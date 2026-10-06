@@ -297,4 +297,19 @@
     <string name="lbl_small">صغير</string>
     <string name="lbl_normal">عادي</string>
     <string name="lbl_large">كبير</string>
+
+    <!-- v1.10.0: وضع التحديد، الوضع الخاص، درجات البشرة، ثيم الخلفية -->
+    <string name="edit_select">تحديد</string>
+    <string name="select_mode_on">وضع التحديد: الأسهم الآن تمدّد التحديد — انسخ أو اقطع عند الانتهاء</string>
+    <string name="select_mode_off">أُوقف وضع التحديد</string>
+    <string name="pref_incognito">الوضع الخاص</string>
+    <string name="pref_incognito_sub">بلا تعلّم ولا إحصاءات ولا سجل حافظة ولا إيموجي حديثة — لا يُسجَّل أي شيء</string>
+    <string name="incognito_hint">🔒 الوضع الخاص: لا يُسجَّل أي شيء</string>
+    <string name="emoji_tone">درجة البشرة</string>
+    <string name="theme_wallpaper">ثيم من الخلفية</string>
+    <string name="theme_wallpaper_sub">لوّن لوحة المفاتيح بتناغم مع خلفيتك الحالية</string>
+    <string name="wallpaper_name">خلفيتي</string>
+    <string name="wallpaper_done">جاهز ثيم الخلفية ✓</string>
+    <string name="wallpaper_fail">تعذّر قراءة ألوان الخلفية</string>
+    <string name="wallpaper_unsupported">يتطلب أندرويد 8.1 أو أحدث</string>
 </resources>

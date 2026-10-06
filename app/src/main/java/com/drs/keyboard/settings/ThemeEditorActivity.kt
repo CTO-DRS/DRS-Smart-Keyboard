@@ -1,11 +1,14 @@
 package com.drs.keyboard.settings
 
 import android.app.Activity
+import android.app.WallpaperManager
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.view.Gravity
 import android.view.View
@@ -335,6 +338,12 @@ class ThemeEditorActivity : Activity() {
             }
         })
 
+        // ---- generate a matching glass theme from the system wallpaper -------
+        controls.addView(UiKit.row(this, p, getString(R.string.theme_wallpaper),
+            getString(R.string.theme_wallpaper_sub)) {
+            applyWallpaperColors()
+        })
+
         // reset
         val reset = UiKit.button(this, p, getString(R.string.editor_reset), false) {
             val preset = ThemeRepo.presets().firstOrNull { it.id == theme.id } ?: ThemeRepo.presets().first()
@@ -350,6 +359,74 @@ class ThemeEditorActivity : Activity() {
         controls.addView(wrap, linearMargins(0, UiKit.dp(this, 6), 0, 0))
 
         root.addView(card, linearMargins(0, 0, 0, UiKit.dp(this, 14)))
+    }
+
+    /**
+     * Builds a glass theme whose accent comes from the system wallpaper
+     * (WallpaperColors — offline, no permission, API 27+). The panel goes
+     * dark or light depending on the wallpaper's own luminance.
+     */
+    private fun applyWallpaperColors() {
+        if (Build.VERSION.SDK_INT < 27) {
+            Toast.makeText(this, getString(R.string.wallpaper_unsupported), Toast.LENGTH_SHORT).show()
+            return
+        }
+        val colors = runCatching {
+            WallpaperManager.getInstance(this)
+                .getWallpaperColors(WallpaperManager.FLAG_SYSTEM)
+        }.getOrNull()
+        if (colors == null) {
+            Toast.makeText(this, getString(R.string.wallpaper_fail), Toast.LENGTH_SHORT).show()
+            return
+        }
+        val primary = colors.primaryColor.toArgb()
+        val secondary = colors.secondaryColor?.toArgb() ?: primary
+        val r = Color.red(primary) / 255f
+        val g = Color.green(primary) / 255f
+        val b = Color.blue(primary) / 255f
+        val lum = 0.2126f * r + 0.7152f * g + 0.0722f * b
+        val dark = lum < 0.55f
+
+        fun mix(c1: Int, c2: Int, ratio: Float): Int {
+            val nr = (Color.red(c1) * (1 - ratio) + Color.red(c2) * ratio).toInt()
+            val ng = (Color.green(c1) * (1 - ratio) + Color.green(c2) * ratio).toInt()
+            val nb = (Color.blue(c1) * (1 - ratio) + Color.blue(c2) * ratio).toInt()
+            return Color.argb(255, nr, ng, nb)
+        }
+
+        val bg = if (dark) mix(primary, Color.argb(255, 14, 16, 24), 0.78f)
+        else mix(primary, Color.argb(255, 243, 244, 248), 0.80f)
+        val key = if (dark) 0x2EFFFFFF else 0x2E1A2032.toInt()
+        val special = if (dark) 0x1F000000 else 0x1F1A2032.toInt()
+        val text = if (dark) 0xF2FFFFFF.toInt() else 0xF21A2032.toInt()
+        val stroke = if (dark) 0x26FFFFFF else 0x261A2032.toInt()
+        val cand = if (dark) 0x26FFFFFF else 0x261A2032.toInt()
+        val press = (primary and 0x00FFFFFF) or 0x3D000000
+
+        theme = KeyboardTheme(
+            id = "wallpaper-${System.currentTimeMillis()}",
+            name = getString(R.string.wallpaper_name),
+            bgColor = (bg and 0x00FFFFFF) or ((theme.opacityPct.coerceIn(40, 100) * 255 / 100) shl 24),
+            keyColor = key,
+            specialKeyColor = special,
+            keyTextColor = text,
+            accentColor = primary,
+            pressColor = press,
+            strokeColor = stroke,
+            candidateBg = cand,
+            cornerRadiusDp = theme.cornerRadiusDp,
+            keyHeightDp = theme.keyHeightDp,
+            opacityPct = theme.opacityPct,
+            glass = true,
+            bgImagePath = theme.bgImagePath
+        ).apply {
+            // keep a whisper of the secondary color in the special keys
+            specialKeyColor = (secondary and 0x00FFFFFF) or (special and 0xFF000000.toInt())
+        }
+        syncEditorControls()
+        refreshPreview()
+        persist()
+        Toast.makeText(this, getString(R.string.wallpaper_done), Toast.LENGTH_SHORT).show()
     }
 
     private fun sliderRow(labelRes: Int, minV: Int, maxV: Int, initial: Int,

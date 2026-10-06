@@ -68,9 +68,15 @@ class DrsImeService : android.inputmethodservice.InputMethodService(),
     private var noAutocorrectField = false // email / uri / subject fields: corrections would mangle input
     private var pendingPaste: String? = null // fresh system clipboard offered as a quick-paste chip
 
+    /** True when nothing may be recorded: no-learn fields or the global private mode. */
+    private fun privacyHold() = noLearnField || prefs.incognito
+
     // autocorrect undo: backspace right after a corrected word restores what was typed
     private var pendingUndo: String? = null
     private var pendingUndoWord: String = ""
+
+    // text-selection mode (edit toolbar "select" toggle): arrows extend the selection
+    private var selectMode = false
 
     // ------------------------------------------------------------------
     // Lifecycle
@@ -81,7 +87,9 @@ class DrsImeService : android.inputmethodservice.InputMethodService(),
         prefs = Prefs(this)
         learner = UserLearner.get(this)
         shortcuts = ShortcutEngine.get(this).also { it.ensureDefaults() }
-        clipboardHistory = ClipboardHistory(this).apply { enabled = prefs.clipboardEnabled }
+        clipboardHistory = ClipboardHistory(this).apply {
+            enabled = prefs.clipboardEnabled && !prefs.incognito
+        }
         suggestionEngine = SuggestionEngine(dictionaries, ngrams, learner)
         Thread { loadEngines() }.start()
     }
@@ -187,6 +195,10 @@ class DrsImeService : android.inputmethodservice.InputMethodService(),
         host?.arrowRow = prefs.arrowRow
         host?.tashkeelRow = prefs.tashkeelRow
         host?.refreshLayout()
+        // incognito can be toggled in settings while the IME process lives
+        clipboardHistory.enabled = prefs.clipboardEnabled && !prefs.incognito
+        selectMode = false
+        host?.setSelectActive(false)
         composing.setLength(0)
         lastWord = extractLastWord()
         lastCommitWasSpace = false
@@ -212,6 +224,11 @@ class DrsImeService : android.inputmethodservice.InputMethodService(),
             host?.candidateBar?.showHint(getString(R.string.secure_hint))
             ui.removeCallbacks(clearHintRunnable)
             ui.postDelayed(clearHintRunnable, 1200)
+        } else if (prefs.incognito) {
+            // remind the user that nothing is being recorded right now
+            host?.candidateBar?.showHint(getString(R.string.incognito_hint))
+            ui.removeCallbacks(clearHintRunnable)
+            ui.postDelayed(clearHintRunnable, 1400)
         } else if (!editHintShown && prefs.clipboardEnabled) {
             // teach the hold-clipboard gesture once per IME process
             editHintShown = true
@@ -249,6 +266,8 @@ class DrsImeService : android.inputmethodservice.InputMethodService(),
     override fun onFinishInputView(finishingInput: Boolean) {
         super.onFinishInputView(finishingInput)
         learner.persist()
+        selectMode = false
+        host?.setSelectActive(false)
         host?.let { if (it.currentPanel() != DrsKeyboardHost.Panel.NONE) it.togglePanel(DrsKeyboardHost.Panel.NONE) }
         host?.keyboardView?.resetTouchVisuals()
     }
@@ -300,7 +319,7 @@ class DrsImeService : android.inputmethodservice.InputMethodService(),
     override fun onKey(key: KeyDef) {
         if (prefs.vibrate) haptic()
         if (prefs.sound) audioManager()?.playSoundEffect(AudioManager.FX_KEY_CLICK)
-        StatsStore.bump(this, StatsStore.KEYS)
+        if (!prefs.incognito) StatsStore.bump(this, StatsStore.KEYS)
 
         when {
             key.type != KeyDef.KeyType.CHAR -> handleFunctional(key)
@@ -509,13 +528,13 @@ class DrsImeService : android.inputmethodservice.InputMethodService(),
                 pendingUndoWord = ""
             }
             learnerBoost(finalWord)
-            if (lastWord.isNotEmpty() && !noLearnField) {
+            if (lastWord.isNotEmpty() && !privacyHold()) {
                 (ngrams[state.lang])?.learn(lastWord, finalWord)
             }
             lastWord = finalWord.lowercase()
             composing.setLength(0)
             ic.finishComposingText()
-            StatsStore.bump(this, StatsStore.WORDS)
+            if (!prefs.incognito) StatsStore.bump(this, StatsStore.WORDS)
             if (prefs.shortcuts && tryShortcut(finalWord)) {
                 lastWord = ""
                 pendingUndo = null
@@ -614,7 +633,7 @@ class DrsImeService : android.inputmethodservice.InputMethodService(),
     }
 
     private fun learnerBoost(word: String) {
-        if (!prefs.learning || noLearnField || secureField) return
+        if (!prefs.learning || privacyHold() || secureField) return
         if (word.length < 2 || !word[0].isLetter()) return
         learner.boost(word)
         if (++boostCounter % 5 == 0) learner.persist()
@@ -669,7 +688,7 @@ class DrsImeService : android.inputmethodservice.InputMethodService(),
             val lead = if (extractLastWord().isNotEmpty()) " " else ""
             ic.commitText(lead + word, 1)
             lastCommitWasSpace = false
-            StatsStore.bump(this, StatsStore.EMOJI)
+            if (!prefs.incognito) StatsStore.bump(this, StatsStore.EMOJI)
             updateSuggestions()
             return
         }
@@ -696,7 +715,7 @@ class DrsImeService : android.inputmethodservice.InputMethodService(),
     }
 
     override fun onCandidateLongPress(word: String) {
-        if (!prefs.learning || noLearnField) return
+        if (!prefs.learning || privacyHold()) return
         learner.boost(word, 5)
         learner.persist()
         host?.candidateBar?.showHint("★ $word")
@@ -715,12 +734,12 @@ class DrsImeService : android.inputmethodservice.InputMethodService(),
         composingFinishQuietly()
         ic.commitText(word, 1)
         learnerBoost(word)
-        if (lastWord.isNotEmpty() && !noLearnField) (ngrams[state.lang])?.learn(lastWord, word)
+        if (lastWord.isNotEmpty() && !privacyHold()) (ngrams[state.lang])?.learn(lastWord, word)
         lastWord = word.lowercase()
         ic.commitText(" ", 1)
         lastCommitWasSpace = true
         lastSpaceTime = System.currentTimeMillis()
-        StatsStore.bump(this, StatsStore.SWIPES)
+        if (!prefs.incognito) StatsStore.bump(this, StatsStore.SWIPES)
         updateSuggestions()
     }
 
@@ -733,7 +752,7 @@ class DrsImeService : android.inputmethodservice.InputMethodService(),
         lastCommitWasSpace = false
         if (text.isNotEmpty() && text[0].code >= 0x1F000 ||
             text.isNotEmpty() && text[0].code in 0x2600..0x27BF) {
-            StatsStore.bump(this, StatsStore.EMOJI)
+            if (!prefs.incognito) StatsStore.bump(this, StatsStore.EMOJI)
         }
         if (text.length == 1 && text[0] in ".!?…") checkSentenceShift(text)
         updateSuggestions()
@@ -742,17 +761,24 @@ class DrsImeService : android.inputmethodservice.InputMethodService(),
     override fun onCursorMove(delta: Int) {
         val ic = currentInputConnection ?: return
         val code = if (delta < 0) KeyEvent.KEYCODE_DPAD_LEFT else KeyEvent.KEYCODE_DPAD_RIGHT
+        // in selection mode the arrows extend the selection (shift + arrow)
+        val meta = if (selectMode) KeyEvent.META_SHIFT_ON else 0
         repeat(kotlin.math.abs(delta)) {
-            ic.sendKeyEvent(KeyEvent(KeyEvent.ACTION_DOWN, code))
-            ic.sendKeyEvent(KeyEvent(KeyEvent.ACTION_UP, code))
+            ic.sendKeyEvent(KeyEvent(System.currentTimeMillis(), System.currentTimeMillis(),
+                KeyEvent.ACTION_DOWN, code, 0, meta))
+            ic.sendKeyEvent(KeyEvent(System.currentTimeMillis(), System.currentTimeMillis(),
+                KeyEvent.ACTION_UP, code, 0, meta))
         }
     }
 
     /** Vertical / line-edge cursor moves for the arrows row (multiline fields). */
     private fun sendDpad(code: Int) {
         val ic = currentInputConnection ?: return
-        ic.sendKeyEvent(KeyEvent(KeyEvent.ACTION_DOWN, code))
-        ic.sendKeyEvent(KeyEvent(KeyEvent.ACTION_UP, code))
+        val meta = if (selectMode) KeyEvent.META_SHIFT_ON else 0
+        ic.sendKeyEvent(KeyEvent(System.currentTimeMillis(), System.currentTimeMillis(),
+            KeyEvent.ACTION_DOWN, code, 0, meta))
+        ic.sendKeyEvent(KeyEvent(System.currentTimeMillis(), System.currentTimeMillis(),
+            KeyEvent.ACTION_UP, code, 0, meta))
     }
 
     override fun onDeleteWord() {
@@ -843,7 +869,23 @@ class DrsImeService : android.inputmethodservice.InputMethodService(),
         val ic = currentInputConnection
         when (action) {
             "close" -> {
+                if (selectMode) {
+                    selectMode = false
+                    host?.setSelectActive(false)
+                    host?.arrowRow = prefs.arrowRow
+                    host?.refreshLayout()
+                }
                 host?.showEditBar(false)
+                return
+            }
+            "select" -> {
+                selectMode = !selectMode
+                host?.setSelectActive(selectMode)
+                // the arrows must be on-screen while selecting
+                host?.arrowRow = prefs.arrowRow || selectMode
+                host?.refreshLayout()
+                // the candidate strip is hidden while the edit bar is open → toast instead
+                toast(if (selectMode) R.string.select_mode_on else R.string.select_mode_off)
                 return
             }
             "selectall" -> ic?.performContextMenuAction(android.R.id.selectAll)

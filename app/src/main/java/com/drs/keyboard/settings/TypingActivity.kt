@@ -94,6 +94,9 @@ class TypingActivity : Activity() {
         smart.addView(divider())
         smart.addView(UiKit.switchRow(c, p, getString(R.string.pref_emoji_suggest),
             getString(R.string.pref_emoji_suggest_sub), prefs.emojiSuggest) { prefs.emojiSuggest = it })
+        smart.addView(divider())
+        smart.addView(UiKit.switchRow(c, p, getString(R.string.pref_incognito),
+            getString(R.string.pref_incognito_sub), prefs.incognito) { prefs.incognito = it })
         root.addView(smart, margins(0, 0, 0, UiKit.dp(c, 16)))
 
         // ---- layout & feel ----

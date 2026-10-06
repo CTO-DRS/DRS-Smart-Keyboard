@@ -14,10 +14,12 @@ import kotlin.math.max
 /**
  * Text editing toolbar rendered in place of the suggestion strip:
  *
- *   [select all] [copy] [cut] [paste]   |  [close]
+ *   [select] [select all] [copy] [cut] [paste]  |  [close]
  *
  * Actions are reported to the host which executes them through the
- * InputConnection (performContextMenuAction). Pure painted UI, themed glass.
+ * InputConnection (performContextMenuAction). "select" toggles selection
+ * mode: the navigation arrows then extend the selection (shift + arrows).
+ * Pure painted UI, themed glass.
  */
 class EditBar @JvmOverloads constructor(
     context: Context,
@@ -25,11 +27,14 @@ class EditBar @JvmOverloads constructor(
 ) : View(context, attrs) {
 
     interface Callback {
-        /** action: "selectall" | "copy" | "cut" | "paste" | "close" */
+        /** action: "select" | "selectall" | "copy" | "cut" | "paste" | "close" */
         fun onEditAction(action: String)
     }
 
     var callback: Callback? = null
+    /** Whether selection mode is on ("select" chip glows accent). */
+    var selectActive = false
+        set(v) { field = v; postInvalidate() }
 
     private var theme: KeyboardTheme? = null
     private val fill = Paint(Paint.ANTI_ALIAS_FLAG)
@@ -40,7 +45,7 @@ class EditBar @JvmOverloads constructor(
     private var pressedZone = -1
 
     private val d = resources.displayMetrics.density
-    private val icons = listOf("selectall", "copy", "cut", "paste", "close")
+    private val icons = listOf("select", "selectall", "copy", "cut", "paste", "close")
     private val chipRect = RectF()
 
     fun setTheme(t: KeyboardTheme) {
@@ -78,13 +83,22 @@ class EditBar @JvmOverloads constructor(
             val inset = r.width() * 0.18f
             chipRect.set(r.left + inset, r.top + inset, r.right - inset, r.bottom - inset)
             val pressed = pressedZone == i
-            chipFill.color = if (pressed)
-                0x44000000 or ((t?.accentColor ?: 0) and 0x00FFFFFF)
-            else
-                0x1A000000 or ((t?.keyTextColor ?: 0) and 0x00FFFFFF)
+            val active = i == 0 && selectActive
+            chipFill.color = when {
+                active -> (t?.accentColor ?: 0) and 0x00FFFFFF or 0x55000000
+                pressed -> 0x44000000 or ((t?.accentColor ?: 0) and 0x00FFFFFF)
+                else -> 0x1A000000 or ((t?.keyTextColor ?: 0) and 0x00FFFFFF)
+            }
             val cr = chipRect.width() / 2f
             canvas.drawCircle(chipRect.centerX(), chipRect.centerY(), cr, chipFill)
-            iconPaint.color = if (pressed) t?.accentColor ?: 0 else t?.keyTextColor ?: 0
+            if (active) {
+                // accent ring around the chip while selection mode is on
+                stroke.color = t?.accentColor ?: 0
+                stroke.strokeWidth = d * 1.4f
+                canvas.drawCircle(chipRect.centerX(), chipRect.centerY(),
+                    cr - d * 0.7f, stroke)
+            }
+            iconPaint.color = if (pressed || active) t?.accentColor ?: 0 else t?.keyTextColor ?: 0
             iconPaint.isAntiAlias = true
             IconPainter.draw(canvas, icons[i], chipRect.centerX(), chipRect.centerY(),
                 max(chipRect.width(), d * 22f), iconPaint)

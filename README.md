@@ -10,15 +10,15 @@ zero network calls by design.
 
 ## Download
 
-Get the latest signed APK from **[GitHub Releases](../../releases)** (v1.9.0)
-or the mirror: [gofile.io/d/2Tv1nlKA](https://gofile.io/d/2Tv1nlKA).
+Get the latest signed APK from **[GitHub Releases](../../releases)** (v1.10.0)
+or the mirror: [gofile.io/d/EtVgLvGa](https://gofile.io/d/EtVgLvGa).
 All releases since v1.3.0 share the same signing key, so upgrades install
 in-place without uninstalling.
 
 | | |
 |---|---|
 | Package | `com.drs.keyboard` |
-| Version | 1.9.0 (versionCode 9) |
+| Version | 1.10.0 (versionCode 10) |
 | Min SDK | 26 (Android 8.0) |
 | Target SDK | 34 (Android 14) |
 | Languages | English (QWERTY) + العربية (Arabic 101, RTL-aware) |
@@ -59,15 +59,21 @@ in-place without uninstalling.
   composed instead of breaking it.
 - **Navigation arrows row** (optional): ← ↑ ↓ → for precise cursor moves.
 - Number row toggle, dedicated symbols and number-pad layouts.
+- **Text selection mode** — the edit toolbar's ⊹ select toggle turns the
+  arrows row into selection arrows (shift + arrows natively); copy or cut
+  when done. The arrows row appears automatically while selecting.
+- **Private mode** — one switch stops *all* recording: no word learning,
+  no n-grams, no typing stats, no clipboard history, no emoji recents.
+  A 🔒 hint confirms it every time the keyboard opens.
 - Cursor control: slide on the space bar to move the caret.
 - Swipe left on backspace deletes the whole word.
 - Key-press preview bubble (Gboard-style, shift-aware, toggleable).
 - **Key label size**: small / normal / large.
 - Emoji panel (999 emoji, 9 categories, recents, **offline bilingual search**
-  with Arabic normalization).
+  with Arabic normalization, **five skin tones** for people & gestures).
 - Clipboard hub: history, pinning, one-tap paste, sensitive clips skipped,
-  **text-editing toolbar** (select-all / copy / cut / paste — hold the
-  clipboard icon).
+  **text-editing toolbar** (select / select-all / copy / cut / paste — hold
+  the clipboard icon).
 - One-handed mode (left/right) + draggable floating keyboard
   (long-press the space bar to cycle modes).
 - Keyboard height (compact / normal / tall) and long-press delay settings.
@@ -87,6 +93,9 @@ in-place without uninstalling.
 - Theme editor: color pickers (HSV + alpha + hex) for every surface, corner
   radius, key height, panel opacity, glass effect toggle, background image.
 - **Theme export / import** as JSON files.
+- **Theme from wallpaper** — reads the system wallpaper's palette
+  (WallpaperColors, offline, no permission) and builds a matching glass
+  theme: dark or light by luminance, accent from the dominant color.
 - Live preview keyboard rendered with the exact views the IME uses.
 
 ### Settings app
@@ -119,7 +128,7 @@ with only the SDK build-tools and kotlinc — see `scripts/build_apk.sh`
 ## Installing & enabling
 
 1. Download the APK from [Releases](../../releases) and install it
-   (`adb install DRS-Smart-Keyboard-v1.9.0.apk` or sideload).
+   (`adb install DRS-Smart-Keyboard-v1.10.0.apk` or sideload).
 2. Open **DRS** → tap **1. Open enable screen** → switch DRS on.
 3. Back in DRS → **2. Choose keyboard** → pick DRS.
 4. Type anywhere. Use the 🌐 key to switch English ⇄ العربية,
@@ -161,6 +170,8 @@ there is no network permission to do it with.
 
 ## Changelog (highlights)
 
+- **v1.10.0** — text selection mode (arrows extend selection), global
+  private mode (zero recording), emoji skin tones, theme from wallpaper.
 - **v1.9.0** — navigation arrows row, Arabic tashkeel row, key label size.
 - **v1.8.0** — offline emoji search (EN+AR), autocorrect undo, punctuation
   auto-space, theme export/import.

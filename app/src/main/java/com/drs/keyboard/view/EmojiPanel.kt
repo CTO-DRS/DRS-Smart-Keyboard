@@ -16,6 +16,7 @@ import android.widget.HorizontalScrollView
 import android.widget.LinearLayout
 import android.widget.ScrollView
 import android.widget.TextView
+import com.drs.keyboard.settings.Prefs
 import com.drs.keyboard.theme.KeyboardTheme
 
 /**
@@ -47,12 +48,17 @@ class EmojiPanel(context: Context) : LinearLayout(context) {
     private var current = "smileys"
     private var searching = false
     private var suppressWatcher = false
+    private var tone = 0
+    private val toneChips = ArrayList<TextView>(6)
+    private var toneLabel: TextView? = null
+    private lateinit var toneRow: LinearLayout
     private lateinit var searchBox: EditText
     private lateinit var searchShell: FrameLayout
 
     init {
         // load the catalog + persisted recents/favorites (idempotent, cheap)
         EmojiRepo.load(context)
+        tone = Prefs(context).emojiTone
         orientation = VERTICAL
         tabsScroll = HorizontalScrollView(context).apply {
             isHorizontalScrollBarEnabled = false
@@ -85,9 +91,60 @@ class EmojiPanel(context: Context) : LinearLayout(context) {
         }
         addView(header, LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT))
         buildSearchRow()
+        buildToneRow()
         addView(tabsScroll, LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT))
         addView(gridScroll, LayoutParams(LayoutParams.MATCH_PARENT, 0, 1f))
         select(current)
+    }
+
+    /** Skin-tone picker: classic + five modifiers applied to toneable emoji. */
+    private fun buildToneRow() {
+        val c = context
+        toneRow = LinearLayout(c).apply {
+            orientation = HORIZONTAL
+            gravity = Gravity.CENTER_VERTICAL
+            setPadding(dp(12), dp(2), dp(12), dp(2))
+        }
+        val label = TextView(c).apply {
+            text = c.getString(com.drs.keyboard.R.string.emoji_tone)
+            textSize = 12.5f
+            setPadding(dp(2), 0, dp(10), 0)
+        }
+        toneLabel = label
+        toneRow.addView(label)
+        val hand = "\uD83D\uDD90"
+        for (i in 0..5) {
+            val shown = if (i == 0) hand else hand + (0x1F3FA + i).toChar()
+            val chip = TextView(c).apply {
+                text = shown
+                textSize = 19f
+                gravity = Gravity.CENTER
+                setPadding(dp(7), dp(3), dp(7), dp(3))
+                setOnClickListener {
+                    tone = i
+                    Prefs(c).emojiTone = i
+                    styleToneChips()
+                    if (searching) filter(searchBox.text.toString()) else select(current)
+                }
+            }
+            toneChips.add(chip)
+            toneRow.addView(chip)
+        }
+        styleToneChips()
+        addView(toneRow, LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT))
+    }
+
+    private fun styleToneChips() {
+        val t = theme
+        val d = resources.displayMetrics.density
+        for ((i, chip) in toneChips.withIndex()) {
+            chip.background = if (i == tone) {
+                GradientDrawable().apply {
+                    setColor(t?.pressColor ?: 0)
+                    cornerRadius = 10 * d
+                }
+            } else null
+        }
     }
 
     /** Glass search field: offline EN+AR keyword lookup across the catalog. */
@@ -157,9 +214,13 @@ class EmojiPanel(context: Context) : LinearLayout(context) {
             cornerRadius = t.cornerRadiusDp * d
         }
         for ((_, tv) in tabViews) tv.setTextColor(t.keyTextColor)
+        // restyle the tone picker row
+        val hintAlpha = (t.keyTextColor ushr 24) * 45 / 100
+        toneLabel?.setTextColor((hintAlpha shl 24) or (t.keyTextColor and 0x00FFFFFF))
+        for (chip in toneChips) chip.setTextColor(t.keyTextColor)
+        styleToneChips()
         // restyle the search field
         searchBox.setTextColor(t.keyTextColor)
-        val hintAlpha = (t.keyTextColor ushr 24) * 45 / 100
         searchBox.setHintTextColor((hintAlpha shl 24) or (t.keyTextColor and 0x00FFFFFF))
         searchBox.background = GradientDrawable().apply {
             setColor(t.candidateBg)
@@ -238,20 +299,22 @@ class EmojiPanel(context: Context) : LinearLayout(context) {
         height = dp(46)
     }
 
-    /** One tappable emoji cell; long-press toggles the favorite star. */
+    /** One tappable emoji cell; long-press toggles the favorite star.
+     *  Toneable emoji render with the user's default skin tone. */
     private fun makeCell(em: String, fromFavorites: Boolean): TextView {
+        val shown = EmojiRepo.toned(em, tone)
         return TextView(context).apply {
-            text = em
+            text = shown
             textSize = 24f
             gravity = Gravity.CENTER
             setPadding(dp(2), dp(4), dp(2), dp(4))
             setOnClickListener {
-                EmojiRepo.recordRecent(context, em)
-                callback?.onEmojiPicked(em)
+                if (!Prefs(context).incognito) EmojiRepo.recordRecent(context, shown)
+                callback?.onEmojiPicked(shown)
             }
-            markFavorite(this, EmojiRepo.isFavorite(em))
+            markFavorite(this, EmojiRepo.isFavorite(EmojiRepo.baseOf(em)))
             setOnLongClickListener {
-                val nowFav = EmojiRepo.toggleFavorite(context, em)
+                val nowFav = EmojiRepo.toggleFavorite(context, EmojiRepo.baseOf(em))
                 markFavorite(this, nowFav)
                 performHapticFeedback(android.view.HapticFeedbackConstants.LONG_PRESS)
                 if (fromFavorites && !nowFav) {

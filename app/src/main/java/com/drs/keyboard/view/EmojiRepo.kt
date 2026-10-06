@@ -135,6 +135,39 @@ object EmojiRepo {
 
     fun hasFavorites(): Boolean = favorites.isNotEmpty()
 
+    // ---- skin tones -------------------------------------------------------
+    // Base glyphs that accept U+1F3FB..U+1F3FF modifiers (curated, all present
+    // in the bundled catalog; ZWJ sequences are deliberately excluded).
+
+    val TONEABLE = setOf(
+        "👋", "🤚", "🖐", "✋", "🖖", "👌", "🤌", "🤏", "✌", "🤞", "🤟", "🤘", "🤙",
+        "👈", "👉", "👆", "🖕", "👇", "☝", "👍", "👎", "✊", "👊", "🤛", "🤜",
+        "👏", "🙌", "👐", "🤲", "🤝", "✍", "💅", "🤳", "💪", "🦵", "🦶",
+        "👂", "👃", "🧠", "🫀", "🫁", "🦷", "🦴",
+        "👶", "🧒", "👦", "👧", "🧑", "👱", "👨", "🧔", "👩", "🧓", "👴", "👵",
+        "🙍", "🙎", "🙅", "🙆", "💁", "🙋", "🧏", "🙇", "🤦", "🤷",
+        "🤵", "👰", "🤰", "🤱", "👼"
+    )
+
+    /** Strips skin-tone modifiers so recents/favorites always key on the base glyph. */
+    fun baseOf(em: String): String {
+        val sb = StringBuilder(em.length)
+        for (c in em) {
+            val v = c.code
+            if (v in 0x1F3FB..0x1F3FF) continue
+            sb.append(c)
+        }
+        return sb.toString()
+    }
+
+    /** Appends the user's default tone (1..5) if the glyph supports it; 0 = classic. */
+    fun toned(em: String, tone: Int): String {
+        if (tone !in 1..5) return em
+        val base = baseOf(em)
+        if (base !in TONEABLE) return em
+        return base + (0x1F3FA + tone).toChar()
+    }
+
     // ---- backup / restore ------------------------------------------------
 
     fun exportFavorites(): String = favorites.joinToString("\u0001")

@@ -159,6 +159,23 @@ object IconPainter {
                 canvas.drawLine(cx - h * 0.5f, cy + h * 0.1f, cx + h * 0.35f, cy + h * 0.1f, paint)
                 canvas.drawLine(cx - h * 0.5f, cy + h * 0.5f, cx + h * 0.15f, cy + h * 0.5f, paint)
             }
+            "select" -> {
+                // text-selection handles: two brackets with a highlighted middle
+                paint.style = Paint.Style.STROKE
+                paint.strokeWidth = size * 0.09f
+                paint.strokeCap = Paint.Cap.ROUND
+                val bw = h * 0.22f
+                canvas.drawLine(cx - h * 0.55f, cy - h * 0.6f, cx - h * 0.55f, cy + h * 0.6f, paint)
+                canvas.drawLine(cx - h * 0.55f, cy - h * 0.6f, cx - h * 0.55f + bw, cy - h * 0.6f, paint)
+                canvas.drawLine(cx - h * 0.55f, cy + h * 0.6f, cx - h * 0.55f + bw, cy + h * 0.6f, paint)
+                canvas.drawLine(cx + h * 0.55f, cy - h * 0.6f, cx + h * 0.55f, cy + h * 0.6f, paint)
+                canvas.drawLine(cx + h * 0.55f - bw, cy - h * 0.6f, cx + h * 0.55f, cy - h * 0.6f, paint)
+                canvas.drawLine(cx + h * 0.55f - bw, cy + h * 0.6f, cx + h * 0.55f, cy + h * 0.6f, paint)
+                val dot = Paint(Paint.ANTI_ALIAS_FLAG).apply { style = Paint.Style.FILL }
+                canvas.drawCircle(cx - h * 0.05f, cy, h * 0.12f, dot)
+                canvas.drawCircle(cx + h * 0.18f, cy, h * 0.12f, dot)
+                canvas.drawCircle(cx + h * 0.41f, cy, h * 0.12f, dot)
+            }
             "close" -> {
                 paint.style = Paint.Style.STROKE
                 paint.strokeWidth = size * 0.1f

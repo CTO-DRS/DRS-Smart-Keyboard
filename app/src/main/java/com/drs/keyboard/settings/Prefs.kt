@@ -147,6 +147,19 @@ class Prefs(context: Context) {
         get() = prefs.getInt("key_text_scale", 1)
         set(v) = prefs.edit().putInt("key_text_scale", v).apply()
 
+    /**
+     * Global incognito (private) mode: no learning, no n-grams, no stats,
+     * no clipboard recording, no emoji recents — for this session of typing.
+     */
+    var incognito: Boolean
+        get() = prefs.getBoolean("incognito", false)
+        set(v) = prefs.edit().putBoolean("incognito", v).apply()
+
+    /** Default skin tone for toneable emoji: 0 = classic, 1..5 = light..dark. */
+    var emojiTone: Int
+        get() = prefs.getInt("emoji_tone", 0)
+        set(v) = prefs.edit().putInt("emoji_tone", v).apply()
+
     /** Raw dump of drs_prefs for backup/restore. */
     fun exportAll(): MutableMap<String, *> = prefs.all
 

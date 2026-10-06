@@ -337,8 +337,15 @@ class DrsKeyboardHost @JvmOverloads constructor(
         val overlay = panel != Panel.NONE
         candidateBar.visibility = if (overlay || editMode) GONE else VISIBLE
         editBar.visibility = if (!overlay && editMode) VISIBLE else GONE
+        if (!on) editBar.selectActive = false
         requestLayout()
         invalidate()
+    }
+
+    /** Mirrors selection mode into the edit toolbar's glowing chip. */
+    fun setSelectActive(on: Boolean) {
+        editBar.selectActive = on
+        editBar.postInvalidate()
     }
 
     // ------------------------------------------------------------------

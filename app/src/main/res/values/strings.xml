@@ -298,4 +298,19 @@
     <string name="lbl_small">Small</string>
     <string name="lbl_normal">Normal</string>
     <string name="lbl_large">Large</string>
+
+    <!-- v1.10.0: selection mode, incognito, emoji skin tones, wallpaper theme -->
+    <string name="edit_select">Select</string>
+    <string name="select_mode_on">Selection mode: the arrows now extend the selection — copy or cut when done</string>
+    <string name="select_mode_off">Selection mode off</string>
+    <string name="pref_incognito">Private mode</string>
+    <string name="pref_incognito_sub">No learning, no stats, no clipboard history, no emoji recents — nothing is recorded</string>
+    <string name="incognito_hint">🔒 Private mode: nothing is being recorded</string>
+    <string name="emoji_tone">Skin tone</string>
+    <string name="theme_wallpaper">Theme from wallpaper</string>
+    <string name="theme_wallpaper_sub">Match the keyboard colors to your current wallpaper</string>
+    <string name="wallpaper_name">My wallpaper</string>
+    <string name="wallpaper_done">Wallpaper theme ready ✓</string>
+    <string name="wallpaper_fail">Couldn\'t read the wallpaper colors</string>
+    <string name="wallpaper_unsupported">Needs Android 8.1 or newer</string>
 </resources>
