@@ -1,0 +1,950 @@
+😀	grin,happy,smile,ابتسامة,سعيد,فرح,smile,face,emoji,ابتسامة,وجه
+😃	smile,happy,joy,ابتسامة,سعادة,فرح,smile,face,emoji,ابتسامة,وجه
+😄	smile,laugh,happy,ضحك,سعيد,فرح,smile,face,emoji,ابتسامة,وجه
+😁	grin,beam,smile,ابتسامة,ضحكة,smile,face,emoji,ابتسامة,وجه
+😆	laugh,lol,squint,ضحك,قهقهة,smile,face,emoji,ابتسامة,وجه
+😅	sweat,laugh,relief,عرق,ضحك,ارتياح,smile,face,emoji,ابتسامة,وجه
+🤣	lol,laugh,rofl,ضحك,مقعد,قهقهة,smile,face,emoji,ابتسامة,وجه
+😂	lol,laugh,tears,joy,ضحك,دموع,فرح,smile,face,emoji,ابتسامة,وجه
+🙂	smile,slight,ابتسامة,smile,face,emoji,ابتسامة,وجه
+🙃	upside,down,silly,مقلوب,مرح,smile,face,emoji,ابتسامة,وجه
+😉	wink,flirt,غمزة,غمز,smile,face,emoji,ابتسامة,وجه
+😊	blush,shy,happy,خجل,ابتسامة,سعادة,smile,face,emoji,ابتسامة,وجه
+😇	angel,halo,innocent,ملاك,بريء,smile,face,emoji,ابتسامة,وجه
+🥰	love,hearts,adore,حب,عشق,smile,face,emoji,ابتسامة,وجه
+😍	heart,eyes,love,حب,عيون,هيام,smile,face,emoji,ابتسامة,وجه
+🤩	star,struck,wow,دهشة,إعجاب,نجمة,smile,face,emoji,ابتسامة,وجه
+😘	kiss,بوسة,قبلة,حب,smile,face,emoji,ابتسامة,وجه
+😗	kiss,قبلة,بوسة,smile,face,emoji,ابتسامة,وجه
+😚	kiss,قبلة,بوسة,smile,face,emoji,ابتسامة,وجه
+😙	kiss,قبلة,بوسة,smile,face,emoji,ابتسامة,وجه
+😋	yum,tasty,tongue,لذيذ,شهية,لسان,smile,face,emoji,ابتسامة,وجه
+😛	tongue,لسان,مرح,smile,face,emoji,ابتسامة,وجه
+😜	wink,tongue,crazy,غمزة,لسان,هبل,smile,face,emoji,ابتسامة,وجه
+🤪	zany,crazy,wacky,مجنون,هبل,smile,face,emoji,ابتسامة,وجه
+🤨	eyebrow,suspect,شك,حاجب,smile,face,emoji,ابتسامة,وجه
+🧐	monocle,inspect,تدقيق,فحص,smile,face,emoji,ابتسامة,وجه
+🤓	nerd,glasses,محشش,نظارة,smile,face,emoji,ابتسامة,وجه
+😎	cool,sunglasses,واثق,نظارة,رائع,smile,face,emoji,ابتسامة,وجه
+🥳	party,celebrate,حفلة,احتفال,فرح,smile,face,emoji,ابتسامة,وجه
+😏	smirk,sly,سخرية,ملامحة,smile,face,emoji,ابتسامة,وجه
+😒	unamused,bored,ملل,ضيق,smile,face,emoji,ابتسامة,وجه
+😞	disappointed,خيبة,حزن,smile,face,emoji,ابتسامة,وجه
+😔	pensive,sad,حزن,كآبة,smile,face,emoji,ابتسامة,وجه
+😟	worried,قلق,هم,smile,face,emoji,ابتسامة,وجه
+😕	confused,حيرة,حيران,smile,face,emoji,ابتسامة,وجه
+🙁	frown,sad,حزن,عبوس,smile,face,emoji,ابتسامة,وجه
+☹️	frown,sad,حزن,عبوس,smile,face,emoji,ابتسامة,وجه
+😣	persevere,صراع,تحمل,smile,face,emoji,ابتسامة,وجه
+😖	confounded,ضيق,انزعاج,smile,face,emoji,ابتسامة,وجه
+😫	tired,exhausted,تعب,إنهاك,smile,face,emoji,ابتسامة,وجه
+😩	weary,tired,تعب,إنهاك,smile,face,emoji,ابتسامة,وجه
+🥺	pleading,beg,توسل,أبكي,smile,face,emoji,ابتسامة,وجه
+😢	cry,tear,بكاء,دمعة,smile,face,emoji,ابتسامة,وجه
+😭	sob,cry,bawling,بكاء,صراخ,دموع,smile,face,emoji,ابتسامة,وجه
+😤	triumph,steam,غضب,حماس,smile,face,emoji,ابتسامة,وجه
+😠	angry,mad,غضب,غاضب,smile,face,emoji,ابتسامة,وجه
+😡	rage,angry,غضب,غاضب,smile,face,emoji,ابتسامة,وجه
+🤯	mindblown,shock,انفجار,صدمة,smile,face,emoji,ابتسامة,وجه
+😳	flushed,embarrassed,خجل,إحراج,smile,face,emoji,ابتسامة,وجه
+🥵	hot,heat,sweat,حر,حرارة,عرق,smile,face,emoji,ابتسامة,وجه
+🥶	cold,freeze,برد,تجمد,smile,face,emoji,ابتسامة,وجه
+😱	scream,fear,صراخ,خوف,رعب,smile,face,emoji,ابتسامة,وجه
+😨	fearful,scared,خوف,رهبة,smile,face,emoji,ابتسامة,وجه
+😰	anxious,sweat,قلق,توتر,smile,face,emoji,ابتسامة,وجه
+😥	sad,relieved,حزن,ارتياح,smile,face,emoji,ابتسامة,وجه
+😓	downcast,sweat,عرق,ضيق,smile,face,emoji,ابتسامة,وجه
+🤗	hug,عناق,حضن,حب,smile,face,emoji,ابتسامة,وجه
+🤔	think,think,hmm,تفكير,تفكر,همم,smile,face,emoji,ابتسامة,وجه
+🫡	smile,face,emoji,ابتسامة,وجه
+🤭	oops,hand,giggle,شهقة,ضحك,خجل,smile,face,emoji,ابتسامة,وجه
+🤫	shush,quiet,secret,سسكوت,هدوء,سر,smile,face,emoji,ابتسامة,وجه
+🤥	lie,pinocchio,كذب,كذاب,smile,face,emoji,ابتسامة,وجه
+😬	grimace,awkward,حرج,توتر,smile,face,emoji,ابتسامة,وجه
+🙄	eyeroll,annoyed,ضيق,تدحرج,smile,face,emoji,ابتسامة,وجه
+😯	hushed,دهشة,صمت,smile,face,emoji,ابتسامة,وجه
+😦	frown,confused,عبوس,حيرة,smile,face,emoji,ابتسامة,وجه
+😧	anguished,قلق,ضيق,smile,face,emoji,ابتسامة,وجه
+😮	wow,surprise,مندهش,مفاجأة,smile,face,emoji,ابتسامة,وجه
+😲	astonished,shock,ذهول,صدمة,smile,face,emoji,ابتسامة,وجه
+🥱	yawn,bored,تثاؤب,ملل,نعاس,smile,face,emoji,ابتسامة,وجه
+😴	sleep,zzz,نوم,نائم,smile,face,emoji,ابتسامة,وجه
+🤤	drool,لعاب,شهية,smile,face,emoji,ابتسامة,وجه
+😪	sleepy,tired,نعاس,تعب,نوم,smile,face,emoji,ابتسامة,وجه
+😵	dizzy,dead,doh,دوخة,غيبوبة,smile,face,emoji,ابتسامة,وجه
+🤐	zip,quiet,mouth,سكوت,فم,smile,face,emoji,ابتسامة,وجه
+🥴	woozy,drunk,dizzy,دوخة,سكر,smile,face,emoji,ابتسامة,وجه
+🤢	nausea,sick,غثيان,قرف,smile,face,emoji,ابتسامة,وجه
+🤮	vomit,puke,تقيؤ,قرف,smile,face,emoji,ابتسامة,وجه
+🤧	sneeze,عطس,زكام,smile,face,emoji,ابتسامة,وجه
+😷	mask,sick,كمامة,مرض,smile,face,emoji,ابتسامة,وجه
+🤒	thermometer,sick,حرارة,مرض,smile,face,emoji,ابتسامة,وجه
+🤕	bandage,hurt,جرح,إصابة,ضماد,smile,face,emoji,ابتسامة,وجه
+🤑	money,face,rich,مال,ثري,طمع,smile,face,emoji,ابتسامة,وجه
+🤠	cowboy,hat,كاوبوي,قبعة,smile,face,emoji,ابتسامة,وجه
+😈	devil,imp,شيطان,مكر,smile,face,emoji,ابتسامة,وجه
+👿	imp,angry,devil,شيطان,غضب,smile,face,emoji,ابتسامة,وجه
+👹	smile,face,emoji,ابتسامة,وجه
+👺	smile,face,emoji,ابتسامة,وجه
+💀	skull,dead,جمجمة,موت,smile,face,emoji,ابتسامة,وجه
+👻	ghost,شبح,طيف,smile,face,emoji,ابتسامة,وجه
+👽	alien,فضائي,كائن,smile,face,emoji,ابتسامة,وجه
+🤖	robot,روبوت,آلي,smile,face,emoji,ابتسامة,وجه
+💩	poop,براز,فضلات,smile,face,emoji,ابتسامة,وجه
+😺	cat,smile,قطة,ابتسامة,smile,face,emoji,ابتسامة,وجه
+😸	smile,face,emoji,ابتسامة,وجه
+😹	cat,laugh,قطة,ضحك,smile,face,emoji,ابتسامة,وجه
+😻	cat,love,heart,قطة,حب,smile,face,emoji,ابتسامة,وجه
+😼	cat,smirk,قطة,سخرية,smile,face,emoji,ابتسامة,وجه
+😽	cat,kiss,قطة,قبلة,smile,face,emoji,ابتسامة,وجه
+🙀	cat,shock,قطة,دهشة,smile,face,emoji,ابتسامة,وجه
+😿	cat,sad,cry,قطة,حزن,بكاء,smile,face,emoji,ابتسامة,وجه
+😾	cat,pouting,قطة,غضب,smile,face,emoji,ابتسامة,وجه
+👋	wave,hi,hello,bye,مرحبا,سلام,وداع,تلويح,person,hand,people,شخص,يد,بشر
+🤚	hand,raised,يد,رفع,person,hand,people,شخص,يد,بشر
+✋	hand,stop,hi,يد,توقف,مرحبا,person,hand,people,شخص,يد,بشر
+🖖	spock,vulcan,سابق,تحية,person,hand,people,شخص,يد,بشر
+👌	ok,perfect,تمام,ممتاز,جيد,person,hand,people,شخص,يد,بشر
+🤌	pinch,italian,قرصة,person,hand,people,شخص,يد,بشر
+🤏	pinch,small,قرصة,صغير,person,hand,people,شخص,يد,بشر
+✌️	victory,peace,peace,نصر,سلام,فوز,person,hand,people,شخص,يد,بشر
+🤞	fingers,crossed,luck,حظ,تمني,person,hand,people,شخص,يد,بشر
+🤟	love,you,حب,إشارة,person,hand,people,شخص,يد,بشر
+🤘	rock,horns,روك,قرون,person,hand,people,شخص,يد,بشر
+🤙	call,shaka,اتصال,مكالمة,person,hand,people,شخص,يد,بشر
+👈	point,left,يسار,إشارة,person,hand,people,شخص,يد,بشر
+👉	point,right,يمين,إشارة,person,hand,people,شخص,يد,بشر
+👆	point,up,finger,أعلى,إشارة,person,hand,people,شخص,يد,بشر
+👇	point,down,أسفل,إشارة,person,hand,people,شخص,يد,بشر
+☝️	index,up,إشارة,أعلى,person,hand,people,شخص,يد,بشر
+👍	thumbsup,like,ok,good,إعجاب,جيد,أعجبني,تمام,person,hand,people,شخص,يد,بشر
+👎	thumbsdown,dislike,bad,عدم,سيء,لم يعجبني,person,hand,people,شخص,يد,بشر
+✊	fist,punch,قبضة,لكمة,person,hand,people,شخص,يد,بشر
+👊	fist,punch,bump,لكمة,قبضة,person,hand,people,شخص,يد,بشر
+🤛	fist,left,قبضة,يسار,person,hand,people,شخص,يد,بشر
+🤜	fist,right,قبضة,يمين,person,hand,people,شخص,يد,بشر
+👏	clap,applause,تصفيق,تصفيق,person,hand,people,شخص,يد,بشر
+🙌	praise,celebrate,هلا,احتفال,تمجيد,person,hand,people,شخص,يد,بشر
+👐	open,hands,يدين,فتح,person,hand,people,شخص,يد,بشر
+🤲	palms,up,dua,يدان,دعاء,person,hand,people,شخص,يد,بشر
+🤝	handshake,deal,مصافحة,اتفاق,person,hand,people,شخص,يد,بشر
+🙏	pray,thanks,please,صلاة,شكرا,رجاء,دعاء,person,hand,people,شخص,يد,بشر
+💪	strong,muscle,عضلة,قوي,person,hand,people,شخص,يد,بشر
+🦾	arm,prosthetic,ذراع,صناعي,person,hand,people,شخص,يد,بشر
+🦿	person,hand,people,شخص,يد,بشر
+🦵	leg,kick,ساق,ركل,person,hand,people,شخص,يد,بشر
+🦶	foot,قدم,person,hand,people,شخص,يد,بشر
+👂	ear,listen,أذن,استماع,person,hand,people,شخص,يد,بشر
+👃	nose,smell,أنف,شم,person,hand,people,شخص,يد,بشر
+🧠	brain,smart,دماغ,عقل,ذكي,person,hand,people,شخص,يد,بشر
+🫀	person,hand,people,شخص,يد,بشر
+🫁	person,hand,people,شخص,يد,بشر
+🦷	person,hand,people,شخص,يد,بشر
+🦴	person,hand,people,شخص,يد,بشر
+👀	person,hand,people,شخص,يد,بشر
+👁️	person,hand,people,شخص,يد,بشر
+👅	person,hand,people,شخص,يد,بشر
+👄	person,hand,people,شخص,يد,بشر
+💋	person,hand,people,شخص,يد,بشر
+🩸	person,hand,people,شخص,يد,بشر
+👶	baby,رضيع,طفل,بيبي,person,hand,people,شخص,يد,بشر
+👧	girl,بنت,فتاة,person,hand,people,شخص,يد,بشر
+🧒	child,kid,طفل,ولد,person,hand,people,شخص,يد,بشر
+👦	boy,ولد,صبي,person,hand,people,شخص,يد,بشر
+👩	woman,امرأة,ست,person,hand,people,شخص,يد,بشر
+🧑	person,شخص,person,hand,people,شخص,يد,بشر
+👨	man,رجل,person,hand,people,شخص,يد,بشر
+👵	old,woman,جدة,امرأة مسنة,person,hand,people,شخص,يد,بشر
+🧓	older,person,مسن,كبير,person,hand,people,شخص,يد,بشر
+👴	old,man,جد,رجل مسن,person,hand,people,شخص,يد,بشر
+👲	person,hand,people,شخص,يد,بشر
+👳	turban,عمامة,person,hand,people,شخص,يد,بشر
+👮	police,شرطي,بوليس,person,hand,people,شخص,يد,بشر
+💁	info,desk,معلومات,خدمة,person,hand,people,شخص,يد,بشر
+🙅	no,forbid,gestre,رفض,منع,لا,person,hand,people,شخص,يد,بشر
+🙆	ok,person,موافقة,نعم,person,hand,people,شخص,يد,بشر
+💃	dancer,dance,راقصة,رقص,person,hand,people,شخص,يد,بشر
+🕺	dancer,dance,راقص,رقص,person,hand,people,شخص,يد,بشر
+🧗	climbing,تسلق,person,hand,people,شخص,يد,بشر
+🏇	horse,race,سباق,person,hand,people,شخص,يد,بشر
+🏄	surfing,تزلج على الماء,person,hand,people,شخص,يد,بشر
+🏊	swimming,سباحة,person,hand,people,شخص,يد,بشر
+🤽	person,hand,people,شخص,يد,بشر
+🚣	person,hand,people,شخص,يد,بشر
+🧘	yoga,meditate,يوغا,تأمل,person,hand,people,شخص,يد,بشر
+🛀	bath,حمام,استحمام,person,hand,people,شخص,يد,بشر
+🛌	sleep,bed,نوم,سرير,person,hand,people,شخص,يد,بشر
+👫	person,hand,people,شخص,يد,بشر
+👭	person,hand,people,شخص,يد,بشر
+👬	person,hand,people,شخص,يد,بشر
+💑	person,hand,people,شخص,يد,بشر
+💏	kiss,couple,قبلة,بوسة,person,hand,people,شخص,يد,بشر
+👪	person,hand,people,شخص,يد,بشر
+👨‍👩‍👧	family,عائلة,person,hand,people,شخص,يد,بشر
+🗣️	person,hand,people,شخص,يد,بشر
+👤	person,hand,people,شخص,يد,بشر
+👥	person,hand,people,شخص,يد,بشر
+🫂	person,hand,people,شخص,يد,بشر
+🚶	walk,مشي,يمشي,person,hand,people,شخص,يد,بشر
+🧎	kneel,رُكوع,person,hand,people,شخص,يد,بشر
+👩‍🏫	teacher,معلمة,مدرسة,person,hand,people,شخص,يد,بشر
+🧑‍⚕️	person,hand,people,شخص,يد,بشر
+👨‍🍳	person,hand,people,شخص,يد,بشر
+👩‍🔧	person,hand,people,شخص,يد,بشر
+🧑‍💻	person,hand,people,شخص,يد,بشر
+👨‍🎤	person,hand,people,شخص,يد,بشر
+👩‍🎨	person,hand,people,شخص,يد,بشر
+🧑‍✈️	person,hand,people,شخص,يد,بشر
+👨‍🚀	person,hand,people,شخص,يد,بشر
+👩‍🚒	person,hand,people,شخص,يد,بشر
+🧑‍⚖️	person,hand,people,شخص,يد,بشر
+👳‍♂️	person,hand,people,شخص,يد,بشر
+👱‍♀️	person,hand,people,شخص,يد,بشر
+🤰	pregnant,حامل,person,hand,people,شخص,يد,بشر
+🤱	breastfeed,رضاعة,person,hand,people,شخص,يد,بشر
+👼	angel,baby,ملاك,طفل,person,hand,people,شخص,يد,بشر
+🎅	santa,christmas,بابا نويل,كريسمس,person,hand,people,شخص,يد,بشر
+🤶	person,hand,people,شخص,يد,بشر
+🧙	wizard,mage,ساحر,مشعوذ,person,hand,people,شخص,يد,بشر
+🧚	fairy,جنية,person,hand,people,شخص,يد,بشر
+🧛	vampire,مصاص دماء,person,hand,people,شخص,يد,بشر
+🧜	merperson,mermaid,حورية,بحر,person,hand,people,شخص,يد,بشر
+🧝	elf,قزم,person,hand,people,شخص,يد,بشر
+🧞	genie,جني,person,hand,people,شخص,يد,بشر
+🧟	zombie,زومبي,person,hand,people,شخص,يد,بشر
+🧿	nazar,evil eye,عين,حسد,person,hand,people,شخص,يد,بشر
+🐶	dog,puppy,كلب,جرو,animal,nature,حيوان,طبيعة
+🐱	cat,kitty,قط,قطة,مزو,animal,nature,حيوان,طبيعة
+🐭	mouse,rat,فأر,فار,animal,nature,حيوان,طبيعة
+🐹	hamster,هامستر,animal,nature,حيوان,طبيعة
+🐰	rabbit,bunny,أرنب,animal,nature,حيوان,طبيعة
+🦊	fox,ثعلب,animal,nature,حيوان,طبيعة
+🐻	bear,دب,animal,nature,حيوان,طبيعة
+🐼	panda,باندا,animal,nature,حيوان,طبيعة
+🐨	koala,كوالا,animal,nature,حيوان,طبيعة
+🐯	tiger,نمر,animal,nature,حيوان,طبيعة
+🦁	lion,أسد,animal,nature,حيوان,طبيعة
+🐮	cow,bull,بقرة,ثور,animal,nature,حيوان,طبيعة
+🐷	pig,خنزير,animal,nature,حيوان,طبيعة
+🐸	frog,ضفدع,animal,nature,حيوان,طبيعة
+🐵	monkey,face,قرد,animal,nature,حيوان,طبيعة
+🙈	monkey,see,evil,قرد,لا أرى,animal,nature,حيوان,طبيعة
+🙉	monkey,hear,قرد,لا أسمع,animal,nature,حيوان,طبيعة
+🙊	monkey,speak,قرد,لا أتكلم,animal,nature,حيوان,طبيعة
+🐒	monkey,قرد,animal,nature,حيوان,طبيعة
+🐔	chicken,hen,دجاجة,فرخ,animal,nature,حيوان,طبيعة
+🐧	penguin,بطريق,animal,nature,حيوان,طبيعة
+🐦	bird,طائر,عصفور,animal,nature,حيوان,طبيعة
+🐤	chick,bird,صوص,فرخ,animal,nature,حيوان,طبيعة
+🦅	eagle,نسر,animal,nature,حيوان,طبيعة
+🦉	owl,بومة,animal,nature,حيوان,طبيعة
+🦇	bat,خفاش,animal,nature,حيوان,طبيعة
+🐺	wolf,ذئب,animal,nature,حيوان,طبيعة
+🐗	boar,خنزير بري,animal,nature,حيوان,طبيعة
+🐴	horse,حصان,animal,nature,حيوان,طبيعة
+🦄	unicorn,وحيد قرن,animal,nature,حيوان,طبيعة
+🐝	bee,نحلة,animal,nature,حيوان,طبيعة
+🐛	bug,caterpillar,يرقة,دودة,animal,nature,حيوان,طبيعة
+🦋	butterfly,فراشة,animal,nature,حيوان,طبيعة
+🐌	snail,حلزون,animal,nature,حيوان,طبيعة
+🐞	ladybug,بقلة,حشرة,animal,nature,حيوان,طبيعة
+🐜	ant,نملة,animal,nature,حيوان,طبيعة
+🦗	cricket,جرادة,animal,nature,حيوان,طبيعة
+🕷️	spider,عنكبوت,animal,nature,حيوان,طبيعة
+🦂	scorpion,عقرب,animal,nature,حيوان,طبيعة
+🐢	turtle,سلحفاة,animal,nature,حيوان,طبيعة
+🐍	snake,ثعبان,حية,animal,nature,حيوان,طبيعة
+🦎	lizard,سحلية,animal,nature,حيوان,طبيعة
+🦖	trex,dinosaur,ديناصور,animal,nature,حيوان,طبيعة
+🦕	dinosaur,ديناصور,animal,nature,حيوان,طبيعة
+🐙	octopus,أخطبوط,animal,nature,حيوان,طبيعة
+🦑	squid,حبار,animal,nature,حيوان,طبيعة
+🦐	shrimp,روبيان,جمبري,animal,nature,حيوان,طبيعة
+🦞	animal,nature,حيوان,طبيعة
+🦀	crab,سلطعون,animal,nature,حيوان,طبيعة
+🐡	blowfish,سمكة منتفخة,animal,nature,حيوان,طبيعة
+🐠	fish,tropical,سمكة استوائية,animal,nature,حيوان,طبيعة
+🐟	fish,سمكة,animal,nature,حيوان,طبيعة
+🐬	dolphin,دولفين,دلفين,animal,nature,حيوان,طبيعة
+🐳	whale,حوت,animal,nature,حيوان,طبيعة
+🐋	animal,nature,حيوان,طبيعة
+🦈	shark,قرش,animal,nature,حيوان,طبيعة
+🐊	crocodile,تمساح,animal,nature,حيوان,طبيعة
+🐅	tiger,نمر,animal,nature,حيوان,طبيعة
+🐆	leopard,فهد,animal,nature,حيوان,طبيعة
+🦓	zebra,حمار وحشي,animal,nature,حيوان,طبيعة
+🦍	gorilla,غوريلا,animal,nature,حيوان,طبيعة
+🐘	elephant,فيل,animal,nature,حيوان,طبيعة
+🦏	rhino,وحيد القرن,animal,nature,حيوان,طبيعة
+🐪	camel,جمل,animal,nature,حيوان,طبيعة
+🐫	camel,جمل,animal,nature,حيوان,طبيعة
+🦒	giraffe,زرافة,animal,nature,حيوان,طبيعة
+🐃	buffalo,جاموس,animal,nature,حيوان,طبيعة
+🐄	cow,بقرة,animal,nature,حيوان,طبيعة
+🐎	horse,حصان,animal,nature,حيوان,طبيعة
+🐖	pig,خنزير,animal,nature,حيوان,طبيعة
+🐏	ram,كبش,animal,nature,حيوان,طبيعة
+🐑	sheep,خروف,غنم,animal,nature,حيوان,طبيعة
+🐐	goat,ماعز,animal,nature,حيوان,طبيعة
+🦌	deer,غزال,أيل,animal,nature,حيوان,طبيعة
+🐕	dog,كلب,animal,nature,حيوان,طبيعة
+🐩	poodle,كلب بودل,animal,nature,حيوان,طبيعة
+🐈	cat,قطة,animal,nature,حيوان,طبيعة
+🐓	rooster,ديك,animal,nature,حيوان,طبيعة
+🦃	turkey,رومي,ديك رومي,animal,nature,حيوان,طبيعة
+🦚	peacock,طاووس,animal,nature,حيوان,طبيعة
+🦜	parrot,ببغاء,animal,nature,حيوان,طبيعة
+🦢	swan,بجعة,animal,nature,حيوان,طبيعة
+🕊️	dove,peace,حمامة,سلام,animal,nature,حيوان,طبيعة
+🐇	rabbit,أرنب,animal,nature,حيوان,طبيعة
+🦝	raccoon,راكون,animal,nature,حيوان,طبيعة
+🦨	skunk,ظربان,animal,nature,حيوان,طبيعة
+🦡	animal,nature,حيوان,طبيعة
+🦦	otter,قضاعة,animal,nature,حيوان,طبيعة
+🦥	sloth,كسلان,animal,nature,حيوان,طبيعة
+🐁	animal,nature,حيوان,طبيعة
+🐀	animal,nature,حيوان,طبيعة
+🦔	animal,nature,حيوان,طبيعة
+🐾	paws,tracks,آثار,قدم حيوان,animal,nature,حيوان,طبيعة
+🐉	animal,nature,حيوان,طبيعة
+🐲	animal,nature,حيوان,طبيعة
+🍏	apple,green,تفاح أخضر,تفاح,food,drink,طعام,أكل,شراب
+🍎	apple,تفاح,food,drink,طعام,أكل,شراب
+🍐	pear,كمثرى,food,drink,طعام,أكل,شراب
+🍊	orange,mandarin,برتقال,ماندرين,food,drink,طعام,أكل,شراب
+🍋	lemon,ليمون,food,drink,طعام,أكل,شراب
+🍌	banana,موز,food,drink,طعام,أكل,شراب
+🍉	watermelon,بطيخ,food,drink,طعام,أكل,شراب
+🍇	grapes,عنب,food,drink,طعام,أكل,شراب
+🍓	strawberry,فراولة,food,drink,طعام,أكل,شراب
+🫐	blueberries,توت أزرق,food,drink,طعام,أكل,شراب
+🍈	melon,شمام,كنتالوب,food,drink,طعام,أكل,شراب
+🍒	cherries,كرز,حبوب,food,drink,طعام,أكل,شراب
+🍑	peach,خوخ,food,drink,طعام,أكل,شراب
+🥭	mango,مانجو,food,drink,طعام,أكل,شراب
+🍍	pineapple,أناناس,food,drink,طعام,أكل,شراب
+🥥	coconut,جوز الهند,food,drink,طعام,أكل,شراب
+🥝	kiwi,كيوي,food,drink,طعام,أكل,شراب
+🍅	tomato,طماطم,بندورة,food,drink,طعام,أكل,شراب
+🍆	eggplant,باذنجان,food,drink,طعام,أكل,شراب
+🥑	avocado,أفوكادو,food,drink,طعام,أكل,شراب
+🥦	broccoli,بروكلي,food,drink,طعام,أكل,شراب
+🥬	greens,lettuce,خس,ورقيات,food,drink,طعام,أكل,شراب
+🥒	cucumber,خيار,food,drink,طعام,أكل,شراب
+🌶️	pepper,hot,فلفل حار,food,drink,طعام,أكل,شراب
+🌽	corn,ذرة,food,drink,طعام,أكل,شراب
+🥕	carrot,جزرة,food,drink,طعام,أكل,شراب
+🧄	garlic,ثوم,food,drink,طعام,أكل,شراب
+🧅	onion,بصل,food,drink,طعام,أكل,شراب
+🥔	potato,بطاطس,بطاطا,food,drink,طعام,أكل,شراب
+🍠	sweet,potato,بطاطا حلوة,food,drink,طعام,أكل,شراب
+🥐	croissant,كرواسون,food,drink,طعام,أكل,شراب
+🥯	bagel,بيغل,food,drink,طعام,أكل,شراب
+🍞	bread,خبز,food,drink,طعام,أكل,شراب
+🥖	baguette,بغيط,خبز,food,drink,طعام,أكل,شراب
+🥨	pretzel,برتزل,food,drink,طعام,أكل,شراب
+🧀	cheese,جبن,جبنة,food,drink,طعام,أكل,شراب
+🥚	egg,بيض,بيضة,food,drink,طعام,أكل,شراب
+🍳	egg,cooking,فريتاتا,بيض مقلي,طبخ,food,drink,طعام,أكل,شراب
+🧈	food,drink,طعام,أكل,شراب
+🥞	pancakes,بان كيك,فطائر,food,drink,طعام,أكل,شراب
+🧇	waffle,وافل,food,drink,طعام,أكل,شراب
+🥓	bacon,لحم مقدد,food,drink,طعام,أكل,شراب
+🥩	steak,meat,ستيك,لحم,food,drink,طعام,أكل,شراب
+🍗	chicken,leg,دجاج,ورك دجاج,food,drink,طعام,أكل,شراب
+🍖	meat,bone,لحم بعظم,food,drink,طعام,أكل,شراب
+🌭	hotdog,هوت دوج,food,drink,طعام,أكل,شراب
+🍔	burger,hamburger,برجر,همبرجر,food,drink,طعام,أكل,شراب
+🍟	fries,بطاطس مقلية,food,drink,طعام,أكل,شراب
+🍕	pizza,بيتزا,food,drink,طعام,أكل,شراب
+🫓	food,drink,طعام,أكل,شراب
+🥪	sandwich,ساندويتش,food,drink,طعام,أكل,شراب
+🌮	taco,تاكو,food,drink,طعام,أكل,شراب
+🌯	burrito,بوريتو,food,drink,طعام,أكل,شراب
+🥗	salad,سلطة,food,drink,طعام,أكل,شراب
+🥘	paella,pan,طاجن,قدر,food,drink,طعام,أكل,شراب
+🍝	spaghetti,pasta,مكرونة,سباغيتي,food,drink,طعام,أكل,شراب
+🍜	noodles,ramen,نودلز,رامن,food,drink,طعام,أكل,شراب
+🍲	stew,soup,شوربة,طبق,food,drink,طعام,أكل,شراب
+🍛	curry,rice,كاري,أرز,food,drink,طعام,أكل,شراب
+🍣	sushi,سوشي,food,drink,طعام,أكل,شراب
+🍱	bento,بنتو,food,drink,طعام,أكل,شراب
+🥟	dumpling,زلابية محشية,food,drink,طعام,أكل,شراب
+🍤	shrimp,fried,جمبري مقلي,food,drink,طعام,أكل,شراب
+🍙	rice,ball,أرز كرة,food,drink,طعام,أكل,شراب
+🍚	rice,أرز,food,drink,طعام,أكل,شراب
+🍘	food,drink,طعام,أكل,شراب
+🍥	fish,cake,عجينة سمك,food,drink,طعام,أكل,شراب
+🥠	fortune,cookie,كعكة الحظ,food,drink,طعام,أكل,شراب
+🥮	moon,cake,كعكة القمر,food,drink,طعام,أكل,شراب
+🍢	skewer,كباب,سيخ,food,drink,طعام,أكل,شراب
+🍡	dango,دونغو,food,drink,طعام,أكل,شراب
+🍧	shaved,ice,ثلج مبشور,food,drink,طعام,أكل,شراب
+🍨	icecream,ice cream,بوظة,آيس كريم,food,drink,طعام,أكل,شراب
+🍦	soft,serve,icecream,بوظة,آيس كريم,food,drink,طعام,أكل,شراب
+🥧	pie,فطيرة,food,drink,طعام,أكل,شراب
+🧁	cupcake,كب كيك,food,drink,طعام,أكل,شراب
+🍰	cake,كيك,حلويات,food,drink,طعام,أكل,شراب
+🎂	birthday,cake,عيد ميلاد,كيك,food,drink,طعام,أكل,شراب
+🍮	custard,crème,كريمة,مهلبية,food,drink,طعام,أكل,شراب
+🍭	lollipop,سكر لولو,حلوى,food,drink,طعام,أكل,شراب
+🍬	candy,حلوى,سكر,food,drink,طعام,أكل,شراب
+🍫	chocolate,شوكولاتة,food,drink,طعام,أكل,شراب
+🍿	popcorn,فشار,food,drink,طعام,أكل,شراب
+🍩	donut,doughnut,دونات,food,drink,طعام,أكل,شراب
+🍪	cookie,كوكيز,بسكويت,food,drink,طعام,أكل,شراب
+🥛	milk,حليب,food,drink,طعام,أكل,شراب
+🍼	food,drink,طعام,أكل,شراب
+☕	coffee,قهوة,كافيين,food,drink,طعام,أكل,شراب
+🫖	food,drink,طعام,أكل,شراب
+🍵	tea,شاي,food,drink,طعام,أكل,شراب
+🧃	juice,box,عصير,food,drink,طعام,أكل,شراب
+🥤	soda,cup,عصير,مشروب,كوب,food,drink,طعام,أكل,شراب
+🧋	food,drink,طعام,أكل,شراب
+🍶	food,drink,طعام,أكل,شراب
+🍺	beer,بيرة,food,drink,طعام,أكل,شراب
+🍻	beers,cheers,بيرة,في صحتك,food,drink,طعام,أكل,شراب
+🥂	champagne,toast,شمبانيا,food,drink,طعام,أكل,شراب
+🍷	wine,نبيذ,food,drink,طعام,أكل,شراب
+🥃	whisky,ويسكي,food,drink,طعام,أكل,شراب
+🍸	cocktail,كوكتيل,food,drink,طعام,أكل,شراب
+🍹	tropical,drink,مشروب استوائي,food,drink,طعام,أكل,شراب
+🧉	mate,شاي الميت,food,drink,طعام,أكل,شراب
+🍾	food,drink,طعام,أكل,شراب
+🧊	food,drink,طعام,أكل,شراب
+🥄	spoon,ملعقة,food,drink,طعام,أكل,شراب
+🍴	fork,knife,شوكة,سكين,food,drink,طعام,أكل,شراب
+🍽️	plate,food,طبق,أكل,وجبة,food,drink,طعام,أكل,شراب
+🥣	food,drink,طعام,أكل,شراب
+🥡	food,drink,طعام,أكل,شراب
+🧂	salt,ملح,food,drink,طعام,أكل,شراب
+⚽	soccer,football,كرة قدم,sport,activity,game,رياضة,نشاط,لعبة
+🏀	basketball,كرة سلة,sport,activity,game,رياضة,نشاط,لعبة
+🏈	football,كرة أمريكية,sport,activity,game,رياضة,نشاط,لعبة
+⚾	baseball,بيسبول,sport,activity,game,رياضة,نشاط,لعبة
+🥎	softball,كرة لينة,sport,activity,game,رياضة,نشاط,لعبة
+🎾	tennis,تنس,sport,activity,game,رياضة,نشاط,لعبة
+🏐	volleyball,كرة طائرة,sport,activity,game,رياضة,نشاط,لعبة
+🏉	rugby,رغبي,sport,activity,game,رياضة,نشاط,لعبة
+🥏	frisbee,فريسبي,sport,activity,game,رياضة,نشاط,لعبة
+🎱	pool,8ball,بلياردو,sport,activity,game,رياضة,نشاط,لعبة
+🪀	yo-yo,يويو,sport,activity,game,رياضة,نشاط,لعبة
+🏓	pingpong,table tennis,تنس طاولة,sport,activity,game,رياضة,نشاط,لعبة
+🏸	badminton,ريشة,sport,activity,game,رياضة,نشاط,لعبة
+🏒	sport,activity,game,رياضة,نشاط,لعبة
+🏑	sport,activity,game,رياضة,نشاط,لعبة
+🥍	sport,activity,game,رياضة,نشاط,لعبة
+🏏	sport,activity,game,رياضة,نشاط,لعبة
+🥅	goal,net,مرمى,شبكة,sport,activity,game,رياضة,نشاط,لعبة
+⛳	golf,غولف,sport,activity,game,رياضة,نشاط,لعبة
+🪁	kite,طائرة ورقية,ورق,sport,activity,game,رياضة,نشاط,لعبة
+🏹	sport,activity,game,رياضة,نشاط,لعبة
+🎣	fishing,صيد سمك,sport,activity,game,رياضة,نشاط,لعبة
+🤿	diving,غطس,sport,activity,game,رياضة,نشاط,لعبة
+🥊	boxing,ملاكمة,sport,activity,game,رياضة,نشاط,لعبة
+🥋	martial,arts,فنون قتالية,sport,activity,game,رياضة,نشاط,لعبة
+🎽	running,shirt,قميص رياضي,sport,activity,game,رياضة,نشاط,لعبة
+🛹	sport,activity,game,رياضة,نشاط,لعبة
+🛼	sport,activity,game,رياضة,نشاط,لعبة
+🛷	sled,زلاجة,sport,activity,game,رياضة,نشاط,لعبة
+⛸️	skate,ice,تزلج جليدي,sport,activity,game,رياضة,نشاط,لعبة
+🥌	curling,كيرلنج,sport,activity,game,رياضة,نشاط,لعبة
+🎿	ski,تزلج,sport,activity,game,رياضة,نشاط,لعبة
+⛷️	sport,activity,game,رياضة,نشاط,لعبة
+🏂	sport,activity,game,رياضة,نشاط,لعبة
+🪂	sport,activity,game,رياضة,نشاط,لعبة
+🏋️	weightlifting,gym,رفع أثقال,جيم,sport,activity,game,رياضة,نشاط,لعبة
+🤼	wrestling,مصارعة,sport,activity,game,رياضة,نشاط,لعبة
+🤸	cartwheel,gymnast,جمباز,sport,activity,game,رياضة,نشاط,لعبة
+⛹️	basketball,player,كرة سلة,sport,activity,game,رياضة,نشاط,لعبة
+🤺	fencing,مبارزة,sport,activity,game,رياضة,نشاط,لعبة
+🤾	handball,كرة يد,sport,activity,game,رياضة,نشاط,لعبة
+🏌️	sport,activity,game,رياضة,نشاط,لعبة
+🧴	lotion,لوشن,sport,activity,game,رياضة,نشاط,لعبة
+🧢	sport,activity,game,رياضة,نشاط,لعبة
+🎯	target,هدف,sport,activity,game,رياضة,نشاط,لعبة
+🎮	gaming,controller,ألعاب,sport,activity,game,رياضة,نشاط,لعبة
+🕹️	joystick,game,عصا تحكم,ألعاب,sport,activity,game,رياضة,نشاط,لعبة
+🎲	dice,نرد,sport,activity,game,رياضة,نشاط,لعبة
+🧩	puzzle,بازل,sport,activity,game,رياضة,نشاط,لعبة
+🎰	sport,activity,game,رياضة,نشاط,لعبة
+🎳	bowling,بولينج,sport,activity,game,رياضة,نشاط,لعبة
+🚴	bike,cycling,دراجة,سباق,sport,activity,game,رياضة,نشاط,لعبة
+🚵	sport,activity,game,رياضة,نشاط,لعبة
+🎪	circus,سيرك,sport,activity,game,رياضة,نشاط,لعبة
+🎭	theater,arts,مسرح,فنون,sport,activity,game,رياضة,نشاط,لعبة
+🎨	art,paint,فن,رسم,لوحة,sport,activity,game,رياضة,نشاط,لعبة
+🎬	clapper,movie,فيلم,سينما,sport,activity,game,رياضة,نشاط,لعبة
+🎤	sing,karaoke,غناء,كاريوكي,sport,activity,game,رياضة,نشاط,لعبة
+🎧	headphones,music,سماعات,موسيقى,sport,activity,game,رياضة,نشاط,لعبة
+🎼	music,score,موسيقى,sport,activity,game,رياضة,نشاط,لعبة
+🎹	piano,بيانو,sport,activity,game,رياضة,نشاط,لعبة
+🥁	drum,طبلة,درام,sport,activity,game,رياضة,نشاط,لعبة
+🎷	saxophone,ساكسفون,sport,activity,game,رياضة,نشاط,لعبة
+🎺	trumpet,بوق,sport,activity,game,رياضة,نشاط,لعبة
+🎸	guitar,قيثارة,جيتار,sport,activity,game,رياضة,نشاط,لعبة
+🪕	banjo,بانجو,sport,activity,game,رياضة,نشاط,لعبة
+🎻	violin,كمان,sport,activity,game,رياضة,نشاط,لعبة
+🎫	ticket,تذكرة,sport,activity,game,رياضة,نشاط,لعبة
+🏆	trophy,win,كأس,فوز,جائزة,sport,activity,game,رياضة,نشاط,لعبة
+🥇	gold,medal,first,ذهبية,أول,ميدالية,sport,activity,game,رياضة,نشاط,لعبة
+🥈	silver,medal,second,فضية,ثاني,sport,activity,game,رياضة,نشاط,لعبة
+🥉	bronze,medal,third,برونزية,ثالث,sport,activity,game,رياضة,نشاط,لعبة
+🏅	sport,activity,game,رياضة,نشاط,لعبة
+🎖️	medal,military,وسام,ميدالية,sport,activity,game,رياضة,نشاط,لعبة
+🏵️	sport,activity,game,رياضة,نشاط,لعبة
+🎗️	ribbon,remembrance,شريط,sport,activity,game,رياضة,نشاط,لعبة
+🎟️	tickets,تذاكر,sport,activity,game,رياضة,نشاط,لعبة
+🎠	carousel,horse,ميزة دوارة,sport,activity,game,رياضة,نشاط,لعبة
+🎡	ferris,wheel,عجلة فيريس,sport,activity,game,رياضة,نشاط,لعبة
+🎢	roller,coaster,أفعوانية,sport,activity,game,رياضة,نشاط,لعبة
+🎉	sport,activity,game,رياضة,نشاط,لعبة
+🎊	sport,activity,game,رياضة,نشاط,لعبة
+🎈	balloon,بالون,sport,activity,game,رياضة,نشاط,لعبة
+🎁	gift,present,هدية,sport,activity,game,رياضة,نشاط,لعبة
+🎀	ribbon,bow,شريط,فيونكة,sport,activity,game,رياضة,نشاط,لعبة
+✨	sport,activity,game,رياضة,نشاط,لعبة
+🧨	sport,activity,game,رياضة,نشاط,لعبة
+🎇	sport,activity,game,رياضة,نشاط,لعبة
+🎆	sport,activity,game,رياضة,نشاط,لعبة
+🎑	sport,activity,game,رياضة,نشاط,لعبة
+🚗	car,سيارة,travel,place,vehicle,سفر,مكان,مركبة
+🚕	taxi,تاكسي,travel,place,vehicle,سفر,مكان,مركبة
+🚙	suv,car,سيارة دفع رباعي,travel,place,vehicle,سفر,مكان,مركبة
+🚌	bus,باص,حافلة,travel,place,vehicle,سفر,مكان,مركبة
+🚎	trolley,bus,ترولي باص,travel,place,vehicle,سفر,مكان,مركبة
+🏎️	racing,car,سيارة سباق,travel,place,vehicle,سفر,مكان,مركبة
+🚓	police,car,شرطة,travel,place,vehicle,سفر,مكان,مركبة
+🚑	ambulance,إسعاف,travel,place,vehicle,سفر,مكان,مركبة
+🚒	firetruck,إطفاء,travel,place,vehicle,سفر,مكان,مركبة
+🚐	van,فان,travel,place,vehicle,سفر,مكان,مركبة
+🛻	pickup,بيك أب,travel,place,vehicle,سفر,مكان,مركبة
+🚚	truck,شاحنة,travel,place,vehicle,سفر,مكان,مركبة
+🚛	truck,trailer,شاحنة مقطورة,travel,place,vehicle,سفر,مكان,مركبة
+🚜	tractor,جرار,travel,place,vehicle,سفر,مكان,مركبة
+🦯	cane,blind,عصا كفيف,travel,place,vehicle,سفر,مكان,مركبة
+🦽	wheelchair,كرسي متحرك,travel,place,vehicle,سفر,مكان,مركبة
+🦼	motorized,wheelchair,كرسي كهربائي,travel,place,vehicle,سفر,مكان,مركبة
+🛴	scooter,سكوتر,travel,place,vehicle,سفر,مكان,مركبة
+🚲	bicycle,bike,دراجة هوائية,travel,place,vehicle,سفر,مكان,مركبة
+🛵	scooter,motor,دراجة نارية,travel,place,vehicle,سفر,مكان,مركبة
+🏍️	motorcycle,دراجة نارية,موتوسيكل,travel,place,vehicle,سفر,مكان,مركبة
+🛺	travel,place,vehicle,سفر,مكان,مركبة
+🚨	police,light,emergency,شرطة,إنذار,طوارئ,travel,place,vehicle,سفر,مكان,مركبة
+🚔	police,car,شرطة,travel,place,vehicle,سفر,مكان,مركبة
+🚍	bus,باص,travel,place,vehicle,سفر,مكان,مركبة
+🚘	car,سيارة,travel,place,vehicle,سفر,مكان,مركبة
+🚖	taxi,تاكسي,travel,place,vehicle,سفر,مكان,مركبة
+🚡	aerial,tramway,تلفريك,travel,place,vehicle,سفر,مكان,مركبة
+🚠	mountain,cableway,تلفريك جبلي,travel,place,vehicle,سفر,مكان,مركبة
+🚟	railway,قطار معلق,travel,place,vehicle,سفر,مكان,مركبة
+🚃	railway,car,قطار,travel,place,vehicle,سفر,مكان,مركبة
+🚋	tram,ترام,travel,place,vehicle,سفر,مكان,مركبة
+🚞	mountain,railway,قطار جبلي,travel,place,vehicle,سفر,مكان,مركبة
+🚝	monorail,مونوريل,travel,place,vehicle,سفر,مكان,مركبة
+🚄	bullet,train,قطار سريع,travel,place,vehicle,سفر,مكان,مركبة
+🚅	bullet,train,قطار سريع,travel,place,vehicle,سفر,مكان,مركبة
+🚈	railway,قطار,travel,place,vehicle,سفر,مكان,مركبة
+🚂	locomotive,train,قطار بخاري,travel,place,vehicle,سفر,مكان,مركبة
+🚆	train,قطار,travel,place,vehicle,سفر,مكان,مركبة
+🚇	metro,subway,مترا,مترو,travel,place,vehicle,سفر,مكان,مركبة
+🚊	tram,ترام,travel,place,vehicle,سفر,مكان,مركبة
+🚉	station,محطة,travel,place,vehicle,سفر,مكان,مركبة
+✈️	airplane,flight,طائرة,سفر,رحلة,travel,place,vehicle,سفر,مكان,مركبة
+🛫	departure,سفر,travel,place,vehicle,سفر,مكان,مركبة
+🛬	landing,arrival,هبوط,وصول,travel,place,vehicle,سفر,مكان,مركبة
+🛩️	small,airplane,طائرة صغيرة,travel,place,vehicle,سفر,مكان,مركبة
+💺	seat,مقعد,travel,place,vehicle,سفر,مكان,مركبة
+🛰️	satellite,قمر صناعي,travel,place,vehicle,سفر,مكان,مركبة
+🚀	rocket,launch,صاروخ,إطلاق,travel,place,vehicle,سفر,مكان,مركبة
+🛸	ufo,flying saucer,طبق طائر,travel,place,vehicle,سفر,مكان,مركبة
+🚁	helicopter,هليكوبتر,طائرة عمودية,travel,place,vehicle,سفر,مكان,مركبة
+🛶	travel,place,vehicle,سفر,مكان,مركبة
+⛵	sailboat,قارب شراعي,travel,place,vehicle,سفر,مكان,مركبة
+🚤	speedboat,قارب سريع,travel,place,vehicle,سفر,مكان,مركبة
+🛥️	motor,boat,قارب,travel,place,vehicle,سفر,مكان,مركبة
+🛳️	passenger,ship,باخرة,travel,place,vehicle,سفر,مكان,مركبة
+⛴️	ferry,عبارة,travel,place,vehicle,سفر,مكان,مركبة
+🚢	ship,سفينة,travel,place,vehicle,سفر,مكان,مركبة
+⚓	anchor,مرساة,travel,place,vehicle,سفر,مكان,مركبة
+⛽	fuel,بنزين,travel,place,vehicle,سفر,مكان,مركبة
+🚧	construction,أشغال,تحذير,travel,place,vehicle,سفر,مكان,مركبة
+🚦	signal,traffic,إشارة,travel,place,vehicle,سفر,مكان,مركبة
+🚥	traffic,light,إشارة,travel,place,vehicle,سفر,مكان,مركبة
+🗺️	map,خريطة,travel,place,vehicle,سفر,مكان,مركبة
+🗿	statue,moai,تمثال,travel,place,vehicle,سفر,مكان,مركبة
+🗽	statue,liberty,تمثال الحرية,travel,place,vehicle,سفر,مكان,مركبة
+🗼	tower,tokyo,برج,طوكيو,travel,place,vehicle,سفر,مكان,مركبة
+🏰	castle,قلعة,قصر,travel,place,vehicle,سفر,مكان,مركبة
+🏯	japanese,castle,قلعة يابانية,travel,place,vehicle,سفر,مكان,مركبة
+⛲	fountain,نافورة,travel,place,vehicle,سفر,مكان,مركبة
+⛱️	beach,umbrella,شمسية,شاطئ,travel,place,vehicle,سفر,مكان,مركبة
+🏖️	beach,شاطئ,travel,place,vehicle,سفر,مكان,مركبة
+🏝️	island,جزيرة,travel,place,vehicle,سفر,مكان,مركبة
+🏜️	desert,صحراء,travel,place,vehicle,سفر,مكان,مركبة
+🌋	volcano,بركان,travel,place,vehicle,سفر,مكان,مركبة
+⛰️	mountain,جبل,travel,place,vehicle,سفر,مكان,مركبة
+🏔️	mountain,snow,جبل ثلجي,travel,place,vehicle,سفر,مكان,مركبة
+🗻	mountain,فوجي,travel,place,vehicle,سفر,مكان,مركبة
+🏕️	camping,تخييم,travel,place,vehicle,سفر,مكان,مركبة
+🛖	travel,place,vehicle,سفر,مكان,مركبة
+🏠	house,home,منزل,بيت,travel,place,vehicle,سفر,مكان,مركبة
+🏡	house,garden,بيت بحديقة,travel,place,vehicle,سفر,مكان,مركبة
+🏘️	houses,حي,منازل,travel,place,vehicle,سفر,مكان,مركبة
+🏚️	derelict,house,بيت مهجور,travel,place,vehicle,سفر,مكان,مركبة
+🏗️	construction,بناء,travel,place,vehicle,سفر,مكان,مركبة
+🏭	factory,مصنع,travel,place,vehicle,سفر,مكان,مركبة
+🏢	office,building,مكتب,مبنى,travel,place,vehicle,سفر,مكان,مركبة
+🏬	department,store,متجر,travel,place,vehicle,سفر,مكان,مركبة
+🏣	post,office,بريد,travel,place,vehicle,سفر,مكان,مركبة
+🏤	travel,place,vehicle,سفر,مكان,مركبة
+🏥	hospital,مستشفى,travel,place,vehicle,سفر,مكان,مركبة
+🏦	bank,مصرف,بنك,travel,place,vehicle,سفر,مكان,مركبة
+🏨	hotel,فندق,travel,place,vehicle,سفر,مكان,مركبة
+🏪	convenience,store,متجر صغير,travel,place,vehicle,سفر,مكان,مركبة
+🏫	school,مدرسة,travel,place,vehicle,سفر,مكان,مركبة
+🏩	travel,place,vehicle,سفر,مكان,مركبة
+💒	wedding,زواج,travel,place,vehicle,سفر,مكان,مركبة
+🏛️	classical,building,مبنى كلاسيكي,travel,place,vehicle,سفر,مكان,مركبة
+⛪	travel,place,vehicle,سفر,مكان,مركبة
+🕌	mosque,مسجد,travel,place,vehicle,سفر,مكان,مركبة
+🕍	synagogue,معبد يهودي,travel,place,vehicle,سفر,مكان,مركبة
+🛕	temple,معبد,travel,place,vehicle,سفر,مكان,مركبة
+🕋	kaaba,مكة,الكعبة,travel,place,vehicle,سفر,مكان,مركبة
+⛩️	shrine,معبد,travel,place,vehicle,سفر,مكان,مركبة
+🌉	travel,place,vehicle,سفر,مكان,مركبة
+🌁	travel,place,vehicle,سفر,مكان,مركبة
+🏞️	travel,place,vehicle,سفر,مكان,مركبة
+🌅	travel,place,vehicle,سفر,مكان,مركبة
+🌄	travel,place,vehicle,سفر,مكان,مركبة
+🌠	travel,place,vehicle,سفر,مكان,مركبة
+🌇	travel,place,vehicle,سفر,مكان,مركبة
+🌆	travel,place,vehicle,سفر,مكان,مركبة
+🏙️	travel,place,vehicle,سفر,مكان,مركبة
+🌃	travel,place,vehicle,سفر,مكان,مركبة
+🌌	travel,place,vehicle,سفر,مكان,مركبة
+⌚	watch,time,ساعة,object,thing,شيء,أداة,جسم
+📱	phone,mobile,جوال,هاتف,موبايل,object,thing,شيء,أداة,جسم
+📲	phone,call,اتصال,هاتف,object,thing,شيء,أداة,جسم
+💻	laptop,computer,لابتوب,حاسوب,كمبيوتر,object,thing,شيء,أداة,جسم
+⌨️	keyboard,لوحة مفاتيح,كيبورد,object,thing,شيء,أداة,جسم
+🖥️	desktop,computer,شاشة,حاسوب,object,thing,شيء,أداة,جسم
+🖨️	printer,طابعة,object,thing,شيء,أداة,جسم
+🖱️	mouse,computer,فأرة,object,thing,شيء,أداة,جسم
+💽	disk,قرص,object,thing,شيء,أداة,جسم
+💾	floppy,disk,save,حفظ,قرص,object,thing,شيء,أداة,جسم
+💿	cd,disk,قرص,object,thing,شيء,أداة,جسم
+📀	dvd,قرص,object,thing,شيء,أداة,جسم
+📼	vhs,tape,شريط,object,thing,شيء,أداة,جسم
+📷	camera,photo,كاميرا,صورة,object,thing,شيء,أداة,جسم
+📸	camera,flash,كاميرا,object,thing,شيء,أداة,جسم
+📹	video,camera,فيديو,object,thing,شيء,أداة,جسم
+🎥	camera,movie,كاميرا,تصوير,object,thing,شيء,أداة,جسم
+📞	object,thing,شيء,أداة,جسم
+☎️	object,thing,شيء,أداة,جسم
+📟	object,thing,شيء,أداة,جسم
+📠	object,thing,شيء,أداة,جسم
+📺	object,thing,شيء,أداة,جسم
+📻	object,thing,شيء,أداة,جسم
+🎙️	object,thing,شيء,أداة,جسم
+⏱️	stopwatch,ساعة إيقاف,object,thing,شيء,أداة,جسم
+⏲️	timer,مؤقت,object,thing,شيء,أداة,جسم
+⏰	alarm,clock,منبه,ساعة,object,thing,شيء,أداة,جسم
+🕰️	clock,ساعة حائط,object,thing,شيء,أداة,جسم
+⌛	hourglass,time,رمل,ساعة رملية,object,thing,شيء,أداة,جسم
+⏳	object,thing,شيء,أداة,جسم
+📡	antenna,بث,object,thing,شيء,أداة,جسم
+🔋	battery,بطارية,object,thing,شيء,أداة,جسم
+🔌	plug,electric,قابس,كهرباء,object,thing,شيء,أداة,جسم
+💡	bulb,idea,لمبة,فكرة,object,thing,شيء,أداة,جسم
+🔦	flashlight,torch,كشاف,object,thing,شيء,أداة,جسم
+🕯️	candle,شمعة,object,thing,شيء,أداة,جسم
+🧯	extinguisher,إطفاء,object,thing,شيء,أداة,جسم
+🛢️	oil,barrel,برميل,object,thing,شيء,أداة,جسم
+💸	money,نقود,object,thing,شيء,أداة,جسم
+💵	dollar,money,دولار,نقود,object,thing,شيء,أداة,جسم
+💴	yen,ين,object,thing,شيء,أداة,جسم
+💶	euro,يورو,object,thing,شيء,أداة,جسم
+💷	pound,جنيه,object,thing,شيء,أداة,جسم
+🪙	coin,عملة,نقود,object,thing,شيء,أداة,جسم
+💰	money,bag,نقود,مال,كيس,object,thing,شيء,أداة,جسم
+💳	credit,card,بطاقة ائتمان,بطاقة,object,thing,شيء,أداة,جسم
+💎	object,thing,شيء,أداة,جسم
+⚖️	object,thing,شيء,أداة,جسم
+🪜	object,thing,شيء,أداة,جسم
+🧰	toolbox,صندوق أدوات,object,thing,شيء,أداة,جسم
+🔧	wrench,مفتاح ربط,عدة,object,thing,شيء,أداة,جسم
+🔨	hammer,مطرقة,object,thing,شيء,أداة,جسم
+⚒️	object,thing,شيء,أداة,جسم
+🛠️	tools,أدوات,object,thing,شيء,أداة,جسم
+⛏️	pick,فأس,object,thing,شيء,أداة,جسم
+🔩	object,thing,شيء,أداة,جسم
+⚙️	gear,settings,تروس,إعدادات,object,thing,شيء,أداة,جسم
+🪤	object,thing,شيء,أداة,جسم
+🧱	object,thing,شيء,أداة,جسم
+⛓️	object,thing,شيء,أداة,جسم
+🧲	magnet,مغناطيس,object,thing,شيء,أداة,جسم
+🔫	pistol,مسدس,object,thing,شيء,أداة,جسم
+💣	object,thing,شيء,أداة,جسم
+🪓	object,thing,شيء,أداة,جسم
+🔪	object,thing,شيء,أداة,جسم
+🗡️	object,thing,شيء,أداة,جسم
+⚔️	swords,fight,سيوف,قتال,object,thing,شيء,أداة,جسم
+🛡️	shield,درع,object,thing,شيء,أداة,جسم
+🚬	cigarette,تدخين,سيجارة,object,thing,شيء,أداة,جسم
+⚰️	coffin,نعش,object,thing,شيء,أداة,جسم
+🪦	object,thing,شيء,أداة,جسم
+⚱️	urn,جرة,object,thing,شيء,أداة,جسم
+🏺	object,thing,شيء,أداة,جسم
+🔮	object,thing,شيء,أداة,جسم
+📿	object,thing,شيء,أداة,جسم
+💈	object,thing,شيء,أداة,جسم
+⚗️	object,thing,شيء,أداة,جسم
+🔭	object,thing,شيء,أداة,جسم
+🔬	object,thing,شيء,أداة,جسم
+🕳️	hole,حفرة,object,thing,شيء,أداة,جسم
+💊	pill,medicine,حبة,دواء,object,thing,شيء,أداة,جسم
+💉	syringe,vaccine,حقنة,تطعيم,object,thing,شيء,أداة,جسم
+🧬	object,thing,شيء,أداة,جسم
+🦠	object,thing,شيء,أداة,جسم
+🧫	object,thing,شيء,أداة,جسم
+🧪	object,thing,شيء,أداة,جسم
+🌡️	object,thing,شيء,أداة,جسم
+🧹	broom,clean,مكنسة,تنظيف,object,thing,شيء,أداة,جسم
+🪠	object,thing,شيء,أداة,جسم
+🧺	basket,سلة,object,thing,شيء,أداة,جسم
+🧻	paper,towel,مناديل,object,thing,شيء,أداة,جسم
+🚽	toilet,دورة مياه,حمام,object,thing,شيء,أداة,جسم
+🚰	object,thing,شيء,أداة,جسم
+🚿	shower,دش,استحمام,object,thing,شيء,أداة,جسم
+🛁	bathtub,حوض استحمام,object,thing,شيء,أداة,جسم
+🧼	soap,صابون,object,thing,شيء,أداة,جسم
+🪥	toothbrush,فرشاة أسنان,object,thing,شيء,أداة,جسم
+🧽	sponge,إسفنجة,object,thing,شيء,أداة,جسم
+🪣	bucket,دلو,object,thing,شيء,أداة,جسم
+🛎️	bell,hotel,جرس,object,thing,شيء,أداة,جسم
+🔑	key,مفتاح,object,thing,شيء,أداة,جسم
+🗝️	key,old,مفتاح,object,thing,شيء,أداة,جسم
+🚪	door,باب,object,thing,شيء,أداة,جسم
+🪑	chair,كرسي,object,thing,شيء,أداة,جسم
+🛋️	sofa,كنبة,أريكة,object,thing,شيء,أداة,جسم
+🛏️	bed,سرير,object,thing,شيء,أداة,جسم
+🧸	teddy,bear,دبدوب,دمية,object,thing,شيء,أداة,جسم
+🪆	object,thing,شيء,أداة,جسم
+🖼️	object,thing,شيء,أداة,جسم
+🪞	object,thing,شيء,أداة,جسم
+🪟	object,thing,شيء,أداة,جسم
+🛍️	bags,shopping,أكياس تسوق,object,thing,شيء,أداة,جسم
+🛒	cart,shopping,عربة تسوق,object,thing,شيء,أداة,جسم
+🎏	object,thing,شيء,أداة,جسم
+🪄	magic,wand,عصا سحرية,object,thing,شيء,أداة,جسم
+📦	package,box,صندوق,شحنة,طرود,object,thing,شيء,أداة,جسم
+📫	mailbox,صندوق بريد,object,thing,شيء,أداة,جسم
+📪	object,thing,شيء,أداة,جسم
+📬	object,thing,شيء,أداة,جسم
+📭	object,thing,شيء,أداة,جسم
+📮	mailbox,post,بريد,object,thing,شيء,أداة,جسم
+📜	scroll,paper,مخطوطة,ورقة,object,thing,شيء,أداة,جسم
+📃	page,papers,صفحة,أوراق,object,thing,شيء,أداة,جسم
+📄	document,page,مستند,صفحة,object,thing,شيء,أداة,جسم
+📑	bookmark,tabs,فاصل,علامة,object,thing,شيء,أداة,جسم
+📊	chart,stats,مخطط,إحصاء,object,thing,شيء,أداة,جسم
+📈	chart,up,growth,مخطط صاعد,نمو,ارتفاع,object,thing,شيء,أداة,جسم
+📉	chart,down,مخطط هابط,انخفاض,object,thing,شيء,أداة,جسم
+🗒️	object,thing,شيء,أداة,جسم
+🗓️	calendar,تقويم,object,thing,شيء,أداة,جسم
+📅	calendar,date,تقويم,تاريخ,object,thing,شيء,أداة,جسم
+📇	card,index,فهرس,object,thing,شيء,أداة,جسم
+🗃️	object,thing,شيء,أداة,جسم
+🗄️	object,thing,شيء,أداة,جسم
+🗂️	dividers,فواصل,object,thing,شيء,أداة,جسم
+🖹	object,thing,شيء,أداة,جسم
+🗓	object,thing,شيء,أداة,جسم
+📆	calendar,تقويم,object,thing,شيء,أداة,جسم
+📁	folder,file,مجلد,ملف,object,thing,شيء,أداة,جسم
+📂	folder,open,مجلد مفتوح,object,thing,شيء,أداة,جسم
+🗑️	trash,bin,سلة مهملات,زبالة,object,thing,شيء,أداة,جسم
+📋	clipboard,لوحة,حافظة,object,thing,شيء,أداة,جسم
+📎	paperclip,مشبك,كليب,object,thing,شيء,أداة,جسم
+🖇️	object,thing,شيء,أداة,جسم
+📍	location,pin,موقع,دبوس,object,thing,شيء,أداة,جسم
+📐	object,thing,شيء,أداة,جسم
+📏	object,thing,شيء,أداة,جسم
+🧮	abacus,calculator,حساب,منتق,object,thing,شيء,أداة,جسم
+📌	pin,dabble,دبوس,تثبيت,object,thing,شيء,أداة,جسم
+✂️	object,thing,شيء,أداة,جسم
+🖊️	pen,قلم,object,thing,شيء,أداة,جسم
+🖋️	fountain,pen,قلم حبر,object,thing,شيء,أداة,جسم
+✒️	pen,قلم,object,thing,شيء,أداة,جسم
+🖌️	brush,paint,فرشاة,رسم,object,thing,شيء,أداة,جسم
+🖍️	crayon,شمع,object,thing,شيء,أداة,جسم
+📝	memo,note,write,مذكرة,كتابة,ملحوظة,object,thing,شيء,أداة,جسم
+✏️	pencil,write,قلم,كتابة,object,thing,شيء,أداة,جسم
+🔍	search,magnifier,zoom,بحث,عدسة,تكبير,object,thing,شيء,أداة,جسم
+🔎	search,magnifier,بحث,عدسة,object,thing,شيء,أداة,جسم
+🔏	object,thing,شيء,أداة,جسم
+🔐	lock,secure,قفل آمن,object,thing,شيء,أداة,جسم
+🔒	lock,locked,قفل,مقفل,object,thing,شيء,أداة,جسم
+🔓	unlock,فتح,مفتوح,object,thing,شيء,أداة,جسم
+❤️	heart,love,red,قلب,حب,أحمر,symbol,sign,رمز,علامة
+🧡	heart,orange,قلب برتقالي,symbol,sign,رمز,علامة
+💛	heart,yellow,قلب أصفر,symbol,sign,رمز,علامة
+💚	heart,green,قلب أخضر,symbol,sign,رمز,علامة
+💙	heart,blue,قلب أزرق,symbol,sign,رمز,علامة
+💜	heart,purple,قلب بنفسجي,symbol,sign,رمز,علامة
+🖤	heart,black,قلب أسود,symbol,sign,رمز,علامة
+🤍	heart,white,قلب أبيض,symbol,sign,رمز,علامة
+🤎	heart,brown,قلب بني,symbol,sign,رمز,علامة
+💔	broken,heart,قلب مكسور,حزن,symbol,sign,رمز,علامة
+❣️	heart,exclamation,قلب,symbol,sign,رمز,علامة
+💕	two,hearts,love,قلبان,حب,symbol,sign,رمز,علامة
+💞	revolving,hearts,قلوب,حب,symbol,sign,رمز,علامة
+💓	beating,heart,قلب نابض,symbol,sign,رمز,علامة
+💗	growing,heart,قلب,symbol,sign,رمز,علامة
+💖	sparkling,heart,قلب لامع,symbol,sign,رمز,علامة
+💘	heart,arrow,cupid,قلب سهم,حب,symbol,sign,رمز,علامة
+💝	heart,ribbon,قلب وشريط,symbol,sign,رمز,علامة
+💟	heart,decoration,قلب,symbol,sign,رمز,علامة
+☮️	peace,سلام,symbol,sign,رمز,علامة
+✝️	cross,صليب,symbol,sign,رمز,علامة
+☪️	star,crescent,هلال ونجمة,إسلام,symbol,sign,رمز,علامة
+🕉️	om,أوم,symbol,sign,رمز,علامة
+☸️	dharma,دارما,symbol,sign,رمز,علامة
+✡️	star,david,نجمة داوود,symbol,sign,رمز,علامة
+🔯	star,sixpoint,نجمة سداسية,symbol,sign,رمز,علامة
+🕎	menorah,منارة,symbol,sign,رمز,علامة
+☯️	yin,yang,ين,symbol,sign,رمز,علامة
+☦️	orthodox,صليب,symbol,sign,رمز,علامة
+🛐	worship,صلاة,symbol,sign,رمز,علامة
+⛎	ophiuchus,zodiac,برج,symbol,sign,رمز,علامة
+♈	aries,zodiac,الحمل,برج,symbol,sign,رمز,علامة
+♉	taurus,zodiac,الثور,برج,symbol,sign,رمز,علامة
+♊	gemini,zodiac,الجوزاء,برج,symbol,sign,رمز,علامة
+♋	cancer,zodiac,السرطان,برج,symbol,sign,رمز,علامة
+♌	leo,zodiac,الأسد,برج,symbol,sign,رمز,علامة
+♍	virgo,zodiac,العذراء,برج,symbol,sign,رمز,علامة
+♎	libra,zodiac,الميزان,برج,symbol,sign,رمز,علامة
+♏	scorpio,zodiac,العقرب,برج,symbol,sign,رمز,علامة
+♐	sagittarius,zodiac,القوس,برج,symbol,sign,رمز,علامة
+♑	capricorn,zodiac,الجدي,برج,symbol,sign,رمز,علامة
+♒	aquarius,zodiac,الدلو,برج,symbol,sign,رمز,علامة
+♓	pisces,zodiac,الحوت,برج,symbol,sign,رمز,علامة
+🆔	identity,هوية,symbol,sign,رمز,علامة
+⚛️	atom,science,ذرة,علم,symbol,sign,رمز,علامة
+🉑	accept,japanese,قبول,symbol,sign,رمز,علامة
+☢️	radioactive,إشعاع,symbol,sign,رمز,علامة
+☣️	biohazard,خطر بيولوجي,symbol,sign,رمز,علامة
+📴	phone,off,إيقاف الهاتف,symbol,sign,رمز,علامة
+📳	vibration,اهتزاز,symbol,sign,رمز,علامة
+🈶	have,ياباني,symbol,sign,رمز,علامة
+🈚	free,مجاني,symbol,sign,رمز,علامة
+🈸	application,طلب,symbol,sign,رمز,علامة
+🈺	open,مفتوح,symbol,sign,رمز,علامة
+🈷️	month,شهر,symbol,sign,رمز,علامة
+✴️	eightpoint,نجمة ثمانية,symbol,sign,رمز,علامة
+🆚	vs,versus,مقابل,symbol,sign,رمز,علامة
+💯	hundred,perfect,score,مئة,ممتاز,درجة,symbol,sign,رمز,علامة
+🔥	symbol,sign,رمز,علامة
+🌟	symbol,sign,رمز,علامة
+⭐	symbol,sign,رمز,علامة
+☄️	symbol,sign,رمز,علامة
+💥	symbol,sign,رمز,علامة
+🌈	symbol,sign,رمز,علامة
+☀️	symbol,sign,رمز,علامة
+🌤️	symbol,sign,رمز,علامة
+⛅	symbol,sign,رمز,علامة
+🌥️	symbol,sign,رمز,علامة
+☁️	symbol,sign,رمز,علامة
+🌦️	symbol,sign,رمز,علامة
+🌧️	symbol,sign,رمز,علامة
+⛈️	symbol,sign,رمز,علامة
+🌩️	symbol,sign,رمز,علامة
+🌨️	symbol,sign,رمز,علامة
+❄️	symbol,sign,رمز,علامة
+☃️	symbol,sign,رمز,علامة
+⛄	symbol,sign,رمز,علامة
+🌬️	symbol,sign,رمز,علامة
+💨	wind,رياح,symbol,sign,رمز,علامة
+💧	symbol,sign,رمز,علامة
+💦	sweat,drops,قطرات,عرق,symbol,sign,رمز,علامة
+☔	symbol,sign,رمز,علامة
+☂️	symbol,sign,رمز,علامة
+🌊	symbol,sign,رمز,علامة
+🌫️	symbol,sign,رمز,علامة
+♾️	infinity,لانهائية,symbol,sign,رمز,علامة
+🚫	forbidden,prohibited,ممنوع,symbol,sign,رمز,علامة
+🚳	no,bikes,ممنوع دراجات,symbol,sign,رمز,علامة
+🚭	no,smoking,ممنوع التدخين,symbol,sign,رمز,علامة
+🚱	no,water,مياه غير صالحة,symbol,sign,رمز,علامة
+🚷	symbol,sign,رمز,علامة
+📵	no,phones,ممنوع الجوال,symbol,sign,رمز,علامة
+🚯	no,littering,ممنوع رمي النفايات,symbol,sign,رمز,علامة
+🔞	18,underage,غير مناسب,symbol,sign,رمز,علامة
+📶	signal,bars,إشارة,شبكة,symbol,sign,رمز,علامة
+✅	check,done,ok,صح,تم,إكمال,symbol,sign,رمز,علامة
+❌	x,wrong,no,خطأ,لا,إلغاء,symbol,sign,رمز,علامة
+❎	x,cross,سلبي,symbol,sign,رمز,علامة
+➕	plus,add,إضافة,زائد,symbol,sign,رمز,علامة
+➖	minus,طرح,ناقص,symbol,sign,رمز,علامة
+➗	divide,قسمة,symbol,sign,رمز,علامة
+✖️	multiply,ضرب,symbol,sign,رمز,علامة
+💠	diamond,معين,symbol,sign,رمز,علامة
+⇨	symbol,sign,رمز,علامة
+➡️	symbol,sign,رمز,علامة
+⬅️	symbol,sign,رمز,علامة
+⬆️	symbol,sign,رمز,علامة
+⬇️	symbol,sign,رمز,علامة
+↗️	symbol,sign,رمز,علامة
+↘️	symbol,sign,رمز,علامة
+↖️	symbol,sign,رمز,علامة
+↙️	symbol,sign,رمز,علامة
+↔️	symbol,sign,رمز,علامة
+↕️	symbol,sign,رمز,علامة
+🔄	symbol,sign,رمز,علامة
+🔁	repeat,loop,تكرار,دوران,symbol,sign,رمز,علامة
+🔂	repeat,one,تكرار مرة,symbol,sign,رمز,علامة
+➰	symbol,sign,رمز,علامة
+➿	symbol,sign,رمز,علامة
+〰️	wave,dash,موجة,symbol,sign,رمز,علامة
+✔️	check,صح,تم,symbol,sign,رمز,علامة
+☑️	check,box,مربع تحديد,symbol,sign,رمز,علامة
+🔲	symbol,sign,رمز,علامة
+🔳	symbol,sign,رمز,علامة
+⬜	white,square,مربع أبيض,symbol,sign,رمز,علامة
+⬛	black,square,مربع أسود,symbol,sign,رمز,علامة
+🔈	speaker,low,صوت منخفض,symbol,sign,رمز,علامة
+🔇	mute,silent,صامت,كتم,symbol,sign,رمز,علامة
+🔉	speaker,medium,صوت متوسط,symbol,sign,رمز,علامة
+🔊	speaker,loud,صوت مرتفع,symbol,sign,رمز,علامة
+📢	loudspeaker,announce,إعلان,مكبر,symbol,sign,رمز,علامة
+📣	megaphone,shout,مكبر صوت,هتاف,symbol,sign,رمز,علامة
+📯	posthorn,بوق بريد,symbol,sign,رمز,علامة
+🔔	bell,جرس,إشعار,symbol,sign,رمز,علامة
+🔕	no,bell,صامت,symbol,sign,رمز,علامة
+♻️	recycle,إعادة تدوير,symbol,sign,رمز,علامة
+⚜️	fleur,زنبقة,symbol,sign,رمز,علامة
+🔱	trident,رمح ثلاثي,symbol,sign,رمز,علامة
+📛	name,badge,شارة اسم,symbol,sign,رمز,علامة
+🔰	beginner,japanese,مبتدئ,symbol,sign,رمز,علامة
+⭕	symbol,sign,رمز,علامة
+❗	exclamation,تعجب,symbol,sign,رمز,علامة
+❕	exclamation,تعجب,symbol,sign,رمز,علامة
+❓	question,سؤال,symbol,sign,رمز,علامة
+❔	question,سؤال,symbol,sign,رمز,علامة
+‼️	exclamation,تنبيه,تعجب,symbol,sign,رمز,علامة
+⁉️	interrobang,تعجب وسؤال,symbol,sign,رمز,علامة
+💤	zzz,sleep,نوم,symbol,sign,رمز,علامة
+🚸	children,أطفال,symbol,sign,رمز,علامة
+🔅	dim,low,سطوع منخفض,symbol,sign,رمز,علامة
+🔆	bright,سطوع عالي,symbol,sign,رمز,علامة
+〽️	part,alternate,تناوب,symbol,sign,رمز,علامة
+⚠️	warning,caution,تحذير,خطر,symbol,sign,رمز,علامة
+✳️	asterisk,نجمة صغيرة,symbol,sign,رمز,علامة
+❇️	sparkle,توهج,symbol,sign,رمز,علامة
+🈯	reserved,محجوز,symbol,sign,رمز,علامة
+🈹	discount,خصم,symbol,sign,رمز,علامة
+🈲	prohibited,ممنوع,symbol,sign,رمز,علامة
+🈳	vacancy,شاغر,symbol,sign,رمز,علامة
+🈂️	service,خدمة,symbol,sign,رمز,علامة
+🊑	symbol,sign,رمز,علامة
+⛔	no,entry,ممنوع الدخول,symbol,sign,رمز,علامة

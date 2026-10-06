@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Subtypes: one per enabled language pack. The in-keyboard language key
+     also switches layouts at runtime. -->
+<input-method xmlns:android="http://schemas.android.com/apk/res/android"
+    android:settingsActivity="com.drs.keyboard.settings.SettingsActivity"
+    android:supportsSwitchingToNextInputMethod="true">
+    <subtype
+        android:label="@string/lang_english"
+        android:imeSubtypeLocale="en_US"
+        android:imeSubtypeMode="keyboard" />
+    <subtype
+        android:label="@string/lang_arabic"
+        android:imeSubtypeLocale="ar"
+        android:imeSubtypeMode="keyboard" />
+</input-method>

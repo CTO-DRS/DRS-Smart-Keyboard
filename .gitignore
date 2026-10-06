@@ -1,0 +1,18 @@
+# Gradle
+.gradle/
+build/
+app/build/
+local.properties
+
+# IDE
+.idea/
+*.iml
+.DS_Store
+
+# Signing material — never publish the keystore
+*.jks
+*.keystore
+
+# APK outputs
+*.apk
+*.idsig

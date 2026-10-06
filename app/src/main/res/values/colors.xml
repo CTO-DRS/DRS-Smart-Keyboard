@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Settings app palette (glass-light) -->
+    <color name="settings_bg">#F2F4F8</color>
+    <color name="settings_bg_dark">#0E1116</color>
+    <color name="card_light">#CCFFFFFF</color>
+    <color name="card_dark">#CC171B22</color>
+    <color name="text_primary">#161A20</color>
+    <color name="text_primary_dark">#ECF0F4</color>
+    <color name="text_secondary">#6B7280</color>
+    <color name="text_secondary_dark">#9AA3AE</color>
+    <color name="accent">#3D7BFF</color>
+    <color name="accent_teal">#19C2A8</color>
+    <color name="stroke_light">#26FFFFFF</color>
+    <color name="icon_tint_dark">#9AA3AE</color>
+</resources>

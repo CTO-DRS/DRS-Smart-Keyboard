@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">DRS</string>
+    <string name="ime_name">لوحة DRS الذكية</string>
+    <string name="ime_settings_activity">إعدادات لوحة DRS الذكية</string>
+
+    <!-- الإعداد -->
+    <string name="setup_title">جهّز لوحة DRS</string>
+    <string name="setup_subtitle">ثلاث خطوات سريعة — بلا حساب، بلا إنترنت، بلا جمع بيانات.</string>
+    <string name="step1_title">١. فعّل اللوحة</string>
+    <string name="step1_desc">افتح إعدادات اللغة والإدخال في أندرويد وفعّل «لوحة DRS الذكية».</string>
+    <string name="step1_btn">فتح شاشة التفعيل</string>
+    <string name="step2_title">٢. اختر DRS</string>
+    <string name="step2_desc">اختر DRS كلوحة نشطة ثم عد إلى هنا.</string>
+    <string name="step2_btn">اختيار اللوحة</string>
+    <string name="step3_title">٣. اجعلها على ذوقك</string>
+    <string name="step3_desc">اختر سمة، وأضف حزم اللغات، واضبط كل التفاصيل.</string>
+    <string name="step3_btn">فتح السمات</string>
+    <string name="status_enabled">تم تفعيل DRS</string>
+    <string name="status_active">DRS هي لوحتك الآن — اكتب بسرور!</string>
+
+    <!-- واجهة احترافية -->
+    <string name="hero_pill_active">نشِطة الآن</string>
+    <string name="hero_pill_setup">أكمل الإعداد</string>
+    <string name="section_setup">ابدأ الإعداد</string>
+    <string name="section_stats">بالأرقام</string>
+    <string name="section_features">التخصيص</string>
+    <string name="section_privacy">درع الخصوصية</string>
+    <string name="stats_words">36,428</string>
+    <string name="stats_words_label">كلمة في القاموس</string>
+    <string name="stats_emoji">999</string>
+    <string name="stats_emoji_label">إيموجي جاهزة</string>
+    <string name="stats_themes">16</string>
+    <string name="stats_themes_label">سمات زجاجية</string>
+    <string name="stats_permissions">0</string>
+    <string name="stats_permissions_label">صلاحيات مطلوبة</string>
+    <string name="privacy_chip_offline">يعمل دون اتصال</string>
+    <string name="privacy_chip_telemetry">بلا تتبّع</string>
+    <string name="privacy_chip_permissions">صفر صلاحيات</string>
+    <string name="setup_done">تم</string>
+    <string name="wizard_status_ready">اكتملت كل الخطوات — DRS تعمل الآن كلوحة إدخال.</string>
+    <string name="feature_lang_sub">إنجليزية QWERTY · عربية 101 RTL</string>
+    <string name="feature_theme_sub">16 حزمة زجاجية · محرر كامل</string>
+    <string name="feature_typing_sub">تصحيح · سحب · تعلّم</string>
+    <string name="feature_shortcuts_sub">توسيع الاختصارات فوراً</string>
+    <string name="footer_made">صُنعت برياضيات صافية — بلا ذكاء اصطناعي، بلا سحابة.</string>
+    <string name="section_smart">محرك الذكاء</string>
+    <string name="section_feel">التخطيط والإحساس</string>
+    <string name="section_feedback">الصوت والاستجابة</string>
+
+    <!-- الأقسام -->
+    <string name="languages_title">حزم اللغات</string>
+    <string name="typing_title">الكتابة</string>
+    <string name="appearance_title">المظهر</string>
+    <string name="shortcuts_title">اختصارات النص</string>
+    <string name="clipboard_title">مركز الحافظة</string>
+    <string name="about_title">حول</string>
+
+    <!-- اللغات -->
+    <string name="lang_english">English (QWERTY)</string>
+    <string name="lang_arabic">العربية (عربي ١٠١)</string>
+    <string name="lang_enabled">مُفعّلة</string>
+    <string name="lang_disabled">معطّلة</string>
+    <string name="lang_hint">فعّل الحزم ثم اضغط زر اللغة في اللوحة للتبديل بينها.</string>
+
+    <!-- تفضيلات الكتابة -->
+    <string name="pref_autocorrect">تصحيح الأخطاء تلقائياً</string>
+    <string name="pref_autocorrect_sub">يقترح التصحيحات عبر مسافة التعديل الموزونة</string>
+    <string name="pref_nextword">توقع الكلمة التالية</string>
+    <string name="pref_nextword_sub">إحصاءات الأزواج (Bigram) تتوقع كلمتك القادمة</string>
+    <string name="pref_swipe">الكتابة بالسحب</string>
+    <string name="pref_swipe_sub">ارسم منحنى على الحروف لكتابة الكلمة</string>
+    <string name="pref_shortcuts">اختصارات النص</string>
+    <string name="pref_shortcuts_sub">توسيع الاختصارات أثناء الكتابة</string>
+    <string name="pref_autocap">الحرف الكبير تلقائياً</string>
+    <string name="pref_autocap_sub">كتابة بداية الجملة بحرف كبير تلقائياً</string>
+    <string name="pref_double_space">النقطة بمسافة مزدوجة</string>
+    <string name="pref_double_space_sub">اضغط المسافة مرتين بسرعة لإدراج نقطة</string>
+    <string name="pref_number_row">صف الأرقام</string>
+    <string name="pref_number_row_sub">إظهار الأرقام ٠–٩ فوق الحروف</string>
+    <string name="pref_height">ارتفاع لوحة المفاتيح</string>
+    <string name="pref_height_sub">اضبط حجم الصفوف لراحة اليد</string>
+    <string name="height_compact">مضغوط</string>
+    <string name="height_normal">عادي</string>
+    <string name="height_tall">مرتفع</string>
+    <string name="pref_longpress">مدة الضغط المطوّل</string>
+    <string name="pref_longpress_sub">مدة الانتظار قبل ظهور الحروف البديلة</string>
+    <string name="lp_fast">سريع</string>
+    <string name="lp_normal">عادي</string>
+    <string name="lp_slow">بطيء</string>
+    <string name="pref_arabic_digits">الأرقام العربية الهندية</string>
+    <string name="pref_arabic_digits_sub">استخدم ٠١٢٣٤٥٦٧٨٩ في لوحة المفاتيح العربية</string>
+    <string name="quick_theme_hint">السمة: %1$s</string>
+    <string name="secure_hint">حقل كلمة مرور — تم إخفاء الاقتراحات</string>
+    <string name="pref_sound">صوت الضغط على المفاتيح</string>
+    <string name="pref_vibrate">الاهتزاز عند اللمس</string>
+    <string name="pref_learning">تعلّم الكلمات المكتوبة</string>
+    <string name="pref_learning_sub">ترتيب الكلمات التي تكتبها كثيراً أولاً (يبقى في جهازك فقط)</string>
+    <string name="pref_cursor">تحكّم بالمؤشر عبر المسافة</string>
+    <string name="pref_cursor_sub">مرّر على المسافة لتحريك المؤشر</string>
+    <string name="clear_learned">مسح الكلمات المتعلّمة</string>
+    <string name="clear_learned_done">تم مسح الكلمات المتعلّمة</string>
+
+    <!-- المظهر -->
+    <string name="themes_title">حزم السمات</string>
+    <string name="themes_hint">اختر حزمة ثم اضبط كل لون ونصف قطر وتأثير كما تريد.</string>
+    <string name="theme_editor">محرر السمة</string>
+    <string name="theme_apply">تطبيق السمة</string>
+    <string name="theme_applied">تم تطبيق السمة</string>
+    <string name="editor_background">لون الخلفية</string>
+    <string name="editor_key">لون المفاتيح</string>
+    <string name="editor_special_key">لون المفاتيح الخاصة</string>
+    <string name="editor_key_text">لون نص المفاتيح</string>
+    <string name="editor_accent">اللون المميّز</string>
+    <string name="editor_press">لون الإبراز عند الضغط</string>
+    <string name="editor_stroke">لون حدود المفاتيح</string>
+    <string name="editor_radius">نصف قطر الزوايا</string>
+    <string name="editor_key_height">ارتفاع المفاتيح</string>
+    <string name="editor_opacity">شفافية اللوحة</string>
+    <string name="editor_glass">تأثير الزجاج</string>
+    <string name="editor_glass_sub">لمعة علوية ناعمة وظلال متدرجة</string>
+    <string name="editor_bg_image">صورة الخلفية</string>
+    <string name="editor_pick_image">اختيار صورة…</string>
+    <string name="editor_remove_image">إزالة الصورة</string>
+    <string name="editor_reset">العودة لافتراضيات الحزمة</string>
+    <string name="editor_save">حفظ السمة</string>
+    <string name="editor_saved">تم حفظ السمة</string>
+    <string name="editor_preview">معاينة حيّة</string>
+
+    <!-- منتقي الألوان -->
+    <string name="picker_title">اختر لوناً</string>
+    <string name="picker_hex">Hex</string>
+    <string name="picker_alpha">الشفافية</string>
+    <string name="picker_ok">موافق</string>
+    <string name="picker_cancel">إلغاء</string>
+
+    <!-- الاختصارات -->
+    <string name="shortcuts_hint">اكتب الشكل القصير فتحصل على الصيغة الكاملة. تُحفظ في جهازك فقط.</string>
+    <string name="shortcuts_add">إضافة اختصار</string>
+    <string name="shortcuts_short">الشكل القصير (مثل: omw)</string>
+    <string name="shortcuts_long">التوسعة (مثل: on my way)</string>
+    <string name="shortcuts_add_btn">إضافة</string>
+    <string name="shortcuts_delete">حذف</string>
+    <string name="shortcuts_edit_hint">اضغط على اختصار لتعديله، واضغط مطولاً لحذفه</string>
+    <string name="shortcuts_empty">لا اختصارات بعد. أضف أول اختصار لك!</string>
+    <string name="shortcuts_duplicate">هذا الشكل القصير موجود مسبقاً</string>
+
+    <!-- الحافظة -->
+    <string name="clipboard_enable">سجل الحافظة</string>
+    <string name="clipboard_enable_sub">تذكّر آخر ما نسخته لتلصقه لاحقاً</string>
+    <string name="clipboard_panel_title">الحافظة</string>
+    <string name="clipboard_empty">لا يوجد ما نُسخ بعد.\nسيظهر النص المنسوخ هنا.</string>
+    <string name="clipboard_pinned">مثبّت</string>
+    <string name="clipboard_cleared">تم مسح سجل الحافظة</string>
+    <string name="clipboard_clear_all">مسح الكل</string>
+
+    <!-- الإيموجي -->
+    <string name="emoji_title">الإيموجي</string>
+    <string name="emoji_recent">الأحدث</string>
+    <string name="emoji_none">لا إيموجي حديثة بعد</string>
+
+    <!-- حول -->
+    <string name="about_version">الإصدار</string>
+    <string name="about_body">لوحة DRS الذكية لوحة تعمل دون اتصال ١٠٠٪. التوقع والتصحيح والسحب والتعلّم كلها خوارزميات حتمية: قاموس شجري (Trie)، مسافة تعديل موزونة، إحصاءات ثنائية، ومطابقة هندسية للمسار. بلا تعلّم آلي، بلا اتصال بالشبكة، بلا تتبّع. كلماتك لا تترك جهازك أبداً.</string>
+    <string name="about_slogan">ذكاء بالرياضيات لا بالآلات.</string>
+    <string name="privacy_title">الخصوصية</string>
+    <string name="privacy_body">لا يطلب التطبيق أي صلاحية شبكة. لا يُرفع أي شيء أبداً. الكلمات المتعلّمة والإعدادات تبقى في التخزين الخاص بهذا التطبيق فقط.</string>
+
+    <!-- الوضع بيد واحدة / العائم -->
+    <string name="mode_onehand_left">بيد واحدة: يسار</string>
+    <string name="mode_onehand_right">بيد واحدة: يمين</string>
+    <string name="mode_full">عرض كامل</string>
+    <string name="mode_floating">لوحة عائمة</string>
+    <string name="edit_selected_all">تم تحديد الكل ✓</string>
+    <string name="edit_copied">تم النسخ ✓</string>
+    <string name="edit_cut">تم القص ✓</string>
+    <string name="edit_pasted">تم اللصق ✓</string>
+    <string name="hint_editbar">اضغط مطولاً على 📋 لأدوات النص</string>
+
+    <!-- ذاكرة اللغة لكل تطبيق -->
+    <string name="pref_perapp">تذكّر اللغة لكل تطبيق</string>
+    <string name="pref_perapp_sub">كل تطبيق يُفتح بلغتك الأخيرة المستخدمة فيه تلقائياً</string>
+
+    <!-- قوة الاهتزاز -->
+    <string name="pref_vib_strength">قوة الاهتزاز</string>
+    <string name="pref_vib_strength_sub">مقدار الإحساس عند كل ضغطة مفتاح</string>
+    <string name="vib_light">خفيف</string>
+    <string name="vib_normal">عادي</string>
+    <string name="vib_strong">قوي</string>
+
+    <!-- مدير الكلمات المتعلّمة -->
+    <string name="learned_manage">إدارة الكلمات المتعلّمة</string>
+    <string name="learned_title">الكلمات المتعلّمة</string>
+    <string name="learned_sub">كل ما تعلّمه الكيبورد من كتاباتك — راجعه، احذف أي كلمة، أو امسح الكل</string>
+    <string name="learned_search">ابحث في الكلمات المتعلّمة…</string>
+    <string name="learned_empty">لا كلمات متعلّمة بعد. تظهر أثناء كتابتك.</string>
+    <string name="learned_count">%1$d كلمة</string>
+    <string name="learned_clear_all">نسيان كل الكلمات المتعلّمة</string>
+
+    <!-- النسخ الاحتياطي والاستعادة -->
+    <string name="backup_title">نسخ احتياطي واستعادة</string>
+    <string name="backup_sub">ملف JSON واحد بكل شيء — تختار مكان حفظه بنفسك</string>
+    <string name="backup_what">ماذا يحتوي النسخ الاحتياطي؟</string>
+    <string name="backup_item_prefs">كل إعدادات الكتابة والتخطيط والاستجابة</string>
+    <string name="backup_item_words">كلماتك المتعلّمة (مع تكراراتها)</string>
+    <string name="backup_item_shortcuts">اختصارات توسيع النص</string>
+    <string name="backup_item_emoji">مفضلات الإيموجي والأحدث استخداماً</string>
+    <string name="backup_item_theme">سمتك الزجاجية الحالية</string>
+    <string name="backup_privacy_note">التصدير يتم عبر منتقي ملفات النظام — بلا أي صلاحية تخزين، ولا يُرسل شيء لأي جهة.</string>
+    <string name="backup_export">تصدير نسخة احتياطية</string>
+    <string name="backup_export_sub">حفظ ملف ‎.json عبر منتقي ملفات النظام</string>
+    <string name="backup_export_btn">تصدير الآن</string>
+    <string name="backup_import">استعادة من نسخة</string>
+    <string name="backup_import_sub">اختر ملف نسخة DRS — تُطبَّق الإعدادات فوراً</string>
+    <string name="backup_import_btn">اختيار ملف النسخة</string>
+    <string name="backup_no_saf">منتقي الملفات غير متاح على هذا الجهاز</string>
+    <string name="backup_saved">تم حفظ النسخة الاحتياطية ✓</string>
+    <string name="backup_failed">تعذّرت معالجة هذا الملف</string>
+    <string name="backup_bad_file">هذا ليس ملف نسخة احتياطية للكيبورد DRS</string>
+    <string name="backup_done">استُعيد: %1$d كلمة، %2$d اختصار، %3$d مفضلة ✓</string>
+    <string name="feature_backup_sub">صدّر أو استعد كل شيء بملف واحد</string>
+
+    <!-- إحصاءات الكتابة -->
+    <string name="stats_title">إحصاءات الكتابة</string>
+    <string name="stats_sub">نشاطك على الكيبورد هذا الأسبوع — يُحسب على جهازك ولا يُرسل أبداً</string>
+    <string name="stats_week">آخر ٧ أيام — ضغطات المفاتيح</string>
+    <string name="stats_week_note">تتبع الأعمدة لغة نظامك. العمود المميز هو أكثر أيامك نشاطاً.</string>
+    <string name="stats_totals">الإجماليات الكلية</string>
+    <string name="stats_keys">ضغطات المفاتيح</string>
+    <string name="stats_words_n">كلمات مكتوبة</string>
+    <string name="stats_emoji_n">إيموجي مُرسلة</string>
+    <string name="stats_swipes">كلمات بالسحب</string>
+    <string name="stats_note">كل عدّاد يبقى في التخزين الخاص بهذا التطبيق فقط. إعادة التعيين تحذف البيانات نهائياً.</string>
+    <string name="stats_clear">تصفير كل الإحصاءات</string>
+    <string name="feature_stats_sub">مخطط أسبوعي وعدّادات تراكمية</string>
+
+    <!-- الوضع الليلي التلقائي -->
+    <string name="night_title">الوضع الليلي</string>
+    <string name="pref_autonight">تبديل السمة تلقائياً ليلاً</string>
+    <string name="pref_autonight_sub">بين ٧ مساءً و٦ صباحاً تتولى سمة الليل المهمة</string>
+    <string name="night_save_btn">حفظ السمة الحالية كسمة الليل</string>
+    <string name="night_status_set">سمة الليل: %1$s</string>
+    <string name="night_status_none">لا سمة ليل بعد — حدّد واحدة أدناه</string>
+    <string name="night_saved">تم حفظ سمة الليل: %1$s</string>
+
+    <!-- رقاقة اللصق السريع -->
+    <string name="paste_chip">اضغط للصق النص المنسوخ ⎘</string>
+
+    <!-- v1.7.0: فقاعة معاينة الحرف -->
+    <string name="pref_key_popup">فقاعة معاينة الحرف</string>
+    <string name="pref_key_popup_sub">اعرض فقاعة زجاجية مكبّرة بالحرف الذي تلمسه</string>
+
+    <!-- v1.7.0: اقتراح الإيموجي -->
+    <string name="pref_emoji_suggest">اقتراح الإيموجي</string>
+    <string name="pref_emoji_suggest_sub">يقترح رقاقة إيموجي مناسبة أثناء كتابة كلمات معروفة — بدون إنترنت وقواعد ثابتة</string>
+
+    <!-- v1.7.0: إضافة كلمات يدوياً -->
+    <string name="learned_add">إضافة كلمة</string>
+    <string name="learned_add_hint">اكتب الكلمة…</string>
+    <string name="learned_add_msg">أسماء أو لهجة أو عامية — الكلمات المضافة تحصل على وزن قوي في الاقتراحات ولا تُصحَّح أبداً.</string>
+    <string name="learned_add_ok">إضافة</string>
+    <string name="learned_added">أُضيفت «%1$s» ✓</string>
+    <string name="learned_add_invalid">حروف فقط، من حرفين إلى ٢٤ حرفاً</string>
+
+    <!-- v1.7.0: مُشغّل الوضع الليلي -->
+    <string name="night_source">مُشغّل الوضع الليلي</string>
+    <string name="ns_clock">حسب الساعة (٧م–٦ص)</string>
+    <string name="ns_system">حسب النمط الداكن للنظام</string>
+
+    <!-- v1.8.0: البحث في الإيموجي -->
+    <string name="emoji_search_hint">ابحث عن إيموجي…</string>
+    <string name="emoji_no_results">لا توجد نتائج</string>
+
+    <!-- v1.8.0: التراجع عن التصحيح التلقائي -->
+    <string name="undo_done">أُعيدت «%1$s» ↩</string>
+
+    <!-- v1.8.0: مسافة تلقائية بعد الترقيم -->
+    <string name="pref_autospace">مسافة تلقائية بعد الترقيم</string>
+    <string name="pref_autospace_sub">أدخل مسافة تلقائياً بعد . ! ? … ، ؛ ؟</string>
+
+    <!-- v1.8.0: تصدير واستيراد السمة -->
+    <string name="theme_export">تصدير السمة</string>
+    <string name="theme_export_sub">احفظ السمة الحالية كملف JSON</string>
+    <string name="theme_import">استيراد سمة</string>
+    <string name="theme_import_sub">حمّل سمة من ملف سمة DRS</string>
+    <string name="theme_exported">تم تصدير السمة ✓</string>
+    <string name="theme_imported">تم استيراد السمة: %1$s</string>
+    <string name="theme_import_bad">الملف ليس سمة DRS صالحة</string>
+
+    <!-- v1.9.0: صف أسهم التنقل، صف الحركات، حجم خط المفاتيح -->
+    <string name="pref_arrow_row">أسهم التنقل</string>
+    <string name="pref_arrow_row_sub">أظهر صفاً بأسهم ← ↑ ↓ → فوق الحروف للتحريك الدقيق للمؤشر</string>
+    <string name="pref_tashkeel">صف الحركات العربية</string>
+    <string name="pref_tashkeel_sub">الحركات والتنوين والسكون والألف الخنجرية والتطويل — بلمسة تتصل بالكلمة الحالية</string>
+    <string name="pref_label_size">حجم خط المفاتيح</string>
+    <string name="pref_label_size_sub">حجم نص الحروف على المفاتيح</string>
+    <string name="lbl_small">صغير</string>
+    <string name="lbl_normal">عادي</string>
+    <string name="lbl_large">كبير</string>
+</resources>

@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">DRS</string>
+    <string name="ime_name">DRS Smart Keyboard</string>
+    <string name="ime_settings_activity">DRS Smart Keyboard Settings</string>
+
+    <!-- Setup -->
+    <string name="setup_title">Set up DRS Keyboard</string>
+    <string name="setup_subtitle">Three quick steps — no account, no internet, no data collection.</string>
+    <string name="step1_title">1. Enable DRS</string>
+    <string name="step1_desc">Open Android\'s language &amp; input settings and turn DRS Smart Keyboard on.</string>
+    <string name="step1_btn">Open enable screen</string>
+    <string name="step2_title">2. Switch to DRS</string>
+    <string name="step2_desc">Pick DRS as your active keyboard, then come back here.</string>
+    <string name="step2_btn">Choose keyboard</string>
+    <string name="step3_title">3. Make it yours</string>
+    <string name="step3_desc">Choose a theme, add language packs and tune every detail.</string>
+    <string name="step3_btn">Open themes</string>
+    <string name="status_enabled">DRS is enabled</string>
+    <string name="status_active">DRS is your keyboard — enjoy typing!</string>
+
+    <!-- Premium UI -->
+    <string name="hero_pill_active">Active now</string>
+    <string name="hero_pill_setup">Finish setup</string>
+    <string name="section_setup">Get started</string>
+    <string name="section_stats">By the numbers</string>
+    <string name="section_features">Customize</string>
+    <string name="section_privacy">Privacy shield</string>
+    <string name="stats_words">36,428</string>
+    <string name="stats_words_label">Dictionary words</string>
+    <string name="stats_emoji">999</string>
+    <string name="stats_emoji_label">Emoji ready</string>
+    <string name="stats_themes">16</string>
+    <string name="stats_themes_label">Glass themes</string>
+    <string name="stats_permissions">0</string>
+    <string name="stats_permissions_label">Permissions asked</string>
+    <string name="privacy_chip_offline">100% offline</string>
+    <string name="privacy_chip_telemetry">No telemetry</string>
+    <string name="privacy_chip_permissions">0 permissions</string>
+    <string name="setup_done">Done</string>
+    <string name="wizard_status_ready">All steps complete — DRS is live on your keyboard.</string>
+    <string name="feature_lang_sub">English QWERTY · Arabic 101 RTL</string>
+    <string name="feature_theme_sub">16 glass packages · full editor</string>
+    <string name="feature_typing_sub">Corrections · swipe · learning</string>
+    <string name="feature_shortcuts_sub">Expand abbreviations instantly</string>
+    <string name="footer_made">Crafted with pure mathematics — no AI, no cloud.</string>
+    <string name="section_smart">Smart engine</string>
+    <string name="section_feel">Layout &amp; feel</string>
+    <string name="section_feedback">Sound &amp; feedback</string>
+
+    <!-- Sections -->
+    <string name="languages_title">Language packs</string>
+    <string name="typing_title">Typing</string>
+    <string name="appearance_title">Appearance</string>
+    <string name="shortcuts_title">Text shortcuts</string>
+    <string name="clipboard_title">Clipboard hub</string>
+    <string name="about_title">About</string>
+
+    <!-- Languages -->
+    <string name="lang_english">English (QWERTY)</string>
+    <string name="lang_arabic">العربية (Arabic 101)</string>
+    <string name="lang_enabled">Enabled</string>
+    <string name="lang_disabled">Disabled</string>
+    <string name="lang_hint">Enable packs, then press the language key on the keyboard to switch.</string>
+
+    <!-- Typing prefs -->
+    <string name="pref_autocorrect">Auto-correct typos</string>
+    <string name="pref_autocorrect_sub">Suggest fixes using weighted edit distance</string>
+    <string name="pref_nextword">Next-word prediction</string>
+    <string name="pref_nextword_sub">Bigram statistics predict your next word</string>
+    <string name="pref_swipe">Swipe typing</string>
+    <string name="pref_swipe_sub">Draw a curve across letters to type a word</string>
+    <string name="pref_shortcuts">Text shortcuts</string>
+    <string name="pref_shortcuts_sub">Expand abbreviations as you type</string>
+    <string name="pref_autocap">Auto-capitalization</string>
+    <string name="pref_autocap_sub">Capitalize sentence starts automatically</string>
+    <string name="pref_double_space">Double-space period</string>
+    <string name="pref_double_space_sub">Tap space twice quickly to insert a period</string>
+    <string name="pref_number_row">Number row</string>
+    <string name="pref_number_row_sub">Show 0–9 above the letters</string>
+    <string name="pref_height">Keyboard height</string>
+    <string name="pref_height_sub">Adjust row size for one-hand comfort</string>
+    <string name="height_compact">Compact</string>
+    <string name="height_normal">Normal</string>
+    <string name="height_tall">Tall</string>
+    <string name="pref_longpress">Long-press delay</string>
+    <string name="pref_longpress_sub">Hold time before alt characters appear</string>
+    <string name="lp_fast">Fast</string>
+    <string name="lp_normal">Normal</string>
+    <string name="lp_slow">Slow</string>
+    <string name="pref_arabic_digits">Arabic-Indic digits</string>
+    <string name="pref_arabic_digits_sub">Use ٠١٢٣٤٥٦٧٨٩ on the Arabic keyboard</string>
+    <string name="quick_theme_hint">Theme: %1$s</string>
+    <string name="secure_hint">Password field — suggestions hidden</string>
+    <string name="pref_sound">Key press sound</string>
+    <string name="pref_vibrate">Haptic feedback</string>
+    <string name="pref_learning">Learn typed words</string>
+    <string name="pref_learning_sub">Boost words you type often (stored only on this device)</string>
+    <string name="pref_cursor">Cursor control on space bar</string>
+    <string name="pref_cursor_sub">Slide on the space bar to move the cursor</string>
+    <string name="clear_learned">Clear learned words</string>
+    <string name="clear_learned_done">Learned words cleared</string>
+
+    <!-- Appearance -->
+    <string name="themes_title">Theme packages</string>
+    <string name="themes_hint">Pick a package, then fine-tune every color, radius and effect.</string>
+    <string name="theme_editor">Theme editor</string>
+    <string name="theme_apply">Apply theme</string>
+    <string name="theme_applied">Theme applied</string>
+    <string name="editor_background">Background color</string>
+    <string name="editor_key">Key color</string>
+    <string name="editor_special_key">Special key color</string>
+    <string name="editor_key_text">Key text color</string>
+    <string name="editor_accent">Accent color</string>
+    <string name="editor_press">Press highlight color</string>
+    <string name="editor_stroke">Key outline color</string>
+    <string name="editor_radius">Corner radius</string>
+    <string name="editor_key_height">Key height</string>
+    <string name="editor_opacity">Panel opacity</string>
+    <string name="editor_glass">Glass depth effect</string>
+    <string name="editor_glass_sub">Soft top sheen and layered shadows</string>
+    <string name="editor_bg_image">Background image</string>
+    <string name="editor_pick_image">Choose image…</string>
+    <string name="editor_remove_image">Remove image</string>
+    <string name="editor_reset">Reset to package defaults</string>
+    <string name="editor_save">Save theme</string>
+    <string name="editor_saved">Theme saved</string>
+    <string name="editor_preview">Live preview</string>
+
+    <!-- Color picker -->
+    <string name="picker_title">Pick a color</string>
+    <string name="picker_hex">Hex</string>
+    <string name="picker_alpha">Alpha</string>
+    <string name="picker_ok">OK</string>
+    <string name="picker_cancel">Cancel</string>
+
+    <!-- Shortcuts -->
+    <string name="shortcuts_hint">Type the short form, get the long form. Stored on device only.</string>
+    <string name="shortcuts_add">Add shortcut</string>
+    <string name="shortcuts_short">Short form (e.g. omw)</string>
+    <string name="shortcuts_long">Expansion (e.g. on my way)</string>
+    <string name="shortcuts_add_btn">Add</string>
+    <string name="shortcuts_delete">Delete</string>
+    <string name="shortcuts_edit_hint">Tap a shortcut to edit, long-press to delete</string>
+    <string name="shortcuts_empty">No shortcuts yet. Add your first one!</string>
+    <string name="shortcuts_duplicate">This short form already exists</string>
+
+    <!-- Clipboard -->
+    <string name="clipboard_enable">Clipboard history</string>
+    <string name="clipboard_enable_sub">Remember recent copies so you can paste them later</string>
+    <string name="clipboard_panel_title">Clipboard</string>
+    <string name="clipboard_empty">Nothing copied yet.\nCopied text will appear here.</string>
+    <string name="clipboard_pinned">Pinned</string>
+    <string name="clipboard_cleared">Clipboard history cleared</string>
+    <string name="clipboard_clear_all">Clear all</string>
+
+    <!-- Emoji -->
+    <string name="emoji_title">Emoji</string>
+    <string name="emoji_recent">Recent</string>
+    <string name="emoji_none">No recent emoji yet</string>
+
+    <!-- About -->
+    <string name="about_version">Version</string>
+    <string name="about_body">DRS Smart Keyboard is a 100% offline keyboard. Prediction, auto-correct, swipe decoding and learning all run on deterministic algorithms — a trie dictionary, weighted edit distance, bigram statistics and geometric gesture matching. No machine learning, no network access, no telemetry. Your words never leave your device.</string>
+    <string name="about_slogan">Smart by mathematics, not by machines.</string>
+    <string name="privacy_title">Privacy</string>
+    <string name="privacy_body">The app requests no network permission. Nothing is uploaded, ever. Learned words and settings live in this app\'s private storage only.</string>
+
+    <!-- One-hand / floating -->
+    <string name="mode_onehand_left">One-handed: left</string>
+    <string name="mode_onehand_right">One-handed: right</string>
+    <string name="mode_full">Full width</string>
+    <string name="mode_floating">Floating keyboard</string>
+    <string name="edit_selected_all">Selected all ✓</string>
+    <string name="edit_copied">Copied ✓</string>
+    <string name="edit_cut">Cut ✓</string>
+    <string name="edit_pasted">Pasted ✓</string>
+    <string name="hint_editbar">Hold 📋 for text tools</string>
+
+    <!-- Per-app language memory -->
+    <string name="pref_perapp">Remember language per app</string>
+    <string name="pref_perapp_sub">Each app reopens in the language you last used there</string>
+
+    <!-- Vibration strength -->
+    <string name="pref_vib_strength">Vibration strength</string>
+    <string name="pref_vib_strength_sub">How strong each key tap feels</string>
+    <string name="vib_light">Light</string>
+    <string name="vib_normal">Normal</string>
+    <string name="vib_strong">Strong</string>
+
+    <!-- Learned words manager -->
+    <string name="learned_manage">Manage learned words</string>
+    <string name="learned_title">Learned words</string>
+    <string name="learned_sub">Everything the keyboard picked up from your typing — audit it, remove any word, or wipe all</string>
+    <string name="learned_search">Search learned words…</string>
+    <string name="learned_empty">No learned words yet. They appear as you type.</string>
+    <string name="learned_count">%1$d words</string>
+    <string name="learned_clear_all">Forget all learned words</string>
+
+    <!-- Backup & restore -->
+    <string name="backup_title">Backup &amp; restore</string>
+    <string name="backup_sub">One JSON file with everything — saved wherever you choose</string>
+    <string name="backup_what">What a backup contains</string>
+    <string name="backup_item_prefs">All typing, layout and feedback settings</string>
+    <string name="backup_item_words">Your learned words (with frequencies)</string>
+    <string name="backup_item_shortcuts">Text expansion shortcuts</string>
+    <string name="backup_item_emoji">Emoji favorites and recents</string>
+    <string name="backup_item_theme">Your current glass theme</string>
+    <string name="backup_privacy_note">Export happens through the system file picker — no storage permission, and nothing is sent anywhere.</string>
+    <string name="backup_export">Export backup</string>
+    <string name="backup_export_sub">Save a .json file via the system file picker</string>
+    <string name="backup_export_btn">Export now</string>
+    <string name="backup_import">Restore from backup</string>
+    <string name="backup_import_sub">Pick a DRS backup file — settings are applied instantly</string>
+    <string name="backup_import_btn">Choose backup file</string>
+    <string name="backup_no_saf">File picker unavailable on this device</string>
+    <string name="backup_saved">Backup saved ✓</string>
+    <string name="backup_failed">Could not process that file</string>
+    <string name="backup_bad_file">That is not a DRS Keyboard backup file</string>
+    <string name="backup_done">Restored: %1$d words, %2$d shortcuts, %3$d favorites ✓</string>
+    <string name="feature_backup_sub">Export or restore everything in one file</string>
+
+    <!-- Typing statistics -->
+    <string name="stats_title">Typing stats</string>
+    <string name="stats_sub">Your keyboard activity this week — counted on-device, never sent</string>
+    <string name="stats_week">Last 7 days — keystrokes</string>
+    <string name="stats_week_note">Bars follow your system language. The highlighted bar is your busiest day.</string>
+    <string name="stats_totals">All-time totals</string>
+    <string name="stats_keys">Keystrokes</string>
+    <string name="stats_words_n">Words typed</string>
+    <string name="stats_emoji_n">Emoji sent</string>
+    <string name="stats_swipes">Swipe words</string>
+    <string name="stats_note">Every counter lives in this app\'s private storage only. Resetting removes the data permanently.</string>
+    <string name="stats_clear">Reset all statistics</string>
+    <string name="feature_stats_sub">Weekly chart and lifetime counters</string>
+
+    <!-- Auto night theme -->
+    <string name="night_title">Night mode</string>
+    <string name="pref_autonight">Switch theme automatically at night</string>
+    <string name="pref_autonight_sub">Between 19:00 and 06:00 the night theme takes over</string>
+    <string name="night_save_btn">Save current theme as the night theme</string>
+    <string name="night_status_set">Night theme: %1$s</string>
+    <string name="night_status_none">No night theme yet — set one below</string>
+    <string name="night_saved">Night theme saved: %1$s</string>
+
+    <!-- Quick-paste chip -->
+    <string name="paste_chip">Tap to paste the copied text ⎘</string>
+
+    <!-- v1.7.0: key-press preview bubble -->
+    <string name="pref_key_popup">Key-press preview bubble</string>
+    <string name="pref_key_popup_sub">Show an enlarged glass bubble of the character you touch</string>
+
+    <!-- v1.7.0: emoji suggestions -->
+    <string name="pref_emoji_suggest">Emoji suggestions</string>
+    <string name="pref_emoji_suggest_sub">Offer a matching emoji chip while typing known words — offline, rule-based</string>
+
+    <!-- v1.7.0: add learned words manually -->
+    <string name="learned_add">Add a word</string>
+    <string name="learned_add_hint">Type the word…</string>
+    <string name="learned_add_msg">Names, dialect or slang — added words get strong suggestions weight and are never "corrected".</string>
+    <string name="learned_add_ok">Add</string>
+    <string name="learned_added">Added "%1$s" ✓</string>
+    <string name="learned_add_invalid">Letters only, 2–24 characters</string>
+
+    <!-- v1.7.0: night trigger source -->
+    <string name="night_source">Night trigger</string>
+    <string name="ns_clock">By clock (19–06)</string>
+    <string name="ns_system">Follow system dark mode</string>
+
+
+    <!-- v1.8.0: emoji search -->
+    <string name="emoji_search_hint">Search emoji…</string>
+    <string name="emoji_no_results">No emoji found</string>
+
+    <!-- v1.8.0: undo autocorrect -->
+    <string name="undo_done">Restored "%1$s" ↩</string>
+
+    <!-- v1.8.0: auto-space after punctuation -->
+    <string name="pref_autospace">Auto-space after punctuation</string>
+    <string name="pref_autospace_sub">Type a space automatically after . ! ? … ، ؛ ؟</string>
+
+    <!-- v1.8.0: theme export / import -->
+    <string name="theme_export">Export theme</string>
+    <string name="theme_export_sub">Save the current theme as a JSON file</string>
+    <string name="theme_import">Import theme</string>
+    <string name="theme_import_sub">Load a theme from a DRS theme file</string>
+    <string name="theme_exported">Theme exported ✓</string>
+    <string name="theme_imported">Theme imported: %1$s</string>
+    <string name="theme_import_bad">Not a valid DRS theme file</string>
+
+    <!-- v1.9.0: navigation arrows row, Arabic tashkeel row, key label size -->
+    <string name="pref_arrow_row">Navigation arrows</string>
+    <string name="pref_arrow_row_sub">Show a ← ↑ ↓ → row above the letters for precise cursor moves</string>
+    <string name="pref_tashkeel">Arabic tashkeel row</string>
+    <string name="pref_tashkeel_sub">Harakat, tanween, sukun, dagger alef and tatweel — one tap joins the current word</string>
+    <string name="pref_label_size">Key label size</string>
+    <string name="pref_label_size_sub">Text size of the letters on the keys</string>
+    <string name="lbl_small">Small</string>
+    <string name="lbl_normal">Normal</string>
+    <string name="lbl_large">Large</string>
+</resources>

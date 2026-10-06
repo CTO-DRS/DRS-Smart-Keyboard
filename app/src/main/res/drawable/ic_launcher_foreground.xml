@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- DRS launcher foreground: a glass keyboard tile with the letters DRS -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- glass panel -->
+    <path
+        android:pathData="M24,32 C24,29.8 25.8,28 28,28 L80,28 C82.2,28 84,29.8 84,32 L84,76 C84,78.2 82.2,80 80,80 L28,80 C25.8,80 24,78.2 24,76 Z"
+        android:strokeWidth="1.5"
+        android:strokeColor="#66FFFFFF"
+        android:fillColor="#26FFFFFF" />
+
+    <!-- top sheen -->
+    <path
+        android:pathData="M24,32 C24,29.8 25.8,28 28,28 L80,28 C82.2,28 84,29.8 84,32 L84,44 L24,44 Z"
+        android:fillColor="#33FFFFFF" />
+
+    <!-- key dots row 1 -->
+    <path android:fillColor="#E8EEF7"
+        android:pathData="M30,50 m-2.6,0 a2.6,2.6 0 1,1 5.2,0 a2.6,2.6 0 1,1 -5.2,0" />
+    <path android:fillColor="#E8EEF7"
+        android:pathData="M38.5,50 m-2.6,0 a2.6,2.6 0 1,1 5.2,0 a2.6,2.6 0 1,1 -5.2,0" />
+    <path android:fillColor="#E8EEF7"
+        android:pathData="M47,50 m-2.6,0 a2.6,2.6 0 1,1 5.2,0 a2.6,2.6 0 1,1 -5.2,0" />
+    <path android:fillColor="#E8EEF7"
+        android:pathData="M55.5,50 m-2.6,0 a2.6,2.6 0 1,1 5.2,0 a2.6,2.6 0 1,1 -5.2,0" />
+    <path android:fillColor="#E8EEF7"
+        android:pathData="M64,50 m-2.6,0 a2.6,2.6 0 1,1 5.2,0 a2.6,2.6 0 1,1 -5.2,0" />
+    <path android:fillColor="#E8EEF7"
+        android:pathData="M72.5,50 m-2.6,0 a2.6,2.6 0 1,1 5.2,0 a2.6,2.6 0 1,1 -5.2,0" />
+
+    <!-- key dots row 2 -->
+    <path android:fillColor="#E8EEF7"
+        android:pathData="M34,58 m-2.6,0 a2.6,2.6 0 1,1 5.2,0 a2.6,2.6 0 1,1 -5.2,0" />
+    <path android:fillColor="#E8EEF7"
+        android:pathData="M42.5,58 m-2.6,0 a2.6,2.6 0 1,1 5.2,0 a2.6,2.6 0 1,1 -5.2,0" />
+    <path android:fillColor="#E8EEF7"
+        android:pathData="M51,58 m-2.6,0 a2.6,2.6 0 1,1 5.2,0 a2.6,2.6 0 1,1 -5.2,0" />
+    <path android:fillColor="#E8EEF7"
+        android:pathData="M59.5,58 m-2.6,0 a2.6,2.6 0 1,1 5.2,0 a2.6,2.6 0 1,1 -5.2,0" />
+    <path android:fillColor="#E8EEF7"
+        android:pathData="M68,58 m-2.6,0 a2.6,2.6 0 1,1 5.2,0 a2.6,2.6 0 1,1 -5.2,0" />
+
+    <!-- space bar -->
+    <path
+        android:pathData="M36,65 L72,65 C73.1,65 74,65.9 74,67 C74,68.1 73.1,69 72,69 L36,69 C34.9,69 34,68.1 34,67 C34,65.9 34.9,65 36,65 Z"
+        android:fillColor="#E8EEF7" />
+
+    <!-- DRS letters -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M42,21.5 L46.5,21.5 C49.3,21.5 51,23.4 51,26 C51,28.6 49.3,30.5 46.5,30.5 L44.6,30.5 L44.6,33.5 L42,33.5 Z M44.6,28.2 L46.2,28.2 C47.6,28.2 48.4,27.4 48.4,26 C48.4,24.6 47.6,23.8 46.2,23.8 L44.6,23.8 Z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M53.5,33.5 L53.5,21.5 L57.8,21.5 C60.1,21.5 61.4,22.7 61.4,24.6 C61.4,26 60.6,26.9 59.4,27.3 C60.9,27.7 61.7,28.7 61.7,30.2 C61.7,32.3 60.3,33.5 57.9,33.5 Z M56,26.7 L57.5,26.7 C58.6,26.7 59,26.2 59,25.2 C59,24.2 58.5,23.8 57.5,23.8 L56,23.8 Z M56,31.2 L57.6,31.2 C58.8,31.2 59.3,30.7 59.3,29.6 C59.3,28.6 58.8,28.1 57.6,28.1 L56,28.1 Z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M63.5,30.9 C64.1,31.9 65.1,32.4 66.3,32.4 C67.5,32.4 68.3,31.9 68.3,31 C68.3,29.9 67.2,29.8 65.5,29.3 C63.8,28.8 63,27.9 63,26.2 C63,24.2 64.6,21.3 67.5,21.3 C68.8,21.3 69.9,21.8 70.6,22.7 L69.1,24.4 C68.6,23.8 68,23.6 67.3,23.6 C66.2,23.6 65.5,24.3 65.5,25.1 C65.5,26.1 66.5,26.3 68.1,26.8 C69.8,27.3 70.8,28.1 70.8,29.9 C70.8,32.4 68.8,34 66.3,34 C64.5,34 63.2,33.3 62.3,32.2 Z"
+        android:fillAlpha="1" />
+</vector>

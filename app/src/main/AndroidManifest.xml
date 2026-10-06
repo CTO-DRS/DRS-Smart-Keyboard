@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Haptic feedback only. The app performs zero network calls. -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <application
+        android:name=".DrsApp"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Drs.Settings"
+        tools:targetApi="34">
+
+        <!-- The IME service -->
+        <service
+            android:name=".ime.DrsImeService"
+            android:exported="true"
+            android:label="@string/ime_name"
+            android:permission="android.permission.BIND_INPUT_METHOD">
+            <intent-filter>
+                <action android:name="android.view.InputMethod" />
+            </intent-filter>
+            <meta-data
+                android:name="android.view.im"
+                android:resource="@xml/method" />
+        </service>
+
+        <!-- Settings application -->
+        <activity
+            android:name=".settings.SettingsActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".settings.ThemeEditorActivity"
+            android:exported="false"
+            android:label="@string/theme_editor"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".settings.ShortcutsActivity"
+            android:exported="false"
+            android:label="@string/shortcuts_title" />
+
+        <activity
+            android:name=".settings.LanguagesActivity"
+            android:exported="false"
+            android:label="@string/languages_title" />
+
+        <activity
+            android:name=".settings.TypingActivity"
+            android:exported="false"
+            android:label="@string/typing_title" />
+
+        <activity
+            android:name=".settings.BackupActivity"
+            android:exported="false"
+            android:label="@string/backup_title" />
+
+        <activity
+            android:name=".settings.LearnedWordsActivity"
+            android:exported="false"
+            android:label="@string/learned_title"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".settings.StatsActivity"
+            android:exported="false"
+            android:label="@string/stats_title" />
+    </application>
+</manifest>
