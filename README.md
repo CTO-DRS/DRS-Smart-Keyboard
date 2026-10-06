@@ -10,15 +10,15 @@ zero network calls by design.
 
 ## Download
 
-Get the latest signed APK from **[GitHub Releases](../../releases)** (v1.10.0)
-or the mirror: [gofile.io/d/EtVgLvGa](https://gofile.io/d/EtVgLvGa).
+Get the latest signed APK from **[GitHub Releases](../../releases)** (v1.11.0)
+or the mirror: [gofile.io/d/xIZTXfLM](https://gofile.io/d/xIZTXfLM).
 All releases since v1.3.0 share the same signing key, so upgrades install
 in-place without uninstalling.
 
 | | |
 |---|---|
 | Package | `com.drs.keyboard` |
-| Version | 1.10.0 (versionCode 10) |
+| Version | 1.11.0 (versionCode 11) |
 | Min SDK | 26 (Android 8.0) |
 | Target SDK | 34 (Android 14) |
 | Languages | English (QWERTY) + العربية (Arabic 101, RTL-aware) |
@@ -36,6 +36,10 @@ in-place without uninstalling.
 - **Auto-correct** — weighted Damerau-Levenshtein distance walked directly
   over the trie; substitutions between *physically adjacent* keys cost less,
   so `helli` → `hello`, not `hills`.
+- **Inline calculator** — type a math expression (`12*8+5`, `2^10`, `√9`,
+  `(4+6)*2`, Arabic-Indic digits `١٢×٣`) and the suggestion strip offers
+  "= 101"; tap it to replace the expression with the result. Hand-written
+  recursive-descent parser — no eval, no network.
 - **Next-word prediction** — bigram statistics (2,000+ EN / 400+ AR pairs)
   suggest what usually follows the previous word.
 - **Swipe typing** — draw a curve across letters; a geometric decoder filters
@@ -73,11 +77,13 @@ in-place without uninstalling.
   with Arabic normalization, **five skin tones** for people & gestures).
 - Clipboard hub: history, pinning, one-tap paste, sensitive clips skipped,
   **text-editing toolbar** (select / select-all / copy / cut / paste — hold
-  the clipboard icon).
+  the clipboard icon), **quick date & time chips**, **auto-clear on field
+  exit** (history + system clipboard; pinned items survive).
 - One-handed mode (left/right) + draggable floating keyboard
   (long-press the space bar to cycle modes).
 - Keyboard height (compact / normal / tall) and long-press delay settings.
-- Haptic feedback with three strength levels + key sounds (both toggleable).
+- Haptic feedback with three strength levels, **key sound styles
+  (soft / normal / clear with per-key-type system clicks)** — both toggleable.
 - Arabic-Indic digits (٠١٢٣…) option.
 
 ### Smart extras
@@ -128,7 +134,7 @@ with only the SDK build-tools and kotlinc — see `scripts/build_apk.sh`
 ## Installing & enabling
 
 1. Download the APK from [Releases](../../releases) and install it
-   (`adb install DRS-Smart-Keyboard-v1.10.0.apk` or sideload).
+   (`adb install DRS-Smart-Keyboard-v1.11.0.apk` or sideload).
 2. Open **DRS** → tap **1. Open enable screen** → switch DRS on.
 3. Back in DRS → **2. Choose keyboard** → pick DRS.
 4. Type anywhere. Use the 🌐 key to switch English ⇄ العربية,
@@ -170,6 +176,9 @@ there is no network permission to do it with.
 
 ## Changelog (highlights)
 
+- **v1.11.0** — inline calculator (offline recursive-descent parser, EN +
+  Arabic-Indic digits), quick date/time insert chips, key sound styles,
+  clipboard auto-clear privacy.
 - **v1.10.0** — text selection mode (arrows extend selection), global
   private mode (zero recording), emoji skin tones, theme from wallpaper.
 - **v1.9.0** — navigation arrows row, Arabic tashkeel row, key label size.
