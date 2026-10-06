@@ -313,4 +313,14 @@
     <string name="wallpaper_done">Wallpaper theme ready ✓</string>
     <string name="wallpaper_fail">Couldn\'t read the wallpaper colors</string>
     <string name="wallpaper_unsupported">Needs Android 8.1 or newer</string>
+    <!-- v1.11.0: inline calculator, quick date/time, sound style, clipboard auto-clear -->
+    <string name="quick_date">Date</string>
+    <string name="quick_time">Time</string>
+    <string name="pref_sound_style">Key sound style</string>
+    <string name="pref_sound_style_sub">Volume of the tap sounds — space, delete and return each get their familiar click</string>
+    <string name="snd_soft">Soft</string>
+    <string name="snd_normal">Normal</string>
+    <string name="snd_clear">Clear</string>
+    <string name="pref_clip_autoclear">Auto-clear clipboard</string>
+    <string name="pref_clip_autoclear_sub">Erase clipboard history and the system clipboard when you leave a field — pinned items survive</string>
 </resources>

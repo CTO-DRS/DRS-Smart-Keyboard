@@ -83,6 +83,18 @@ class ClipboardHistory(context: Context) : ClipboardManager.OnPrimaryClipChanged
         listeners.forEach { it.onChanged() }
     }
 
+    /** Privacy auto-clear: drop unpinned history, keep pinned items. */
+    fun clearUnpinned() {
+        items.removeAll { !it.pinned }
+        save()
+        listeners.forEach { it.onChanged() }
+    }
+
+    /** Wipes the system clipboard (API 26+; minSdk is 26). */
+    fun clearSystem() {
+        runCatching { cm.clearPrimaryClip() }
+    }
+
     fun copyToSystem(text: String) {
         cm.setPrimaryClip(ClipData.newPlainText("drs", text))
     }

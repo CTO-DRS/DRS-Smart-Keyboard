@@ -15,6 +15,9 @@ import android.widget.TextView
 import android.widget.Toast
 import com.drs.keyboard.R
 import com.drs.keyboard.theme.KeyboardTheme
+import java.text.DateFormat
+import java.util.Date
+import java.util.Locale
 
 /**
  * Clipboard hub panel: pinned items first, then history. Tap = paste,
@@ -26,10 +29,13 @@ class ClipboardPanel(context: Context, private val history: ClipboardHistory) :
     interface Callback {
         fun onPaste(text: String)
         fun onDismiss()
+        /** Tap on a quick-insert chip (date / time). */
+        fun onInsert(text: String) { onPaste(text) }
     }
 
     var callback: Callback? = null
     private var theme: KeyboardTheme? = null
+    private var quickRow: LinearLayout? = null
     private val list = ListView(context)
     private val adapter = ClipsAdapter()
     private val emptyView = TextView(context)
@@ -66,6 +72,20 @@ class ClipboardPanel(context: Context, private val history: ClipboardHistory) :
         }
         header.addView(close)
 
+        // quick-insert chips: today's date and the current time, one tap each
+        val quick = LinearLayout(context).apply {
+            orientation = HORIZONTAL
+            gravity = Gravity.CENTER_VERTICAL
+            setPadding(dp(10), dp(2), dp(10), dp(6))
+        }
+        quickRow = quick
+        quick.addView(quickChip("📅  " + context.getString(R.string.quick_date),
+            { callback?.onInsert(DateFormat.getDateInstance(DateFormat.SHORT, Locale.getDefault())
+                .format(Date())) }))
+        quick.addView(quickChip("🕐  " + context.getString(R.string.quick_time),
+            { callback?.onInsert(DateFormat.getTimeInstance(DateFormat.SHORT, Locale.getDefault())
+                .format(Date())) }))
+
         emptyView.text = context.getString(R.string.clipboard_empty)
         emptyView.gravity = Gravity.CENTER
         emptyView.setPadding(dp(20), dp(40), dp(20), dp(40))
@@ -76,6 +96,7 @@ class ClipboardPanel(context: Context, private val history: ClipboardHistory) :
         list.emptyView = emptyView
 
         addView(header, LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT))
+        addView(quick, LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT))
         addView(emptyView, LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT))
         addView(list, LayoutParams(LayoutParams.MATCH_PARENT, 0, 1f))
 
@@ -93,10 +114,42 @@ class ClipboardPanel(context: Context, private val history: ClipboardHistory) :
             setColor(t.bgColor)
             cornerRadius = t.cornerRadiusDp * d
         }
+        // recolor the quick-insert chips with the new theme
+        quickRow?.let { row ->
+            for (j in 0 until row.childCount) {
+                val chip = row.getChildAt(j) as? TextView ?: continue
+                chip.setTextColor(t.keyTextColor)
+                chip.background = GradientDrawable().apply {
+                    cornerRadius = 20 * d
+                    setColor(t.pressColor)
+                }
+            }
+        }
         adapter.applyTheme()
     }
 
     fun refresh() = adapter.refresh()
+
+    /** Pill-shaped quick-insert chip; text color follows the theme. */
+    private fun quickChip(label: String, onClick: () -> Unit): TextView {
+        val d = resources.displayMetrics.density
+        val t = theme
+        return TextView(context).apply {
+            text = label
+            textSize = 13.5f
+            setPadding(dp(14), dp(7), dp(14), dp(7))
+            setOnClickListener { onClick() }
+            background = GradientDrawable().apply {
+                cornerRadius = 20 * d
+                setColor(t?.pressColor ?: 0x22000000)
+            }
+            setTextColor(t?.keyTextColor ?: Color.WHITE)
+            val lp = LinearLayout.LayoutParams(
+                LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
+            lp.marginEnd = dp(8)
+            layoutParams = lp
+        }
+    }
 
     private inner class ClipsAdapter : BaseAdapter() {
         private var items: List<ClipboardHistory.Item> = history.all()

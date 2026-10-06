@@ -165,8 +165,18 @@ class TypingActivity : Activity() {
             prefs.vibrateStrength = it
         })
         feedback.addView(divider())
+        feedback.addView(segmentedRow(getString(R.string.pref_sound_style),
+            getString(R.string.pref_sound_style_sub),
+            listOf(getString(R.string.snd_soft), getString(R.string.snd_normal),
+                getString(R.string.snd_clear)), prefs.soundStyle) {
+            prefs.soundStyle = it
+        })
+        feedback.addView(divider())
         feedback.addView(UiKit.switchRow(c, p, getString(R.string.clipboard_enable),
             getString(R.string.clipboard_enable_sub), prefs.clipboardEnabled) { prefs.clipboardEnabled = it })
+        feedback.addView(divider())
+        feedback.addView(UiKit.switchRow(c, p, getString(R.string.pref_clip_autoclear),
+            getString(R.string.pref_clip_autoclear_sub), prefs.clipAutoClear) { prefs.clipAutoClear = it })
         root.addView(feedback, margins(0, 0, 0, UiKit.dp(c, 16)))
 
         // ---- learned data ----

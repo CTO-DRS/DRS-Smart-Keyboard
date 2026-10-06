@@ -160,6 +160,19 @@ class Prefs(context: Context) {
         get() = prefs.getInt("emoji_tone", 0)
         set(v) = prefs.edit().putInt("emoji_tone", v).apply()
 
+    /** Key-press sound style: 0 = soft, 1 = normal, 2 = clear (playback volume). */
+    var soundStyle: Int
+        get() = prefs.getInt("sound_style", 1)
+        set(v) = prefs.edit().putInt("sound_style", v).apply()
+
+    /**
+     * Auto-clear clipboard privacy: when leaving a field, erase the keyboard
+     * clipboard history and wipe the system clipboard. Pinned items survive.
+     */
+    var clipAutoClear: Boolean
+        get() = prefs.getBoolean("clip_autoclear", false)
+        set(v) = prefs.edit().putBoolean("clip_autoclear", v).apply()
+
     /** Raw dump of drs_prefs for backup/restore. */
     fun exportAll(): MutableMap<String, *> = prefs.all
 

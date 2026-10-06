@@ -312,4 +312,14 @@
     <string name="wallpaper_done">جاهز ثيم الخلفية ✓</string>
     <string name="wallpaper_fail">تعذّر قراءة ألوان الخلفية</string>
     <string name="wallpaper_unsupported">يتطلب أندرويد 8.1 أو أحدث</string>
+    <!-- v1.11.0: الآلة الحاسبة المدمجة، التاريخ والوقت السريعان، نمط الصوت، مسح الحافظة تلقائياً -->
+    <string name="quick_date">التاريخ</string>
+    <string name="quick_time">الوقت</string>
+    <string name="pref_sound_style">نمط صوت المفاتيح</string>
+    <string name="pref_sound_style_sub">مستوى صوت النقر — للمسافة والحذف والإدخال نقرتها المألوفة الخاصة</string>
+    <string name="snd_soft">خفيف</string>
+    <string name="snd_normal">عادي</string>
+    <string name="snd_clear">واضح</string>
+    <string name="pref_clip_autoclear">مسح الحافظة تلقائياً</string>
+    <string name="pref_clip_autoclear_sub">امسح سجل الحافظة وحافظة النظام عند مغادرة أي حقل — المثبّتة تبقى كما هي</string>
 </resources>

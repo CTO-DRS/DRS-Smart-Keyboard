@@ -19,6 +19,7 @@ import com.drs.keyboard.R
 import com.drs.keyboard.clipboard.ClipboardHistory
 import com.drs.keyboard.engine.Dictionary
 import com.drs.keyboard.engine.EmojiSuggest
+import com.drs.keyboard.engine.MathEval
 import com.drs.keyboard.engine.NgramModel
 import com.drs.keyboard.engine.ShortcutEngine
 import com.drs.keyboard.engine.StatsStore
@@ -77,6 +78,9 @@ class DrsImeService : android.inputmethodservice.InputMethodService(),
 
     // text-selection mode (edit toolbar "select" toggle): arrows extend the selection
     private var selectMode = false
+
+    // inline calculator: expression currently before the cursor + its result chip
+    private var mathExpr: String? = null
 
     // ------------------------------------------------------------------
     // Lifecycle
@@ -270,6 +274,11 @@ class DrsImeService : android.inputmethodservice.InputMethodService(),
         host?.setSelectActive(false)
         host?.let { if (it.currentPanel() != DrsKeyboardHost.Panel.NONE) it.togglePanel(DrsKeyboardHost.Panel.NONE) }
         host?.keyboardView?.resetTouchVisuals()
+        // privacy auto-clear: wipe clipboard traces when the user moves on
+        if (prefs.clipAutoClear) {
+            clipboardHistory.clearUnpinned()
+            clipboardHistory.clearSystem()
+        }
     }
 
     private fun extractLastWord(): String {
@@ -318,13 +327,33 @@ class DrsImeService : android.inputmethodservice.InputMethodService(),
 
     override fun onKey(key: KeyDef) {
         if (prefs.vibrate) haptic()
-        if (prefs.sound) audioManager()?.playSoundEffect(AudioManager.FX_KEY_CLICK)
+        if (prefs.sound) {
+            val am = audioManager()
+            am?.playSoundEffect(soundEffectFor(key), soundVolume())
+        }
         if (!prefs.incognito) StatsStore.bump(this, StatsStore.KEYS)
 
         when {
             key.type != KeyDef.KeyType.CHAR -> handleFunctional(key)
             else -> handleChar(key)
         }
+    }
+
+    /** Contextual key sound: space/delete/return get their own familiar click.
+     *  Note: FX_KEY_SPACEBAR/DELETE/RETURN are hidden SDK constants (6/7/8);
+     *  their integer ids are stable in AOSP and handled by AudioService. */
+    private fun soundEffectFor(key: KeyDef): Int = when (key.type) {
+        KeyDef.KeyType.SPACE -> 6     // FX_KEY_SPACEBAR
+        KeyDef.KeyType.BACKSPACE -> 7 // FX_KEY_DELETE
+        KeyDef.KeyType.ENTER -> 8     // FX_KEY_RETURN
+        else -> AudioManager.FX_KEY_CLICK
+    }
+
+    /** Playback volume for key sounds from the style setting (soft/normal/clear). */
+    private fun soundVolume(): Float = when (prefs.soundStyle) {
+        0 -> 0.25f
+        2 -> 1f
+        else -> 0.55f
     }
 
     private fun handleChar(key: KeyDef) {
@@ -545,6 +574,7 @@ class DrsImeService : android.inputmethodservice.InputMethodService(),
             pendingUndo = null
             pendingUndoWord = ""
         }
+        mathExpr = null // a space always ends any math expression
 
         ic.commitText(" ", 1)
         lastCommitWasSpace = true
@@ -670,8 +700,19 @@ class DrsImeService : android.inputmethodservice.InputMethodService(),
             state.lang, typed, lastWord, prefs.autocorrect && !noAutocorrectField
         )
         val items = suggestions.map { it.word to it.isCorrection }.toMutableList()
+        // inline calculator: a complete math expression sits right before the cursor
+        mathExpr = null
+        val before = currentInputConnection?.getTextBeforeCursor(48, 0)?.toString() ?: ""
+        val expr = MathEval.trailingExpr(before)
+        if (expr != null) {
+            val result = MathEval.evaluate(expr)
+            if (result != null) {
+                mathExpr = expr
+                items.add(0, "= " + MathEval.format(result) to false)
+            }
+        }
         // rule-based emoji chip: matches the word being typed (or just finished)
-        if (prefs.emojiSuggest && items.size < 3) {
+        if (prefs.emojiSuggest && mathExpr == null && items.size < 3) {
             val probe = typed.ifEmpty { lastWord }
             val emoji = EmojiSuggest.forWord(probe)
             if (emoji != null) items.add(emoji to false)
@@ -681,6 +722,17 @@ class DrsImeService : android.inputmethodservice.InputMethodService(),
 
     override fun onCandidatePicked(word: String, isCorrection: Boolean) {
         val ic = currentInputConnection ?: return
+        // calculator result chip: replace the whole typed expression with the result
+        if (word.startsWith("= ")) {
+            val expr = mathExpr
+            composingFinishQuietly()
+            if (expr != null) ic.deleteSurroundingText(expr.length, 0)
+            ic.commitText(word.substring(2), 1)
+            mathExpr = null
+            lastCommitWasSpace = false
+            updateSuggestions()
+            return
+        }
         // emoji chip: keep the typed word untouched, just add the emoji
         if (EmojiSuggest.isEmojiChip(word)) {
             composingFinishQuietly()
