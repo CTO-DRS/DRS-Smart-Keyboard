@@ -2,17 +2,29 @@
 
 ## GitHub
 - Repo: **https://github.com/CTO-DRS/DRS-Smart-Keyboard**
-- Release v1.13.0: https://github.com/CTO-DRS/DRS-Smart-Keyboard/releases/tag/v1.13.0
+- Release v1.14.0: https://github.com/CTO-DRS/DRS-Smart-Keyboard/releases/tag/v1.14.0
 
 ## Downloads / التنزيل
-- **DRS-Smart-Keyboard-v1.13.0.apk** — latest release (992 KB, signed, versionCode 13)
-  - GitHub: https://github.com/CTO-DRS/DRS-Smart-Keyboard/releases/download/v1.13.0/DRS-Smart-Keyboard-v1.13.0.apk
-  - gofile mirror: https://gofile.io/d/CIIdYYBR (md5 3987b88bdf9ed4de2f5c2dee48b09fa7)
+- **DRS-Smart-Keyboard-v1.14.0.apk** — latest release (992 KB, signed, versionCode 14)
+  - GitHub: https://github.com/CTO-DRS/DRS-Smart-Keyboard/releases/download/v1.14.0/DRS-Smart-Keyboard-v1.14.0.apk
+  - gofile mirror: https://gofile.io/d/YFXtZwLm (md5 cde51220d01fbc998494430abe0422c7)
 - **DRS-Keyboard-source.zip** — full Android Studio project source
-  - GitHub release asset: https://github.com/CTO-DRS/DRS-Smart-Keyboard/releases/download/v1.13.0/DRS-Keyboard-source-v1.13.0.zip
-  - gofile mirror: https://gofile.io/d/WAAX8U6j (md5 37da8b23bb29f73c37eed4e32f933f50)
+  - GitHub release asset: https://github.com/CTO-DRS/DRS-Smart-Keyboard/releases/download/v1.14.0/DRS-Keyboard-source-v1.14.0.zip
+  - gofile mirror: https://gofile.io/d/SSU19B39 (md5 3bc402dd1071b7f9f9470a40d0215b37)
 
-## What's new in v1.13.0
+## What's new in v1.14.0 — world-class settings look
+- ✅ **The check marks are finally visible** — completed wizard steps showed a green ✓ painted on a solid green disc (invisible!); they now use a vivid gradient green disc with a bold white check and a glassy inner rim; pending steps get an accent ring
+- 🎬 **Staggered entrance motion** — each section fades in and rises gently on first open (320 ms, decelerating); replays are skipped so refreshes stay instant
+- 📰 **Editorial section headers** — the accent bar + label is now followed by a hairline that fades away from the text (RTL-aware direction)
+- 🌫️ **Edge-faded dividers** — all card dividers dissolve at both ends instead of hard flat rules
+- 🔢 **Bigger stat numerals** — 20sp bold with letter spacing; stat cards no longer show a dead ripple (they are display-only now)
+- 🌌 **Richer hero aurora** — third teal glow depth + brighter keyboard watermark + top glass sheen; the glyph tile is stroked glass instead of a milky square
+- 🖋 **Upright Arabic slogan** — the hero tagline no longer uses synthetic italic in RTL (it slanted Arabic glyphs awkwardly); English keeps its italic
+- 🎉 **"All steps done" banner** — when enable + choose + personalize are all complete the wizard shows the ready line: "اكتملت كل الخطوات — DRS تعمل الآن كلوحة إدخال."
+- 🔆 **Theme-aware status bars everywhere** — every screen now sets light status/navigation-bar icons in light mode (they were white-on-white before); all 8 screens unified through UiKit.applySystemBars
+- Same signing certificate as v1.3.0+ — installs directly over them
+
+## What was new in v1.13.0
 - 🚀 **Launcher shortcuts** — long-press the app icon to jump straight into Themes, Backup & restore, Typing stats, or Learned words (static shortcuts, zero extra permissions)
 - 📊 **Per-app typing stats** — a new "Most-typed apps" card in the stats screen: app labels, word counters and proportional usage bars; stored in a separate local-only file, capped at the top 20 apps, and private mode never records anything
 - ⏭️ **Word-jump arrows** — long-press ← / → in the arrows row to jump a whole word (standard Ctrl+arrow semantics); in selection mode it extends the selection word-by-word
