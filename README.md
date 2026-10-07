@@ -10,15 +10,15 @@ zero network calls by design.
 
 ## Download
 
-Get the latest signed APK from **[GitHub Releases](../../releases)** (v1.14.0)
-or the mirror: [gofile.io/d/YFXtZwLm](https://gofile.io/d/YFXtZwLm).
+Get the latest signed APK from **[GitHub Releases](../../releases)** (v1.15.0)
+or the mirror: [gofile.io/d/H4Mcxj56](https://gofile.io/d/H4Mcxj56).
 All releases since v1.3.0 share the same signing key, so upgrades install
 in-place without uninstalling.
 
 | | |
 |---|---|
 | Package | `com.drs.keyboard` |
-| Version | 1.14.0 (versionCode 14) |
+| Version | 1.15.0 (versionCode 15) |
 | Min SDK | 26 (Android 8.0) |
 | Target SDK | 34 (Android 14) |
 | Languages | English (QWERTY) + العربية (Arabic 101, RTL-aware) |
@@ -180,6 +180,12 @@ there is no network permission to do it with.
 
 ## Changelog (highlights)
 
+- **v1.15.0** — typing-surface visual overhaul: Caps Lock vs shifted now
+  visually distinct (solid accent fill vs tint + ring + accent glyph),
+  pressed keys sink into the glass for physical feedback, bare harakat
+  hints anchored on dotted circles (OneUI style), space-bar drag-cursor
+  chevrons, clipboard chip icon redrawn (clip tab + paper lines), idle
+  candidate-bar brand watermark, chip rings and accent pill outline.
 - **v1.14.0** — settings-app visual overhaul: completed wizard steps now
   show a vivid white ✓ on a gradient green disc (the check was previously
   invisible — green-on-green), staggered entrance motion, editorial

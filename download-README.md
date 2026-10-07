@@ -2,17 +2,26 @@
 
 ## GitHub
 - Repo: **https://github.com/CTO-DRS/DRS-Smart-Keyboard**
-- Release v1.14.0: https://github.com/CTO-DRS/DRS-Smart-Keyboard/releases/tag/v1.14.0
+- Release v1.15.0: https://github.com/CTO-DRS/DRS-Smart-Keyboard/releases/tag/v1.15.0
 
 ## Downloads / التنزيل
-- **DRS-Smart-Keyboard-v1.14.0.apk** — latest release (992 KB, signed, versionCode 14)
-  - GitHub: https://github.com/CTO-DRS/DRS-Smart-Keyboard/releases/download/v1.14.0/DRS-Smart-Keyboard-v1.14.0.apk
-  - gofile mirror: https://gofile.io/d/YFXtZwLm (md5 cde51220d01fbc998494430abe0422c7)
+- **DRS-Smart-Keyboard-v1.15.0.apk** — latest release (992 KB, signed, versionCode 15)
+  - GitHub: https://github.com/CTO-DRS/DRS-Smart-Keyboard/releases/download/v1.15.0/DRS-Smart-Keyboard-v1.15.0.apk
+  - gofile mirror: https://gofile.io/d/H4Mcxj56 (md5 cf75708be3214ccf47f6783336526fd1)
 - **DRS-Keyboard-source.zip** — full Android Studio project source
-  - GitHub release asset: https://github.com/CTO-DRS/DRS-Smart-Keyboard/releases/download/v1.14.0/DRS-Keyboard-source-v1.14.0.zip
-  - gofile mirror: https://gofile.io/d/SSU19B39 (md5 3bc402dd1071b7f9f9470a40d0215b37)
+  - GitHub release asset: https://github.com/CTO-DRS/DRS-Smart-Keyboard/releases/download/v1.15.0/DRS-Keyboard-source.zip
+  - gofile mirror: https://gofile.io/d/WCJgnGXm (md5 f20c1af33965b894a8e08cf50228a914)
 
-## What's new in v1.14.0 — world-class settings look
+## What's new in v1.15.0 — typing-surface visual overhaul
+- 🔠 **Caps Lock vs Shift, at a glance** — one Shift tap = soft accent tint + accent ring + accent glyph; Caps Lock = solid accent fill + bright glyph. No more guessing the state
+- 👇 **Physical press feedback** — pressed keys sink 1.1 dp into the glass panel while the glow ring lights up
+- ◌ **Elegant harakat hints** — bare combining marks (ً ُ ِ ّ ْ …) now sit centered on a tiny dotted circle (OneUI style) instead of floating at the key's top edge; other hints got a size/contrast bump
+- ↔️ **Space-bar drag affordance** — subtle chevrons at both space-bar edges hint that sliding moves the cursor
+- 📋 **Clipboard icon redrawn** — protruding clip tab + paper lines (the old open box read like a battery on dark themes); round-capped backspace strokes
+- 🏷 **Candidate-bar presence** — idle bar shows a quiet DRS brand mark + accent dot; utility chips gained hairline rings; the primary suggestion pill wears a fine accent outline
+- Same signing certificate as v1.3.0+ — installs directly over them
+
+## What was new in v1.14.0 — world-class settings look
 - ✅ **The check marks are finally visible** — completed wizard steps showed a green ✓ painted on a solid green disc (invisible!); they now use a vivid gradient green disc with a bold white check and a glassy inner rim; pending steps get an accent ring
 - 🎬 **Staggered entrance motion** — each section fades in and rises gently on first open (320 ms, decelerating); replays are skipped so refreshes stay instant
 - 📰 **Editorial section headers** — the accent bar + label is now followed by a hairline that fades away from the text (RTL-aware direction)
