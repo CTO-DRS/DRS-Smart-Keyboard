@@ -10,8 +10,8 @@ zero network calls by design.
 
 ## Download
 
-Get the latest signed APK from **[GitHub Releases](../../releases)** (v1.17.0)
-or the mirror: [gofile.io/d/h5ANvZJc](https://gofile.io/d/h5ANvZJc).
+Get the latest signed APK from **[GitHub Releases](../../releases)** (v1.18.0)
+or the mirror: [gofile.io/d/sFvt8Rsz](https://gofile.io/d/sFvt8Rsz).
 All releases since v1.3.0 share the same signing key, so upgrades install
 in-place without uninstalling.
 
@@ -180,6 +180,13 @@ there is no network permission to do it with.
 
 ## Changelog (highlights)
 
+- **v1.18.0** — Arabic typing intelligence: the dictionary trie keys are
+  bare letters now (harakat/tanween/dagger alef/tatweel stripped on
+  write and read), so vocalized typing reaches the dictionary and bare
+  typing reaches the 1,111 vocalized entries; deliberately diacritized
+  words are never auto-replaced by bare corrections; bigram model and
+  user learner normalize the same way; Arabic next-word bigrams
+  expanded 426 → 1,235 curated pairs.
 - **v1.17.0** — one-handed mode & honest numbers: keys can anchor to the
   left or right edge at 80% width with a glass grip strip in the free
   margin (tap = flip hands, hold = full width; default side in Settings →

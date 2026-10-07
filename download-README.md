@@ -2,17 +2,24 @@
 
 ## GitHub
 - Repo: **https://github.com/CTO-DRS/DRS-Smart-Keyboard**
-- Release v1.17.0: https://github.com/CTO-DRS/DRS-Smart-Keyboard/releases/tag/v1.17.0
+- Release v1.18.0: https://github.com/CTO-DRS/DRS-Smart-Keyboard/releases/tag/v1.18.0
 
 ## Downloads / التنزيل
-- **DRS-Smart-Keyboard-v1.17.0.apk** — latest release (1,000 KB, signed, versionCode 17)
-  - GitHub: https://github.com/CTO-DRS/DRS-Smart-Keyboard/releases/download/v1.17.0/DRS-Smart-Keyboard-v1.17.0.apk
-  - gofile mirror: https://gofile.io/d/h5ANvZJc (md5 86aea945530a95ba6bc9987eff7f0da0)
+- **DRS-Smart-Keyboard-v1.18.0.apk** — latest release (1,004 KB, signed, versionCode 18)
+  - GitHub: https://github.com/CTO-DRS/DRS-Smart-Keyboard/releases/download/v1.18.0/DRS-Smart-Keyboard-v1.18.0.apk
+  - gofile mirror: https://gofile.io/d/sFvt8Rsz (md5 d08ccc1dd0595f28807b120462f389c0)
 - **DRS-Keyboard-source.zip** — full Android Studio project source
-  - GitHub release asset: https://github.com/CTO-DRS/DRS-Smart-Keyboard/releases/download/v1.17.0/DRS-Keyboard-source.zip
-  - gofile mirror: https://gofile.io/d/qAWM0rly (md5 f10f69a8d8bc86e703725edb8e1d47ec)
+  - GitHub release asset: https://github.com/CTO-DRS/DRS-Smart-Keyboard/releases/download/v1.18.0/DRS-Keyboard-source.zip
+  - gofile mirror: https://gofile.io/d/aZYa1GmM (md5 1b35e8af6c38dc02a3464e149deca672)
 
-## What's new in v1.17.0 — one-handed mode & honest numbers
+## What's new in v1.18.0 — Arabic typing intelligence
+- 🔤 **Tashkeel-aware dictionary** — trie keys are bare letters now: harakat, tanween, dagger alef and tatweel are stripped on write and read, so typing WITH diacritics (كِتـاب) reaches the dictionary normally, and bare typing (كتب) can reach the 1,111 vocalized entries (إذاً، حقاً، جداً…)
+- 🛡️ **Harakat protection** — a deliberately diacritized word is recognized as known and never auto-replaced by a bare autocorrection on space; your vocalization survives exactly as typed
+- 🧠 **Normalized prediction & learning** — the bigram next-word model and the personal user learner normalize keys the same way, so prediction and learning keep working across mixed tashkeel input
+- 📈 **Arabic bigrams 426 → 1,235** — hand-curated high-frequency pairs (في/من/إلى/على/عن/مع…, pronouns, كان/لقد/قال…, time and possession patterns) for noticeably stronger Arabic next-word suggestions
+- 🌍 Same signing certificate as v1.3.0+ — installs directly over them; no new permissions, no AI, no telemetry
+
+## What was new in v1.17.0 — one-handed mode & honest numbers
 - 🖐️ **One-handed mode** — keys anchor to the left or right edge at 80% width so every letter is thumb-reachable; a slim glass **grip strip** (grip dots + flip chevrons) lives in the free margin — **tap** it to flip hands, **hold** it to return to full width
 - ⚙️ **Default side in Settings** — Settings → Typing → One-handed mode (Off / Right / Left); strip gestures are session-level, exactly like top-tier keyboards
 - 🔢 **Honest numbers** — the "By the numbers" cards now compute live from the shipped assets at launch: 36,428 dictionary words counted from the bundled en+ar frequency files, 999 emoji from the catalog, 16 themes from ThemeRepo, and sensitive permissions verified against the manifest (0) — no more frozen marketing strings
