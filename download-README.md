@@ -2,17 +2,24 @@
 
 ## GitHub
 - Repo: **https://github.com/CTO-DRS/DRS-Smart-Keyboard**
-- Release v1.11.0: https://github.com/CTO-DRS/DRS-Smart-Keyboard/releases/tag/v1.11.0
+- Release v1.12.0: https://github.com/CTO-DRS/DRS-Smart-Keyboard/releases/tag/v1.12.0
 
 ## Downloads / التنزيل
-- **DRS-Smart-Keyboard-v1.11.0.apk** — latest release (961 KB, signed, versionCode 11)
-  - GitHub: https://github.com/CTO-DRS/DRS-Smart-Keyboard/releases/download/v1.11.0/DRS-Smart-Keyboard-v1.11.0.apk
-  - gofile mirror: https://gofile.io/d/xIZTXfLM (md5 dba1ecd177ee2c65c9b3c5ac9f0b4784)
+- **DRS-Smart-Keyboard-v1.12.0.apk** — latest release (988 KB, signed, versionCode 12)
+  - GitHub: https://github.com/CTO-DRS/DRS-Smart-Keyboard/releases/download/v1.12.0/DRS-Smart-Keyboard-v1.12.0.apk
+  - gofile mirror: https://gofile.io/d/dNU5PwsR (md5 0a05f7a90e4058490d0f30ef5e0fa755)
 - **DRS-Keyboard-source.zip** — full Android Studio project source
-  - GitHub release asset: https://github.com/CTO-DRS/DRS-Smart-Keyboard/releases/download/v1.11.0/DRS-Keyboard-source-v1.11.0.zip
-  - gofile mirror: https://gofile.io/d/M2MtqNKA (md5 01947232941da78304b0b81e921ce1ac)
+  - GitHub release asset: https://github.com/CTO-DRS/DRS-Smart-Keyboard/releases/download/v1.12.0/DRS-Keyboard-source-v1.12.0.zip
+  - gofile mirror: https://gofile.io/d/N8mSToQO (md5 99aae9d6a78cc760d4831296aa580ac2)
 
-## What's new in v1.11.0
+## What's new in v1.12.0
+- ↩️ **Multi-level undo in the edit toolbar** — every text change the keyboard makes (keystrokes, corrections, suggestions, swipes, shortcut expansions, pastes, emoji, calculator results) is recorded locally and can be undone step by step; safe by design: entries only apply when the text before the cursor still matches, and edits made by the app itself are never touched. The toolbar stays open for repeated presses
+- 🗑️ **Clear-all button** — wipes the entire field (before and after the cursor) in one tap, with a restore entry on the undo stack so ↩ brings everything back
+- 🛡️ **Proper-noun / acronym protection** — words with internal capitals (DRS, iPhone, NASA, McDonald) are never autocorrected, and no "did you mean" fix is offered while typing them; normal sentence-start capitals keep working
+- 📥 **Bulk word-list import** — in the learned-words manager: import a plain .txt list (one word per line, also accepts "word,count" or tab-separated) into your personal dictionary; duplicates merge, counts clamp 1–99, and you get an "N words imported" toast
+- Same signing certificate as v1.3.0+ — installs directly over them
+
+## What was new in v1.11.0
 - 🧮 **Inline calculator** — type a math expression (`12*8+5`, `2^10`, `√9`, `(4+6)*2`, Arabic digits `١٢×٣` with `٫` decimals) and the suggestion strip offers "= 101"; tap it to replace the expression with the result. Hand-written recursive-descent parser — no eval(), no network; deliberately ignores `12:30` times
 - 📅 **Quick date & time insert** — two chips at the top of the clipboard panel insert today's date and the current time in your device's locale format
 - 🔊 **Key sound styles** — soft / normal / clear tap volume, and space, delete, return keep their familiar distinct system clicks (Typing → Sound & feedback)
