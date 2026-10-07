@@ -120,6 +120,8 @@ class DrsKeyboardView @JvmOverloads constructor(
     private val dottedCircle = Paint(Paint.ANTI_ALIAS_FLAG)
     private val stripRing = Paint(Paint.ANTI_ALIAS_FLAG)
     private val stripGlyph = Paint(Paint.ANTI_ALIAS_FLAG)
+    private val neonRim = Paint(Paint.ANTI_ALIAS_FLAG)
+    private val neonGlow = Paint(Paint.ANTI_ALIAS_FLAG)
     private val glyphBounds = android.graphics.Rect()
     private val keyScratch = RectF()
     private val path = Path()
@@ -127,6 +129,21 @@ class DrsKeyboardView @JvmOverloads constructor(
     // cached per-color vertical gradients (theme-keyed, cleared on setTheme)
     private val fillShaders = HashMap<Long, LinearGradient>(8)
     private var sheenShader: LinearGradient? = null
+
+    companion object {
+        /** Multi-hue neon palette for neonRims themes (blue-biased scatter,
+         *  mirroring the glow rims of the reference design). */
+        val NEON_RIMS = intArrayOf(
+            0xFF4D8DFF.toInt(),  // blue
+            0xFF31C9FF.toInt(),  // cyan
+            0xFF7B5CFF.toInt(),  // indigo
+            0xFF3D6BFF.toInt(),  // deep blue
+            0xFFB44DFF.toInt(),  // violet
+            0xFFFF5C9E.toInt(),  // pink
+            0xFFFF8A3D.toInt(),  // orange
+            0xFF35D46A.toInt()   // green
+        )
+    }
 
     // touch state
     private enum class Mode { IDLE, TAP, ALT, REPEAT, GESTURE }
@@ -332,6 +349,16 @@ class DrsKeyboardView @JvmOverloads constructor(
         stripGlyph.strokeWidth = d * 1.6f
         stripGlyph.color = t.keyTextColor
         stripGlyph.alpha = 115
+        // neon rim themes: wide soft glow pass + crisp bright rim pass,
+        // colored per key at draw time (palette above)
+        neonRim.style = Paint.Style.STROKE
+        neonRim.strokeCap = Paint.Cap.ROUND
+        neonRim.strokeJoin = Paint.Join.ROUND
+        neonRim.strokeWidth = d * 1.4f
+        neonGlow.style = Paint.Style.STROKE
+        neonGlow.strokeCap = Paint.Cap.ROUND
+        neonGlow.strokeJoin = Paint.Join.ROUND
+        neonGlow.strokeWidth = d * 4.6f
         dottedCircle.alpha = 60
         dottedCircle.pathEffect = android.graphics.DashPathEffect(
             floatArrayOf(d * 1.4f, d * 1.7f), 0f)
@@ -446,7 +473,7 @@ class DrsKeyboardView @JvmOverloads constructor(
         }
 
         // pass 2: key bodies
-        for (kr in keyRects) {
+        keyRects.forEachIndexed { kIdx, kr ->
             val isPressed = pressed === kr && (mode == Mode.TAP || mode == Mode.ALT || mode == Mode.REPEAT)
             val functional = kr.key.isFunctional
             // shifted and caps-locked now look different at a glance:
@@ -484,11 +511,21 @@ class DrsKeyboardView @JvmOverloads constructor(
             keySheen.shader = sheenShader
             canvas.drawRoundRect(r, radius, radius, keySheen)
 
-            // stroke / active accent ring / pressed glow ring
+            // stroke / active accent ring / pressed glow ring / neon rims
             if (isPressed) {
                 canvas.drawRoundRect(r, radius, radius, glowRing)
             } else if (active) {
                 canvas.drawRoundRect(r, radius, radius, accentStroke)
+            } else if (theme?.neonRims == true) {
+                val hue = NEON_RIMS[(kIdx * 5 + 2) % NEON_RIMS.size]
+                neonGlow.color = hue
+                neonGlow.alpha = 66
+                canvas.drawRoundRect(r, radius, radius, neonGlow)
+                neonRim.color = hue
+                neonRim.alpha = 205
+                canvas.drawRoundRect(r, radius, radius, neonRim)
+                neonGlow.alpha = 255
+                neonRim.alpha = 255
             } else {
                 canvas.drawRoundRect(r, radius, radius, keyStroke)
             }

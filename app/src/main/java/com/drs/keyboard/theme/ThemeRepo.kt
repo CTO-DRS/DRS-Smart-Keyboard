@@ -141,6 +141,38 @@ object ThemeRepo {
             accentColor = 0xFF9A6B4F.toInt(), pressColor = 0x409A6B4F.toInt(),
             strokeColor = 0x42FFFFFF.toInt(), candidateBg = 0xD9FFFFFF.toInt(),
             cornerRadiusDp = 16, keyHeightDp = 54, opacityPct = 96
+        ),
+        KeyboardTheme(
+            id = "aurora", name = "Aurora Neon",
+            bgColor = 0xFA070B14.toInt(), keyColor = 0xD91E2740.toInt(),
+            specialKeyColor = 0xD9161E30.toInt(), keyTextColor = 0xFFFFFFFF.toInt(),
+            accentColor = 0xFF2EE56B.toInt(), pressColor = 0x422EE56B.toInt(),
+            strokeColor = 0x3D4D8DFF.toInt(), candidateBg = 0x2631C9FF.toInt(),
+            cornerRadiusDp = 16, keyHeightDp = 54, opacityPct = 97, neonRims = true
+        ),
+        KeyboardTheme(
+            id = "nebula", name = "Nebula Neon",
+            bgColor = 0xFA0C0818.toInt(), keyColor = 0xD9241A3C.toInt(),
+            specialKeyColor = 0xD91B1430.toInt(), keyTextColor = 0xFFFFFFFF.toInt(),
+            accentColor = 0xFFB44DFF.toInt(), pressColor = 0x42B44DFF.toInt(),
+            strokeColor = 0x3DB44DFF.toInt(), candidateBg = 0x26B44DFF.toInt(),
+            cornerRadiusDp = 16, keyHeightDp = 54, opacityPct = 97, neonRims = true
+        ),
+        KeyboardTheme(
+            id = "solar", name = "Solar Neon",
+            bgColor = 0xFA160D06.toInt(), keyColor = 0xD92E2212.toInt(),
+            specialKeyColor = 0xD922180C.toInt(), keyTextColor = 0xFFFFFFFF.toInt(),
+            accentColor = 0xFFFF8A3D.toInt(), pressColor = 0x42FF8A3D.toInt(),
+            strokeColor = 0x3DFF8A3D.toInt(), candidateBg = 0x26FF8A3D.toInt(),
+            cornerRadiusDp = 16, keyHeightDp = 54, opacityPct = 97, neonRims = true
+        ),
+        KeyboardTheme(
+            id = "ion", name = "Ion Neon",
+            bgColor = 0xFA061019.toInt(), keyColor = 0xD9122A3A.toInt(),
+            specialKeyColor = 0xD90C202C.toInt(), keyTextColor = 0xFFFFFFFF.toInt(),
+            accentColor = 0xFF31E9FF.toInt(), pressColor = 0x4231E9FF.toInt(),
+            strokeColor = 0x3D31C9FF.toInt(), candidateBg = 0x2631C9FF.toInt(),
+            cornerRadiusDp = 16, keyHeightDp = 54, opacityPct = 97, neonRims = true
         )
     )
 

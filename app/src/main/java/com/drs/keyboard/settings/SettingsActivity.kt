@@ -277,7 +277,7 @@ class SettingsActivity : Activity() {
                 }
             }
         }
-        val themes = runCatching { com.drs.keyboard.theme.ThemeRepo.presets().size }.getOrDefault(16)
+        val themes = runCatching { com.drs.keyboard.theme.ThemeRepo.presets().size }.getOrDefault(20)
         var sensitive = 0
         runCatching {
             val info = packageManager.getPackageInfo(packageName, PackageManager.GET_PERMISSIONS)
