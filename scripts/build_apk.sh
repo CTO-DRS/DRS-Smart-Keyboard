@@ -32,8 +32,8 @@ echo "==> [2/7] aapt2 link"
   -A "$PROJECT/app/src/main/assets" \
   --min-sdk-version 26 \
   --target-sdk-version 34 \
-  --version-code 15 \
-  --version-name 1.15.0 \
+  --version-code 16 \
+  --version-name 1.16.0 \
   --auto-add-overlay \
   "$WORK/res.zip"
 
@@ -85,8 +85,8 @@ if [ ! -f "$KS" ]; then
     -dname "CN=DRS Smart Keyboard, OU=DRS, O=DRS, L=Riyadh, C=SA" >/dev/null 2>&1
 fi
 "$BT/apksigner" sign --ks "$KS" --ks-pass pass:drskeyboard \
-  --key-pass pass:drskeyboard --out "$OUT/DRS-Smart-Keyboard-v1.15.0.apk" aligned.apk
-"$BT/apksigner" verify --print-certs "$OUT/DRS-Smart-Keyboard-v1.15.0.apk" | head -5
+  --key-pass pass:drskeyboard --out "$OUT/DRS-Smart-Keyboard-v1.16.0.apk" aligned.apk
+"$BT/apksigner" verify --print-certs "$OUT/DRS-Smart-Keyboard-v1.16.0.apk" | head -5
 
-ls -la "$OUT/DRS-Smart-Keyboard-v1.15.0.apk"
+ls -la "$OUT/DRS-Smart-Keyboard-v1.16.0.apk"
 echo "==> DONE"

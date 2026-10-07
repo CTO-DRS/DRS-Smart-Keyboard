@@ -176,6 +176,26 @@ class DrsKeyboardView @JvmOverloads constructor(
                     )
                     invalidate()
                 }
+                k.key.type == KeyDef.KeyType.MODE_SYMBOLS -> {
+                    // long-press "؟123" = jump straight to the locked number pad
+                    mode = Mode.IDLE
+                    pressed = null
+                    performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
+                    callback?.onKey(
+                        KeyDef.fn("", KeyDef.CODE_MODE_NUM, KeyDef.KeyType.MODE_NUM, 1f)
+                    )
+                    invalidate()
+                }
+                k.key.type == KeyDef.KeyType.MODE_NUM -> {
+                    // long-press "#+=" (inside the number pad) = back to letters
+                    mode = Mode.IDLE
+                    pressed = null
+                    performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
+                    callback?.onKey(
+                        KeyDef.fn("", KeyDef.CODE_MODE_ALPHA, KeyDef.KeyType.MODE_ALPHA, 1f)
+                    )
+                    invalidate()
+                }
                 k.key.alts.isNotEmpty() -> {
                     mode = Mode.ALT
                     popupKey = k

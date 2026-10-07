@@ -38,6 +38,16 @@ class CandidateBar @JvmOverloads constructor(
 
     var callback: Callback? = null
 
+    // password-strength meter state (secure fields only)
+    private var strengthLevel = -1   // -1 hidden, 0..3 segments lit
+    private var strengthLabel = ""
+    private val strengthColors = intArrayOf(
+        0xFFE5484D.toInt(), // weak    — red
+        0xFFFFB224.toInt(), // fair    — amber
+        0xFFA8C938.toInt(), // good    — lime
+        0xFF30BD6D.toInt()  // strong  — green
+    )
+
     private var theme: KeyboardTheme? = null
     private val fill = Paint(Paint.ANTI_ALIAS_FLAG)
     private val stroke = Paint(Paint.ANTI_ALIAS_FLAG)
@@ -49,6 +59,9 @@ class CandidateBar @JvmOverloads constructor(
     private val watermark = Paint(Paint.ANTI_ALIAS_FLAG)
     private val chipRing = Paint(Paint.ANTI_ALIAS_FLAG)
     private val pillRing = Paint(Paint.ANTI_ALIAS_FLAG)
+    private val strengthFill = Paint(Paint.ANTI_ALIAS_FLAG)
+    private val strengthTrack = Paint(Paint.ANTI_ALIAS_FLAG)
+    private val strengthText = Paint(Paint.ANTI_ALIAS_FLAG)
 
     private var words: List<Pair<String, Boolean>> = emptyList() // word + isCorrection
     private var hint: String? = null
@@ -94,6 +107,14 @@ class CandidateBar @JvmOverloads constructor(
         pillRing.strokeWidth = d * 1f
         pillRing.color = t.accentColor
         pillRing.alpha = 95
+        strengthTrack.style = Paint.Style.FILL
+        strengthTrack.color = t.keyTextColor
+        strengthTrack.alpha = 36
+        strengthText.color = t.keyTextColor
+        strengthText.isAntiAlias = true
+        strengthText.textAlign = Paint.Align.CENTER
+        strengthText.typeface = Typeface.create("sans-serif-medium", Typeface.NORMAL)
+        strengthText.textSize = d * 13f
         invalidate()
     }
 
@@ -102,12 +123,14 @@ class CandidateBar @JvmOverloads constructor(
         words = list.take(3)
         hint = null
         pasteHint = false
+        strengthLevel = -1
         invalidate()
     }
 
     fun showHint(text: String) {
         hint = text
         pasteHint = false
+        strengthLevel = -1
         invalidate()
     }
 
@@ -117,6 +140,26 @@ class CandidateBar @JvmOverloads constructor(
         pasteHint = true
         words = emptyList()
         invalidate()
+    }
+
+    /**
+     * Live password-strength meter (secure fields). level −1 hides it;
+     * 0..3 lights that many segments in a semantic color.
+     */
+    fun showStrength(level: Int, label: String) {
+        strengthLevel = level
+        strengthLabel = label
+        words = emptyList()
+        hint = null
+        pasteHint = false
+        invalidate()
+    }
+
+    private fun clearStrength() {
+        if (strengthLevel != -1) {
+            strengthLevel = -1
+            invalidate()
+        }
     }
 
     override fun onMeasure(widthSpec: Int, heightSpec: Int) {
@@ -165,6 +208,34 @@ class CandidateBar @JvmOverloads constructor(
             p.alpha = if (pasteHint) 255 else 190
             canvas.drawText(h, width / 2f, height / 2f - (p.ascent() + p.descent()) / 2f, p)
             if (!pasteHint) primaryText.alpha = 255
+            return
+        }
+
+        // live password-strength meter: 4-segment gauge + semantic label
+        if (strengthLevel in 0..3 && words.isEmpty()) {
+            val segW = d * 13f; val segH = d * 5f; val segGap = d * 2.5f
+            val barW = 4 * segW + 3 * segGap
+            val lw = strengthText.measureText(strengthLabel)
+            val total = barW + d * 8f + lw
+            var sx = width / 2f - total / 2f
+            val segY = height / 2f - segH / 2f
+            val color = strengthColors[strengthLevel.coerceAtMost(3)]
+            for (i in 0 until 4) {
+                if (i <= strengthLevel) {
+                    strengthFill.color = color
+                    strengthFill.alpha = if (i == strengthLevel) 235 else 145
+                    canvas.drawRoundRect(sx, segY, sx + segW, segY + segH,
+                        segH / 2f, segH / 2f, strengthFill)
+                } else {
+                    canvas.drawRoundRect(sx, segY, sx + segW, segY + segH,
+                        segH / 2f, segH / 2f, strengthTrack)
+                }
+                sx += segW + segGap
+            }
+            val ty = height / 2f - (strengthText.ascent() + strengthText.descent()) / 2f
+            strengthText.color = color
+            canvas.drawText(strengthLabel, sx + d * 8f + lw / 2f, ty, strengthText)
+            strengthText.color = theme?.keyTextColor ?: 0
             return
         }
 

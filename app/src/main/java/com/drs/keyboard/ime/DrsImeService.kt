@@ -23,6 +23,7 @@ import com.drs.keyboard.engine.MathEval
 import com.drs.keyboard.engine.NgramModel
 import com.drs.keyboard.engine.ShortcutEngine
 import com.drs.keyboard.engine.StatsStore
+import com.drs.keyboard.engine.StrengthMeter
 import com.drs.keyboard.engine.SuggestionEngine
 import com.drs.keyboard.engine.SwipeDecoder
 import com.drs.keyboard.engine.UserLearner
@@ -765,7 +766,30 @@ class DrsImeService : android.inputmethodservice.InputMethodService(),
 
     private fun updateSuggestions() {
         val bar = host?.candidateBar ?: return
-        if (secureField || dictionaries.isEmpty()) {
+        if (secureField) {
+            // live offline strength meter — computed in place from the field
+            // contents, never stored, never learned on (no network exists)
+            val ic = currentInputConnection
+            val pw = buildString {
+                append(ic?.getTextBeforeCursor(64, 0) ?: "")
+                append(ic?.getSelectedText(0) ?: "")
+                append(ic?.getTextAfterCursor(64, 0) ?: "")
+            }
+            val r = StrengthMeter.analyze(pw)
+            if (r.level < 0) {
+                bar.showStrength(-1, "")
+            } else {
+                val label = getString(when (r.level) {
+                    0 -> R.string.pwd_weak
+                    1 -> R.string.pwd_fair
+                    2 -> R.string.pwd_good
+                    else -> R.string.pwd_strong
+                })
+                bar.showStrength(r.level, label)
+            }
+            return
+        }
+        if (dictionaries.isEmpty()) {
             bar.setSuggestions(emptyList())
             return
         }

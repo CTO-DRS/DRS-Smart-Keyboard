@@ -92,6 +92,10 @@
     <string name="pref_arabic_digits_sub">استخدم ٠١٢٣٤٥٦٧٨٩ في لوحة المفاتيح العربية</string>
     <string name="quick_theme_hint">السمة: %1$s</string>
     <string name="secure_hint">حقل كلمة مرور — تم إخفاء الاقتراحات</string>
+    <string name="pwd_weak">ضعيفة</string>
+    <string name="pwd_fair">مقبولة</string>
+    <string name="pwd_good">جيدة</string>
+    <string name="pwd_strong">قوية</string>
     <string name="pref_sound">صوت الضغط على المفاتيح</string>
     <string name="pref_vibrate">الاهتزاز عند اللمس</string>
     <string name="pref_learning">تعلّم الكلمات المكتوبة</string>

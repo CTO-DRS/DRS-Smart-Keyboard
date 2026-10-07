@@ -92,6 +92,10 @@
     <string name="pref_arabic_digits_sub">Use ٠١٢٣٤٥٦٧٨٩ on the Arabic keyboard</string>
     <string name="quick_theme_hint">Theme: %1$s</string>
     <string name="secure_hint">Password field — suggestions hidden</string>
+    <string name="pwd_weak">Weak</string>
+    <string name="pwd_fair">Fair</string>
+    <string name="pwd_good">Good</string>
+    <string name="pwd_strong">Strong</string>
     <string name="pref_sound">Key press sound</string>
     <string name="pref_vibrate">Haptic feedback</string>
     <string name="pref_learning">Learn typed words</string>
