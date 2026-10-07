@@ -51,12 +51,13 @@ class UserLearner private constructor(private val context: Context) {
 
     fun boost(word: String, amount: Int = 1) {
         if (word.length < 2 || word.length > 24) return
-        val w = word.lowercase()
+        val w = Dictionary.stripTashkeel(word.lowercase())
         if (!w.all { it.isLetter() }) return
         counts[w] = (counts[w] ?: 0) + amount
     }
 
-    fun freqOf(word: String): Int = counts[word.lowercase()] ?: 0
+    fun freqOf(word: String): Int =
+        counts[Dictionary.stripTashkeel(word.lowercase())] ?: 0
 
     fun knownWords(): Set<String> = counts.keys
 
@@ -65,7 +66,7 @@ class UserLearner private constructor(private val context: Context) {
         counts.entries.sortedByDescending { it.value }.map { it.key to it.value }
 
     fun remove(word: String) {
-        counts.remove(word.lowercase())
+        counts.remove(Dictionary.stripTashkeel(word.lowercase()))
         persist()
     }
 

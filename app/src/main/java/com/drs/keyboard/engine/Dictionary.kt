@@ -5,16 +5,45 @@ package com.drs.keyboard.engine
  *  - prefix completion ranked by frequency (with user-frequency boost)
  *  - weighted Damerau-Levenshtein fuzzy search walked directly over the trie
  *    (keyboard-adjacency-aware substitution costs, early subtree pruning)
- *  - separate display forms for capitalized words (trie keys stay lowercase)
+ *  - separate display forms for capitalized and diacritized words
+ *    (trie keys stay lowercase, bare letters)
  *
  * Pure deterministic data structures — no ML, no network.
  */
 class Dictionary {
 
+    companion object {
+        /**
+         * Strips Arabic tashkeel/tanween (U+064B–U+0655), dagger alef
+         * (U+0670) and tatweel (U+0640). Shared by the dictionary, the
+         * n-gram model and the user learner so every lookup runs on bare
+         * letters regardless of how the user typed the word.
+         */
+        fun stripTashkeel(w: String): String {
+            var needs = false
+            for (c in w) {
+                val code = c.code
+                if (code in 0x064B..0x0655 || code == 0x0670 || code == 0x0640) {
+                    needs = true; break
+                }
+            }
+            if (!needs) return w
+            val sb = StringBuilder(w.length)
+            for (c in w) {
+                val code = c.code
+                if (code in 0x064B..0x0655 || code == 0x0670 || code == 0x0640) continue
+                sb.append(c)
+            }
+            return sb.toString()
+        }
+
+        private fun normKey(w: String): String = stripTashkeel(w.lowercase())
+    }
+
     class Node {
         val children = HashMap<Char, Node>(8)
         var freq = 0
-        var display: String? = null // set when word contains uppercase
+        var display: String? = null // set when the stored form differs from the bare key
     }
 
     private val root = Node()
@@ -31,13 +60,19 @@ class Dictionary {
 
     fun add(word: String, freq: Int) {
         if (word.isEmpty()) return
-        val key = word.lowercase()
+        // Trie keys are bare letters: tashkeel/tanween, dagger alef and tatweel
+        // are stripped on both write and read so that typing WITH diacritics
+        // still reaches the dictionary, and bare typing can reach diacritized
+        // entries (completions show the fully vocalized form).
+        val key = normKey(word)
         var node = root
         for (c in key) {
             node = node.children.getOrPut(c) { Node() }
         }
-        node.freq = freq
-        if (word != key) node.display = word
+        if (freq >= node.freq) {
+            node.freq = freq
+            node.display = if (word != key) word else null
+        }
         wordCount++
         allWords.add(word)
     }
@@ -46,12 +81,12 @@ class Dictionary {
     fun words(): List<String> = allWords
 
     fun contains(word: String): Boolean {
-        val n = findNode(word.lowercase()) ?: return false
+        val n = findNode(normKey(word)) ?: return false
         return n.freq > 0
     }
 
     fun freqOf(word: String): Int {
-        val n = findNode(word.lowercase()) ?: return 0
+        val n = findNode(normKey(word)) ?: return 0
         return n.freq
     }
 
@@ -76,7 +111,7 @@ class Dictionary {
      * Visits at most [maxNodes] trie nodes as a safety cap for huge subtrees.
      */
     fun complete(prefix: String, limit: Int = 8, maxNodes: Int = 6000): List<Completion> {
-        val key = prefix.lowercase()
+        val key = normKey(prefix)
         if (key.isEmpty()) return emptyList()
         val start = findNode(key) ?: return emptyList()
         val out = ArrayList<Completion>(limit)
@@ -122,7 +157,7 @@ class Dictionary {
         maxCost: Double = 2.0,
         limit: Int = 8
     ): List<Correction> {
-        val target = word.lowercase()
+        val target = normKey(word)
         val n = target.length
         if (n == 0 || n > 24) return emptyList()
 

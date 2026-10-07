@@ -34,8 +34,8 @@ class NgramModel {
     }
 
     fun learn(prev: String, next: String, amount: Int = 1) {
-        val a = prev.lowercase()
-        val b = next.lowercase()
+        val a = Dictionary.stripTashkeel(prev.lowercase())
+        val b = Dictionary.stripTashkeel(next.lowercase())
         if (a.isEmpty() || b.isEmpty() || a.length > 24 || b.length > 24) return
         val m = table.getOrPut(a) { HashMap() }
         m[b] = (m[b] ?: 0) + amount
@@ -48,7 +48,7 @@ class NgramModel {
 
     /** Top [limit] candidates that follow [prev], best first. */
     fun nextWords(prev: String, limit: Int = 3): List<String> {
-        val m = table[prev.lowercase()] ?: return emptyList()
+        val m = table[Dictionary.stripTashkeel(prev.lowercase())] ?: return emptyList()
         return m.entries
             .sortedWith(compareByDescending<Map.Entry<String, Int>> { it.value })
             .take(limit)
