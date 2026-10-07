@@ -98,7 +98,7 @@ class CandidateBar @JvmOverloads constructor(
         watermark.textAlign = Paint.Align.CENTER
         watermark.typeface = Typeface.create("sans-serif-medium", Typeface.NORMAL)
         watermark.letterSpacing = 0.24f
-        watermark.textSize = d * 11.5f
+        watermark.textSize = d * 12.5f
         chipRing.style = Paint.Style.STROKE
         chipRing.strokeWidth = d * 0.9f
         chipRing.color = t.keyTextColor
@@ -243,13 +243,13 @@ class CandidateBar @JvmOverloads constructor(
             // idle state: quiet brand presence instead of an empty void
             val wm = "DRS"
             val tyw = height / 2f - (watermark.ascent() + watermark.descent()) / 2f
-            watermark.alpha = 44
+            watermark.alpha = 88
             canvas.drawText(wm, width / 2f, tyw, watermark)
             watermark.alpha = 255
             val dot = Paint(watermark).apply {
                 color = theme?.accentColor ?: 0
                 style = Paint.Style.FILL
-                alpha = 105
+                alpha = 150
             }
             val tw = watermark.measureText(wm)
             canvas.drawCircle(width / 2f + tw / 2f + d * 4f, height / 2f - d * 0.6f, d * 1.7f, dot)

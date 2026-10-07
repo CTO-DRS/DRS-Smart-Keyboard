@@ -112,6 +112,11 @@ class Prefs(context: Context) {
         get() = prefs.getInt("vibrate_strength", 1)
         set(v) = prefs.edit().putInt("vibrate_strength", v).apply()
 
+    /** One-handed mode: 0 = off, 1 = keys anchored right, 2 = keys anchored left. */
+    var oneHanded: Int
+        get() = prefs.getInt("one_handed", 0)
+        set(v) = prefs.edit().putInt("one_handed", v).apply()
+
     /** Auto-switch to the night theme between 19:00 and 06:00. */
     var autoNight: Boolean
         get() = prefs.getBoolean("auto_night", false)

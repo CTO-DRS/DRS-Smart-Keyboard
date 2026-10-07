@@ -142,6 +142,13 @@ class TypingActivity : Activity() {
         feel.addView(UiKit.switchRow(c, p, getString(R.string.pref_tashkeel),
             getString(R.string.pref_tashkeel_sub), prefs.tashkeelRow) { prefs.tashkeelRow = it })
         feel.addView(divider())
+        feel.addView(segmentedRow(getString(R.string.pref_one_handed),
+            getString(R.string.pref_one_handed_sub),
+            listOf(getString(R.string.onehanded_off), getString(R.string.onehanded_right),
+                getString(R.string.onehanded_left)), prefs.oneHanded) {
+            prefs.oneHanded = it
+        })
+        feel.addView(divider())
         feel.addView(segmentedRow(getString(R.string.pref_label_size),
             getString(R.string.pref_label_size_sub),
             listOf(getString(R.string.lbl_small), getString(R.string.lbl_normal),

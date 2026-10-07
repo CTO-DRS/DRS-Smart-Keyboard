@@ -336,6 +336,7 @@ class DrsImeService : android.inputmethodservice.InputMethodService(),
         h.keyboardView.cursorControlEnabled = prefs.cursorControl
         h.keyboardView.keyPopupEnabled = prefs.keyPopup
         h.keyboardView.labelScale = labelScale()
+        h.keyboardView.oneHanded = prefs.oneHanded
     }
 
     /** Key label text multiplier from the size setting (small/normal/large). */

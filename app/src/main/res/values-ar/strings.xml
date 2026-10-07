@@ -26,14 +26,10 @@
     <string name="section_stats">بالأرقام</string>
     <string name="section_features">التخصيص</string>
     <string name="section_privacy">درع الخصوصية</string>
-    <string name="stats_words">36,428</string>
     <string name="stats_words_label">كلمة في القاموس</string>
-    <string name="stats_emoji">999</string>
     <string name="stats_emoji_label">إيموجي جاهزة</string>
-    <string name="stats_themes">16</string>
     <string name="stats_themes_label">سمات زجاجية</string>
-    <string name="stats_permissions">0</string>
-    <string name="stats_permissions_label">صلاحيات مطلوبة</string>
+    <string name="stats_permissions_label">صلاحيات حساسة</string>
     <string name="privacy_chip_offline">يعمل دون اتصال</string>
     <string name="privacy_chip_telemetry">بلا تتبّع</string>
     <string name="privacy_chip_permissions">صفر صلاحيات</string>
@@ -310,6 +306,11 @@
     <string name="pref_arrow_row_sub">أظهر صفاً بأسهم ← ↑ ↓ → فوق الحروف للتحريك الدقيق للمؤشر</string>
     <string name="pref_tashkeel">صف الحركات العربية</string>
     <string name="pref_tashkeel_sub">الحركات والتنوين والسكون والألف الخنجرية والتطويل — بلمسة تتصل بالكلمة الحالية</string>
+    <string name="pref_one_handed">وضع اليد الواحدة</string>
+    <string name="pref_one_handed_sub">قرّب المفاتيح نحو إبهام واحد — انقر شريط القبض لتبديل الجهة، واضغط مطوّلًا للعودة إلى العرض الكامل</string>
+    <string name="onehanded_off">إيقاف</string>
+    <string name="onehanded_right">يمين</string>
+    <string name="onehanded_left">يسار</string>
     <string name="pref_label_size">حجم خط المفاتيح</string>
     <string name="pref_label_size_sub">حجم نص الحروف على المفاتيح</string>
     <string name="lbl_small">صغير</string>

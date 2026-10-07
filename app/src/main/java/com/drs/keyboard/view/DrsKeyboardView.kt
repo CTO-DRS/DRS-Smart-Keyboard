@@ -75,6 +75,27 @@ class DrsKeyboardView @JvmOverloads constructor(
     private var keyHeightPx = 0f
     private var keyW = 0f
 
+    /** One-handed mode: 0 = off, 1 = keys anchored right, 2 = keys anchored left. */
+    var oneHanded = 0
+        set(v) {
+            if (field == v) return
+            field = v
+            computeGeometry()
+            invalidate()
+        }
+    /** Session-level side flips / exits from the grip strip are handled in-view. */
+    private val oneHandedStrip = RectF()
+    private var stripTouched = false
+    private var stripLongFired = false
+    private val stripLongRunnable = Runnable {
+        if (oneHanded != 0 && stripTouched) {
+            stripLongFired = true
+            oneHanded = 0
+            performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
+            invalidate()
+        }
+    }
+
     // paints
     private val keyFill = Paint(Paint.ANTI_ALIAS_FLAG)
     private val keyStroke = Paint(Paint.ANTI_ALIAS_FLAG)
@@ -97,6 +118,8 @@ class DrsKeyboardView @JvmOverloads constructor(
     private val popupAltText = Paint(Paint.ANTI_ALIAS_FLAG)
     private val chevronPaint = Paint(Paint.ANTI_ALIAS_FLAG)
     private val dottedCircle = Paint(Paint.ANTI_ALIAS_FLAG)
+    private val stripRing = Paint(Paint.ANTI_ALIAS_FLAG)
+    private val stripGlyph = Paint(Paint.ANTI_ALIAS_FLAG)
     private val glyphBounds = android.graphics.Rect()
     private val keyScratch = RectF()
     private val path = Path()
@@ -298,6 +321,17 @@ class DrsKeyboardView @JvmOverloads constructor(
         dottedCircle.style = Paint.Style.STROKE
         dottedCircle.strokeWidth = d * 1.1f
         dottedCircle.color = t.keyTextColor
+        // one-handed grip strip: hairline ring + grip chevrons
+        stripRing.style = Paint.Style.STROKE
+        stripRing.strokeWidth = d * 1f
+        stripRing.color = t.keyTextColor
+        stripRing.alpha = 40
+        stripGlyph.style = Paint.Style.STROKE
+        stripGlyph.strokeCap = Paint.Cap.ROUND
+        stripGlyph.strokeJoin = Paint.Join.ROUND
+        stripGlyph.strokeWidth = d * 1.6f
+        stripGlyph.color = t.keyTextColor
+        stripGlyph.alpha = 115
         dottedCircle.alpha = 60
         dottedCircle.pathEffect = android.graphics.DashPathEffect(
             floatArrayOf(d * 1.4f, d * 1.7f), 0f)
@@ -335,11 +369,26 @@ class DrsKeyboardView @JvmOverloads constructor(
         val gap = d * 3f
         val rowH = keyHeightPx + d * 3f
         val pad = d * 5f
+        // one-handed: keys occupy ~80% of the width, anchored to the chosen side;
+        // the remaining margin becomes the grip strip (tap = flip, hold = exit)
+        val effW = (if (oneHanded == 0) width else width * 0.80f).toFloat()
+        val effLeft = when (oneHanded) {
+            1 -> width - effW
+            2 -> 0f
+            else -> 0f
+        }
+        if (oneHanded == 1) {
+            oneHandedStrip.set(0f, 0f, effLeft - gap, height.toFloat())
+        } else if (oneHanded == 2) {
+            oneHandedStrip.set(effLeft + effW + gap, 0f, width.toFloat(), height.toFloat())
+        } else {
+            oneHandedStrip.setEmpty()
+        }
         val list = ArrayList<KR>(48)
         for ((rowIdx, row) in rows.withIndex()) {
             val totalUnits = row.sumOf { it.widthUnits.toDouble() }.toFloat()
-            val unitPx = (width - pad * 2 - gap * (row.size - 1)) / totalUnits
-            var x = pad
+            val unitPx = (effW - pad * 2 - gap * (row.size - 1)) / totalUnits
+            var x = effLeft + pad
             // arrows stay in absolute LTR order even on the RTL Arabic layout
             val isNavRow = row.any { it.type == KeyDef.KeyType.NAV }
             val ordered = if (rtl && !isNavRow) row.reversed() else row
@@ -351,7 +400,7 @@ class DrsKeyboardView @JvmOverloads constructor(
             }
         }
         keyRects = list
-        keyW = if (width > 0) width / 10f else 60f
+        keyW = if (effW > 0) effW / 10f else 60f
         feedSwipeDecoder()
     }
 
@@ -526,6 +575,9 @@ class DrsKeyboardView @JvmOverloads constructor(
             drawTrail(canvas, d)
         }
 
+        // one-handed grip strip
+        if (oneHanded != 0) drawOneHandedStrip(canvas, d)
+
         // alt popup + press-preview bubble
         drawPopup(canvas, d)
         drawPressBubble(canvas, d)
@@ -584,6 +636,36 @@ class DrsKeyboardView @JvmOverloads constructor(
         val g = LinearGradient(0f, 0f, 0f, height, top, base, Shader.TileMode.CLAMP)
         fillShaders[key] = g
         return g
+    }
+
+    /**
+     * One-handed grip strip: a slim glass pill in the margin on the empty side.
+     * Chevron pair points where the keys will move, grip dots sit between.
+     * Tap = flip hands, hold = return to full width.
+     */
+    private fun drawOneHandedStrip(canvas: Canvas, d: Float) {
+        if (oneHandedStrip.isEmpty) return
+        val r = oneHandedStrip
+        stripRing.alpha = if (stripTouched) 95 else 40
+        stripGlyph.alpha = if (stripTouched) 165 else 115
+        val pillW = d * 15f
+        val pillH = r.height() * 0.52f
+        val cx = r.centerX()
+        val cy = r.centerY()
+        val pill = RectF(cx - pillW / 2f, cy - pillH / 2f, cx + pillW / 2f, cy + pillH / 2f)
+        canvas.drawRoundRect(pill, pillW / 2f, pillW / 2f, stripRing)
+        // flip chevrons — apex points toward the next anchor side
+        val dir = if (oneHanded == 1) -1f else 1f
+        val ch = d * 3.4f
+        for (yy in floatArrayOf(cy - d * 17f, cy + d * 17f)) {
+            path.reset()
+            path.moveTo(cx - dir * ch, yy - ch)
+            path.lineTo(cx + dir * ch, yy)
+            path.lineTo(cx - dir * ch, yy + ch)
+            canvas.drawPath(path, stripGlyph)
+        }
+        // grip dots
+        for (i in -1..1) canvas.drawCircle(cx, cy + i * d * 7f, d * 1.1f, stripGlyph)
     }
 
     /** Swipe ribbon: recent segments brightest, older fade out; glowing head dot. */
@@ -697,6 +779,17 @@ class DrsKeyboardView @JvmOverloads constructor(
                 pointerId = event.getPointerId(0)
                 downX = event.x; downY = event.y
                 lastX = downX; lastY = downY
+                // one-handed grip strip: tap = flip hands, hold = back to full width
+                if (oneHanded != 0 && oneHandedStrip.contains(downX, downY)) {
+                    mode = Mode.IDLE
+                    stripTouched = true
+                    stripLongFired = false
+                    performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                    handler.postDelayed(stripLongRunnable, longPressDelayMs)
+                    invalidate()
+                    return true
+                }
+                stripTouched = false
                 mode = Mode.TAP
                 pressed = hitTest(downX, downY)
                 spaceDragMoved = false
@@ -736,6 +829,17 @@ class DrsKeyboardView @JvmOverloads constructor(
             MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
                 handler.removeCallbacks(longPressRunnable)
                 handler.removeCallbacks(repeatRunnable)
+                handler.removeCallbacks(stripLongRunnable)
+                if (stripTouched) {
+                    // a clean tap flips the anchor side; long-press already exited
+                    if (!stripLongFired && event.actionMasked == MotionEvent.ACTION_UP &&
+                        oneHanded != 0
+                    ) {
+                        performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                        oneHanded = if (oneHanded == 1) 2 else 1
+                    }
+                    stripTouched = false
+                }
                 finishTouch(event.actionMasked == MotionEvent.ACTION_UP)
                 invalidate()
                 return true

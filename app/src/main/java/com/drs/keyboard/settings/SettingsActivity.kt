@@ -3,6 +3,7 @@ package com.drs.keyboard.settings
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
@@ -17,6 +18,9 @@ import android.widget.LinearLayout
 import android.widget.ScrollView
 import android.widget.TextView
 import com.drs.keyboard.R
+import java.io.BufferedReader
+import java.io.InputStreamReader
+import java.util.Locale
 
 /**
  * Main settings screen — Glass Depth 2.0. Gradient hero, live status pill,
@@ -32,6 +36,9 @@ class SettingsActivity : Activity() {
     private var step1Done = false
     private var step2Done = false
     private val step3Done get() = Prefs(this).themeEditorJustSaved
+
+    /** Counted once per activity life — shared by the stat grid and the privacy chip. */
+    private val liveStatsCache: IntArray by lazy { liveStats() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -221,15 +228,19 @@ class SettingsActivity : Activity() {
         val cardTeal = if (p.isDark) 0x262DD4BF else 0x1A0D9488
         val cardAmber = if (p.isDark) 0x26F59E0B else 0x1AD97706
 
-        row1.addView(UiKit.statCard(c, p, "book", getString(R.string.stats_words),
+        // live inventory, computed from the real assets — never frozen marketing numbers
+        val loc = Locale.getDefault()
+        val fmt = { n: Int -> String.format(loc, "%,d", n) }
+        val (words, emoji, themes, sensitive) = liveStatsCache
+        row1.addView(UiKit.statCard(c, p, "book", fmt(words),
             getString(R.string.stats_words_label), p.accent, cardBlue), cellLp)
         row1.addView(space(10))
-        row1.addView(UiKit.statCard(c, p, "emoji", getString(R.string.stats_emoji),
+        row1.addView(UiKit.statCard(c, p, "emoji", fmt(emoji),
             getString(R.string.stats_emoji_label), 0xFFEC4899.toInt(), cardViolet), cellLp)
-        row2.addView(UiKit.statCard(c, p, "palette", getString(R.string.stats_themes),
+        row2.addView(UiKit.statCard(c, p, "palette", fmt(themes),
             getString(R.string.stats_themes_label), 0xFF14B8A6.toInt(), cardTeal), cellLp)
         row2.addView(space(10))
-        row2.addView(UiKit.statCard(c, p, "shield", getString(R.string.stats_permissions),
+        row2.addView(UiKit.statCard(c, p, "shield", fmt(sensitive),
             getString(R.string.stats_permissions_label), 0xFFF59E0B.toInt(), cardAmber), cellLp)
 
         grid.addView(row1, linear(UiKit.dp(c, 10)))
@@ -239,6 +250,48 @@ class SettingsActivity : Activity() {
 
     private fun space(w: Int): View = View(this).apply {
         layoutParams = LinearLayout.LayoutParams(UiKit.dp(this@SettingsActivity, w), 1)
+    }
+
+    /**
+     * Real inventory, counted on-device from what the keyboard actually ships:
+     *  - words  = entries in the bundled en + ar frequency dictionaries
+     *  - emoji  = rows in the bundled emoji catalog
+     *  - themes = presets currently registered in ThemeRepo
+     *  - sensitive = requested permissions in the dangerous groups (always 0 here)
+     * Everything is derived live so the numbers can never drift from reality.
+     */
+    private fun liveStats(): IntArray {
+        var words = 0
+        var emoji = 0
+        runCatching {
+            for (name in listOf("dict/en_freq.txt", "dict/ar_freq.txt")) {
+                assets.open(name).use { s ->
+                    BufferedReader(InputStreamReader(s, Charsets.UTF_8)).forEachLine { line ->
+                        if (line.indexOf('\t') > 0) words++
+                    }
+                }
+            }
+            assets.open("dict/emoji.txt").use { s ->
+                BufferedReader(InputStreamReader(s, Charsets.UTF_8)).forEachLine { line ->
+                    if (line.indexOf('\t') > 0) emoji++
+                }
+            }
+        }
+        val themes = runCatching { com.drs.keyboard.theme.ThemeRepo.presets().size }.getOrDefault(16)
+        var sensitive = 0
+        runCatching {
+            val info = packageManager.getPackageInfo(packageName, PackageManager.GET_PERMISSIONS)
+            val dangerous = setOf(
+                "CAMERA", "RECORD_AUDIO", "READ_CONTACTS", "WRITE_CONTACTS", "GET_ACCOUNTS",
+                "READ_SMS", "SEND_SMS", "RECEIVE_SMS", "READ_CALL_LOG", "WRITE_CALL_LOG",
+                "CALL_PHONE", "READ_PHONE_STATE", "ACCESS_FINE_LOCATION", "ACCESS_COARSE_LOCATION",
+                "READ_EXTERNAL_STORAGE", "WRITE_EXTERNAL_STORAGE", "READ_PHONE_NUMBERS")
+            for (perm in info.requestedPermissions ?: emptyArray()) {
+                val bare = perm.substringAfterLast('.')
+                if (bare in dangerous) sensitive++
+            }
+        }
+        return intArrayOf(words, emoji, themes, sensitive)
     }
 
     // ---------- features ----------
@@ -309,7 +362,8 @@ class SettingsActivity : Activity() {
             setPadding(UiKit.dp(c, 14), 0, UiKit.dp(c, 14), 0)
             layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f)
         })
-        top.addView(UiKit.chip(c, p, getString(R.string.stats_permissions), p.green))
+        top.addView(UiKit.chip(c, p,
+            String.format(Locale.getDefault(), "%,d", liveStatsCache[3]), p.green))
         card.addView(top)
 
         card.addView(UiKit.body(c, p, getString(R.string.about_body)).apply {

@@ -26,14 +26,10 @@
     <string name="section_stats">By the numbers</string>
     <string name="section_features">Customize</string>
     <string name="section_privacy">Privacy shield</string>
-    <string name="stats_words">36,428</string>
     <string name="stats_words_label">Dictionary words</string>
-    <string name="stats_emoji">999</string>
     <string name="stats_emoji_label">Emoji ready</string>
-    <string name="stats_themes">16</string>
     <string name="stats_themes_label">Glass themes</string>
-    <string name="stats_permissions">0</string>
-    <string name="stats_permissions_label">Permissions asked</string>
+    <string name="stats_permissions_label">Sensitive permissions</string>
     <string name="privacy_chip_offline">100% offline</string>
     <string name="privacy_chip_telemetry">No telemetry</string>
     <string name="privacy_chip_permissions">0 permissions</string>
@@ -311,6 +307,11 @@
     <string name="pref_arrow_row_sub">Show a ← ↑ ↓ → row above the letters for precise cursor moves</string>
     <string name="pref_tashkeel">Arabic tashkeel row</string>
     <string name="pref_tashkeel_sub">Harakat, tanween, sukun, dagger alef and tatweel — one tap joins the current word</string>
+    <string name="pref_one_handed">One-handed mode</string>
+    <string name="pref_one_handed_sub">Shift the keys toward one thumb — tap the grip strip to flip sides, hold it to return to full width</string>
+    <string name="onehanded_off">Off</string>
+    <string name="onehanded_right">Right</string>
+    <string name="onehanded_left">Left</string>
     <string name="pref_label_size">Key label size</string>
     <string name="pref_label_size_sub">Text size of the letters on the keys</string>
     <string name="lbl_small">Small</string>
