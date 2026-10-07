@@ -2,17 +2,24 @@
 
 ## GitHub
 - Repo: **https://github.com/CTO-DRS/DRS-Smart-Keyboard**
-- Release v1.15.0: https://github.com/CTO-DRS/DRS-Smart-Keyboard/releases/tag/v1.15.0
+- Release v1.16.0: https://github.com/CTO-DRS/DRS-Smart-Keyboard/releases/tag/v1.16.0
 
 ## Downloads / التنزيل
-- **DRS-Smart-Keyboard-v1.15.0.apk** — latest release (992 KB, signed, versionCode 15)
-  - GitHub: https://github.com/CTO-DRS/DRS-Smart-Keyboard/releases/download/v1.15.0/DRS-Smart-Keyboard-v1.15.0.apk
-  - gofile mirror: https://gofile.io/d/H4Mcxj56 (md5 cf75708be3214ccf47f6783336526fd1)
+- **DRS-Smart-Keyboard-v1.16.0.apk** — latest release (996 KB, signed, versionCode 16)
+  - GitHub: https://github.com/CTO-DRS/DRS-Smart-Keyboard/releases/download/v1.16.0/DRS-Smart-Keyboard-v1.16.0.apk
+  - gofile mirror: https://gofile.io/d/yaMawbQh (md5 859c925655281b0fc39e02750e0e5765)
 - **DRS-Keyboard-source.zip** — full Android Studio project source
-  - GitHub release asset: https://github.com/CTO-DRS/DRS-Smart-Keyboard/releases/download/v1.15.0/DRS-Keyboard-source.zip
-  - gofile mirror: https://gofile.io/d/WCJgnGXm (md5 f20c1af33965b894a8e08cf50228a914)
+  - GitHub release asset: https://github.com/CTO-DRS/DRS-Smart-Keyboard/releases/download/v1.16.0/DRS-Keyboard-source.zip
+  - gofile mirror: https://gofile.io/d/S1GZ5yX3 (md5 f182cb5f1d70d4a977cdb3edf63e0ab4)
 
-## What's new in v1.15.0 — typing-surface visual overhaul
+## What's new in v1.16.0 — smart field intelligence
+- 🎚️ **Live password-strength meter** — type in any password field and the suggestion strip becomes a real-time 4-segment gauge with a bilingual label (Weak ضعيفة / Fair مقبولة / Good جيدة / Strong قوية) in a semantic color (red → amber → lime → green)
+- 🧮 **Honest scoring, zero AI** — charset entropy (length × log₂ of the pool) with structural penalties: 48 most-common passwords = instant zero, repeated characters (aaab/111222), sequences (abc/123/987), keyboard runs (qwe/asd/zxc), hopeless length (< 6)
+- 🔒 **Privacy by architecture** — the analysis runs in place from the field contents; nothing is stored, nothing learned on, and the app has no network permission at all; secure fields still never show suggestions or learning
+- ⏱️ **Quick number pad** — long-press `؟123` to jump straight to the locked number pad (was two taps); long-press `#+=` inside the pad to return to letters — one gesture each way
+- Same signing certificate as v1.3.0+ — installs directly over them
+
+## What was new in v1.15.0 — typing-surface visual overhaul
 - 🔠 **Caps Lock vs Shift, at a glance** — one Shift tap = soft accent tint + accent ring + accent glyph; Caps Lock = solid accent fill + bright glyph. No more guessing the state
 - 👇 **Physical press feedback** — pressed keys sink 1.1 dp into the glass panel while the glow ring lights up
 - ◌ **Elegant harakat hints** — bare combining marks (ً ُ ِ ّ ْ …) now sit centered on a tiny dotted circle (OneUI style) instead of floating at the key's top edge; other hints got a size/contrast bump

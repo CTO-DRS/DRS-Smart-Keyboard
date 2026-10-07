@@ -10,15 +10,15 @@ zero network calls by design.
 
 ## Download
 
-Get the latest signed APK from **[GitHub Releases](../../releases)** (v1.15.0)
-or the mirror: [gofile.io/d/H4Mcxj56](https://gofile.io/d/H4Mcxj56).
+Get the latest signed APK from **[GitHub Releases](../../releases)** (v1.16.0)
+or the mirror: [gofile.io/d/yaMawbQh](https://gofile.io/d/yaMawbQh).
 All releases since v1.3.0 share the same signing key, so upgrades install
 in-place without uninstalling.
 
 | | |
 |---|---|
 | Package | `com.drs.keyboard` |
-| Version | 1.15.0 (versionCode 15) |
+| Version | 1.16.0 (versionCode 16) |
 | Min SDK | 26 (Android 8.0) |
 | Target SDK | 34 (Android 14) |
 | Languages | English (QWERTY) + العربية (Arabic 101, RTL-aware) |
@@ -180,6 +180,12 @@ there is no network permission to do it with.
 
 ## Changelog (highlights)
 
+- **v1.16.0** — smart field intelligence: live offline password-strength
+  meter in the suggestion strip while typing in any password field
+  (charset entropy + structural penalties: 48 common passwords, repeats,
+  sequences, keyboard runs; 4-segment gauge, bilingual semantic labels),
+  plus a quick number pad — long-press `؟123` jumps to the locked number
+  pad, long-press `#+=` inside it returns to letters.
 - **v1.15.0** — typing-surface visual overhaul: Caps Lock vs shifted now
   visually distinct (solid accent fill vs tint + ring + accent glyph),
   pressed keys sink into the glass for physical feedback, bare harakat
