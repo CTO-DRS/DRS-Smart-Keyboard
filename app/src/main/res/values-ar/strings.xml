@@ -283,6 +283,14 @@
     <!-- v1.8.0: مسافة تلقائية بعد الترقيم -->
     <string name="pref_autospace">مسافة تلقائية بعد الترقيم</string>
     <string name="pref_autospace_sub">أدخل مسافة تلقائياً بعد . ! ? … ، ؛ ؟</string>
+    <string name="pref_spacesnap">إلصاق الترقيم بالكلمات</string>
+    <string name="pref_spacesnap_sub">كتابة علامة بعد «كلمة » تحذف المسافة الزائدة: «كلمة .» تصبح «كلمة.»</string>
+    <string name="stats_apps">أكثر التطبيقات كتابةً</string>
+    <string name="stats_apps_note">يُحفظ محليًا فقط (أسماء التطبيقات وعدّاداتها). الوضع الخاص لا يسجّل شيئًا إطلاقًا.</string>
+    <string name="shortcut_themes">الثيمات</string>
+    <string name="shortcut_backup">النسخ الاحتياطي</string>
+    <string name="shortcut_stats">إحصاءات الكتابة</string>
+    <string name="shortcut_words">الكلمات المتعلّمة</string>
 
     <!-- v1.8.0: تصدير واستيراد السمة -->
     <string name="theme_export">تصدير السمة</string>

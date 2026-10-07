@@ -173,6 +173,14 @@ class Prefs(context: Context) {
         get() = prefs.getBoolean("clip_autoclear", false)
         set(v) = prefs.edit().putBoolean("clip_autoclear", v).apply()
 
+    /**
+     * Space-snap before punctuation: typing . , ! ? … ، ؛ ؟ : ; right after
+     * "word " removes the stray space before the mark ("word ." → "word.").
+     */
+    var spaceSnap: Boolean
+        get() = prefs.getBoolean("space_snap", false)
+        set(v) = prefs.edit().putBoolean("space_snap", v).apply()
+
     /** Raw dump of drs_prefs for backup/restore. */
     fun exportAll(): MutableMap<String, *> = prefs.all
 

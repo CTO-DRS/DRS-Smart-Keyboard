@@ -110,6 +110,8 @@ class TypingActivity : Activity() {
         feel.addView(divider())
         feel.addView(UiKit.switchRow(c, p, getString(R.string.pref_autospace),
             getString(R.string.pref_autospace_sub), prefs.autoSpacePunct) { prefs.autoSpacePunct = it })
+        feel.addView(UiKit.switchRow(c, p, getString(R.string.pref_spacesnap),
+            getString(R.string.pref_spacesnap_sub), prefs.spaceSnap) { prefs.spaceSnap = it })
         feel.addView(divider())
         feel.addView(UiKit.switchRow(c, p, getString(R.string.pref_number_row),
             getString(R.string.pref_number_row_sub), prefs.numberRow) { prefs.numberRow = it })

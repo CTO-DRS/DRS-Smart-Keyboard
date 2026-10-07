@@ -34,6 +34,9 @@ class KeyDef(
         const val CODE_NAV_DOWN = -11
         const val CODE_NAV_LEFT = -12
         const val CODE_NAV_RIGHT = -13
+        // long-press on ← / → = jump a whole word (Ctrl+arrow semantics)
+        const val CODE_NAV_WORD_LEFT = -14
+        const val CODE_NAV_WORD_RIGHT = -15
 
         // --- helpers -----------------------------------------------------
         fun char(label: String, code: Int, shiftLabel: String? = null, shiftCode: Int = code,

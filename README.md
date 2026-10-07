@@ -11,14 +11,14 @@ zero network calls by design.
 ## Download
 
 Get the latest signed APK from **[GitHub Releases](../../releases)** (v1.12.0)
-or the mirror: [gofile.io/d/dNU5PwsR](https://gofile.io/d/dNU5PwsR).
+or the mirror: [gofile.io/d/CIIdYYBR](https://gofile.io/d/CIIdYYBR).
 All releases since v1.3.0 share the same signing key, so upgrades install
 in-place without uninstalling.
 
 | | |
 |---|---|
 | Package | `com.drs.keyboard` |
-| Version | 1.12.0 (versionCode 12) |
+| Version | 1.13.0 (versionCode 13) |
 | Min SDK | 26 (Android 8.0) |
 | Target SDK | 34 (Android 14) |
 | Languages | English (QWERTY) + العربية (Arabic 101, RTL-aware) |
@@ -176,6 +176,10 @@ there is no network permission to do it with.
 
 ## Changelog (highlights)
 
+- **v1.13.0** — launcher shortcuts (long-press the icon → themes / backup /
+  stats / learned words), per-app typing stats with usage bars, word-jump
+  via long-press on ← / → (extends selection in select mode), optional
+  space-snap before punctuation ("word ." → "word.").
 - **v1.12.0** — edit-toolbar undo (multi-level, restores even a cleared
   field), clear-all button, proper-noun/acronym autocorrect protection
   (DRS, iPhone… stay untouched), bulk word-list import (one word per line).

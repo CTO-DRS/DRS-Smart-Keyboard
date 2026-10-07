@@ -284,6 +284,14 @@
     <!-- v1.8.0: auto-space after punctuation -->
     <string name="pref_autospace">Auto-space after punctuation</string>
     <string name="pref_autospace_sub">Type a space automatically after . ! ? … ، ؛ ؟</string>
+    <string name="pref_spacesnap">Snap punctuation to words</string>
+    <string name="pref_spacesnap_sub">Typing a mark after "word " removes the stray space: "word ." → "word."</string>
+    <string name="stats_apps">Most-typed apps</string>
+    <string name="stats_apps_note">Stored locally only (app names + counters). The private mode never records anything.</string>
+    <string name="shortcut_themes">Themes</string>
+    <string name="shortcut_backup">Backup &amp; restore</string>
+    <string name="shortcut_stats">Typing stats</string>
+    <string name="shortcut_words">Learned words</string>
 
     <!-- v1.8.0: theme export / import -->
     <string name="theme_export">Export theme</string>

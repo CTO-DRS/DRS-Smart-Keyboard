@@ -433,7 +433,17 @@ class DrsImeService : android.inputmethodservice.InputMethodService(),
             }
             // read the char before the cursor BEFORE committing, so auto-space
             // can be skipped after a digit (3.14) or after the same mark (...)
-            val prev = ic.getTextBeforeCursor(1, 0) ?: ""
+            var prev = ic.getTextBeforeCursor(2, 0)?.toString() ?: ""
+            // space-snap: a mark typed right after "word " hugs the word
+            if (prefs.spaceSnap && !secureField && !noAutocorrectField &&
+                text.length == 1 && text[0] in ".!?…،؛؟,:;" &&
+                prev.length == 2 && prev[1] == ' ' &&
+                prev[0] != ' ' && prev[0].isLetterOrDigit()
+            ) {
+                ic.deleteSurroundingText(1, 0)
+                prev = prev.dropLast(1)
+            }
+            prev = prev.takeLast(1)
             ic.commitText(text, 1)
             trackInsert(text, charMerge = true)
             val autoSp = prefs.autoSpacePunct && !secureField && !noAutocorrectField &&
@@ -506,6 +516,8 @@ class DrsImeService : android.inputmethodservice.InputMethodService(),
                 KeyDef.CODE_NAV_RIGHT -> onCursorMove(1)
                 KeyDef.CODE_NAV_UP -> sendDpad(KeyEvent.KEYCODE_DPAD_UP)
                 KeyDef.CODE_NAV_DOWN -> sendDpad(KeyEvent.KEYCODE_DPAD_DOWN)
+                KeyDef.CODE_NAV_WORD_LEFT -> jumpWord(-1)
+                KeyDef.CODE_NAV_WORD_RIGHT -> jumpWord(1)
             }
             KeyDef.KeyType.SHIFT -> {
                 state.tapShift()
@@ -606,7 +618,11 @@ class DrsImeService : android.inputmethodservice.InputMethodService(),
             composing.setLength(0)
             ic.finishComposingText()
             trackInsert(finalWord)
-            if (!prefs.incognito) StatsStore.bump(this, StatsStore.WORDS)
+            if (!prefs.incognito) {
+                StatsStore.bump(this, StatsStore.WORDS)
+                // attribute the word to the foreground app (local-only file)
+                StatsStore.bumpApp(this, currentInputEditorInfo?.packageName)
+            }
             if (prefs.shortcuts && tryShortcut(finalWord)) {
                 lastWord = ""
                 pendingUndo = null
@@ -895,6 +911,20 @@ class DrsImeService : android.inputmethodservice.InputMethodService(),
     private fun sendDpad(code: Int) {
         val ic = currentInputConnection ?: return
         val meta = if (selectMode) KeyEvent.META_SHIFT_ON else 0
+        ic.sendKeyEvent(KeyEvent(System.currentTimeMillis(), System.currentTimeMillis(),
+            KeyEvent.ACTION_DOWN, code, 0, meta))
+        ic.sendKeyEvent(KeyEvent(System.currentTimeMillis(), System.currentTimeMillis(),
+            KeyEvent.ACTION_UP, code, 0, meta))
+    }
+
+    /** Long-press on ← / →: jump a whole word (Ctrl+arrow — the standard
+     *  text-field semantics, honored by every editor). In selection mode the
+     *  jump extends the selection word-by-word (Ctrl+Shift+arrow). */
+    private fun jumpWord(dir: Int) {
+        val ic = currentInputConnection ?: return
+        val code = if (dir < 0) KeyEvent.KEYCODE_DPAD_LEFT else KeyEvent.KEYCODE_DPAD_RIGHT
+        var meta = KeyEvent.META_CTRL_ON or KeyEvent.META_CTRL_LEFT_ON
+        if (selectMode) meta = meta or KeyEvent.META_SHIFT_ON
         ic.sendKeyEvent(KeyEvent(System.currentTimeMillis(), System.currentTimeMillis(),
             KeyEvent.ACTION_DOWN, code, 0, meta))
         ic.sendKeyEvent(KeyEvent(System.currentTimeMillis(), System.currentTimeMillis(),

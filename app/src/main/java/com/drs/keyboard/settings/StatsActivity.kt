@@ -9,6 +9,7 @@ import android.graphics.Typeface
 import android.os.Bundle
 import android.view.Gravity
 import android.view.View
+import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.ScrollView
 import android.widget.TextView
@@ -99,6 +100,25 @@ class StatsActivity : Activity() {
         grid.addView(row2)
         root.addView(grid, pad(0, 0, 0, UiKit.dp(c, 16)))
 
+        // ---- per-app top list (local-only, incognito never records) ----
+        val apps = StatsStore.topApps(c, 5)
+        if (apps.isNotEmpty()) {
+            val pm = packageManager
+            val appsCard = UiKit.card(c, p)
+            appsCard.addView(UiKit.title(c, p, getString(R.string.stats_apps)))
+            val maxCount = apps.first().second.coerceAtLeast(1)
+            for ((pkg, count) in apps) {
+                val label = runCatching {
+                    pm.getApplicationLabel(pm.getApplicationInfo(pkg, 0)).toString()
+                }.getOrDefault(pkg)
+                appsCard.addView(appRow(c, p, label, count, maxCount))
+            }
+            appsCard.addView(UiKit.body(c, p, getString(R.string.stats_apps_note)).apply {
+                setPadding(0, UiKit.dp(c, 10), 0, 0)
+            })
+            root.addView(appsCard, pad(0, 0, 0, UiKit.dp(c, 16)))
+        }
+
         // ---- privacy note + clear ----
         val note = UiKit.card(c, p)
         note.addView(UiKit.body(c, p, getString(R.string.stats_note)).apply {
@@ -113,6 +133,47 @@ class StatsActivity : Activity() {
 
     private fun format(n: Int, loc: Locale): String =
         String.format(loc, "%,d", n)
+
+    /** One app row: label + word count + a thin proportional usage bar. */
+    private fun appRow(
+        c: Context, p: UiKit.Palette, label: String, count: Int, maxCount: Int
+    ): View {
+        val row = LinearLayout(c).apply { orientation = LinearLayout.VERTICAL }
+        val top = LinearLayout(c).apply { orientation = LinearLayout.HORIZONTAL }
+        val name = TextView(c).apply {
+            text = label
+            setTextColor(p.text)
+            textSize = 14f
+            maxLines = 1
+            ellipsize = android.text.TextUtils.TruncateAt.END
+        }
+        val num = TextView(c).apply {
+            text = format(count, Locale.getDefault())
+            setTextColor(p.subtext)
+            textSize = 13f
+            gravity = Gravity.END
+        }
+        top.addView(name, LinearLayout.LayoutParams(0, android.view.ViewGroup.LayoutParams.WRAP_CONTENT, 1f))
+        top.addView(num)
+        row.addView(top)
+        val barBg = FrameLayout(c).apply { setBackgroundColor(p.faint) }
+        val bar = View(c).apply { setBackgroundColor(0xFF14B8A6.toInt()) }
+        row.addView(barBg, LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT, UiKit.dp(this@StatsActivity, 4)).apply {
+            setMargins(0, UiKit.dp(this@StatsActivity, 6), 0, UiKit.dp(this@StatsActivity, 10))
+        })
+        barBg.addView(bar, FrameLayout.LayoutParams(
+            UiKit.dp(this@StatsActivity, 2), UiKit.dp(this@StatsActivity, 4)
+        ))
+        // width computed post-layout: proportion of the max
+        barBg.post {
+            bar.layoutParams = FrameLayout.LayoutParams(
+                ((barBg.width.toFloat() * count / maxCount.coerceAtLeast(1)).toInt())
+                    .coerceAtLeast(UiKit.dp(this@StatsActivity, 2)),
+                UiKit.dp(this@StatsActivity, 4))
+        }
+        return row
+    }
 
     private fun space(w: Int): View = View(this).apply {
         layoutParams = LinearLayout.LayoutParams(UiKit.dp(this@StatsActivity, w), 1)

@@ -157,6 +157,21 @@ class DrsKeyboardView @JvmOverloads constructor(
                     pressed = null
                     invalidate()
                 }
+                k.key.type == KeyDef.KeyType.NAV &&
+                    (k.key.code == KeyDef.CODE_NAV_LEFT || k.key.code == KeyDef.CODE_NAV_RIGHT) -> {
+                    // long-press ← / → = jump a whole word (extends selection
+                    // when selection mode is on — the service adds shift)
+                    mode = Mode.IDLE
+                    pressed = null
+                    performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
+                    callback?.onKey(
+                        KeyDef.fn("",
+                            if (k.key.code == KeyDef.CODE_NAV_LEFT) KeyDef.CODE_NAV_WORD_LEFT
+                            else KeyDef.CODE_NAV_WORD_RIGHT,
+                            KeyDef.KeyType.NAV, 1f)
+                    )
+                    invalidate()
+                }
                 k.key.alts.isNotEmpty() -> {
                     mode = Mode.ALT
                     popupKey = k

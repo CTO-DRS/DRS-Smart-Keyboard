@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Long-press the app icon: jump straight into the keyboard's most-used
+     screens. Static shortcuts — no extra permissions, pure intents. -->
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:shortcutId="themes"
+        android:enabled="true"
+        android:icon="@mipmap/ic_launcher"
+        android:shortcutShortLabel="@string/shortcut_themes"
+        android:shortcutLongLabel="@string/shortcut_themes">
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetPackage="com.drs.keyboard"
+            android:targetClass="com.drs.keyboard.settings.ThemeEditorActivity" />
+    </shortcut>
+    <shortcut
+        android:shortcutId="backup"
+        android:enabled="true"
+        android:icon="@mipmap/ic_launcher"
+        android:shortcutShortLabel="@string/shortcut_backup"
+        android:shortcutLongLabel="@string/shortcut_backup">
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetPackage="com.drs.keyboard"
+            android:targetClass="com.drs.keyboard.settings.BackupActivity" />
+    </shortcut>
+    <shortcut
+        android:shortcutId="stats"
+        android:enabled="true"
+        android:icon="@mipmap/ic_launcher"
+        android:shortcutShortLabel="@string/shortcut_stats"
+        android:shortcutLongLabel="@string/shortcut_stats">
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetPackage="com.drs.keyboard"
+            android:targetClass="com.drs.keyboard.settings.StatsActivity" />
+    </shortcut>
+    <shortcut
+        android:shortcutId="words"
+        android:enabled="true"
+        android:icon="@mipmap/ic_launcher"
+        android:shortcutShortLabel="@string/shortcut_words"
+        android:shortcutLongLabel="@string/shortcut_words">
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetPackage="com.drs.keyboard"
+            android:targetClass="com.drs.keyboard.settings.LearnedWordsActivity" />
+    </shortcut>
+</shortcuts>

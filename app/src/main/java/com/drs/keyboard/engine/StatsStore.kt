@@ -15,6 +15,7 @@ import java.util.Locale
 object StatsStore {
 
     private const val PREFS = "drs_stats"
+    private const val PREFS_APPS = "drs_stats_apps"
     private val dayFormat = SimpleDateFormat("yyyy-MM-dd", Locale.US)
 
     const val KEYS = "keys"
@@ -74,8 +75,37 @@ object StatsStore {
         return acc
     }
 
+    /** Attribute a completed word to the foreground app — stored in a
+     *  separate local-only file (package name + counter, nothing else),
+     *  capped at the top 20 apps. Incognito is enforced at the call site. */
+    @Synchronized
+    fun bumpApp(context: Context, pkg: String?, amount: Int = 1) {
+        if (pkg.isNullOrEmpty()) return
+        val p = context.getSharedPreferences(PREFS_APPS, Context.MODE_PRIVATE)
+        val e = p.edit().putInt(pkg, p.getInt(pkg, 0) + amount)
+        if (!p.contains(pkg) && p.all.size >= 20) {
+            // evict the least-used app to make room for a new one
+            val smallest = p.all.entries
+                .minByOrNull { (it.value as? Number)?.toInt() ?: 0 }?.key
+            if (smallest != null) e.remove(smallest)
+        }
+        e.apply()
+    }
+
+    /** Top n apps by completed words: (packageName, count), best first. */
+    fun topApps(context: Context, n: Int): List<Pair<String, Int>> =
+        context.getSharedPreferences(PREFS_APPS, Context.MODE_PRIVATE)
+            .all.entries.mapNotNull { (k, v) ->
+                val i = (v as? Number)?.toInt() ?: 0
+                if (i > 0) k to i else null
+            }
+            .sortedByDescending { it.second }
+            .take(n)
+
     fun clear(context: Context) {
         prefs(context).edit().clear().apply()
+        context.getSharedPreferences(PREFS_APPS, Context.MODE_PRIVATE)
+            .edit().clear().apply()
         cachedCounts.clear()
         cachedDay = ""
     }
