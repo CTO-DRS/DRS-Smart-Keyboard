@@ -76,6 +76,37 @@ class DrsImeService : android.inputmethodservice.InputMethodService(),
     private var pendingUndo: String? = null
     private var pendingUndoWord: String = ""
 
+    /**
+     * Local multi-level undo: every text change WE make through the
+     * InputConnection is recorded as a contiguous inserted run (or a cleared
+     * block). Undo pops entries newest-first and reverts them only when the
+     * text before the cursor still matches — so edits made by the app itself
+     * never get mangled. Session-scoped: cleared on every field change.
+     */
+    private class UndoEntry(var text: String, val deletion: Boolean = false) {
+        var time: Long = System.currentTimeMillis()
+    }
+    private val undoStack = ArrayDeque<UndoEntry>()
+    private var undoCharMerged = false   // last entry grew from single keystrokes
+
+    /** Record text we are about to commit. charMerge=true coalesces rapid
+     *  single keystrokes into one run (capped) so undo works word-by-word. */
+    private fun trackInsert(text: String, charMerge: Boolean = false) {
+        if (text.isEmpty()) return
+        val now = System.currentTimeMillis()
+        val top = undoStack.lastOrNull()
+        if (charMerge && undoCharMerged && top != null && !top.deletion &&
+            now - top.time < 1500 && top.text.length < 12
+        ) {
+            top.text += text
+            top.time = now
+        } else {
+            undoStack.addLast(UndoEntry(text))
+            if (undoStack.size > 50) undoStack.removeFirst()
+            undoCharMerged = charMerge
+        }
+    }
+
     // text-selection mode (edit toolbar "select" toggle): arrows extend the selection
     private var selectMode = false
 
@@ -208,6 +239,8 @@ class DrsImeService : android.inputmethodservice.InputMethodService(),
         lastCommitWasSpace = false
         pendingUndo = null
         pendingUndoWord = ""
+        undoStack.clear()
+        undoCharMerged = false
         // ---- field awareness -------------------------------------------------
         val cls = info.inputType and EditorInfo.TYPE_MASK_CLASS
         val vari = info.inputType and EditorInfo.TYPE_MASK_VARIATION
@@ -396,15 +429,20 @@ class DrsImeService : android.inputmethodservice.InputMethodService(),
                 composing.setLength(0)
                 ic.finishComposingText()
                 if (prefs.shortcuts) tryShortcut(word)
+                trackInsert(word)
             }
             // read the char before the cursor BEFORE committing, so auto-space
             // can be skipped after a digit (3.14) or after the same mark (...)
             val prev = ic.getTextBeforeCursor(1, 0) ?: ""
             ic.commitText(text, 1)
+            trackInsert(text, charMerge = true)
             val autoSp = prefs.autoSpacePunct && !secureField && !noAutocorrectField &&
                 text.length == 1 && text[0] in ".!?…،؛؟" &&
                 !prev.any { it.isDigit() } && prev != text
-            if (autoSp) ic.commitText(" ", 1)
+            if (autoSp) {
+                ic.commitText(" ", 1)
+                trackInsert(" ", charMerge = true)
+            }
             lastCommitWasSpace = false
             state.consumeShift()
             syncShiftVisuals()
@@ -525,6 +563,7 @@ class DrsImeService : android.inputmethodservice.InputMethodService(),
         if (prefs.doubleSpace && lastCommitWasSpace && now - lastSpaceTime < 400 && composing.isEmpty()) {
             ic.deleteSurroundingText(1, 0)
             ic.commitText(". ", 1)
+            trackInsert(". ")
             lastCommitWasSpace = false
             lastWord = ""
             state.setSentenceShift(prefs.autoCap)
@@ -535,7 +574,10 @@ class DrsImeService : android.inputmethodservice.InputMethodService(),
 
         if (composing.isNotEmpty()) {
             val typed = composing.toString()
-            val canCorrect = prefs.autocorrect && !noAutocorrectField
+            // protect names & acronyms from mangling: any uppercase letter after
+            // the first character (DRS, iPhone, NASA…) disables autocorrection
+            val protectCap = typed.indexOfFirst { it.isUpperCase() } > 0
+            val canCorrect = prefs.autocorrect && !noAutocorrectField && !protectCap
             val suggestions = suggestionEngine.suggest(
                 state.lang, typed, lastWord, canCorrect
             )
@@ -563,6 +605,7 @@ class DrsImeService : android.inputmethodservice.InputMethodService(),
             lastWord = finalWord.lowercase()
             composing.setLength(0)
             ic.finishComposingText()
+            trackInsert(finalWord)
             if (!prefs.incognito) StatsStore.bump(this, StatsStore.WORDS)
             if (prefs.shortcuts && tryShortcut(finalWord)) {
                 lastWord = ""
@@ -577,6 +620,7 @@ class DrsImeService : android.inputmethodservice.InputMethodService(),
         mathExpr = null // a space always ends any math expression
 
         ic.commitText(" ", 1)
+        trackInsert(" ", charMerge = true)
         lastCommitWasSpace = true
         lastSpaceTime = now
         updateSuggestions()
@@ -616,6 +660,18 @@ class DrsImeService : android.inputmethodservice.InputMethodService(),
                 ic.setComposingText(composing.toString(), 1)
             }
         } else {
+            // keep the undo ledger honest: if the char being deleted came from
+            // the newest tracked run, shrink that run instead of leaving a
+            // stale entry behind
+            val victim = ic.getTextBeforeCursor(1, 0)?.toString() ?: ""
+            val top = undoStack.lastOrNull()
+            if (victim.isNotEmpty() && top != null && !top.deletion && top.text.endsWith(victim)) {
+                top.text = top.text.dropLast(1)
+                if (top.text.isEmpty()) {
+                    undoStack.removeLast()
+                    undoCharMerged = false
+                }
+            }
             ic.sendKeyEvent(KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_DEL))
         }
         lastCommitWasSpace = false
@@ -632,6 +688,7 @@ class DrsImeService : android.inputmethodservice.InputMethodService(),
             lastWord = word.lowercase()
             composing.setLength(0)
             ic.finishComposingText()
+            trackInsert(word)
             if (prefs.shortcuts) tryShortcut(word)
         }
         val action = currentInputEditorInfo
@@ -656,6 +713,7 @@ class DrsImeService : android.inputmethodservice.InputMethodService(),
         // typed word was already committed as composing text; delete it
         ic.deleteSurroundingText(word.length, 0)
         ic.commitText(expansion, 1)
+        trackInsert(expansion)
         host?.candidateBar?.showHint("→ $expansion")
         ui.removeCallbacks(clearHintRunnable)
         ui.postDelayed(clearHintRunnable, 1200)
@@ -696,8 +754,12 @@ class DrsImeService : android.inputmethodservice.InputMethodService(),
             return
         }
         val typed = composing.toString()
+        // same proper-noun protection as the space commit: internal capitals
+        // (DRS, iPhone…) are never offered a "did you mean" fix
+        val protectCap = typed.indexOfFirst { it.isUpperCase() } > 0
         val suggestions = suggestionEngine.suggest(
-            state.lang, typed, lastWord, prefs.autocorrect && !noAutocorrectField
+            state.lang, typed, lastWord,
+            prefs.autocorrect && !noAutocorrectField && !protectCap
         )
         val items = suggestions.map { it.word to it.isCorrection }.toMutableList()
         // inline calculator: a complete math expression sits right before the cursor
@@ -728,6 +790,7 @@ class DrsImeService : android.inputmethodservice.InputMethodService(),
             composingFinishQuietly()
             if (expr != null) ic.deleteSurroundingText(expr.length, 0)
             ic.commitText(word.substring(2), 1)
+            trackInsert(word.substring(2))
             mathExpr = null
             lastCommitWasSpace = false
             updateSuggestions()
@@ -739,6 +802,7 @@ class DrsImeService : android.inputmethodservice.InputMethodService(),
             // space only when a word sits right before the cursor
             val lead = if (extractLastWord().isNotEmpty()) " " else ""
             ic.commitText(lead + word, 1)
+            trackInsert(lead + word)
             lastCommitWasSpace = false
             if (!prefs.incognito) StatsStore.bump(this, StatsStore.EMOJI)
             updateSuggestions()
@@ -751,11 +815,13 @@ class DrsImeService : android.inputmethodservice.InputMethodService(),
             learnerBoost(word)
             lastWord = word.lowercase()
             ic.commitText(" ", 1)
+            trackInsert(word + " ")
             lastCommitWasSpace = true
             lastSpaceTime = System.currentTimeMillis()
         } else {
             // next-word suggestion: commit directly
             ic.commitText(word + " ", 1)
+            trackInsert(word + " ")
             lastWord = word.lowercase()
             learnerBoost(word)
             lastCommitWasSpace = true
@@ -789,6 +855,7 @@ class DrsImeService : android.inputmethodservice.InputMethodService(),
         if (lastWord.isNotEmpty() && !privacyHold()) (ngrams[state.lang])?.learn(lastWord, word)
         lastWord = word.lowercase()
         ic.commitText(" ", 1)
+        trackInsert(word + " ")
         lastCommitWasSpace = true
         lastSpaceTime = System.currentTimeMillis()
         if (!prefs.incognito) StatsStore.bump(this, StatsStore.SWIPES)
@@ -801,6 +868,7 @@ class DrsImeService : android.inputmethodservice.InputMethodService(),
         pendingUndoWord = ""
         composingFinishQuietly()
         ic.commitText(text, 1)
+        trackInsert(text)
         lastCommitWasSpace = false
         if (text.isNotEmpty() && text[0].code >= 0x1F000 ||
             text.isNotEmpty() && text[0].code in 0x2600..0x27BF) {
@@ -903,12 +971,74 @@ class DrsImeService : android.inputmethodservice.InputMethodService(),
     // Text editing toolbar (hold the clipboard icon)
     // ------------------------------------------------------------------
 
+    /** Multi-level undo of OUR OWN recent edits: keystrokes, corrections,
+     *  suggestions, swipes, shortcuts, pastes, emoji, calculator results. */
+    private fun performUndo() {
+        val ic = currentInputConnection ?: return
+        while (undoStack.isNotEmpty()) {
+            val e = undoStack.removeLast()
+            undoCharMerged = false
+            if (e.deletion) {
+                // entry recorded a cleared block → restore it at the cursor
+                ic.commitText(e.text, 1)
+                showUndoHint(e.text)
+                updateSuggestions()
+                return
+            }
+            val before = ic.getTextBeforeCursor(e.text.length, 0)?.toString() ?: ""
+            if (before == e.text) {
+                ic.beginBatchEdit()
+                ic.deleteSurroundingText(e.text.length, 0)
+                ic.endBatchEdit()
+                showUndoHint(e.text)
+                updateSuggestions()
+                return
+            }
+            // stale entry (app edited itself in between) — discard and keep looking
+        }
+        toast(R.string.edit_undo_none)
+    }
+
+    private fun showUndoHint(text: String) {
+        val shown = text.replace("\n", "⏎")
+        host?.candidateBar?.showHint(getString(R.string.edit_undo_done, shown))
+        ui.removeCallbacks(clearHintRunnable)
+        ui.postDelayed(clearHintRunnable, 1400)
+    }
+
+    /** Wipe the entire field (before + after the cursor), keep a restore
+     *  entry on the undo stack so one tap of ↩ brings everything back. */
+    private fun performClearAll() {
+        val ic = currentInputConnection ?: return
+        composingFinishQuietly()
+        val cleared = StringBuilder()
+        var guard = 0
+        while (guard++ < 10) {
+            val before = ic.getTextBeforeCursor(20000, 0)?.toString() ?: ""
+            val after = ic.getTextAfterCursor(20000, 0)?.toString() ?: ""
+            if (before.isEmpty() && after.isEmpty()) break
+            cleared.append(before).append(after)
+            ic.deleteSurroundingText(before.length, after.length)
+        }
+        pendingUndo = null
+        pendingUndoWord = ""
+        lastWord = ""
+        lastCommitWasSpace = false
+        if (cleared.isNotEmpty()) {
+            undoStack.addLast(UndoEntry(cleared.toString(), deletion = true))
+            if (undoStack.size > 50) undoStack.removeFirst()
+            undoCharMerged = false
+        }
+        updateSuggestions()
+    }
+
     /** One-tap paste from the quick-paste chip in the suggestion strip. */
     override fun onPasteChipTapped() {
         val text = pendingPaste ?: return
         val ic = currentInputConnection ?: return
         composingFinishQuietly()
         ic.commitText(text, 1)
+        trackInsert(text)
         pendingPaste = null
         lastCommitWasSpace = false
         updateSuggestions()
@@ -943,7 +1073,25 @@ class DrsImeService : android.inputmethodservice.InputMethodService(),
             "selectall" -> ic?.performContextMenuAction(android.R.id.selectAll)
             "copy" -> ic?.performContextMenuAction(android.R.id.copy)
             "cut" -> ic?.performContextMenuAction(android.R.id.cut)
-            "paste" -> ic?.performContextMenuAction(android.R.id.paste)
+            "paste" -> {
+                if (ic != null) {
+                    // best-effort undo tracking: diff the text before the cursor
+                    val before = ic.getTextBeforeCursor(4000, 0)?.toString() ?: ""
+                    ic.performContextMenuAction(android.R.id.paste)
+                    ui.postDelayed({
+                        val ic2 = currentInputConnection ?: return@postDelayed
+                        val after = ic2.getTextBeforeCursor(4000, 0)?.toString() ?: ""
+                        if (after.length > before.length && after.startsWith(before)) {
+                            trackInsert(after.substring(before.length))
+                        }
+                    }, 150)
+                }
+            }
+            "undo" -> {
+                performUndo()
+                return  // keep the toolbar open for repeat presses
+            }
+            "clear" -> performClearAll()
         }
         // close the toolbar and confirm via the suggestion-strip hint
         host?.showEditBar(false)
@@ -952,6 +1100,7 @@ class DrsImeService : android.inputmethodservice.InputMethodService(),
             "copy" -> getString(R.string.edit_copied)
             "cut" -> getString(R.string.edit_cut)
             "paste" -> getString(R.string.edit_pasted)
+            "clear" -> getString(R.string.edit_cleared)
             else -> ""
         }
         if (msg.isNotEmpty()) {

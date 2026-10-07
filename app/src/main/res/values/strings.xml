@@ -175,6 +175,9 @@
     <string name="edit_copied">Copied ✓</string>
     <string name="edit_cut">Cut ✓</string>
     <string name="edit_pasted">Pasted ✓</string>
+    <string name="edit_undo_done">Undone: «%1$s»</string>
+    <string name="edit_undo_none">Nothing to undo</string>
+    <string name="edit_cleared">Field cleared</string>
     <string name="hint_editbar">Hold 📋 for text tools</string>
 
     <!-- Per-app language memory -->
@@ -256,6 +259,9 @@
 
     <!-- v1.7.0: add learned words manually -->
     <string name="learned_add">Add a word</string>
+    <string name="learned_import">Import word list</string>
+    <string name="learned_imported">%1$d words imported</string>
+    <string name="learned_import_bad">Could not read the file</string>
     <string name="learned_add_hint">Type the word…</string>
     <string name="learned_add_msg">Names, dialect or slang — added words get strong suggestions weight and are never "corrected".</string>
     <string name="learned_add_ok">Add</string>

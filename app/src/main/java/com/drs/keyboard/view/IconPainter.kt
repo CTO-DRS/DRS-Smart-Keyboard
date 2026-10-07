@@ -176,6 +176,36 @@ object IconPainter {
                 canvas.drawCircle(cx + h * 0.18f, cy, h * 0.12f, dot)
                 canvas.drawCircle(cx + h * 0.41f, cy, h * 0.12f, dot)
             }
+            "undo" -> {
+                // curved return arrow: tail sweeps from the right, head points left
+                paint.style = Paint.Style.STROKE
+                paint.strokeWidth = size * 0.09f
+                paint.strokeCap = Paint.Cap.ROUND
+                path.reset()
+                path.moveTo(cx + h * 0.72f, cy + h * 0.5f)
+                path.quadTo(cx + h * 0.72f, cy - h * 0.58f, cx - h * 0.3f, cy - h * 0.52f)
+                canvas.drawPath(path, paint)
+                paint.style = Paint.Style.FILL
+                path.reset()
+                path.moveTo(cx - h * 0.78f, cy - h * 0.52f)
+                path.lineTo(cx - h * 0.18f, cy - h * 0.86f)
+                path.lineTo(cx - h * 0.18f, cy - h * 0.18f)
+                path.close()
+                canvas.drawPath(path, paint)
+            }
+            "clear" -> {
+                // trash can: lid + handle + ribbed body
+                paint.style = Paint.Style.STROKE
+                paint.strokeWidth = size * 0.08f
+                paint.strokeCap = Paint.Cap.ROUND
+                canvas.drawLine(cx - h * 0.68f, cy - h * 0.5f, cx + h * 0.68f, cy - h * 0.5f, paint)
+                canvas.drawLine(cx - h * 0.2f, cy - h * 0.5f, cx - h * 0.2f, cy - h * 0.8f, paint)
+                canvas.drawLine(cx + h * 0.2f, cy - h * 0.5f, cx + h * 0.2f, cy - h * 0.8f, paint)
+                tmp.set(cx - h * 0.48f, cy - h * 0.45f, cx + h * 0.48f, cy + h * 0.85f)
+                canvas.drawRoundRect(tmp, size * 0.08f, size * 0.08f, paint)
+                canvas.drawLine(cx - h * 0.16f, cy - h * 0.1f, cx - h * 0.16f, cy + h * 0.5f, paint)
+                canvas.drawLine(cx + h * 0.16f, cy - h * 0.1f, cx + h * 0.16f, cy + h * 0.5f, paint)
+            }
             "close" -> {
                 paint.style = Paint.Style.STROKE
                 paint.strokeWidth = size * 0.1f

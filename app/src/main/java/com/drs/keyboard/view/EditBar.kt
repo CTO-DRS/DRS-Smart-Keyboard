@@ -14,7 +14,7 @@ import kotlin.math.max
 /**
  * Text editing toolbar rendered in place of the suggestion strip:
  *
- *   [select] [select all] [copy] [cut] [paste]  |  [close]
+ *   [undo] [select] [select all] [copy] [cut] [paste] [clear] | [close]
  *
  * Actions are reported to the host which executes them through the
  * InputConnection (performContextMenuAction). "select" toggles selection
@@ -27,7 +27,7 @@ class EditBar @JvmOverloads constructor(
 ) : View(context, attrs) {
 
     interface Callback {
-        /** action: "select" | "selectall" | "copy" | "cut" | "paste" | "close" */
+        /** action: "undo" | "select" | "selectall" | "copy" | "cut" | "paste" | "clear" | "close" */
         fun onEditAction(action: String)
     }
 
@@ -45,7 +45,9 @@ class EditBar @JvmOverloads constructor(
     private var pressedZone = -1
 
     private val d = resources.displayMetrics.density
-    private val icons = listOf("select", "selectall", "copy", "cut", "paste", "close")
+    private val icons = listOf(
+        "undo", "select", "selectall", "copy", "cut", "paste", "clear", "close"
+    )
     private val chipRect = RectF()
 
     fun setTheme(t: KeyboardTheme) {
@@ -83,7 +85,7 @@ class EditBar @JvmOverloads constructor(
             val inset = r.width() * 0.18f
             chipRect.set(r.left + inset, r.top + inset, r.right - inset, r.bottom - inset)
             val pressed = pressedZone == i
-            val active = i == 0 && selectActive
+            val active = icons[i] == "select" && selectActive
             chipFill.color = when {
                 active -> (t?.accentColor ?: 0) and 0x00FFFFFF or 0x55000000
                 pressed -> 0x44000000 or ((t?.accentColor ?: 0) and 0x00FFFFFF)

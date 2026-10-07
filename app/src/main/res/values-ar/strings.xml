@@ -175,6 +175,9 @@
     <string name="edit_copied">تم النسخ ✓</string>
     <string name="edit_cut">تم القص ✓</string>
     <string name="edit_pasted">تم اللصق ✓</string>
+    <string name="edit_undo_done">تم التراجع عن «%1$s»</string>
+    <string name="edit_undo_none">لا شيء للتراجع عنه</string>
+    <string name="edit_cleared">تم مسح الحقل</string>
     <string name="hint_editbar">اضغط مطولاً على 📋 لأدوات النص</string>
 
     <!-- ذاكرة اللغة لكل تطبيق -->
@@ -256,6 +259,9 @@
 
     <!-- v1.7.0: إضافة كلمات يدوياً -->
     <string name="learned_add">إضافة كلمة</string>
+    <string name="learned_import">استيراد قائمة كلمات</string>
+    <string name="learned_imported">تم استيراد %1$d كلمة</string>
+    <string name="learned_import_bad">تعذّر قراءة الملف</string>
     <string name="learned_add_hint">اكتب الكلمة…</string>
     <string name="learned_add_msg">أسماء أو لهجة أو عامية — الكلمات المضافة تحصل على وزن قوي في الاقتراحات ولا تُصحَّح أبداً.</string>
     <string name="learned_add_ok">إضافة</string>

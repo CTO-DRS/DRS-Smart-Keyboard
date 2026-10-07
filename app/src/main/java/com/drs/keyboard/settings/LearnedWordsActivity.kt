@@ -3,7 +3,9 @@ package com.drs.keyboard.settings
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.graphics.Typeface
+import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -114,6 +116,9 @@ class LearnedWordsActivity : Activity() {
         // add a word manually (names, slang — autocorrect will respect it)
         root.addView(UiKit.button(c, p, getString(R.string.learned_add), false) { showAddDialog() })
 
+        // bulk import: a plain .txt list, one word per line (optionally "word,count")
+        root.addView(UiKit.button(c, p, getString(R.string.learned_import), false) { pickWordFile() })
+
         root.addView(UiKit.button(c, p, getString(R.string.learned_clear_all), false) {
             learner.clear()
             adapter.refresh()
@@ -121,6 +126,62 @@ class LearnedWordsActivity : Activity() {
         })
 
         adapter.refresh()
+    }
+
+    private fun pickWordFile() {
+        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+            addCategory(Intent.CATEGORY_OPENABLE)
+            type = "text/*"
+            putExtra(Intent.EXTRA_MIME_TYPES, arrayOf("text/plain", "text/csv", "application/octet-stream"))
+        }
+        startActivityForResult(
+            Intent.createChooser(intent, getString(R.string.learned_import)), 5001
+        )
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode != 5001 || resultCode != RESULT_OK || data?.data == null) return
+        val imported = importWordList(data.data!!)
+        if (imported < 0) {
+            Toast.makeText(this, R.string.learned_import_bad, Toast.LENGTH_SHORT).show()
+        } else {
+            adapter.refresh()
+            Toast.makeText(this, getString(R.string.learned_imported, imported), Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    /** Parse "one word per line" text (word / word,count / word<TAB>count),
+     *  merge into the learned dictionary with the given weight. Returns the
+     *  number of NEW words added, or -1 when the file could not be read. */
+    private fun importWordList(uri: Uri): Int {
+        val lines = try {
+            contentResolver.openInputStream(uri)?.bufferedReader(Charsets.UTF_8)
+                ?.readLines() ?: return -1
+        } catch (e: Exception) {
+            return -1
+        }
+        var added = 0
+        var dirty = false
+        for (raw in lines) {
+            val line = raw.trim()
+            if (line.isEmpty() || line.startsWith("#")) continue
+            val parts = line.split(",", "\t", ";")
+            val word = parts[0].trim()
+            val count = if (parts.size > 1) {
+                parts[1].trim().filter { it.isDigit() }.toIntOrNull()?.coerceIn(1, 99) ?: 1
+            } else 1
+            // sanity: 1–40 chars, no control characters, not pure punctuation
+            if (word.length !in 1..40) continue
+            if (word.any { it.code < 32 }) continue
+            if (word.none { it.isLetterOrDigit() }) continue
+            val before = learner.freqOf(word)
+            learner.boost(word, count)
+            dirty = true
+            if (before == 0) added++
+        }
+        if (dirty) learner.persist()
+        return added
     }
 
     /** Small dialog: type a word, it lands in the learned dictionary with a strong weight. */

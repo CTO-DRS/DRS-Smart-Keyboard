@@ -10,15 +10,15 @@ zero network calls by design.
 
 ## Download
 
-Get the latest signed APK from **[GitHub Releases](../../releases)** (v1.11.0)
-or the mirror: [gofile.io/d/xIZTXfLM](https://gofile.io/d/xIZTXfLM).
+Get the latest signed APK from **[GitHub Releases](../../releases)** (v1.12.0)
+or the mirror: [gofile.io/d/dNU5PwsR](https://gofile.io/d/dNU5PwsR).
 All releases since v1.3.0 share the same signing key, so upgrades install
 in-place without uninstalling.
 
 | | |
 |---|---|
 | Package | `com.drs.keyboard` |
-| Version | 1.11.0 (versionCode 11) |
+| Version | 1.12.0 (versionCode 12) |
 | Min SDK | 26 (Android 8.0) |
 | Target SDK | 34 (Android 14) |
 | Languages | English (QWERTY) + العربية (Arabic 101, RTL-aware) |
@@ -176,6 +176,9 @@ there is no network permission to do it with.
 
 ## Changelog (highlights)
 
+- **v1.12.0** — edit-toolbar undo (multi-level, restores even a cleared
+  field), clear-all button, proper-noun/acronym autocorrect protection
+  (DRS, iPhone… stay untouched), bulk word-list import (one word per line).
 - **v1.11.0** — inline calculator (offline recursive-descent parser, EN +
   Arabic-Indic digits), quick date/time insert chips, key sound styles,
   clipboard auto-clear privacy.
