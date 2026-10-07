@@ -10,15 +10,15 @@ zero network calls by design.
 
 ## Download
 
-Get the latest signed APK from **[GitHub Releases](../../releases)** (v1.18.0)
-or the mirror: [gofile.io/d/sFvt8Rsz](https://gofile.io/d/sFvt8Rsz).
+Get the latest signed APK from **[GitHub Releases](../../releases)** (v1.19.0)
+or the mirror: [gofile.io/d/EiBnf770](https://gofile.io/d/EiBnf770).
 All releases since v1.3.0 share the same signing key, so upgrades install
 in-place without uninstalling.
 
 | | |
 |---|---|
 | Package | `com.drs.keyboard` |
-| Version | 1.16.0 (versionCode 16) |
+| Version | 1.19.0 (versionCode 19) |
 | Min SDK | 26 (Android 8.0) |
 | Target SDK | 34 (Android 14) |
 | Languages | English (QWERTY) + العربية (Arabic 101, RTL-aware) |
@@ -94,8 +94,10 @@ in-place without uninstalling.
 - **Auto night theme** — by clock (19:00–06:00) or by system dark mode.
 
 ### Appearance — full in-app customizer
-- 16 pre-made theme packages (Midnight, Frost, Emerald, Rose, Ocean, Ink,
-  Sand, Violet, Royal Gold, Carbon Red, Lavender Mist, Cocoa Cream, …).
+- 20 pre-made theme packages (Midnight, Frost, Emerald, Rose, Ocean, Ink,
+  Sand, Violet, Royal Gold, Carbon Red, Lavender Mist, Cocoa Cream, plus
+  the Neon Glass family: Aurora, Nebula, Solar, Ion with per-key neon
+  glow rims).
 - Theme editor: color pickers (HSV + alpha + hex) for every surface, corner
   radius, key height, panel opacity, glass effect toggle, background image.
 - **Theme export / import** as JSON files.
@@ -180,6 +182,12 @@ there is no network permission to do it with.
 
 ## Changelog (highlights)
 
+- **v1.19.0** — Neon Glass theme family: themes can declare per-key neon
+  rims — each key draws its own hue from an 8-color neon palette
+  (blue-biased deterministic scatter, stable across frames) in two passes
+  (soft outer glow + crisp bright rim); four new hand-tuned packs
+  (Aurora, Nebula, Solar, Ion) take the catalog from 16 to 20 themes,
+  all fully editable, quick-switchable and night-mode aware.
 - **v1.18.0** — Arabic typing intelligence: the dictionary trie keys are
   bare letters now (harakat/tanween/dagger alef/tatweel stripped on
   write and read), so vocalized typing reaches the dictionary and bare
