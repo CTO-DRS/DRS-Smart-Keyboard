@@ -173,6 +173,38 @@ object ThemeRepo {
             accentColor = 0xFF31E9FF.toInt(), pressColor = 0x4231E9FF.toInt(),
             strokeColor = 0x3D31C9FF.toInt(), candidateBg = 0x2631C9FF.toInt(),
             cornerRadiusDp = 16, keyHeightDp = 54, opacityPct = 97, neonRims = true
+        ),
+        KeyboardTheme(
+            id = "zellige", name = "Zellige Cobalt",
+            bgColor = 0xF50E2247.toInt(), keyColor = 0xDA1E4C8F.toInt(),
+            specialKeyColor = 0xD9163A6E.toInt(), keyTextColor = 0xFFFFFFFF.toInt(),
+            accentColor = 0xFFFFC857.toInt(), pressColor = 0x42FFC857.toInt(),
+            strokeColor = 0x3D9CC3FF.toInt(), candidateBg = 0x26FFC857.toInt(),
+            cornerRadiusDp = 14, keyHeightDp = 54, opacityPct = 96, tilePattern = 1
+        ),
+        KeyboardTheme(
+            id = "fez", name = "Fez Clay",
+            bgColor = 0xF52A150C.toInt(), keyColor = 0xD9A64B2E.toInt(),
+            specialKeyColor = 0xD97A3220.toInt(), keyTextColor = 0xFFFFF3E4.toInt(),
+            accentColor = 0xFF39B488.toInt(), pressColor = 0x4239B488.toInt(),
+            strokeColor = 0x3DFFD9B8.toInt(), candidateBg = 0x2639B488.toInt(),
+            cornerRadiusDp = 14, keyHeightDp = 54, opacityPct = 96, tilePattern = 2
+        ),
+        KeyboardTheme(
+            id = "andalus", name = "Andalus Ivory",
+            bgColor = 0xF5EFE6D8.toInt(), keyColor = 0xEEF8F4EA.toInt(),
+            specialKeyColor = 0xE0E4D9C6.toInt(), keyTextColor = 0xFF24304A.toInt(),
+            accentColor = 0xFF1E5AA8.toInt(), pressColor = 0x401E5AA8.toInt(),
+            strokeColor = 0x3D1E5AA8.toInt(), candidateBg = 0xD9FFFFFF.toInt(),
+            cornerRadiusDp = 14, keyHeightDp = 54, opacityPct = 97, tilePattern = 3
+        ),
+        KeyboardTheme(
+            id = "persia", name = "Persian Tile",
+            bgColor = 0xF2062B30.toInt(), keyColor = 0xD90E6E78.toInt(),
+            specialKeyColor = 0xD90A545C.toInt(), keyTextColor = 0xFFF0FFFD.toInt(),
+            accentColor = 0xFFFFD166.toInt(), pressColor = 0x42FFD166.toInt(),
+            strokeColor = 0x3DB8F5EF.toInt(), candidateBg = 0x26FFD166.toInt(),
+            cornerRadiusDp = 14, keyHeightDp = 54, opacityPct = 96, tilePattern = 4
         )
     )
 

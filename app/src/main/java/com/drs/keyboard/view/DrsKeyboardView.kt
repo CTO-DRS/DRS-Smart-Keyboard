@@ -122,6 +122,7 @@ class DrsKeyboardView @JvmOverloads constructor(
     private val stripGlyph = Paint(Paint.ANTI_ALIAS_FLAG)
     private val neonRim = Paint(Paint.ANTI_ALIAS_FLAG)
     private val neonGlow = Paint(Paint.ANTI_ALIAS_FLAG)
+    private val tileInk = Paint(Paint.ANTI_ALIAS_FLAG)
     private val glyphBounds = android.graphics.Rect()
     private val keyScratch = RectF()
     private val path = Path()
@@ -129,6 +130,10 @@ class DrsKeyboardView @JvmOverloads constructor(
     // cached per-color vertical gradients (theme-keyed, cleared on setTheme)
     private val fillShaders = HashMap<Long, LinearGradient>(8)
     private var sheenShader: LinearGradient? = null
+
+    // cached tile-pattern paths + rounded-rect clips (cleared on setTheme)
+    private val tileCache = HashMap<Long, Path>(24)
+    private val tileClipCache = HashMap<Long, Path>(24)
 
     companion object {
         /** Multi-hue neon palette for neonRims themes (blue-biased scatter,
@@ -359,6 +364,15 @@ class DrsKeyboardView @JvmOverloads constructor(
         neonGlow.strokeCap = Paint.Cap.ROUND
         neonGlow.strokeJoin = Paint.Join.ROUND
         neonGlow.strokeWidth = d * 4.6f
+        // tile templates: thin decorative ink over each key's fill,
+        // colored from the accent so the editor recolors it naturally
+        tileInk.style = Paint.Style.STROKE
+        tileInk.strokeCap = Paint.Cap.ROUND
+        tileInk.strokeJoin = Paint.Join.ROUND
+        tileInk.strokeWidth = d * 1.1f
+        tileInk.color = t.accentColor
+        tileCache.clear()
+        tileClipCache.clear()
         dottedCircle.alpha = 60
         dottedCircle.pathEffect = android.graphics.DashPathEffect(
             floatArrayOf(d * 1.4f, d * 1.7f), 0f)
@@ -506,6 +520,28 @@ class DrsKeyboardView @JvmOverloads constructor(
             }
             canvas.drawRoundRect(r, radius, radius, keyFill)
             keyFill.shader = null
+
+            // tile template: decorative pattern under the glass glaze
+            val tpat = theme?.tilePattern ?: 0
+            if (tpat in 1..4) {
+                val cw = r.width().toInt().toLong()
+                val ch = r.height().toInt().toLong()
+                val clip = tileClipCache.getOrPut((cw shl 40) or ch) {
+                    Path().apply {
+                        addRoundRect(0f, 0f, cw.toFloat(), ch.toFloat(),
+                            radius, radius, Path.Direction.CW)
+                    }
+                }
+                val pat = tileCache.getOrPut((tpat.toLong() shl 44) or (cw shl 22) or ch) {
+                    tilePathFor(tpat, cw.toFloat(), ch.toFloat())
+                }
+                canvas.save()
+                canvas.translate(r.left, r.top)
+                canvas.clipPath(clip)
+                tileInk.alpha = if (functional) 34 else 62
+                canvas.drawPath(pat, tileInk)
+                canvas.restore()
+            }
 
             // glass sheen on the key's top half
             keySheen.shader = sheenShader
@@ -673,6 +709,57 @@ class DrsKeyboardView @JvmOverloads constructor(
         val g = LinearGradient(0f, 0f, 0f, height, top, base, Shader.TileMode.CLAMP)
         fillShaders[key] = g
         return g
+    }
+
+    /** Decorative tile-template geometry in key-local space (0..w × 0..h).
+     *  1 = khatam eight-point star · 2 = chevron zigzag rows
+     *  3 = quatrefoil rosette · 4 = diamond lattice. */
+    private fun tilePathFor(type: Int, w: Float, h: Float): Path {
+        val p = Path()
+        val cx = w / 2f
+        val cy = h / 2f
+        val m = min(w, h)
+        when (type) {
+            1 -> {          // khatam: two overlapping squares (one rotated 45°)
+                val s = m * 0.30f
+                p.moveTo(cx - s, cy - s); p.lineTo(cx + s, cy - s)
+                p.lineTo(cx + s, cy + s); p.lineTo(cx - s, cy + s); p.close()
+                val dg = s * 1.38f
+                p.moveTo(cx, cy - dg); p.lineTo(cx + dg, cy)
+                p.lineTo(cx, cy + dg); p.lineTo(cx - dg, cy); p.close()
+            }
+            2 -> {          // chevron: three zigzag rows across the key
+                val step = w / 4f
+                val amp = h * 0.11f
+                for (k in 1..3) {
+                    val y = h * (0.22f + 0.28f * (k - 1))
+                    p.moveTo(0f, y + amp)
+                    for (i in 0..3) {
+                        p.lineTo(step * (i + 1), if (i % 2 == 0) y - amp else y + amp)
+                    }
+                }
+            }
+            3 -> {          // quatrefoil: four overlapping rings around a core
+                val r0 = m * 0.17f
+                val off = r0 * 1.05f
+                p.addCircle(cx, cy - off, r0, Path.Direction.CW)
+                p.addCircle(cx, cy + off, r0, Path.Direction.CW)
+                p.addCircle(cx - off, cy, r0, Path.Direction.CW)
+                p.addCircle(cx + off, cy, r0, Path.Direction.CW)
+                p.addCircle(cx, cy, r0 * 0.55f, Path.Direction.CW)
+            }
+            4 -> {          // lattice: diagonal diamonds both ways
+                val step = w / 3f
+                var i = -3
+                while (i <= 3) {
+                    val x0 = i * step
+                    p.moveTo(x0, h); p.lineTo(x0 + h, 0f)
+                    p.moveTo(x0, 0f); p.lineTo(x0 + h, h)
+                    i++
+                }
+            }
+        }
+        return p
     }
 
     /**

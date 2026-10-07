@@ -24,6 +24,7 @@ data class KeyboardTheme(
     var opacityPct: Int = 92,                    // panel opacity 40..100
     var glass: Boolean = true,                   // top sheen + edge highlights
     var neonRims: Boolean = false,               // per-key multi-hue neon rims + glow
+    var tilePattern: Int = 0,                    // 0 none · 1 khatam star · 2 chevron · 3 quatrefoil · 4 lattice
     var bgImagePath: String? = null              // copied into filesDir
 ) {
 
@@ -44,6 +45,7 @@ data class KeyboardTheme(
         o.put("opacityPct", opacityPct)
         o.put("glass", glass)
         o.put("neonRims", neonRims)
+        o.put("tilePattern", tilePattern)
         o.put("bgImagePath", bgImagePath ?: "")
         return o.toString()
     }
@@ -67,6 +69,7 @@ data class KeyboardTheme(
                 opacityPct = o.optInt("opacityPct", 92),
                 glass = o.optBoolean("glass", true),
                 neonRims = o.optBoolean("neonRims", false),
+                tilePattern = o.optInt("tilePattern", 0),
                 bgImagePath = o.optString("bgImagePath", "").ifEmpty { null }
             )
         }.getOrNull()
