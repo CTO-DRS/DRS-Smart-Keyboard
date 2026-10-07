@@ -54,8 +54,7 @@ class ThemeEditorActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         p = UiKit.palette(this)
-        window.statusBarColor = p.bg
-        window.navigationBarColor = p.bg
+        UiKit.applySystemBars(this, p)
         theme = ThemeRepo.loadCurrent(this)
 
         val scroll = ScrollView(this).apply {

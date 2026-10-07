@@ -10,15 +10,15 @@ zero network calls by design.
 
 ## Download
 
-Get the latest signed APK from **[GitHub Releases](../../releases)** (v1.12.0)
-or the mirror: [gofile.io/d/CIIdYYBR](https://gofile.io/d/CIIdYYBR).
+Get the latest signed APK from **[GitHub Releases](../../releases)** (v1.14.0)
+or the mirror: [gofile.io/d/YFXtZwLm](https://gofile.io/d/YFXtZwLm).
 All releases since v1.3.0 share the same signing key, so upgrades install
 in-place without uninstalling.
 
 | | |
 |---|---|
 | Package | `com.drs.keyboard` |
-| Version | 1.13.0 (versionCode 13) |
+| Version | 1.14.0 (versionCode 14) |
 | Min SDK | 26 (Android 8.0) |
 | Target SDK | 34 (Android 14) |
 | Languages | English (QWERTY) + العربية (Arabic 101, RTL-aware) |
@@ -105,7 +105,11 @@ in-place without uninstalling.
 - Live preview keyboard rendered with the exact views the IME uses.
 
 ### Settings app
-- 3-step setup wizard (enable → switch → personalize).
+- 3-step setup wizard (enable → switch → personalize) with a completion
+  banner once everything is ready.
+- **Glass Depth 2.0 UI**: staggered entrance motion, editorial section
+  headers, edge-faded dividers, gradient step badges with vivid check
+  marks, theme-aware status-bar icons (light mode fixed).
 - Language pack manager (enable/disable EN & AR).
 - Typing behavior switches, shortcuts manager, privacy page.
 
@@ -134,7 +138,7 @@ with only the SDK build-tools and kotlinc — see `scripts/build_apk.sh`
 ## Installing & enabling
 
 1. Download the APK from [Releases](../../releases) and install it
-   (`adb install DRS-Smart-Keyboard-v1.11.0.apk` or sideload).
+   (`adb install DRS-Smart-Keyboard-v1.14.0.apk` or sideload).
 2. Open **DRS** → tap **1. Open enable screen** → switch DRS on.
 3. Back in DRS → **2. Choose keyboard** → pick DRS.
 4. Type anywhere. Use the 🌐 key to switch English ⇄ العربية,
@@ -176,6 +180,13 @@ there is no network permission to do it with.
 
 ## Changelog (highlights)
 
+- **v1.14.0** — settings-app visual overhaul: completed wizard steps now
+  show a vivid white ✓ on a gradient green disc (the check was previously
+  invisible — green-on-green), staggered entrance motion, editorial
+  section headers with fading hairlines, edge-faded dividers, larger
+  stat-card numerals, richer hero aurora + glass sheen, upright Arabic
+  slogan (no synthetic italic), "all steps done" banner, and theme-aware
+  status-bar icons in every screen (light-mode icons were white-on-white).
 - **v1.13.0** — launcher shortcuts (long-press the icon → themes / backup /
   stats / learned words), per-app typing stats with usage bars, word-jump
   via long-press on ← / → (extends selection in select mode), optional

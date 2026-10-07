@@ -32,8 +32,7 @@ class ShortcutsActivity : Activity() {
         super.onCreate(savedInstanceState)
         p = UiKit.palette(this)
         engine = ShortcutEngine.get(this).also { it.ensureDefaults() }
-        window.statusBarColor = p.bg
-        window.navigationBarColor = p.bg
+        UiKit.applySystemBars(this, p)
 
         root = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL

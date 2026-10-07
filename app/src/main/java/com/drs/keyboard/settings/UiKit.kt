@@ -62,8 +62,39 @@ object UiKit {
     fun dp(context: Context, v: Int): Int =
         (v * context.resources.displayMetrics.density).toInt()
 
-    private fun isRtl(context: Context): Boolean =
+    fun isRtl(context: Context): Boolean =
         context.resources.configuration.layoutDirection == View.LAYOUT_DIRECTION_RTL
+
+    /** Lighten a color by blending toward white by [f] (1.0 = unchanged). */
+    fun lighten(color: Int, f: Float): Int {
+        val a = (color ushr 24) and 0xFF
+        val r = (((color shr 16) and 0xFF).toFloat() * f).toInt().coerceAtMost(255)
+        val g = (((color shr 8) and 0xFF).toFloat() * f).toInt().coerceAtMost(255)
+        val b = ((color and 0xFF).toFloat() * f).toInt().coerceAtMost(255)
+        return (a shl 24) or (r shl 16) or (g shl 8) or b
+    }
+
+    /** Staggered entrance — fade + rise. Call once on first build only. */
+    fun animateIn(v: View, delayMs: Long) {
+        v.alpha = 0f
+        v.translationY = dp(v.context, 22).toFloat()
+        v.animate().alpha(1f).translationY(0f)
+            .setDuration(320L).setStartDelay(delayMs)
+            .setInterpolator(android.view.animation.DecelerateInterpolator(1.7f))
+            .start()
+    }
+
+    /** Theme-tinted system bars with legible foreground icons in light mode. */
+    fun applySystemBars(activity: Activity, p: Palette) {
+        activity.window.statusBarColor = p.bg
+        activity.window.navigationBarColor = p.bg
+        if (!p.isDark) {
+            val v = activity.window.decorView
+            v.systemUiVisibility = v.systemUiVisibility or
+                    View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR or
+                    View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
+        }
+    }
 
     // ---------- gradients ----------
 
@@ -178,7 +209,15 @@ object UiKit {
                 typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
                 setTextColor(p.subtext)
                 letterSpacing = 0.06f
-                setPadding(dp(c, 8), 0, 0, 0)
+                setPadding(dp(c, 8), 0, dp(c, 8), 0)
+            })
+            // editorial hairline — fades away from the label, RTL-aware
+            addView(View(context).apply {
+                layoutParams = LinearLayout.LayoutParams(0, dp(c, 1), 1f)
+                background = GradientDrawable(
+                    if (isRtl(context)) GradientDrawable.Orientation.RIGHT_LEFT
+                    else GradientDrawable.Orientation.LEFT_RIGHT,
+                    intArrayOf(p.cardStroke, 0x00000000))
             })
         }
     }
@@ -254,8 +293,13 @@ object UiKit {
             })
         }
         row.addView(texts)
-        // chevron: points to layout-end, auto-flipped for RTL
-        val chev = object : View(context) {
+        row.addView(chevron(context, p))
+        return row
+    }
+
+    /** Small end-pointing chevron, auto-flipped for RTL. */
+    fun chevron(context: Context, p: Palette, sizeDp: Int = 20): View {
+        val v = object : View(context) {
             val paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
                 color = p.faint
                 style = Paint.Style.STROKE
@@ -271,9 +315,8 @@ object UiKit {
                 canvas.restore()
             }
         }
-        chev.layoutParams = LinearLayout.LayoutParams(dp(context, 20), dp(context, 20))
-        row.addView(chev)
-        return row
+        v.layoutParams = LinearLayout.LayoutParams(dp(context, sizeDp), dp(context, sizeDp))
+        return v
     }
 
     fun ripple(context: Context): RippleDrawable {
@@ -416,25 +459,25 @@ object UiKit {
         val card = LinearLayout(context).apply {
             orientation = LinearLayout.VERTICAL
             gravity = Gravity.CENTER
-            setPadding(dp(context, 10), dp(context, 16), dp(context, 10), dp(context, 16))
-            background = pressedTint(context, glassLayers(context, p, r), r)
-            isClickable = true
-            isFocusable = true
+            setPadding(dp(context, 10), dp(context, 18), dp(context, 10), dp(context, 18))
+            // display-only: no dead ripple for a card with no action
+            background = glassLayers(context, p, r)
         }
-        card.addView(tileView(context, p, icon, tint, tileColor, 40))
+        card.addView(tileView(context, p, icon, tint, tileColor, 42))
         card.addView(TextView(context).apply {
             text = value
-            textSize = 17f
+            textSize = 20f
             typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
             setTextColor(p.text)
-            setPadding(0, dp(context, 10), 0, 0)
+            letterSpacing = 0.02f
+            setPadding(0, dp(context, 12), 0, 0)
         })
         card.addView(TextView(context).apply {
             text = label
             textSize = 11.5f
             setTextColor(p.subtext)
             gravity = Gravity.CENTER
-            setPadding(0, dp(context, 2), 0, 0)
+            setPadding(0, dp(context, 3), 0, 0)
         })
         return card
     }
@@ -444,30 +487,42 @@ object UiKit {
     fun stepBadge(context: Context, p: Palette, number: String, done: Boolean): View {
         val s = dp(context, 44)
         val frame = FrameLayout(context)
-        frame.background = GradientDrawable().apply {
-            shape = GradientDrawable.OVAL
-            setColor(if (done) p.green and 0x30FFFFFF or (p.green and 0xFF000000.toInt()) else p.accentSoft)
-        }
         if (done) {
-            val check = object : View(context) {
+            // vivid gradient disc so the WHITE check pops (green-on-green was invisible)
+            frame.background = GradientDrawable().apply {
+                shape = GradientDrawable.OVAL
+                orientation = GradientDrawable.Orientation.TL_BR
+                colors = intArrayOf(lighten(p.green, 1.22f), p.green)
+            }
+            frame.addView(object : View(context) {
                 val paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-                    color = p.green
+                    color = Color.WHITE
                     style = Paint.Style.STROKE
+                    strokeCap = Paint.Cap.ROUND
+                    strokeJoin = Paint.Join.ROUND
                 }
                 override fun onDraw(canvas: Canvas) {
-                    val size = width * 0.5f
-                    paint.strokeWidth = size * 0.16f
-                    paint.strokeCap = Paint.Cap.ROUND
-                    paint.strokeJoin = Paint.Join.ROUND
+                    // faint glassy inner rim
+                    paint.color = 0x40FFFFFF
+                    paint.strokeWidth = dp(context, 1).toFloat()
+                    canvas.drawCircle(width / 2f, height / 2f,
+                        width / 2f - dp(context, 2), paint)
+                    paint.color = Color.WHITE
+                    val size = width * 0.4f
                     SettingsIcons.draw(canvas, "check", width / 2f, height / 2f, size, paint)
                 }
-            }
-            frame.addView(check, FrameLayout.LayoutParams(
+            }, FrameLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT))
         } else {
+            frame.background = GradientDrawable().apply {
+                shape = GradientDrawable.OVAL
+                setColor(p.accentSoft)
+                setStroke(dp(context, 1),
+                    p.accent and 0x55FFFFFF or (p.accent and 0xFF000000.toInt()))
+            }
             frame.addView(TextView(context).apply {
                 text = number
-                textSize = 17f
+                textSize = 16f
                 typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
                 setTextColor(p.accent)
                 gravity = Gravity.CENTER
@@ -506,7 +561,10 @@ object UiKit {
         layoutParams = LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.MATCH_PARENT, dp(context, 1)
         )
-        setBackgroundColor(p.cardStroke)
+        // hairline that dissolves at both edges — softer than a flat rule
+        background = GradientDrawable(
+            GradientDrawable.Orientation.LEFT_RIGHT,
+            intArrayOf(0x00000000, p.cardStroke, 0x00000000))
     }
 
     fun rounded(color: Int, radius: Float): GradientDrawable = GradientDrawable().apply {
@@ -603,13 +661,15 @@ object UiKit {
                 val w = bounds.width().toFloat()
                 val hgt = bounds.height().toFloat()
                 val paint = Paint(Paint.ANTI_ALIAS_FLAG)
-                // soft glowing circles
+                // soft glowing circles — three depths for a richer aurora
                 paint.color = if (p.isDark) 0x2E4D8DFF else 0x30FFFFFF
                 canvas.drawCircle(w * 0.16f, hgt * 1.05f, w * 0.42f, paint)
                 paint.color = if (p.isDark) 0x268B5CF6 else 0x22FFFFFF
                 canvas.drawCircle(w * 0.94f, hgt * -0.15f, w * 0.5f, paint)
+                paint.color = if (p.isDark) 0x1F2DD4BF else 0x14FFFFFF
+                canvas.drawCircle(w * 0.72f, hgt * 1.1f, w * 0.3f, paint)
                 // keyboard glyph watermark
-                paint.color = 0x24FFFFFF
+                paint.color = 0x2EFFFFFF
                 paint.style = Paint.Style.STROKE
                 paint.strokeWidth = w * 0.012f
                 SettingsIcons.draw(canvas, "keyboard", w * 0.87f, hgt * 0.2f, w * 0.14f, paint)
@@ -619,7 +679,13 @@ object UiKit {
             @Deprecated("Deprecated in Java")
             override fun getOpacity(): Int = android.graphics.PixelFormat.TRANSLUCENT
         }
-        return LayerDrawable(arrayOf(gradient, decor))
+        // gentle top sheen so the hero reads as glass, not a flat poster
+        val sheen = GradientDrawable().apply {
+            orientation = GradientDrawable.Orientation.TOP_BOTTOM
+            colors = intArrayOf(0x16FFFFFF, 0x00FFFFFF)
+            cornerRadius = r
+        }
+        return LayerDrawable(arrayOf(gradient, decor, sheen))
     }
 
     // blurred accent glow behind the app glyph in the hero

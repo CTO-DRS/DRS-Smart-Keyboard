@@ -43,8 +43,7 @@ class LearnedWordsActivity : Activity() {
         super.onCreate(savedInstanceState)
         p = UiKit.palette(this)
         learner = UserLearner.get(this)
-        window.statusBarColor = p.bg
-        window.navigationBarColor = p.bg
+        UiKit.applySystemBars(this, p)
 
         root = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL

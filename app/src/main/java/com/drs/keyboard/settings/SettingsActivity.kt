@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.provider.Settings
 import android.view.Gravity
@@ -35,8 +36,7 @@ class SettingsActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         p = UiKit.palette(this)
-        window.statusBarColor = p.bg
-        window.navigationBarColor = p.bg
+        UiKit.applySystemBars(this, p)
 
         val scroll = ScrollView(this).apply {
             setBackgroundColor(p.bg)
@@ -49,7 +49,7 @@ class SettingsActivity : Activity() {
         }
         scroll.addView(root)
         setContentView(scroll)
-        buildUi()
+        buildUi(animate = true)
     }
 
     override fun onResume() {
@@ -57,7 +57,7 @@ class SettingsActivity : Activity() {
         refreshStatus()
     }
 
-    private fun buildUi() {
+    private fun buildUi(animate: Boolean) {
         val c = this
         val d = UiKit.dp(c, 14)
 
@@ -67,6 +67,12 @@ class SettingsActivity : Activity() {
         buildFeatures()
         buildPrivacy()
         buildFooter()
+        if (animate) {
+            // staggered fade-and-rise — plays on first open only
+            for (i in 0 until root.childCount) {
+                UiKit.animateIn(root.getChildAt(i), 45L * i)
+            }
+        }
     }
 
     // ---------- hero ----------
@@ -85,7 +91,11 @@ class SettingsActivity : Activity() {
             gravity = Gravity.CENTER_VERTICAL
         }
         val glyphHost = FrameLayout(c).apply {
-            background = UiKit.rounded(0x26FFFFFF, UiKit.dp(c, 18).toFloat())
+            background = GradientDrawable().apply {
+                cornerRadius = UiKit.dp(c, 18).toFloat()
+                setColor(0x1FFFFFFF)
+                setStroke(UiKit.dp(c, 1), 0x33FFFFFF)
+            }
             setPadding(UiKit.dp(c, 9), UiKit.dp(c, 9), UiKit.dp(c, 9), UiKit.dp(c, 9))
         }
         glyphHost.addView(UiKit.glowGlyphView(c, p, 34))
@@ -109,9 +119,10 @@ class SettingsActivity : Activity() {
 
         hero.addView(TextView(c).apply {
             text = "“" + getString(R.string.about_slogan) + "”"
-            textSize = 13f
-            setTextColor(0xCCFFFFFF.toInt())
-            typeface = Typeface.create(Typeface.DEFAULT, Typeface.ITALIC)
+            textSize = 13.5f
+            setTextColor(0xD9FFFFFF.toInt())
+            // synthetic italic slants Arabic glyphs awkwardly — keep upright in RTL
+            if (!UiKit.isRtl(c)) typeface = Typeface.create(Typeface.DEFAULT, Typeface.ITALIC)
             setPadding(0, UiKit.dp(c, 4), 0, 0)
         })
 
@@ -187,14 +198,11 @@ class SettingsActivity : Activity() {
             setPadding(0, UiKit.dp(c, 3), 0, 0)
         })
         row.addView(texts)
+        row.addView(UiKit.chevron(c, p))
         return row
     }
 
-    private fun wizardDivider(): View = View(this).apply {
-        layoutParams = LinearLayout.LayoutParams(
-            LinearLayout.LayoutParams.MATCH_PARENT, UiKit.dp(this@SettingsActivity, 1))
-        setBackgroundColor(p.cardStroke)
-    }
+    private fun wizardDivider(): View = UiKit.divider(this, p)
 
     // ---------- stats grid ----------
 
@@ -362,7 +370,7 @@ class SettingsActivity : Activity() {
         step2Done = default.contains(packageName)
         // full rebuild keeps every embedded state (pill, badges, status) in sync
         root.removeAllViews()
-        buildUi()
+        buildUi(animate = false)
         renderStatus()
     }
 
@@ -371,7 +379,12 @@ class SettingsActivity : Activity() {
         pillHost.addView(UiKit.statusPill(this, p,
             getString(if (active) R.string.hero_pill_active else R.string.hero_pill_setup), active))
 
-        wizardStatus.text = getString(if (step2Done) R.string.status_active else R.string.status_enabled)
+        val allDone = step1Done && step2Done && step3Done
+        wizardStatus.text = getString(when {
+            allDone -> R.string.wizard_status_ready
+            step2Done -> R.string.status_active
+            else -> R.string.status_enabled
+        })
         wizardStatus.setTextColor(if (step2Done) p.green else p.subtext)
         wizardStatus.visibility = if (step1Done) View.VISIBLE else View.GONE
     }

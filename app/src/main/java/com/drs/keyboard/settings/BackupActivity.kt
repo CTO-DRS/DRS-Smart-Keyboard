@@ -34,8 +34,7 @@ class BackupActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         p = UiKit.palette(this)
-        window.statusBarColor = p.bg
-        window.navigationBarColor = p.bg
+        UiKit.applySystemBars(this, p)
 
         val scroll = ScrollView(this).apply {
             setBackgroundColor(p.bg)
