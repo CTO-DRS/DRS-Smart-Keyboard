@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.RectF
+import android.graphics.Typeface
 import android.util.AttributeSet
 import android.view.HapticFeedbackConstants
 import android.view.MotionEvent
@@ -45,6 +46,9 @@ class CandidateBar @JvmOverloads constructor(
     private val accentText = Paint(Paint.ANTI_ALIAS_FLAG)
     private val divider = Paint(Paint.ANTI_ALIAS_FLAG)
     private val iconPaint = Paint(Paint.ANTI_ALIAS_FLAG)
+    private val watermark = Paint(Paint.ANTI_ALIAS_FLAG)
+    private val chipRing = Paint(Paint.ANTI_ALIAS_FLAG)
+    private val pillRing = Paint(Paint.ANTI_ALIAS_FLAG)
 
     private var words: List<Pair<String, Boolean>> = emptyList() // word + isCorrection
     private var hint: String? = null
@@ -75,6 +79,21 @@ class CandidateBar @JvmOverloads constructor(
         divider.color = t.strokeColor
         iconPaint.color = t.keyTextColor
         iconPaint.isAntiAlias = true
+        // idle brand mark: subtle DRS wordmark + accent dot
+        watermark.color = t.keyTextColor
+        watermark.isAntiAlias = true
+        watermark.textAlign = Paint.Align.CENTER
+        watermark.typeface = Typeface.create("sans-serif-medium", Typeface.NORMAL)
+        watermark.letterSpacing = 0.24f
+        watermark.textSize = d * 11.5f
+        chipRing.style = Paint.Style.STROKE
+        chipRing.strokeWidth = d * 0.9f
+        chipRing.color = t.keyTextColor
+        chipRing.alpha = 34
+        pillRing.style = Paint.Style.STROKE
+        pillRing.strokeWidth = d * 1f
+        pillRing.color = t.accentColor
+        pillRing.alpha = 95
         invalidate()
     }
 
@@ -149,6 +168,23 @@ class CandidateBar @JvmOverloads constructor(
             return
         }
 
+        if (words.isEmpty()) {
+            // idle state: quiet brand presence instead of an empty void
+            val wm = "DRS"
+            val tyw = height / 2f - (watermark.ascent() + watermark.descent()) / 2f
+            watermark.alpha = 44
+            canvas.drawText(wm, width / 2f, tyw, watermark)
+            watermark.alpha = 255
+            val dot = Paint(watermark).apply {
+                color = theme?.accentColor ?: 0
+                style = Paint.Style.FILL
+                alpha = 105
+            }
+            val tw = watermark.measureText(wm)
+            canvas.drawCircle(width / 2f + tw / 2f + d * 4f, height / 2f - d * 0.6f, d * 1.7f, dot)
+            return
+        }
+
         // candidate chips: center = primary pill, sides = soft pills
         for (i in words.indices) {
             val zone = wordZone(i)
@@ -165,6 +201,9 @@ class CandidateBar @JvmOverloads constructor(
                 else -> 0x16000000 or ((theme?.keyTextColor ?: 0) and 0x00FFFFFF)
             }
             canvas.drawRoundRect(chipRect, pillH / 2f, pillH / 2f, chipFill)
+            if (isCorrection || i == 0) {
+                canvas.drawRoundRect(chipRect, pillH / 2f, pillH / 2f, pillRing)
+            }
 
             val p = when {
                 pressed -> accentText
@@ -187,9 +226,13 @@ class CandidateBar @JvmOverloads constructor(
             0x44000000 or ((theme?.accentColor ?: 0) and 0x00FFFFFF)
         else
             0x1A000000 or ((theme?.keyTextColor ?: 0) and 0x00FFFFFF)
-        canvas.drawCircle(rect.centerX(), rect.centerY(), rect.width() / 2f, chipFill)
+        val cx = rect.centerX(); val cy = rect.centerY(); val rr = rect.width() / 2f
+        canvas.drawCircle(cx, cy, rr, chipFill)
+        chipRing.alpha = if (pressed) 70 else 34
+        canvas.drawCircle(cx, cy, rr - d * 0.5f, chipRing)
+        chipRing.alpha = 34
         iconPaint.color = if (pressed) theme?.accentColor ?: 0 else theme?.keyTextColor ?: 0
-        IconPainter.draw(canvas, icon, rect.centerX(), rect.centerY(), d * 19f, iconPaint)
+        IconPainter.draw(canvas, icon, cx, cy, d * 19f, iconPaint)
     }
 
     private fun blend(c1: Int, c2: Int, t: Float): Int {

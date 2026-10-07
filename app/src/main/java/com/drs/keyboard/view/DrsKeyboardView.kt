@@ -95,6 +95,10 @@ class DrsKeyboardView @JvmOverloads constructor(
     private val popupFill = Paint(Paint.ANTI_ALIAS_FLAG)
     private val popupShadow = Paint(Paint.ANTI_ALIAS_FLAG)
     private val popupAltText = Paint(Paint.ANTI_ALIAS_FLAG)
+    private val chevronPaint = Paint(Paint.ANTI_ALIAS_FLAG)
+    private val dottedCircle = Paint(Paint.ANTI_ALIAS_FLAG)
+    private val glyphBounds = android.graphics.Rect()
+    private val keyScratch = RectF()
     private val path = Path()
 
     // cached per-color vertical gradients (theme-keyed, cleared on setTheme)
@@ -264,6 +268,19 @@ class DrsKeyboardView @JvmOverloads constructor(
         popupAltText.isAntiAlias = true
         popupAltText.textAlign = Paint.Align.CENTER
         popupAltText.typeface = Typeface.create("sans-serif-medium", Typeface.NORMAL)
+        // space-bar drag affordance chevrons
+        chevronPaint.style = Paint.Style.STROKE
+        chevronPaint.strokeCap = Paint.Cap.ROUND
+        chevronPaint.strokeJoin = Paint.Join.ROUND
+        chevronPaint.strokeWidth = d * 1.5f
+        chevronPaint.color = t.keyTextColor
+        // dotted circle underlay for bare combining-mark hints (harakat)
+        dottedCircle.style = Paint.Style.STROKE
+        dottedCircle.strokeWidth = d * 1.1f
+        dottedCircle.color = t.keyTextColor
+        dottedCircle.alpha = 60
+        dottedCircle.pathEffect = android.graphics.DashPathEffect(
+            floatArrayOf(d * 1.4f, d * 1.7f), 0f)
         fillShaders.clear()
         invalidate()
     }
@@ -361,15 +378,26 @@ class DrsKeyboardView @JvmOverloads constructor(
 
         // pass 2: key bodies
         for (kr in keyRects) {
-            val r = kr.rect
             val isPressed = pressed === kr && (mode == Mode.TAP || mode == Mode.ALT || mode == Mode.REPEAT)
             val functional = kr.key.isFunctional
-            val active = kr.key.type == KeyDef.KeyType.SHIFT &&
-                    (shiftIndicator || capsIndicator)
+            // shifted and caps-locked now look different at a glance:
+            //   shifted = soft accent tint + accent ring + accent glyph
+            //   caps    = strong accent fill + bright glyph (no ambiguity)
+            val shifted = kr.key.type == KeyDef.KeyType.SHIFT && shiftIndicator && !capsIndicator
+            val caps = kr.key.type == KeyDef.KeyType.SHIFT && capsIndicator
+            val active = shifted || caps
             val space = kr.key.type == KeyDef.KeyType.SPACE
+
+            // pressed keys sink slightly into the glass (inset rect)
+            val r = if (isPressed) {
+                keyScratch.set(kr.rect)
+                keyScratch.inset(d * 1.1f, d * 1.1f)
+                keyScratch
+            } else kr.rect
 
             val base = when {
                 space -> blend(theme?.keyColor ?: 0, theme?.accentColor ?: 0, 0.20f)
+                caps -> blend(theme?.keyColor ?: 0, theme?.accentColor ?: 0, 0.80f)
                 active -> blend(theme?.keyColor ?: 0, theme?.accentColor ?: 0, 0.35f)
                 functional -> theme?.specialKeyColor ?: 0
                 else -> theme?.keyColor ?: 0
@@ -399,7 +427,10 @@ class DrsKeyboardView @JvmOverloads constructor(
             // content
             val icon = IconPainter.iconFor(kr.key)
             if (icon != null) {
-                labelText.color = theme?.keyTextColor ?: 0
+                labelText.color = when {
+                    shifted -> blend(theme?.keyTextColor ?: 0, theme?.accentColor ?: 0, 0.65f)
+                    else -> theme?.keyTextColor ?: 0
+                }
                 val p = labelText
                 p.style = if (icon == "shift" && (shiftIndicator || capsIndicator)) {
                     Paint.Style.FILL_AND_STROKE
@@ -409,6 +440,7 @@ class DrsKeyboardView @JvmOverloads constructor(
                 IconPainter.draw(canvas, icon, r.centerX(), r.centerY(),
                     min(r.width(), r.height()) * 0.42f, p)
                 p.style = Paint.Style.FILL
+                labelText.color = theme?.keyTextColor ?: 0
             } else {
                 val label = if (kr.key.type == KeyDef.KeyType.SHIFT) "" else kr.key.label
                 if (label.isNotEmpty()) {
@@ -426,14 +458,44 @@ class DrsKeyboardView @JvmOverloads constructor(
                         val lx = if (space && spaceLabel.isNotEmpty()) spaceLabel else label
                         canvas.drawText(lx, r.centerX(), ty, labelText)
                         labelText.alpha = 255
+                        if (space) {
+                            // subtle ‹ › affordance: the space bar drags the cursor
+                            chevronPaint.alpha = 58
+                            val cs = d * 4.2f
+                            val cyv = r.centerY()
+                            for (side in intArrayOf(-1, 1)) {
+                                val cxv = r.centerX() + side * (r.width() / 2f - d * 14f)
+                                path.reset()
+                                path.moveTo(cxv - side * cs * 0.45f, cyv - cs)
+                                path.lineTo(cxv + side * cs * 0.45f, cyv)
+                                path.lineTo(cxv - side * cs * 0.45f, cyv + cs)
+                                canvas.drawPath(path, chevronPaint)
+                            }
+                            chevronPaint.alpha = 255
+                        }
                     }
                 }
                 // shifted alt letter shown small at top-right
                 if (!functional && kr.key.shiftLabel != null && kr.key.shiftLabel != kr.key.label) {
-                    smallText.textSize = d * 11f * labelScale
+                    val sl = kr.key.shiftLabel!!
+                    smallText.textSize = d * 11.5f * labelScale
                     smallText.color = theme?.keyTextColor ?: 0
-                    smallText.alpha = 150
-                    canvas.drawText(kr.key.shiftLabel!!, r.right - d * 8f, r.top + d * 13f, smallText)
+                    smallText.alpha = 175
+                    val hx = r.right - d * 8.5f
+                    val c0 = sl[0]
+                    val bareMark = sl.length == 1 &&
+                        (c0 in '\u0610'..'\u061A' || c0 in '\u064B'..'\u0652' || c0 == '\u0670')
+                    if (bareMark) {
+                        // combining marks float above the baseline — anchor them on a
+                        // tiny dotted circle so the hint reads as a harakah, not noise
+                        smallText.getTextBounds(sl, 0, sl.length, glyphBounds)
+                        val cyh = r.top + d * 10.5f
+                        canvas.drawCircle(hx, cyh, d * 3.6f, dottedCircle)
+                        val by = cyh - (glyphBounds.top + glyphBounds.bottom) / 2f
+                        canvas.drawText(sl, hx, by, smallText)
+                    } else {
+                        canvas.drawText(sl, hx, r.top + d * 13f, smallText)
+                    }
                     smallText.alpha = 255
                 }
             }

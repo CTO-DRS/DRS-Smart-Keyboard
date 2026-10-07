@@ -35,6 +35,8 @@ object IconPainter {
             }
             "backspace" -> {
                 // left-pointing body with an X
+                paint.strokeCap = Paint.Cap.ROUND
+                paint.strokeJoin = Paint.Join.ROUND
                 tmp.set(cx - h, cy - h * 0.72f, cx + h * 0.95f, cy + h * 0.72f)
                 path.moveTo(cx + h * 0.95f, cy - h * 0.72f)
                 path.lineTo(cx - h * 0.25f, cy - h * 0.72f)
@@ -115,11 +117,21 @@ object IconPainter {
                 }
             }
             "clip" -> {
+                // clipboard: body + protruding clip tab + two paper lines
+                // (the old open-box read as a battery on dark themes)
                 paint.style = Paint.Style.STROKE
                 paint.strokeWidth = size * 0.08f
-                tmp.set(cx - h * 0.55f, cy - h * 0.7f, cx + h * 0.55f, cy + h * 0.75f)
-                canvas.drawRoundRect(tmp, size * 0.12f, size * 0.12f, paint)
-                canvas.drawLine(cx - h * 0.22f, cy - h * 0.85f, cx + h * 0.22f, cy - h * 0.85f, paint)
+                paint.strokeCap = Paint.Cap.ROUND
+                paint.strokeJoin = Paint.Join.ROUND
+                tmp.set(cx - h * 0.55f, cy - h * 0.60f, cx + h * 0.55f, cy + h * 0.82f)
+                canvas.drawRoundRect(tmp, size * 0.1f, size * 0.1f, paint)
+                tmp.set(cx - h * 0.22f, cy - h * 0.92f, cx + h * 0.22f, cy - h * 0.42f)
+                canvas.drawRoundRect(tmp, size * 0.05f, size * 0.05f, paint)
+                val lineP = Paint(paint)
+                lineP.strokeWidth = size * 0.06f
+                lineP.alpha = (lineP.alpha * 0.75f).toInt()
+                canvas.drawLine(cx - h * 0.28f, cy + h * 0.05f, cx + h * 0.28f, cy + h * 0.05f, lineP)
+                canvas.drawLine(cx - h * 0.28f, cy + h * 0.45f, cx + h * 0.08f, cy + h * 0.45f, lineP)
             }
             "copy" -> {
                 // two overlapping rounded rects
