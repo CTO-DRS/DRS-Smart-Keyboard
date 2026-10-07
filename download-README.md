@@ -2,17 +2,24 @@
 
 ## GitHub
 - Repo: **https://github.com/CTO-DRS/DRS-Smart-Keyboard**
-- Release v1.16.0: https://github.com/CTO-DRS/DRS-Smart-Keyboard/releases/tag/v1.16.0
+- Release v1.17.0: https://github.com/CTO-DRS/DRS-Smart-Keyboard/releases/tag/v1.17.0
 
 ## Downloads / التنزيل
-- **DRS-Smart-Keyboard-v1.16.0.apk** — latest release (996 KB, signed, versionCode 16)
-  - GitHub: https://github.com/CTO-DRS/DRS-Smart-Keyboard/releases/download/v1.16.0/DRS-Smart-Keyboard-v1.16.0.apk
-  - gofile mirror: https://gofile.io/d/yaMawbQh (md5 859c925655281b0fc39e02750e0e5765)
+- **DRS-Smart-Keyboard-v1.17.0.apk** — latest release (1,000 KB, signed, versionCode 17)
+  - GitHub: https://github.com/CTO-DRS/DRS-Smart-Keyboard/releases/download/v1.17.0/DRS-Smart-Keyboard-v1.17.0.apk
+  - gofile mirror: https://gofile.io/d/h5ANvZJc (md5 86aea945530a95ba6bc9987eff7f0da0)
 - **DRS-Keyboard-source.zip** — full Android Studio project source
-  - GitHub release asset: https://github.com/CTO-DRS/DRS-Smart-Keyboard/releases/download/v1.16.0/DRS-Keyboard-source.zip
-  - gofile mirror: https://gofile.io/d/S1GZ5yX3 (md5 f182cb5f1d70d4a977cdb3edf63e0ab4)
+  - GitHub release asset: https://github.com/CTO-DRS/DRS-Smart-Keyboard/releases/download/v1.17.0/DRS-Keyboard-source.zip
+  - gofile mirror: https://gofile.io/d/qAWM0rly (md5 f10f69a8d8bc86e703725edb8e1d47ec)
 
-## What's new in v1.16.0 — smart field intelligence
+## What's new in v1.17.0 — one-handed mode & honest numbers
+- 🖐️ **One-handed mode** — keys anchor to the left or right edge at 80% width so every letter is thumb-reachable; a slim glass **grip strip** (grip dots + flip chevrons) lives in the free margin — **tap** it to flip hands, **hold** it to return to full width
+- ⚙️ **Default side in Settings** — Settings → Typing → One-handed mode (Off / Right / Left); strip gestures are session-level, exactly like top-tier keyboards
+- 🔢 **Honest numbers** — the "By the numbers" cards now compute live from the shipped assets at launch: 36,428 dictionary words counted from the bundled en+ar frequency files, 999 emoji from the catalog, 16 themes from ThemeRepo, and sensitive permissions verified against the manifest (0) — no more frozen marketing strings
+- 🎨 **Idle brand polish** — the DRS wordmark on the idle strip was near-invisible (alpha 44); now clearly present (alpha 88) with a brighter accent dot
+- 🌍 Fully bilingual (EN/AR) and RTL-aware; same signing certificate as v1.3.0+ — installs directly over them
+
+## What was new in v1.16.0 — smart field intelligence
 - 🎚️ **Live password-strength meter** — type in any password field and the suggestion strip becomes a real-time 4-segment gauge with a bilingual label (Weak ضعيفة / Fair مقبولة / Good جيدة / Strong قوية) in a semantic color (red → amber → lime → green)
 - 🧮 **Honest scoring, zero AI** — charset entropy (length × log₂ of the pool) with structural penalties: 48 most-common passwords = instant zero, repeated characters (aaab/111222), sequences (abc/123/987), keyboard runs (qwe/asd/zxc), hopeless length (< 6)
 - 🔒 **Privacy by architecture** — the analysis runs in place from the field contents; nothing is stored, nothing learned on, and the app has no network permission at all; secure fields still never show suggestions or learning

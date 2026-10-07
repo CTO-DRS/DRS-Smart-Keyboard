@@ -10,8 +10,8 @@ zero network calls by design.
 
 ## Download
 
-Get the latest signed APK from **[GitHub Releases](../../releases)** (v1.16.0)
-or the mirror: [gofile.io/d/yaMawbQh](https://gofile.io/d/yaMawbQh).
+Get the latest signed APK from **[GitHub Releases](../../releases)** (v1.17.0)
+or the mirror: [gofile.io/d/h5ANvZJc](https://gofile.io/d/h5ANvZJc).
 All releases since v1.3.0 share the same signing key, so upgrades install
 in-place without uninstalling.
 
@@ -180,6 +180,13 @@ there is no network permission to do it with.
 
 ## Changelog (highlights)
 
+- **v1.17.0** — one-handed mode & honest numbers: keys can anchor to the
+  left or right edge at 80% width with a glass grip strip in the free
+  margin (tap = flip hands, hold = full width; default side in Settings →
+  Typing, fully RTL-aware); the settings stat cards now compute their
+  values live from the shipped assets (dictionary words, emoji catalog,
+  themes, sensitive permissions) instead of frozen strings; idle DRS
+  wordmark lifted to visible alpha.
 - **v1.16.0** — smart field intelligence: live offline password-strength
   meter in the suggestion strip while typing in any password field
   (charset entropy + structural penalties: 48 common passwords, repeats,
