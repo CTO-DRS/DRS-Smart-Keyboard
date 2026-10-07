@@ -10,15 +10,15 @@ zero network calls by design.
 
 ## Download
 
-Get the latest signed APK from **[GitHub Releases](../../releases)** (v1.19.0)
-or the mirror: [gofile.io/d/EiBnf770](https://gofile.io/d/EiBnf770).
+Get the latest signed APK from **[GitHub Releases](../../releases)** (v1.20.0)
+or the mirror: [gofile.io/d/DLEuyKKO](https://gofile.io/d/DLEuyKKO).
 All releases since v1.3.0 share the same signing key, so upgrades install
 in-place without uninstalling.
 
 | | |
 |---|---|
 | Package | `com.drs.keyboard` |
-| Version | 1.19.0 (versionCode 19) |
+| Version | 1.20.0 (versionCode 20) |
 | Min SDK | 26 (Android 8.0) |
 | Target SDK | 34 (Android 14) |
 | Languages | English (QWERTY) + العربية (Arabic 101, RTL-aware) |
@@ -94,10 +94,10 @@ in-place without uninstalling.
 - **Auto night theme** — by clock (19:00–06:00) or by system dark mode.
 
 ### Appearance — full in-app customizer
-- 20 pre-made theme packages (Midnight, Frost, Emerald, Rose, Ocean, Ink,
-  Sand, Violet, Royal Gold, Carbon Red, Lavender Mist, Cocoa Cream, plus
-  the Neon Glass family: Aurora, Nebula, Solar, Ion with per-key neon
-  glow rims).
+- 24 pre-made theme packages (Midnight, Frost, Emerald, Rose, Ocean, Ink,
+  Sand, Violet, Royal Gold, Carbon Red, Lavender Mist, Cocoa Cream, the
+  Neon Glass family with per-key glow rims, and the Tile templates:
+  Zellige, Fez, Andalus, Persian with ceramic key patterns).
 - Theme editor: color pickers (HSV + alpha + hex) for every surface, corner
   radius, key height, panel opacity, glass effect toggle, background image.
 - **Theme export / import** as JSON files.
@@ -182,6 +182,12 @@ there is no network permission to do it with.
 
 ## Changelog (highlights)
 
+- **v1.20.0** — tile templates (قوالب بلاطة): a new render layer turns
+  every key into a decorative ceramic tile — four hand-built geometric
+  patterns (khatam eight-point star, chevron rows, quatrefoil rosette,
+  diamond lattice) stroked in the theme accent under the glass sheen;
+  four new packs (Zellige Cobalt, Fez Clay, Andalus Ivory, Persian Tile)
+  take the catalog from 20 to 24 themes.
 - **v1.19.0** — Neon Glass theme family: themes can declare per-key neon
   rims — each key draws its own hue from an 8-color neon palette
   (blue-biased deterministic scatter, stable across frames) in two passes
