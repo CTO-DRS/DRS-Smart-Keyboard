@@ -1,0 +1,164 @@
+file,upstream_ref,verdict,similarity_pct,note
+lib/android/.gitignore,-,build-file,,no counterpart >= 0.50
+lib/android/build.gradle.kts,floris@fe1241f:lib/android/build.gradle.kts,build-file,89.1,canonical=89.1%
+lib/android/consumer-rules.pro,-,build-file,,no counterpart >= 0.50
+lib/android/proguard-rules.pro,-,build-file,,no counterpart >= 0.50
+lib/android/src/main/AndroidManifest.xml,-,build-file,,no counterpart >= 0.50
+lib/android/src/main/kotlin/org/drs/lib/android/AndroidAssetsManager.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/AndroidAssetsManager.kt,verbatim,100.0,
+lib/android/src/main/kotlin/org/drs/lib/android/AndroidClipboardManager.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/AndroidClipboardManager.kt,verbatim,100.0,
+lib/android/src/main/kotlin/org/drs/lib/android/AndroidInternalR.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/AndroidInternalR.kt,verbatim,100.0,
+lib/android/src/main/kotlin/org/drs/lib/android/AndroidKeyguardManager.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/AndroidKeyguardManager.kt,verbatim,100.0,
+lib/android/src/main/kotlin/org/drs/lib/android/AndroidSettings.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/AndroidSettings.kt,verbatim,100.0,
+lib/android/src/main/kotlin/org/drs/lib/android/AndroidVersion.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/AndroidVersion.kt,verbatim,100.0,
+lib/android/src/main/kotlin/org/drs/lib/android/Configuration.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/Configuration.kt,verbatim,100.0,
+lib/android/src/main/kotlin/org/drs/lib/android/ContentResolver.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/ContentResolver.kt,verbatim,100.0,
+lib/android/src/main/kotlin/org/drs/lib/android/Context.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/Context.kt,verbatim,100.0,
+lib/android/src/main/kotlin/org/drs/lib/android/FileObserver.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/FileObserver.kt,verbatim,100.0,
+lib/android/src/main/kotlin/org/drs/lib/android/PackageManager.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/PackageManager.kt,slightly-modified,94.1,canonical=94.1%
+lib/android/src/main/kotlin/org/drs/lib/android/SparseArray.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/SparseArray.kt,verbatim,100.0,
+lib/android/src/main/kotlin/org/drs/lib/android/SystemSettingObserver.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/SystemSettingObserver.kt,verbatim,100.0,
+lib/android/src/main/kotlin/org/drs/lib/android/Toast.kt,-,drs-original,,no counterpart >= 0.50
+lib/android/src/main/kotlin/org/drs/lib/android/UriSerializer.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/UriSerializer.kt,verbatim,100.0,
+lib/android/src/main/kotlin/org/drs/lib/android/Vibrator.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/Vibrator.kt,verbatim,100.0,
+lib/color/build.gradle.kts,floris@fe1241f:lib/compose/build.gradle.kts,build-file,81.0,canonical=81.0%
+lib/color/src/main/kotlin/org/drs/lib/color/ColorMappings.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/color/ColorMappings.kt,deeply-modified,74.7,canonical=74.7%
+lib/color/src/main/kotlin/org/drs/lib/color/ColorPalette.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/color/ColorPalette.kt,verbatim,100.0,
+lib/color/src/main/kotlin/org/drs/lib/color/MaterialYouFlags.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/color/MaterialYouFlags.kt,verbatim,100.0,
+lib/compose/build.gradle.kts,floris@fe1241f:lib/compose/build.gradle.kts,build-file,86.0,canonical=86.0%
+lib/compose/consumer-rules.pro,-,build-file,,no counterpart >= 0.50
+lib/compose/proguard-rules.pro,-,build-file,,no counterpart >= 0.50
+lib/compose/src/main/kotlin/org/drs/compose/tooltip/Tooltip.kt,-,protected,,protected (AOSP origin)
+lib/compose/src/main/kotlin/org/drs/compose/tooltip/TooltipDefaults.kt,-,protected,,protected (AOSP origin)
+lib/compose/src/main/kotlin/org/drs/lib/compose/ClickableModifiers.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/ClickableModifiers.kt,verbatim,100.0,
+lib/compose/src/main/kotlin/org/drs/lib/compose/DisposableLifecycleEffect.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/DisposableLifecycleEffect.kt,verbatim,100.0,
+lib/compose/src/main/kotlin/org/drs/lib/compose/DpSpSizeFuns.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/DpSpSizeFuns.kt,slightly-modified,100.0,canonical=100.0%
+lib/compose/src/main/kotlin/org/drs/lib/compose/DrawScope.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/DrawScope.kt,verbatim,100.0,
+lib/compose/src/main/kotlin/org/drs/lib/compose/DrsAnimation.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/FlorisAnimation.kt,verbatim,100.0,
+lib/compose/src/main/kotlin/org/drs/lib/compose/DrsAppBar.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/FlorisAppBar.kt,deeply-modified,44.4,canonical=44.4%
+lib/compose/src/main/kotlin/org/drs/lib/compose/DrsBulletSpacer.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/FlorisBulletSpacer.kt,slightly-modified,95.8,canonical=95.8%
+lib/compose/src/main/kotlin/org/drs/lib/compose/DrsButtonBar.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/FlorisButtonBar.kt,slightly-modified,96.6,canonical=96.6%
+lib/compose/src/main/kotlin/org/drs/lib/compose/DrsButtons.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/FlorisButtons.kt,slightly-modified,92.4,canonical=92.4%
+lib/compose/src/main/kotlin/org/drs/lib/compose/DrsCanvasIcon.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/FlorisCanvasIcon.kt,slightly-modified,92.9,canonical=92.9%
+lib/compose/src/main/kotlin/org/drs/lib/compose/DrsCards.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/FlorisCards.kt,slightly-modified,87.2,canonical=87.2%
+lib/compose/src/main/kotlin/org/drs/lib/compose/DrsChip.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/FlorisChip.kt,slightly-modified,98.1,canonical=98.1%
+lib/compose/src/main/kotlin/org/drs/lib/compose/DrsDropdownLikeButton.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/FlorisDropdownLikeButton.kt,slightly-modified,97.9,canonical=97.9%
+lib/compose/src/main/kotlin/org/drs/lib/compose/DrsStepLayout.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/FlorisStepLayout.kt,slightly-modified,93.0,canonical=93.0%
+lib/compose/src/main/kotlin/org/drs/lib/compose/LazyGrid.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/LazyGrid.kt,verbatim,100.0,
+lib/compose/src/main/kotlin/org/drs/lib/compose/Modifier.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/Modifier.kt,verbatim,100.0,
+lib/compose/src/main/kotlin/org/drs/lib/compose/MotionScale.kt,-,protected,,protected (DRS original)
+lib/compose/src/main/kotlin/org/drs/lib/compose/Resources.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/Resources.kt,slightly-modified,98.9,canonical=98.9%
+lib/compose/src/main/kotlin/org/drs/lib/compose/RtlModifiers.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/RtlModifiers.kt,verbatim,100.0,
+lib/compose/src/main/kotlin/org/drs/lib/compose/ScrollableModifiers.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/ScrollableModifiers.kt,slightly-modified,96.6,canonical=96.6%
+lib/compose/src/main/kotlin/org/drs/lib/compose/State.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/State.kt,verbatim,100.0,
+lib/compose/src/main/kotlin/org/drs/lib/compose/icons/KeyboardForwardDelete.kt,AOSP frameworks/base (verbatim; extension-property trap),verbatim,,"AOSP origin, header intact, not matched to floris/jetpref"
+lib/jetpref/datastore-model/build.gradle.kts,floris@fe1241f:lib/android/build.gradle.kts,build-file,77.4,canonical=77.4%
+lib/jetpref/datastore-model/proguard-rules.pro,-,build-file,,no counterpart >= 0.50
+lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/JetPref.kt,jetpref@7a3df4e:datastore-model/src/jvmCommonMain/kotlin/dev/patrickgold/jetpref/datastore/JetPref.kt,slightly-modified,100.0,canonical=100.0%
+lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/JetPrefJvm.kt,-,drs-original,,no counterpart >= 0.50
+lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/Utils.kt,jetpref@7a3df4e:datastore-model/src/commonMain/kotlin/dev/patrickgold/jetpref/datastore/Utils.kt,verbatim,100.0,
+lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/annotations/Annotations.kt,jetpref@7a3df4e:datastore-model/src/commonMain/kotlin/dev/patrickgold/jetpref/datastore/annotations/Annotations.kt,verbatim,100.0,
+lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/model/LocalTime.kt,jetpref@7a3df4e:datastore-model/src/commonMain/kotlin/dev/patrickgold/jetpref/datastore/model/LocalTime.kt,verbatim,100.0,
+lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/model/PreferenceData.kt,jetpref@7a3df4e:datastore-model/src/commonMain/kotlin/dev/patrickgold/jetpref/datastore/model/PreferenceData.kt,slightly-modified,100.0,canonical=100.0%
+lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/model/PreferenceDataJvm.kt,-,drs-original,,no counterpart >= 0.50
+lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/model/PreferenceMigration.kt,jetpref@7a3df4e:datastore-model/src/commonMain/kotlin/dev/patrickgold/jetpref/datastore/model/PreferenceMigration.kt,verbatim,100.0,
+lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/model/PreferenceModel.kt,jetpref@7a3df4e:datastore-model/src/commonMain/kotlin/dev/patrickgold/jetpref/datastore/model/PreferenceModel.kt,verbatim,100.0,
+lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/model/PreferenceSerializer.kt,jetpref@7a3df4e:datastore-model/src/commonMain/kotlin/dev/patrickgold/jetpref/datastore/model/PreferenceSerializer.kt,verbatim,100.0,
+lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/model/PreferenceType.kt,jetpref@7a3df4e:datastore-model/src/commonMain/kotlin/dev/patrickgold/jetpref/datastore/model/PreferenceType.kt,verbatim,100.0,
+lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/model/StringEncoder.kt,jetpref@7a3df4e:datastore-model/src/commonMain/kotlin/dev/patrickgold/jetpref/datastore/model/StringEncoder.kt,verbatim,100.0,
+lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/model/Validator.kt,jetpref@7a3df4e:datastore-model/src/commonMain/kotlin/dev/patrickgold/jetpref/datastore/model/Validator.kt,verbatim,100.0,
+lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/runtime/AndroidAppDataStorage.kt,jetpref@7a3df4e:datastore-model/src/androidMain/kotlin/dev/patrickgold/jetpref/datastore/runtime/AndroidAppDataStorage.kt,verbatim,100.0,
+lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/runtime/DataStore.kt,jetpref@7a3df4e:datastore-model/src/commonMain/kotlin/dev/patrickgold/jetpref/datastore/runtime/DataStore.kt,verbatim,100.0,
+lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/runtime/Exceptions.kt,jetpref@7a3df4e:datastore-model/src/commonMain/kotlin/dev/patrickgold/jetpref/datastore/runtime/Exceptions.kt,verbatim,100.0,
+lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/runtime/FileBasedStorage.kt,jetpref@7a3df4e:datastore-model/src/jvmCommonMain/kotlin/dev/patrickgold/jetpref/datastore/runtime/FileBasedStorage.kt,verbatim,100.0,
+lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/runtime/Storage.kt,jetpref@7a3df4e:datastore-model/src/commonMain/kotlin/dev/patrickgold/jetpref/datastore/runtime/Storage.kt,verbatim,100.0,
+lib/jetpref/datastore-model-processor/build.gradle.kts,jetpref@7a3df4e:example/build.gradle.kts,build-file,69.2,canonical=69.2%
+lib/jetpref/datastore-model-processor/src/main/kotlin/org/drs/jetpref/datastore/model/ModelProcessor.kt,jetpref@7a3df4e:datastore-model-processor/src/jvmMain/kotlin/dev/patrickgold/jetpref/datastore/model/ModelProcessor.kt,slightly-modified,97.9,canonical=97.9%
+lib/jetpref/datastore-model-processor/src/main/resources/META-INF/services/com.google.devtools.ksp.processing.SymbolProcessorProvider,jetpref (KSP registration),resource-file,,KSP SymbolProcessorProvider registration — NEVER delete (trap #11)
+lib/jetpref/datastore-ui/build.gradle.kts,floris@fe1241f:lib/compose/build.gradle.kts,build-file,78.0,canonical=78.0%
+lib/jetpref/datastore-ui/proguard-rules.pro,-,build-file,,no counterpart >= 0.50
+lib/jetpref/datastore-ui/src/main/kotlin/org/drs/jetpref/datastore/model/PreferenceDataAdapter.kt,jetpref@7a3df4e:datastore-ui/src/androidMain/kotlin/dev/patrickgold/jetpref/datastore/model/PreferenceDataAdapter.kt,verbatim,100.0,
+lib/jetpref/datastore-ui/src/main/kotlin/org/drs/jetpref/datastore/model/PreferenceDataEvaluatorScope.kt,jetpref@7a3df4e:datastore-ui/src/androidMain/kotlin/dev/patrickgold/jetpref/datastore/model/PreferenceDataEvaluatorScope.kt,verbatim,100.0,
+lib/jetpref/datastore-ui/src/main/kotlin/org/drs/jetpref/datastore/ui/Annotations.kt,jetpref@7a3df4e:datastore-ui/src/androidMain/kotlin/dev/patrickgold/jetpref/datastore/ui/Annotations.kt,verbatim,100.0,
+lib/jetpref/datastore-ui/src/main/kotlin/org/drs/jetpref/datastore/ui/ColorPickerPreference.kt,jetpref@7a3df4e:datastore-ui/src/androidMain/kotlin/dev/patrickgold/jetpref/datastore/ui/ColorPickerPreference.kt,verbatim,100.0,
+lib/jetpref/datastore-ui/src/main/kotlin/org/drs/jetpref/datastore/ui/Common.kt,jetpref@7a3df4e:datastore-ui/src/androidMain/kotlin/dev/patrickgold/jetpref/datastore/ui/Common.kt,verbatim,100.0,
+lib/jetpref/datastore-ui/src/main/kotlin/org/drs/jetpref/datastore/ui/DialogPrefStrings.kt,jetpref@7a3df4e:datastore-ui/src/androidMain/kotlin/dev/patrickgold/jetpref/datastore/ui/DialogPrefStrings.kt,verbatim,100.0,
+lib/jetpref/datastore-ui/src/main/kotlin/org/drs/jetpref/datastore/ui/DialogSliderPreference.kt,jetpref@7a3df4e:datastore-ui/src/androidMain/kotlin/dev/patrickgold/jetpref/datastore/ui/DialogSliderPreference.kt,slightly-modified,95.9,canonical=95.9%
+lib/jetpref/datastore-ui/src/main/kotlin/org/drs/jetpref/datastore/ui/ListPreference.kt,jetpref@7a3df4e:datastore-ui/src/androidMain/kotlin/dev/patrickgold/jetpref/datastore/ui/ListPreference.kt,verbatim,100.0,
+lib/jetpref/datastore-ui/src/main/kotlin/org/drs/jetpref/datastore/ui/LocalTimePickerPreference.kt,jetpref@7a3df4e:datastore-ui/src/androidMain/kotlin/dev/patrickgold/jetpref/datastore/ui/LocalTimePickerPreference.kt,verbatim,100.0,
+lib/jetpref/datastore-ui/src/main/kotlin/org/drs/jetpref/datastore/ui/Preference.kt,jetpref@7a3df4e:datastore-ui/src/androidMain/kotlin/dev/patrickgold/jetpref/datastore/ui/Preference.kt,slightly-modified,100.0,canonical=100.0%
+lib/jetpref/datastore-ui/src/main/kotlin/org/drs/jetpref/datastore/ui/PreferenceUi.kt,jetpref@7a3df4e:datastore-ui/src/androidMain/kotlin/dev/patrickgold/jetpref/datastore/ui/PreferenceUi.kt,verbatim,100.0,
+lib/jetpref/datastore-ui/src/main/kotlin/org/drs/jetpref/datastore/ui/SwitchPreference.kt,jetpref@7a3df4e:datastore-ui/src/androidMain/kotlin/dev/patrickgold/jetpref/datastore/ui/SwitchPreference.kt,verbatim,100.0,
+lib/jetpref/datastore-ui/src/main/kotlin/org/drs/jetpref/datastore/ui/TextFieldPreference.kt,jetpref@7a3df4e:datastore-ui/src/androidMain/kotlin/dev/patrickgold/jetpref/datastore/ui/TextFieldPreference.kt,verbatim,100.0,
+lib/jetpref/material-ui/build.gradle.kts,floris@fe1241f:lib/compose/build.gradle.kts,build-file,82.5,canonical=82.5%
+lib/jetpref/material-ui/proguard-rules.pro,-,build-file,,no counterpart >= 0.50
+lib/jetpref/material-ui/src/main/kotlin/org/drs/jetpref/material/ui/Annotations.kt,jetpref@7a3df4e:material-ui/src/androidMain/kotlin/dev/patrickgold/jetpref/material/ui/Annotations.kt,verbatim,100.0,
+lib/jetpref/material-ui/src/main/kotlin/org/drs/jetpref/material/ui/ColorRepresentation.kt,jetpref@7a3df4e:material-ui/src/androidMain/kotlin/dev/patrickgold/jetpref/material/ui/ColorRepresentation.kt,verbatim,100.0,
+lib/jetpref/material-ui/src/main/kotlin/org/drs/jetpref/material/ui/Common.kt,jetpref@7a3df4e:material-ui/src/androidMain/kotlin/dev/patrickgold/jetpref/material/ui/Common.kt,verbatim,100.0,
+lib/jetpref/material-ui/src/main/kotlin/org/drs/jetpref/material/ui/JetPrefAlertDialog.kt,jetpref@7a3df4e:material-ui/src/androidMain/kotlin/dev/patrickgold/jetpref/material/ui/JetPrefAlertDialog.kt,verbatim,100.0,
+lib/jetpref/material-ui/src/main/kotlin/org/drs/jetpref/material/ui/JetPrefColorPicker.kt,jetpref@7a3df4e:material-ui/src/androidMain/kotlin/dev/patrickgold/jetpref/material/ui/JetPrefColorPicker.kt,verbatim,100.0,
+lib/jetpref/material-ui/src/main/kotlin/org/drs/jetpref/material/ui/JetPrefDropdown.kt,jetpref@7a3df4e:material-ui/src/androidMain/kotlin/dev/patrickgold/jetpref/material/ui/JetPrefDropdown.kt,verbatim,100.0,
+lib/jetpref/material-ui/src/main/kotlin/org/drs/jetpref/material/ui/JetPrefListItem.kt,jetpref@7a3df4e:material-ui/src/androidMain/kotlin/dev/patrickgold/jetpref/material/ui/JetPrefListItem.kt,verbatim,100.0,
+lib/jetpref/material-ui/src/main/kotlin/org/drs/jetpref/material/ui/JetPrefTextField.kt,jetpref@7a3df4e:material-ui/src/androidMain/kotlin/dev/patrickgold/jetpref/material/ui/JetPrefTextField.kt,verbatim,100.0,
+lib/kotlin/build.gradle.kts,floris@fe1241f:lib/kotlin/build.gradle.kts,build-file,90.6,canonical=90.6%
+lib/kotlin/src/main/kotlin/org/drs/lib/kotlin/Class.kt,floris@fe1241f:lib/kotlin/src/main/kotlin/org/florisboard/lib/kotlin/Class.kt,verbatim,100.0,
+lib/kotlin/src/main/kotlin/org/drs/lib/kotlin/Collections.kt,floris@fe1241f:lib/kotlin/src/main/kotlin/org/florisboard/lib/kotlin/Collections.kt,verbatim,100.0,
+lib/kotlin/src/main/kotlin/org/drs/lib/kotlin/Flow.kt,floris@fe1241f:lib/kotlin/src/main/kotlin/org/florisboard/lib/kotlin/Flow.kt,verbatim,100.0,
+lib/kotlin/src/main/kotlin/org/drs/lib/kotlin/GuardedByLock.kt,floris@fe1241f:lib/kotlin/src/main/kotlin/org/florisboard/lib/kotlin/GuardedByLock.kt,verbatim,100.0,
+lib/kotlin/src/main/kotlin/org/drs/lib/kotlin/Library.kt,floris@fe1241f:lib/kotlin/src/main/kotlin/org/florisboard/lib/kotlin/Library.kt,verbatim,100.0,
+lib/kotlin/src/main/kotlin/org/drs/lib/kotlin/MimeTypeFilter.kt,floris@fe1241f:lib/kotlin/src/main/kotlin/org/florisboard/lib/kotlin/MimeTypeFilter.kt,slightly-modified,100.0,canonical=100.0%
+lib/kotlin/src/main/kotlin/org/drs/lib/kotlin/Numbers.kt,floris@fe1241f:lib/kotlin/src/main/kotlin/org/florisboard/lib/kotlin/Numbers.kt,verbatim,100.0,
+lib/kotlin/src/main/kotlin/org/drs/lib/kotlin/Regex.kt,floris@fe1241f:lib/kotlin/src/main/kotlin/org/florisboard/lib/kotlin/Regex.kt,verbatim,100.0,
+lib/kotlin/src/main/kotlin/org/drs/lib/kotlin/Result.kt,floris@fe1241f:lib/kotlin/src/main/kotlin/org/florisboard/lib/kotlin/Result.kt,verbatim,100.0,
+lib/kotlin/src/main/kotlin/org/drs/lib/kotlin/Strings.kt,floris@fe1241f:lib/kotlin/src/main/kotlin/org/florisboard/lib/kotlin/Strings.kt,verbatim,100.0,
+lib/kotlin/src/main/kotlin/org/drs/lib/kotlin/io/FsFile.kt,floris@fe1241f:lib/kotlin/src/main/kotlin/org/florisboard/lib/kotlin/io/FsFile.kt,verbatim,100.0,
+lib/kotlin/src/test/kotlin/org/drs/lib/kotlin/MimeTypeFilterTest.kt,floris@fe1241f:lib/kotlin/src/test/kotlin/org/florisboard/lib/kotlin/MimeTypeFilterTest.kt,verbatim,100.0,
+lib/kotlin/src/test/kotlin/org/drs/lib/kotlin/StringsTest.kt,floris@fe1241f:lib/kotlin/src/test/kotlin/org/florisboard/lib/kotlin/StringsTest.kt,verbatim,100.0,
+lib/snygg/.gitignore,-,build-file,,no counterpart >= 0.50
+lib/snygg/build.gradle.kts,floris@fe1241f:lib/compose/build.gradle.kts,build-file,53.9,canonical=53.9%
+lib/snygg/consumer-rules.pro,-,build-file,,no counterpart >= 0.50
+lib/snygg/proguard-rules.pro,-,build-file,,no counterpart >= 0.50
+lib/snygg/schemas/stylesheet.schema.json,-,build-file,,no counterpart >= 0.50
+lib/snygg/src/main/AndroidManifest.xml,-,build-file,,no counterpart >= 0.50
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/Snygg.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/Snygg.kt,verbatim,100.0,
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggJsonSchemaGenerator.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/SnyggJsonSchemaGenerator.kt,verbatim,100.0,
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggPropertySet.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/SnyggPropertySet.kt,slightly-modified,98.1,canonical=98.1%
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggPropertySetEditor.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/SnyggPropertySetEditor.kt,verbatim,100.0,
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggRule.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/SnyggRule.kt,verbatim,100.0,
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggSpecDecl.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/SnyggSpecDecl.kt,verbatim,100.0,
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggStylesheet.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/SnyggStylesheet.kt,slightly-modified,98.2,canonical=98.2%
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggStylesheetEditor.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/SnyggStylesheetEditor.kt,verbatim,100.0,
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggTheme.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/SnyggTheme.kt,verbatim,100.0,
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggBox.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/ui/SnyggBox.kt,deeply-modified,81.1,canonical=81.1%
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggButton.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/ui/SnyggButton.kt,verbatim,100.0,
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggChip.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/ui/SnyggChip.kt,verbatim,100.0,
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggColumn.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/ui/SnyggColumn.kt,verbatim,100.0,
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggIcon.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/ui/SnyggIcon.kt,verbatim,100.0,
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggIconButton.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/ui/SnyggIconButton.kt,slightly-modified,90.8,canonical=90.8%
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggListItem.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/ui/SnyggListItem.kt,verbatim,100.0,
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggRow.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/ui/SnyggRow.kt,verbatim,100.0,
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggSpacer.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/ui/SnyggSpacer.kt,verbatim,100.0,
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggText.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/ui/SnyggText.kt,verbatim,100.0,
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggUi.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/ui/SnyggUi.kt,verbatim,100.0,
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/value/SnyggAppearanceValue.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/value/SnyggAppearanceValue.kt,verbatim,100.0,
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/value/SnyggFontValue.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/value/SnyggFontValue.kt,verbatim,100.0,
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/value/SnyggIdToValueMap.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/value/SnyggIdToValueMap.kt,verbatim,100.0,
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/value/SnyggPaddingValue.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/value/SnyggPaddingValue.kt,verbatim,100.0,
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/value/SnyggShapeValue.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/value/SnyggShapeValue.kt,verbatim,100.0,
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/value/SnyggSizeValue.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/value/SnyggSizeValue.kt,verbatim,100.0,
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/value/SnyggTextValue.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/value/SnyggTextValue.kt,verbatim,100.0,
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/value/SnyggUriValue.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/value/SnyggUriValue.kt,slightly-modified,97.7,canonical=97.7%
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/value/SnyggValue.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/value/SnyggValue.kt,verbatim,100.0,
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/value/SnyggValueEncoder.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/value/SnyggValueEncoder.kt,verbatim,100.0,
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/value/SnyggValueSpec.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/value/SnyggValueSpec.kt,verbatim,100.0,
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/value/SnyggVarValue.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/value/SnyggVarValue.kt,verbatim,100.0,
+lib/snygg/src/test/kotlin/org/drs/lib/snygg/SnyggRuleTest.kt,floris@fe1241f:lib/snygg/src/commonTest/kotlin/org/florisboard/lib/snygg/SnyggRuleTest.kt,verbatim,100.0,
+lib/snygg/src/test/kotlin/org/drs/lib/snygg/SnyggStylesheetEditorTest.kt,floris@fe1241f:lib/snygg/src/commonTest/kotlin/org/florisboard/lib/snygg/SnyggStylesheetEditorTest.kt,verbatim,100.0,
+lib/snygg/src/test/kotlin/org/drs/lib/snygg/SnyggStylesheetTest.kt,floris@fe1241f:lib/snygg/src/commonTest/kotlin/org/florisboard/lib/snygg/SnyggStylesheetTest.kt,slightly-modified,98.3,canonical=98.3%
+lib/snygg/src/test/kotlin/org/drs/lib/snygg/SnyggThemeTest.kt,floris@fe1241f:lib/snygg/src/commonTest/kotlin/org/florisboard/lib/snygg/SnyggThemeTest.kt,slightly-modified,95.5,canonical=95.5%
+lib/snygg/src/test/kotlin/org/drs/lib/snygg/value/SnyggAppearanceValueTest.kt,floris@fe1241f:lib/snygg/src/commonTest/kotlin/org/florisboard/lib/snygg/value/SnyggAppearanceValueTest.kt,verbatim,100.0,
+lib/snygg/src/test/kotlin/org/drs/lib/snygg/value/SnyggFontValueTest.kt,floris@fe1241f:lib/snygg/src/commonTest/kotlin/org/florisboard/lib/snygg/value/SnyggFontValueTest.kt,verbatim,100.0,
+lib/snygg/src/test/kotlin/org/drs/lib/snygg/value/SnyggPaddingValueTest.kt,floris@fe1241f:lib/snygg/src/commonTest/kotlin/org/florisboard/lib/snygg/value/SnyggPaddingValueTest.kt,verbatim,100.0,
+lib/snygg/src/test/kotlin/org/drs/lib/snygg/value/SnyggShapeValueTest.kt,floris@fe1241f:lib/snygg/src/commonTest/kotlin/org/florisboard/lib/snygg/value/SnyggShapeValueTest.kt,verbatim,100.0,
+lib/snygg/src/test/kotlin/org/drs/lib/snygg/value/SnyggSizeValueTest.kt,floris@fe1241f:lib/snygg/src/commonTest/kotlin/org/florisboard/lib/snygg/value/SnyggSizeValueTest.kt,verbatim,100.0,
+lib/snygg/src/test/kotlin/org/drs/lib/snygg/value/SnyggTextValueTest.kt,floris@fe1241f:lib/snygg/src/commonTest/kotlin/org/florisboard/lib/snygg/value/SnyggTextValueTest.kt,verbatim,100.0,
+lib/snygg/src/test/kotlin/org/drs/lib/snygg/value/SnyggUriValueTest.kt,floris@fe1241f:lib/snygg/src/commonTest/kotlin/org/florisboard/lib/snygg/value/SnyggUriValueTest.kt,verbatim,100.0,
