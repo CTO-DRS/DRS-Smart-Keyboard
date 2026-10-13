@@ -16,64 +16,89 @@
 
 package org.drs.lib.compose
 
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.ui.platform.LocalContext
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleEventObserver
-import androidx.lifecycle.compose.LocalLifecycleOwner
-import org.drs.lib.android.AndroidSettingsHelper
-import org.drs.lib.android.SystemSettingsObserver
+/**
+ * Releases a gated settings observation: detaches the lifecycle observer and
+ * unregisters the system settings listener in one call.
+ */
+private fun org.drs.lib.android.AndroidSettingsHelper.detachSettingsObservation(
+    lifecycle: androidx.lifecycle.Lifecycle,
+    eventObserver: androidx.lifecycle.LifecycleObserver,
+    context: android.content.Context,
+    observer: org.drs.lib.android.SystemSettingsObserver,
+) {
+    lifecycle.removeObserver(eventObserver)
+    removeObserver(context = context, observer = observer)
+}
 
-@Composable
-fun AndroidSettingsHelper.observeAsState(
-    key: String,
-    foregroundOnly: Boolean = false,
-) = observeAsState(
-    key = key,
-    foregroundOnly = foregroundOnly,
-    transform = { it },
-)
+/**
+ * Gates a settings observation to the foreground: the listener registers on
+ * resume and is released on pause, leaving no work done while backgrounded.
+ */
+private class ForegroundGatedSettingsObserver(
+    private val helper: org.drs.lib.android.AndroidSettingsHelper,
+    private val context: android.content.Context,
+    private val key: String,
+    private val listener: org.drs.lib.android.SystemSettingsObserver,
+) : androidx.lifecycle.DefaultLifecycleObserver {
+    override fun onResume(owner: androidx.lifecycle.LifecycleOwner) {
+        helper.observe(context = context, key = key, observer = listener)
+    }
 
-@Composable
-fun <R> AndroidSettingsHelper.observeAsState(
-    key: String,
-    foregroundOnly: Boolean = false,
-    transform: (String?) -> R,
-): State<R> {
-    val lifecycleOwner = LocalLifecycleOwner.current
-    val context = LocalContext.current.applicationContext
-    val state = remember(key) { mutableStateOf(transform(getString(context, key))) }
-    DisposableEffect(lifecycleOwner.lifecycle) {
-        val observer = SystemSettingsObserver(context) {
-            state.value = transform(getString(context, key))
+    override fun onPause(owner: androidx.lifecycle.LifecycleOwner) {
+        helper.removeObserver(context = context, observer = listener)
+    }
+}
+
+/**
+ * Observes a settings entry for as long as this composable stays alive,
+ * exposing the raw string value; see the transforming overload below.
+ */
+@androidx.compose.runtime.Composable
+fun org.drs.lib.android.AndroidSettingsHelper.observeAsState(
+    key: String, foregroundOnly: Boolean = false,
+) = observeAsState(key, foregroundOnly, { value -> value })
+
+/**
+ * Observes the settings entry [key] through this helper and exposes it as
+ * compose state, re-reading via [transform] on every system change. With
+ * [foregroundOnly] the underlying observation is attached on resume and
+ * released on pause, otherwise it lives for the whole composition.
+ */
+@androidx.compose.runtime.Composable
+fun <R> org.drs.lib.android.AndroidSettingsHelper.observeAsState(
+    key: String, foregroundOnly: Boolean = false, transform: (String?) -> R,
+): androidx.compose.runtime.State<R> {
+    val lifecycleOwner = androidx.lifecycle.compose.LocalLifecycleOwner.current
+    val context = androidx.compose.ui.platform.LocalContext.current.applicationContext
+    val state = androidx.compose.runtime.remember(key) {
+        androidx.compose.runtime.mutableStateOf(transform(getString(context, key)))
+    }
+
+    fun refreshObservedValue() {
+        state.value = transform(getString(context = context, key = key))
+    }
+
+    androidx.compose.runtime.DisposableEffect(lifecycleOwner.lifecycle) {
+        val observer = org.drs.lib.android.SystemSettingsObserver(context) {
+            refreshObservedValue()
         }
-        if (foregroundOnly) {
-            val eventObserver = LifecycleEventObserver { _, event ->
-                when (event) {
-                    Lifecycle.Event.ON_RESUME -> {
-                        observe(context, key, observer)
-                    }
-                    Lifecycle.Event.ON_PAUSE -> {
-                        removeObserver(context, observer)
-                    }
-                    else -> {}
+        when {
+            foregroundOnly -> {
+                val eventObserver: androidx.lifecycle.LifecycleObserver =
+                    ForegroundGatedSettingsObserver(this@observeAsState, context, key, observer)
+                val lifecycle = lifecycleOwner.lifecycle
+                lifecycle.addObserver(eventObserver)
+                onDispose {
+                    detachSettingsObservation(
+                        lifecycle, eventObserver, context, observer,
+                    )
                 }
             }
-            lifecycleOwner.lifecycle.addObserver(eventObserver)
-            onDispose {
-                lifecycleOwner.lifecycle.removeObserver(eventObserver)
-                removeObserver(context, observer)
-            }
-        } else {
-            observe(context, key, observer)
-            onDispose {
-                removeObserver(context, observer)
+            else -> {
+                observe(context = context, key = key, observer = observer)
+                onDispose { removeObserver(context = context, observer = observer) }
             }
         }
     }
-    return state
+    return state as androidx.compose.runtime.State<R>
 }
