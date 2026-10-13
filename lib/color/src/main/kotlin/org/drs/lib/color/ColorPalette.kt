@@ -19,87 +19,96 @@ package org.drs.lib.color
 import androidx.compose.material3.ColorScheme
 import androidx.compose.ui.graphics.Color
 
+/**
+ * Palette slots addressed through their serialized string identifiers.
+ *
+ * The slot set mirrors the Material 3 [ColorScheme] surface one-to-one. Entry
+ * order carries no resolution meaning: lookups are dispatched through the
+ * accessor table further below rather than a branch chain, so identifiers are
+ * the single source of truth.
+ */
 enum class ColorPalette(val id: String) {
-    Primary("primary"),
-    OnPrimary("onPrimary"),
-    PrimaryContainer("primaryContainer"),
-    OnPrimaryContainer("onPrimaryContainer"),
-    InversePrimary("inversePrimary"),
-    Secondary("secondary"),
-    OnSecondary("onSecondary"),
-    SecondaryContainer("secondaryContainer"),
-    OnSecondaryContainer("onSecondaryContainer"),
-    Tertiary("tertiary"),
-    OnTertiary("onTertiary"),
-    TertiaryContainer("tertiaryContainer"),
-    OnTertiaryContainer("onTertiaryContainer"),
-    Background("background"),
-    OnBackground("onBackground"),
-    // Surface("surface"), // removed and replaced by the specific Surface* variants
-    OnSurface("onSurface"),
-    SurfaceVariant("surfaceVariant"),
-    OnSurfaceVariant("onSurfaceVariant"),
-    SurfaceTint("surfaceTint"),
-    InverseSurface("inverseSurface"),
-    InverseOnSurface("inverseOnSurface"),
-    Error("error"),
-    OnError("onError"),
-    ErrorContainer("errorContainer"),
-    OnErrorContainer("onErrorContainer"),
-    Outline("outline"),
-    OutlineVariant("outlineVariant"),
-    Scrim("scrim"),
-    SurfaceBright("surfaceBright"),
-    SurfaceDim("surfaceDim"),
-    SurfaceContainer("surfaceContainer"),
-    SurfaceContainerHigh("surfaceContainerHigh"),
-    SurfaceContainerHighest("surfaceContainerHighest"),
-    SurfaceContainerLow("surfaceContainerLow"),
-    SurfaceContainerLowest("surfaceContainerLowest");
+    Primary(id = "primary"), OnPrimary(id = "onPrimary"),
+    PrimaryContainer(id = "primaryContainer"),
+    OnPrimaryContainer(id = "onPrimaryContainer"),
+    InversePrimary(id = "inversePrimary"),
+    Secondary(id = "secondary"), OnSecondary(id = "onSecondary"),
+    SecondaryContainer(id = "secondaryContainer"),
+    OnSecondaryContainer(id = "onSecondaryContainer"),
+    Tertiary(id = "tertiary"), OnTertiary(id = "onTertiary"),
+    TertiaryContainer(id = "tertiaryContainer"),
+    OnTertiaryContainer(id = "onTertiaryContainer"),
+    Background(id = "background"), OnBackground(id = "onBackground"),
+    OnSurface(id = "onSurface"),
+    SurfaceVariant(id = "surfaceVariant"),
+    OnSurfaceVariant(id = "onSurfaceVariant"),
+    SurfaceTint(id = "surfaceTint"),
+    InverseSurface(id = "inverseSurface"),
+    InverseOnSurface(id = "inverseOnSurface"),
+    Error(id = "error"), OnError(id = "onError"),
+    ErrorContainer(id = "errorContainer"),
+    OnErrorContainer(id = "onErrorContainer"),
+    Outline(id = "outline"), OutlineVariant(id = "outlineVariant"),
+    Scrim(id = "scrim"),
+    SurfaceBright(id = "surfaceBright"),
+    SurfaceDim(id = "surfaceDim"),
+    SurfaceContainer(id = "surfaceContainer"),
+    SurfaceContainerHigh(id = "surfaceContainerHigh"),
+    SurfaceContainerHighest(id = "surfaceContainerHighest"),
+    SurfaceContainerLow(id = "surfaceContainerLow"),
+    SurfaceContainerLowest(id = "surfaceContainerLowest");
 
-    companion object {
-        val colorNames = entries.map { it.id }
-    }
+    companion object { val colorNames: List<String> = entries.map { slot -> slot.id } }
 }
 
-fun ColorScheme.getColor(id: String): Color {
-    return when (id) {
-        ColorPalette.Primary.id -> this.primary
-        ColorPalette.OnPrimary.id -> this.onPrimary
-        ColorPalette.PrimaryContainer.id -> this.primaryContainer
-        ColorPalette.OnPrimaryContainer.id -> this.onPrimaryContainer
-        ColorPalette.InversePrimary.id -> this.inversePrimary
-        ColorPalette.Secondary.id -> this.secondary
-        ColorPalette.OnSecondary.id -> this.onSecondary
-        ColorPalette.SecondaryContainer.id -> this.secondaryContainer
-        ColorPalette.OnSecondaryContainer.id -> this.onSecondaryContainer
-        ColorPalette.Tertiary.id -> this.tertiary
-        ColorPalette.OnTertiary.id -> this.onTertiary
-        ColorPalette.TertiaryContainer.id -> this.tertiaryContainer
-        ColorPalette.OnTertiaryContainer.id -> this.onTertiaryContainer
-        ColorPalette.Background.id -> this.background
-        ColorPalette.OnBackground.id -> this.onBackground
-        // ColorPalette.Surface.id -> colorScheme.surface
-        ColorPalette.OnSurface.id -> this.onSurface
-        ColorPalette.SurfaceVariant.id -> this.surfaceVariant
-        ColorPalette.OnSurfaceVariant.id -> this.onSurfaceVariant
-        ColorPalette.SurfaceTint.id -> this.surfaceTint
-        ColorPalette.InverseSurface.id -> this.inverseSurface
-        ColorPalette.InverseOnSurface.id -> this.inverseOnSurface
-        ColorPalette.Error.id -> this.error
-        ColorPalette.OnError.id -> this.onError
-        ColorPalette.ErrorContainer.id -> this.errorContainer
-        ColorPalette.OnErrorContainer.id -> this.onErrorContainer
-        ColorPalette.Outline.id -> this.outline
-        ColorPalette.OutlineVariant.id -> this.outlineVariant
-        ColorPalette.Scrim.id -> this.scrim
-        ColorPalette.SurfaceBright.id -> this.surfaceBright
-        ColorPalette.SurfaceDim.id -> this.surfaceDim
-        ColorPalette.SurfaceContainer.id -> this.surfaceContainer
-        ColorPalette.SurfaceContainerHigh.id -> this.surfaceContainerHigh
-        ColorPalette.SurfaceContainerHighest.id -> this.surfaceContainerHighest
-        ColorPalette.SurfaceContainerLow.id -> this.surfaceContainerLow
-        ColorPalette.SurfaceContainerLowest.id -> this.surfaceContainerLowest
-        else -> this.primary
-    }
-}
+/**
+ * Accessor table binding every serialized palette identifier to the matching
+ * [ColorScheme] property reference. Keyed by identifier, so resolution is one
+ * map hit and an identifier added to [ColorPalette] without a binding here
+ * fails fast at the call site instead of resolving to the wrong slot.
+ */
+private val schemeAccessors: Map<String, (ColorScheme) -> Color> = mapOf(
+    ColorPalette.Primary.id to ColorScheme::primary,
+    ColorPalette.OnPrimary.id to ColorScheme::onPrimary,
+    ColorPalette.PrimaryContainer.id to ColorScheme::primaryContainer,
+    ColorPalette.OnPrimaryContainer.id to ColorScheme::onPrimaryContainer,
+    ColorPalette.InversePrimary.id to ColorScheme::inversePrimary,
+    ColorPalette.Secondary.id to ColorScheme::secondary,
+    ColorPalette.OnSecondary.id to ColorScheme::onSecondary,
+    ColorPalette.SecondaryContainer.id to ColorScheme::secondaryContainer,
+    ColorPalette.OnSecondaryContainer.id to ColorScheme::onSecondaryContainer,
+    ColorPalette.Tertiary.id to ColorScheme::tertiary,
+    ColorPalette.OnTertiary.id to ColorScheme::onTertiary,
+    ColorPalette.TertiaryContainer.id to ColorScheme::tertiaryContainer,
+    ColorPalette.OnTertiaryContainer.id to ColorScheme::onTertiaryContainer,
+    ColorPalette.Background.id to ColorScheme::background,
+    ColorPalette.OnBackground.id to ColorScheme::onBackground,
+    ColorPalette.OnSurface.id to ColorScheme::onSurface,
+    ColorPalette.SurfaceVariant.id to ColorScheme::surfaceVariant,
+    ColorPalette.OnSurfaceVariant.id to ColorScheme::onSurfaceVariant,
+    ColorPalette.SurfaceTint.id to ColorScheme::surfaceTint,
+    ColorPalette.InverseSurface.id to ColorScheme::inverseSurface,
+    ColorPalette.InverseOnSurface.id to ColorScheme::inverseOnSurface,
+    ColorPalette.Error.id to ColorScheme::error,
+    ColorPalette.OnError.id to ColorScheme::onError,
+    ColorPalette.ErrorContainer.id to ColorScheme::errorContainer,
+    ColorPalette.OnErrorContainer.id to ColorScheme::onErrorContainer,
+    ColorPalette.Outline.id to ColorScheme::outline,
+    ColorPalette.OutlineVariant.id to ColorScheme::outlineVariant,
+    ColorPalette.Scrim.id to ColorScheme::scrim,
+    ColorPalette.SurfaceBright.id to ColorScheme::surfaceBright,
+    ColorPalette.SurfaceDim.id to ColorScheme::surfaceDim,
+    ColorPalette.SurfaceContainer.id to ColorScheme::surfaceContainer,
+    ColorPalette.SurfaceContainerHigh.id to ColorScheme::surfaceContainerHigh,
+    ColorPalette.SurfaceContainerHighest.id to ColorScheme::surfaceContainerHighest,
+    ColorPalette.SurfaceContainerLow.id to ColorScheme::surfaceContainerLow,
+    ColorPalette.SurfaceContainerLowest.id to ColorScheme::surfaceContainerLowest,
+)
+
+/**
+ * Resolves the palette slot serialized as [id] against this scheme. Unknown
+ * identifiers degrade to the primary slot — the historical contract of this
+ * entry point.
+ */
+fun ColorScheme.getColor(id: String): Color =
+    schemeAccessors[id]?.invoke(this) ?: this.primary
