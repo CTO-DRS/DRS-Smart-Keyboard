@@ -1,21 +1,9 @@
-# Add project specific ProGuard rules here.
-# You can control the set of applied configuration files using the
-# proguardFiles setting in build.gradle.
+# DRS Smart Keyboard — :lib:compose shrinker rules (release/beta builds).
 #
-# For more details, see
-#   http://developer.android.com/guide/developing/tools/proguard.html
-
-# If your project uses WebView with JS, uncomment the following
-# and specify the fully qualified class name to the JavaScript interface
-# class:
-#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
-#   public *;
-#}
-
-# Uncomment this to preserve the line number information for
-# debugging stack traces.
-#-keepattributes SourceFile,LineNumberTable
-
-# If you keep the line number information, uncomment this to
-# hide the original source file name.
-#-renamesourcefileattribute SourceFile
+# This module hosts pure compose UI building blocks (scroll containers,
+# app bars, cards, buttons, step wizard, resource lookups). Everything is
+# statically reachable from Kotlin call sites: no reflection, no JNI, no
+# dynamic class loading, and no serialization base classes declared here,
+# so R8 needs no -keep rules from this module. The compose runtime and the
+# jetpref material-ui dependency ship their own consumer rules; any app
+# level keep requirements belong to the :app module configuration.
