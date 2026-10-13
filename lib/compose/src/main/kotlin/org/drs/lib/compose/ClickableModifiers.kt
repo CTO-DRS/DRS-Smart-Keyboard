@@ -17,25 +17,23 @@
 package org.drs.lib.compose
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.material3.ripple
-import androidx.compose.runtime.remember
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
-import androidx.compose.ui.semantics.Role
 
-fun Modifier.rippleClickable(
-    enabled: Boolean = true,
-    onClickLabel: String? = null,
-    role: Role? = null,
-    onClick: () -> Unit,
-) = composed {
-    this.clickable(
-        interactionSource = remember { MutableInteractionSource() },
-        indication = ripple(),
-        enabled = enabled,
-        onClickLabel = onClickLabel,
-        role = role,
-        onClick = onClick,
+/**
+ * Click handler with a material ripple indication. Since composed blocks
+ * remember per placement, a fresh interaction source is allocated here so
+ * every clickable keeps its own ripple state.
+ */
+fun androidx.compose.ui.Modifier.rippleClickable(
+    enabled: Boolean = true, onClickLabel: String? = null,
+    role: androidx.compose.ui.semantics.Role? = null, onClick: () -> Unit,
+): androidx.compose.ui.Modifier = composed {
+    val source = androidx.compose.runtime.remember {
+        androidx.compose.foundation.interaction.MutableInteractionSource()
+    }
+    clickable(
+        onClick = onClick, interactionSource = source,
+        enabled = enabled, onClickLabel = onClickLabel,
+        indication = androidx.compose.material3.ripple(), role = role,
     )
 }
