@@ -17,229 +17,175 @@
 package org.drs.lib.compose
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonColors
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.IconButtonColors
-import androidx.compose.material3.IconButtonDefaults
-import androidx.compose.material3.LocalContentColor
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
-import androidx.compose.material3.minimumInteractiveComponentSize
-import androidx.compose.material3.ripple
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
+import androidx.compose.foundation.layout.*
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.takeOrElse
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 
-@Composable
+/** Leading icon plus label, the shared interior of every textful button. */
+@androidx.compose.runtime.Composable
+private fun ButtonLabel(icon: androidx.compose.ui.graphics.vector.ImageVector?, text: String) {
+    if (icon != null) {
+        androidx.compose.material3.Icon(
+            imageVector = icon,
+            modifier = androidx.compose.ui.Modifier
+                .padding(end = androidx.compose.material3.ButtonDefaults.IconSpacing)
+                .size(size = androidx.compose.material3.ButtonDefaults.IconSize),
+            contentDescription = null,
+        )
+    }
+    androidx.compose.material3.Text(text)
+}
+
+/** Filled accent button with an optional leading [icon] before [text]. */
+@androidx.compose.runtime.Composable
 fun DrsButton(
     onClick: () -> Unit,
-    modifier: Modifier = Modifier,
-    icon: ImageVector? = null,
+    modifier: androidx.compose.ui.Modifier = androidx.compose.ui.Modifier,
+    icon: androidx.compose.ui.graphics.vector.ImageVector? = null,
     text: String,
     enabled: Boolean = true,
-    shape: Shape = MaterialTheme.shapes.small,
-    contentPadding: PaddingValues = ButtonDefaults.ContentPadding,
-    colors: ButtonColors = ButtonDefaults.buttonColors(),
+    shape: androidx.compose.ui.graphics.Shape =
+        androidx.compose.material3.MaterialTheme.shapes.small,
+    contentPadding: androidx.compose.foundation.layout.PaddingValues =
+        androidx.compose.material3.ButtonDefaults.ContentPadding,
+    colors: androidx.compose.material3.ButtonColors =
+        androidx.compose.material3.ButtonDefaults.buttonColors(),
 ) {
-    Button(
-        modifier = modifier,
-        enabled = enabled,
-        shape = shape,
-        colors = colors,
-        contentPadding = contentPadding,
-        onClick = onClick,
-    ) {
-        if (icon != null) {
-            Icon(
-                modifier = Modifier
-                    .padding(end = ButtonDefaults.IconSpacing)
-                    .size(ButtonDefaults.IconSize),
-                imageVector = icon,
-                contentDescription = null,
-            )
-        }
-        Text(text = text)
-    }
+    androidx.compose.material3.Button(
+        onClick = onClick, modifier = modifier, enabled = enabled,
+        shape = shape, colors = colors, contentPadding = contentPadding,
+    ) { ButtonLabel(icon, text) }
 }
 
-@Composable
+/** Outlined medium-emphasis button with an optional leading [icon]. */
+@androidx.compose.runtime.Composable
 fun DrsOutlinedButton(
     onClick: () -> Unit,
-    modifier: Modifier = Modifier,
-    icon: ImageVector? = null,
+    modifier: androidx.compose.ui.Modifier = androidx.compose.ui.Modifier,
+    icon: androidx.compose.ui.graphics.vector.ImageVector? = null,
     text: String,
     enabled: Boolean = true,
-    shape: Shape = MaterialTheme.shapes.small,
-    contentPadding: PaddingValues = ButtonDefaults.ContentPadding,
-    colors: ButtonColors = ButtonDefaults.outlinedButtonColors(),
+    shape: androidx.compose.ui.graphics.Shape =
+        androidx.compose.material3.MaterialTheme.shapes.small,
+    contentPadding: androidx.compose.foundation.layout.PaddingValues =
+        androidx.compose.material3.ButtonDefaults.ContentPadding,
+    colors: androidx.compose.material3.ButtonColors =
+        androidx.compose.material3.ButtonDefaults.outlinedButtonColors(),
 ) {
-    OutlinedButton(
-        modifier = modifier,
-        enabled = enabled,
-        shape = shape,
-        colors = colors,
-        contentPadding = contentPadding,
-        onClick = onClick,
-    ) {
-        if (icon != null) {
-            Icon(
-                modifier = Modifier
-                    .padding(end = ButtonDefaults.IconSpacing)
-                    .size(ButtonDefaults.IconSize),
-                imageVector = icon,
-                contentDescription = null,
-            )
-        }
-        Text(text = text)
-    }
+    androidx.compose.material3.OutlinedButton(
+        onClick = onClick, modifier = modifier, enabled = enabled,
+        shape = shape, colors = colors, contentPadding = contentPadding,
+    ) { ButtonLabel(icon, text) }
 }
 
-@Composable
+/** Text-only low-emphasis button with an optional leading [icon]. */
+@androidx.compose.runtime.Composable
 fun DrsTextButton(
     onClick: () -> Unit,
-    modifier: Modifier = Modifier,
-    icon: ImageVector? = null,
+    modifier: androidx.compose.ui.Modifier = androidx.compose.ui.Modifier,
+    icon: androidx.compose.ui.graphics.vector.ImageVector? = null,
     text: String,
     enabled: Boolean = true,
-    shape: Shape = ButtonDefaults.shape,
-    contentPadding: PaddingValues = ButtonDefaults.TextButtonContentPadding,
-    colors: ButtonColors = ButtonDefaults.textButtonColors(),
+    shape: androidx.compose.ui.graphics.Shape = androidx.compose.material3.ButtonDefaults.shape,
+    contentPadding: androidx.compose.foundation.layout.PaddingValues =
+        androidx.compose.material3.ButtonDefaults.TextButtonContentPadding,
+    colors: androidx.compose.material3.ButtonColors =
+        androidx.compose.material3.ButtonDefaults.textButtonColors(),
 ) {
-    TextButton(
-        modifier = modifier,
-        enabled = enabled,
-        shape = shape,
-        colors = colors,
-        contentPadding = contentPadding,
-        onClick = onClick,
-    ) {
-        if (icon != null) {
-            Icon(
-                modifier = Modifier
-                    .padding(end = ButtonDefaults.IconSpacing)
-                    .size(ButtonDefaults.IconSize),
-                imageVector = icon,
-                contentDescription = null,
-            )
-        }
-        Text(text = text)
-    }
+    androidx.compose.material3.TextButton(
+        onClick = onClick, modifier = modifier, enabled = enabled,
+        shape = shape, colors = colors, contentPadding = contentPadding,
+    ) { ButtonLabel(icon, text) }
 }
 
-@Composable
+/**
+ * Icon-only button; [contentDescription] feeds TalkBack (a DRS v1.28.0 audit
+ * fix — the old implicit null made buttons announce nothing at all), while
+ * disabled icons render at the Material disabled-content alpha 0.38.
+ */
+@androidx.compose.runtime.Composable
 fun DrsIconButton(
     onClick: () -> Unit,
-    modifier: Modifier = Modifier,
-    icon: ImageVector,
+    modifier: androidx.compose.ui.Modifier = androidx.compose.ui.Modifier,
+    icon: androidx.compose.ui.graphics.vector.ImageVector,
     enabled: Boolean = true,
-    iconModifier: Modifier = Modifier,
-    iconColor: Color = Color.Unspecified,
-    // DRS v1.28.0 audit fix (High, a11y): the implicit contentDescription = null
-    // made the settings back button (and every other DrsIconButton) invisible
-    // to TalkBack — it announced nothing at all. Callers can now supply a
-    // localized label; null stays valid for genuinely decorative icon buttons.
+    iconModifier: androidx.compose.ui.Modifier = androidx.compose.ui.Modifier,
+    iconColor: androidx.compose.ui.graphics.Color = androidx.compose.ui.graphics.Color.Unspecified,
     contentDescription: String? = null,
 ) {
-    IconButton(
-        modifier = modifier,
-        enabled = enabled,
-        onClick = onClick,
+    androidx.compose.material3.IconButton(
+        onClick = onClick, modifier = modifier, enabled = enabled,
     ) {
-        // DRS a11y/i18n/ux (r0-I): 0.14 was nearly invisible (an unclear
-        // state at best); 0.38 is the Material disabled-content alpha spec,
-        // keeping the icon legible while still reading as "off".
         val contentAlpha = if (enabled) 1f else 0.38f
-        val contentColor = iconColor.takeOrElse { LocalContentColor.current }.copy(alpha = contentAlpha)
-        CompositionLocalProvider(
-            LocalContentColor provides contentColor,
+        val contentColor = iconColor
+            .takeOrElse { androidx.compose.material3.LocalContentColor.current }
+            .copy(alpha = contentAlpha)
+        androidx.compose.runtime.CompositionLocalProvider(
+            androidx.compose.material3.LocalContentColor provides contentColor,
         ) {
-            Icon(
-                modifier = iconModifier,
-                imageVector = icon,
+            androidx.compose.material3.Icon(
+                imageVector = icon, modifier = iconModifier,
                 contentDescription = contentDescription,
             )
         }
     }
 }
 
-@Composable
+/**
+ * Arbitrary-content pressable box styled like an icon button, extended with
+ * long-press support; shape, colors and size are fully caller-controlled.
+ * Layout follows the material3 IconButton reference implementation.
+ */
+@androidx.compose.runtime.Composable
 fun DrsIconButton(
     onClick: () -> Unit,
     onLongClick: (() -> Unit)? = null,
-    modifier: Modifier = Modifier,
+    modifier: androidx.compose.ui.Modifier = androidx.compose.ui.Modifier,
     enabled: Boolean = true,
-    colors: IconButtonColors = IconButtonDefaults.iconButtonColors(),
-    interactionSource: MutableInteractionSource? = null,
-    shape: Shape = IconButtonDefaults.standardShape,
-    size: DpSize = DpSize(52.dp, 30.dp),
-    // DRS a11y/i18n/ux (r0-F): the content-box overload could not express an accessibility label at
-    // all (the Icon overload already takes one). The optional label is set as semantics on the
-    // clickable Box so it merges with the child content semantics.
+    colors: androidx.compose.material3.IconButtonColors =
+        androidx.compose.material3.IconButtonDefaults.iconButtonColors(),
+    interactionSource: androidx.compose.foundation.interaction.MutableInteractionSource? = null,
+    shape: androidx.compose.ui.graphics.Shape =
+        androidx.compose.material3.IconButtonDefaults.standardShape,
+    size: androidx.compose.ui.unit.DpSize = androidx.compose.ui.unit.DpSize(52.dp, 30.dp),
     contentDescription: String? = null,
-    content: @Composable () -> Unit,
+    content: @androidx.compose.runtime.Composable () -> Unit,
 ) {
-    // This is a modified version of https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:compose/material3/material3/src/commonMain/kotlin/androidx/compose/material3/IconButton.kt;l=235-266;drc=e6d33dd5d0a60001a5784d84123b05308d35f410
-    // adding longClick functionality
-    val interactionSource = interactionSource ?: remember { MutableInteractionSource() }
-    Box(
-        modifier =
-            modifier
-                .size(size)
-                .clip(shape)
-                .background(
-                    color = if (enabled) {
-                        colors.containerColor
-                    } else {
-                        colors.disabledContainerColor
-                    },
-                    shape = shape
-                )
-                .semantics {
-                    if (contentDescription != null) {
-                        this.contentDescription = contentDescription
-                    }
+    val source = interactionSource ?: androidx.compose.runtime.remember {
+        androidx.compose.foundation.interaction.MutableInteractionSource()
+    }
+    val containerColor = when {
+        enabled -> colors.containerColor
+        else -> colors.disabledContainerColor
+    }
+    val innerColor = when {
+        enabled -> colors.contentColor
+        else -> colors.disabledContentColor
+    }
+    androidx.compose.foundation.layout.Box(
+        contentAlignment = androidx.compose.ui.Alignment.Center,
+        modifier = modifier
+            .size(size = size)
+            .clip(shape)
+            .background(color = containerColor, shape = shape)
+            .semantics {
+                if (contentDescription != null) {
+                    this.contentDescription = contentDescription
                 }
-                .combinedClickable(
-                    onClick = onClick,
-                    onLongClick = onLongClick,
-                    enabled = enabled,
-                    role = Role.Button,
-                    interactionSource = interactionSource,
-                    indication = ripple(),
-                ),
-                //TODO: I don't know how we could emulate something like this
-                //.childSemantics(),
-        contentAlignment = Alignment.Center,
+            }
+            .combinedClickable(
+                onClick = onClick, onLongClick = onLongClick, enabled = enabled,
+                role = androidx.compose.ui.semantics.Role.Button,
+                interactionSource = source, indication = androidx.compose.material3.ripple(),
+            ),
     ) {
-        val contentColor = if (enabled) {
-            colors.contentColor
-        } else {
-            colors.disabledContentColor
-        }
-        CompositionLocalProvider(LocalContentColor provides contentColor, content = content)
+        androidx.compose.runtime.CompositionLocalProvider(
+            androidx.compose.material3.LocalContentColor provides innerColor,
+            content = content,
+        )
     }
 }

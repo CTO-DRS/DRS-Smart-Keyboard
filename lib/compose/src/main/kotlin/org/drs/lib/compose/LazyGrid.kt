@@ -16,14 +16,16 @@
 
 package org.drs.lib.compose
 
-import androidx.compose.foundation.lazy.grid.GridItemSpan
-import androidx.compose.foundation.lazy.grid.LazyGridItemScope
-import androidx.compose.foundation.lazy.grid.LazyGridScope
-import androidx.compose.runtime.Composable
-
-fun LazyGridScope.header(
+/**
+ * Emits a single grid item stretched across the current line's full span,
+ * usable as a section header inside lazy grids; [key] enables stable
+ * identity and state retention across recompositions.
+ */
+fun androidx.compose.foundation.lazy.grid.LazyGridScope.header(
     key: Any? = null,
-    content: @Composable LazyGridItemScope.() -> Unit,
-) {
-    item(key, span = { GridItemSpan(this.maxLineSpan) }, content = content)
-}
+    content: @androidx.compose.runtime.Composable androidx.compose.foundation.lazy.grid.LazyGridItemScope.() -> Unit,
+) = item(
+    key = key,
+    span = { androidx.compose.foundation.lazy.grid.GridItemSpan(this.maxLineSpan) },
+    content = content,
+)

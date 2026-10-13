@@ -16,52 +16,47 @@
 
 package org.drs.lib.compose
 
-import android.graphics.Canvas
-import android.graphics.drawable.Drawable
-import androidx.annotation.DrawableRes
-import androidx.compose.foundation.Image
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.asImageBitmap
-import androidx.compose.ui.platform.LocalContext
-import androidx.core.content.res.ResourcesCompat
-import androidx.core.graphics.createBitmap
 
-@Composable
+/**
+ * Renders a vector/bitmap drawable resource as a compose image by rasterizing
+ * it onto an ARGB bitmap first; [iconId] resolves against the ambient context.
+ */
+@androidx.compose.runtime.Composable
 fun DrsCanvasIcon(
-    @DrawableRes iconId: Int,
-    modifier: Modifier = Modifier,
-    contentDescription: String? = null,
+    @androidx.annotation.DrawableRes iconId: Int,
+    modifier: androidx.compose.ui.Modifier = androidx.compose.ui.Modifier, contentDescription: String? = null,
 ) {
-    ResourcesCompat.getDrawable(
-        LocalContext.current.resources,
-        iconId,
-        null,
-    )?.let { drawable ->
-        DrsCanvasIcon(
-            drawable = drawable,
-            modifier = modifier,
-            contentDescription = contentDescription,
-        )
+    val drawable = androidx.core.content.res.ResourcesCompat.getDrawable(
+        androidx.compose.ui.platform.LocalContext.current.resources,
+        iconId, null,
+    )
+    if (drawable != null) {
+        DrsCanvasIcon(drawable, modifier, contentDescription)
     }
 }
 
-@Composable
+/**
+ * Rasterizes [drawable] at its intrinsic size and displays it; use this
+ * overload when the drawable instance is already available at the call site.
+ */
+@androidx.compose.runtime.Composable
 fun DrsCanvasIcon(
-    drawable: Drawable,
-    modifier: Modifier = Modifier,
-    contentDescription: String? = null,
+    drawable: android.graphics.drawable.Drawable,
+    modifier: androidx.compose.ui.Modifier = androidx.compose.ui.Modifier, contentDescription: String? = null,
 ) {
-    val bitmap = createBitmap(
-        width = drawable.intrinsicWidth,
-        height = drawable.intrinsicHeight,
+    val width = drawable.intrinsicWidth
+    val height = drawable.intrinsicHeight
+    val bitmap = android.graphics.Bitmap.createBitmap(
+        width, height, android.graphics.Bitmap.Config.ARGB_8888,
     )
-    val canvas = Canvas(bitmap)
-    drawable.setBounds(0, 0, canvas.width, canvas.height)
-    drawable.draw(canvas)
-    Image(
-        modifier = modifier,
-        bitmap = bitmap.asImageBitmap(),
-        contentDescription = contentDescription,
+    val canvas = android.graphics.Canvas(bitmap)
+    drawable.run {
+        setBounds(0, 0, bitmap.width, bitmap.height)
+        draw(canvas)
+    }
+    val image = bitmap.asImageBitmap()
+    androidx.compose.foundation.Image(
+        modifier = modifier, bitmap = image, contentDescription = contentDescription,
     )
 }

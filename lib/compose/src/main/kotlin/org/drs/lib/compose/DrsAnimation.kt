@@ -16,41 +16,40 @@
 
 package org.drs.lib.compose
 
-import androidx.compose.animation.EnterTransition
-import androidx.compose.animation.ExitTransition
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.expandHorizontally
-import androidx.compose.animation.expandVertically
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.shrinkHorizontally
-import androidx.compose.animation.shrinkVertically
-import androidx.compose.ui.Alignment
-
-fun EnterTransition.Companion.verticalTween(
+/** Shared tween curve for all directional enter/exit transitions below. */
+private fun <T> drsTransitionSpec(
     duration: Int,
-    expandFrom: Alignment.Vertical = Alignment.Bottom,
-): EnterTransition {
-    return fadeIn(tween(duration)) + expandVertically(tween(duration), expandFrom)
-}
+): androidx.compose.animation.core.FiniteAnimationSpec<T> =
+    androidx.compose.animation.core.tween(duration)
 
-fun ExitTransition.Companion.verticalTween(
+/** Fades in while expanding vertically from [expandFrom]. */
+fun androidx.compose.animation.EnterTransition.Companion.verticalTween(
     duration: Int,
-    shrinkTowards: Alignment.Vertical = Alignment.Bottom,
-): ExitTransition {
-    return fadeOut(tween(duration)) + shrinkVertically(tween(duration), shrinkTowards)
-}
+    expandFrom: androidx.compose.ui.Alignment.Vertical = androidx.compose.ui.Alignment.Bottom,
+): androidx.compose.animation.EnterTransition =
+    androidx.compose.animation.fadeIn(drsTransitionSpec(duration)) +
+        androidx.compose.animation.expandVertically(drsTransitionSpec(duration), expandFrom)
 
-fun EnterTransition.Companion.horizontalTween(
+/** Fades in while expanding horizontally from [expandFrom]. */
+fun androidx.compose.animation.EnterTransition.Companion.horizontalTween(
     duration: Int,
-    expandFrom: Alignment.Horizontal = Alignment.End,
-): EnterTransition {
-    return fadeIn(tween(duration)) + expandHorizontally(tween(duration), expandFrom)
-}
+    expandFrom: androidx.compose.ui.Alignment.Horizontal = androidx.compose.ui.Alignment.End,
+): androidx.compose.animation.EnterTransition =
+    androidx.compose.animation.fadeIn(drsTransitionSpec(duration)) +
+        androidx.compose.animation.expandHorizontally(drsTransitionSpec(duration), expandFrom)
 
-fun ExitTransition.Companion.horizontalTween(
+/** Fades out while shrinking vertically towards [shrinkTowards]. */
+fun androidx.compose.animation.ExitTransition.Companion.verticalTween(
     duration: Int,
-    shrinkTowards: Alignment.Horizontal = Alignment.End,
-): ExitTransition {
-    return fadeOut(tween(duration)) + shrinkHorizontally(tween(duration), shrinkTowards)
-}
+    shrinkTowards: androidx.compose.ui.Alignment.Vertical = androidx.compose.ui.Alignment.Bottom,
+): androidx.compose.animation.ExitTransition =
+    androidx.compose.animation.fadeOut(drsTransitionSpec(duration)) +
+        androidx.compose.animation.shrinkVertically(drsTransitionSpec(duration), shrinkTowards)
+
+/** Fades out while shrinking horizontally towards [shrinkTowards]. */
+fun androidx.compose.animation.ExitTransition.Companion.horizontalTween(
+    duration: Int,
+    shrinkTowards: androidx.compose.ui.Alignment.Horizontal = androidx.compose.ui.Alignment.End,
+): androidx.compose.animation.ExitTransition =
+    androidx.compose.animation.fadeOut(drsTransitionSpec(duration)) +
+        androidx.compose.animation.shrinkHorizontally(drsTransitionSpec(duration), shrinkTowards)
