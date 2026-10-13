@@ -1,1 +1,5 @@
+# DRS Smart Keyboard — :lib:android module ignores.
+# /build is the standard AGP output directory for this module.
+# Kept as the canonical generic template (documented exception:
+# build scaffolding may remain generic per cleanup protocol).
 /build

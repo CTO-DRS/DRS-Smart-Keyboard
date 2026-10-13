@@ -1,9 +1,9 @@
 file,upstream_ref,verdict,similarity_pct,note
-lib/android/.gitignore,-,build-file,,no counterpart >= 0.50
-lib/android/build.gradle.kts,floris@fe1241f:lib/android/build.gradle.kts,build-file,89.1,canonical=89.1%
-lib/android/consumer-rules.pro,-,build-file,,no counterpart >= 0.50
-lib/android/proguard-rules.pro,-,build-file,,no counterpart >= 0.50
-lib/android/src/main/AndroidManifest.xml,-,build-file,,no counterpart >= 0.50
+lib/android/.gitignore,floris@fe1241f:lib/android/.gitignore,build-file,20.0,documented-exception: generic template kept + DRS header (before=100.0)
+lib/android/build.gradle.kts,floris@fe1241f:lib/android/build.gradle.kts,rewritten-phase4,17.6,canonical=89.1%→17.6%
+lib/android/consumer-rules.pro,floris@fe1241f:lib/android/consumer-rules.pro,build-file,0.0,empty-by-design (before=after=0 lines)
+lib/android/proguard-rules.pro,floris@fe1241f:lib/android/proguard-rules.pro,rewritten-phase4,12.5,template→DRS-documentation (before=100.0)
+lib/android/src/main/AndroidManifest.xml,floris@fe1241f:lib/android/src/main/AndroidManifest.xml,rewritten-phase4,20.0,canonical=100.0%→20.0%
 lib/android/src/main/kotlin/org/drs/lib/android/AndroidAssetsManager.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/AndroidAssetsManager.kt,rewritten-phase4,22.5,canonical=100.0%→22.5%
 lib/android/src/main/kotlin/org/drs/lib/android/AndroidClipboardManager.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/AndroidClipboardManager.kt,rewritten-phase4,9.1,canonical=100.0%→9.1%
 lib/android/src/main/kotlin/org/drs/lib/android/AndroidInternalR.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/AndroidInternalR.kt,rewritten-phase4,10.5,canonical=100.0%→10.5%
