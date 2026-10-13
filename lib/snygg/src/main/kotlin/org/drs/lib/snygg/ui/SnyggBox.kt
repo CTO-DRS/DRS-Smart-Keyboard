@@ -128,29 +128,3 @@ fun SnyggBox(
     }
 }
 
-@Preview
-@Composable
-private fun SimpleSnyggBox() {
-    val stylesheet = SnyggStylesheet.v2 {
-        "preview-surface" {
-            background = rgbaColor(255, 255, 255)
-            foreground = rgbaColor(255, 0, 0)
-            padding = padding(10.dp)
-            shape = roundedCornerShape(20)
-            clip = yes()
-        }
-        "preview-text" {
-            fontSize = fontSize(12.sp)
-        }
-    }
-    val theme = rememberSnyggTheme(stylesheet)
-
-    ProvideSnyggTheme(theme) {
-        SnyggBox("preview-surface") {
-            SnyggColumn("column") {
-                SnyggText("preview-text", text = "hello world")
-                SnyggText("preview-text", text = "second text")
-            }
-        }
-    }
-}

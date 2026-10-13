@@ -72,25 +72,3 @@ fun SnyggColumn(
     }
 }
 
-@Preview
-@Composable
-private fun SimpleSnyggColumn() {
-    val stylesheet = SnyggStylesheet.v2 {
-        "preview-column" {
-            background = rgbaColor(255, 255, 255)
-            foreground = rgbaColor(255, 0, 0)
-            padding = padding(10.dp)
-        }
-        "preview-text" {
-            fontSize = fontSize(12.sp)
-        }
-    }
-    val theme = rememberSnyggTheme(stylesheet)
-
-    ProvideSnyggTheme(theme) {
-        SnyggColumn("preview-column") {
-            SnyggText("preview-text", text = "hello world")
-            SnyggText("preview-text", text = "second text")
-        }
-    }
-}

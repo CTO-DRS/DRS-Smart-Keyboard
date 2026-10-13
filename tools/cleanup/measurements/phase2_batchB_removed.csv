@@ -1,0 +1,11 @@
+file,kind,name,lines
+lib/kotlin/src/main/kotlin/org/drs/lib/kotlin/Regex.kt,top-class,RegexSerializer,11
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggBox.kt,top-fun,SimpleSnyggBox,26
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggChip.kt,top-fun,SimpleSnyggChip,27
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggColumn.kt,top-fun,SimpleSnyggColumn,22
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggIcon.kt,top-fun,SimpleSnyggIcon,21
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggIconButton.kt,top-fun,SimpleSnyggIconButton,30
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggListItem.kt,top-fun,SimpleSnyggListItem,50
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggRow.kt,top-fun,SimpleSnyggRow,26
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggSpacer.kt,top-fun,SimpleSnyggSpacer,28
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggText.kt,top-fun,SimpleSnyggText,45
