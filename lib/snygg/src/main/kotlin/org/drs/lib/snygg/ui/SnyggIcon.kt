@@ -145,24 +145,3 @@ fun SnyggIcon(
     }
 }
 
-@Preview
-@Composable
-private fun SimpleSnyggIcon() {
-    val stylesheet = SnyggStylesheet.v2 {
-        "preview-column" {
-            fontSize = fontSize(20.sp)
-            foreground = rgbaColor(0, 0, 255)
-        }
-        "preview-icon" {
-            padding = padding(6.dp)
-        }
-    }
-    val theme = rememberSnyggTheme(stylesheet)
-
-    ProvideSnyggTheme(theme) {
-        SnyggColumn("preview-column") {
-            SnyggText("preview-text", text = "blue text")
-            SnyggIcon("preview-icon", imageVector = Icons.Default.Search)
-        }
-    }
-}

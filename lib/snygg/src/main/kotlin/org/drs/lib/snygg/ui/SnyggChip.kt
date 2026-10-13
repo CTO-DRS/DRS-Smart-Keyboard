@@ -116,30 +116,3 @@ internal fun SnyggChip(
     }
 }
 
-@Preview
-@Composable
-private fun SimpleSnyggChip() {
-    val stylesheet = SnyggStylesheet.v2 {
-        "preview-row" {
-            background = rgbaColor(255, 255, 255)
-            foreground = rgbaColor(255, 0, 0)
-            padding = padding(10.dp)
-        }
-        "chip" {
-            background = rgbaColor(255, 0, 0)
-            foreground = rgbaColor(255, 255, 255)
-            shape = roundedCornerShape(20, 20, 20, 20)
-        }
-    }
-    val theme = rememberSnyggTheme(stylesheet)
-
-    ProvideSnyggTheme(theme) {
-        SnyggRow("preview-row") {
-            SnyggChip(
-                elementName = "chip",
-                onClick = {},
-                text = "Hello",
-            )
-        }
-    }
-}
