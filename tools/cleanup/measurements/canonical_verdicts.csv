@@ -21,7 +21,7 @@ lib/android/src/main/kotlin/org/drs/lib/android/Toast.kt,-,drs-original,,no coun
 lib/android/src/main/kotlin/org/drs/lib/android/UriSerializer.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/UriSerializer.kt,verbatim,100.0,
 lib/android/src/main/kotlin/org/drs/lib/android/Vibrator.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/Vibrator.kt,verbatim,100.0,
 lib/color/build.gradle.kts,floris@fe1241f:lib/compose/build.gradle.kts,build-file,81.0,canonical=81.0%
-lib/color/src/main/kotlin/org/drs/lib/color/ColorMappings.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/color/ColorMappings.kt,deeply-modified,74.7,canonical=74.7%
+lib/color/src/main/kotlin/org/drs/lib/color/ColorMappings.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/color/ColorMappings.kt,rewritten-phase3,26.0,canonical=74.7%→26.0%
 lib/color/src/main/kotlin/org/drs/lib/color/ColorPalette.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/color/ColorPalette.kt,rewritten-phase3,5.6,canonical=100.0%→5.6%
 lib/color/src/main/kotlin/org/drs/lib/color/MaterialYouFlags.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/color/MaterialYouFlags.kt,verbatim,100.0,
 lib/compose/build.gradle.kts,floris@fe1241f:lib/compose/build.gradle.kts,build-file,86.0,canonical=86.0%
