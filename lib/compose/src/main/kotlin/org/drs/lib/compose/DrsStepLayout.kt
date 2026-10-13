@@ -16,236 +16,215 @@
 
 package org.drs.lib.compose
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.animation.core.Spring
-import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.core.spring
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ColumnScope
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.material3.contentColorFor
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.State
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.key
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.saveable.Saver
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
+import androidx.compose.foundation.layout.*
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.PathEffect
-import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 
-private val StepHeaderPaddingVertical = 8.dp
-private val StepHeaderNumberBoxSize = 40.dp
-private val StepHeaderNumberBoxPaddingEnd = 16.dp
-private val StepHeaderTextBoxHeight = 32.dp
-private val StepHeaderTextInnerPaddingHorizontal = 16.dp
+private val stepHeaderVerticalPad = 8.dp
+private val stepBadgeDiameter = 40.dp
+private val stepBadgeGap = 16.dp
+private val stepTitleBoxHeight = 32.dp
+private val stepTitleInnerPad = 16.dp
 
+/** One wizard step: a stable [id], a [title], and composable [content]. */
 data class DrsStep(
-    val id: Int,
-    val title: String,
-    val content: @Composable DrsStepLayoutScope.() -> Unit,
+    val id: Int, val title: String,
+    val content: @androidx.compose.runtime.Composable DrsStepLayoutScope.() -> Unit,
 )
 
+/** Scope handed to step headers/contents, tinting buttons with the accent. */
 class DrsStepLayoutScope(
-    columnScope: ColumnScope,
-    private val primaryColor: Color,
-) : ColumnScope by columnScope {
+    columnScope: androidx.compose.foundation.layout.ColumnScope,
+    private val primaryColor: androidx.compose.ui.graphics.Color,
+) : androidx.compose.foundation.layout.ColumnScope by columnScope {
 
-    @Composable
-    fun StepText(
-        text: String,
-        modifier: Modifier = Modifier,
-        fontStyle: FontStyle = FontStyle.Normal,
+    /** Justified body text for instruction copy. */
+    @androidx.compose.runtime.Composable
+    fun StepText(text: String,
+        modifier: androidx.compose.ui.Modifier = androidx.compose.ui.Modifier,
+        fontStyle: androidx.compose.ui.text.font.FontStyle =
+            androidx.compose.ui.text.font.FontStyle.Normal,
     ) {
-        Text(
-            modifier = modifier,
-            text = text,
-            textAlign = TextAlign.Justify,
-            fontStyle = fontStyle,
+        androidx.compose.material3.Text(
+            text = text, textAlign = androidx.compose.ui.text.style.TextAlign.Justify,
+            fontStyle = fontStyle, modifier = modifier,
         )
     }
 
-    @Composable
-    fun StepButton(
-        label: String,
-        modifier: Modifier = Modifier,
+    /** Accent-filled primary action of the current step. */
+    @androidx.compose.runtime.Composable
+    fun StepButton(label: String,
+        modifier: androidx.compose.ui.Modifier = androidx.compose.ui.Modifier,
         onClick: () -> Unit,
     ) {
-        Button(
+        androidx.compose.material3.Button(
+            colors = androidx.compose.material3.ButtonDefaults.buttonColors(
+                containerColor = primaryColor),
             modifier = modifier
-                .align(Alignment.CenterHorizontally)
-                .padding(top = 16.dp),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = primaryColor,
-            ),
+                .align(androidx.compose.ui.Alignment.CenterHorizontally).padding(top = 16.dp),
             onClick = onClick,
         ) {
-            Text(text = label)
+            androidx.compose.material3.Text(text = label)
         }
     }
 }
 
-@Suppress("unused")
-class DrsStepState private constructor(
-    private val currentAuto: MutableState<Int>,
-    private val currentManual: MutableState<Int> = mutableIntStateOf(-1),
+/**
+ * Tracks the automatic step progression plus an optional manual override;
+ * the manual value wins while it is at or after the automatic position.
+ */
+@Suppress("unused") class DrsStepState private constructor(
+    private val currentAuto: androidx.compose.runtime.MutableState<Int>,
+    private val currentManual: androidx.compose.runtime.MutableState<Int> =
+        androidx.compose.runtime.mutableIntStateOf(-1),
 ) {
     companion object {
-        fun new(init: Int) = DrsStepState(mutableIntStateOf(init))
+        fun new(init: Int): DrsStepState =
+            DrsStepState(androidx.compose.runtime.mutableIntStateOf(init))
 
-        val Saver = Saver<DrsStepState, ArrayList<Int>>(
-            save = {
-                arrayListOf(it.currentAuto.value, it.currentManual.value)
-            },
-            restore = {
-                DrsStepState(mutableIntStateOf(it[0]), mutableIntStateOf(it[1]))
-            },
-        )
+        val Saver: androidx.compose.runtime.saveable.Saver<DrsStepState, ArrayList<Int>> =
+            androidx.compose.runtime.saveable.Saver(
+                save = { state ->
+                    arrayListOf(state.currentAuto.value, state.currentManual.value)
+                },
+                restore = { saved ->
+                    DrsStepState(
+                        androidx.compose.runtime.mutableIntStateOf(saved[0]),
+                        androidx.compose.runtime.mutableIntStateOf(saved[1]),
+                    )
+                },
+            )
     }
 
-    fun getCurrent(): State<Int> {
-        return if (currentManual.value >= 0 && currentAuto.value >= currentManual.value) {
-            currentManual
-        } else {
-            currentAuto
+    /** The effective step: manual override if active, automatic otherwise. */
+    fun getCurrent(): androidx.compose.runtime.State<Int> {
+        return when {
+            currentManual.value >= 0 && currentAuto.value >= currentManual.value -> currentManual
+            else -> currentAuto
         }
     }
 
-    fun getCurrentAuto(): State<Int> = currentAuto
+    fun getCurrentAuto(): androidx.compose.runtime.State<Int> = currentAuto
 
-    fun getCurrentManual(): State<Int> = currentManual
+    fun getCurrentManual(): androidx.compose.runtime.State<Int> = currentManual
 
-    fun setCurrentAuto(value: Int) {
-        currentAuto.value = value
-    }
+    /** Advances (or rewinds) the automatic progression to [value]. */
+    fun setCurrentAuto(value: Int) { currentAuto.value = value }
 
+    /** Pins a manual step, or clears the pin when it equals the automatic one. */
     fun setCurrentManual(value: Int) {
-        if (currentAuto.value == value) {
-            currentManual.value = -1
-        } else {
-            currentManual.value = value
+        currentManual.value = when {
+            currentAuto.value == value -> -1
+            else -> value
         }
     }
 }
 
-@Composable
+/**
+ * Vertical wizard: renders [header], then every step from [steps] with its
+ * numbered pill header, expanding only the active step between them, then
+ * [footer]. Steps are keyed by [DrsStep.id] to preserve state.
+ */
+@androidx.compose.runtime.Composable
 fun DrsStepLayout(
     stepState: DrsStepState,
     steps: List<DrsStep>,
-    modifier: Modifier = Modifier,
-    primaryColor: Color = MaterialTheme.colorScheme.primary,
-    header: @Composable DrsStepLayoutScope.() -> Unit = { },
-    footer: @Composable DrsStepLayoutScope.() -> Unit = { },
+    modifier: androidx.compose.ui.Modifier = androidx.compose.ui.Modifier,
+    primaryColor: androidx.compose.ui.graphics.Color =
+        androidx.compose.material3.MaterialTheme.colorScheme.primary,
+    header: @androidx.compose.runtime.Composable DrsStepLayoutScope.() -> Unit = { },
+    footer: @androidx.compose.runtime.Composable DrsStepLayoutScope.() -> Unit = { },
 ) {
-    Column(
-        modifier = modifier.fillMaxSize()
+    androidx.compose.foundation.layout.Column(
+        modifier = modifier.fillMaxSize(),
     ) {
         val scope = DrsStepLayoutScope(this, primaryColor)
-        header(scope)
-        for ((index, step) in steps.withIndex()) {
-            key(step.id) {
+        header.invoke(scope)
+        steps.forEachIndexed { index, step ->
+            androidx.compose.runtime.key(step.id) {
                 Step(
-                    ownStepId = step.id,
-                    index = index + 1, // Start numbering with 1
-                    stepState = stepState,
-                    title = step.title,
-                    primaryColor = primaryColor,
+                    ownStepId = step.id, index = index + 1,
+                    stepState = stepState, title = step.title, primaryColor = primaryColor,
                 ) {
                     step.content(DrsStepLayoutScope(this, primaryColor))
                 }
             }
         }
-        footer(scope)
+        footer.invoke(scope)
     }
 }
 
-@OptIn(ExperimentalAnimationApi::class)
-@Composable
-private fun ColumnScope.Step(
-    ownStepId: Int,
-    index: Int,
-    stepState: DrsStepState,
-    title: String,
-    primaryColor: Color,
-    content: @Composable ColumnScope.() -> Unit,
+@kotlin.OptIn(androidx.compose.animation.ExperimentalAnimationApi::class)
+@androidx.compose.runtime.Composable
+private fun androidx.compose.foundation.layout.ColumnScope.Step(
+    ownStepId: Int, index: Int, stepState: DrsStepState, title: String,
+    primaryColor: androidx.compose.ui.graphics.Color,
+    content: @androidx.compose.runtime.Composable
+        androidx.compose.foundation.layout.ColumnScope.() -> Unit,
 ) {
-    val currentStepId by stepState.getCurrent()
-    val autoStepId by stepState.getCurrentAuto()
-    val backgroundColor = when (ownStepId) {
+    val currentStepId = stepState.getCurrent().value
+    val autoStepId = stepState.getCurrentAuto().value
+    val contentVisible = currentStepId == ownStepId
+    val stepTint = when (ownStepId) {
         currentStepId -> primaryColor
         else -> primaryColor.copy(alpha = 0.38f)
     }
-    val contentVisible = ownStepId == currentStepId
     StepHeader(
+        backgroundColor = stepTint,
+        step = index, title = title,
         modifier = when {
-            ownStepId <= autoStepId -> Modifier
-                .clickable(enabled = !contentVisible) { stepState.setCurrentManual(ownStepId) }
-            else -> Modifier.alpha(0.38f)
+            ownStepId <= autoStepId ->
+                androidx.compose.ui.Modifier.clickable(enabled = !contentVisible) {
+                    stepState.setCurrentManual(ownStepId)
+                }
+            else -> androidx.compose.ui.Modifier.alpha(alpha = 0.38f)
         },
-        backgroundColor = backgroundColor,
-        step = index,
-        title = title,
     )
-    val animSpec = spring<Float>(stiffness = Spring.StiffnessMedium)
-    val weight by animateFloatAsState(
+    val animSpec = androidx.compose.animation.core.spring<Float>(
+        stiffness = androidx.compose.animation.core.Spring.StiffnessMedium,
+    )
+    val weight = androidx.compose.animation.core.animateFloatAsState(
         targetValue = if (contentVisible) 1.0f else 0.00001f,
         animationSpec = animSpec,
-    )
-    AnimatedVisibility(
-        modifier = Modifier
-            .fillMaxWidth()
-            .weight(weight),
+    ).value
+    androidx.compose.animation.AnimatedVisibility(
         visible = contentVisible,
-        enter = fadeIn(animationSpec = animSpec),
-        exit = fadeOut(animationSpec = animSpec),
+        enter = androidx.compose.animation.fadeIn(animationSpec = animSpec),
+        exit = androidx.compose.animation.fadeOut(animationSpec = animSpec),
+        modifier = androidx.compose.ui.Modifier
+            .fillMaxWidth()
+            .weight(weight = weight),
     ) {
-        val onBackground = MaterialTheme.colorScheme.onSurface
-        Box(
-            modifier = Modifier
+        val onBackground = androidx.compose.material3.MaterialTheme.colorScheme.onSurface
+        androidx.compose.foundation.layout.Box(
+            modifier = androidx.compose.ui.Modifier
                 .padding(start = 56.dp)
                 .drawBehind {
                     val strokeWidth = 2.dp
-                    val x = -(StepHeaderNumberBoxPaddingEnd + (StepHeaderNumberBoxSize / 2 - strokeWidth / 2))
+                    val connectorX = -(stepBadgeGap +
+                        (stepBadgeDiameter / 2 - strokeWidth / 2))
                     drawLine(
                         color = onBackground,
-                        start = Offset(x.toPx(), 0f),
-                        end = Offset(x.toPx(), size.height),
+                        start = androidx.compose.ui.geometry.Offset(connectorX.toPx(), 0f),
+                        end = androidx.compose.ui.geometry.Offset(
+                            connectorX.toPx(), size.height,
+                        ),
                         strokeWidth = strokeWidth.toPx(),
-                        pathEffect = PathEffect.dashPathEffect(floatArrayOf(2.dp.toPx(), 10.dp.toPx())),
+                        pathEffect = androidx.compose.ui.graphics.PathEffect.dashPathEffect(
+                            floatArrayOf(2.dp.toPx(), 10.dp.toPx()),
+                        ),
                         alpha = 0.12f,
                     )
-                },
-        ) {
-            Column(modifier = Modifier
-                .fillMaxSize()
-                .drsVerticalScroll()
-                .padding(end = 8.dp),
+                }) {
+            androidx.compose.foundation.layout.Column(
+                modifier = androidx.compose.ui.Modifier
+                    .fillMaxSize()
+                    .drsVerticalScroll()
+                    .padding(end = 8.dp),
             ) {
                 content()
             }
@@ -253,48 +232,46 @@ private fun ColumnScope.Step(
     }
 }
 
-@Composable
+@androidx.compose.runtime.Composable
 private fun StepHeader(
-    modifier: Modifier = Modifier,
-    backgroundColor: Color,
-    contentColor: Color = contentColorFor(backgroundColor),
-    step: Int,
-    title: String,
+    modifier: androidx.compose.ui.Modifier = androidx.compose.ui.Modifier,
+    backgroundColor: androidx.compose.ui.graphics.Color,
+    contentColor: androidx.compose.ui.graphics.Color =
+        androidx.compose.material3.contentColorFor(backgroundColor),
+    step: Int, title: String,
 ) {
-    Row(
-        modifier = modifier
-            .padding(vertical = StepHeaderPaddingVertical),
-        verticalAlignment = Alignment.CenterVertically,
+    androidx.compose.foundation.layout.Row(
+        verticalAlignment = androidx.compose.ui.Alignment.CenterVertically,
+        modifier = modifier.padding(vertical = stepHeaderVerticalPad),
     ) {
-        Box(
-            modifier = Modifier
-                .padding(end = StepHeaderNumberBoxPaddingEnd)
-                .size(StepHeaderNumberBoxSize)
-                .clip(CircleShape)
-                .background(backgroundColor),
+        androidx.compose.foundation.layout.Box(
+            modifier = androidx.compose.ui.Modifier
+                .padding(end = stepBadgeGap)
+                .size(size = stepBadgeDiameter)
+                .clip(androidx.compose.foundation.shape.CircleShape)
+                .background(color = backgroundColor),
         ) {
-            Text(
-                modifier = Modifier.align(Alignment.Center),
-                text = step.toString(),
-                color = contentColor,
+            androidx.compose.material3.Text(
+                text = step.toString(), color = contentColor,
+                modifier = androidx.compose.ui.Modifier
+                    .align(alignment = androidx.compose.ui.Alignment.Center),
             )
         }
 
-        Box(
-            modifier = Modifier
-                .height(StepHeaderTextBoxHeight)
-                .weight(1.0f)
-                .clip(CircleShape)
-                .background(backgroundColor),
+        androidx.compose.foundation.layout.Box(
+            modifier = androidx.compose.ui.Modifier
+                .height(height = stepTitleBoxHeight)
+                .weight(weight = 1.0f)
+                .clip(androidx.compose.foundation.shape.CircleShape)
+                .background(color = backgroundColor),
         ) {
-            Text(
-                modifier = Modifier
-                    .align(Alignment.Center)
-                    .padding(horizontal = StepHeaderTextInnerPaddingHorizontal),
+            androidx.compose.material3.Text(
                 text = title,
-                overflow = TextOverflow.Ellipsis,
-                maxLines = 1,
-                color = contentColor,
+                overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis,
+                maxLines = 1, color = contentColor,
+                modifier = androidx.compose.ui.Modifier
+                    .align(alignment = androidx.compose.ui.Alignment.Center)
+                    .padding(horizontal = stepTitleInnerPad),
             )
         }
     }
