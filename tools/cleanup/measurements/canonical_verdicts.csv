@@ -107,7 +107,7 @@ lib/kotlin/src/main/kotlin/org/drs/lib/kotlin/GuardedByLock.kt,floris@fe1241f:li
 lib/kotlin/src/main/kotlin/org/drs/lib/kotlin/Library.kt,floris@fe1241f:lib/kotlin/src/main/kotlin/org/florisboard/lib/kotlin/Library.kt,verbatim,100.0,
 lib/kotlin/src/main/kotlin/org/drs/lib/kotlin/MimeTypeFilter.kt,floris@fe1241f:lib/kotlin/src/main/kotlin/org/florisboard/lib/kotlin/MimeTypeFilter.kt,slightly-modified,100.0,canonical=100.0%
 lib/kotlin/src/main/kotlin/org/drs/lib/kotlin/Numbers.kt,floris@fe1241f:lib/kotlin/src/main/kotlin/org/florisboard/lib/kotlin/Numbers.kt,verbatim,100.0,
-lib/kotlin/src/main/kotlin/org/drs/lib/kotlin/Regex.kt,floris@fe1241f:lib/kotlin/src/main/kotlin/org/florisboard/lib/kotlin/Regex.kt,verbatim,100.0,
+lib/kotlin/src/main/kotlin/org/drs/lib/kotlin/Regex.kt,floris@fe1241f:lib/kotlin/src/main/kotlin/org/florisboard/lib/kotlin/Regex.kt,verbatim,100.0,"phase2 cat-B: removed dead top-level decl(s), re-measured 100.0->100.0"
 lib/kotlin/src/main/kotlin/org/drs/lib/kotlin/Result.kt,floris@fe1241f:lib/kotlin/src/main/kotlin/org/florisboard/lib/kotlin/Result.kt,verbatim,100.0,
 lib/kotlin/src/main/kotlin/org/drs/lib/kotlin/Strings.kt,floris@fe1241f:lib/kotlin/src/main/kotlin/org/florisboard/lib/kotlin/Strings.kt,verbatim,100.0,
 lib/kotlin/src/main/kotlin/org/drs/lib/kotlin/io/FsFile.kt,floris@fe1241f:lib/kotlin/src/main/kotlin/org/florisboard/lib/kotlin/io/FsFile.kt,verbatim,100.0,
@@ -128,16 +128,16 @@ lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggSpecDecl.kt,floris@fe1241f:lib/
 lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggStylesheet.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/SnyggStylesheet.kt,slightly-modified,98.2,canonical=98.2%
 lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggStylesheetEditor.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/SnyggStylesheetEditor.kt,verbatim,100.0,
 lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggTheme.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/SnyggTheme.kt,verbatim,100.0,
-lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggBox.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/ui/SnyggBox.kt,deeply-modified,81.1,canonical=81.1%
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggBox.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/ui/SnyggBox.kt,deeply-modified,76.4,"canonical=81.1%; phase2 cat-B: removed dead top-level decl(s), re-measured 81.1->76.4"
 lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggButton.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/ui/SnyggButton.kt,verbatim,100.0,
-lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggChip.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/ui/SnyggChip.kt,verbatim,100.0,
-lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggColumn.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/ui/SnyggColumn.kt,verbatim,100.0,
-lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggIcon.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/ui/SnyggIcon.kt,verbatim,100.0,
-lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggIconButton.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/ui/SnyggIconButton.kt,slightly-modified,90.8,canonical=90.8%
-lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggListItem.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/ui/SnyggListItem.kt,verbatim,100.0,
-lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggRow.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/ui/SnyggRow.kt,verbatim,100.0,
-lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggSpacer.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/ui/SnyggSpacer.kt,verbatim,100.0,
-lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggText.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/ui/SnyggText.kt,verbatim,100.0,
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggChip.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/ui/SnyggChip.kt,verbatim,100.0,"phase2 cat-B: removed dead top-level decl(s), re-measured 100.0->100.0"
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggColumn.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/ui/SnyggColumn.kt,verbatim,100.0,"phase2 cat-B: removed dead top-level decl(s), re-measured 100.0->100.0"
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggIcon.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/ui/SnyggIcon.kt,verbatim,100.0,"phase2 cat-B: removed dead top-level decl(s), re-measured 100.0->100.0"
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggIconButton.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/ui/SnyggIconButton.kt,slightly-modified,87.7,"canonical=90.8%; phase2 cat-B: removed dead top-level decl(s), re-measured 90.8->87.7"
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggListItem.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/ui/SnyggListItem.kt,verbatim,100.0,"phase2 cat-B: removed dead top-level decl(s), re-measured 100.0->100.0"
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggRow.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/ui/SnyggRow.kt,verbatim,100.0,"phase2 cat-B: removed dead top-level decl(s), re-measured 100.0->100.0"
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggSpacer.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/ui/SnyggSpacer.kt,verbatim,100.0,"phase2 cat-B: removed dead top-level decl(s), re-measured 100.0->100.0"
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggText.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/ui/SnyggText.kt,verbatim,100.0,"phase2 cat-B: removed dead top-level decl(s), re-measured 100.0->100.0"
 lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggUi.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/ui/SnyggUi.kt,verbatim,100.0,
 lib/snygg/src/main/kotlin/org/drs/lib/snygg/value/SnyggAppearanceValue.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/value/SnyggAppearanceValue.kt,verbatim,100.0,
 lib/snygg/src/main/kotlin/org/drs/lib/snygg/value/SnyggFontValue.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/value/SnyggFontValue.kt,verbatim,100.0,

@@ -60,6 +60,9 @@ per module as each cleanup phase completes.
   فأُعطيا الترويسة الكانونية القياسية لjetpref (`Copyright 2025 Patrick
   Goldinger` + نص Apache-2.0) مع ضمان ثبات الجسم SHA-256، وصُحّح تصنيفهما في
   الجدول الكانوني من `drs-original` إلى `slightly-modified`.
+- **قتل المرحلة 2 (فئة أ)**: `datastore-ui/ui/TextFieldPreference.kt` (نسخة
+  مشتقة 100% من jetpref) حُذفت — 0 مراجع على مستوى المشروع كله، مؤكدة بفحص
+  الرموز والبناء الكامل.
 
 ## 3. Android Open Source Project (AOSP)
 
