@@ -337,8 +337,8 @@ TextFieldPreference موسومة deleted-phase2.
 - `THIRD_PARTY_NOTICES.md`: `lib/color` خرجت من Derived paths لقسم FlorisBoard
   عدا إفصاح `MaterialYouFlags.kt` الموثق.
 
-### المرحلة 4: android — لم تبدأ
-### المرحلة 5: compose — لم تبدأ
+### المرحلة 4: android — مكتملة (انظر القسم 4 أدناه)
+### المرحلة 5: compose — مكتملة (انظر القسم 5 أدناه)
 ### بعد المرحلة 5: توقف إجباري (بوابات jetpref لاحقاً بموافقة صريحة)
 
 ═══════════════════════════════════════════════════════════
@@ -417,3 +417,83 @@ unexpectedly" — أُعيد التشغيل مرة واحدة وفق بروتو�
 | 2026-10-13 | 4c (الصغار) | 36e3b2f | — | 7 ملفات + مزلقة 22 |
 | 2026-10-13 | 4d (بنية الوحدة) | e3470b3 | — | 5 ملفات بنية |
 | 2026-10-13 | 4e (إغلاق المرحلة 4) | (هذا الكومِت) | cleanup/phase4 | الحالتان الخاصتان + إشعارات + مزلقات 20-23 |
+
+═══════════════════════════════════════════════════════════
+
+## 5) المرحلة 5: lib/compose (27 ملفاً) — مكتملة
+
+البروتوكول نفسه: تمهيد كامل (purge@phase4 + JDK17.0.20.1 + SDK + المرجعان
+المثبتان + سلامة أدوات 100/100/100 + أساس أخضر 1780/0/131) ثم سبع دفعات
+إلزامية الترتيب، كل دفعة ببوابة كاملة نصية (BUILD SUCCESSFUL + exit صريح)
+ثم push فوري. الملاحظة البيئية: العمليات الخلفية تُقتل عند حدود نداءات
+الأدوات في هذه البيئة — الأبواب تُشغَّل أمامياً ضمن نافذة واحدة، وبيئة التشغيل
+أُعيد تجميدها من الصفر (JDK/gradle-home) مع بقاء المستودع والمراجع.
+
+### فخ rememberSettingState الموثق (لا ينطبق هنا)
+فحص شجري كامل: الرمز `rememberSettingState` غير موجود في `State.kt` ولا في
+الشجرة كلها (لا في floris المثبت) — المزلقة 7 من الجولة السابقة تعود لمرحلة
+jetpref القادمة. ما ينطبق فعلاً من فخها في `State.kt`: الواجهة العامة تبقى
+`State<R>` عبر التحويل الصريح، ومواقع الاستدعاء لم تتحرك سطراً (105 مستورداً
+والأبواب الخضراء هي الدليل).
+
+### المزلقات الجديدة (24–28)
+- **مزلقة 24 (FQN الامتدادات)**: الدوال/القيم الامتدادية لا تُندَى بمسار
+  مؤهل كامل (`composed`, `dp`) — الاستيراد إلزامي؛ المؤهَّل الكامل صالح فقط
+  للفئات/الدوال العليا/الكائنات (`DisposableEffect`, `LocalContext.current`).
+- **مزلقة 25 (نوع مواصفة الحركة)**: `expandVertically/shrinkHorizontally…`
+  تحرّك `IntSize` لا `Float` — مساعد tween مشترك يجب أن يكون عاماً `<T>`.
+- **مزلقة 26 (أيقونات المواد)**: `Icons.Filled.ErrorOutline` وأخواتها خصائص
+  امتداد تحتاج استيراداً صريحاً؛ السلسلة المؤهلة بالكامل لا تحل الامتداد.
+- **مزلقة 27 (كائن مجهول في composable عامة)**: كائن مجهول داخل دالة
+  `@Composable` عامة `<R>` ينهار استنتاجه (`<anonymous><R>`) ولا يجتاز
+  الوسائط — العلاج: كلاس خاص مسمى + `this@fun` لمستقبِل الامتداد داخل
+  `DisposableEffect`.
+- **مزلقة 28 (تسلسل observers)**: `DefaultLifecycleObserver` شقيق
+  `LifecycleEventObserver` (كلاهما `LifecycleObserver`) لا ابنه — الوسيط
+  المشترك للفصل/الإزالة يجب أن يكون `LifecycleObserver`.
+- مطبقة سابقاً ومجدية: 2 (maxLineSpan/`LazyGridItemSpanScope` — وثّقت عند
+  المساس بشبكات lazy)، 4 (providers.gradleProperty)، 6 (key() موضعياً —
+  معاملها keys vararg)، 7 (State<R> عبر التحويل)، 12 (إعادة daemon)، 13
+  (الضغط الجذري)، 19 (exit صريح)، 22 (أسماء stubs الجافا p0/p1 — أُبقيت
+  النداءات موضعية على addObserver/removeObserver/setBounds).
+
+### توضيحا المالك (منصوصان في THIRD_PARTY_NOTICES.md)
+1. الإفصاحان الموثقان في lib/android بالاسم المضبوط: `Toast.kt` (أصلي DRS،
+   قياسه 16.7% ضد أفضل مرشح) و`SystemSettingObserver.kt` (حرفية 100.0%
+   معفاة بمبررها الموثق).
+2. نعم: `SystemSettingObserver.kt` مذكورة فعلاً في NOTICES (فقرة المرحلة 4)
+   وستبقى 100.0% دائماً — إفصاح قانوني دائم.
+
+### دفعات المرحلة 5 (كل بوابة: BUILD SUCCESSFUL نصياً + exit=0 + 1,780/0/131)
+| الدفعة | الملفات (قبل→بعد) | commit |
+|---|---|---|
+| 5a | DpSpSizeFuns 100→10.0 + DrawScope 100→12.5 + DisposableLifecycleEffect 100→16.7 + RtlModifiers 100→26.7 + Modifier 100→5.9 + DrsBulletSpacer 95.8→28.6 + DrsChip 98.1→15.2 + DrsButtonBar 96.6→14.0 + DrsDropdownLikeButton 97.9→25.0 + ClickableModifiers 100→23.1 | 951c927 |
+| 5b | DrsCanvasIcon 92.9→14.3 + LazyGrid 100→25.0 (فخ الأرضية الخمسية) + DrsCards 87.2→24.2 + DrsButtons 92.4→26.7 + DrsAnimation 100→17.2 | 00eb8aa |
+| 5c | ScrollableModifiers 96.6→16.0 + DrsAppBar 44.4→22.5 | 2ad01c2 |
+| 5d | Resources.kt 98.9→20.9 (العملاق 1/3 — 172 مرجعاً) | e616329 |
+| 5e | DrsStepLayout.kt 93.0→25.3 (العملاق 2/3 — 190 مرجعاً) | 127ca1c |
+| 5f | State.kt 100→4.1 (العملاق 3/3 — 211 مرجعاً) | 5c062b2 |
+| 5g | build.gradle.kts 86.0→0.0 + proguard-rules.pro 100→11.1 (+ consumer فارغ 0.0 ذكراً فقط) | cd7bd02 |
+
+ملاحظات daemon: بوابات 5b و5e و5g سقطت كل واحدة مرة بـ"daemon disappeared
+unexpectedly" — أُعيد تشغيل كل منها مرة واحدة وفق فخ daemon وخضرت (مزلقة 12).
+
+### الحالات غير المكتوبة (المحميون الأربعة + consumer)
+`Tooltip.kt` و`TooltipDefaults.kt` (AOSP بترويسة مزدوجة الأصل) + `MotionScale.kt`
+(DRS أصلي) + `KeyboardForwardDelete.kt` (AOSP — فخ خاصية الامتداد ForwardDelete
+المستخدمة في ComputingEvaluator، مزلقة 8): لا ترويسة ولا كتابة ولا حذف —
+تحقق صفر-فروق ضد تاغ cleanup/phase4. `consumer-rules.pro` فارغ بالتصميم
+(0.0%) — ذكراً فقط.
+
+### الحصيلة الكانونية بعد المرحلة 5
+- `canonical_similarity.csv`: 22 صفاً للمرحلة 5 (قبل/بعد) — كلها ≤30%.
+- `canonical_verdicts.csv`: 22 صفاً → `rewritten-phase5` + المحميون الأربعة
+  كما هم + consumer بلا مقابل.
+- `THIRD_PARTY_NOTICES.md`: `lib/compose` خرجت من Derived paths تماماً —
+  يتبقى كمشتقات FlorisBoard: `lib/kotlin` و`lib/snygg`؛ ويتبقى من الإفصاحات:
+  jetpref (4 وحدات — مرحلة قادمة) + `MaterialYouFlags.kt` +
+  `SystemSettingObserver.kt`.
+
+### التوقف الإجباري بعد المرحلة 5
+لا بوابات jetpref ولا كود DrsPrefs قبل موافقة المالك الصريحة. الخطوة الموثقة
+التالية عند الموافقة: قياس مساحة API لوحدات jetpref ثم القرار.
