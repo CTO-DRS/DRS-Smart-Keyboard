@@ -88,7 +88,7 @@ lib/jetpref/datastore-ui/src/main/kotlin/org/drs/jetpref/datastore/ui/LocalTimeP
 lib/jetpref/datastore-ui/src/main/kotlin/org/drs/jetpref/datastore/ui/Preference.kt,jetpref@7a3df4e:datastore-ui/src/androidMain/kotlin/dev/patrickgold/jetpref/datastore/ui/Preference.kt,slightly-modified,100.0,canonical=100.0%
 lib/jetpref/datastore-ui/src/main/kotlin/org/drs/jetpref/datastore/ui/PreferenceUi.kt,jetpref@7a3df4e:datastore-ui/src/androidMain/kotlin/dev/patrickgold/jetpref/datastore/ui/PreferenceUi.kt,verbatim,100.0,
 lib/jetpref/datastore-ui/src/main/kotlin/org/drs/jetpref/datastore/ui/SwitchPreference.kt,jetpref@7a3df4e:datastore-ui/src/androidMain/kotlin/dev/patrickgold/jetpref/datastore/ui/SwitchPreference.kt,verbatim,100.0,
-lib/jetpref/datastore-ui/src/main/kotlin/org/drs/jetpref/datastore/ui/TextFieldPreference.kt,jetpref@7a3df4e:datastore-ui/src/androidMain/kotlin/dev/patrickgold/jetpref/datastore/ui/TextFieldPreference.kt,verbatim,100.0,
+lib/jetpref/datastore-ui/src/main/kotlin/org/drs/jetpref/datastore/ui/TextFieldPreference.kt,jetpref@7a3df4e:datastore-ui/src/androidMain/kotlin/dev/patrickgold/jetpref/datastore/ui/TextFieldPreference.kt,deleted-phase2,100.0,"category-a kill (0 refs project-wide, symbol-scan + compiler-confirmed); phase2 batch A"
 lib/jetpref/material-ui/build.gradle.kts,floris@fe1241f:lib/compose/build.gradle.kts,build-file,82.5,canonical=82.5%
 lib/jetpref/material-ui/proguard-rules.pro,-,build-file,,no counterpart >= 0.50
 lib/jetpref/material-ui/src/main/kotlin/org/drs/jetpref/material/ui/Annotations.kt,jetpref@7a3df4e:material-ui/src/androidMain/kotlin/dev/patrickgold/jetpref/material/ui/Annotations.kt,verbatim,100.0,
