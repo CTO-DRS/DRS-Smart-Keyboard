@@ -4,12 +4,12 @@ lib/android/build.gradle.kts,floris@fe1241f:lib/android/build.gradle.kts,build-f
 lib/android/consumer-rules.pro,-,build-file,,no counterpart >= 0.50
 lib/android/proguard-rules.pro,-,build-file,,no counterpart >= 0.50
 lib/android/src/main/AndroidManifest.xml,-,build-file,,no counterpart >= 0.50
-lib/android/src/main/kotlin/org/drs/lib/android/AndroidAssetsManager.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/AndroidAssetsManager.kt,verbatim,100.0,
+lib/android/src/main/kotlin/org/drs/lib/android/AndroidAssetsManager.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/AndroidAssetsManager.kt,rewritten-phase4,22.5,canonical=100.0%→22.5%
 lib/android/src/main/kotlin/org/drs/lib/android/AndroidClipboardManager.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/AndroidClipboardManager.kt,verbatim,100.0,
 lib/android/src/main/kotlin/org/drs/lib/android/AndroidInternalR.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/AndroidInternalR.kt,rewritten-phase4,10.5,canonical=100.0%→10.5%
 lib/android/src/main/kotlin/org/drs/lib/android/AndroidKeyguardManager.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/AndroidKeyguardManager.kt,verbatim,100.0,
-lib/android/src/main/kotlin/org/drs/lib/android/AndroidSettings.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/AndroidSettings.kt,verbatim,100.0,
-lib/android/src/main/kotlin/org/drs/lib/android/AndroidVersion.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/AndroidVersion.kt,verbatim,100.0,
+lib/android/src/main/kotlin/org/drs/lib/android/AndroidSettings.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/AndroidSettings.kt,rewritten-phase4,16.7,canonical=100.0%→16.7%
+lib/android/src/main/kotlin/org/drs/lib/android/AndroidVersion.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/AndroidVersion.kt,rewritten-phase4,5.7,canonical=100.0%→5.7%
 lib/android/src/main/kotlin/org/drs/lib/android/Configuration.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/Configuration.kt,verbatim,100.0,
 lib/android/src/main/kotlin/org/drs/lib/android/ContentResolver.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/ContentResolver.kt,rewritten-phase4,14.6,canonical=100.0%→30.6%→14.6%
 lib/android/src/main/kotlin/org/drs/lib/android/Context.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/Context.kt,rewritten-phase4,24.1,canonical=100.0%→24.1%
@@ -19,7 +19,7 @@ lib/android/src/main/kotlin/org/drs/lib/android/SparseArray.kt,floris@fe1241f:li
 lib/android/src/main/kotlin/org/drs/lib/android/SystemSettingObserver.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/SystemSettingObserver.kt,verbatim,100.0,
 lib/android/src/main/kotlin/org/drs/lib/android/Toast.kt,-,drs-original,,no counterpart >= 0.50
 lib/android/src/main/kotlin/org/drs/lib/android/UriSerializer.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/UriSerializer.kt,verbatim,100.0,
-lib/android/src/main/kotlin/org/drs/lib/android/Vibrator.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/Vibrator.kt,verbatim,100.0,
+lib/android/src/main/kotlin/org/drs/lib/android/Vibrator.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/Vibrator.kt,rewritten-phase4,29.2,canonical=100.0%→29.2%
 lib/color/build.gradle.kts,floris@fe1241f:lib/compose/build.gradle.kts,build-file,25.0,canonical=81.0%→25.0%
 lib/color/src/main/kotlin/org/drs/lib/color/ColorMappings.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/color/ColorMappings.kt,rewritten-phase3,26.0,canonical=74.7%→26.0%
 lib/color/src/main/kotlin/org/drs/lib/color/ColorPalette.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/color/ColorPalette.kt,rewritten-phase3,5.6,canonical=100.0%→5.6%

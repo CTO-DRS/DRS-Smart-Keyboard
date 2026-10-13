@@ -22,22 +22,38 @@ import android.os.Vibrator
 import android.os.VibratorManager
 import android.util.Log
 
-fun Context.systemVibratorOrNull(): Vibrator? {
-    return if (AndroidVersion.ATLEAST_API31_S) {
-        this.systemServiceOrNull(VibratorManager::class)?.defaultVibrator
-    } else {
-        this.systemServiceOrNull(Vibrator::class)
-    }?.takeIf { it.hasVibrator() }
+/**
+ * Returns the platform vibrator best suited for haptics on this device, or
+ * `null` when the device carries no vibrator at all. On Android 12+ the
+ * vibrator is obtained through the composited [VibratorManager]; older
+ * platforms expose the single [Vibrator] service directly.
+ */
+fun Context.systemVibratorOrNull(): Vibrator? =
+    resolvePlatformVibrator()?.takeIf { vibrator -> vibrator.hasVibrator() }
+
+private fun Context.resolvePlatformVibrator(): Vibrator? = when {
+    AndroidVersion.ATLEAST_API31_S -> systemServiceOrNull(VibratorManager::class)?.defaultVibrator
+    else -> systemServiceOrNull(Vibrator::class)
 }
 
-fun Vibrator.vibrate(duration: Int, strength: Int, factor: Double = 1.0) {
-    if (duration == 0 || strength == 0) return
-    val effectiveDuration = (duration * factor).toLong().coerceAtLeast(1L)
-    val effectiveStrength = when {
-        this.hasAmplitudeControl() -> (255.0 * ((strength * factor) / 100.0)).toInt().coerceIn(1, 255)
-        else -> VibrationEffect.DEFAULT_AMPLITUDE
+/**
+ * Plays a one-shot haptic of [duration] milliseconds scaled by [factor], with
+ * an amplitude derived from [strength] (percent) scaled by [factor] when the
+ * device supports amplitude control, falling back to the platform default
+ * amplitude otherwise. Zero duration or zero strength is a no-op.
+ */
+fun Vibrator.vibrate(
+    duration: Int,
+    strength: Int,
+    factor: Double = 1.0,
+) {
+    if (duration == 0 || strength == 0) { return }
+    val activeDuration = (duration * factor).toLong().coerceAtLeast(1L)
+    val activeStrength: Int = if (hasAmplitudeControl()) {
+        (255.0 * (strength * factor / 100.0)).toInt().coerceIn(1, 255)
+    } else {
+        VibrationEffect.DEFAULT_AMPLITUDE
     }
-    Log.d("Vibrator", "Perform haptic with duration=$effectiveDuration and strength=$effectiveStrength")
-    val effect = VibrationEffect.createOneShot(effectiveDuration, effectiveStrength)
-    this.vibrate(effect)
+    Log.d("Vibrator", "Perform haptic with duration=$activeDuration and strength=$activeStrength")
+    vibrate(VibrationEffect.createOneShot(activeDuration, activeStrength))
 }

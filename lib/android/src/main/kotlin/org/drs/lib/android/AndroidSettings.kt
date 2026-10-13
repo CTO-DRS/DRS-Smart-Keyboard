@@ -20,74 +20,79 @@ import android.content.Context
 import android.net.Uri
 import android.provider.Settings
 import org.drs.lib.kotlin.tryOrNull
-import java.lang.reflect.Modifier
 import kotlin.reflect.KClass
 
-abstract class AndroidSettingsHelper(
-    private val kClass: KClass<*>,
-    val groupId: String,
-) {
-    abstract fun getString(context: Context, key: String): String?
+/**
+ * Gateway to one of the platform settings collections ([Settings.Global],
+ * [Settings.Secure], [Settings.System]). Concrete subclasses bind the abstract
+ * read/watch operations to a concrete collection; the key universe of each
+ * collection is enumerated through reflection over its static string fields.
+ */
+abstract class AndroidSettingsHelper(private val kClass: KClass<*>, val groupId: String) {
+    abstract fun getString(
+        context: Context,
+        key: String,
+    ): String?
 
-    abstract fun getUriFor(key: String): Uri?
+    abstract fun getUriFor(
+        key: String,
+    ): Uri?
 
-    private fun reflectionGetAllStaticFields(kClass: KClass<*>) = sequence<Pair<String, String>> {
-        for (field in kClass.java.declaredFields) {
-            if (Modifier.isStatic(field.modifiers)) {
-                try {
-                    val value = field.get(null) as? String ?: continue
-                    yield(field.name to value)
-                } catch (e: Exception) {
-                    // Cannot access field, continue on to next one
+    private fun reflectStaticStringFields(target: KClass<*>): Sequence<Pair<String, String>> =
+        target.java.declaredFields.asSequence()
+            .filter { field -> java.lang.reflect.Modifier.isStatic(field.modifiers) }
+            .mapNotNull { field ->
+                val value = try {
+                    field.get(null) as? String
+                } catch (ignored: Exception) {
+                    null
                 }
+                value?.let { fetched -> field.name to fetched }
             }
-        }
-    }
 
-    fun getAllKeys(): Sequence<Pair<String, String>> {
-        return reflectionGetAllStaticFields(kClass)
-    }
+    fun getAllKeys(): Sequence<Pair<String, String>> = reflectStaticStringFields(kClass)
 
     fun observe(context: Context, key: String, observer: SystemSettingsObserver) {
-        getUriFor(key)?.let { uri ->
-            context.contentResolver.registerContentObserver(uri, false, observer)
-            observer.dispatchChange(false, uri)
-        }
+        val settingsUri = getUriFor(key) ?: return
+        context.contentResolver.registerContentObserver(settingsUri, false, observer)
+        observer.dispatchChange(false, settingsUri)
     }
 
     fun removeObserver(context: Context, observer: SystemSettingsObserver) {
-        context.contentResolver.unregisterContentObserver(observer)
+        with(context.contentResolver) { unregisterContentObserver(observer) }
     }
 }
 
+private fun helperFor(
+    settingsClass: KClass<*>,
+    groupId: String,
+    readString: (android.content.ContentResolver, String) -> String?,
+    uriFor: (String) -> Uri?,
+): AndroidSettingsHelper = object : AndroidSettingsHelper(settingsClass, groupId) {
+    override fun getString(context: Context, key: String): String? = readString(context.contentResolver, key)
+
+    override fun getUriFor(key: String): Uri? = uriFor(key)
+}
+
 object AndroidSettings {
-    val Global = object : AndroidSettingsHelper(Settings.Global::class, "global") {
-        override fun getString(context: Context, key: String): String? {
-            return tryOrNull { Settings.Global.getString(context.contentResolver, key) }
-        }
+    val Global = helperFor(
+        settingsClass = Settings.Global::class,
+        groupId = "global",
+        readString = { resolver, key -> tryOrNull { Settings.Global.getString(resolver, key) } },
+        uriFor = { key -> tryOrNull { Settings.Global.getUriFor(key) } },
+    )
 
-        override fun getUriFor(key: String): Uri? {
-            return tryOrNull { Settings.Global.getUriFor(key) }
-        }
-    }
+    val Secure = helperFor(
+        settingsClass = Settings.Secure::class,
+        groupId = "secure",
+        readString = { resolver, key -> tryOrNull { Settings.Secure.getString(resolver, key) } },
+        uriFor = { key -> tryOrNull { Settings.Secure.getUriFor(key) } },
+    )
 
-    val Secure = object : AndroidSettingsHelper(Settings.Secure::class, "secure") {
-        override fun getString(context: Context, key: String): String? {
-            return tryOrNull { Settings.Secure.getString(context.contentResolver, key) }
-        }
-
-        override fun getUriFor(key: String): Uri? {
-            return tryOrNull { Settings.Secure.getUriFor(key) }
-        }
-    }
-
-    val System = object : AndroidSettingsHelper(Settings.System::class, "system") {
-        override fun getString(context: Context, key: String): String? {
-            return tryOrNull { Settings.System.getString(context.contentResolver, key) }
-        }
-
-        override fun getUriFor(key: String): Uri? {
-            return tryOrNull { Settings.System.getUriFor(key) }
-        }
-    }
+    val System = helperFor(
+        settingsClass = Settings.System::class,
+        groupId = "system",
+        readString = { resolver, key -> tryOrNull { Settings.System.getString(resolver, key) } },
+        uriFor = { key -> tryOrNull { Settings.System.getUriFor(key) } },
+    )
 }
