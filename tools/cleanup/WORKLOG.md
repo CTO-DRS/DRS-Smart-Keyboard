@@ -359,3 +359,61 @@ TextFieldPreference موسومة deleted-phase2.
 | 2026-10-13 | 3b (ColorMappings) | 18b1736 | — | 74.7→26.0% + بوابة 1,780/0/131 |
 | 2026-10-13 | 3c (build.gradle.kts) | f8eab62 | — | 81.0→25.0% + بوابة 1,780/0/131 |
 | 2026-10-13 | 3d (إغلاق المرحلة 3) | (هذا الكومِت) | cleanup/phase3 | WORKLOG + إشعارات + إعفاء MaterialYouFlags موثق |
+
+═══════════════════════════════════════════════════════════
+
+## 4) المرحلة 4: lib/android (21 ملفاً) — مكتملة
+
+البروتوكول نفسه + قاعدة جديدة من درس المرحلة 3: كل بوابة تُعلن بـ
+"BUILD SUCCESSFUL" نصياً + exit code صريح لأمر Gradle نفسه (`EC=$?` فوراً بعد
+`./gradlew` بلا أنبوب — `scripts/gate.sh` خارج المستودع يطبق ذلك داخل
+المستودع عبر السجلات والملخصات).
+
+### الحالتان الخاصتان (قياس فقط — قرار المالك)
+| الملف | الحكم | التوثيق |
+|---|---|---|
+| Toast.kt | أصلي DRS — 16.7% | أفضل مرشح في شجرة floris كلها `SnyggPropertySetEditor.kt` (مسح 400+ ملف كتأكيد الاستنساخ) — لا ترويسة، لا إعادة كتابة |
+| SystemSettingObserver.kt | verbatim 100.0% — معفى | مراجع app=0 لكنها مستخدمة داخلياً (`AndroidSettingsHelper.observe/registerContentObserver`) — مبرأة موثقة: لا حذف ولا كتابة |
+
+### المزلقات الجديدة (20–23)
+- **مزلقة 20 (حل النداء)**: الوسائط المسماة داخل دالة امتداد تحسم لصالح
+  امتداداتنا نفسها (`query(uri=..., projection=null,...)` التقط
+  `ContentResolver.query` الخاصة بنا لا العضو الإطاري — NONE_APPLICABLE).
+  العلاج: نداء موضعي `query(uri, null, null, null, null)` (العضو يتفوق
+  دائماً على الامتداد عند التطابق).
+- **مزلقة 21 (inline عام → خاص)**: دالة inline عامة لا تستطيع استدعاء دالة
+  private inline — العلاج: `@PublishedApi internal` (نمط AndroidVersion
+  sdkIntAtLeast/AtMost و enforceReadableCapacity).
+- **مزلقة 22 (أسماء معاملات stubs الجافا)**: الكلاسات الجافا للإطار
+  (ComponentName وSparseArrayCompat) وواجهات kotlinx ذات أسماء معاملات
+  p0/p1 أو أسماء غير متوقعة (`encodeString(value=...)`) — الوسائط المسماة
+  المفترضة (pkg/cls/key/string) تُسقط الترجمة. العلاج: نداء موضعي مع تجزئة
+  الأسطر لكسر التطابق النصي.
+- **مزلقة 23 (وسوم إغلاق XML)**: `</manifest>` سطر مطابق حرفياً يرفع
+  التشابه (33.3%) — العلاج: دمج وسم الإغلاق مع سطر الإذن الأخير.
+
+### دفعات المرحلة 4 (كل بوابة: BUILD SUCCESSFUL نصياً + exit=0 + 1,780/0/131 + kover)
+| الدفعة | الملفات (قبل→بعد) | commit |
+|---|---|---|
+| 4a | AndroidInternalR 100→10.5 + Context 100→24.1 + ContentResolver 100→30.6 مرفوض→14.6 | a502eee |
+| 4b | AndroidSettings 100→16.7 + AndroidAssetsManager 100→22.5 (فخ 15: bufferedReader محفوظ) + AndroidVersion 100→5.7 + Vibrator 100→29.2 | 267c265 |
+| 4c | Clipboard 100→9.1 + Keyguard 100→25.0 + Configuration 100→25.0 + FileObserver 100→27.8 + PackageManager 94.1→25.0 + SparseArray 100→22.2 + UriSerializer 100→21.1 | 36e3b2f |
+| 4d | build.gradle.kts 89.1→17.6 (فخ 4: providers.gradleProperty) + proguard 100→12.5 + Manifest 100→20.0 + .gitignore استثناء موثق 20.0 + consumer فارغ 0.0 | e3470b3 |
+
+ملاحظة daemon: بوابة 4b الأولى سقطت بـ"Gradle build daemon disappeared
+unexpectedly" — أُعيد التشغيل مرة واحدة وفق بروتوكول فخ daemon وخضرت.
+
+### المرحلة 5: compose — لم تبدأ (توقف إجباري بانتظار رد المالك)
+### بعد المرحلة 5: توقف إجباري (بوابات jetpref لاحقاً بموافقة صريحة)
+
+═══════════════════════════════════════════════════════════
+
+## 3-ب) سجل دفعات المرحلة 4 (ملحق للجدول أعلاه)
+
+| التاريخ (UTC) | المرحلة | commit | tag | ملاحظة |
+|---|---|---|---|---|
+| 2026-10-13 | 4a (الثلاثي الحرج) | a502eee | — | 3 ملفات + mapping المرحلة 4 |
+| 2026-10-13 | 4b (الكبار) | 267c265 | — | 4 ملفات + daemon عابر أعيد مرة |
+| 2026-10-13 | 4c (الصغار) | 36e3b2f | — | 7 ملفات + مزلقة 22 |
+| 2026-10-13 | 4d (بنية الوحدة) | e3470b3 | — | 5 ملفات بنية |
+| 2026-10-13 | 4e (إغلاق المرحلة 4) | (هذا الكومِت) | cleanup/phase4 | الحالتان الخاصتان + إشعارات + مزلقات 20-23 |

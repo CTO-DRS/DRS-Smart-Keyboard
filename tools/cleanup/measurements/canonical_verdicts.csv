@@ -16,8 +16,8 @@ lib/android/src/main/kotlin/org/drs/lib/android/Context.kt,floris@fe1241f:lib/an
 lib/android/src/main/kotlin/org/drs/lib/android/FileObserver.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/FileObserver.kt,rewritten-phase4,27.8,canonical=100.0%→27.8%
 lib/android/src/main/kotlin/org/drs/lib/android/PackageManager.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/PackageManager.kt,rewritten-phase4,25.0,canonical=94.1%→30.6%→25.0%
 lib/android/src/main/kotlin/org/drs/lib/android/SparseArray.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/SparseArray.kt,rewritten-phase4,22.2,canonical=100.0%→25.0%→22.2%
-lib/android/src/main/kotlin/org/drs/lib/android/SystemSettingObserver.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/SystemSettingObserver.kt,verbatim,100.0,
-lib/android/src/main/kotlin/org/drs/lib/android/Toast.kt,-,drs-original,,no counterpart >= 0.50
+lib/android/src/main/kotlin/org/drs/lib/android/SystemSettingObserver.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/SystemSettingObserver.kt,verbatim,100.0,exempt:measure-only per owner (app-refs=0 لكنها مستخدمة داخلياً في observe/registerContentObserver — مبرأة موثقة: لا حذف ولا كتابة)
+lib/android/src/main/kotlin/org/drs/lib/android/Toast.kt,-,drs-original,16.7,drs-original مثبتة: أفضل مرشح في الشجرة كلها SnyggPropertySetEditor.kt=16.7% (مسح 400+ ملف) — لا ترويسة ولا إعادة كتابة بقرار المالك
 lib/android/src/main/kotlin/org/drs/lib/android/UriSerializer.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/UriSerializer.kt,rewritten-phase4,21.1,canonical=100.0%→22.2%→21.1%
 lib/android/src/main/kotlin/org/drs/lib/android/Vibrator.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/Vibrator.kt,rewritten-phase4,29.2,canonical=100.0%→29.2%
 lib/color/build.gradle.kts,floris@fe1241f:lib/compose/build.gradle.kts,build-file,25.0,canonical=81.0%→25.0%

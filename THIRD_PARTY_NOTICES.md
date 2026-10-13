@@ -14,7 +14,7 @@ per module as each cleanup phase completes.
 | Author / copyright | The FlorisBoard Contributors (project by Patrick Goldinger) |
 | Pinned reference | branch `main` @ commit `fe1241f4921b3eae923571ff7a3e113a7e10d677` |
 | License | Apache-2.0 |
-| Derived paths (modules) | `lib/android`, `lib/compose`, `lib/kotlin`, `lib/snygg` |
+| Derived paths (modules) | `lib/compose`, `lib/kotlin`, `lib/snygg` (حُذفت `lib/android` — انظر فقرة المرحلة 4 أدناه) |
 
 ### طبيعة الحالة (Nature of the derived copies)
 
@@ -34,6 +34,15 @@ per module as each cleanup phase completes.
   المشتقات أعلاه **عدا `MaterialYouFlags.kt`** الذي يبقى نسخة حرفية (100.0%)
   معفياً بعقده البياني التسلسلي البحت (data class + Saver بلا منطق يُعاد
   تصميمه — استثناء موثق منذ step-0) — إبقاؤه في هذا القسم إفصاح قانوني.
+- **إعادة كتابة المرحلة 4 (وحدة android مكتملة)**: `lib/android` (21 ملفاً)
+  أعيدت كتابتها ضد المرجع المثبت وأُعيد قياسها موحّداً — 18 ملفاً معاد
+  الكتابة كلها ≤30% (أعلاها Vibrator.kt ‏29.2%)، وحالتان خاصتان بقياس فقط
+  بقرار المالك: `Toast.kt` أصلي DRS (أفضل مرشح في الشجرة 16.7%) و
+  `SystemSettingObserver.kt` نسخة حرفية (100.0%) معفاة بمبررها الموثق
+  (مراجع app=0 لكنها مستخدمة داخلياً في observe/registerContentObserver —
+  لا حذف ولا كتابة) — إبقاؤه في هذا القسم إفصاح قانوني. القياسات الكاملة في
+  `canonical_verdicts.csv` و`canonical_similarity.csv`، فخرجت `lib/android`
+  من قائمة المشتقات أعلاه عدا الإفصاحين الموثقين.
 - **تصحيح المرحلة 2 (قرار المالك — الخيار أ)**: `lib/kotlin/.../MimeTypeFilter.kt`
   و`lib/compose/.../DrsAppBar.kt` ثبت بالقياس أنهما مشتقان (100.0% و44.4% ضد
   المرجع المثبت) واستُعيدت ترويستهما الأصلية الحرفية من ملفَي الأصل
