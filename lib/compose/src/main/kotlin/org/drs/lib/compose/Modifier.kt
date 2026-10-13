@@ -16,27 +16,24 @@
 
 package org.drs.lib.compose
 
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
+/** Applies [modifier] onto the receiver only when [condition] holds. */
+@androidx.compose.runtime.Composable
+fun androidx.compose.ui.Modifier.conditional(
+    condition: Boolean, modifier: @androidx.compose.runtime.Composable androidx.compose.ui.Modifier.() ->
+        androidx.compose.ui.Modifier,
+): androidx.compose.ui.Modifier =
+    fold(condition, { modifier(androidx.compose.ui.Modifier) }, { androidx.compose.ui.Modifier })
 
-@Composable
-fun Modifier.conditional(
-    condition: Boolean,
-    modifier: @Composable Modifier.() -> Modifier,
-): Modifier =
-    if (condition) then(modifier(Modifier)) else this
+/** Picks between [ifTrue] and [ifFalse] based on [condition] and chains the winner. */
+@androidx.compose.runtime.Composable
+fun androidx.compose.ui.Modifier.fold(
+    condition: Boolean, ifTrue: @androidx.compose.runtime.Composable () -> androidx.compose.ui.Modifier,
+    ifFalse: @androidx.compose.runtime.Composable () -> androidx.compose.ui.Modifier,
+): androidx.compose.ui.Modifier = then(if (condition) ifTrue() else ifFalse())
 
-@Composable
-fun Modifier.fold(
-    condition: Boolean,
-    ifTrue: @Composable () -> Modifier,
-    ifFalse: @Composable () -> Modifier,
-): Modifier =
-    if (condition) then(ifTrue()) else then(ifFalse())
-
-@Composable
-inline fun <reified T : Any> Modifier.ifIsInstance(
-    value: Any,
-    modifier: @Composable (T) -> Modifier,
-): Modifier =
-    if (value is T) then(modifier(value)) else this
+/** Chains [modifier] when [value] is a [T], passing the cast instance. */
+@androidx.compose.runtime.Composable
+inline fun <reified T : Any> androidx.compose.ui.Modifier.ifIsInstance(
+    value: Any, modifier: @androidx.compose.runtime.Composable (T) -> androidx.compose.ui.Modifier,
+): androidx.compose.ui.Modifier =
+    (value as? T)?.let { instance -> then(modifier(instance)) } ?: this

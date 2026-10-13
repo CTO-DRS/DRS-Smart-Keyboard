@@ -16,29 +16,23 @@
 
 package org.drs.lib.compose
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.RowScope
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
+import androidx.compose.foundation.layout.*
 import androidx.compose.ui.unit.dp
 
-@Composable
-fun RowScope.DrsBulletSpacer(
-    modifier: Modifier = Modifier,
-) {
-    Box(
-        modifier = modifier
-            .align(Alignment.CenterVertically)
-            .padding(horizontal = 8.dp)
-            .size(4.dp)
-            .clip(CircleShape)
-            .background(MaterialTheme.colorScheme.outline),
-    )
-}
+/**
+ * A tiny round separator dot for toolbar rows: an 8 dp horizontal gap
+ * followed by a 4 dp circle tinted with the theme's outline color, kept
+ * vertically centered relative to its row siblings.
+ */
+@androidx.compose.runtime.Composable
+fun androidx.compose.foundation.layout.RowScope.DrsBulletSpacer(
+    modifier: androidx.compose.ui.Modifier = androidx.compose.ui.Modifier,
+) = androidx.compose.material3.Surface(
+    shape = androidx.compose.foundation.shape.CircleShape,
+    color = androidx.compose.material3.MaterialTheme.colorScheme.outline,
+    modifier = modifier
+        .align(androidx.compose.ui.Alignment.CenterVertically)
+        .padding(start = 8.dp, end = 8.dp)
+        .size(size = 4.dp),
+    content = { },
+)

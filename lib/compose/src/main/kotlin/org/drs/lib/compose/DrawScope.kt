@@ -16,35 +16,35 @@
 
 package org.drs.lib.compose
 
-import androidx.annotation.FloatRange
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.BlendMode
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.graphics.drawscope.DrawScope
-import androidx.compose.ui.graphics.drawscope.DrawScope.Companion.DefaultBlendMode
-import androidx.compose.ui.graphics.drawscope.Stroke
-
-fun DrawScope.drawBorder(
-    color: Color,
-    stroke: Stroke,
-    topLeft: Offset = Offset.Zero,
-    size: Size = this.size.offsetSize(topLeft),
-    @FloatRange(from = 0.0, to = 1.0) alpha: Float = 1.0f,
-    colorFilter: ColorFilter? = null,
-    blendMode: BlendMode = DefaultBlendMode,
+/**
+ * Strokes a rectangular border fully inside [size], shifted by [topLeft].
+ * The stroke is centered on the shrunken rectangle's edges, so half of the
+ * stroke width bleeds outward on every side — matching the canvas contract.
+ */
+fun androidx.compose.ui.graphics.drawscope.DrawScope.drawBorder(
+    color: androidx.compose.ui.graphics.Color,
+    stroke: androidx.compose.ui.graphics.drawscope.Stroke,
+    topLeft: androidx.compose.ui.geometry.Offset = androidx.compose.ui.geometry.Offset.Zero,
+    size: androidx.compose.ui.geometry.Size =
+        androidx.compose.ui.geometry.Size(this.size.width - topLeft.x, this.size.height - topLeft.y),
+    @androidx.annotation.FloatRange(from = 0.0, to = 1.0) alpha: Float = 1.0f,
+    colorFilter: androidx.compose.ui.graphics.ColorFilter? = null,
+    blendMode: androidx.compose.ui.graphics.BlendMode =
+        androidx.compose.ui.graphics.drawscope.DrawScope.Companion.DefaultBlendMode,
 ) {
-    drawRect(
+    val inset = stroke.width * 0.5f
+    val shiftedTopLeft = androidx.compose.ui.geometry.Offset(
+        topLeft.x + inset,
+        topLeft.y + inset,
+    )
+    val innerSize = androidx.compose.ui.geometry.Size(
+        size.width - stroke.width,
+        size.height - stroke.width,
+    )
+    this.drawRect(
         color = color,
-        topLeft = topLeft + Offset(stroke.width / 2, stroke.width / 2),
-        size = size.copy(size.width - stroke.width, size.height - stroke.width),
-        alpha = alpha,
-        style = stroke,
-        colorFilter = colorFilter,
-        blendMode = blendMode,
+        topLeft = shiftedTopLeft,
+        size = innerSize,
+        alpha = alpha, style = stroke, colorFilter = colorFilter, blendMode = blendMode,
     )
 }
-
-private fun Size.offsetSize(offset: Offset): Size =
-    Size(this.width - offset.x, this.height - offset.y)

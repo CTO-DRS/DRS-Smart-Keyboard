@@ -16,69 +16,51 @@
 
 package org.drs.lib.compose
 
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Icon
-import androidx.compose.material3.InputChip
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.foundation.layout.*
 import androidx.compose.ui.unit.dp
 
-@Composable
-fun DrsChip(
-    text: String,
-    modifier: Modifier = Modifier,
-    onClick: () -> Unit = { },
-    selected: Boolean = false,
-    enabled: Boolean = true,
-    shape: Shape = MaterialTheme.shapes.small,
-    leadingIcons: List<ImageVector> = listOf(),
-    trailingIcons: List<ImageVector> = listOf(),
+/** Renders one stack of chip icons, spacing them toward the label side. */
+@androidx.compose.runtime.Composable
+private fun ChipIconStack(
+    icons: List<androidx.compose.ui.graphics.vector.ImageVector>,
+    towardLabelEnd: Boolean,
 ) {
-    InputChip(
-        selected = selected,
-        onClick = onClick,
-        enabled = enabled,
-        shape = shape,
+    androidx.compose.foundation.layout.Row {
+        for (icon in icons) {
+            val spacing = when {
+                towardLabelEnd -> androidx.compose.ui.Modifier.padding(end = 8.dp)
+                else -> androidx.compose.ui.Modifier.padding(start = 8.dp)
+            }
+            androidx.compose.material3.Icon(
+                imageVector = icon,
+                modifier = spacing.size(size = 16.dp), contentDescription = null,
+            )
+        }
+    }
+}
+
+/**
+ * A selectable filter chip showing [text] plus optional icon stacks before
+ * and after the label; icons are clipped at 16 dp so chip rows stay even.
+ */
+@androidx.compose.runtime.Composable
+fun DrsChip(
+    text: String, modifier: androidx.compose.ui.Modifier = androidx.compose.ui.Modifier,
+    onClick: () -> Unit = { }, selected: Boolean = false, enabled: Boolean = true,
+    shape: androidx.compose.ui.graphics.Shape =
+        androidx.compose.material3.MaterialTheme.shapes.small,
+    leadingIcons: List<androidx.compose.ui.graphics.vector.ImageVector> = listOf(),
+    trailingIcons: List<androidx.compose.ui.graphics.vector.ImageVector> = listOf(),
+) {
+    androidx.compose.material3.InputChip(
+        selected = selected, onClick = onClick, enabled = enabled, shape = shape,
         label = {
-            Text(
-                text = text,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis
+            androidx.compose.material3.Text(
+                text = text, maxLines = 1,
+                overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis,
             )
         },
-        modifier = modifier,
-        leadingIcon = {
-            Row {
-                for (leadingIcon in leadingIcons) {
-                    Icon(
-                        modifier = Modifier
-                            .padding(end = 8.dp)
-                            .size(16.dp),
-                        imageVector = leadingIcon,
-                        contentDescription = null,
-                    )
-                }
-            }
-        },
-        trailingIcon = {
-            Row {
-                for (trailingIcon in trailingIcons) {
-                    Icon(
-                        modifier = Modifier
-                            .padding(start = 8.dp)
-                            .size(16.dp),
-                        imageVector = trailingIcon,
-                        contentDescription = null,
-                    )
-                }
-            }
-        }
+        modifier = modifier, leadingIcon = { ChipIconStack(leadingIcons, towardLabelEnd = true) },
+        trailingIcon = { ChipIconStack(trailingIcons, towardLabelEnd = false) },
     )
 }

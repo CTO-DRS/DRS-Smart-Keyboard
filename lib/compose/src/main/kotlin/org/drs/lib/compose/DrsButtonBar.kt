@@ -16,110 +16,83 @@
 
 package org.drs.lib.compose
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.RowScope
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.foundation.layout.*
 import androidx.compose.ui.unit.dp
 
-@Composable
-fun DrsButtonBar(content: @Composable DrsButtonBarScope.() -> Unit) {
-    Surface(
-        modifier = Modifier.fillMaxWidth(),
-        color = MaterialTheme.colorScheme.background,
-        tonalElevation = 8.dp,
+/** Icon-plus-label pair shared by every button bar button variant. */
+@androidx.compose.runtime.Composable
+private fun BarIconAndLabel(
+    text: String, icon: androidx.compose.ui.graphics.vector.ImageVector?,
+) {
+    icon?.let { drawable ->
+        androidx.compose.material3.Icon(
+            imageVector = drawable,
+            modifier = androidx.compose.ui.Modifier.padding(end = 8.dp), contentDescription = null,
+        )
+    }
+    androidx.compose.material3.Text(text)
+}
+
+/**
+ * Horizontal action bar used at dialog / screen bottoms: a hairline divider
+ * in surface color, then a row hosting the [content] buttons right-aligned.
+ */
+@androidx.compose.runtime.Composable
+fun DrsButtonBar(content: @androidx.compose.runtime.Composable DrsButtonBarScope.() -> Unit) {
+    androidx.compose.material3.Surface(
+        color = androidx.compose.material3.MaterialTheme.colorScheme.background,
+        tonalElevation = 8.dp, modifier = androidx.compose.ui.Modifier.fillMaxWidth(),
     ) {
-        Column {
-            Surface(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(1.dp),
-                color = MaterialTheme.colorScheme.surface,
-            ) {}
-            Row(
-                modifier = Modifier
-                    .padding(top = 4.dp, bottom = 4.dp, start = 0.dp, end = 16.dp),
-                verticalAlignment = Alignment.CenterVertically,
+        androidx.compose.foundation.layout.Column {
+            androidx.compose.material3.Surface(
+                color = androidx.compose.material3.MaterialTheme.colorScheme.surface,
+                modifier = androidx.compose.ui.Modifier.fillMaxWidth().height(height = 1.dp),
+            ) { }
+            androidx.compose.foundation.layout.Row(
+                modifier = androidx.compose.ui.Modifier
+                    .padding(start = 0.dp, end = 16.dp)
+                    .padding(top = 4.dp, bottom = 4.dp),
+                verticalAlignment = androidx.compose.ui.Alignment.CenterVertically,
             ) {
-                val scope = DrsButtonBarScope(this)
-                content(scope)
+                content(DrsButtonBarScope(this))
             }
         }
     }
 }
 
-class DrsButtonBarScope(rowScope: RowScope) : RowScope by rowScope {
-    @Composable
-    fun ButtonBarButton(
-        text: String,
-        modifier: Modifier = Modifier,
-        enabled: Boolean = true,
-        icon: ImageVector? = null,
+/** Scope granting bar buttons access to their parent row arrangement. */
+class DrsButtonBarScope(
+    rowScope: androidx.compose.foundation.layout.RowScope,
+) : androidx.compose.foundation.layout.RowScope by rowScope {
+    /** Primary action button, filled with the theme's primary color pair. */
+    @androidx.compose.runtime.Composable
+    fun ButtonBarButton(text: String,
+        modifier: androidx.compose.ui.Modifier = androidx.compose.ui.Modifier,
+        enabled: Boolean = true, icon: androidx.compose.ui.graphics.vector.ImageVector? = null,
         onClick: () -> Unit,
-    ) {
-        Button(
-            modifier = modifier.padding(start = 16.dp),
-            enabled = enabled,
-            colors = ButtonDefaults.buttonColors(
-                containerColor = MaterialTheme.colorScheme.primary,
-                contentColor = MaterialTheme.colorScheme.onPrimary,
-            ),
-            onClick = onClick,
-        ) {
-            if (icon != null) {
-                Icon(
-                    modifier = Modifier.padding(end = 8.dp),
-                    imageVector = icon,
-                    contentDescription = null,
-                )
-            }
-            Text(text = text)
-        }
-    }
+    ) = androidx.compose.material3.Button(
+        enabled = enabled, modifier = modifier.padding(start = 16.dp), onClick = onClick,
+        colors = androidx.compose.material3.ButtonDefaults.buttonColors(
+            containerColor = androidx.compose.material3.MaterialTheme.colorScheme.primary,
+            contentColor = androidx.compose.material3.MaterialTheme.colorScheme.onPrimary,
+        ),
+    ) { BarIconAndLabel(text, icon) }
 
-    @Composable
-    fun ButtonBarTextButton(
-        text: String,
-        modifier: Modifier = Modifier,
-        enabled: Boolean = true,
-        icon: ImageVector? = null,
+    /** Low-emphasis action button, tinted with the primary content color. */
+    @androidx.compose.runtime.Composable
+    fun ButtonBarTextButton(text: String,
+        modifier: androidx.compose.ui.Modifier = androidx.compose.ui.Modifier,
+        enabled: Boolean = true, icon: androidx.compose.ui.graphics.vector.ImageVector? = null,
         onClick: () -> Unit,
-    ) {
-        TextButton(
-            modifier = modifier.padding(start = 16.dp),
-            enabled = enabled,
-            colors = ButtonDefaults.textButtonColors(
-                contentColor = MaterialTheme.colorScheme.primary,
-            ),
-            onClick = onClick,
-        ) {
-            if (icon != null) {
-                Icon(
-                    modifier = Modifier.padding(end = 8.dp),
-                    imageVector = icon,
-                    contentDescription = null,
-                )
-            }
-            Text(text = text)
-        }
-    }
+    ) = androidx.compose.material3.TextButton(
+        enabled = enabled, modifier = modifier.padding(start = 16.dp), onClick = onClick,
+        colors = androidx.compose.material3.ButtonDefaults.textButtonColors(
+            contentColor = androidx.compose.material3.MaterialTheme.colorScheme.primary,
+        ),
+    ) { BarIconAndLabel(text, icon) }
 
-    @Composable
-    fun ButtonBarSpacer() {
-        Spacer(modifier = Modifier.weight(1f))
-    }
+    /** Gap that pushes preceding buttons to the leading bar edge. */
+    @androidx.compose.runtime.Composable
+    fun ButtonBarSpacer() =
+        androidx.compose.foundation.layout.Spacer(androidx.compose.ui.Modifier.weight(weight = 1f))
 }
