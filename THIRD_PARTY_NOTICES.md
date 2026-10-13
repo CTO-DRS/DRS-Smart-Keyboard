@@ -27,6 +27,11 @@ per module as each cleanup phase completes.
   (4 أسطر)، واستُعادت الترويسة الأصلية الحرفية في هذه المرحلة (المرحلة 1)**
   عبر `tools/cleanup/restore_headers.py` مع ضمان ثبات جسم كل ملف (SHA-256).
 - الملفات التي لا مقابل لها في المرجع المثبت (مؤلفات DRS) تحتفظ بترويسة DRS.
+- **تصحيح المرحلة 2 (قرار المالك — الخيار أ)**: `lib/kotlin/.../MimeTypeFilter.kt`
+  و`lib/compose/.../DrsAppBar.kt` ثبت بالقياس أنهما مشتقان (100.0% و44.4% ضد
+  المرجع المثبت) واستُعيدت ترويستهما الأصلية الحرفية من ملفَي الأصل
+  (`MimeTypeFilter.kt` و`FlorisAppBar.kt`) مع ضمان ثبات الجسم SHA-256 —
+  سجل الإصلاح: `tools/cleanup/measurements/phase2_header_fix.csv`.
 
 ## 2. jetpref
 
@@ -48,6 +53,13 @@ per module as each cleanup phase completes.
 - ملف تسجيل معالج KSP
   (`lib/jetpref/datastore-model-processor/src/main/resources/META-INF/services/com.google.devtools.ksp.processing.SymbolProcessorProvider`)
   ملف تسجيل خدمة مشتق من jetpref ولا يحمل ترويسة بطبيعته.
+- **تصحيح المرحلة 2 (قرار المالك — الخيار أ)**: `datastore/JetPref.kt` و
+  `datastore/JetPrefJvm.kt` و`datastore/model/PreferenceDataJvm.kt` ثبت بالقياس
+  أنها مشتقة (100.0% و95.2% و93.2% ضد المرجع المثبت) — الأول استُعيدت ترويسته
+  الحرفية من `jvmCommonMain JetPref.kt`، والملفان الآخران مدموجان من مصدرين
+  فأُعطيا الترويسة الكانونية القياسية لjetpref (`Copyright 2025 Patrick
+  Goldinger` + نص Apache-2.0) مع ضمان ثبات الجسم SHA-256، وصُحّح تصنيفهما في
+  الجدول الكانوني من `drs-original` إلى `slightly-modified`.
 
 ## 3. Android Open Source Project (AOSP)
 
@@ -64,7 +76,9 @@ per module as each cleanup phase completes.
 
 `lib/compose/.../MotionScale.kt` وملفات `Drs*`/الاختبارات التي لا مقابل
 لها في المرجعين أعلاه هي مؤلفات أصلية لهذا المشروع (ترويسة DRS) — التصنيف
-النهائي في الجدول الكانوني.
+النهائي في الجدول الكانوني. (بعد تصحيح المرحلة 2 بقرار المالك: `DrsAppBar.kt`
+و`MimeTypeFilter.kt` وملفات jetpref الثلاثة أُعيد تصنيفها كمشتقات — انظر
+القسمين 1 و2 أعلاه؛ `Toast.kt` يبقى أصلياً بقياس 14.8%.)
 
 ---
 
