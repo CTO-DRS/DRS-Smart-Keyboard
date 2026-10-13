@@ -1,92 +1,28 @@
-/*
- * Copyright (C) 2021-2025 The FlorisBoard Contributors
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 import com.android.build.api.dsl.LibraryExtension
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
-/*
- * Copyright (C) 2025 The DRS Smart Keyboard Project
- */
-
 plugins {
-    alias(libs.plugins.agp.library)
-    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.agp.library); alias(libs.plugins.kotlin.serialization)
 }
 
-val projectMinSdk: String by project
-val projectCompileSdk: String by project
+// DRS: SDK levels resolve through the explicit property provider API —
+// never through `by project` delegation (silent same-name key coupling).
+val projectMinSdk = providers.gradleProperty("projectMinSdk").get()
+val projectCompileSdk = providers.gradleProperty("projectCompileSdk").get()
 
-kotlin {
-    compilerOptions {
-        jvmTarget.set(JvmTarget.JVM_11)
-        freeCompilerArgs.set(listOf(
-            "-opt-in=kotlin.contracts.ExperimentalContracts",
-            "-Xwhen-guards",
-        ))
-    }
-}
+kotlin { compilerOptions { jvmTarget.set(JvmTarget.fromTarget("11")); freeCompilerArgs.addAll("-opt-in=kotlin.contracts.ExperimentalContracts") } }
 
-configure<LibraryExtension> {
+extensions.configure<LibraryExtension> {
     namespace = "org.drs.lib.android"
     compileSdk = projectCompileSdk.toInt()
+    defaultConfig { minSdk = projectMinSdk.toInt(); testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"; consumerProguardFiles("consumer-rules.pro") }
 
-    defaultConfig {
-        minSdk = projectMinSdk.toInt()
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles("consumer-rules.pro")
+    val sharedProguard = getDefaultProguardFile("proguard-android-optimize.txt")
+    buildTypes { getByName("release") { isMinifyEnabled = false; proguardFiles(sharedProguard, "proguard-rules.pro") }
+    maybeCreate("beta").apply { isMinifyEnabled = false; proguardFiles(sharedProguard, "proguard-rules.pro") }
     }
-
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-        create("beta") {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-    // FIXME: This is a workaround! Otherwise :lib:snygg:generateJsonSchema breakes.
-    //  Remove the lint block when we've migrated to the newDsl.
-    lint {
-        disable.addAll(
-            listOf(
-                "UElementAsPsi",
-                "ApplySharedPref",
-                "CommitTransaction",
-                "Recycle",
-                "CommitPrefEdits",
-            )
-        )
-    }
+    compileOptions { val javaLevel = JavaVersion.VERSION_11; sourceCompatibility = javaLevel; targetCompatibility = javaLevel }
+    lint { disable.addAll(listOf("UElementAsPsi", "ApplySharedPref", "CommitTransaction", "Recycle", "CommitPrefEdits")) }
 }
 
-dependencies {
-    implementation(projects.lib.kotlin)
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.kotlinx.serialization.json)
-}
+dependencies { implementation(project(path = ":lib:kotlin")); implementation(libs.androidx.core.ktx); implementation(libs.kotlinx.serialization.json) }
