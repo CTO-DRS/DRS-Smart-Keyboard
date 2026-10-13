@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2025 The FlorisBoard Contributors
+ * Copyright (C) 2022-2025 The FlorisBoard Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,22 +16,30 @@
 
 package org.drs.lib.android
 
-typealias AndroidClipboardManager = android.content.ClipboardManager
-// TODO: remove this once https://youtrack.jetbrains.com/issue/KT-34281 is fixed
-typealias AndroidClipboardManager_OnPrimaryClipChangedListener = android.content.ClipboardManager.OnPrimaryClipChangedListener
+/**
+ * Alias of the platform clipboard manager so the DRS Smart Keyboard and the
+ * raw platform type can be referenced without name clashes.
+ */
+typealias AndroidClipboardManager =
+    android.content.ClipboardManager
 
-fun AndroidClipboardManager.clearPrimaryClipAnyApi() {
-    if (AndroidVersion.ATLEAST_API28_P) {
-        this.clearPrimaryClip()
-    } else {
-        this.setPrimaryClip(android.content.ClipData.newPlainText("", ""))
+/**
+ * Alias of the platform primary-clip listener. Kept as a separate declaration
+ * because the compiler refuses nested typealiases on the parent type; revisit
+ * only when the upstream Kotlin issue around nested typealias resolution is
+ * resolved (tracked upstream as KT-34281).
+ */
+typealias AndroidClipboardManager_OnPrimaryClipChangedListener =
+    android.content.ClipboardManager.OnPrimaryClipChangedListener
+
+/** Clears the clip on API 28+, falling back to replacing it with an empty clip below. */
+fun AndroidClipboardManager.clearPrimaryClipAnyApi(): Unit {
+    when {
+        AndroidVersion.ATLEAST_API28_P -> clearPrimaryClip()
+        else -> setPrimaryClip(android.content.ClipData.newPlainText("", ""))
     }
 }
 
-fun AndroidClipboardManager.setOrClearPrimaryClip(clip: android.content.ClipData?) {
-    if (clip != null) {
-        this.setPrimaryClip(clip)
-    } else {
-        this.clearPrimaryClipAnyApi()
-    }
-}
+/** Applies [clip] when present, otherwise clears whatever is currently stored. */
+fun AndroidClipboardManager.setOrClearPrimaryClip(clip: android.content.ClipData?) =
+    clip?.let { pinned -> setPrimaryClip(pinned) } ?: clearPrimaryClipAnyApi()

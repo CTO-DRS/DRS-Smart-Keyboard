@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022-2025 The FlorisBoard Contributors
+ * Copyright (C) 2021-2025 The FlorisBoard Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,12 +18,16 @@ package org.drs.lib.android
 
 import androidx.collection.SparseArrayCompat
 
-fun <T> SparseArrayCompat<T>.removeAndReturn(key: Int): T? {
-    val elem = get(key)
-    return if (elem == null) {
-        null
-    } else {
-        remove(key)
-        elem
-    }
+/**
+ * Removes the entry bound to [key] and hands back the value that was stored,
+ * or yields `null` untouched when no entry exists for the key.
+ */
+fun <T> SparseArrayCompat<T>.removeAndReturn(
+    key: Int,
+): T? {
+    val existing = get(key) ?: return null
+    remove(
+        key,
+    )
+    return existing
 }

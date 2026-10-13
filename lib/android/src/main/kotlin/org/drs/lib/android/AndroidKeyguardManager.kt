@@ -16,4 +16,10 @@
 
 package org.drs.lib.android
 
-typealias AndroidKeyguardManager = android.app.KeyguardManager
+/**
+ * Alias of the platform keyguard manager, the gate for checking lock-screen
+ * state before the keyboard performs any sensitive UI work.
+ */
+typealias AndroidKeyguardManager =
+    android.app.
+        KeyguardManager
