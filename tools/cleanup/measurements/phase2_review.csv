@@ -1,0 +1,203 @@
+item,file,ref,score,classification,audit
+1-fuzzy,lib/android/build.gradle.kts,floris:lib/android/build.gradle.kts,0.91,derived (header restored phase1),ok
+1-fuzzy,lib/android/src/main/kotlin/org/drs/lib/android/PackageManager.kt,floris:lib/android/src/main/kotlin/org/florisboard/lib/android/PackageManager.kt,0.94,derived (header restored phase1),ok
+1-fuzzy,lib/color/src/main/kotlin/org/drs/lib/color/ColorMappings.kt,floris:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/color/ColorMappings.kt,0.84,derived (header restored phase1),ok
+1-fuzzy,lib/compose/build.gradle.kts,floris:lib/compose/build.gradle.kts,0.89,derived (header restored phase1),ok
+1-fuzzy,lib/compose/src/main/kotlin/org/drs/lib/compose/DpSpSizeFuns.kt,floris:lib/compose/src/main/kotlin/org/florisboard/lib/compose/DpSpSizeFuns.kt,0.94,derived (header restored phase1),ok
+1-fuzzy,lib/compose/src/main/kotlin/org/drs/lib/compose/DrsBulletSpacer.kt,floris:lib/compose/src/main/kotlin/org/florisboard/lib/compose/FlorisBulletSpacer.kt,0.96,derived (header restored phase1),ok
+1-fuzzy,lib/compose/src/main/kotlin/org/drs/lib/compose/DrsButtonBar.kt,floris:lib/compose/src/main/kotlin/org/florisboard/lib/compose/FlorisButtonBar.kt,0.97,derived (header restored phase1),ok
+1-fuzzy,lib/compose/src/main/kotlin/org/drs/lib/compose/DrsButtons.kt,floris:lib/compose/src/main/kotlin/org/florisboard/lib/compose/FlorisButtons.kt,0.94,derived (header restored phase1),ok
+1-fuzzy,lib/compose/src/main/kotlin/org/drs/lib/compose/DrsCanvasIcon.kt,floris:lib/compose/src/main/kotlin/org/florisboard/lib/compose/FlorisCanvasIcon.kt,0.93,derived (header restored phase1),ok
+1-fuzzy,lib/compose/src/main/kotlin/org/drs/lib/compose/DrsCards.kt,floris:lib/compose/src/main/kotlin/org/florisboard/lib/compose/FlorisCards.kt,0.88,derived (header restored phase1),ok
+1-fuzzy,lib/compose/src/main/kotlin/org/drs/lib/compose/DrsChip.kt,floris:lib/compose/src/main/kotlin/org/florisboard/lib/compose/FlorisChip.kt,0.98,derived (header restored phase1),ok
+1-fuzzy,lib/compose/src/main/kotlin/org/drs/lib/compose/DrsDropdownLikeButton.kt,floris:lib/compose/src/main/kotlin/org/florisboard/lib/compose/FlorisDropdownLikeButton.kt,0.98,derived (header restored phase1),ok
+1-fuzzy,lib/compose/src/main/kotlin/org/drs/lib/compose/DrsStepLayout.kt,floris:lib/compose/src/main/kotlin/org/florisboard/lib/compose/FlorisStepLayout.kt,0.93,derived (header restored phase1),ok
+1-fuzzy,lib/compose/src/main/kotlin/org/drs/lib/compose/Resources.kt,floris:lib/compose/src/main/kotlin/org/florisboard/lib/compose/Resources.kt,0.99,derived (header restored phase1),ok
+1-fuzzy,lib/compose/src/main/kotlin/org/drs/lib/compose/ScrollableModifiers.kt,floris:lib/compose/src/main/kotlin/org/florisboard/lib/compose/ScrollableModifiers.kt,0.97,derived (header restored phase1),ok
+1-fuzzy,lib/kotlin/build.gradle.kts,floris:lib/kotlin/build.gradle.kts,0.95,derived (header restored phase1),ok
+1-fuzzy,lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggPropertySet.kt,floris:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/SnyggPropertySet.kt,0.98,derived (header restored phase1),ok
+1-fuzzy,lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggStylesheet.kt,floris:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/SnyggStylesheet.kt,0.98,derived (header restored phase1),ok
+1-fuzzy,lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggBox.kt,floris:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/ui/SnyggBox.kt,0.88,derived (header restored phase1),ok
+1-fuzzy,lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggIconButton.kt,floris:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/ui/SnyggIconButton.kt,0.95,derived (header restored phase1),ok
+1-fuzzy,lib/snygg/src/main/kotlin/org/drs/lib/snygg/value/SnyggUriValue.kt,floris:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/value/SnyggUriValue.kt,0.98,derived (header restored phase1),ok
+1-fuzzy,lib/snygg/src/test/kotlin/org/drs/lib/snygg/SnyggStylesheetTest.kt,floris:lib/snygg/src/commonTest/kotlin/org/florisboard/lib/snygg/SnyggStylesheetTest.kt,0.98,derived (header restored phase1),ok
+1-fuzzy,lib/snygg/src/test/kotlin/org/drs/lib/snygg/SnyggThemeTest.kt,floris:lib/snygg/src/commonTest/kotlin/org/florisboard/lib/snygg/SnyggThemeTest.kt,0.98,derived (header restored phase1),ok
+1-fuzzy,lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/model/PreferenceData.kt,jetpref:datastore-model/src/commonMain/kotlin/dev/patrickgold/jetpref/datastore/model/PreferenceData.kt,0.85,derived (header restored phase1),ok
+1-fuzzy,lib/jetpref/datastore-model-processor/src/main/kotlin/org/drs/jetpref/datastore/model/ModelProcessor.kt,jetpref:datastore-model-processor/src/jvmMain/kotlin/dev/patrickgold/jetpref/datastore/model/ModelProcessor.kt,0.98,derived (header restored phase1),ok
+1-fuzzy,lib/jetpref/datastore-ui/src/main/kotlin/org/drs/jetpref/datastore/ui/DialogSliderPreference.kt,jetpref:datastore-ui/src/androidMain/kotlin/dev/patrickgold/jetpref/datastore/ui/DialogSliderPreference.kt,0.93,derived (header restored phase1),ok
+1-fuzzy,lib/jetpref/datastore-ui/src/main/kotlin/org/drs/jetpref/datastore/ui/Preference.kt,jetpref:datastore-ui/src/androidMain/kotlin/dev/patrickgold/jetpref/datastore/ui/Preference.kt,0.98,derived (header restored phase1),ok
+2-nomatch,lib/android/src/main/kotlin/org/drs/lib/android/Toast.kt,src/main/kotlin/org/florisboard/lib/android/AndroidAssetsManager.kt,14.8,drs-original,CONFIRMED
+2-nomatch,lib/color/build.gradle.kts,floris@fe1241f:lib/compose/build.gradle.kts,81.0,build-file,confirmed-non-derived(build-config)
+2-nomatch,lib/compose/src/main/kotlin/org/drs/lib/compose/DrsAppBar.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/FlorisAppBar.kt,44.4,deeply-modified,DOUBTFUL-derived-per-canonical
+2-nomatch,lib/kotlin/src/main/kotlin/org/drs/lib/kotlin/MimeTypeFilter.kt,floris@fe1241f:lib/kotlin/src/main/kotlin/org/florisboard/lib/kotlin/MimeTypeFilter.kt,100.0,slightly-modified,DOUBTFUL-derived-per-canonical
+2-nomatch,lib/snygg/build.gradle.kts,floris@fe1241f:lib/compose/build.gradle.kts,53.9,build-file,confirmed-non-derived(build-config)
+2-nomatch,lib/jetpref/datastore-model/build.gradle.kts,floris@fe1241f:lib/android/build.gradle.kts,77.4,build-file,confirmed-non-derived(build-config)
+2-nomatch,lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/JetPref.kt,jetpref@7a3df4e:datastore-model/src/jvmCommonMain/kotlin/dev/patrickgold/jetpref/datastore/JetPref.kt,100.0,slightly-modified,DOUBTFUL-derived-per-canonical
+2-nomatch,lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/JetPrefJvm.kt,src/jvmCommonMain/kotlin/dev/patrickgold/jetpref/datastore/JetPref.kt,95.2,drs-original,DOUBTFUL
+2-nomatch,lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/model/PreferenceDataJvm.kt,src/jvmCommonMain/kotlin/dev/patrickgold/jetpref/datastore/model/PreferenceData.kt,93.2,drs-original,DOUBTFUL
+2-nomatch,lib/jetpref/datastore-model-processor/build.gradle.kts,jetpref@7a3df4e:example/build.gradle.kts,69.2,build-file,confirmed-non-derived(build-config)
+2-nomatch,lib/jetpref/datastore-ui/build.gradle.kts,floris@fe1241f:lib/compose/build.gradle.kts,78.0,build-file,confirmed-non-derived(build-config)
+2-nomatch,lib/jetpref/material-ui/build.gradle.kts,floris@fe1241f:lib/compose/build.gradle.kts,82.5,build-file,confirmed-non-derived(build-config)
+3-audit,lib/android/.gitignore,-,,build-file,ok(no-apache-header)
+3-audit,lib/android/build.gradle.kts,floris@fe1241f:lib/android/build.gradle.kts,89.1,build-file,ok(apache-header)
+3-audit,lib/android/consumer-rules.pro,-,,build-file,ok(no-apache-header)
+3-audit,lib/android/proguard-rules.pro,-,,build-file,ok(no-apache-header)
+3-audit,lib/android/src/main/AndroidManifest.xml,-,,build-file,ok(no-apache-header)
+3-audit,lib/android/src/main/kotlin/org/drs/lib/android/AndroidAssetsManager.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/AndroidAssetsManager.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/android/src/main/kotlin/org/drs/lib/android/AndroidClipboardManager.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/AndroidClipboardManager.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/android/src/main/kotlin/org/drs/lib/android/AndroidInternalR.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/AndroidInternalR.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/android/src/main/kotlin/org/drs/lib/android/AndroidKeyguardManager.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/AndroidKeyguardManager.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/android/src/main/kotlin/org/drs/lib/android/AndroidSettings.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/AndroidSettings.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/android/src/main/kotlin/org/drs/lib/android/AndroidVersion.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/AndroidVersion.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/android/src/main/kotlin/org/drs/lib/android/Configuration.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/Configuration.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/android/src/main/kotlin/org/drs/lib/android/ContentResolver.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/ContentResolver.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/android/src/main/kotlin/org/drs/lib/android/Context.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/Context.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/android/src/main/kotlin/org/drs/lib/android/FileObserver.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/FileObserver.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/android/src/main/kotlin/org/drs/lib/android/PackageManager.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/PackageManager.kt,94.1,slightly-modified,ok(apache-header)
+3-audit,lib/android/src/main/kotlin/org/drs/lib/android/SparseArray.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/SparseArray.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/android/src/main/kotlin/org/drs/lib/android/SystemSettingObserver.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/SystemSettingObserver.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/android/src/main/kotlin/org/drs/lib/android/Toast.kt,-,,drs-original,ok(no-apache-header)
+3-audit,lib/android/src/main/kotlin/org/drs/lib/android/UriSerializer.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/UriSerializer.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/android/src/main/kotlin/org/drs/lib/android/Vibrator.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/Vibrator.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/color/build.gradle.kts,floris@fe1241f:lib/compose/build.gradle.kts,81.0,build-file,ok(no-apache-header)
+3-audit,lib/color/src/main/kotlin/org/drs/lib/color/ColorMappings.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/color/ColorMappings.kt,74.7,deeply-modified,ok(apache-header)
+3-audit,lib/color/src/main/kotlin/org/drs/lib/color/ColorPalette.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/color/ColorPalette.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/color/src/main/kotlin/org/drs/lib/color/MaterialYouFlags.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/color/MaterialYouFlags.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/compose/build.gradle.kts,floris@fe1241f:lib/compose/build.gradle.kts,86.0,build-file,ok(apache-header)
+3-audit,lib/compose/consumer-rules.pro,-,,build-file,ok(no-apache-header)
+3-audit,lib/compose/proguard-rules.pro,-,,build-file,ok(no-apache-header)
+3-audit,lib/compose/src/main/kotlin/org/drs/compose/tooltip/Tooltip.kt,-,,protected,ok(protected-aosp-header)
+3-audit,lib/compose/src/main/kotlin/org/drs/compose/tooltip/TooltipDefaults.kt,-,,protected,ok(protected-aosp-header)
+3-audit,lib/compose/src/main/kotlin/org/drs/lib/compose/ClickableModifiers.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/ClickableModifiers.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/compose/src/main/kotlin/org/drs/lib/compose/DisposableLifecycleEffect.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/DisposableLifecycleEffect.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/compose/src/main/kotlin/org/drs/lib/compose/DpSpSizeFuns.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/DpSpSizeFuns.kt,100.0,slightly-modified,ok(apache-header)
+3-audit,lib/compose/src/main/kotlin/org/drs/lib/compose/DrawScope.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/DrawScope.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/compose/src/main/kotlin/org/drs/lib/compose/DrsAnimation.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/FlorisAnimation.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/compose/src/main/kotlin/org/drs/lib/compose/DrsAppBar.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/FlorisAppBar.kt,44.4,deeply-modified,VIOLATION: derived without Apache header
+3-audit,lib/compose/src/main/kotlin/org/drs/lib/compose/DrsBulletSpacer.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/FlorisBulletSpacer.kt,95.8,slightly-modified,ok(apache-header)
+3-audit,lib/compose/src/main/kotlin/org/drs/lib/compose/DrsButtonBar.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/FlorisButtonBar.kt,96.6,slightly-modified,ok(apache-header)
+3-audit,lib/compose/src/main/kotlin/org/drs/lib/compose/DrsButtons.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/FlorisButtons.kt,92.4,slightly-modified,ok(apache-header)
+3-audit,lib/compose/src/main/kotlin/org/drs/lib/compose/DrsCanvasIcon.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/FlorisCanvasIcon.kt,92.9,slightly-modified,ok(apache-header)
+3-audit,lib/compose/src/main/kotlin/org/drs/lib/compose/DrsCards.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/FlorisCards.kt,87.2,slightly-modified,ok(apache-header)
+3-audit,lib/compose/src/main/kotlin/org/drs/lib/compose/DrsChip.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/FlorisChip.kt,98.1,slightly-modified,ok(apache-header)
+3-audit,lib/compose/src/main/kotlin/org/drs/lib/compose/DrsDropdownLikeButton.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/FlorisDropdownLikeButton.kt,97.9,slightly-modified,ok(apache-header)
+3-audit,lib/compose/src/main/kotlin/org/drs/lib/compose/DrsStepLayout.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/FlorisStepLayout.kt,93.0,slightly-modified,ok(apache-header)
+3-audit,lib/compose/src/main/kotlin/org/drs/lib/compose/LazyGrid.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/LazyGrid.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/compose/src/main/kotlin/org/drs/lib/compose/Modifier.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/Modifier.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/compose/src/main/kotlin/org/drs/lib/compose/MotionScale.kt,-,,protected,ok(no-apache-header)
+3-audit,lib/compose/src/main/kotlin/org/drs/lib/compose/Resources.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/Resources.kt,98.9,slightly-modified,ok(apache-header)
+3-audit,lib/compose/src/main/kotlin/org/drs/lib/compose/RtlModifiers.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/RtlModifiers.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/compose/src/main/kotlin/org/drs/lib/compose/ScrollableModifiers.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/ScrollableModifiers.kt,96.6,slightly-modified,ok(apache-header)
+3-audit,lib/compose/src/main/kotlin/org/drs/lib/compose/State.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/State.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/compose/src/main/kotlin/org/drs/lib/compose/icons/KeyboardForwardDelete.kt,AOSP frameworks/base (verbatim; extension-property trap),,verbatim,ok(protected-aosp-header)
+3-audit,lib/jetpref/datastore-model-processor/build.gradle.kts,jetpref@7a3df4e:example/build.gradle.kts,69.2,build-file,ok(no-apache-header)
+3-audit,lib/jetpref/datastore-model-processor/src/main/kotlin/org/drs/jetpref/datastore/model/ModelProcessor.kt,jetpref@7a3df4e:datastore-model-processor/src/jvmMain/kotlin/dev/patrickgold/jetpref/datastore/model/ModelProcessor.kt,97.9,slightly-modified,ok(apache-header)
+3-audit,lib/jetpref/datastore-model-processor/src/main/resources/META-INF/services/com.google.devtools.ksp.processing.SymbolProcessorProvider,jetpref (KSP registration),,resource-file,ok(no-apache-header)
+3-audit,lib/jetpref/datastore-model/build.gradle.kts,floris@fe1241f:lib/android/build.gradle.kts,77.4,build-file,ok(no-apache-header)
+3-audit,lib/jetpref/datastore-model/proguard-rules.pro,-,,build-file,ok(no-apache-header)
+3-audit,lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/JetPref.kt,jetpref@7a3df4e:datastore-model/src/jvmCommonMain/kotlin/dev/patrickgold/jetpref/datastore/JetPref.kt,100.0,slightly-modified,VIOLATION: derived without Apache header
+3-audit,lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/JetPrefJvm.kt,-,,drs-original,VIOLATION: drs-original without documented measurement
+3-audit,lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/Utils.kt,jetpref@7a3df4e:datastore-model/src/commonMain/kotlin/dev/patrickgold/jetpref/datastore/Utils.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/annotations/Annotations.kt,jetpref@7a3df4e:datastore-model/src/commonMain/kotlin/dev/patrickgold/jetpref/datastore/annotations/Annotations.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/model/LocalTime.kt,jetpref@7a3df4e:datastore-model/src/commonMain/kotlin/dev/patrickgold/jetpref/datastore/model/LocalTime.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/model/PreferenceData.kt,jetpref@7a3df4e:datastore-model/src/commonMain/kotlin/dev/patrickgold/jetpref/datastore/model/PreferenceData.kt,100.0,slightly-modified,ok(apache-header)
+3-audit,lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/model/PreferenceDataJvm.kt,-,,drs-original,VIOLATION: drs-original without documented measurement
+3-audit,lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/model/PreferenceMigration.kt,jetpref@7a3df4e:datastore-model/src/commonMain/kotlin/dev/patrickgold/jetpref/datastore/model/PreferenceMigration.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/model/PreferenceModel.kt,jetpref@7a3df4e:datastore-model/src/commonMain/kotlin/dev/patrickgold/jetpref/datastore/model/PreferenceModel.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/model/PreferenceSerializer.kt,jetpref@7a3df4e:datastore-model/src/commonMain/kotlin/dev/patrickgold/jetpref/datastore/model/PreferenceSerializer.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/model/PreferenceType.kt,jetpref@7a3df4e:datastore-model/src/commonMain/kotlin/dev/patrickgold/jetpref/datastore/model/PreferenceType.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/model/StringEncoder.kt,jetpref@7a3df4e:datastore-model/src/commonMain/kotlin/dev/patrickgold/jetpref/datastore/model/StringEncoder.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/model/Validator.kt,jetpref@7a3df4e:datastore-model/src/commonMain/kotlin/dev/patrickgold/jetpref/datastore/model/Validator.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/runtime/AndroidAppDataStorage.kt,jetpref@7a3df4e:datastore-model/src/androidMain/kotlin/dev/patrickgold/jetpref/datastore/runtime/AndroidAppDataStorage.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/runtime/DataStore.kt,jetpref@7a3df4e:datastore-model/src/commonMain/kotlin/dev/patrickgold/jetpref/datastore/runtime/DataStore.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/runtime/Exceptions.kt,jetpref@7a3df4e:datastore-model/src/commonMain/kotlin/dev/patrickgold/jetpref/datastore/runtime/Exceptions.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/runtime/FileBasedStorage.kt,jetpref@7a3df4e:datastore-model/src/jvmCommonMain/kotlin/dev/patrickgold/jetpref/datastore/runtime/FileBasedStorage.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/runtime/Storage.kt,jetpref@7a3df4e:datastore-model/src/commonMain/kotlin/dev/patrickgold/jetpref/datastore/runtime/Storage.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/jetpref/datastore-ui/build.gradle.kts,floris@fe1241f:lib/compose/build.gradle.kts,78.0,build-file,ok(no-apache-header)
+3-audit,lib/jetpref/datastore-ui/proguard-rules.pro,-,,build-file,ok(no-apache-header)
+3-audit,lib/jetpref/datastore-ui/src/main/kotlin/org/drs/jetpref/datastore/model/PreferenceDataAdapter.kt,jetpref@7a3df4e:datastore-ui/src/androidMain/kotlin/dev/patrickgold/jetpref/datastore/model/PreferenceDataAdapter.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/jetpref/datastore-ui/src/main/kotlin/org/drs/jetpref/datastore/model/PreferenceDataEvaluatorScope.kt,jetpref@7a3df4e:datastore-ui/src/androidMain/kotlin/dev/patrickgold/jetpref/datastore/model/PreferenceDataEvaluatorScope.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/jetpref/datastore-ui/src/main/kotlin/org/drs/jetpref/datastore/ui/Annotations.kt,jetpref@7a3df4e:datastore-ui/src/androidMain/kotlin/dev/patrickgold/jetpref/datastore/ui/Annotations.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/jetpref/datastore-ui/src/main/kotlin/org/drs/jetpref/datastore/ui/ColorPickerPreference.kt,jetpref@7a3df4e:datastore-ui/src/androidMain/kotlin/dev/patrickgold/jetpref/datastore/ui/ColorPickerPreference.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/jetpref/datastore-ui/src/main/kotlin/org/drs/jetpref/datastore/ui/Common.kt,jetpref@7a3df4e:datastore-ui/src/androidMain/kotlin/dev/patrickgold/jetpref/datastore/ui/Common.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/jetpref/datastore-ui/src/main/kotlin/org/drs/jetpref/datastore/ui/DialogPrefStrings.kt,jetpref@7a3df4e:datastore-ui/src/androidMain/kotlin/dev/patrickgold/jetpref/datastore/ui/DialogPrefStrings.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/jetpref/datastore-ui/src/main/kotlin/org/drs/jetpref/datastore/ui/DialogSliderPreference.kt,jetpref@7a3df4e:datastore-ui/src/androidMain/kotlin/dev/patrickgold/jetpref/datastore/ui/DialogSliderPreference.kt,95.9,slightly-modified,ok(apache-header)
+3-audit,lib/jetpref/datastore-ui/src/main/kotlin/org/drs/jetpref/datastore/ui/ListPreference.kt,jetpref@7a3df4e:datastore-ui/src/androidMain/kotlin/dev/patrickgold/jetpref/datastore/ui/ListPreference.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/jetpref/datastore-ui/src/main/kotlin/org/drs/jetpref/datastore/ui/LocalTimePickerPreference.kt,jetpref@7a3df4e:datastore-ui/src/androidMain/kotlin/dev/patrickgold/jetpref/datastore/ui/LocalTimePickerPreference.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/jetpref/datastore-ui/src/main/kotlin/org/drs/jetpref/datastore/ui/Preference.kt,jetpref@7a3df4e:datastore-ui/src/androidMain/kotlin/dev/patrickgold/jetpref/datastore/ui/Preference.kt,100.0,slightly-modified,ok(apache-header)
+3-audit,lib/jetpref/datastore-ui/src/main/kotlin/org/drs/jetpref/datastore/ui/PreferenceUi.kt,jetpref@7a3df4e:datastore-ui/src/androidMain/kotlin/dev/patrickgold/jetpref/datastore/ui/PreferenceUi.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/jetpref/datastore-ui/src/main/kotlin/org/drs/jetpref/datastore/ui/SwitchPreference.kt,jetpref@7a3df4e:datastore-ui/src/androidMain/kotlin/dev/patrickgold/jetpref/datastore/ui/SwitchPreference.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/jetpref/datastore-ui/src/main/kotlin/org/drs/jetpref/datastore/ui/TextFieldPreference.kt,jetpref@7a3df4e:datastore-ui/src/androidMain/kotlin/dev/patrickgold/jetpref/datastore/ui/TextFieldPreference.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/jetpref/material-ui/build.gradle.kts,floris@fe1241f:lib/compose/build.gradle.kts,82.5,build-file,ok(no-apache-header)
+3-audit,lib/jetpref/material-ui/proguard-rules.pro,-,,build-file,ok(no-apache-header)
+3-audit,lib/jetpref/material-ui/src/main/kotlin/org/drs/jetpref/material/ui/Annotations.kt,jetpref@7a3df4e:material-ui/src/androidMain/kotlin/dev/patrickgold/jetpref/material/ui/Annotations.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/jetpref/material-ui/src/main/kotlin/org/drs/jetpref/material/ui/ColorRepresentation.kt,jetpref@7a3df4e:material-ui/src/androidMain/kotlin/dev/patrickgold/jetpref/material/ui/ColorRepresentation.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/jetpref/material-ui/src/main/kotlin/org/drs/jetpref/material/ui/Common.kt,jetpref@7a3df4e:material-ui/src/androidMain/kotlin/dev/patrickgold/jetpref/material/ui/Common.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/jetpref/material-ui/src/main/kotlin/org/drs/jetpref/material/ui/JetPrefAlertDialog.kt,jetpref@7a3df4e:material-ui/src/androidMain/kotlin/dev/patrickgold/jetpref/material/ui/JetPrefAlertDialog.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/jetpref/material-ui/src/main/kotlin/org/drs/jetpref/material/ui/JetPrefColorPicker.kt,jetpref@7a3df4e:material-ui/src/androidMain/kotlin/dev/patrickgold/jetpref/material/ui/JetPrefColorPicker.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/jetpref/material-ui/src/main/kotlin/org/drs/jetpref/material/ui/JetPrefDropdown.kt,jetpref@7a3df4e:material-ui/src/androidMain/kotlin/dev/patrickgold/jetpref/material/ui/JetPrefDropdown.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/jetpref/material-ui/src/main/kotlin/org/drs/jetpref/material/ui/JetPrefListItem.kt,jetpref@7a3df4e:material-ui/src/androidMain/kotlin/dev/patrickgold/jetpref/material/ui/JetPrefListItem.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/jetpref/material-ui/src/main/kotlin/org/drs/jetpref/material/ui/JetPrefTextField.kt,jetpref@7a3df4e:material-ui/src/androidMain/kotlin/dev/patrickgold/jetpref/material/ui/JetPrefTextField.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/kotlin/build.gradle.kts,floris@fe1241f:lib/kotlin/build.gradle.kts,90.6,build-file,ok(apache-header)
+3-audit,lib/kotlin/src/main/kotlin/org/drs/lib/kotlin/Class.kt,floris@fe1241f:lib/kotlin/src/main/kotlin/org/florisboard/lib/kotlin/Class.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/kotlin/src/main/kotlin/org/drs/lib/kotlin/Collections.kt,floris@fe1241f:lib/kotlin/src/main/kotlin/org/florisboard/lib/kotlin/Collections.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/kotlin/src/main/kotlin/org/drs/lib/kotlin/Flow.kt,floris@fe1241f:lib/kotlin/src/main/kotlin/org/florisboard/lib/kotlin/Flow.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/kotlin/src/main/kotlin/org/drs/lib/kotlin/GuardedByLock.kt,floris@fe1241f:lib/kotlin/src/main/kotlin/org/florisboard/lib/kotlin/GuardedByLock.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/kotlin/src/main/kotlin/org/drs/lib/kotlin/Library.kt,floris@fe1241f:lib/kotlin/src/main/kotlin/org/florisboard/lib/kotlin/Library.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/kotlin/src/main/kotlin/org/drs/lib/kotlin/MimeTypeFilter.kt,floris@fe1241f:lib/kotlin/src/main/kotlin/org/florisboard/lib/kotlin/MimeTypeFilter.kt,100.0,slightly-modified,VIOLATION: derived without Apache header
+3-audit,lib/kotlin/src/main/kotlin/org/drs/lib/kotlin/Numbers.kt,floris@fe1241f:lib/kotlin/src/main/kotlin/org/florisboard/lib/kotlin/Numbers.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/kotlin/src/main/kotlin/org/drs/lib/kotlin/Regex.kt,floris@fe1241f:lib/kotlin/src/main/kotlin/org/florisboard/lib/kotlin/Regex.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/kotlin/src/main/kotlin/org/drs/lib/kotlin/Result.kt,floris@fe1241f:lib/kotlin/src/main/kotlin/org/florisboard/lib/kotlin/Result.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/kotlin/src/main/kotlin/org/drs/lib/kotlin/Strings.kt,floris@fe1241f:lib/kotlin/src/main/kotlin/org/florisboard/lib/kotlin/Strings.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/kotlin/src/main/kotlin/org/drs/lib/kotlin/io/FsFile.kt,floris@fe1241f:lib/kotlin/src/main/kotlin/org/florisboard/lib/kotlin/io/FsFile.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/kotlin/src/test/kotlin/org/drs/lib/kotlin/MimeTypeFilterTest.kt,floris@fe1241f:lib/kotlin/src/test/kotlin/org/florisboard/lib/kotlin/MimeTypeFilterTest.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/kotlin/src/test/kotlin/org/drs/lib/kotlin/StringsTest.kt,floris@fe1241f:lib/kotlin/src/test/kotlin/org/florisboard/lib/kotlin/StringsTest.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/snygg/.gitignore,-,,build-file,ok(no-apache-header)
+3-audit,lib/snygg/build.gradle.kts,floris@fe1241f:lib/compose/build.gradle.kts,53.9,build-file,ok(no-apache-header)
+3-audit,lib/snygg/consumer-rules.pro,-,,build-file,ok(no-apache-header)
+3-audit,lib/snygg/proguard-rules.pro,-,,build-file,ok(no-apache-header)
+3-audit,lib/snygg/schemas/stylesheet.schema.json,-,,build-file,ok(no-apache-header)
+3-audit,lib/snygg/src/main/AndroidManifest.xml,-,,build-file,ok(no-apache-header)
+3-audit,lib/snygg/src/main/kotlin/org/drs/lib/snygg/Snygg.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/Snygg.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggJsonSchemaGenerator.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/SnyggJsonSchemaGenerator.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggPropertySet.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/SnyggPropertySet.kt,98.1,slightly-modified,ok(apache-header)
+3-audit,lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggPropertySetEditor.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/SnyggPropertySetEditor.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggRule.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/SnyggRule.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggSpecDecl.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/SnyggSpecDecl.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggStylesheet.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/SnyggStylesheet.kt,98.2,slightly-modified,ok(apache-header)
+3-audit,lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggStylesheetEditor.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/SnyggStylesheetEditor.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggTheme.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/SnyggTheme.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggBox.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/ui/SnyggBox.kt,81.1,deeply-modified,ok(apache-header)
+3-audit,lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggButton.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/ui/SnyggButton.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggChip.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/ui/SnyggChip.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggColumn.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/ui/SnyggColumn.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggIcon.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/ui/SnyggIcon.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggIconButton.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/ui/SnyggIconButton.kt,90.8,slightly-modified,ok(apache-header)
+3-audit,lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggListItem.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/ui/SnyggListItem.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggRow.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/ui/SnyggRow.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggSpacer.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/ui/SnyggSpacer.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggText.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/ui/SnyggText.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggUi.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/ui/SnyggUi.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/snygg/src/main/kotlin/org/drs/lib/snygg/value/SnyggAppearanceValue.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/value/SnyggAppearanceValue.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/snygg/src/main/kotlin/org/drs/lib/snygg/value/SnyggFontValue.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/value/SnyggFontValue.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/snygg/src/main/kotlin/org/drs/lib/snygg/value/SnyggIdToValueMap.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/value/SnyggIdToValueMap.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/snygg/src/main/kotlin/org/drs/lib/snygg/value/SnyggPaddingValue.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/value/SnyggPaddingValue.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/snygg/src/main/kotlin/org/drs/lib/snygg/value/SnyggShapeValue.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/value/SnyggShapeValue.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/snygg/src/main/kotlin/org/drs/lib/snygg/value/SnyggSizeValue.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/value/SnyggSizeValue.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/snygg/src/main/kotlin/org/drs/lib/snygg/value/SnyggTextValue.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/value/SnyggTextValue.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/snygg/src/main/kotlin/org/drs/lib/snygg/value/SnyggUriValue.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/value/SnyggUriValue.kt,97.7,slightly-modified,ok(apache-header)
+3-audit,lib/snygg/src/main/kotlin/org/drs/lib/snygg/value/SnyggValue.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/value/SnyggValue.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/snygg/src/main/kotlin/org/drs/lib/snygg/value/SnyggValueEncoder.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/value/SnyggValueEncoder.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/snygg/src/main/kotlin/org/drs/lib/snygg/value/SnyggValueSpec.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/value/SnyggValueSpec.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/snygg/src/main/kotlin/org/drs/lib/snygg/value/SnyggVarValue.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/value/SnyggVarValue.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/snygg/src/test/kotlin/org/drs/lib/snygg/SnyggRuleTest.kt,floris@fe1241f:lib/snygg/src/commonTest/kotlin/org/florisboard/lib/snygg/SnyggRuleTest.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/snygg/src/test/kotlin/org/drs/lib/snygg/SnyggStylesheetEditorTest.kt,floris@fe1241f:lib/snygg/src/commonTest/kotlin/org/florisboard/lib/snygg/SnyggStylesheetEditorTest.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/snygg/src/test/kotlin/org/drs/lib/snygg/SnyggStylesheetTest.kt,floris@fe1241f:lib/snygg/src/commonTest/kotlin/org/florisboard/lib/snygg/SnyggStylesheetTest.kt,98.3,slightly-modified,ok(apache-header)
+3-audit,lib/snygg/src/test/kotlin/org/drs/lib/snygg/SnyggThemeTest.kt,floris@fe1241f:lib/snygg/src/commonTest/kotlin/org/florisboard/lib/snygg/SnyggThemeTest.kt,95.5,slightly-modified,ok(apache-header)
+3-audit,lib/snygg/src/test/kotlin/org/drs/lib/snygg/value/SnyggAppearanceValueTest.kt,floris@fe1241f:lib/snygg/src/commonTest/kotlin/org/florisboard/lib/snygg/value/SnyggAppearanceValueTest.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/snygg/src/test/kotlin/org/drs/lib/snygg/value/SnyggFontValueTest.kt,floris@fe1241f:lib/snygg/src/commonTest/kotlin/org/florisboard/lib/snygg/value/SnyggFontValueTest.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/snygg/src/test/kotlin/org/drs/lib/snygg/value/SnyggPaddingValueTest.kt,floris@fe1241f:lib/snygg/src/commonTest/kotlin/org/florisboard/lib/snygg/value/SnyggPaddingValueTest.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/snygg/src/test/kotlin/org/drs/lib/snygg/value/SnyggShapeValueTest.kt,floris@fe1241f:lib/snygg/src/commonTest/kotlin/org/florisboard/lib/snygg/value/SnyggShapeValueTest.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/snygg/src/test/kotlin/org/drs/lib/snygg/value/SnyggSizeValueTest.kt,floris@fe1241f:lib/snygg/src/commonTest/kotlin/org/florisboard/lib/snygg/value/SnyggSizeValueTest.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/snygg/src/test/kotlin/org/drs/lib/snygg/value/SnyggTextValueTest.kt,floris@fe1241f:lib/snygg/src/commonTest/kotlin/org/florisboard/lib/snygg/value/SnyggTextValueTest.kt,100.0,verbatim,ok(apache-header)
+3-audit,lib/snygg/src/test/kotlin/org/drs/lib/snygg/value/SnyggUriValueTest.kt,floris@fe1241f:lib/snygg/src/commonTest/kotlin/org/florisboard/lib/snygg/value/SnyggUriValueTest.kt,100.0,verbatim,ok(apache-header)

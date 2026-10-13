@@ -162,7 +162,49 @@ git clone --depth 1 --branch main https://github.com/patrickgold/jetpref.git /ho
 - `structural:jetpref-naming` = 867 (تسمية الوحدة المقلدة نفسها — ضمن بوابات
   jetpref اللاحقة بموافقة صريحة، ليست تسريباً).
 
-### المرحلة 2: القتل الوقائي — لم تبدأ
+### المرحلة 2: القتل الوقائي — مفتوحة: بند المراجعة مُسلَّم، **توقف إجباري قبل أول قتل** (براءة مشكوك فيها، بند 2)
+
+#### التمهيد (2026-10-13)
+- [x] استئناف من الخاص: `cleanup/drs-purge @ 1346140` (تاغا `cleanup/step0` + `cleanup/phase1` حاضران)
+- [x] JDK 17.0.20.1 (Temurin) + SDK (platforms;android-36, build-tools;36.0.0) + `local.properties`
+- [x] المرجعان المثبتان مُستنسخان بالهاش: floris `fe1241f4921b3eae923571ff7a3e113a7e10d677` ✓ jetpref `7a3df4eb76ff81245244761f6c160eab31e9f73f` ✓
+- [x] سلامة الأدوات: ذاتي=100.0%؛ عينات حرفية floris(Context)=100.0% + jetpref(material-ui/Common)=100.0%
+
+#### المهمة 1: إعادة تشغيل الكاشف (قراءة فقط)
+`deadcode_phase2_start.csv` — **204 صفاً = 204 صفاً تطابق تام مع baseline step0 (صفر انحراف)**.
+الفارق الوحيد بين المسحين كان نهايات أسطر CRLF/LF (بيئة الكتابة) — طُبّع وأُثبت التطابق
+بالمقارنة الثنائية. التفسير: المرحلة 1 لمست الترويسات/التعليقات فقط وكاشف الرموز يجرد التعليقات.
+
+#### تسليم بنود المراجعة الثلاثة (`phase2_review.py` + `phase2_review.csv`)
+**بند 1 — الـfuzzy**: التصحيح المحاسبي: نثر المرحلة 1 قال «17»؛ **العدّ الفعلي في
+`phase1_header_map.csv` = 27 fuzzy** (الحصيلة الصحيحة: exact=96 + exact+canonical=9 +
+fuzzy=27 = 132 استعادة). الجدول هو المرجع، النثر كان خطأ إحصاء.
+
+**بند 2 — الـ12 بلا مقابل**: 7 مُصادَق عليها غير مشتقة + **5 مشكوك في براءتها**:
+
+| # | الملف | القياس | التصنيف | الحكم |
+|---|---|---|---|---|
+| 1 | android/Toast.kt | best=14.8% (مسح كامل floris lib/android + app) | drs-original | ✓ غير مشتق |
+| 2-7 | 6× build.gradle.kts | 53.9–82.5% (build config) | build-file | ✓ إعدادات بناء DRS لا مشتق كود |
+| 8 | compose/DrsAppBar.kt | canonical=44.4% vs FlorisAppBar | deeply-modified | ⚠ مشتق بلا ترويسة Apache |
+| 9 | kotlin/MimeTypeFilter.kt | canonical=**100.0%** vs floris MimeTypeFilter | slightly-modified | ⚠ مشتق (جزء محذوف من الأصل) بلا ترويسة |
+| 10 | jetpref/JetPref.kt | canonical=**100.0%** vs jetpref jvmCommon JetPref.kt | slightly-modified | ⚠ مشتق بلا ترويسة |
+| 11 | jetpref/JetPrefJvm.kt | **fresh scan=95.2%** vs jetpref jvmCommon JetPref.kt (jetprefDataStoreOf منسوخ حرفياً، أُثبت بصرياً) | كان drs-original ← خطأ تصنيف | ⚠ مشتق بلا ترويسة |
+| 12 | jetpref/model/PreferenceDataJvm.kt | **fresh scan=93.2%** vs jetpref jvmCommon PreferenceData.kt | كان drs-original ← خطأ تصنيف | ⚠ مشتق بلا ترويسة |
+
+**بند 3 — تدقيق الاتساق**: 5 مخالفات (نفس الملفات 8–12): مشتق بقياس ≥44% يحمل
+ترويسة DRS بدل ترويسة Apache الأصلية. (KeyboardForwardDelete: إنذار كاذب أُصلح —
+ترويسة AOSP السطرين هي الصيغة القياسية الصحيحة للملفات المحمية.)
+
+#### القرار المطلوب من المالك (قبل أي قتل)
+- **خيار أ (الموصى به قانونياً)**: معاملة الخمسة كمشتقات — استعادة الترويسات
+  الأصلية الحرفية بميكانيكا المرحلة 1 (ضمان SHA-256 للأجسام) + إدخالات
+  THIRD_PARTY_NOTICES + تصحيح صفي drs-original في الجدول الكانوني إلى
+  slightly-modified بالمراجع والأرقام أعلاه، ثم متابعة القتل في نفس الدور.
+- **خيار ب**: تأجيل الترويسات إلى المراحل 3–5 (DrsAppBar/MimeTypeFilter ضمن
+  نطاق إعادة الكتابة) — لكن jetpref الثلاثة خارج نطاق إعادة الكتابة الحالية.
+- القتل الوقائي نفسه مستقل تماماً (الملفات الخمسة كلها حية وليست مرشحة للقتل).
+
 ### المرحلة 3: color — لم تبدأ
 ### المرحلة 4: android — لم تبدأ
 ### المرحلة 5: compose — لم تبدأ

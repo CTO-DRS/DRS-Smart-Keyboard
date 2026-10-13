@@ -1,0 +1,205 @@
+file,kind,name,refs,exempt,note
+lib/android/src/main/kotlin/org/drs/lib/android/AndroidAssetsManager.kt,file,AndroidAssetsManager,0,no,delete candidate
+lib/android/src/main/kotlin/org/drs/lib/android/AndroidInternalR.kt,top-val,ic_qs_one_handed_mode,0,no,orphan top-level symbol
+lib/android/src/main/kotlin/org/drs/lib/android/AndroidSettings.kt,top-fun,reflectionGetAllStaticFields,0,no,orphan top-level symbol
+lib/android/src/main/kotlin/org/drs/lib/android/AndroidVersion.kt,top-val,ATMOST_API27_O_MR1,0,no,orphan top-level symbol
+lib/android/src/main/kotlin/org/drs/lib/android/AndroidVersion.kt,top-val,ATMOST_API29_Q,0,no,orphan top-level symbol
+lib/android/src/main/kotlin/org/drs/lib/android/AndroidVersion.kt,top-val,ATMOST_API30_R,0,no,orphan top-level symbol
+lib/android/src/main/kotlin/org/drs/lib/android/AndroidVersion.kt,top-val,ATMOST_API31_S,0,no,orphan top-level symbol
+lib/android/src/main/kotlin/org/drs/lib/android/AndroidVersion.kt,top-val,ATLEAST_API32_S_V2,0,no,orphan top-level symbol
+lib/android/src/main/kotlin/org/drs/lib/android/AndroidVersion.kt,top-val,ATMOST_API32_S_V2,0,no,orphan top-level symbol
+lib/android/src/main/kotlin/org/drs/lib/android/AndroidVersion.kt,top-val,ATMOST_API33_T,0,no,orphan top-level symbol
+lib/android/src/main/kotlin/org/drs/lib/android/AndroidVersion.kt,top-val,ATMOST_API34_U,0,no,orphan top-level symbol
+lib/android/src/main/kotlin/org/drs/lib/android/AndroidVersion.kt,top-val,ATLEAST_API35_V,0,no,orphan top-level symbol
+lib/android/src/main/kotlin/org/drs/lib/android/AndroidVersion.kt,top-val,ATMOST_API35_V,0,no,orphan top-level symbol
+lib/android/src/main/kotlin/org/drs/lib/android/SystemSettingObserver.kt,file,SystemSettingObserver,0,no,delete candidate
+lib/color/src/main/kotlin/org/drs/lib/color/ColorMappings.kt,top-val,DEFAULT_GREEN,0,no,orphan top-level symbol
+lib/color/src/main/kotlin/org/drs/lib/color/ColorMappings.kt,top-fun,getSystemAccent,0,no,orphan top-level symbol
+lib/compose/src/main/kotlin/org/drs/compose/tooltip/TooltipDefaults.kt,file,TooltipDefaults,0,no,delete candidate
+lib/compose/src/main/kotlin/org/drs/lib/compose/ClickableModifiers.kt,file,ClickableModifiers,0,no,delete candidate
+lib/compose/src/main/kotlin/org/drs/lib/compose/DpSpSizeFuns.kt,file,DpSpSizeFuns,0,no,delete candidate
+lib/compose/src/main/kotlin/org/drs/lib/compose/DrsAnimation.kt,file,DrsAnimation,0,no,delete candidate
+lib/compose/src/main/kotlin/org/drs/lib/compose/DrsButtonBar.kt,top-class,DrsButtonBarScope,0,no,orphan top-level symbol
+lib/compose/src/main/kotlin/org/drs/lib/compose/DrsButtons.kt,file,DrsButtons,0,no,delete candidate
+lib/compose/src/main/kotlin/org/drs/lib/compose/DrsCards.kt,file,DrsCards,0,no,delete candidate
+lib/compose/src/main/kotlin/org/drs/lib/compose/MotionScale.kt,top-var,animatorScale,0,no,orphan top-level symbol
+lib/compose/src/main/kotlin/org/drs/lib/compose/Resources.kt,top-val,LocalResourcesContext,0,no,orphan top-level symbol
+lib/compose/src/main/kotlin/org/drs/lib/compose/Resources.kt,top-val,LocalAppNameString,0,no,orphan top-level symbol
+lib/compose/src/main/kotlin/org/drs/lib/compose/Resources.kt,top-val,LocalActualLayoutDirection,0,no,orphan top-level symbol
+lib/compose/src/main/kotlin/org/drs/lib/compose/Resources.kt,top-val,dateTimeFormatter,0,no,orphan top-level symbol
+lib/compose/src/main/kotlin/org/drs/lib/compose/Resources.kt,top-fun,formatString,0,no,orphan top-level symbol
+lib/compose/src/main/kotlin/org/drs/lib/compose/RtlModifiers.kt,file,RtlModifiers,0,no,delete candidate
+lib/compose/src/main/kotlin/org/drs/lib/compose/ScrollableModifiers.kt,file,ScrollableModifiers,0,no,delete candidate
+lib/compose/src/main/kotlin/org/drs/lib/compose/State.kt,top-val,eventObserver,0,no,orphan top-level symbol
+lib/compose/src/main/kotlin/org/drs/lib/compose/icons/KeyboardForwardDelete.kt,file,KeyboardForwardDelete,0,no,delete candidate
+lib/jetpref/datastore-model-processor/src/main/kotlin/org/drs/jetpref/datastore/model/ModelProcessor.kt,top-class,ModelProcessor,0,no,orphan top-level symbol
+lib/jetpref/datastore-model-processor/src/main/kotlin/org/drs/jetpref/datastore/model/ModelProcessor.kt,top-val,PREFERNCE_MODEL_DUPLICATE_KEY_EXCEPTION_QUALIFIED_NAME,0,no,orphan top-level symbol
+lib/jetpref/datastore-model-processor/src/main/kotlin/org/drs/jetpref/datastore/model/ModelProcessor.kt,top-fun,collectProperties,0,no,orphan top-level symbol
+lib/jetpref/datastore-model-processor/src/main/kotlin/org/drs/jetpref/datastore/model/ModelProcessor.kt,top-fun,nestedClassMap,0,no,orphan top-level symbol
+lib/jetpref/datastore-model-processor/src/main/kotlin/org/drs/jetpref/datastore/model/ModelProcessor.kt,top-fun,recurse,0,no,orphan top-level symbol
+lib/jetpref/datastore-model-processor/src/main/kotlin/org/drs/jetpref/datastore/model/ModelProcessor.kt,top-fun,generateModelImplementation,0,no,orphan top-level symbol
+lib/jetpref/datastore-model-processor/src/main/kotlin/org/drs/jetpref/datastore/model/ModelProcessor.kt,top-val,finalModelName,0,no,orphan top-level symbol
+lib/jetpref/datastore-model-processor/src/main/kotlin/org/drs/jetpref/datastore/model/ModelProcessor.kt,top-val,declaredPreferenceEntriesName,0,no,orphan top-level symbol
+lib/jetpref/datastore-model-processor/src/main/kotlin/org/drs/jetpref/datastore/model/ModelProcessor.kt,top-val,initBlock,0,no,orphan top-level symbol
+lib/jetpref/datastore-model-processor/src/main/kotlin/org/drs/jetpref/datastore/model/ModelProcessor.kt,top-val,entriesName,0,no,orphan top-level symbol
+lib/jetpref/datastore-model-processor/src/main/kotlin/org/drs/jetpref/datastore/model/ModelProcessor.kt,top-val,duplicatesName,0,no,orphan top-level symbol
+lib/jetpref/datastore-model-processor/src/main/kotlin/org/drs/jetpref/datastore/model/ModelProcessor.kt,top-val,declaredPreferencesEntriesProperty,0,no,orphan top-level symbol
+lib/jetpref/datastore-model-processor/src/main/kotlin/org/drs/jetpref/datastore/model/ModelProcessor.kt,top-fun,isPreferenceData,0,no,orphan top-level symbol
+lib/jetpref/datastore-model-processor/src/main/kotlin/org/drs/jetpref/datastore/model/ModelProcessor.kt,top-fun,isInnerClassOf,0,no,orphan top-level symbol
+lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/JetPrefJvm.kt,file,JetPrefJvm,0,no,delete candidate
+lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/Utils.kt,file,Utils,0,no,delete candidate
+lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/annotations/Annotations.kt,file,Annotations,0,no,delete candidate
+lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/model/LocalTime.kt,top-val,isAfternoon,0,no,orphan top-level symbol
+lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/model/LocalTime.kt,top-fun,hourForDisplay,0,no,orphan top-level symbol
+lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/model/LocalTime.kt,top-val,PATTERN,0,no,orphan top-level symbol
+lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/model/PreferenceDataJvm.kt,file,PreferenceDataJvm,0,no,delete candidate
+lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/model/PreferenceType.kt,top-val,BOOLEAN,0,no,orphan top-level symbol
+lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/model/PreferenceType.kt,top-val,DOUBLE,0,no,orphan top-level symbol
+lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/model/PreferenceType.kt,top-val,INTEGER,0,no,orphan top-level symbol
+lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/model/PreferenceType.kt,top-fun,isPrimitive,0,no,orphan top-level symbol
+lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/model/PreferenceType.kt,top-fun,isBoolean,0,no,orphan top-level symbol
+lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/model/PreferenceType.kt,top-fun,isDouble,0,no,orphan top-level symbol
+lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/model/PreferenceType.kt,top-fun,isInteger,0,no,orphan top-level symbol
+lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/model/PreferenceType.kt,top-fun,isLong,0,no,orphan top-level symbol
+lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/model/Validator.kt,top-val,FILE_NAME_REGEX,0,no,orphan top-level symbol
+lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/model/Validator.kt,top-val,KEY_REGEX,0,no,orphan top-level symbol
+lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/runtime/AndroidAppDataStorage.kt,top-fun,androidAppDataStorageOf,0,no,orphan top-level symbol
+lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/runtime/AndroidAppDataStorage.kt,top-val,storageProvider,0,no,orphan top-level symbol
+lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/runtime/AndroidAppDataStorage.kt,ext-prop,jetprefDatastoreDir,0,no,orphan extension property
+lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/runtime/DataStore.kt,top-var,currentStoreRef,0,no,orphan top-level symbol
+lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/runtime/DataStore.kt,top-fun,handleEvent,0,no,orphan top-level symbol
+lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/runtime/DataStore.kt,top-val,currentStore,0,no,orphan top-level symbol
+lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/runtime/DataStore.kt,top-fun,loadAndUpdate,0,no,orphan top-level symbol
+lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/runtime/DataStore.kt,top-val,rawEncodedValues,0,no,orphan top-level symbol
+lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/runtime/DataStore.kt,top-val,rawDatastoreContent,0,no,orphan top-level symbol
+lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/runtime/DataStore.kt,top-fun,generateEmptyRawEncodedValues,0,no,orphan top-level symbol
+lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/runtime/DataStore.kt,top-val,rawEncodedValues,0,no,orphan top-level symbol
+lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/runtime/DataStore.kt,top-class,Init,0,no,orphan top-level symbol
+lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/runtime/DataStore.kt,top-class,SetValueAndTryPersist,0,no,orphan top-level symbol
+lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/runtime/DataStore.kt,top-val,rawEncodedValue,0,no,orphan top-level symbol
+lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/runtime/DataStore.kt,top-val,importReader,0,no,orphan top-level symbol
+lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/runtime/DataStore.kt,top-val,exportWriter,0,no,orphan top-level symbol
+lib/jetpref/datastore-model/src/main/kotlin/org/drs/jetpref/datastore/runtime/FileBasedStorage.kt,top-val,datastoreFile,0,no,orphan top-level symbol
+lib/jetpref/datastore-ui/src/main/kotlin/org/drs/jetpref/datastore/model/PreferenceDataAdapter.kt,file,PreferenceDataAdapter,0,no,delete candidate
+lib/jetpref/datastore-ui/src/main/kotlin/org/drs/jetpref/datastore/ui/Annotations.kt,file,Annotations,0,no,delete candidate
+lib/jetpref/datastore-ui/src/main/kotlin/org/drs/jetpref/datastore/ui/ColorPickerPreference.kt,top-var,showPicker,0,no,orphan top-level symbol
+lib/jetpref/datastore-ui/src/main/kotlin/org/drs/jetpref/datastore/ui/ColorPickerPreference.kt,top-var,dialogValue,0,no,orphan top-level symbol
+lib/jetpref/datastore-ui/src/main/kotlin/org/drs/jetpref/datastore/ui/ColorPickerPreference.kt,top-val,presetColors,0,no,orphan top-level symbol
+lib/jetpref/datastore-ui/src/main/kotlin/org/drs/jetpref/datastore/ui/ColorPickerPreference.kt,top-var,selectedPreset,0,no,orphan top-level symbol
+lib/jetpref/datastore-ui/src/main/kotlin/org/drs/jetpref/datastore/ui/ColorPickerPreference.kt,top-fun,ColorBox,0,no,orphan top-level symbol
+lib/jetpref/datastore-ui/src/main/kotlin/org/drs/jetpref/datastore/ui/DialogPrefStrings.kt,top-val,dialogPrefStrings,0,no,orphan top-level symbol
+lib/jetpref/datastore-ui/src/main/kotlin/org/drs/jetpref/datastore/ui/DialogSliderPreference.kt,top-var,primarySliderValue,0,no,orphan top-level symbol
+lib/jetpref/datastore-ui/src/main/kotlin/org/drs/jetpref/datastore/ui/DialogSliderPreference.kt,top-var,secondarySliderValue,0,no,orphan top-level symbol
+lib/jetpref/datastore-ui/src/main/kotlin/org/drs/jetpref/datastore/ui/DialogSliderPreference.kt,top-fun,customSliderDialogColors,0,no,orphan top-level symbol
+lib/jetpref/datastore-ui/src/main/kotlin/org/drs/jetpref/datastore/ui/ListPreference.kt,top-val,labelComposer,0,no,orphan top-level symbol
+lib/jetpref/datastore-ui/src/main/kotlin/org/drs/jetpref/datastore/ui/ListPreference.kt,top-val,descriptionComposer,0,no,orphan top-level symbol
+lib/jetpref/datastore-ui/src/main/kotlin/org/drs/jetpref/datastore/ui/ListPreference.kt,top-interface,ListPreferenceEntriesScope,0,no,orphan top-level symbol
+lib/jetpref/datastore-ui/src/main/kotlin/org/drs/jetpref/datastore/ui/ListPreference.kt,top-class,ListPreferenceEntriesScopeImpl,0,no,orphan top-level symbol
+lib/jetpref/datastore-ui/src/main/kotlin/org/drs/jetpref/datastore/ui/LocalTimePickerPreference.kt,top-val,timePickerState,0,no,orphan top-level symbol
+lib/jetpref/datastore-ui/src/main/kotlin/org/drs/jetpref/datastore/ui/LocalTimePickerPreference.kt,top-fun,DisplayModeToggleButton,0,no,orphan top-level symbol
+lib/jetpref/datastore-ui/src/main/kotlin/org/drs/jetpref/datastore/ui/TextFieldPreference.kt,file,TextFieldPreference,0,no,delete candidate
+lib/jetpref/material-ui/src/main/kotlin/org/drs/jetpref/material/ui/Annotations.kt,file,Annotations,0,no,delete candidate
+lib/jetpref/material-ui/src/main/kotlin/org/drs/jetpref/material/ui/ColorRepresentation.kt,top-object,RegexHelpers,0,no,orphan top-level symbol
+lib/jetpref/material-ui/src/main/kotlin/org/drs/jetpref/material/ui/ColorRepresentation.kt,top-val,HexDigit,0,no,orphan top-level symbol
+lib/jetpref/material-ui/src/main/kotlin/org/drs/jetpref/material/ui/ColorRepresentation.kt,top-val,Separator,0,no,orphan top-level symbol
+lib/jetpref/material-ui/src/main/kotlin/org/drs/jetpref/material/ui/ColorRepresentation.kt,top-val,ParenOpen,0,no,orphan top-level symbol
+lib/jetpref/material-ui/src/main/kotlin/org/drs/jetpref/material/ui/ColorRepresentation.kt,top-val,ParenClose,0,no,orphan top-level symbol
+lib/jetpref/material-ui/src/main/kotlin/org/drs/jetpref/material/ui/ColorRepresentation.kt,top-val,Int255,0,no,orphan top-level symbol
+lib/jetpref/material-ui/src/main/kotlin/org/drs/jetpref/material/ui/ColorRepresentation.kt,top-val,Rgb,0,no,orphan top-level symbol
+lib/jetpref/material-ui/src/main/kotlin/org/drs/jetpref/material/ui/ColorRepresentation.kt,top-val,Int360,0,no,orphan top-level symbol
+lib/jetpref/material-ui/src/main/kotlin/org/drs/jetpref/material/ui/ColorRepresentation.kt,top-val,Int100,0,no,orphan top-level symbol
+lib/jetpref/material-ui/src/main/kotlin/org/drs/jetpref/material/ui/ColorRepresentation.kt,top-val,Hsv,0,no,orphan top-level symbol
+lib/jetpref/material-ui/src/main/kotlin/org/drs/jetpref/material/ui/ColorRepresentation.kt,top-class,HsvColor,0,no,orphan top-level symbol
+lib/jetpref/material-ui/src/main/kotlin/org/drs/jetpref/material/ui/ColorRepresentation.kt,top-val,cMax,0,no,orphan top-level symbol
+lib/jetpref/material-ui/src/main/kotlin/org/drs/jetpref/material/ui/ColorRepresentation.kt,top-val,cMin,0,no,orphan top-level symbol
+lib/jetpref/material-ui/src/main/kotlin/org/drs/jetpref/material/ui/ColorRepresentation.kt,top-class,RgbColor,0,no,orphan top-level symbol
+lib/jetpref/material-ui/src/main/kotlin/org/drs/jetpref/material/ui/Common.kt,top-fun,whenNotNull,0,no,orphan top-level symbol
+lib/jetpref/material-ui/src/main/kotlin/org/drs/jetpref/material/ui/JetPrefDropdown.kt,top-fun,rememberJetPrefDropdownExpandedState,0,no,orphan top-level symbol
+lib/kotlin/src/main/kotlin/org/drs/lib/kotlin/MimeTypeFilter.kt,top-fun,matchMimeTypeAgainstFilters,0,no,orphan top-level symbol
+lib/kotlin/src/main/kotlin/org/drs/lib/kotlin/Regex.kt,top-class,RegexSerializer,0,no,orphan top-level symbol
+lib/kotlin/src/main/kotlin/org/drs/lib/kotlin/Strings.kt,file,Strings,0,no,delete candidate
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggJsonSchemaGenerator.kt,top-val,jsonSchema,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggJsonSchemaGenerator.kt,top-val,jsonSchemaObj,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggJsonSchemaGenerator.kt,top-fun,convertToJsonObject,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggJsonSchemaGenerator.kt,top-fun,convertToJsonObjectList,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggJsonSchemaGenerator.kt,top-fun,oneOfList,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggJsonSchemaGenerator.kt,top-fun,mapWithoutEmptyValuesOf,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggPropertySet.kt,top-fun,toJsonElementSpecialized,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggPropertySet.kt,top-fun,fromJsonElementSpecialized,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggPropertySet.kt,top-fun,toJsonElementSpecialized,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggPropertySet.kt,top-fun,fromJsonElementSpecialized,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggPropertySetEditor.kt,top-fun,setProperty,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggPropertySetEditor.kt,top-val,transformedValue,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggPropertySetEditor.kt,top-fun,textMaxLinesNone,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggPropertySetEditor.kt,top-fun,cutCornerShape,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggPropertySetEditor.kt,top-fun,cutCornerShape,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggPropertySetEditor.kt,top-fun,cutCornerShape,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggPropertySetEditor.kt,top-fun,cutCornerShape,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggRule.kt,top-val,ATTRIBUTES_REGEX,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggRule.kt,top-val,SELECTOR_REGEX,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggRule.kt,top-val,otherAttr,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggRule.kt,top-val,serializedValues,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggRule.kt,top-val,ATTRIBUTE_OPEN,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggRule.kt,top-val,ATTRIBUTE_CLOSE,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggRule.kt,top-val,ATTRIBUTE_ASSIGN,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggRule.kt,top-val,ATTRIBUTE_VALUES_SEPARATOR,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggRule.kt,top-val,ATTR_VALUE_PATTERN,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggRule.kt,top-val,ATTRIBUTE_REGEX,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggRule.kt,top-val,SELECTOR_COLON,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggSpecDecl.kt,top-val,_allEncoders,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggSpecDecl.kt,top-val,implicitEncoders,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggSpecDecl.kt,top-val,inheritBehavior,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggSpecDecl.kt,top-var,isAny,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggSpecDecl.kt,top-class,JsonSchemaMeta,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggSpecDecl.kt,top-class,JsonSchemaMetaBuilder,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggStylesheet.kt,top-val,ruleMap,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggStylesheet.kt,top-class,SnyggInvalidSchemaException,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggStylesheet.kt,top-class,SnyggUnsupportedSchemaException,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggStylesheetEditor.kt,top-val,propertySetEditor,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggStylesheetEditor.kt,top-val,propertySetEditor,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggStylesheetEditor.kt,top-val,propertySetEditor,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggStylesheetEditor.kt,top-object,DefaultRuleComparator,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/SnyggTheme.kt,top-var,variablesSet,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggBox.kt,top-val,imagePath,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggBox.kt,top-fun,SimpleSnyggBox,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggChip.kt,top-fun,SimpleSnyggChip,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggColumn.kt,top-fun,SimpleSnyggColumn,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggIcon.kt,top-fun,SimpleSnyggIcon,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggIconButton.kt,top-fun,SimpleSnyggIconButton,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggListItem.kt,top-fun,SimpleSnyggListItem,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggRow.kt,top-fun,SimpleSnyggRow,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggSpacer.kt,top-fun,SimpleSnyggSpacer,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggText.kt,top-fun,SimpleSnyggText,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/ui/SnyggUi.kt,file,SnyggUi,0,no,delete candidate
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/value/SnyggAppearanceValue.kt,file,SnyggAppearanceValue,0,no,delete candidate
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/value/SnyggFontValue.kt,file,SnyggFontValue,0,no,delete candidate
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/value/SnyggPaddingValue.kt,top-val,PaddingStart,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/value/SnyggPaddingValue.kt,top-val,PaddingTop,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/value/SnyggPaddingValue.kt,top-val,PaddingEnd,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/value/SnyggPaddingValue.kt,top-val,PaddingBottom,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/value/SnyggPaddingValue.kt,top-val,PaddingHorizontal,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/value/SnyggPaddingValue.kt,top-val,PaddingVertical,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/value/SnyggPaddingValue.kt,top-val,PaddingAll,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/value/SnyggShapeValue.kt,top-val,CornerSizeTopStart,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/value/SnyggShapeValue.kt,top-val,CornerSizeTopEnd,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/value/SnyggShapeValue.kt,top-val,CornerSizeBottomEnd,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/value/SnyggShapeValue.kt,top-val,CornerSizeBottomStart,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/value/SnyggShapeValue.kt,top-val,CutCorner,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/value/SnyggSizeValue.kt,file,SnyggSizeValue,0,no,delete candidate
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/value/SnyggTextValue.kt,file,SnyggTextValue,0,no,delete candidate
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/value/SnyggUriValue.kt,top-val,EnclosedUriFunction,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/value/SnyggUriValue.kt,top-val,EnclosedUriId,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/value/SnyggValue.kt,top-val,Undefined,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/value/SnyggValueSpec.kt,top-val,packTemplate,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/value/SnyggValueSpec.kt,top-class,SnyggIntValueSpec,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/value/SnyggValueSpec.kt,top-class,SnyggFloatValueSpec,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/value/SnyggValueSpec.kt,top-class,SnyggStringValueSpec,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/value/SnyggValueSpec.kt,top-class,SnyggFunctionValueSpec,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/value/SnyggValueSpec.kt,top-val,innerSpec,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/value/SnyggValueSpec.kt,top-class,SnyggListValueSpec,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/value/SnyggValueSpec.kt,top-val,valueSpecs,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/value/SnyggValueSpec.kt,top-object,SnyggNothingValueSpec,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/value/SnyggValueSpec.kt,top-class,SnyggValueFormatListBuilder,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/value/SnyggValueSpec.kt,top-val,valueFormats,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/value/SnyggValueSpec.kt,top-class,SnyggValueSpecBuilder,0,no,orphan top-level symbol
+lib/snygg/src/main/kotlin/org/drs/lib/snygg/value/SnyggVarValue.kt,top-val,VarKey,0,no,orphan top-level symbol
