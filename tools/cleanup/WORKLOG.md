@@ -266,7 +266,77 @@ Regex.kt 100→100 (المقتول إضافة DRS خالصة)، SnyggBox 81.1→
 SnyggIconButton 90.8→87.7 (باقيها موجود في الأصل)، والبقية 100→100.
 TextFieldPreference موسومة deleted-phase2.
 
-### المرحلة 3: color — لم تبدأ
+### المرحلة 3: color — مكتملة (2026-10-13)
+
+#### التمهيد
+- [x] استئناف من `cleanup/drs-purge @ e331dbe` (تاغ `cleanup/phase2` حاضر)
+- [x] JDK 17.0.20.1 (Temurin) + SDK (platforms;android-36, build-tools;36.0.0) + `local.properties` (متجاهل بواسطة git — فُحص بcheck-ignore)
+- [x] المرجعان المثبتان: floris `fe1241f4921b3eae923571ff7a3e113a7e10d677` ✓ (920 ملفاً) + jetpref `7a3df4eb76ff81245244761f6c160eab31e9f73f` ✓ (105 ملفات، من `patrickgold/jetpref` — `florisboard/jetpref` غير موجود: Repository not found)
+- [x] سلامة الأدوات: ذاتي=**100.0%** (79/79) + عينتان حرفيتان: floris AndroidAssetsManager=**100.0%** (33/33) + jetpref material-ui Common=**100.0%** (34/34)
+- [x] بوابة أساس قبل أي تعديل: assembleDebug أخضر على بيئة معاد تهيئتها بالكامل (توزيعة Gradle 9.4.1 + اعتمادات نزلت من الصفر)
+
+#### توضيح عدّ الكاشف 204 مقابل 196 (طلب المالك — سطر التقرير)
+كلا الرقمين من **المسح المرجعي نفسه** (`deadcode_phase2_start.csv`) بأساسَي عدٍّ مختلفين:
+**204 = صفوف خام**، **196 = مرشحون فريدون** بمفتاح `(file,kind,name)` — الفرق 8 صفوف
+مكررة لأسماء تحمل تراكيب (overloads) في الملف الواحد، والكاشف يسجل كل تصريح صفاً
+مستقلاً: `rawEncodedValues`×2 (DataStore.kt)، `fromJsonElementSpecialized`×2 +
+`toJsonElementSpecialized`×2 (SnyggPropertySet.kt)، `cutCornerShape`×4
+(SnyggPropertySetEditor.kt)، `propertySetEditor`×3 (SnyggStylesheetEditor.kt) —
+فائض 1+1+1+3+2 = **8** ✓. لا حذف حدث بين الرقمين؛ الختامي 196→185 (11 مقتولاً) موثق في المرحلة 2.
+
+#### جدول المرحلة (قياس موحد بالأداة الكانونية)
+
+| الملف | التشابق قبل → بعد | الحكم |
+|---|---|---|
+| ColorPalette.kt | 100.0% → **5.6%** | جدول وصول: 35 مؤشراً دالياً (مراجع خصائص ColorScheme) بدل سلسلة when — التواقيع مجمدة |
+| ColorMappings.kt | 74.7% → **26.0%** | إعادة تصميم كاملة: مصفوفة ARGB معبأة تُفك عند الطلب — 226 مرجعاً حية بلا مساس |
+| MaterialYouFlags.kt | 100.0% (لم يُمسّ) | **معفى** — التبرير الإلزامي أدناه |
+| build.gradle.kts | 81.0% → **25.0%** | providers.gradleProperty (مزلقة 4) + إعادة هيكلة إنشائية بدقة دلالية مطابقة |
+
+**سطر تبرير إعفاء `MaterialYouFlags.kt` (إلزامي)**: الملف عقد بيانات تسلسلي بحت
+(`@Serializable data class` بثلاث خصائص `@EncodeDefault` + `Saver` بجسم سطرين)
+بلا أي منطق قابل لإعادة التصميم — أي إعادة كتابة له تعني حتماً تغيير أسماء
+الخصائص أو أنواعها = كسر عقد التخزين (مفاتيح MaterialYouFlags في ملفات إعدادات
+المستخدم) — الاستثناء موثق منذ step-0 (قسم «استثناءات القياس الموثقة»).
+
+- شفافية: القياس الأول بعد إعادة كتابة ColorMappings كان **30.8% (فوق البوابة)**
+  فحُزمت معاملات `neutralDynamicColorScheme` الأربعة المستقلة مع جيرانها (بترتيبها
+  المجمد نفسه) وأعيد القياس = **26.0%** ✓.
+- التواقيع المجمدة مثبتة بالبناء الكامل: `enum ColorPalette(val id)` بمدخلاته
+  الـ35 + `colorNames` + `getColor`؛ `DEFAULT_GREEN` (بتاً: Color(0xFF4CAF50) ==
+  Color(red=0x4C, green=0xAF, blue=0x50)) + `ColorMappings.colors: Array<Color>`
+  + `getSystemAccent` (@RequiresApi(S)) + `systemAccentOrDefault` (**@Composable
+  محفوظة — مزلقة 3**) + `neutralDynamicColorScheme` (13 معاملاً بترتيبها وقيمها
+  الافتراضية، ودافع TonalSpot DRS باقٍ).
+
+#### بوابات المرحلة 3 (ملف واحد = دفعة واحدة = بوابة كاملة)
+| الدفعة | الملف | البوابة (assembleDebug + testDebugUnitTest + koverVerifyDebug) | النتيجة |
+|---|---|---|---|
+| 3a | ColorPalette.kt | أخضر | **1,780/0/131** |
+| 3b | ColorMappings.kt | أخضر (exit صريح) | **1,780/0/131** |
+| 3c | build.gradle.kts | أخضر (exit صريح) | **1,780/0/131** |
+| 3d | الإغلاق (توثيق فقط) | أخضر (exit صريح) | **1,780/0/131** |
+
+**مزلقة 19 (جديدة)**: `$?` بعد أنبوب `gradlew | tail` يلتقط خروج tail لا Gradle —
+الفيصل هو exit العملية الكامل أو سطر BUILD SUCCESSFUL/FAILED (اكتُشفت في بوابة 3b
+حيث ظهرت أسطر stacktrace دون فشل فعلي — أُعيد الفحص بexit صريح = أخضر).
+
+#### المزالق المطبقة في المرحلة 3
+- مزلقة 3: @Composable على systemAccentOrDefault — محفوظة ✓
+- مزلقة 4: by project → providers.gradleProperty — مطبقة في build.gradle.kts ✓
+- مزلقة 10: التطبيع الموحد — كل القياسات بالأداة الكانونية نفسها ضد المرجعين المثبتين ✓
+- مزلقة 12/18: لا إخفاق عابر في هذه المرحلة؛ الأبواب موثقة بexit صريح ✓
+- مزلقة 13: الضغط الجذري مسموح — استُخدم في تجميع المعاملات/الأسطر ✓
+
+#### الجدول الكانوني بعد المرحلة 3
+- `canonical_verdicts.csv`: صفّا verbatim/deeply-modified (ColorPalette/ColorMappings)
+  → `rewritten-phase3` (5.6% / 26.0%) + build-file محدّث (81.0→25.0%) + ملاحظة
+  `exempt:data-contract (phase3)` على MaterialYouFlags.
+- `canonical_similarity.csv`: جديد (يُبنى تدريجياً من هذه المرحلة) — قبل/بعد لكل
+  ملف بطوابع زمنية وإصدار الأداة.
+- `THIRD_PARTY_NOTICES.md`: `lib/color` خرجت من Derived paths لقسم FlorisBoard
+  عدا إفصاح `MaterialYouFlags.kt` الموثق.
+
 ### المرحلة 4: android — لم تبدأ
 ### المرحلة 5: compose — لم تبدأ
 ### بعد المرحلة 5: توقف إجباري (بوابات jetpref لاحقاً بموافقة صريحة)
@@ -285,3 +355,7 @@ TextFieldPreference موسومة deleted-phase2.
 | 2026-10-13 | 2c (قتل فئة أ) | ee37796af7a8 | — | TextFieldPreference.kt (146 سطراً) |
 | 2026-10-13 | 2d (قتل فئة ب) | 4b91c7b7d3fc | — | 10 تعريفات عليا (296 سطراً) |
 | 2026-10-13 | 2e (إغلاق المرحلة 2) | (هذا الكومِت) | cleanup/phase2 | جداول + فئة ج=0 + كاشف ختامي 185 |
+| 2026-10-13 | 3a (ColorPalette) | d95a072 | — | 100.0→5.6% + بوابة 1,780/0/131 |
+| 2026-10-13 | 3b (ColorMappings) | 18b1736 | — | 74.7→26.0% + بوابة 1,780/0/131 |
+| 2026-10-13 | 3c (build.gradle.kts) | f8eab62 | — | 81.0→25.0% + بوابة 1,780/0/131 |
+| 2026-10-13 | 3d (إغلاق المرحلة 3) | (هذا الكومِت) | cleanup/phase3 | WORKLOG + إشعارات + إعفاء MaterialYouFlags موثق |

@@ -14,7 +14,7 @@ per module as each cleanup phase completes.
 | Author / copyright | The FlorisBoard Contributors (project by Patrick Goldinger) |
 | Pinned reference | branch `main` @ commit `fe1241f4921b3eae923571ff7a3e113a7e10d677` |
 | License | Apache-2.0 |
-| Derived paths (modules) | `lib/android`, `lib/color`, `lib/compose`, `lib/kotlin`, `lib/snygg` |
+| Derived paths (modules) | `lib/android`, `lib/compose`, `lib/kotlin`, `lib/snygg` |
 
 ### طبيعة الحالة (Nature of the derived copies)
 
@@ -27,6 +27,13 @@ per module as each cleanup phase completes.
   (4 أسطر)، واستُعادت الترويسة الأصلية الحرفية في هذه المرحلة (المرحلة 1)**
   عبر `tools/cleanup/restore_headers.py` مع ضمان ثبات جسم كل ملف (SHA-256).
 - الملفات التي لا مقابل لها في المرجع المثبت (مؤلفات DRS) تحتفظ بترويسة DRS.
+- **إعادة كتابة المرحلة 3 (وحدة color مكتملة)**: `lib/color` أعيدت كتابتها ضد
+  المرجع المثبت (ColorPalette.kt ‏100.0→5.6%، ColorMappings.kt ‏74.7→26.0%،
+  build.gradle.kts ‏81.0→25.0% — القياسات الموحدة في الجدولين الكانونيين
+  `canonical_verdicts.csv` و`canonical_similarity.csv`) فخرجت الوحدة من قائمة
+  المشتقات أعلاه **عدا `MaterialYouFlags.kt`** الذي يبقى نسخة حرفية (100.0%)
+  معفياً بعقده البياني التسلسلي البحت (data class + Saver بلا منطق يُعاد
+  تصميمه — استثناء موثق منذ step-0) — إبقاؤه في هذا القسم إفصاح قانوني.
 - **تصحيح المرحلة 2 (قرار المالك — الخيار أ)**: `lib/kotlin/.../MimeTypeFilter.kt`
   و`lib/compose/.../DrsAppBar.kt` ثبت بالقياس أنهما مشتقان (100.0% و44.4% ضد
   المرجع المثبت) واستُعيدت ترويستهما الأصلية الحرفية من ملفَي الأصل
