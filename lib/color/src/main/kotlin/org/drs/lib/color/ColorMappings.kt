@@ -31,92 +31,75 @@ import com.materialkolor.dynamiccolor.ColorSpec
 import com.materialkolor.scheme.DynamicScheme
 import org.drs.lib.android.AndroidVersion
 
-val DEFAULT_GREEN = Color(0xFF4CAF50)
+/**
+ * Standby accent for environments without a platform accent and without an
+ * explicit caller default — Material Green 500.
+ */
+val DEFAULT_GREEN = Color(red = 0x4C, green = 0xAF, blue = 0x50)
+
+/**
+ * Accent swatch catalogue — the Material tone-500 row kept as packed ARGB
+ * words and decoded on demand. Element order is part of the long-standing
+ * public contract of [ColorMappings.colors] and must not be reshuffled.
+ */
+private val SWATCH_ARGB_500 = intArrayOf(
+    0xFF4CAF50.toInt(), 0xFFF44336.toInt(), 0xFFE91E63.toInt(), 0xFFFF2C93.toInt(),
+    0xFF9C27B0.toInt(), 0xFF673AB7.toInt(), 0xFF3F51B5.toInt(), 0xFF2196F3.toInt(),
+    0xFF03A9F4.toInt(), 0xFF00BCD4.toInt(), 0xFF009688.toInt(), 0xFF8BC34A.toInt(),
+    0xFFCDDC39.toInt(), 0xFFFFEB3B.toInt(), 0xFFFFC107.toInt(), 0xFFFF9800.toInt(),
+    0xFF795548.toInt(), 0xFF607D8B.toInt(), 0xFF9E9E9E.toInt(),
+)
 
 object ColorMappings {
-
-    val colors = listOf(
-        DEFAULT_GREEN, // GREEN 500
-        Color(0xFFF44336), // RED 500
-        Color(0xFFE91E63), // PINK 500
-        Color(0xFFFF2C93), // LIGHT PINK 500
-        Color(0xFF9C27B0), // PURPLE 500
-        Color(0xFF673AB7), // DEEP PURPLE 500
-        Color(0xFF3F51B5), // INDIGO 500
-        Color(0xFF2196F3), // BLUE 500
-        Color(0xFF03A9F4), // LIGHT BLUE 500
-        Color(0xFF00BCD4), // CYAN 500
-        Color(0xFF009688), // TEAL 500
-        Color(0xFF8BC34A), // LIGHT GREEN 500
-        Color(0xFFCDDC39), // LIME 500
-        Color(0xFFFFEB3B), // YELLOW 500
-        Color(0xFFFFC107), // AMBER 500
-        Color(0xFFFF9800), // ORANGE 500
-        Color(0xFF795548), // BROWN 500
-        Color(0xFF607D8B), // BLUE GREY 500
-        Color(0xFF9E9E9E), // GRAY 500
-    ).toTypedArray()
-}
-
-@Composable
-@RequiresApi(Build.VERSION_CODES.S)
-fun getSystemAccent(): Color {
-    val context = LocalContext.current
-    val resources = LocalResources.current
-
-    return Color(resources.getColor(android.R.color.system_accent1_500, context.theme))
-}
-
-@Composable
-fun systemAccentOrDefault(default: Color): Color {
-    return when {
-        default.isUnspecified && AndroidVersion.ATLEAST_API31_S -> {
-            getSystemAccent()
-        }
-        default.isUnspecified -> {
-            DEFAULT_GREEN
-        }
-        else -> {
-            default
-        }
+    /** Decoded swatch palette, positionally aligned with [SWATCH_ARGB_500]. */
+    val colors: Array<Color> = Array(SWATCH_ARGB_500.size) { index ->
+        Color(color = SWATCH_ARGB_500[index])
     }
 }
 
+/**
+ * Reads the platform accent (system_accent1_500) under the ambient theme.
+ * Available on S+ only — call sites must be gated on
+ * [org.drs.lib.android.AndroidVersion.ATLEAST_API31_S].
+ */
+@Composable
+@RequiresApi(Build.VERSION_CODES.S)
+fun getSystemAccent(): Color {
+    val resources = LocalResources.current
+    val theme = LocalContext.current.theme
+    return Color(color = resources.getColor(android.R.color.system_accent1_500, theme))
+}
 
 /**
- * This is a helper method that uses [com.materialkolor.PaletteStyle.TonalSpot]
- * as the default PaletteStyle — the Material You standard that gives the whole
- * app softly tinted, premium surfaces (like Pixel flagship phones) instead of
- * the flat grayish feel of the plain Neutral style.
+ * Resolution order: caller-supplied default, then the platform accent on
+ * S+, then [DEFAULT_GREEN].
+ */
+@Composable
+fun systemAccentOrDefault(default: Color): Color {
+    if (!default.isUnspecified) {
+        return default
+    }
+    return if (AndroidVersion.ATLEAST_API31_S) getSystemAccent() else DEFAULT_GREEN
+}
+
+/**
+ * Dynamic scheme builder pinned to [PaletteStyle.TonalSpot] — the Material
+ * You standard that softly tints the entire surface system from one seed,
+ * rather than the flatter feel of the plain neutral ramp.
  */
 fun neutralDynamicColorScheme(
-    primary: Color,
-    isDark: Boolean,
-    isAmoled: Boolean = false,
-    secondary: Color? = null,
-    tertiary: Color? = null,
-    neutral: Color? = null,
-    neutralVariant: Color? = null,
-    error: Color? = null,
-    style: PaletteStyle = PaletteStyle.TonalSpot,
-    contrastLevel: Double = Contrast.Default.value,
-    specVersion: ColorSpec.SpecVersion = ColorSpec.SpecVersion.Default,
-    platform: DynamicScheme.Platform = DynamicScheme.Platform.Default,
+    primary: Color, isDark: Boolean, isAmoled: Boolean = false,
+    secondary: Color? = null, tertiary: Color? = null, neutral: Color? = null,
+    neutralVariant: Color? = null, error: Color? = null,
+    style: PaletteStyle = PaletteStyle.TonalSpot, contrastLevel: Double = Contrast.Default.value,
+    specVersion: ColorSpec.SpecVersion = ColorSpec.SpecVersion.Default, platform: DynamicScheme.Platform = DynamicScheme.Platform.Default,
     modifyColorScheme: ((ColorScheme) -> ColorScheme)? = null,
-): ColorScheme =
-    dynamicColorScheme(
-        seedColor = primary,
-        isDark = isDark,
-        isAmoled = isAmoled,
-        primary = primary,
-        secondary = secondary,
-        tertiary = tertiary,
-        neutral = neutral,
-        neutralVariant = neutralVariant,
-        error = error,
-        style = style,
-        contrastLevel = contrastLevel,
-        specVersion = specVersion,
-        platform = platform,
-        modifyColorScheme = modifyColorScheme,
+): ColorScheme {
+    return dynamicColorScheme(
+        seedColor = primary, isDark = isDark, isAmoled = isAmoled, primary = primary,
+        secondary = secondary, tertiary = tertiary, neutral = neutral,
+        neutralVariant = neutralVariant, error = error, style = style,
+        contrastLevel = contrastLevel, specVersion = specVersion,
+        platform = platform, modifyColorScheme = modifyColorScheme,
     )
+}
