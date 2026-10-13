@@ -16,47 +16,36 @@
 
 package org.drs.lib.android
 
-import android.annotation.SuppressLint
-import android.content.res.Resources
-
 /**
- * Helper class for retrieving `com.android.internal.R.*` resources.
+ * Resolution table for framework-internal (`com.android.internal.R.*`) resources.
  *
- * Usage of this ids should always be done within a try..catch block, as there may be devices which have completely
- * modified system resources or something has changed in a newer Android version.
+ * Every identifier is resolved lazily at access time through the system-wide
+ * [android.content.res.Resources] handle, because the numeric identifiers are
+ * device- and build-dependent. Callers must remain defensive: a modified system
+ * image or a future platform release may drop any given entry, in which case
+ * the accessor yields the sentinel id `0`.
  */
 object AndroidInternalR {
-    @SuppressLint("DiscouragedApi")
-    @Suppress("ClassName")
-    object string {
-        val ime_action_go by lazy {
-            Resources.getSystem().getIdentifier("ime_action_go", "string", "android")
-        }
-        val ime_action_search by lazy {
-            Resources.getSystem().getIdentifier("ime_action_search", "string", "android")
-        }
-        val ime_action_send by lazy {
-            Resources.getSystem().getIdentifier("ime_action_send", "string", "android")
-        }
-        val ime_action_next by lazy {
-            Resources.getSystem().getIdentifier("ime_action_next", "string", "android")
-        }
-        val ime_action_done by lazy {
-            Resources.getSystem().getIdentifier("ime_action_done", "string", "android")
-        }
-        val ime_action_previous by lazy {
-            Resources.getSystem().getIdentifier("ime_action_previous", "string", "android")
-        }
-        val ime_action_default by lazy {
-            Resources.getSystem().getIdentifier("ime_action_default", "string", "android")
-        }
+    private const val SYSTEM_PACKAGE = "android"
+    private const val KIND_STRING = "string"
+    private const val KIND_DRAWABLE = "drawable"
+
+    private fun identifier(kind: String, name: String): Int =
+        android.content.res.Resources.getSystem().getIdentifier(name, kind, SYSTEM_PACKAGE)
+
+    @android.annotation.SuppressLint("DiscouragedApi") @Suppress("ClassName")
+    object string : Any() {
+        val ime_action_go: Int get() = identifier(KIND_STRING, "ime_action_go")
+        val ime_action_search: Int get() = identifier(KIND_STRING, "ime_action_search")
+        val ime_action_send: Int get() = identifier(KIND_STRING, "ime_action_send")
+        val ime_action_next: Int get() = identifier(KIND_STRING, "ime_action_next")
+        val ime_action_done: Int get() = identifier(KIND_STRING, "ime_action_done")
+        val ime_action_previous: Int get() = identifier(KIND_STRING, "ime_action_previous")
+        val ime_action_default: Int get() = identifier(KIND_STRING, "ime_action_default")
     }
 
-    @SuppressLint("DiscouragedApi")
-    @Suppress("ClassName")
-    object drawable {
-        val ic_qs_one_handed_mode by lazy {
-            Resources.getSystem().getIdentifier("ic_qs_one_handed_mode", "drawable", "android")
-        }
+    @android.annotation.SuppressLint("DiscouragedApi") @Suppress("ClassName")
+    object drawable : Any() {
+        val ic_qs_one_handed_mode: Int get() = identifier(KIND_DRAWABLE, "ic_qs_one_handed_mode")
     }
 }

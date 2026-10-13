@@ -6,13 +6,13 @@ lib/android/proguard-rules.pro,-,build-file,,no counterpart >= 0.50
 lib/android/src/main/AndroidManifest.xml,-,build-file,,no counterpart >= 0.50
 lib/android/src/main/kotlin/org/drs/lib/android/AndroidAssetsManager.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/AndroidAssetsManager.kt,verbatim,100.0,
 lib/android/src/main/kotlin/org/drs/lib/android/AndroidClipboardManager.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/AndroidClipboardManager.kt,verbatim,100.0,
-lib/android/src/main/kotlin/org/drs/lib/android/AndroidInternalR.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/AndroidInternalR.kt,verbatim,100.0,
+lib/android/src/main/kotlin/org/drs/lib/android/AndroidInternalR.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/AndroidInternalR.kt,rewritten-phase4,10.5,canonical=100.0%→10.5%
 lib/android/src/main/kotlin/org/drs/lib/android/AndroidKeyguardManager.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/AndroidKeyguardManager.kt,verbatim,100.0,
 lib/android/src/main/kotlin/org/drs/lib/android/AndroidSettings.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/AndroidSettings.kt,verbatim,100.0,
 lib/android/src/main/kotlin/org/drs/lib/android/AndroidVersion.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/AndroidVersion.kt,verbatim,100.0,
 lib/android/src/main/kotlin/org/drs/lib/android/Configuration.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/Configuration.kt,verbatim,100.0,
-lib/android/src/main/kotlin/org/drs/lib/android/ContentResolver.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/ContentResolver.kt,verbatim,100.0,
-lib/android/src/main/kotlin/org/drs/lib/android/Context.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/Context.kt,verbatim,100.0,
+lib/android/src/main/kotlin/org/drs/lib/android/ContentResolver.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/ContentResolver.kt,rewritten-phase4,14.6,canonical=100.0%→30.6%→14.6%
+lib/android/src/main/kotlin/org/drs/lib/android/Context.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/Context.kt,rewritten-phase4,24.1,canonical=100.0%→24.1%
 lib/android/src/main/kotlin/org/drs/lib/android/FileObserver.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/FileObserver.kt,verbatim,100.0,
 lib/android/src/main/kotlin/org/drs/lib/android/PackageManager.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/PackageManager.kt,slightly-modified,94.1,canonical=94.1%
 lib/android/src/main/kotlin/org/drs/lib/android/SparseArray.kt,floris@fe1241f:lib/android/src/main/kotlin/org/florisboard/lib/android/SparseArray.kt,verbatim,100.0,
