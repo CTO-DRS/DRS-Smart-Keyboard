@@ -24,32 +24,32 @@ lib/color/build.gradle.kts,floris@fe1241f:lib/compose/build.gradle.kts,build-fil
 lib/color/src/main/kotlin/org/drs/lib/color/ColorMappings.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/color/ColorMappings.kt,rewritten-phase3,26.0,canonical=74.7%→26.0%
 lib/color/src/main/kotlin/org/drs/lib/color/ColorPalette.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/color/ColorPalette.kt,rewritten-phase3,5.6,canonical=100.0%→5.6%
 lib/color/src/main/kotlin/org/drs/lib/color/MaterialYouFlags.kt,floris@fe1241f:lib/snygg/src/commonMain/kotlin/org/florisboard/lib/snygg/color/MaterialYouFlags.kt,verbatim,100.0,exempt:data-contract (phase3)
-lib/compose/build.gradle.kts,floris@fe1241f:lib/compose/build.gradle.kts,build-file,86.0,canonical=86.0%
+lib/compose/build.gradle.kts,floris@fe1241f:lib/compose/build.gradle.kts,rewritten-phase5,0.0,canonical=86.0%→0.0%
 lib/compose/consumer-rules.pro,-,build-file,,no counterpart >= 0.50
-lib/compose/proguard-rules.pro,-,build-file,,no counterpart >= 0.50
+lib/compose/proguard-rules.pro,-,rewritten-phase5,11.1,canonical=100.0%→11.1%
 lib/compose/src/main/kotlin/org/drs/compose/tooltip/Tooltip.kt,-,protected,,protected (AOSP origin)
 lib/compose/src/main/kotlin/org/drs/compose/tooltip/TooltipDefaults.kt,-,protected,,protected (AOSP origin)
-lib/compose/src/main/kotlin/org/drs/lib/compose/ClickableModifiers.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/ClickableModifiers.kt,verbatim,100.0,
-lib/compose/src/main/kotlin/org/drs/lib/compose/DisposableLifecycleEffect.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/DisposableLifecycleEffect.kt,verbatim,100.0,
-lib/compose/src/main/kotlin/org/drs/lib/compose/DpSpSizeFuns.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/DpSpSizeFuns.kt,slightly-modified,100.0,canonical=100.0%
-lib/compose/src/main/kotlin/org/drs/lib/compose/DrawScope.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/DrawScope.kt,verbatim,100.0,
-lib/compose/src/main/kotlin/org/drs/lib/compose/DrsAnimation.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/FlorisAnimation.kt,verbatim,100.0,
-lib/compose/src/main/kotlin/org/drs/lib/compose/DrsAppBar.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/FlorisAppBar.kt,deeply-modified,44.4,canonical=44.4%
-lib/compose/src/main/kotlin/org/drs/lib/compose/DrsBulletSpacer.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/FlorisBulletSpacer.kt,slightly-modified,95.8,canonical=95.8%
-lib/compose/src/main/kotlin/org/drs/lib/compose/DrsButtonBar.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/FlorisButtonBar.kt,slightly-modified,96.6,canonical=96.6%
-lib/compose/src/main/kotlin/org/drs/lib/compose/DrsButtons.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/FlorisButtons.kt,slightly-modified,92.4,canonical=92.4%
-lib/compose/src/main/kotlin/org/drs/lib/compose/DrsCanvasIcon.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/FlorisCanvasIcon.kt,slightly-modified,92.9,canonical=92.9%
-lib/compose/src/main/kotlin/org/drs/lib/compose/DrsCards.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/FlorisCards.kt,slightly-modified,87.2,canonical=87.2%
-lib/compose/src/main/kotlin/org/drs/lib/compose/DrsChip.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/FlorisChip.kt,slightly-modified,98.1,canonical=98.1%
-lib/compose/src/main/kotlin/org/drs/lib/compose/DrsDropdownLikeButton.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/FlorisDropdownLikeButton.kt,slightly-modified,97.9,canonical=97.9%
-lib/compose/src/main/kotlin/org/drs/lib/compose/DrsStepLayout.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/FlorisStepLayout.kt,slightly-modified,93.0,canonical=93.0%
-lib/compose/src/main/kotlin/org/drs/lib/compose/LazyGrid.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/LazyGrid.kt,verbatim,100.0,
-lib/compose/src/main/kotlin/org/drs/lib/compose/Modifier.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/Modifier.kt,verbatim,100.0,
+lib/compose/src/main/kotlin/org/drs/lib/compose/ClickableModifiers.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/ClickableModifiers.kt,rewritten-phase5,23.1,canonical=100.0%→23.1%
+lib/compose/src/main/kotlin/org/drs/lib/compose/DisposableLifecycleEffect.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/DisposableLifecycleEffect.kt,rewritten-phase5,16.7,canonical=100.0%→16.7%
+lib/compose/src/main/kotlin/org/drs/lib/compose/DpSpSizeFuns.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/DpSpSizeFuns.kt,rewritten-phase5,10.0,canonical=100.0%→10.0%
+lib/compose/src/main/kotlin/org/drs/lib/compose/DrawScope.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/DrawScope.kt,rewritten-phase5,12.5,canonical=100.0%→12.5%
+lib/compose/src/main/kotlin/org/drs/lib/compose/DrsAnimation.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/FlorisAnimation.kt,rewritten-phase5,17.2,canonical=100.0%→17.2%
+lib/compose/src/main/kotlin/org/drs/lib/compose/DrsAppBar.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/FlorisAppBar.kt,rewritten-phase5,22.5,canonical=44.4%→22.5%
+lib/compose/src/main/kotlin/org/drs/lib/compose/DrsBulletSpacer.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/FlorisBulletSpacer.kt,rewritten-phase5,28.6,canonical=95.8%→28.6%
+lib/compose/src/main/kotlin/org/drs/lib/compose/DrsButtonBar.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/FlorisButtonBar.kt,rewritten-phase5,14.0,canonical=96.6%→14.0%
+lib/compose/src/main/kotlin/org/drs/lib/compose/DrsButtons.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/FlorisButtons.kt,rewritten-phase5,26.7,canonical=92.4%→26.7%
+lib/compose/src/main/kotlin/org/drs/lib/compose/DrsCanvasIcon.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/FlorisCanvasIcon.kt,rewritten-phase5,14.3,canonical=92.9%→14.3%
+lib/compose/src/main/kotlin/org/drs/lib/compose/DrsCards.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/FlorisCards.kt,rewritten-phase5,24.2,canonical=87.2%→24.2%
+lib/compose/src/main/kotlin/org/drs/lib/compose/DrsChip.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/FlorisChip.kt,rewritten-phase5,15.2,canonical=98.1%→15.2%
+lib/compose/src/main/kotlin/org/drs/lib/compose/DrsDropdownLikeButton.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/FlorisDropdownLikeButton.kt,rewritten-phase5,25.0,canonical=97.9%→25.0%
+lib/compose/src/main/kotlin/org/drs/lib/compose/DrsStepLayout.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/FlorisStepLayout.kt,rewritten-phase5,25.3,canonical=93.0%→25.3%
+lib/compose/src/main/kotlin/org/drs/lib/compose/LazyGrid.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/LazyGrid.kt,rewritten-phase5,25.0,canonical=100.0%→25.0%
+lib/compose/src/main/kotlin/org/drs/lib/compose/Modifier.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/Modifier.kt,rewritten-phase5,5.9,canonical=100.0%→5.9%
 lib/compose/src/main/kotlin/org/drs/lib/compose/MotionScale.kt,-,protected,,protected (DRS original)
-lib/compose/src/main/kotlin/org/drs/lib/compose/Resources.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/Resources.kt,slightly-modified,98.9,canonical=98.9%
-lib/compose/src/main/kotlin/org/drs/lib/compose/RtlModifiers.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/RtlModifiers.kt,verbatim,100.0,
-lib/compose/src/main/kotlin/org/drs/lib/compose/ScrollableModifiers.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/ScrollableModifiers.kt,slightly-modified,96.6,canonical=96.6%
-lib/compose/src/main/kotlin/org/drs/lib/compose/State.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/State.kt,verbatim,100.0,
+lib/compose/src/main/kotlin/org/drs/lib/compose/Resources.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/Resources.kt,rewritten-phase5,20.9,canonical=98.9%→20.9%
+lib/compose/src/main/kotlin/org/drs/lib/compose/RtlModifiers.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/RtlModifiers.kt,rewritten-phase5,26.7,canonical=100.0%→26.7%
+lib/compose/src/main/kotlin/org/drs/lib/compose/ScrollableModifiers.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/ScrollableModifiers.kt,rewritten-phase5,16.0,canonical=96.6%→16.0%
+lib/compose/src/main/kotlin/org/drs/lib/compose/State.kt,floris@fe1241f:lib/compose/src/main/kotlin/org/florisboard/lib/compose/State.kt,rewritten-phase5,4.1,canonical=100.0%→4.1%
 lib/compose/src/main/kotlin/org/drs/lib/compose/icons/KeyboardForwardDelete.kt,AOSP frameworks/base (verbatim; extension-property trap),verbatim,,"AOSP origin, header intact, not matched to floris/jetpref"
 lib/jetpref/datastore-model/build.gradle.kts,floris@fe1241f:lib/android/build.gradle.kts,build-file,77.4,canonical=77.4%
 lib/jetpref/datastore-model/proguard-rules.pro,-,build-file,,no counterpart >= 0.50

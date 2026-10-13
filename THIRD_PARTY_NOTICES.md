@@ -14,7 +14,7 @@ per module as each cleanup phase completes.
 | Author / copyright | The FlorisBoard Contributors (project by Patrick Goldinger) |
 | Pinned reference | branch `main` @ commit `fe1241f4921b3eae923571ff7a3e113a7e10d677` |
 | License | Apache-2.0 |
-| Derived paths (modules) | `lib/compose`, `lib/kotlin`, `lib/snygg` (حُذفت `lib/android` — انظر فقرة المرحلة 4 أدناه) |
+| Derived paths (modules) | `lib/kotlin`, `lib/snygg` (حُذفت `lib/android` في المرحلة 4، وحُذفت `lib/compose` في المرحلة 5 — انظر فقرتي المرحلتين أدناه) |
 
 ### طبيعة الحالة (Nature of the derived copies)
 
@@ -48,6 +48,20 @@ per module as each cleanup phase completes.
   المرجع المثبت) واستُعيدت ترويستهما الأصلية الحرفية من ملفَي الأصل
   (`MimeTypeFilter.kt` و`FlorisAppBar.kt`) مع ضمان ثبات الجسم SHA-256 —
   سجل الإصلاح: `tools/cleanup/measurements/phase2_header_fix.csv`.
+- **إعادة كتابة المرحلة 5 (وحدة compose مكتملة)**: `lib/compose` (27 ملفاً)
+  أعيدت كتابتها ضد المرجع المثبت في سبع دفعات (5a–5g) ببوابة بناء كاملة بعد
+  كل دفعة — 22 ملفاً معاد الكتابة كلها ≤30% (أعلاها DrsBulletSpacer.kt ‏28.6%
+  وRtlModifiers.kt ‏26.7%)، و4 ملفات محمية لم تُمسّ (`Tooltip.kt` و
+  `TooltipDefaults.kt` بترويستهما الأصلية، و`MotionScale.kt` أصلي DRS، و
+  `KeyboardForwardDelete.kt`)، و`consumer-rules.pro` فارغ بالتصميم (0.0%).
+  فخرجت `lib/compose` من قائمة المشتقات أعلاه تماماً. القياسات الكاملة في
+  `canonical_verdicts.csv` و`canonical_similarity.csv`.
+- **توضيحان مطلوبان من المالك (المرحلة 5)**:
+  1. الإفصاحان الموثقان في `lib/android` هما بالاسم المضبوط: `Toast.kt`
+     (أصلي DRS — أفضل مرشح SnyggPropertySetEditor بقياس 16.7%) و
+     `SystemSettingObserver.kt` (نسخة حرفية 100.0% معفاة بمبررها الموثق).
+  2. نعم، `SystemSettingObserver.kt` مذكورة فعلاً في هذا الملف (الفقرة أعلاه
+     للمرحلة 4) وستبقى هنا 100.0% دائماً — إفصاح قانوني دائم لا يُزال.
 
 ## 2. jetpref
 
