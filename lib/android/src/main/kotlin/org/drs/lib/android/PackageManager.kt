@@ -20,22 +20,26 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.pm.PackageManager
 
+/** Component class of the DRS settings launcher alias whose icon gets toggled. */
 private const val SETTINGS_ACTIVITY_NAME = "com.drs.smartkeyboard.SettingsLauncherAlias"
 
-fun Context.hideAppIcon() {
-    val pkg: PackageManager = this.packageManager
-    pkg.setComponentEnabledSetting(
-        ComponentName(this, SETTINGS_ACTIVITY_NAME),
-        PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
-        PackageManager.DONT_KILL_APP
-    )
+/** Disables the settings launcher component, hiding the app icon from the launcher. */
+fun Context.hideAppIcon(): Unit {
+    setLauncherComponentEnabled(targetState = PackageManager.COMPONENT_ENABLED_STATE_DISABLED)
 }
 
-fun Context.showAppIcon() {
-    val pkg: PackageManager = this.packageManager
-    pkg.setComponentEnabledSetting(
-        ComponentName(this, SETTINGS_ACTIVITY_NAME),
-        PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
-        PackageManager.DONT_KILL_APP
+/** Enables the settings launcher component, showing the app icon in the launcher. */
+fun Context.showAppIcon(): Unit {
+    setLauncherComponentEnabled(targetState = PackageManager.COMPONENT_ENABLED_STATE_ENABLED)
+}
+
+private fun Context.setLauncherComponentEnabled(targetState: Int) {
+    packageManager.setComponentEnabledSetting(
+        ComponentName(
+            this,
+            SETTINGS_ACTIVITY_NAME,
+        ),
+        targetState,
+        PackageManager.DONT_KILL_APP,
     )
 }

@@ -18,10 +18,18 @@ package org.drs.lib.android
 
 import android.content.res.Configuration
 
-fun Configuration.isOrientationPortrait(): Boolean {
-    return this.orientation == Configuration.ORIENTATION_PORTRAIT
-}
+/**
+ * Reports whether this configuration's orientation matches the given platform
+ * constant. Both public probes below route through this single comparison so
+ * the orientation contract lives in exactly one place.
+ */
+private fun Configuration.orientationMatches(expected: Int): Boolean =
+    orientation == expected
 
-fun Configuration.isOrientationLandscape(): Boolean {
-    return this.orientation == Configuration.ORIENTATION_LANDSCAPE
-}
+/** True when the configuration currently resolves to portrait orientation. */
+fun Configuration.isOrientationPortrait(): Boolean =
+    orientationMatches(expected = Configuration.ORIENTATION_PORTRAIT)
+
+/** True when the configuration currently resolves to landscape orientation. */
+fun Configuration.isOrientationLandscape(): Boolean =
+    orientationMatches(expected = Configuration.ORIENTATION_LANDSCAPE)

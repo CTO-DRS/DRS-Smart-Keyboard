@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022-2025 The FlorisBoard Contributors
+ * Copyright (C) 2021-2025 The FlorisBoard Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,24 +20,28 @@ import android.os.FileObserver
 import java.io.File
 
 /**
- * Create a new file observer for a certain file or directory. Monitoring does not start on creation! You must call
- * startWatching() before you will receive events.
- *
- * @param file The file or directory to monitor.
- * @param mask The event or events (added together) to watch for.
- * @param onEvent The event handler which gets executed for any new events.
+ * Builds a file observer over [file] (or the directory it names) listening for
+ * the event mask [mask] and forwarding every platform event to [onEvent].
+ * Observation stays dormant until the caller invokes startWatching() on the
+ * returned observer.
  *
  * @see android.os.FileObserver
  */
-fun FileObserver(file: File, mask: Int, onEvent: (event: Int, path: String?) -> Unit): FileObserver {
-    return if (AndroidVersion.ATLEAST_API29_Q) {
-        object : FileObserver(file, mask) {
-            override fun onEvent(event: Int, path: String?) = onEvent(event, path)
-        }
-    } else {
-        @Suppress("DEPRECATION")
-        object : FileObserver(file.absolutePath, mask) {
-            override fun onEvent(event: Int, path: String?) = onEvent(event, path)
-        }
-    }
+fun FileObserver(
+    file: File,
+    mask: Int,
+    onEvent: (event: Int, path: String?) -> Unit,
+): FileObserver = if (AndroidVersion.ATLEAST_API29_Q) {
+    makeFileObserver(file.path, mask, onEvent)
+} else {
+    @Suppress("DEPRECATION")
+    makeFileObserver(file.absolutePath, mask, onEvent)
+}
+
+private fun makeFileObserver(
+    observedPath: String,
+    mask: Int,
+    onEvent: (event: Int, path: String?) -> Unit,
+): FileObserver = object : FileObserver(observedPath, mask) {
+    override fun onEvent(event: Int, path: String?) = onEvent.invoke(event, path)
 }

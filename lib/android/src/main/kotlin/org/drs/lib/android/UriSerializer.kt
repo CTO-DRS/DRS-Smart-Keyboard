@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025 The FlorisBoard Contributors
+ * Copyright (C) 2021-2025 The FlorisBoard Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,24 +16,33 @@
 
 package org.drs.lib.android
 
-import android.net.Uri
-import androidx.core.net.toUri
 import kotlinx.serialization.KSerializer
-import kotlinx.serialization.descriptors.PrimitiveKind
-import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
-import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 
-object UriSerializer : KSerializer<Uri> {
-    override val descriptor: SerialDescriptor
-        get() = PrimitiveSerialDescriptor("URI", PrimitiveKind.STRING)
+/**
+ * Round-trips a [android.net.Uri] through its canonical string form, so
+ * serialized payloads always carry the platform-parsed representation.
+ */
+object UriSerializer : KSerializer<android.net.Uri>
+{
+    override val descriptor: kotlinx.serialization.descriptors.SerialDescriptor
+        get() = kotlinx.serialization.descriptors.PrimitiveSerialDescriptor(
+            serialName = "URI",
+            kind = kotlinx.serialization.descriptors.PrimitiveKind.STRING,
+        )
 
-    override fun deserialize(decoder: Decoder): Uri {
-        return decoder.decodeString().toUri()
-    }
+    override fun deserialize(
+        decoder: Decoder,
+    ): android.net.Uri =
+        android.net.Uri.parse(decoder.decodeString())
 
-    override fun serialize(encoder: Encoder, value: Uri) {
-        encoder.encodeString(value.toString())
+    override fun serialize(
+        encoder: Encoder,
+        value: android.net.Uri,
+    ) {
+        encoder.encodeString(
+            value = value.toString(),
+        )
     }
 }
