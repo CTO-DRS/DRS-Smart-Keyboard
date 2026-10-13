@@ -1,97 +1,76 @@
-# Third-Party Notices | إشعارات الطرف الثالث
+# THIRD-PARTY SOURCE NOTICES / إشعارات المصادر الخارجية
 
-<div dir="rtl">
-
-يُبنى DRS Smart Keyboard فوق مكتبات مفتوحة المصدر محترمة، ونقدّر عمل مؤلفيها.
-هذه الصفحة تسرد الاعتمادات الخارجية الرئيسية وتراخيصها. التفاصيل الكاملة لكل
-اعتماد موجودة في `gradle/libs.versions.toml` داخل المستودع، وتُعرض داخل التطبيق
-في شاشة «تراخيص الطرف الثالث».
-
-</div>
+This document discloses vendored / derived third-party source code shipped in
+this repository under `lib/`, with exact upstream references. It is updated
+per module as each cleanup phase completes.
 
 ---
 
-## Runtime Dependencies | الاعتمادات التشغيلية
+## 1. FlorisBoard
 
-### Android Jetpack / AndroidX (The Android Open Source Project)
-**License:** Apache License 2.0 — https://opensource.org/licenses/Apache-2.0
+| Item | Value |
+|---|---|
+| Upstream project | FlorisBoard — https://github.com/florisboard/florisboard |
+| Author / copyright | The FlorisBoard Contributors (project by Patrick Goldinger) |
+| Pinned reference | branch `main` @ commit `fe1241f4921b3eae923571ff7a3e113a7e10d677` |
+| License | Apache-2.0 |
+| Derived paths (modules) | `lib/android`, `lib/color`, `lib/compose`, `lib/kotlin`, `lib/snygg` |
 
-- `androidx.activity:activity-compose`, `androidx.activity:activity-ktx`
-- `androidx.appcompat`, `androidx.autofill`, `androidx.collection`
-- `androidx.core:core-ktx`, `androidx.core:core-splashscreen`
-- `androidx.emoji2`, `androidx.exifinterface`
-- `androidx.lifecycle`, `androidx.window`
-- `androidx.navigation:navigation-compose`
-- `androidx.room` (runtime + compiler)
-- `androidx.profileinstaller`
+### طبيعة الحالة (Nature of the derived copies)
 
-### Jetpack Compose (The Android Open Source Project)
-**License:** Apache License 2.0
+- الملفات المشتقة من FlorisBoard منقولة **مع تعديلات** (إعادة تسمية الحزم من
+  `org.florisboard.*` إلى `org.drs.*`، إعادة تسمية بعض الملفات من البادئة
+  `Floris*` إلى `Drs*`، وتعديلات داخلية متفاوتة من تعديل بسيط حتى إعادة كتابة
+  عميقة — انظر `tools/cleanup/measurements/canonical_verdicts.csv` للتصنيف
+  الكامل لكل ملف).
+- **الترويسة الأصلية (Apache-2.0) كانت قد استُبدلت سابقاً بترويسة DRS قصيرة
+  (4 أسطر)، واستُعادت الترويسة الأصلية الحرفية في هذه المرحلة (المرحلة 1)**
+  عبر `tools/cleanup/restore_headers.py` مع ضمان ثبات جسم كل ملف (SHA-256).
+- الملفات التي لا مقابل لها في المرجع المثبت (مؤلفات DRS) تحتفظ بترويسة DRS.
 
-- `androidx.compose:compose-bom`, `androidx.compose.ui:*`,
-  `androidx.compose.foundation`, `androidx.compose.material3`,
-  `androidx.compose.material:material-icons-extended`,
-  `androidx.compose.runtime:runtime-livedata`
+## 2. jetpref
 
-### Kotlin & JetBrains libraries (JetBrains)
-**License:** Apache License 2.0
+| Item | Value |
+|---|---|
+| Upstream project | jetpref — https://github.com/patrickgold/jetpref |
+| Author / copyright | Patrick Goldinger |
+| Pinned reference | branch `main` @ commit `7a3df4eb76ff81245244761f6c160eab31e9f73f` |
+| License | Apache-2.0 |
+| Derived paths (modules) | `lib/jetpref/datastore-model`, `lib/jetpref/datastore-model-processor`, `lib/jetpref/datastore-ui`, `lib/jetpref/material-ui` |
 
-- `org.jetbrains.kotlin:kotlin-stdlib`, `kotlin-reflect`
-- `org.jetbrains.kotlinx:kotlinx-coroutines-*`
-- `org.jetbrains.kotlinx:kotlinx-serialization-json`
+### طبيعة الحالة (Nature of the derived copies)
 
-### Coil (Coil Kotlin — image loading)
-**License:** Apache License 2.0 — https://github.com/coil-kt/coil
+- الملفات المشتقة من jetpref منقولة **مع تعديلات** (إعادة تسمية الحزم من
+  `dev.patrickgold.jetpref.*` إلى `org.drs.jetpref.*` مع تعديلات متفاوتة —
+  التصنيف الكامل في `tools/cleanup/measurements/canonical_verdicts.csv`).
+- **الترويسة الأصلية (Apache-2.0) كانت قد استُبدلت سابقاً بترويسة DRS قصيرة
+  (4 أسطر)، واستُعادت الترويسة الأصلية الحرفية في هذه المرحلة (المرحلة 1)**.
+- ملف تسجيل معالج KSP
+  (`lib/jetpref/datastore-model-processor/src/main/resources/META-INF/services/com.google.devtools.ksp.processing.SymbolProcessorProvider`)
+  ملف تسجيل خدمة مشتق من jetpref ولا يحمل ترويسة بطبيعته.
 
-- `io.coil-kt.coil3:coil-compose`, `io.coil-kt.coil3:coil-gif`
+## 3. Android Open Source Project (AOSP)
 
-### Material Kolor
-**License:** Apache License 2.0 — https://github.com/jordond/materialkolor
+| Item | Value |
+|---|---|
+| Upstream | AOSP — https://source.android.com |
+| License | Apache-2.0 |
+| Derived files | `lib/compose/.../tooltip/Tooltip.kt`, `TooltipDefaults.kt` (ترويسة AOSP الأصلية قائمة)، `lib/compose/.../icons/KeyboardForwardDelete.kt` |
 
-- `com.materialkolor:material-kolor-android`
+- ملفات AOSP محمية: ترويساتها الأصلية صحيحة ولا تُمسّ (قائمة الحماية
+  الموثقة في `tools/cleanup/WORKLOG.md`).
 
-### cache4k
-**License:** Apache License 2.0 — https://github.com/reactivecircus/cache4k
+## 4. DRS originals
 
-- `io.github.reactivecircus.cache4k`
-
-### Google KSP & KotlinPoet (build-time tooling)
-**License:** Apache License 2.0
-
-- `com.google.devtools.ksp:symbol-processing-api`
-- `com.squareup:kotlinpoet`, `com.squareup:kotlinpoet-ksp`
-
-### ICU4J (International Components for Unicode — Hijri calendar support)
-**License:** ICU License (ICU 1.8.1 and later) — bundled via the Android platform.
-
-## Test & Benchmark tooling
-
-- Kotest (`io.kotest`) — Apache License 2.0
-- `androidx.benchmark:benchmark-macro-junit4`, `androidx.test.*`, `kotlin-test` — Apache License 2.0 / The Android Open Source Project
-
-## Bundled Data | البيانات المدمجة
-
-### Tashkeela corpus (excerpts in the vocalization lexicon — DRS v1.2.0)
-**License:** GNU General Public License v2.0 — https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
-
-- `app/src/main/assets/drs/tashkeel_lexicon.txt` embeds top-frequency
-  vocalized word forms extracted from the **Tashkeela** corpus
-  (community-datasets/tashkeela on Hugging Face), in addition to the
-  project's own hand-reviewed seed entries.
-- Extraction was deterministic (frequency voting + a documented
-  pause-form policy) at development time; the runtime does no corpus
-  processing — it performs a local, offline dictionary lookup only.
-- Attribution and license preserved here per GPL-2.0 requirements.
+`lib/compose/.../MotionScale.kt` وملفات `Drs*`/الاختبارات التي لا مقابل
+لها في المرجعين أعلاه هي مؤلفات أصلية لهذا المشروع (ترويسة DRS) — التصنيف
+النهائي في الجدول الكانوني.
 
 ---
 
-<div dir="rtl">
+### ملاحظة تشغيلية (Maintenance note)
 
-## ملاحظة
-
-جميع التراخيص أعلاه تسمح بالاستخدام وإعادة التوزيع التجاري وغير التجاري مع
-الالتزام بشروطها (الاحتفاظ بإشعارات الترخيص وحقوق المؤلفين الأصلية لدى مكتباتها
-الخاصة داخل مستودعاتها). هذا المشروع يوزّع المكتبات بصيغة Gradle المعتمدة دون
-تعديل على مصادرها.
-
-</div>
+يُحدَّث هذا الملف **وحدة وحدة** مع كل اقتلاع لاحق (المراحل 2–5 وما بعدها):
+عند اكتمال إعادة كتابة وحدة بالكامل يُحذف قسمها من هنا أو يُعدَّل ليعكس
+الحالة الجديدة. المرجع المثبت للقياس موثق في `tools/cleanup/WORKLOG.md`
+(الوسوم مرفوضة بالقياس — القرار نهائي).
