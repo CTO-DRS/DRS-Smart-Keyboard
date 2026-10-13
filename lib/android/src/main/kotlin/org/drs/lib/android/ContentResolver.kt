@@ -19,7 +19,6 @@
 package org.drs.lib.android
 
 import android.content.ContentResolver
-import android.content.res.AssetFileDescriptor
 import android.net.Uri
 import org.drs.lib.kotlin.io.FsFile
 import java.io.BufferedReader
@@ -29,93 +28,113 @@ import java.io.OutputStream
 import kotlin.contracts.InvocationKind
 import kotlin.contracts.contract
 
-/**
- * Shorthand function for querying a Uri without any other arguments.
- *
- * @see android.content.ContentResolver.query
- */
-inline fun ContentResolver.query(uri: Uri) = this.query(uri, null, null, null, null)
+/** Runs [android.content.ContentResolver.query] with every optional clause unset. */
+inline fun ContentResolver.query(uri: Uri) =
+    query(uri, null, null, null, null)
 
-/**
- * Shorthand function for querying a Uri and projection without any other arguments.
- *
- * @see android.content.ContentResolver.query
- */
-inline fun ContentResolver.query(uri: Uri, projection: Array<String>) = this.query(uri, projection, null, null, null)
+/** Runs [android.content.ContentResolver.query] with [projection] set and every other clause unset. */
+inline fun ContentResolver.query(uri: Uri, projection: Array<String>) =
+    query(uri, projection, null, null, null)
 
-inline fun ContentResolver.read(uri: Uri, maxSize: Long = Long.MAX_VALUE, block: (InputStream) -> Unit) {
-    contract {
-        callsInPlace(block, InvocationKind.EXACTLY_ONCE)
+/** Streams the payload of [uri] into [block], refusing payloads above [maxSize] bytes. */
+inline fun ContentResolver.read(
+    uri: Uri,
+    maxSize: Long = Long.MAX_VALUE,
+    block: (InputStream) -> Unit,
+) {
+    contract { callsInPlace(block, InvocationKind.EXACTLY_ONCE) }
+    enforceReadableCapacity(maxSize)
+    val source = openInputStream(uri)
+        ?: throw IllegalStateException("Cannot open input stream for given uri '$uri'")
+    val descriptor = openAssetFileDescriptor(uri, "r")
+        ?: throw IllegalStateException("Cannot open asset file descriptor for given uri '$uri'")
+    descriptor.use { checked ->
+        val totalSize = checked.length
+        if (totalSize != android.content.res.AssetFileDescriptor.UNKNOWN_LENGTH && totalSize > maxSize) {
+            throw IllegalStateException("Contents of given uri '$uri' exceeds maximum size of $maxSize bytes!")
+        }
     }
+    source.use(block)
+}
+
+@PublishedApi
+internal inline fun enforceReadableCapacity(maxSize: Long) =
     require(maxSize > 0) { "Argument `maxSize` must be greater than 0" }
-    val inputStream = this.openInputStream(uri)
-        ?: error("Cannot open input stream for given uri '$uri'")
-    val assetFileDescriptor = this.openAssetFileDescriptor(uri, "r")
-        ?: error("Cannot open asset file descriptor for given uri '$uri'")
-    assetFileDescriptor.use {
-        val assetFileSize = assetFileDescriptor.length
-        if (assetFileSize != AssetFileDescriptor.UNKNOWN_LENGTH) {
-            if (assetFileSize > maxSize) {
-                error("Contents of given uri '$uri' exceeds maximum size of $maxSize bytes!")
-            }
-        }
-    }
-    inputStream.use(block)
-}
 
-inline fun ContentResolver.readToFile(uri: Uri, file: FsFile) {
-    this.read(uri) { inStream ->
-        file.outputStream().use { outStream ->
-            inStream.copyTo(outStream)
+/** Copies the payload of [uri] into [file], replacing its previous contents. */
+inline fun ContentResolver.readToFile(
+    uri: Uri,
+    file: FsFile,
+) {
+    read(uri) { source ->
+        file.outputStream().use { destination ->
+            source.copyTo(destination)
         }
     }
 }
 
-inline fun ContentResolver.readText(uri: Uri, block: (BufferedReader) -> Unit) {
-    contract {
-        callsInPlace(block, InvocationKind.EXACTLY_ONCE)
-    }
-    this.read(uri) { inStream ->
-        inStream.bufferedReader().use(block)
+/** Streams the payload of [uri] through a buffered reader into [block]. */
+inline fun ContentResolver.readText(
+    uri: Uri,
+    block: (BufferedReader) -> Unit,
+) {
+    contract { callsInPlace(block, InvocationKind.EXACTLY_ONCE) }
+    read(uri) { source ->
+        source.bufferedReader().use(block)
     }
 }
 
-inline fun ContentResolver.readAllText(uri: Uri): String {
-    val text: String
-    this.read(uri) { inStream ->
-        text = inStream.bufferedReader().use { it.readText() }
+/** Reads the whole payload of [uri] as text. */
+inline fun ContentResolver.readAllText(
+    uri: Uri,
+): String {
+    var collected: String? = null
+    read(uri) { source ->
+        collected = source.bufferedReader().use { it.readText() }
     }
-    return text
+    return collected!!
 }
 
-inline fun ContentResolver.write(uri: Uri, block: (OutputStream) -> Unit) {
-    contract {
-        callsInPlace(block, InvocationKind.EXACTLY_ONCE)
-    }
-    val outputStream = this.openOutputStream(uri, "wt")
-        ?: error("Cannot open input stream for given uri '$uri'")
-    outputStream.use(block)
+/** Opens [uri] for writing and hands the stream to [block], truncating prior content. */
+inline fun ContentResolver.write(
+    uri: Uri,
+    block: (OutputStream) -> Unit,
+) {
+    contract { callsInPlace(block, InvocationKind.EXACTLY_ONCE) }
+    openOutputStream(uri, "wt")
+        ?.use(block)
+        ?: throw IllegalStateException("Cannot open input stream for given uri '$uri'")
 }
 
-inline fun ContentResolver.writeFromFile(uri: Uri, file: FsFile) {
-    this.write(uri) { outStream ->
-        file.inputStream().use { inStream ->
-            inStream.copyTo(outStream)
+/** Copies the contents of [file] into [uri], replacing the provider's prior data. */
+inline fun ContentResolver.writeFromFile(
+    uri: Uri,
+    file: FsFile,
+) {
+    write(uri) { destination ->
+        file.inputStream().use { source ->
+            source.copyTo(destination)
         }
     }
 }
 
-inline fun ContentResolver.writeText(uri: Uri, block: (BufferedWriter) -> Unit) {
-    contract {
-        callsInPlace(block, InvocationKind.EXACTLY_ONCE)
-    }
-    this.write(uri) { outStream ->
-        outStream.bufferedWriter().use(block)
+/** Streams the payload of [uri] through a buffered writer into [block]. */
+inline fun ContentResolver.writeText(
+    uri: Uri,
+    block: (BufferedWriter) -> Unit,
+) {
+    contract { callsInPlace(block, InvocationKind.EXACTLY_ONCE) }
+    write(uri) { target ->
+        target.bufferedWriter().use(block)
     }
 }
 
-inline fun ContentResolver.writeAllText(uri: Uri, text: String) {
-    this.write(uri) { outStream ->
-        outStream.bufferedWriter().use { it.write(text) }
+/** Replaces the payload of [uri] with [text]. */
+inline fun ContentResolver.writeAllText(
+    uri: Uri,
+    text: String,
+) {
+    write(uri) { target ->
+        target.bufferedWriter().use { it.write(text) }
     }
 }
