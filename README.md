@@ -104,6 +104,15 @@ A DRS-built keyboard for Android — Arabic-first, fully private, deeply customi
 - لا تنفيذ لأي كود مُنزَّل: الحزم بيانات صرفة (سمات وتخطيطات) تستهلكها المحركات الأصلية.
 - التطبيق يعمل بالكامل بدون إنترنت؛ الشبكة تُستخدم فقط للفحص والتنزيل.
 
+## مكوّنات الطرف الثالث المصرَّح بها
+
+مشروع **DRS Smart Keyboard** بنية أصلية من تطوير DRS، ويستخدم داخلَه مكوّنَين مساعدَين مفتوحي المصدر مُندمجَين في هذا المستودع بإسناد قانوني كامل:
+
+- **jetpref** (وحدات `lib/jetpref/*`) — إطار تفضيلات data-store من تأليف Patrick Goldinger (patrickgold)، مؤلف FlorisBoard — [patrickgold/jetpref](https://github.com/patrickgold/jetpref) @ `7a3df4e` — رخصة [Apache-2.0](https://www.apache.org/licenses/LICENSE-2.0)، الترويسات الأصلية محفوظة، والإفصاح الكامل في [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+- **snygg** و`lib/kotlin` — محرك السمات وأدوات Kotlin الأساسية من مشروع FlorisBoard بفضل The FlorisBoard Contributors — [florisboard/florisboard](https://github.com/florisboard/florisboard) @ `fe1241f` — رخصة [Apache-2.0](https://www.apache.org/licenses/LICENSE-2.0)، والإفصاح الكامل في [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+
+هذان المكوّنان يخدمان وظائف مساعدة معزولة (نظام التفضيلات ومحرك السمات) فقط؛ لوحة المفاتيح نفسها — بنيتها وأنظمتها ومحركاتها — مؤلَّف أصلي من DRS.
+
 ## التوثيق
 
 - 🏛️ [بنية المشروع](docs/ARCHITECTURE.md) — خريطة الوحدات والأنظمة ومسار البيانات.
@@ -177,6 +186,26 @@ three usage systems (Casual / Technical / Integrated), a built-in official Packa
 and Update Center with mandatory SHA-256 verification, deep theme customization with live
 preview, a rich clipboard manager, real reward economy, and absolute privacy — all data
 stays on your device.
+
+### Third-party components
+
+DRS Smart Keyboard is an original DRS-built project that integrates two open-source
+helper components, vendored in this repository with full legal attribution:
+
+- **jetpref** (`lib/jetpref/*`) — a data-store preferences framework by Patrick
+  Goldinger (patrickgold), the FlorisBoard author —
+  [patrickgold/jetpref](https://github.com/patrickgold/jetpref) @ `7a3df4e`,
+  licensed under [Apache-2.0](https://www.apache.org/licenses/LICENSE-2.0);
+  original headers preserved; full disclosure in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+- **snygg** and `lib/kotlin` — the theming engine and core Kotlin utilities from
+  FlorisBoard by The FlorisBoard Contributors —
+  [florisboard/florisboard](https://github.com/florisboard/florisboard) @ `fe1241f`,
+  licensed under [Apache-2.0](https://www.apache.org/licenses/LICENSE-2.0);
+  full disclosure in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+
+These two components serve isolated auxiliary functionality (the preferences system
+and the theming engine) only; the keyboard itself — its architecture, systems and
+engines — is original DRS work.
 
 **[Download the latest release](https://github.com/CTO-DRS/DRS-SmartKeyboard/releases/latest)** ·
 [Privacy Policy](PRIVACY.md)
