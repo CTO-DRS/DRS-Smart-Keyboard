@@ -1,0 +1,139 @@
+Jetpref API usage measurement (jetpref gate 1) — read-only
+============================================================
+inventory_api_rows_total     : 148  (unique defining_package+symbol; declarations=161)
+inventory_rows_public        : 103
+symbols_used_total           : 41
+symbols_used_public          : 41
+usage_ratio_total            : 41/148 = 27.7%
+usage_ratio_public           : 41/103 = 39.8%
+consumer_files_scanned       : 585
+consumer_files_referencing   : 90
+jetpref_import_lines_total   : 223
+files_using_fq_references    : 2 (FQ org.drs.jetpref.* outside import lines)
+  - app/src/main/kotlin/com/drs/smartkeyboard/app/ext/KeyboardLayoutEditorScreen.kt
+  - lib/compose/src/main/kotlin/org/drs/lib/compose/DrsDropdownLikeButton.kt
+
+files referencing jetpref, by scope:
+  app/src                 : 89
+  lib/compose             : 1
+
+top 10 most-used symbols:
+  collectAsState                     composable-extension-fun   datastore-ui                 sites= 241 files=39
+  SwitchPreference                   composable-fun             datastore-ui                 sites= 128 files=16
+  Preference                         composable-fun             datastore-ui                 sites= 108 files=21
+  ListPreference                     composable-fun             datastore-ui                 sites=  83 files=16
+  PreferenceGroup                    composable-extension-fun   datastore-ui                 sites=  83 files=19
+  jetprefDataStoreOf                 fun                        datastore-model              sites=  58 files=8
+  DialogSliderPreference             composable-fun             datastore-ui                 sites=  46 files=9
+  listPrefEntries                    composable-fun             datastore-ui                 sites=  44 files=2
+  JetPrefAlertDialog                 composable-fun             material-ui                  sites=  42 files=15
+  JetPrefTextField                   composable-fun             material-ui                  sites=  32 files=7
+
+unused api rows (107):
+  datastore-model  org.drs.jetpref.datastore                            consumeFirst (extension-fun,public)
+  datastore-model  org.drs.jetpref.datastore                            runCatchingCancellationAware (extension-fun,public)
+  datastore-model  org.drs.jetpref.datastore.annotations                PreferenceKey (annotation,public)
+  datastore-model  org.drs.jetpref.datastore.annotations                PreferenceTypeId (annotation,public)
+  datastore-model  org.drs.jetpref.datastore.model                      BooleanPreferenceSerializer (object,internal)
+  datastore-model  org.drs.jetpref.datastore.model                      DoublePreferenceSerializer (object,internal)
+  datastore-model  org.drs.jetpref.datastore.model                      FloatPreferenceSerializer (object,internal)
+  datastore-model  org.drs.jetpref.datastore.model                      IntPreferenceSerializer (object,internal)
+  datastore-model  org.drs.jetpref.datastore.model                      LocalTimePreferenceSerializer (object,internal)
+  datastore-model  org.drs.jetpref.datastore.model                      LongPreferenceSerializer (object,internal)
+  datastore-model  org.drs.jetpref.datastore.model                      PreferenceDataImpl (class,private)
+  datastore-model  org.drs.jetpref.datastore.model                      StringEncoder (object,internal)
+  datastore-model  org.drs.jetpref.datastore.model                      StringPreferenceSerializer (object,internal)
+  datastore-model  org.drs.jetpref.datastore.model                      Validator (object,internal)
+  datastore-model  org.drs.jetpref.datastore.model                      action (property,internal)
+  datastore-model  org.drs.jetpref.datastore.model                      hour (property,public)
+  datastore-model  org.drs.jetpref.datastore.model                      millisecond (property,public)
+  datastore-model  org.drs.jetpref.datastore.model                      minute (property,public)
+  datastore-model  org.drs.jetpref.datastore.model                      preferenceDataOf (fun,internal)
+  datastore-model  org.drs.jetpref.datastore.model                      rawValue (property,public)
+  datastore-model  org.drs.jetpref.datastore.model                      second (property,public)
+  datastore-model  org.drs.jetpref.datastore.model                      type (property,public)
+  datastore-model  org.drs.jetpref.datastore.runtime                    DataStore (class,public)
+  datastore-model  org.drs.jetpref.datastore.runtime                    DataStoreWriter (interface,public)
+  datastore-model  org.drs.jetpref.datastore.runtime                    LoadStrategy (interface,public)
+  datastore-model  org.drs.jetpref.datastore.runtime                    PersistStrategy (interface,public)
+  datastore-model  org.drs.jetpref.datastore.runtime                    PreferenceModelDuplicateKeyException (class,public)
+  datastore-model  org.drs.jetpref.datastore.runtime                    PreferenceModelNotFoundException (class,public)
+  datastore-model  org.drs.jetpref.datastore.runtime                    RawEncodedValues (typealias,private)
+  datastore-model  org.drs.jetpref.datastore.runtime                    androidAppDataStorageOf (fun,private)
+  datastore-model  org.drs.jetpref.datastore.runtime                    jetprefDatastoreDir (extension-property,public)
+  datastore-model  org.drs.jetpref.datastore.runtime                    jetprefDatastoreFile (extension-fun,private)
+  datastore-model  org.drs.jetpref.datastore.runtime                    model (property,private)
+  datastore-ui     org.drs.jetpref.datastore.model                      PreferenceDataEvaluator (typealias,public)
+  datastore-ui     org.drs.jetpref.datastore.model                      PreferenceDataEvaluatorScope (object,public)
+  datastore-ui     org.drs.jetpref.datastore.model                      observeAsState (composable-extension-fun,public)
+  datastore-ui     org.drs.jetpref.datastore.ui                         ColorBox (composable-fun,public)
+  datastore-ui     org.drs.jetpref.datastore.ui                         DialogPrefStrings (data-class,public)
+  datastore-ui     org.drs.jetpref.datastore.ui                         DisplayModeToggleButton (composable-fun,private)
+  datastore-ui     org.drs.jetpref.datastore.ui                         ListPreferenceEntriesScope (interface,public)
+  datastore-ui     org.drs.jetpref.datastore.ui                         ListPreferenceEntriesScopeImpl (class,private)
+  datastore-ui     org.drs.jetpref.datastore.ui                         LocalDefaultDialogPrefStrings (property,public)
+  datastore-ui     org.drs.jetpref.datastore.ui                         LocalIconSpaceReserved (property,public)
+  datastore-ui     org.drs.jetpref.datastore.ui                         LocalIsPrefEnabled (property,public)
+  datastore-ui     org.drs.jetpref.datastore.ui                         LocalIsPrefVisible (property,public)
+  datastore-ui     org.drs.jetpref.datastore.ui                         PreferenceUiScopeDsl (annotation,public)
+  datastore-ui     org.drs.jetpref.datastore.ui                         ScrollablePreferenceLayout (composable-fun,public)
+  datastore-ui     org.drs.jetpref.datastore.ui                         confirmLabel (property,public)
+  datastore-ui     org.drs.jetpref.datastore.ui                         customSliderDialogColors (composable-fun,private)
+  datastore-ui     org.drs.jetpref.datastore.ui                         description (property,public)
+  datastore-ui     org.drs.jetpref.datastore.ui                         descriptionComposer (property,public)
+  datastore-ui     org.drs.jetpref.datastore.ui                         dismissLabel (property,public)
+  datastore-ui     org.drs.jetpref.datastore.ui                         key (property,public)
+  datastore-ui     org.drs.jetpref.datastore.ui                         label (property,public)
+  datastore-ui     org.drs.jetpref.datastore.ui                         labelComposer (property,public)
+  datastore-ui     org.drs.jetpref.datastore.ui                         maybeJetIcon (composable-fun,internal)
+  datastore-ui     org.drs.jetpref.datastore.ui                         neutralLabel (property,public)
+  datastore-ui     org.drs.jetpref.datastore.ui                         prefs (property,public)
+  datastore-ui     org.drs.jetpref.datastore.ui                         safeValue (composable-extension-fun,public)
+  datastore-ui     org.drs.jetpref.datastore.ui                         showDescriptionOnlyIfSelected (property,public)
+  datastore-ui     org.drs.jetpref.datastore.ui                         toLocalTime (extension-fun,public)
+  material-ui      org.drs.jetpref.material.ui                          AlphaBar (composable-fun,public)
+  material-ui      org.drs.jetpref.material.ui                          AlphaBarShader (class,private)
+  material-ui      org.drs.jetpref.material.ui                          ColorSlider (composable-fun,private)
+  material-ui      org.drs.jetpref.material.ui                          HsvColor (data-class,public)
+  material-ui      org.drs.jetpref.material.ui                          HueBar (composable-fun,private)
+  material-ui      org.drs.jetpref.material.ui                          HueBarShader (class,private)
+  material-ui      org.drs.jetpref.material.ui                          JetPrefAlertDialogDefaults (object,public)
+  material-ui      org.drs.jetpref.material.ui                          JetPrefColorPickerState (interface,public)
+  material-ui      org.drs.jetpref.material.ui                          JetPrefColorPickerStateImpl (class,private)
+  material-ui      org.drs.jetpref.material.ui                          JetPrefTextFieldStyle (enum-class,public)
+  material-ui      org.drs.jetpref.material.ui                          PreviewSize (property,private)
+  material-ui      org.drs.jetpref.material.ui                          RgbColor (data-class,public)
+  material-ui      org.drs.jetpref.material.ui                          SaturationValueBox (composable-fun,private)
+  material-ui      org.drs.jetpref.material.ui                          SaturationValueBoxShader (class,private)
+  material-ui      org.drs.jetpref.material.ui                          ShaderBase (interface,private)
+  material-ui      org.drs.jetpref.material.ui                          SliderPadding (property,private)
+  material-ui      org.drs.jetpref.material.ui                          SliderThumbBorderSize (property,private)
+  material-ui      org.drs.jetpref.material.ui                          SliderThumbElevation (property,private)
+  material-ui      org.drs.jetpref.material.ui                          SliderThumbSize (property,private)
+  material-ui      org.drs.jetpref.material.ui                          SliderTrackHeight (property,private)
+  material-ui      org.drs.jetpref.material.ui                          TextRowPadding (property,private)
+  material-ui      org.drs.jetpref.material.ui                          Thumb (composable-fun,private)
+  material-ui      org.drs.jetpref.material.ui                          ZeroOneRange (property,private)
+  material-ui      org.drs.jetpref.material.ui                          alpha (property,public)
+  material-ui      org.drs.jetpref.material.ui                          blue (property,public)
+  material-ui      org.drs.jetpref.material.ui                          colors (property,public)
+  material-ui      org.drs.jetpref.material.ui                          copy (extension-fun,public)
+  material-ui      org.drs.jetpref.material.ui                          green (property,public)
+  material-ui      org.drs.jetpref.material.ui                          hue (property,public)
+  material-ui      org.drs.jetpref.material.ui                          parseOrNull (extension-fun,public)
+  material-ui      org.drs.jetpref.material.ui                          red (property,public)
+  material-ui      org.drs.jetpref.material.ui                          rememberColorWithoutAlpha (composable-extension-fun,private)
+  material-ui      org.drs.jetpref.material.ui                          rememberHueColor (composable-extension-fun,private)
+  material-ui      org.drs.jetpref.material.ui                          rememberJetPrefDropdownExpandedState (composable-fun,public)
+  material-ui      org.drs.jetpref.material.ui                          saturation (property,public)
+  material-ui      org.drs.jetpref.material.ui                          setAlpha (extension-fun,private)
+  material-ui      org.drs.jetpref.material.ui                          setHue (extension-fun,private)
+  material-ui      org.drs.jetpref.material.ui                          setSaturation (extension-fun,private)
+  material-ui      org.drs.jetpref.material.ui                          setValue (extension-fun,private)
+  material-ui      org.drs.jetpref.material.ui                          shape (property,public)
+  material-ui      org.drs.jetpref.material.ui                          style (property,public)
+  material-ui      org.drs.jetpref.material.ui                          toHsv (extension-fun,internal)
+  material-ui      org.drs.jetpref.material.ui                          toRgb (extension-fun,internal)
+  material-ui      org.drs.jetpref.material.ui                          value (property,public)
+  material-ui      org.drs.jetpref.material.ui                          whenNotNull (composable-fun,public)
+  material-ui      org.drs.jetpref.material.ui                          whenNotNullOrBlank (composable-fun,public)
