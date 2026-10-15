@@ -33,7 +33,7 @@ import org.drs.jetpref.datastore.ui.PreferenceGroup
 import org.drs.lib.compose.stringRes
 
 /**
- * DRS v1.0.5: a plain-language help center for the normal user. Every entry
+ * a plain-language help center for the normal user. Every entry
  * is wired to the real screen it describes — no dead ends: either it opens
  * the relevant settings page or performs the action directly.
  */
@@ -78,7 +78,7 @@ fun HelpScreen() = DrsScreen {
         }
 
         PreferenceGroup(title = stringRes(R.string.help__faq_group)) {
-            // DRS v1.0.7: the unified «كلاهما» system explanation leads the FAQ.
+            // the unified «كلاهما» system explanation leads the FAQ.
             Preference(
                 icon = Icons.Default.Dashboard,
                 title = stringRes(R.string.help__faq_unified__title),

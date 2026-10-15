@@ -20,7 +20,7 @@ import kotlin.io.path.createTempDirectory
  *  - p7 (E3-4): [ExtensionValidation.isSafeStylesheetPath] + the
  *    ThemeComponentStylesheetPath rule block traversal at validation time, and
  *    ExtensionEditScreen's canonical containment ([containedSubFile]) at write time;
- *  - v1.28.0: [ExtensionValidation.META_ID_REGEX] — the shared id contract also
+ * - [ExtensionValidation.META_ID_REGEX] — the shared id contract also
  *    enforced by ExtensionManager.import and DrsPackageManager;
  *  - p8 (S-4): [containedRestoreMediaFile] sanitizes untrusted clipboard media
  *    file names from a restore archive before they reach the filesystem.
@@ -72,7 +72,7 @@ class ExtensionPathSafetyTest : FunSpec({
         }
     }
 
-    context("META_ID_REGEX (DRS v1.28.0 shared id contract)") {
+    context("META_ID_REGEX ( shared id contract)") {
         test("accepts lowercase dotted ids incl. digit-led inner segments") {
             listOf(
                 "a",

@@ -194,7 +194,7 @@
     <string name="pref__theme__day" comment="Label of the day group (day means light theme)">نسق نهاري</string>
     <string name="pref__theme__night" comment="Label of the night group (night means dark theme)">نسق ليلي</string>
     <string name="pref__theme__theme_accent_color__label" comment="Label of accent color preference in Theme">لون التمييز (سمات Material You)</string>
-    <!-- DRS v2.8.0 «خلفيتك من ألبومك»: user background image for the keyboard theme -->
+    <!-- «خلفيتك من ألبومك»: user background image for the keyboard theme -->
     <string name="pref__theme__group_background__label" comment="Theme screen group title for the user background image">صورة الخلفية</string>
     <string name="pref__theme__background_image__label" comment="Preference title: pick a background image">صورة خلفية الكيبورد</string>
     <string name="pref__theme__background_image__summary_none" comment="Summary when no image is set">لا صورة — الخلفية من الثيم الحالي. انقر لاختيار صورة من جهازك</string>
@@ -475,7 +475,7 @@
     <string name="settings__smartbar__title" comment="Title of Smartbar screen">الشريط الذكي</string>
     <string name="pref__smartbar__enabled__label" comment="Preference title">تفعيل الشريط الذكي</string>
     <string name="pref__smartbar__enabled__summary" comment="Preference summary">سوف يظهر أعلى لوحة المفاتيح</string>
-    <!-- DRS v2.11.0 «المُرتّب السياقي الصادق» -->
+    <!-- «المُرتّب السياقي الصادق» -->
     <string name="pref__smartbar__contextual_ranking__label" comment="Preference title">الترتيب السياقي الصادق</string>
     <string name="pref__smartbar__contextual_ranking__summary" comment="Preference summary">يرفع أفعالك المفعّلة نفسها إلى الواجهة بحسب نوع الحقل (رابط، بحث، رسالة، كلمة سر) — بلا بلاطات جديدة ولا حذف، وترتيبك اليدوي يبقى الأساس، وفي كلمات السر لا تُرقّى الحافظة أو الصوت أبدًا</string>
     <string name="pref__smartbar__layout__label" comment="Preference title">التخطيط</string>
@@ -528,7 +528,7 @@
     <string name="pref__dictionary__learn_from_suggestions__summary" comment="DRS: Preference summary">الكلمات التي تختارها من شريط الاقتراحات تُحفظ وتُقترح أولاً لاحقاً (تُخزن على هذا الجهاز فقط)</string>
     <string name="pref__dictionary__learn_typed_words__label" comment="DRS: Preference title">تعلّم الكلمات التي تكتبها</string>
     <string name="pref__dictionary__learn_typed_words__summary" comment="DRS: Preference summary">الكلمات التي تكتبها وتُنهيها بمسافة تُحفظ محلياً لتتوسع اللوحة مع مفرداتك</string>
-    <!-- DRS v2.8.0 «قاموسك من ملفك»: external dictionary import -->
+    <!-- «قاموسك من ملفك»: external dictionary import -->
     <string name="pref__external_dict__group__label" comment="Dictionary screen group title for external dictionaries">القواميس الخارجية</string>
     <string name="pref__external_dict__import__label" comment="Preference title: import external dictionary">استيراد قاموس من ملف</string>
     <string name="pref__external_dict__import__summary" comment="Preference summary: accepted formats">JSON بالشكل {“كلمة”: تردد} أو أسطر «كلمة,تردد» — تُدمج مع قاموس اللغة ولا تُستبدل به</string>
@@ -1282,7 +1282,7 @@
     <string name="drs__search__history__clear" comment="Action that clears the entire search history">مسح الكل</string>
     <string name="pref__search__history_enabled__label" comment="Label of the search-history preference">سجل البحث</string>
     <string name="pref__search__history_enabled__summary" comment="Summary of the search-history preference">تذكّر عمليات البحث الأخيرة واعرضها كاقتراحات سريعة داخل البحث الذكي</string>
-    <!-- DRS v1.0.5: smart tools — share, word navigation, most-used tools -->
+    <!-- smart tools — share, word navigation, most-used tools -->
     <string name="quick_action__clipboard_share">مشاركة النص</string>
     <string name="quick_action__clipboard_share__tooltip">مشاركة النص المحدد (أو نص الحقل كاملًا) عبر تطبيق آخر</string>
     <string name="quick_action__move_word_left">انتقال كلمة لليسار</string>
@@ -1294,10 +1294,10 @@
     <string name="smart_tools__most_used">الأكثر استخدامًا</string>
     <string name="pref__smartbar__customize_hint__label" comment="Informational row pointing to the in-IME tools editor">تخصيص الأدوات السريعة</string>
     <string name="pref__smartbar__customize_hint__summary" comment="Explains where tool customization lives">افتح لوحة المفاتيح في أي تطبيق، اضغط على زر الأدوات (⋮) في الشريط ثم «تخصيص الأدوات» — يمكنك السحب لإعادة الترتيب والإخفاء والتثبيت في المقدمة</string>
-    <!-- DRS v1.0.5: emoji search -->
+    <!-- emoji search -->
     <string name="emoji__search__hint" comment="Placeholder of the emoji search field — search works on English names/keywords">بحث الإيموجي (بالإنجليزية: heart، fire…)</string>
     <string name="emoji__search__no_results">لا إيموجي مطابق — جرّب كلمة أخرى بالإنجليزية مثل smile أو star</string>
-    <!-- DRS v1.0.5: help center -->
+    <!-- help center -->
     <string name="help__title" comment="Title of the help center screen">مساعدة</string>
     <string name="help__entry_summary" comment="Summary of the help entry in the maintenance group">إرشادات مبسّطة عن أهم المميزات مع وصول مباشر لكل شاشة</string>
     <string name="help__maintenance_group" comment="Title of the maintenance group in Other settings">الصيانة والدعم</string>
@@ -1327,7 +1327,7 @@
     <string name="help__faq_backup__summary">النسخ الاحتياطي يحفظ الإعدادات والسمات والملفات الشخصية في ملف واحد يمكنك استعادته على أي جهاز</string>
     <string name="help__faq_update__title">كيف أحدّث التطبيق؟</string>
     <string name="help__faq_update__summary">مركز التحديث يفحص أحدث إصدار وينزّله ويثبته من داخل التطبيق مع تحقق SHA-256</string>
-    <!-- DRS v1.0.5: factory reset -->
+    <!-- factory reset -->
     <string name="factory_reset__title" comment="Title of the factory reset preference">إعادة ضبط إعدادات المصنع</string>
     <string name="factory_reset__summary" comment="Summary of the factory reset preference">إعادة كل إعدادات لوحة المفاتيح والتخصيص والطبقة التكيفية إلى حالتها الافتراضية</string>
     <string name="factory_reset__confirm_title">إعادة الضبط إلى الإعدادات الافتراضية؟</string>
@@ -1717,7 +1717,7 @@
     <string name="packages__type_theme">سمة</string>
     <string name="packages__type_keyboard">لوحة مفاتيح</string>
     <string name="packages__type_languagepack">حزمة لغة</string>
-    <!-- DRS v1.0.6: technical text tools panel -->
+    <!-- technical text tools panel -->
     <string name="drs__text_tools__header_title">أدوات النصوص</string>
     <string name="drs__text_tools__section_case">حالة الأحرف</string>
     <string name="drs__text_tools__section_spaces">المسافات والأسطر</string>
@@ -1725,8 +1725,8 @@
     <string name="drs__text_tools__section_punctuation">الترقيم والتنظيف</string>
     <string name="drs__text_tools__section_lines">عمليات الأسطر</string>
     <string name="drs__text_tools__section_quick">إجراءات سريعة</string>
-    <!-- DRS v2.2.0: the smart tiles — chips, favorites, recents and the
-         contextual advisory row of the text tools panel -->
+    <!-- the smart tiles — chips, favorites, recents and the
+ contextual advisory row of the text tools panel -->
     <string name="drs__text_tools__chip_all">الكل</string>
     <string name="drs__text_tools__section_favorites">المفضلة</string>
     <string name="drs__text_tools__section_recents">الأكثر استخدامًا</string>
@@ -1819,7 +1819,7 @@
     <string name="quick_action__ime_ui_mode_text_tools">أدوات النصوص</string>
     <string name="quick_action__ime_ui_mode_text_tools__tooltip">فتح لوحة أدوات النصوص المتقدمة</string>
     <string name="drs__shortcuts__duplicate_error">هذا الاختصار مستخدم بالفعل — اختر اختصارًا آخر</string>
-    <!-- DRS v1.0.6: technical toolbar editor -->
+    <!-- technical toolbar editor -->
     <string name="drs__tech_toolbar__title">تخصيص الشريط التقني</string>
     <string name="drs__tech_toolbar__description">اختر المفاتيح التي تظهر في الشريط التقني أعلى لوحة المفاتيح وترتيبها. زر أدوات النصوص ثابت في البداية ولا يمكن حذفه. التغييرات تُطبَّق مباشرة على اللوحة.</string>
     <string name="drs__tech_toolbar__keys_section">مفاتيح الشريط (بالترتيب)</string>
@@ -1853,7 +1853,7 @@
     <string name="drs__tech_toolbar__key_caret">إقحام ^</string>
     <string name="drs__tech_toolbar__key_amp">علامة &amp;</string>
     <string name="drs__tech_toolbar__key_asterisk">نجمة *</string>
-    <!-- DRS v1.0.6: diagnostics full test, event log, state backup, performance -->
+    <!-- diagnostics full test, event log, state backup, performance -->
     <string name="drs__diagnostics__test_section">الفحص الشامل</string>
     <string name="drs__diagnostics__test_run">تشغيل الفحص الشامل</string>
     <string name="drs__diagnostics__test_summary">نجح: {passed} • تحذير: {warnings} • خطأ: {errors}</string>
@@ -1905,7 +1905,7 @@
     <string name="pref__keyboard__accelerated_delete__label">الحذف المتسارع عند الاستمرار</string>
     <string name="pref__keyboard__accelerated_delete__summary">يُبقي سرعة التكرار كما هي في أول ست تكرارات، ثم ينزل سلّمًا حتميًا ثابتًا من ثلاث سرعات — لحذف الفقرات دون انتظار</string>
 
-    <!-- DRS v1.0.7: نظام «كلاهما» الموحد -->
+    <!-- نظام «كلاهما» الموحد -->
     <string name="drs__unified__dashboard_title">لوحة كلاهما</string>
     <string name="drs__unified__home_summary">مركز التحكم الموحد للنظام الثلاثي</string>
     <string name="drs__unified__tools_title">الأدوات الموحدة</string>
@@ -2056,7 +2056,7 @@
     <string name="drs__unified__system_diagnostics_summary">فحص شامل للخدمة والمحرك واللغات والأدوات</string>
     <string name="drs__unified__system_backup_summary">حفظ واستعادة إعدادات وبيانات لوحتك محليًا</string>
 
-    <!-- DRS v1.0.8: جولة تطوير المميزات الشاملة -->
+    <!-- جولة تطوير المميزات الشاملة -->
     <string name="pref__keyboard__height_scale__label">ارتفاع لوحة المفاتيح</string>
     <string name="drs__unified__basics_height_summary">تكبير أو تصغير ارتفاع اللوحة كاملة — يسري فورًا على كل الصفوف والمفاتيح</string>
     <string name="drs__unified__tool_theme_cycle">تبديل الثيم</string>
@@ -2090,13 +2090,13 @@
     <string name="drs__diagnostics__check_daily_stats">سلامة عدّادات الإحصاءات اليومية</string>
     <string name="drs__diagnostics__hint_daily_stats">بيانات الإحصاءات اليومية تحتوي يومًا غير صالح أو قيمة سالبة — استخدم «تصفير الإحصاءات» في شاشة الإحصاءات اليومية لتنظيفها</string>
 
-    <!-- DRS v1.1.0: new unified-strip tools -->
+    <!-- new unified-strip tools -->
     <string name="drs__unified__tool_one_handed">الوضع بيد واحدة</string>
     <string name="drs__unified__tool_one_handed_desc">تصغير لوحة المفاتيح إلى جانب واحد لسهولة الكتابة بإبهام واحد — الضغط مجددًا يعيدها إلى ملء الشاشة</string>
     <string name="drs__unified__tool_number_row">صف الأرقام</string>
     <string name="drs__unified__tool_number_row_desc">إظهار أو إخفاء صف الأرقام فوق لوحة الحروف فورًا دون فتح الإعدادات</string>
 
-    <!-- DRS v1.1.0: quick-action tile names for the unified tools -->
+    <!-- quick-action tile names for the unified tools -->
     <string name="quick_action__theme_cycle">تبديل الثيم</string>
     <string name="quick_action__theme_cycle__tooltip">الانتقال إلى الثيم التالي المثبّت</string>
     <string name="quick_action__insert_date_time">التاريخ والوقت</string>
@@ -2104,13 +2104,13 @@
     <string name="quick_action__toggle_number_row">صف الأرقام</string>
     <string name="quick_action__toggle_number_row__tooltip">إظهار أو إخفاء صف الأرقام</string>
 
-    <!-- DRS v1.1.0: new text tools -->
+    <!-- new text tools -->
     <string name="drs__text_tools__tool_number_lines">ترقيم الأسطر</string>
     <string name="drs__text_tools__desc_number_lines">يضيف رقمًا تسلسليًا قبل كل سطر: 1. 2. 3. — مع الحفاظ على الأسطر كما هي</string>
     <string name="drs__text_tools__tool_reverse_lines">عكس ترتيب الأسطر</string>
     <string name="drs__text_tools__desc_reverse_lines">يقلب ترتيب الأسطر بحيث يصبح آخر سطر أولًا والعكس</string>
 
-    <!-- DRS v1.1.0: stats chart + CSV export -->
+    <!-- stats chart + CSV export -->
     <string name="drs__unified__stats_chart_title">ضغطات المفاتيح — آخر 14 يومًا</string>
     <string name="drs__unified__stats_chart_peak">أعلى يوم: {date} ({keys} ضغطة)</string>
     <string name="drs__unified__stats_export">تصدير CSV</string>
@@ -2118,37 +2118,37 @@
     <string name="drs__unified__stats_export_failed">تعذّر كتابة ملف CSV — حاول موضعًا آخر</string>
     <string name="drs__unified__stats_export_empty">لا توجد أيام مسجّلة لتصديرها بعد</string>
 
-    <!-- DRS v1.1.0: diagnostics checks #20 and #21 -->
+    <!-- diagnostics checks #20 and #21 -->
     <string name="drs__diagnostics__check_storage">مساحة التخزين المتاحة</string>
     <string name="drs__diagnostics__hint_storage">مساحة تخزين الجهاز شبه ممتلئة — حفظ الحالة والحافظة والنسخ الاحتياطي قد يفشل؛ احذف ملفات غير ضرورية</string>
     <string name="drs__diagnostics__check_backup_age">حداثة النسخة الاحتياطية</string>
     <string name="drs__diagnostics__hint_backup_age">لم تُصدِّر نسخة احتياطية لحالة DRS خلال 30 يومًا (أو أبدًا) — استخدم زر التصدير في هذه الشاشة لحماية ملفاتك وسماتك واختصاراتك</string>
     <string name="drs__diagnostics__backup_last">آخر نسخة احتياطية: {when}</string>
     <string name="drs__diagnostics__backup_never">لم تُصدَّر أي نسخة احتياطية بعد</string>
-    <!-- DRS v1.2.0: smartbar height scale -->
+    <!-- smartbar height scale -->
     <string name="pref__keyboard__smartbar_height_scale__label">مقياس ارتفاع الشريط الذكي</string>
     <string name="drs__unified__basics_smartbar_summary">اضبط ارتفاع الشريط الذكي فوق الحروف — يُطبَّق التغيير فورًا على اللوحة الحية وملفات الاقتراحات والرؤوس</string>
 
-    <!-- DRS v1.2.0: new unified-strip tools -->
+    <!-- new unified-strip tools -->
     <string name="drs__unified__tool_incognito">الوضع الخفي</string>
     <string name="drs__unified__tool_incognito_desc">كتابة دون تعلم أو حفظ لما تكتبه — يُعاد ضبط الاقتراحات بعد كل جلسة، بديل مثالي للحقول الحساسة</string>
     <string name="drs__unified__tool_autocorrect">التصحيح التلقائي</string>
     <string name="drs__unified__tool_autocorrect_desc">تشغيل أو إيقاف تصحيح الكلمات تلقائيًا أثناء الكتابة — تبديل فوري من الشريط دون فتح الإعدادات</string>
 
-    <!-- DRS v1.2.0: quote wrapping text tool -->
+    <!-- quote wrapping text tool -->
     <string name="drs__text_tools__tool_wrap_quotes">إحاطة بعلامات اقتباس</string>
     <string name="drs__text_tools__desc_wrap_quotes">يحيط النص المحدد (أو النص كاملًا) بعلامتي «» للنصوص العربية أو \"\" لغيرها</string>
 
-    <!-- DRS v1.2.0: all-time totals card -->
+    <!-- all-time totals card -->
     <string name="drs__unified__stats_totals_title">الإجماليات الكلية — كل الأيام المسجلة</string>
     <string name="drs__unified__stats_streak">سلسلة النشاط المتتالي: {count} يوم</string>
     <string name="drs__unified__stats_best_day">أعلى يوم على الإطلاق: {date} ({keys} ضغطة)</string>
 
-    <!-- DRS v1.3.0: real autocorrect toggle toasts -->
+    <!-- real autocorrect toggle toasts -->
     <string name="drs__autocorrect__toast_enabled">التصحيح التلقائي ممكن الآن — ستظهر اقتراحات وتصحيحات الكلمات مجددًا</string>
     <string name="drs__autocorrect__toast_disabled">التصحيح التلقائي متوقف الآن — ستُكتب الكلمات كما هي دون اقتراحات</string>
 
-    <!-- DRS v1.3.0: text tools — digit conversion, tatweel, blank lines -->
+    <!-- text tools — digit conversion, tatweel, blank lines -->
     <string name="drs__text_tools__tool_to_arabic_digits">تحويل الأرقام إلى عربية</string>
     <string name="drs__text_tools__desc_to_arabic_digits">يحوّل كل الأرقام الغربية 123 في النص المحدد (أو النص كاملًا) إلى أرقام عربية-هندية ١٢٣ دون مساس بالحروف أو علامات الترقيم</string>
     <string name="drs__text_tools__tool_to_western_digits">تحويل الأرقام إلى غربية</string>
@@ -2158,13 +2158,13 @@
     <string name="drs__text_tools__tool_collapse_empty_lines">تكثيف الأسطر الفارغة</string>
     <string name="drs__text_tools__desc_collapse_empty_lines">يحوّل كل مجموعة أسطر فارغة متتالية إلى سطر فارغ واحد — مسافات أنظف دون حذف الفواصل أو السطر الختامي</string>
 
-    <!-- DRS v1.3.0: unified catalogue tools -->
+    <!-- unified catalogue tools -->
     <string name="drs__unified__tool_clipboard_clear">إفراغ الحافظة الحالية</string>
     <string name="drs__unified__tool_clipboard_clear_desc">يمسح ما هو مثبّت الآن في الحافظة الأساسية فورًا — مفيد عند نسخ بيانات حساسة، والعناصر المثبتة في السجل تبقى كما هي حسب إعدادك</string>
     <string name="drs__unified__tool_voice_input">الإدخال الصوتي</string>
     <string name="drs__unified__tool_voice_input_desc">ينتقل فورًا إلى مُدخل الصوت في النظام لإملاء النص بدل الكتابة — يعود بك إلى اللوحة عند الانتهاء</string>
 
-    <!-- DRS v1.3.0: diagnostics checks #22-#24 -->
+    <!-- diagnostics checks #22-#24 -->
     <string name="drs__diagnostics__check_battery">حالة الطاقة والبطارية</string>
     <string name="drs__diagnostics__hint_battery">البطارية منخفضة أو وضع توفير الطاقة مفعّل — قد يُبطئ النظام عمل لوحة المفاتيح في الخلفية (الاقتراحات والتكيّف)؛ اشحن الجهاز أو أوقف توفير الطاقة لهذا التطبيق</string>
     <string name="drs__text_tools__tool_sort_lines_desc">ترتيب الأسطر تنازليًا</string>
@@ -2186,13 +2186,13 @@
     <string name="drs__diagnostics__check_active_theme">سلامة تحميل الثيم النشط</string>
     <string name="drs__diagnostics__hint_active_theme">تعذّر تحميل الثيم النشط وعادت اللوحة إلى الثيم الأساسي — جرّب اختيار الثيم من جديد أو أعد تثبيت حزمة سماته</string>
 
-    <!-- DRS v1.3.0: stats — numbers/symbols counters + week-over-week -->
+    <!-- stats — numbers/symbols counters + week-over-week -->
     <string name="drs__unified__stats_numbers">ضغطات الأرقام</string>
     <string name="drs__unified__stats_symbols">ضغطات الرموز</string>
     <string name="drs__unified__stats_week_over_week">مقارنة أسبوع بأسبوع: {delta} مقارنة بالأسبوع السابق (ضغطات المفاتيح)</string>
 
 
-    <!-- DRS v1.5.0: الجولة الخامسة — عمليات نصية وأدوات كتالوج وأسماء بلاطات وإحصاء وتشخيص ونسخ احتياطي وتبديل الثيم -->
+    <!-- الجولة الخامسة — عمليات نصية وأدوات كتالوج وأسماء بلاطات وإحصاء وتشخيص ونسخ احتياطي وتبديل الثيم -->
     <string name="drs__text_tools__tool_toggle_case">عكس حالة الأحرف</string>
     <string name="drs__text_tools__desc_toggle_case">يقلب حالة كل حرف: الصغير يصبح كبيرًا والعكس، والعربية بلا حالة تبقى كما هي</string>
     <string name="drs__text_tools__tool_to_arabic_punctuation">ترقيم عربي</string>
@@ -2333,7 +2333,7 @@
     <string name="drs__context_mode__password">كلمة مرور</string>
     <string name="drs__context_mode__technical">تقني</string>
 
-    <!-- DRS v1.8.0: درج المهام المثبتة (زر السحب الجانبي) -->
+    <!-- درج المهام المثبتة (زر السحب الجانبي) -->
     <string name="drs__tools_drawer__title">المهام المثبتة</string>
     <string name="drs__tools_drawer__count">{count} من {total}</string>
     <string name="drs__tools_drawer__filter_all">الكل</string>
@@ -2345,12 +2345,12 @@
     <string name="drs__tools_drawer__reset">إعادة ضبط تخصيص الشريط</string>
     <string name="drs__tools_drawer__on">ظاهر</string>
     <string name="drs__tools_drawer__off">مخفي</string>
-    <!-- DRS v1.8.0: أداتا الكتالوج الجديدتان -->
+    <!-- أداتا الكتالوج الجديدتان -->
     <string name="drs__unified__tool_quick_actions">الإجراءات السريعة</string>
     <string name="drs__unified__tool_quick_actions_desc">يفتح لوحة الإجراءات السريعة مع بلاطات مهامك الأكثر استخدامًا — نفس مسار زر الإجراءات في الشريط الذكي</string>
     <string name="drs__unified__tool_actions_editor">محرر الإجراءات</string>
     <string name="drs__unified__tool_actions_editor_desc">يفتح محرر أزرار الإجراءات السريعة في الشريط الذكي لإعادة ترتيبها وإخفائها</string>
-    <!-- DRS v1.8.0: عمليتا النصوص الجديدتان -->
+    <!-- عمليتا النصوص الجديدتان -->
     <string name="drs__text_tools__tool_separate_digit_letters">فصل الأرقام عن الحروف</string>
     <string name="drs__text_tools__desc_separate_digit_letters">يضع مسافة واحدة بين كل رقم وحرف متجاور في الاتجاهين (12abc تصبح 12 abc و٣س تصبح ٣ س) — عربيًا ولاتينيًا</string>
     <string name="drs__text_tools__tool_remove_punctuation">إزالة علامات الترقيم</string>
@@ -2493,7 +2493,7 @@
     <string name="pref__clipboard__large_text_warning__label">تحذير النص الضخم</string>
     <string name="pref__clipboard__large_text_warning__summary">تنبيه عند وصول النص إلى الأحجام التي قد تبطئ التحرير</string>
     <string name="clipboard__group_flat">الكل</string>
-    <!-- DRS v1.15.0: المهام المثبتة 10 فقط + اللوحات الذكية الثلاث -->
+    <!-- المهام المثبتة 10 فقط + اللوحات الذكية الثلاث -->
     <string name="drs__unified__tool_diacritics_panel">لوحة الحركات</string>
     <string name="drs__unified__tool_diacritics_panel_desc">تفتح لوحة الحركات الذكية: حركة فوق حركة تستبدلها بدل التراكم، مع التشكيل المزدوج والأكثر استخدامًا</string>
     <string name="drs__unified__tool_smart_symbols">لوحة الرموز الذكية</string>
@@ -2535,7 +2535,7 @@
     <string name="panel__switcher_harakat">حركات</string>
     <string name="panel__switcher_symbols">رموز</string>
     <string name="panel__switcher_letters">حروف</string>
-    <!-- DRS v1.2.0: لوحة الأرقام الذكية (the smart numbers panel) -->
+    <!-- لوحة الأرقام الذكية (the smart numbers panel) -->
     <string name="panel__switcher_numbers">أرقام</string>
     <string name="panel__numbers__title">لوحة الأرقام الذكية</string>
     <string name="panel__numbers__ctx_general">عام</string>
@@ -2548,7 +2548,7 @@
     <string name="panel__numbers__formats_title">تنسيقات جاهزة</string>
     <string name="drs__unified__tool_smart_number_panel">لوحة الأرقام الذكية</string>
     <string name="drs__unified__tool_smart_number_panel_desc">تفتح لوحة أرقام تكشف سياق الحقل وتعيد ترتيب نفسه، وتعرض تنسيقات جاهزة: هاتف، تاريخ ميلادي وهجري، وسبع عملات — كلها حساب محلي خالص بلا شبكة</string>
-    <!-- DRS v1.3.0: لوحة الحافظة الذكية -->
+    <!-- لوحة الحافظة الذكية -->
     <string name="panel__switcher_clipboard">حافظة</string>
     <string name="panel__clipboard__title">لوحة الحافظة الذكية</string>
     <string name="panel__clipboard__cls_url">رابط</string>
@@ -2570,7 +2570,7 @@
     <string name="pref__panels__symbol_suggestions__summary">صف رموز يقترح ما يناسب النص قبل المؤشر تلقائيًا</string>
     <string name="pref__panels__recents__label">الأكثر استخدامًا في اللوحات</string>
     <string name="pref__panels__recents__summary">تذكر أكثر ما تستخدمه في لوحات الحركات والرموز والحروف محليًا فقط</string>
-    <!-- DRS v1.16.0: شريط المهام الثابت (10 خانات) + محرر الخانة + لوحة الحركات كلوحة مفاتيح + الترتيب الذكي للوحات -->
+    <!-- شريط المهام الثابت (10 خانات) + محرر الخانة + لوحة الحركات كلوحة مفاتيح + الترتيب الذكي للوحات -->
     <string name="drs__strip_slot__title">تغيير المهمة — الخانة {slot}</string>
     <string name="drs__strip_slot__hint">اختر مهمة من الكتالوج لتشغل هذه الخانة في الشريط الثابت. لفتح هذا المحرر اضغط مطولًا على أي خانة في شريط المهام.</string>
     <string name="drs__strip_slot__pick">استبدال</string>
@@ -2578,7 +2578,7 @@
     <string name="drs__unified__bar_slots_hint">شريط المهام ثابت الآن: يعرض 10 مهام فقط فوق شريط الاقتراحات — تثبياتك أولًا ثم يُستكمل من الكتالوج. اضغط مطولًا على أي مهمة لتغييرها، وافتح الدرج (السحب الجانبي) لترتيبها وتثبيت غيرها.</string>
     <string name="pref__panels__smart_order__label">الترتيب الذكي للوحات</string>
     <string name="pref__panels__smart_order__summary">رقاقات مبدّل اللوحات تُرتَّب تلقائيًا: اللوحة الحالية أولًا ثم الأكثر فتحًا — محليًا فقط</string>
-    <!-- DRS v1.1.0: لوحة الحركات الذكية الكاملة — المستشار السياقي ومشكِّل الكلمة -->
+    <!-- لوحة الحركات الذكية الكاملة — المستشار السياقي ومشكِّل الكلمة -->
     <string name="panel__harakat__advice_after_shadda">شدّة + فتحة</string>
     <string name="panel__harakat__advice_definite_sun">شدّة الحرف الشمسي</string>
     <string name="panel__harakat__advice_definite_lam">سكون لام التعريف</string>
@@ -2719,15 +2719,15 @@
     <string name="clip__dictation_stop" comment="Accessibility label of the popup editor's dictate button while listening">إيقاف الإملاء</string>
     <string name="clip__dictation_hint" comment="Popup editor dictation strip shown before any partial transcript arrives">تحدث الآن…</string>
 
-    <string name="action__navigate_back" comment="Accessibility label for the back button on every settings screen (DRS v1.28.0 a11y fix)">رجوع</string>
-    <string name="general__confirm" comment="Generic confirm button label (DRS v1.28.0 shortcut delete confirmation)">تأكيد</string>
-    <string name="drs__shortcuts__delete_confirm_title" comment="Title of the delete-confirmation dialog for a shortcut (DRS v1.28.0)">حذف الاختصار؟</string>
-    <string name="drs__shortcuts__delete_confirm_message" comment="Message of the delete-confirmation dialog for a shortcut (DRS v1.28.0)">سيُحذف هذا الاختصار نهائيًا ولا يمكن التراجع عن ذلك.</string>
+    <string name="action__navigate_back" comment="Accessibility label for the back button on every settings screen ( a11y fix)">رجوع</string>
+    <string name="general__confirm" comment="Generic confirm button label ( shortcut delete confirmation)">تأكيد</string>
+    <string name="drs__shortcuts__delete_confirm_title" comment="Title of the delete-confirmation dialog for a shortcut ()">حذف الاختصار؟</string>
+    <string name="drs__shortcuts__delete_confirm_message" comment="Message of the delete-confirmation dialog for a shortcut ()">سيُحذف هذا الاختصار نهائيًا ولا يمكن التراجع عن ذلك.</string>
 
     <string name="clipboard__a11y_search" comment="Accessibility label of the clipboard panel header search toggle (ClipboardInputLayout)">البحث في الحافظة</string>
     <string name="clipboard__a11y_filter" comment="Accessibility label of the clipboard panel header type-filter toggle (ClipboardInputLayout)">تصفية السجل</string>
     <string name="drs__unified__a11y_open_drawer" comment="Accessibility label for the tasks-bar side-pull handle that opens the pinned-tools drawer (DRS a11y/i18n/ux r0-I)">فتح درج المهام</string>
-    <string name="drs__unified__a11y_unavailable" comment="Suffix appended to a task-slot accessibility label when the editor context makes the action a silent no-op — the strip tells the truth instead of acting fake (DRS v2.2.2)">غير متاح الآن</string>
+    <string name="drs__unified__a11y_unavailable" comment="Suffix appended to a task-slot accessibility label when the editor context makes the action a silent no-op — the strip tells the truth instead of acting fake ()">غير متاح الآن</string>
     <string name="action__more_options" comment="UserDictionaryScreen: contentDescription of the app-bar overflow (MoreVert) icon button">خيارات أخرى</string>
     <string name="db__error_null_handle_fmt" comment="UserDictionaryScreen: toast when the dictionary database handle is null; {op} is filled with db__op_import / db__op_export / db__op_clear">مقبض قاعدة البيانات فارغ، فشل {op}</string>
     <string name="db__op_import" comment="UserDictionaryScreen: operation name inside db__error_null_handle_fmt">الاستيراد</string>

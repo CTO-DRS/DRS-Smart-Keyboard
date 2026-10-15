@@ -5,7 +5,7 @@
 package com.drs.smartkeyboard.ime.theme
 
 /**
- * DRS v2.8.0 «خلفيتك من ألبومك» — the pure contract of the user background image.
+ * «خلفيتك من ألبومك» — the pure contract of the user background image.
  *
  * The user can pick ONE image from their device; it is stored app-privately under
  * `noBackupFilesDir/drs_background/<name>` and injected into the ACTIVE theme's

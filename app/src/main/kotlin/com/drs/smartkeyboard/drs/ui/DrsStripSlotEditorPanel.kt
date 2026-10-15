@@ -54,7 +54,7 @@ import org.drs.lib.snygg.ui.SnyggRow
 import org.drs.lib.snygg.ui.SnyggText
 
 /**
- * DRS v1.16.0 — محرّر خانة شريط المهام (the strip slot editor).
+ * محرّر خانة شريط المهام (the strip slot editor).
  *
  * Opened by LONG-PRESSING one of the ten fixed tasks bar slots
  * («إمكانية تغيير المهام»). It replaces the keyboard area for a moment
@@ -75,7 +75,7 @@ fun DrsStripSlotEditorPanel(modifier: Modifier = Modifier) {
 
     val view = DrsUnifiedTools.viewForSystem(drsState.userPath, drsState.hybridViewMode)
 
-    // DRS v2.2.0: the group chips filter — null means الكل.
+    // the group chips filter — null means الكل.
     var groupFilter by remember { mutableStateOf<DrsToolGroup?>(null) }
 
     val systemSpec = DrsSystems.specOfName(drsState.userPath)
@@ -138,7 +138,7 @@ fun DrsStripSlotEditorPanel(modifier: Modifier = Modifier) {
             text = stringRes(R.string.drs__strip_slot__hint),
         )
 
-        // ---------------- رقائق المجموعات (DRS v2.2.0) ----------------
+        // ---------------- رقائق المجموعات () ----------------
         // فلتر المجموعات: الكل · الأدوات · التحرير · المؤشر — لمسة واحدة
         // تقفز إلى المجموعة بدل تمرير الكتالوج كله. Same accent-pill
         // pattern the panel switcher chips established.
@@ -248,8 +248,8 @@ private fun SlotCandidateRow(
 }
 
 /**
- * DRS v2.2.0: one group chip of the slot editor's filter bar — the same
- * accent-pill pattern the panel switcher chips established (v1.16.0).
+ * one group chip of the slot editor's filter bar — the same
+ * accent-pill pattern the panel switcher chips established ().
  */
 @Composable
 private fun slotGroupChip(

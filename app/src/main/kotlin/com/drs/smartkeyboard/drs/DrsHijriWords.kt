@@ -9,7 +9,7 @@ import java.time.chrono.HijrahDate
 import java.time.temporal.ChronoField
 
 /**
- * DRS v2.1.0 — the deterministic calendar-conversion engine (التحويل
+ * the deterministic calendar-conversion engine (التحويل
  * بين التقويمين) behind the GREGORIAN_TO_HIJRI and HIJRI_TO_GREGORIAN
  * text tools:
  *  - GREGORIAN_TO_HIJRI: a clean Gregorian date becomes its Hijri
@@ -32,7 +32,7 @@ import java.time.temporal.ChronoField
  *    known to differ by one day between editions; the convention is
  *    named, not guessed: whatever the platform says, the tool says.
  *  - The Gregorian direction parses through the SAME closed Gregorian
- *    parser as DATE_WORDS (shared after the v2.1.0 visibility
+ * parser as DATE_WORDS (shared after the visibility
  *    refactor); the Hijri direction parses through a closed Hijri
  *    parser mirroring those shape rules exactly: three components
  *    over ONE consistent separator from { - , / , . }, the year
@@ -47,7 +47,7 @@ import java.time.temporal.ChronoField
  *    and turned into the honest no-op, never a crash, never an
  *    invented date.
  *  - The day renders through the SAME closed 31-entry day-ordinal
- *    table as [DrsDateWords] (v2.1.0 sharing); the month renders from
+ * table as [DrsDateWords] ( sharing); the month renders from
  *    the closed 12-name Hijri catalog (محرم..ذو الحجة); the year
  *    renders through [DrsNumberWords] in the GENITIVE — one source of
  *    truth for number words. The inverse direction renders through

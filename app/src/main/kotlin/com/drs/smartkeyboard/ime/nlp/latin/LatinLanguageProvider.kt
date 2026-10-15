@@ -52,10 +52,10 @@ private const val USER_WORDS_MAX = 4000
 private const val LEARNED_INSERT_FREQ_FROM_SUGGESTION = 160
 private const val LEARNED_INSERT_FREQ_TYPED = 120
 
-/** DRS v1.20.0: frequency drained from a personally learned word per rejected (reverted) suggestion. */
+/** frequency drained from a personally learned word per rejected (reverted) suggestion. */
 private const val REVERT_DEMOTE_STEP = 64
 
-/** DRS v1.20.0: characters after which the next word starts a new sentence (Latin + Arabic marks). */
+/** characters after which the next word starts a new sentence (Latin + Arabic marks). */
 private val SENTENCE_TERMINATORS = charArrayOf('.', '!', '?', '…', '؟', '۔')
 
 /** DRS Phase 2 (task 13): power-tier probe interval. */
@@ -183,7 +183,7 @@ internal fun isEditDistanceAtMostOneWithTransposition(a: String, b: String): Boo
  *
  * Dictionaries are language-aware assets stored under `ime/dict/`:
  *  - `ar.json`   : 50k-word Arabic frequency dictionary (with smart normalization)
- *  - `fr/de/es/it/pt/tr/ru/fa.json` : DRS v1.18.0 curated high-frequency
+ * - `fr/de/es/it/pt/tr/ru/fa.json`: curated high-frequency
  *    dictionaries per language (rank-based score curve) — Latin-script
  *    languages and Persian no longer fall back to ENGLISH suggestions
  *  - `data.json` : generic Latin dictionary (English, also the honest
@@ -194,7 +194,7 @@ internal fun isEditDistanceAtMostOneWithTransposition(a: String, b: String): Boo
  *
  * Arabic matching is performed on a normalized form (hamza variants unified, ta-marbuta,
  * alif maqsura, diacritics and tatweel stripped), so typing "مدرسه" still surfaces the
- * correct spelling "مدرسة" as a tap-to-commit suggestion. DRS v1.18.0: Latin input is
+ * correct spelling "مدرسة" as a tap-to-commit suggestion. Latin input is
  * matched through the same pipeline with accent folding, so "eleve" surfaces "élève".
  *
  * When the composing region is empty (right after a space/commit), the provider predicts
@@ -218,7 +218,7 @@ class LatinLanguageProvider(context: Context) : SpellingProvider, SuggestionProv
     private val appContext by context.appContext()
     private val prefs by DrsPreferenceStore
 
-    // DRS v1.20.0: DictEntry/DictIndex moved to file top-level as `internal` so the
+    // DictEntry/DictIndex moved to file top-level as `internal` so the
     // prefix-ranking contracts (findByPrefix / findTopByPrefix) are JVM-testable.
 
     private val json = Json { ignoreUnknownKeys = true }
@@ -232,7 +232,7 @@ class LatinLanguageProvider(context: Context) : SpellingProvider, SuggestionProv
     /** Language code -> next-word table (normalized head -> next words sorted by score desc). */
     private val bigramCache = guardedByLock { mutableMapOf<String, Map<String, List<Pair<String, Int>>>>() }
 
-    /** v2.13.0 — language code -> static trigram-chain table (drained lazily like the bigrams). */
+    /** language code -> static trigram-chain table (drained lazily like the bigrams). */
     private val chainsCache = guardedByLock { mutableMapOf<String, DrsTrigramChains.Table>() }
 
     /** DRS: cached personal user dictionary entries with a short TTL. */
@@ -265,7 +265,7 @@ class LatinLanguageProvider(context: Context) : SpellingProvider, SuggestionProv
 
     override suspend fun create() {
         // One-time provider initialization; dictionaries are loaded per language in preload().
-        // DRS v2.12.0: ONE normalization truth — the LatinNormBridge default has
+        // ONE normalization truth — the LatinNormBridge default has
         // the same Arabic semantics, but the hard-correction matching now runs
         // through the SAME tested pipeline the dictionary and typed prefix use.
         LatinNormBridge.normalize = LatinWordNormalize::normalize
@@ -324,7 +324,7 @@ class LatinLanguageProvider(context: Context) : SpellingProvider, SuggestionProv
         val asset = dictAssetFor(lang)
         val rawData = appContext.assets.readText(asset)
         val data = json.decodeFromString(wordDataSerializer, rawData)
-        // DRS v2.8.0 «قاموسك من ملفك»: user-imported external dictionaries for
+        // «قاموسك من ملفك»: user-imported external dictionaries for
         // this language extend the bundled one (max frequency wins on dupes).
         // The store lives in the same process — the settings screen drops this
         // cache entry via NlpManager.invalidateDictCaches right after an
@@ -338,7 +338,7 @@ class LatinLanguageProvider(context: Context) : SpellingProvider, SuggestionProv
     }
 
     /**
-     * DRS v2.8.0: external-dictionary import/remove hook — drops the cached
+ * external-dictionary import/remove hook — drops the cached
      * dictionary index for [lang] so the next suggestion pass rebuilds it with
      * the current external words. Cheap, idempotent, lock-guarded.
      */
@@ -346,7 +346,7 @@ class LatinLanguageProvider(context: Context) : SpellingProvider, SuggestionProv
         dictCache.withLock { it.remove(lang) }
     }
 
-    // DRS v1.18.0: bundled per-language dictionaries live in the pure
+    // bundled per-language dictionaries live in the pure
     // LatinWordNormalize object (tested): every Latin-script language below
     // gets its own frequency dictionary instead of silently receiving
     // ENGLISH suggestions (the old generic data.json fallback); unknown
@@ -368,7 +368,7 @@ class LatinLanguageProvider(context: Context) : SpellingProvider, SuggestionProv
             subtype.secondaryLocales.map { it.language }
         val lang = languages.firstOrNull() ?: return emptyMap()
         bigramCache.withLock { it[lang] }?.let { return it }
-        // DRS v1.18.0: bigram tables exist for Arabic and English only —
+        // bigram tables exist for Arabic and English only —
         // the other bundled languages degrade to an empty next-word table
         // (prefix suggestions still work) instead of a dishonest lookup in
         // the English table that can never match.
@@ -387,14 +387,14 @@ class LatinLanguageProvider(context: Context) : SpellingProvider, SuggestionProv
         return table
     }
 
-    /** v2.13.0 «السياق الأعمق» — the curated chain asset exists for Arabic only today. */
+    /** «السياق الأعمق» — the curated chain asset exists for Arabic only today. */
     private fun chainsAssetFor(lang: String): String? = when (lang) {
         ARABIC_LANGUAGE -> "drs/trigram_chains.txt"
         else -> null
     }
 
     /**
-     * v2.13.0 — loads the static trigram-chain table for the given language
+ * loads the static trigram-chain table for the given language
      * lazily, mirroring [bigramsFor] exactly: a missing or invalid asset
      * degrades to the shared empty table (the trigram layer is an honest
      * no-op there — never a dishonest lookup in a table that cannot match).
@@ -439,8 +439,8 @@ class LatinLanguageProvider(context: Context) : SpellingProvider, SuggestionProv
         allowPossiblyOffensive: Boolean,
         isPrivateSession: Boolean,
     ): SpellingResult {
-        // DRS v1.19.0: REAL typo marking, governed by the pure SpellingDecider.
-        // Until v1.18.0 this function unconditionally returned validWord(), so the
+        // REAL typo marking, governed by the pure SpellingDecider.
+        // Until this function unconditionally returned validWord(), so the
         // spell-checker service was a dead channel: fully wired sessions, ~180
         // advertised subtypes, and never a single red underline. The gates are
         // deliberately conservative — only rich dictionaries (ar/en, >=10k entries)
@@ -534,7 +534,7 @@ class LatinLanguageProvider(context: Context) : SpellingProvider, SuggestionProv
 
         val index = dictFor(subtype) ?: return emptyList()
         val isArabic = raw.any { it in ARABIC_SCRIPT_START..ARABIC_SCRIPT_END }
-        // DRS v1.18.0: normalize the typed prefix through the SAME pipeline
+        // normalize the typed prefix through the SAME pipeline
         // the dictionary was pre-normalized with (Arabic unification + Latin
         // accent folding), so accent-less input matches accented words.
         val prefix = normalize(raw)
@@ -552,7 +552,7 @@ class LatinLanguageProvider(context: Context) : SpellingProvider, SuggestionProv
         val userMatches = userWordMatchesFor(subtype, prefix, isArabic, raw, maxCandidateCount)
 
         // Gather a wider slice next so we can rank the best matches by frequency.
-        // DRS v1.20.0: findTopByPrefix ranks the WHOLE matching range by frequency
+        // findTopByPrefix ranks the WHOLE matching range by frequency
         // (bounded heap) instead of truncating lexicographically first — productive
         // prefixes no longer lose their most frequent words to an arbitrary cut.
         val dictMatches = index.findTopByPrefix(prefix, limit = maxCandidateCount * 6)
@@ -573,7 +573,7 @@ class LatinLanguageProvider(context: Context) : SpellingProvider, SuggestionProv
         // list by the stem family of the word before the cursor: the lemma
         // itself first, its stem family next, same-root words after — all
         // with a stable sort that never scrambles the frequency order.
-        // DRS v2.12.0 — both exits pass through the KNOWN-BUT-WRONG
+        // both exits pass through the KNOWN-BUT-WRONG
         // composition head (a universal misspelling that lives in the
         // dictionary, e.g. مسئول، لاكن، اللذي، هاذا، شئ — its correction
         // leads the strip, suggestion-only, never auto-committed).
@@ -618,7 +618,7 @@ class LatinLanguageProvider(context: Context) : SpellingProvider, SuggestionProv
             subtype, index, raw, prefix, isArabic, caps, maxCandidateCount,
         )
         if (fallback.isEmpty()) return fallback
-        // DRS v1.17.0: TRUE autocorrect — the FIRST high-frequency correction of a
+        // TRUE autocorrect — the FIRST high-frequency correction of a
         // real typo becomes auto-commit eligible, so pressing space silently fixes
         // the word (backspace reverts). The decider is conservative: the typed
         // word matched no prefix at all (genuine typo branch), it is long enough,
@@ -700,7 +700,7 @@ class LatinLanguageProvider(context: Context) : SpellingProvider, SuggestionProv
             emptyList()
         }
         val staticFallback = if (lemmaKey != key) bigramsFor(subtype)[lemmaKey] ?: emptyList() else emptyList()
-        // v2.13.0 «السياق الأعمق» — the trigram layer: when TWO words sit
+        // «السياق الأعمق» — the trigram layer: when TWO words sit
         // behind the cursor, the static chain table and the personal chain
         // table both get asked about (p2, p1). Either row empty = the layer
         // honestly stays silent (the predictor's pinned no-op contract).
@@ -770,7 +770,7 @@ class LatinLanguageProvider(context: Context) : SpellingProvider, SuggestionProv
     }
 
     /**
-     * v2.13.0 «السياق الأعمق» — the TWO words before the cursor, in order
+ * «السياق الأعمق» — the TWO words before the cursor, in order
      * (second-last to last), by the same word-internal scan [lastWordBefore]
      * uses — the trigram layer's context extraction. Either word failing
      * the same word contract (length 2..MAX, no digits) returns null: the
@@ -836,7 +836,7 @@ class LatinLanguageProvider(context: Context) : SpellingProvider, SuggestionProv
         if (limit <= 0 || prefix.isEmpty()) return emptyList()
         // DRS (r0-D perf): match against the PRE-NORMALIZED spellings from the
         // cache snapshot — the old code re-normalized every personal word on
-        // EVERY keystroke. Same pipeline (v1.20.0: Arabic unification + Latin
+        // EVERY keystroke. Same pipeline (Arabic unification + Latin
         // accent folding for BOTH scripts), just precomputed at load time.
         return userDataFor(subtype).normalizedEntries.mapNotNull { (normWord, entry) ->
             val word = entry.word
@@ -879,7 +879,7 @@ class LatinLanguageProvider(context: Context) : SpellingProvider, SuggestionProv
     /** DRS Phase 2 (task 9): the previous learned word, for personal bigrams. */
     private var lastLearnedWord: String? = null
 
-    /** v2.13.0: the word before the previous one, for personal trigrams. */
+    /** the word before the previous one, for personal trigrams. */
     private var secondLastLearnedWord: String? = null
 
     /** DRS Phase 2 (task 9): learned-unit counter, drives the flush cadence. */
@@ -901,7 +901,7 @@ class LatinLanguageProvider(context: Context) : SpellingProvider, SuggestionProv
         // itself as its own lemma — the reservoir just tracks the word.
         DrsLearningEngine.learnWordWithLemma(word, DrsArabicMorphology.lemmaOf(word))
         if (prev != null) DrsLearningEngine.learnBigram(prev, word)
-        // v2.13.0 «السياق الأعمق» — the two-word habit rides the same
+        // «السياق الأعمق» — the two-word habit rides the same
         // learning unit: p2 → p1 → next, same gates, same caps, same file.
         if (secondPrev != null && prev != null) DrsLearningEngine.learnTrigram(secondPrev, prev, word)
         secondLastLearnedWord = prev
@@ -938,7 +938,7 @@ class LatinLanguageProvider(context: Context) : SpellingProvider, SuggestionProv
     override suspend fun notifySuggestionReverted(subtype: Subtype, candidate: SuggestionCandidate) {
         // DRS privacy (S-3): the candidate text IS user text — log length only.
         flogDebug { "suggestion reverted (textLen=${candidate.text.length})" }
-        // DRS v1.20.0: a REJECTED suggestion used to keep sitting in the personal
+        // a REJECTED suggestion used to keep sitting in the personal
         // dictionary at full strength — reverting an auto-correct left the unwanted
         // word learned forever. Demote it; when its frequency is drained to zero the
         // entry is deleted entirely. Private sessions never learned anything anyway.
@@ -980,7 +980,7 @@ class LatinLanguageProvider(context: Context) : SpellingProvider, SuggestionProv
 
     /**
      * DRS Phase 2 (tasks 8+10+9): the fused correction pipeline — now a thin
-     * delegate to the PURE DrsFusedCorrection (v2.12.0 extraction): the
+ * delegate to the PURE DrsFusedCorrection ( extraction): the
      * real-errors benchmark measures the exact same computation the provider
      * runs. The provider keeps the candidate wrapping (display case + source).
      */
@@ -1011,7 +1011,7 @@ class LatinLanguageProvider(context: Context) : SpellingProvider, SuggestionProv
         }
     }
 
-    // DRS v1.18.0: the normalization pipeline lives in the pure
+    // the normalization pipeline lives in the pure
     // LatinWordNormalize object (strips Arabic diacritics/tatweel, unifies
     // hamza carriers, folds Latin accents, lowercases) — one tested path
     // for both the loaded dictionary and the typed prefix.
@@ -1021,7 +1021,7 @@ class LatinLanguageProvider(context: Context) : SpellingProvider, SuggestionProv
      * Adapts the dictionary spelling to the user's capitalization for Latin scripts.
      * Arabic text is returned unchanged.
      *
-     * DRS v1.28.0 audit improvement: ALL-CAPS typing (caps lock / shift-held
+ * audit improvement: ALL-CAPS typing (caps lock / shift-held
      * entries like "HEL") used to come back as "Hel" — only the first letter
      * was ever adapted. The all-caps style is now honored the way Gboard does.
      */
@@ -1035,7 +1035,7 @@ class LatinLanguageProvider(context: Context) : SpellingProvider, SuggestionProv
 }
 
 /**
- * DRS v1.20.0: casing for NEXT-WORD predictions. The previous heuristic compared the
+ * casing for NEXT-WORD predictions. The previous heuristic compared the
  * prediction against the previous word's own case — which is wrong in both directions
  * ("Hello " would capitalize the next word; "Hi. " would not). What actually decides
  * capitalization is whether the word being predicted starts a NEW SENTENCE: that is
@@ -1068,7 +1068,7 @@ internal class DictIndex(val entries: List<DictEntry>) {
      * correction engine — the weighted search returns NORMALIZED keys, the
      * provider needs the original (correct) spelling back. Built lazily.
      *
-     * DRS v2.12.0 — CANONICAL tiebreak instead of last-wins: when several
+ * CANONICAL tiebreak instead of last-wins: when several
      * raw spellings share one norm (the dictionary carries a misspelling
      * beside the correct form), the entry whose spelling ends in ة wins
      * over a ه-ending twin, then the higher frequency wins. The suggestion
@@ -1162,7 +1162,7 @@ internal class DictIndex(val entries: List<DictEntry>) {
     }
 
     /**
-     * DRS v1.20.0: collects the [limit] MOST FREQUENT entries whose normalized form
+ * collects the [limit] MOST FREQUENT entries whose normalized form
      * starts with [prefix], scanning the ENTIRE matching range instead of the first
      * [limit] lexicographic hits. The old truncation silently dropped frequent words
      * beyond the cutoff for productive prefixes (like "ال" or "al") — the ranking

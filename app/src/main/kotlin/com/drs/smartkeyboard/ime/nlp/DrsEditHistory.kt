@@ -5,7 +5,7 @@
 package com.drs.smartkeyboard.ime.nlp
 
 /**
- * DRS v2.10.0 — «التراجع والإعادة المحليان الصادقان».
+ * «التراجع والإعادة المحليان الصادقان».
  *
  * A deterministic, purely local, self-verifying edit history for the text
  * the keyboard itself commits or deletes. Until this round, the UNDO/REDO

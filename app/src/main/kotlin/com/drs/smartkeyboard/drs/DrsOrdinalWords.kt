@@ -5,7 +5,7 @@
 package com.drs.smartkeyboard.drs
 
 /**
- * DRS v1.10.0 — the deterministic ordinal-to-Arabic-words engine
+ * the deterministic ordinal-to-Arabic-words engine
  * (الترتيب بالكلمات) behind the ORDINAL_WORDS text tool: a clean integer
  * becomes its formal written ordinal — «3» → «الثالث»، «21» → «الحادي
  * والعشرون»، «1234» → «الألف والمائة والرابع والثلاثون» — the shapes

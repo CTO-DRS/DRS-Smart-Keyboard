@@ -5,19 +5,19 @@
 package com.drs.smartkeyboard.drs
 
 /**
- * DRS v1.9.0 — the deterministic clock-time-to-Arabic-words engine
+ * the deterministic clock-time-to-Arabic-words engine
  * (الوقت بالكلمات) behind the TIME_WORDS text tool: a clean numeric
  * clock time becomes its formal spoken phrase — «14:45» → «الثالثة
  * إلا الربع»، «09:30» → «التاسعة والنصف» — the phrase invitations,
- * minutes and official letters spell out. The quartet closes: v1.6.0
- * made numbers speak, v1.7.0 made amounts speak, v1.8.0 made dates
- * speak, v1.9.0 makes clock times speak.
+ * minutes and official letters spell out. The quartet closes: 
+ * made numbers speak, made amounts speak, made dates
+ * speak, makes clock times speak.
  *
  * Pure clock grammar, no model, no dictionary, no guesswork:
  *  - The whole field must be a clean two-component clock time over the
  *    single separator «:» (optional whitespace around the field and
  *    around the separator). The colon is the clock's one universal
- *    mark — dot, dash and slash belong to the date grammar (v1.8.0)
+ * mark — dot, dash and slash belong to the date grammar ()
  *    and are deliberately NOT accepted here. Anything else is an
  *    honest no-op.
  *  - Exactly two components, 1..2 digits each; digits are locale-blind

@@ -102,7 +102,7 @@ class ImeWindowController(
             activeWindowConfig.value = windowConfig
         }
 
-        // DRS v1.0.8: the five user preference factors are combined first
+        // the five user preference factors are combined first
         // (kotlinx combine supports up to five flows per overload), then
         // merged with the root insets to build the orientation-aware spec.
         val userPreferredPrefs = combine(
@@ -566,7 +566,7 @@ class ImeWindowController(
 }
 
 /**
- * DRS v1.0.8: bundle of the five raw user preference factors read from
+ * bundle of the five raw user preference factors read from
  * [com.drs.smartkeyboard.app.AppPrefs.Keyboard]. Exists because kotlinx
  * combine supports at most five flows per overload, so the preferences are
  * combined into one holder first and merged with the root insets after.

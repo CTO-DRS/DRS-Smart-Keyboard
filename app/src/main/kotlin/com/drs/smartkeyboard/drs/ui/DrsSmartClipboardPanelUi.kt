@@ -58,7 +58,7 @@ import org.drs.lib.snygg.ui.SnyggColumn
 import org.drs.lib.snygg.ui.SnyggText
 
 /**
- * DRS v1.3.0 — لوحة الحافظة الذكية (the smart clipboard panel) — the
+ * لوحة الحافظة الذكية (the smart clipboard panel) — the
  * FIFTH smart panel, built on the exact anatomy of the harakat/numbers
  * boards: the shared header and switcher chips, an honest one-line
  * preview of the copied content, a class bar whose chips reorder
@@ -240,7 +240,7 @@ fun DrsSmartClipboardPanel(modifier: Modifier = Modifier) {
                                 feedback.keyPress()
                                 selected = candidate
                             },
-                            // DRS v2.3.0: the class bar reads as one capped
+                            // the class bar reads as one capped
                             // wave whenever the usage-ordered set changes.
                             entranceIndex = classIndex,
                             entranceKey = classOrder,
@@ -291,7 +291,7 @@ fun DrsSmartClipboardPanel(modifier: Modifier = Modifier) {
                                             feedback.keyPress()
                                             commitText(variant)
                                         },
-                                        // DRS v2.3.0: one capped wave per new
+                                        // one capped wave per new
                                         // variants set — never a pop-in.
                                         entranceIndex = variantIndex,
                                         entranceKey = variants,

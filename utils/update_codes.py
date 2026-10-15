@@ -1,7 +1,7 @@
 import json
 from sys import argv
 
-# DRS v1.25.0 audit note: authoring helper for single-character layout
+# DRS audit note: authoring helper for single-character layout
 # keys — it derives `code` from `label` with ord(). Multi-character
 # labels (popups, special keys) have no single code point, so they are
 # skipped with a warning instead of crashing on TypeError like before.

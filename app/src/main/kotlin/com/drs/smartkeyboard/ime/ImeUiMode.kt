@@ -9,25 +9,25 @@ enum class ImeUiMode(val value: Int) {
     MEDIA(1),
     CLIPBOARD(2),
 
-    /** DRS v1.0.6: technical text tools panel (case, spacing, lines, info). */
+    /** technical text tools panel (case, spacing, lines, info). */
     TEXT_TOOLS(3),
 
-    /** DRS v1.15.0: the smart harakat panel (لوحة الحركات الذكية). */
+    /** the smart harakat panel (لوحة الحركات الذكية). */
     DIACRITICS(4),
 
-    /** DRS v1.15.0: the context-aware smart symbols panel (لوحة الرموز الذكية). */
+    /** the context-aware smart symbols panel (لوحة الرموز الذكية). */
     SMART_SYMBOLS(5),
 
-    /** DRS v1.15.0: the extended Arabic letters panel (لوحة الحروف الموسعة). */
+    /** the extended Arabic letters panel (لوحة الحروف الموسعة). */
     ARABIC_LETTERS(6),
 
-    /** DRS v1.2.0: the context-aware smart numbers panel (لوحة الأرقام الذكية). */
+    /** the context-aware smart numbers panel (لوحة الأرقام الذكية). */
     SMART_NUMBER(7),
 
-    /** DRS v1.3.0: the deterministic smart clipboard panel (لوحة الحافظة الذكية). */
+    /** the deterministic smart clipboard panel (لوحة الحافظة الذكية). */
     SMART_CLIPBOARD(8),
 
-    /** DRS v2.21.0: the saved-texts panel (لوحة نصوصي المحفوظة) — the sixth smart panel. */
+    /** the saved-texts panel (لوحة نصوصي المحفوظة) — the sixth smart panel. */
     MY_TEXTS(9);
 
     companion object {

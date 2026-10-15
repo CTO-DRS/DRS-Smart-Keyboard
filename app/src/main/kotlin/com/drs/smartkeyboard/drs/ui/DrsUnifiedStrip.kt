@@ -119,7 +119,7 @@ import org.drs.lib.snygg.ui.SnyggIconButton
 import org.drs.lib.snygg.ui.SnyggRow
 
 /**
- * DRS v1.0.7 — الشريط الموحد لنظام «كلاهما».
+ * الشريط الموحد لنظام «كلاهما».
  *
  * One strip that serves all three systems and renders the RIGHT tools for
  * the active display level:
@@ -139,7 +139,7 @@ import org.drs.lib.snygg.ui.SnyggRow
  */
 
 /**
- * DRS v2.2.1 «الشريطان الحيّان» — the shared press-pulse wiring of the
+ * «الشريطان الحيّان» — the shared press-pulse wiring of the
  * tasks bar. Every strip button hoists an interaction source, reads the
  * pressed state from it and drives the SAME DrsMotion pulse the keyboard
  * keys use (M2.2) — one motion language across the whole IME surface.
@@ -169,47 +169,47 @@ internal fun iconForTool(id: String) = when (id) {
     "line_end" -> Icons.Default.LastPage
     "delete_word" -> Icons.AutoMirrored.Outlined.Backspace
     "hide_keyboard" -> Icons.Default.KeyboardHide
-    // DRS v1.0.8: the new unified tools.
+    // the new unified tools.
     "theme_cycle" -> Icons.Default.Palette
     "insert_date_time" -> Icons.Default.Schedule
     "text_start" -> Icons.Default.VerticalAlignTop
     "text_end" -> Icons.Default.VerticalAlignBottom
-    // DRS v1.1.0: one-handed window toggle + number-row toggle.
+    // one-handed window toggle + number-row toggle.
     "one_handed" -> Icons.Default.CloseFullscreen
     "number_row" -> Icons.Default.Dialpad
-    // DRS v1.2.0: incognito + autocorrect toggles.
+    // incognito + autocorrect toggles.
     "incognito" -> Icons.Default.VisibilityOff
     "autocorrect" -> Icons.Default.Spellcheck
-    // DRS v1.3.0: clipboard clear + voice input.
+    // clipboard clear + voice input.
     "clipboard_clear" -> Icons.Default.DeleteSweep
     "voice_input" -> Icons.Default.Mic
-    // DRS v1.4.0: floating window + smartbar visibility toggles.
+    // floating window + smartbar visibility toggles.
     "floating_mode" -> Icons.Default.PictureInPictureAlt
     "smartbar_toggle" -> Icons.Default.ViewAgenda
-    // DRS v1.5.0: history wipe + next language + resize mode.
+    // history wipe + next language + resize mode.
     "clipboard_history_clear" -> Icons.Default.History
     "next_language" -> Icons.Default.Translate
     "resize_mode" -> Icons.Default.OpenInFull
-    // DRS v1.6.0: full history wipe + previous language + one-handed sides
+    // full history wipe + previous language + one-handed sides
     // + next keyboard app.
     "clipboard_full_clear" -> Icons.Default.DeleteSweep
     "prev_language" -> Icons.Default.Replay
     "one_handed_left" -> Icons.Default.West
     "one_handed_right" -> Icons.Default.East
     "next_keyboard_app" -> Icons.Default.SwapHoriz
-    // DRS v1.7.0: the active-clip pin toggle.
+    // the active-clip pin toggle.
     "clipboard_pin" -> Icons.Default.PushPin
-    // DRS v1.8.0: quick actions overflow + the actions editor.
+    // quick actions overflow + the actions editor.
     "quick_actions" -> Icons.Default.Apps
     "actions_editor" -> Icons.Default.Tune
-    // DRS v1.15.0: the three smart panels.
+    // the three smart panels.
     "diacritics_panel" -> Icons.Default.TextFormat
     "smart_symbols" -> Icons.Default.Functions
     "arabic_letters" -> Icons.Default.Abc
-    // DRS v1.19.0: the split/merge keyboard toggles.
+    // the split/merge keyboard toggles.
     "split_keyboard" -> Icons.Default.Splitscreen
     "merge_keyboard" -> Icons.Default.MergeType
-    // DRS v2.21.0: the saved-texts panel (لوحة نصوصي المحفوظة).
+    // the saved-texts panel (لوحة نصوصي المحفوظة).
     "my_texts_panel" -> Icons.AutoMirrored.Filled.Notes
     else -> Icons.Default.Build
 }
@@ -219,14 +219,14 @@ fun DrsUnifiedStrip(modifier: Modifier = Modifier) {
     val context = LocalContext.current
     val keyboardManager by context.keyboardManager()
 
-    // DRS v2.2.1: the strip finally speaks — haptics/sound fire at the
+    // the strip finally speaks — haptics/sound fire at the
     // interaction site (same convention as the keyboard keys and the
     // quick actions). The buttons dispatch through the input event
     // dispatcher, which owns NO feedback, so every button was silent
     // before this round.
     val feedback = LocalInputFeedbackController.current
 
-    // DRS v2.2.2 «الشريطان الصادقان سياقيًا»: the ten slots dispatch raw
+    // «الشريطان الصادقان سياقيًا»: the ten slots dispatch raw
     // KeyCodes with NO context gate — a paste slot on an empty clipboard,
     // a copy/cut slot with no selection and a language slot with a single
     // subtype all end in a silent no-op, and the strip 2 quick actions
@@ -234,7 +234,7 @@ fun DrsUnifiedStrip(modifier: Modifier = Modifier) {
     // strip joins the same single source of truth: the LIVE smartbar
     // evaluator (the same instance Smartbar.kt hands QuickActionButton).
     val evaluator by keyboardManager.activeSmartbarEvaluator.collectAsState()
-    // DRS v2.2.2: the motion-respect gate — the system «remove animations»
+    // the motion-respect gate — the system «remove animations»
     // accessibility switch snaps every pulse/dot below to its final target
     // (same durations contract, zero animation time).
     val motionEnabled = rememberDrsMotionEnabled()
@@ -251,7 +251,7 @@ fun DrsUnifiedStrip(modifier: Modifier = Modifier) {
 
     val isHybrid = drsState.userPath == DrsUserPath.HYBRID.name
 
-    // DRS v1.8.0: the tasks bar (شريط المهام) sits ABOVE the suggestions
+    // the tasks bar (شريط المهام) sits ABOVE the suggestions
     // strip for ALL three user systems — العادي والتقني وكلاهما. Exactly
     // two gates: the persisted master switch (unifiedStripEnabled, on by
     // default, toggled from the tools drawer) and the password-field
@@ -260,7 +260,7 @@ fun DrsUnifiedStrip(modifier: Modifier = Modifier) {
         contextMode != DrsContextMode.PASSWORD
     if (!visible) return
 
-    // DRS v1.8.0: real on/off state of the toggle tools, read from the
+    // real on/off state of the toggle tools, read from the
     // same engine sources that own them (IME flags, jetpref settings and
     // the window controller) so the active dot never lies.
     val windowController = LocalWindowController.current
@@ -282,18 +282,18 @@ fun DrsUnifiedStrip(modifier: Modifier = Modifier) {
             autocorrect = suggestionEnabled,
             numberRow = numberRowEnabled,
             smartbarVisible = smartbarEnabled,
-            // DRS v2.1.1: افحص التخصيص لا خصائصه — القديم كان يخلط التسلسلين
+            // افحص التخصيص لا خصائصه — القديم كان يخلط التسلسلين
             // المغلقين (ImeWindowProps مقابل ImeWindowSpec) فصار الفحص خطأً
             // ثابتًا بالبرهان، ومُجمِّع 2.4.20 يرفضه IMPOSSIBLE_IS_CHECK_ERROR،
             // وكانت نقطة floating_mode عاجزة عن الإضاءة أبدًا — بنفس اتفاقية
             // ImeWindow/ImeSystemUi/ImeWindowEditorHandles كلها.
             floatingWindow = windowSpec is ImeWindowSpec.Floating,
-            // DRS v1.22.0: the revived CTRL/ALT latches show the truth —
+            // the revived CTRL/ALT latches show the truth —
             // the tile dot reads the same latch state the input pipeline
             // arms and consumes.
             ctrlArmed = activeState.inputCtrlState.isArmed,
             altArmed = activeState.inputAltState.isArmed,
-            // DRS v1.23.0: FN completes the modifier family.
+            // FN completes the modifier family.
             fnArmed = activeState.inputFnState.isArmed,
         )
     }
@@ -316,7 +316,7 @@ fun DrsUnifiedStrip(modifier: Modifier = Modifier) {
         )
     }
 
-    // DRS v1.16.0: «شريط المهام ثابت يعرض 10 مهام فقط» — the FIXED
+    // «شريط المهام ثابت يعرض 10 مهام فقط» — the FIXED
     // slots. The user's pins lead in pin order, the visible defaults
     // fill the next slots, and the resolved visible catalogue pads the
     // tail so the bar always renders exactly ten tasks (or less only
@@ -354,7 +354,7 @@ fun DrsUnifiedStrip(modifier: Modifier = Modifier) {
     }
 
     val isTextToolsOpen = activeState.imeUiMode == ImeUiMode.TEXT_TOOLS
-    // DRS v1.0.8: the strip tracks the real Smartbar height (which follows
+    // the strip tracks the real Smartbar height (which follows
     // the keyboard height scale) instead of a hardcoded 40.dp, so growing
     // the keyboard grows the strip consistently.
     val stripHeight = DrsImeSizing.smartbarHeight
@@ -383,13 +383,13 @@ fun DrsUnifiedStrip(modifier: Modifier = Modifier) {
         // 0) the side-pull handle (زر السحب الجانبي). Always first so the
         //    pinned-tools drawer stays reachable — the drawer is where
         //    tasks are reordered (up/down), pinned and unpinned.
-        //    DRS v2.2.1: pulse + feedback — the handle used to be the
+        // pulse + feedback — the handle used to be the
         //    only silent control on the bar (no KeyCode to dispatch).
         val handleInteraction = remember { MutableInteractionSource() }
         val handlePressed by handleInteraction.collectIsPressedAsState()
         val handlePulse by animateFloatAsState(
             targetValue = DrsMotion.scaleFor(handlePressed),
-            // DRS v2.2.2: snaps to 0ms under the system «remove animations»
+            // snaps to 0ms under the system «remove animations»
             // switch — same targets, zero animation time.
             animationSpec = tween(durationMillis = DrsMotion.durationOrSnap(DrsMotion.durationFor(handlePressed), motionEnabled)),
             label = "drsStripHandlePulse",
@@ -425,7 +425,7 @@ fun DrsUnifiedStrip(modifier: Modifier = Modifier) {
         // 1) the ten FIXED task slots — every slot dispatches its real
         //    KeyCode, and a LONG-PRESS opens the slot editor (change the
         //    task occupying that slot, «إمكانية تغييرها»).
-        //    DRS v2.2.1: every slot lives — the same press pulse the keys
+        // every slot lives — the same press pulse the keys
         //    use, an honest halo behind ACTIVE toggles, a dot that grows
         //    in and shrinks out instead of popping, and feedback on both
         //    click (keyPress) and long-press (keyLongPress, slot editor).
@@ -433,7 +433,7 @@ fun DrsUnifiedStrip(modifier: Modifier = Modifier) {
             val tool = DrsUnifiedTools.byId(toolId) ?: return@forEachIndexed
             val isTextTools = tool.code == KeyCode.IME_UI_MODE_TEXT_TOOLS
             val toggleOn = DrsUnifiedTools.toggleStateOf(tool.id, toggleStates)
-            // DRS v2.2.2 «الخانة الصادقة سياقيًا»: the same single-source
+            // «الخانة الصادقة سياقيًا»: the same single-source
             // truth QuickActionButton uses. Toggles, settings and navigation
             // tools evaluate true (always meaningful); clipboard/language
             // tools evaluate the REAL editor context. The evaluator is the
@@ -465,7 +465,7 @@ fun DrsUnifiedStrip(modifier: Modifier = Modifier) {
             SnyggIconButton(
                 elementName = DrsImeUi.SmartbarActionKey.elementName,
                 onClick = {
-                    // DRS v2.2.2: the honest refusal — when the context says
+                    // the honest refusal — when the context says
                     // the action would be a silent no-op, the slot says so
                     // visually (dimmed) and semantically (disabled()), and
                     // the tap does NOTHING: no fake haptic, no usage record,
@@ -502,7 +502,7 @@ fun DrsUnifiedStrip(modifier: Modifier = Modifier) {
                 modifier = slotModifier
                     .semantics {
                         role = Role.Button
-                        // DRS v2.2.2: TalkBack hears the truth too — the
+                        // TalkBack hears the truth too — the
                         // gated slot is announced disabled, and its label
                         // carries the localized reason suffix.
                         if (!contextEnabled) disabled()
@@ -513,7 +513,7 @@ fun DrsUnifiedStrip(modifier: Modifier = Modifier) {
                         alpha = if (contextEnabled) 1f else DrsMotion.DISABLED_SLOT_ALPHA
                     },
             ) {
-                // DRS v2.2.2: the a11y label carries the honest reason —
+                // the a11y label carries the honest reason —
                 // computed once per slot composition (stringRes needs
                 // composition, the gate value is already in scope).
                 val slotLabel = if (contextEnabled) toolTitle(tool.id) else {
@@ -522,7 +522,7 @@ fun DrsUnifiedStrip(modifier: Modifier = Modifier) {
                 androidx.compose.foundation.layout.Box(
                     contentAlignment = androidx.compose.ui.Alignment.Center,
                 ) {
-                    // DRS v2.2.1: هالة التفعيل الصادقة — a soft accent disc
+                    // هالة التفعيل الصادقة — a soft accent disc
                     // behind the icon of an ACTIVE toggle, same accent the
                     // dot uses, so «مفعّل» reads at a glance from arm's
                     // length. matchParentSize keeps it behind the icon and
@@ -539,7 +539,7 @@ fun DrsUnifiedStrip(modifier: Modifier = Modifier) {
                         isTextTools -> SnyggIcon(
                             imageVector = if (isTextToolsOpen) Icons.Default.Close else Icons.Default.Build,
                             // DRS a11y/i18n/ux (r0-I): the tile is icon-only.
-                            // DRS v2.2.2: the label carries the honest
+                            // the label carries the honest
                             // unavailable suffix when the gate is closed.
                             contentDescription = slotLabel,
                         )
@@ -547,15 +547,15 @@ fun DrsUnifiedStrip(modifier: Modifier = Modifier) {
                         else -> SnyggIcon(
                             imageVector = iconForTool(tool.id),
                             // DRS a11y/i18n/ux (r0-I): the tile is icon-only.
-                            // DRS v2.2.2: the label carries the honest
+                            // the label carries the honest
                             // unavailable suffix when the gate is closed.
                             contentDescription = slotLabel,
                         )
                     }
-                    // DRS v1.8.0: the real on/off state of toggle tools
+                    // the real on/off state of toggle tools
                     // (incognito/autocorrect/number row/smartbar/floating)
                     // as a small accent dot — the tile shows the truth.
-                    // DRS v2.2.1: the dot now BREATHES (grows in / shrinks
+                    // the dot now BREATHES (grows in / shrinks
                     // out via DrsMotion's dot contract) instead of popping
                     // in and out of existence. Always composed, draw-only.
                     androidx.compose.foundation.layout.Box(
@@ -576,7 +576,7 @@ fun DrsUnifiedStrip(modifier: Modifier = Modifier) {
 
         // 2) the user's technical keys (advanced/dual levels only).
         techKeys.forEach { key ->
-            // DRS v1.22.0: the modifier latch keys show their live armed
+            // the modifier latch keys show their live armed
             // state the same way the toggle tools do — the tile shows the
             // truth, LATCHED and LOCKED alike.
             val latchOn = when (key.id) {
@@ -584,7 +584,7 @@ fun DrsUnifiedStrip(modifier: Modifier = Modifier) {
                 "alt" -> toggleStates.altArmed
                 else -> null
             }
-            // DRS v2.2.1: the same living treatment as the task slots —
+            // the same living treatment as the task slots —
             // pulse, honest halo on armed latches, breathing dot, and
             // feedback (the tail keys used to be silent too).
             val keyInteraction = remember(key.id) { MutableInteractionSource() }

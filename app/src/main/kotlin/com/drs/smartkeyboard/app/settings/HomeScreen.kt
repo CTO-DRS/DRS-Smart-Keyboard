@@ -175,7 +175,7 @@ private fun rememberDrsSmartGreeting(): DrsSmartGreeting {
 }
 
 /**
- * DRS v1.0.3: rotating hero subtitle — seven curated, product-truthful
+ * rotating hero subtitle — seven curated, product-truthful
  * taglines picked deterministically by day-of-year, so the welcome header
  * feels alive day after day without ever flickering randomly mid-session.
  */
@@ -549,7 +549,7 @@ private fun DrsHomeTile(
             tint = colorScheme.onSurfaceVariant.copy(alpha = 0.55f),
             modifier = Modifier
                 .size(20.dp)
-                // DRS v1.28.0 audit fix (High, RTL): AutoMirrored artwork does
+                // audit fix (High, RTL): AutoMirrored artwork does
                 // NOT self-mirror at render time — the codebase convention
                 // (DrsScreen back arrow) pairs it with autoMirrorForRtl().
                 // Without it every home-tile chevron pointed backward in the
@@ -711,7 +711,7 @@ private fun DrsHomeSystemCard(onClick: () -> Unit) {
                 .background(accent),
             contentAlignment = Alignment.Center,
         ) {
-            // DRS v1.28.0 audit fix (UI consistency): the "★" Text glyph with a
+            // audit fix (UI consistency): the "★" Text glyph with a
             // hardcoded Color.White became unreadable on light accents and
             // rendered differently per platform font. A themed vector icon
             // keeps contrast under control via onPrimary.
@@ -830,7 +830,7 @@ private fun DrsHomeHeroHeader(scrollBehavior: TopAppBarScrollBehavior) {
     val colorScheme = MaterialTheme.colorScheme
     val navController = LocalNavController.current
     val greeting = rememberDrsSmartGreeting()
-    // DRS v1.0.3: daily-rotating tagline — refreshed once per minute-tick so
+    // daily-rotating tagline — refreshed once per minute-tick so
     // an app left open across midnight rolls to the next tagline by itself.
     val heroSubtitleRes = rememberDrsHeroSubtitleRes()
     val collapse = scrollBehavior.state.collapsedFraction
@@ -1128,7 +1128,7 @@ private fun <T : PreferenceModel> PreferenceUiScope<T>.DrsGroupCard(
 /**
  * DRS version footer: a calm, centered identity block that closes the home
  * screen — the app name, the exact build version straight from BuildConfig,
- * and the v1.0 release tagline in the accent color. Tapping it opens the
+ * and the release tagline in the accent color. Tapping it opens the
  * About screen, keeping the release identity one tap away from the hub.
  */
 @Composable
@@ -1220,7 +1220,7 @@ fun HomeScreen() = DrsScreen {
         }
         DrsStaggerIn(index = 2) {
             DrsGroupCard(icon = Icons.Default.AutoAwesome, title = stringRes(R.string.settings__home__group__drs)) {
-                // DRS v1.0.7: the unified «كلاهما» system leads the group.
+                // the unified «كلاهما» system leads the group.
                 DrsHomeTile(
                     icon = Icons.Default.Dashboard,
                     accent = MaterialTheme.colorScheme.primary,

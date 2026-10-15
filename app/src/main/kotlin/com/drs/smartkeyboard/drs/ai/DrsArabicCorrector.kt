@@ -36,7 +36,7 @@ object DrsArabicCorrector {
      *  - hamza family on alef: أ إ آ ٱ → ا (cost 0 — same letter linguistically)
      *  - ة ↔ ه (cost 0), ى ↔ ي (cost 0), ئ ↔ ي (0), ؤ ↔ و (0)
      *  - Arabic keyboard adjacency (row-mates on the standard layout) cost 1
-     *  - v2.12.0: same-row two-apart pairs cost 2 (QwertyCostModel parity —
+ * - same-row two-apart pairs cost 2 (QwertyCostModel parity —
      *    the fat-finger band the Arabic model alone refused to cover), and
      *    the PHONETIC-IDENTICAL pairs ت↔ط، د↔ض، ذ↔ظ، ض↔ظ cost 2 — letters
      *    whose SOUNDS are identical or dialectally merged, the classic
@@ -67,7 +67,7 @@ object DrsArabicCorrector {
         )
 
         /**
-         * v2.12.0: phonetically identical / dialectally merged letter pairs.
+ * phonetically identical / dialectally merged letter pairs.
          * These are NOT keyboard confusions — they are spelling-ignorance
          * errors (the writer does not know which of the identical-sounding
          * letters the word carries). Cost 2: reachable, but always outranked
@@ -92,7 +92,7 @@ object DrsArabicCorrector {
                 }
                 if (hasA && hasB) return 0
             }
-            // v2.12.0: phonetically identical pairs — cost 2.
+            // phonetically identical pairs — cost 2.
             for (g in PHONETIC_GROUPS) {
                 var hasA = false
                 var hasB = false
@@ -103,7 +103,7 @@ object DrsArabicCorrector {
                 if (hasA && hasB) return 2
             }
             // Arabic keyboard adjacency: cost 1 for row-mates one apart,
-            // cost 2 for same-row two-apart (v2.12.0, Qwerty parity).
+            // cost 2 for same-row two-apart (, Qwerty parity).
             val pa = AR_POS[a]
             val pb = AR_POS[b]
             if (pa != null && pb != null) {
@@ -169,7 +169,7 @@ object DrsArabicCorrector {
         "بريئ" to "بريء",
         "انن" to "إنن",
         "الله اكبر" to "اللهُ أكبر",
-        // DRS v1.6.0: twelve more UNIVERSALLY-wrong spellings. Every entry
+        // twelve more UNIVERSALLY-wrong spellings. Every entry
         // is orthographic certainty, not a style preference: the hamza-seat
         // errors (ئ vs أ/ؤ after the medial position), the opening-hamza
         // omissions (اكثر/اقل/الان) and the fused إنشاءالله.
@@ -185,7 +185,7 @@ object DrsArabicCorrector {
         "مسئلة" to "مسألة",
         "تسئولات" to "تساؤلات",
         "شئون" to "شؤون",
-        // DRS v2.12.0: the real-errors reference round — thirteen more
+        // the real-errors reference round — thirteen more
         // UNIVERSALLY-wrong spellings, each one orthographic certainty:
         // opening-hamza omissions (انت/اهم/افضل/الي), the لاكن/اللذي/هاذا
         // trio (the three wrong spellings the AR DICTIONARY ITSELF carries),
@@ -225,7 +225,7 @@ object DrsArabicCorrector {
     }
 
     /**
-     * v2.12.0 — the KNOWN-BUT-WRONG composition: several of the universal
+ * the KNOWN-BUT-WRONG composition: several of the universal
      * misspellings (مسئول، لاكن، اللذي، هاذا، شئ…) are dictionary entries in
      * their own right, so the completion branch serves them and the typo
      * branch never fires — the correction was dead code for exactly the

@@ -61,7 +61,7 @@ fun DictionaryScreen() = DrsScreen {
     val scope = rememberCoroutineScope()
     val store = remember { context.externalDictStore().value }
 
-    // DRS v2.8.0 «قاموسك من ملفك»: user-imported external dictionary indexes.
+    // «قاموسك من ملفك»: user-imported external dictionary indexes.
     // Picked from the device, parsed deterministically, stored app-privately,
     // and merged INTO the bundled dictionaries (never replacing them). The
     // same-process NlpManager cache is invalidated right here so the live

@@ -44,7 +44,7 @@ class StatisticalGlideTypingClassifier(
     private val gesture = Gesture()
 
     /**
-     * DRS v1.28.0 audit fix (Medium): [gesture] used to be mutated on the UI
+ * audit fix (Medium): [gesture] used to be mutated on the UI
      * thread (addGesturePoint from pointer events) and read/cloned on
      * Dispatchers.Default (getSuggestions → resample/prune) with no
      * synchronization — torn reads during an active glide produced garbage
@@ -163,7 +163,7 @@ class StatisticalGlideTypingClassifier(
         distanceThresholdSquared = (keyViews.first().visibleBounds.width / 4).toInt()
         distanceThresholdSquared *= distanceThresholdSquared
 
-        // DRS v1.20.0: word-data loading (a runBlocking dictionary access plus a
+        // word-data loading (a runBlocking dictionary access plus a
         // 50k-entry list allocation) and Pruner construction (a pass over every word)
         // used to run synchronously right here on the composition thread — the first
         // layout of a subtype could freeze the keyboard for hundreds of milliseconds
@@ -238,7 +238,7 @@ class StatisticalGlideTypingClassifier(
 
     private val lruSuggestionCache = LruCache<Pair<Gesture, Int>, List<String>>(SUGGESTION_CACHE_SIZE)
     override fun getSuggestions(maxSuggestionCount: Int, gestureCompleted: Boolean): List<String> {
-        // DRS v1.28.0 audit fix: classify against a cloned snapshot and use
+        // audit fix: classify against a cloned snapshot and use
         // that snapshot as the cache key — the live, mutating gesture object
         // previously served as the key, which both raced and poisoned the
         // LRU cache entries.
@@ -368,7 +368,7 @@ class StatisticalGlideTypingClassifier(
     }
 
     /**
-     * DRS v1.5.0 — الرياضيات الخالصة لـ SHARK2 (the pure glide math),
+ * الرياضيات الخالصة لـ SHARK2 (the pure glide math),
      * extracted from the classifier so the JVM test suite can pin their
      * contracts directly (the classifier itself needs an Android Context
      * and is therefore un-testable in isolation). Deterministic, pure,
@@ -501,7 +501,7 @@ class StatisticalGlideTypingClassifier(
 
         private val cachedIdealLength = ConcurrentHashMap<String, Float>()
 
-        // DRS v1.20.0: this cache used to be keyed by the WORD only, while
+        // this cache used to be keyed by the WORD only, while
         // generateIdealGestures yields TWO variants for words with repeated letters
         // (plain + loops). The loop variant was answered with the plain variant's
         // cached length, mis-pruning exactly the double-letter words the loop gesture
@@ -688,7 +688,7 @@ class StatisticalGlideTypingClassifier(
             var cumulativeError = 0.0f
 
             // otherwise nothing happens if size is only 1:
-            // DRS v1.5.0: honor the numPoints PARAMETER (the old code added
+            // honor the numPoints PARAMETER (the old code added
             // the hard-coded SAMPLING_POINTS constant — identical in the
             // production call but silently wrong for any other resolution).
             if (this.size == 1) {

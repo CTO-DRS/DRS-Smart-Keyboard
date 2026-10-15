@@ -30,14 +30,14 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
 /**
- * DRS v1.27.0: dictation inside the popup clipboard editor — «المحرر
+ * dictation inside the popup clipboard editor — «المحرر
  * يسمع». Until this round the floating editor's only way to receive
  * speech was the system keyboard popping up on top of it. The editor is
  * a real [androidx.activity.ComponentActivity] with a window of its own,
  * so unlike the IME service it may host the microphone permission
  * dialog directly, and its text lives in plain Compose state — there is
  * no InputConnection to route through. The controller below drives the
- * platform recognizer (the same engine the v1.23 IME dictation uses)
+ * platform recognizer (the same engine the IME dictation uses)
  * and appends the transcript straight into the editor's text state.
  *
  * Deliberately NOT wired through [DrsVoiceInputBus]: that bus belongs to
@@ -106,7 +106,7 @@ class ClipDictationController(
         context.resources.configuration.locales[0].toLanguageTag()
     },
     /**
-     * DRS v1.28.0 audit fix (Medium): this window's dictation used to always
+ * audit fix (Medium): this window's dictation used to always
      * create the classic cloud-capable recognizer and never consulted
      * voice__recognizer_mode — a user who pinned ON_DEVICE_ONLY in the
      * typing settings still got the network engine here. The mode is now

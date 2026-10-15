@@ -177,7 +177,7 @@ object DrsStore {
             }
         } catch (t: Throwable) {
             // Persisting the adaptive layer must never crash the keyboard.
-            // DRS v1.0.6: record the failure in the sanitized event log so
+            // record the failure in the sanitized event log so
             // diagnostics can show WHY data was not persisted.
             runCatching {
                 DrsEventLog.recordError(
@@ -207,7 +207,7 @@ object DrsStore {
     }
 
     /**
-     * DRS v1.6.0: re-decodes the persisted state file to verify it still
+ * re-decodes the persisted state file to verify it still
      * parses. [init] silently falls back to a default [DrsState] when the
      * file is corrupt — without this check the user's whole DRS layer is
      * wiped by the next write with ZERO signal. States:
@@ -228,7 +228,7 @@ object DrsStore {
     }
 
     /**
-     * DRS v1.0.6: real on-disk size of the state file in bytes (0 when the
+ * real on-disk size of the state file in bytes (0 when the
      * store is not initialized yet). Surfaced in the performance screen -
      * measured, never estimated.
      */

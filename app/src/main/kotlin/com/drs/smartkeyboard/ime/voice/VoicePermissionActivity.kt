@@ -18,7 +18,7 @@ import com.drs.smartkeyboard.R
 import com.drs.smartkeyboard.lib.devtools.flogWarning
 
 /**
- * DRS v1.23.0: the microphone permission trampoline — «بوابة الإذن
+ * the microphone permission trampoline — «بوابة الإذن
  * الشفافة». An IME service cannot host a permission dialog, so the first
  * mic-key press launches this translucent activity (nothing paints but a
  * system dialog), which requests RECORD_AUDIO, then either emits a start
@@ -27,7 +27,7 @@ import com.drs.smartkeyboard.lib.devtools.flogWarning
  * Single-session safety: onDeviceAvailable checks happen in the
  * controller, not here.
  *
- * DRS v1.26.0: the denied path is no longer one dead-end toast. The pure
+ * the denied path is no longer one dead-end toast. The pure
  * [nextPermissionAction] reads the system's rationale availability: a
  * plain denial (the system can still show its dialog again) answers with
  * the honest explanation toast, while a permanent denial ("don't ask
@@ -36,7 +36,7 @@ import com.drs.smartkeyboard.lib.devtools.flogWarning
  * the user has a real way out, with a toast explaining why.
  */
 
-/** DRS v1.26.0: what a denied mic permission must do next. */
+/** what a denied mic permission must do next. */
 enum class PermissionNextAction {
     /** The system dialog may appear again — explain and stay light. */
     RE_EXPLAIN,
@@ -46,7 +46,7 @@ enum class PermissionNextAction {
 }
 
 /**
- * DRS v1.26.0: the pure denied-permission decision — JVM-tested. After a
+ * the pure denied-permission decision — JVM-tested. After a
  * denial, `shouldShowRequestPermissionRationale == false` means the
  * system will never show its dialog again for this app (the permanent
  * denial), so the honest answer is the settings page; `true` means the
@@ -82,7 +82,7 @@ class VoicePermissionActivity : ComponentActivity() {
         if (grantResults.firstOrNull() == PackageManager.PERMISSION_GRANTED) {
             DrsVoiceInputBus.requestStart(languageTag)
         } else {
-            // DRS v1.26.0: the honest denied path — a plain denial keeps
+            // the honest denied path — a plain denial keeps
             // the light explanation toast, a permanent denial opens the
             // app's settings page because re-prompting is impossible.
             when (nextPermissionAction(

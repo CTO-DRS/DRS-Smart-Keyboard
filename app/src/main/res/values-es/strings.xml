@@ -1269,7 +1269,7 @@
     <string name="pref__panels__recents__summary">Recuerda tus tarjetas más usadas en los paneles de harakat, símbolos y letras — solo local</string>
     <string name="pref__panels__smart_order__label">Orden inteligente de paneles</string>
     <string name="pref__panels__smart_order__summary">El conmutador de paneles se reordena solo: el panel actual va primero, luego los más abiertos — solo local</string>
-    <!-- DRS v1.1.0: el tablero completo de harakat inteligente — asesor contextual y vocalización de palabras -->
+    <!-- el tablero completo de harakat inteligente — asesor contextual y vocalización de palabras -->
     <string name="panel__harakat__advice_after_shadda">shadda + fatha</string>
     <string name="panel__harakat__advice_definite_lam">sukun de la lam definida</string>
     <string name="panel__harakat__advice_tanween_alef">completa el tanween con alef</string>

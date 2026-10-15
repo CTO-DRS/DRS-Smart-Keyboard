@@ -46,7 +46,7 @@ buildscript {
 }
 
 // ---------------------------------------------------------------------------
-// DRS — تحصين رسم تبعيات المشاريع (project-graph hardening, v2.1.1).
+// DRS — تحصين رسم تبعيات المشاريع (project-graph hardening).
 //
 // خريطة الحل الكاملة (كل قابلة للحل × كل مشروع، أداة deps_map.init.gradle)
 // أظهرت أن الثغرات الـ54 المفتوحة في Dependabot تتركز في مصدرين، كلاهما
@@ -97,7 +97,7 @@ subprojects {
             "org.apache.httpcomponents:httpclient:4.5.13",
             "org.apache.commons:commons-lang3:3.18.0",
             "com.squareup.wire:wire-runtime-jvm:6.4.5",
-            // DRS v2.1.1: قطعة الإحداثيات غير المجارية — عائلة androidx.benchmark
+            // DRS: قطعة الإحداثيات غير المجارية — عائلة androidx.benchmark
             // تجّر wire-runtime بلا لاحقة -jvm (نطاق POM الخام 5.2.1) فلم تلمسها
             // قوة -jvm وبقيت تنبيها CVE-2026-63126/CVE-2026-45799 مفتوحين على
             // الرسم المُرسل — القوة هنا تطفئهما من المصدر نفسه.

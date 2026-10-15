@@ -4,7 +4,7 @@
 
 package com.drs.smartkeyboard.ime.keyboard
 
-// DRS v1.23.0: the three @Deprecated("TODO: remove") entries (EDITING=1,
+// the three @Deprecated("TODO: remove") entries (EDITING=1,
 // SMARTBAR_CLIPBOARD_CURSOR_ROW=8, SMARTBAR_NUMBER_ROW=9) are gone. The
 // audit verified none of them has a producer anywhere (no writer of the
 // keyboard-mode register ever stored these ints, the register is

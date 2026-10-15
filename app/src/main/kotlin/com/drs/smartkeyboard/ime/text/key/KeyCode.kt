@@ -47,7 +47,7 @@ object KeyCode {
     const val MOVE_START_OF_LINE =           -27
     const val MOVE_END_OF_LINE =             -28
 
-    // DRS v1.0.5: word-by-word cursor navigation for the normal user.
+    // word-by-word cursor navigation for the normal user.
     const val MOVE_WORD_LEFT =               -29
     const val MOVE_WORD_RIGHT =              -30
 
@@ -60,10 +60,10 @@ object KeyCode {
     const val CLIPBOARD_CLEAR_FULL_HISTORY = -37
     const val CLIPBOARD_CLEAR_PRIMARY_CLIP = -38
 
-    // DRS v1.0.5: share the selected text (or the whole field) via the
+    // share the selected text (or the whole field) via the
     // system share sheet — wired to the real editor content.
     const val CLIPBOARD_SHARE =              -39
-    // DRS v1.7.0: pin/unpin the ACTIVE clipboard entry — the same real
+    // pin/unpin the ACTIVE clipboard entry — the same real
     // pinClip/unpinClip path the clipboard panel long-press popup uses
     // (pinned entries survive clearHistory by contract).
     const val CLIPBOARD_PIN_ACTIVE =         -40
@@ -91,22 +91,22 @@ object KeyCode {
     const val IME_UI_MODE_MEDIA =           -212
     const val IME_UI_MODE_CLIPBOARD =       -213
 
-    // DRS v1.0.6: opens the technical text tools panel.
+    // opens the technical text tools panel.
     const val IME_UI_MODE_TEXT_TOOLS =      -214
 
-    // DRS v1.0.8: unified-strip tools. THEME_CYCLE switches the keyboard
+    // unified-strip tools. THEME_CYCLE switches the keyboard
     // theme of the currently effective day/night slot to the next installed
     // theme; INSERT_DATE_TIME commits the current date & time formatted
     // with the active subtype's locale. Both are handled in KeyboardManager.
     const val THEME_CYCLE =                 -215
     const val INSERT_DATE_TIME =            -216
 
-    // DRS v1.1.0: unified-strip tools. TOGGLE_NUMBER_ROW flips the
+    // unified-strip tools. TOGGLE_NUMBER_ROW flips the
     // keyboard__number_row pref; the LayoutManager recomputes the layout
     // through the existing pref collector. Handled in KeyboardManager.
     const val TOGGLE_NUMBER_ROW =           -217
 
-    // DRS v1.15.0: the three smart panels (لوحة الحركات / لوحة الرموز
+    // the three smart panels (لوحة الحركات / لوحة الرموز
     // الذكية / لوحة الحروف الموسعة). Each is a real ImeUiMode handled in
     // KeyboardManager + hosted in ImeWindow, and each joins the unified
     // tool catalogue so it can be pinned among the capped 10 tasks.
@@ -123,12 +123,12 @@ object KeyCode {
     const val LANGUAGE_SWITCH =             -227
     const val SHOW_SUBTYPE_PICKER =         -228
 
-    // DRS v1.2.0: the fourth smart panel (لوحة الأرقام الذكية) — a real
+    // the fourth smart panel (لوحة الأرقام الذكية) — a real
     // ImeUiMode handled in KeyboardManager + hosted in ImeWindow, joined
     // the unified tool catalogue with the same tail-append contract.
     const val IME_UI_MODE_SMART_NUMBER =    -229
 
-    // DRS v1.3.0: the fifth smart panel (لوحة الحافظة الذكية) — a real
+    // the fifth smart panel (لوحة الحافظة الذكية) — a real
     // ImeUiMode handled in KeyboardManager + hosted in ImeWindow, joined
     // the unified tool catalogue with the same tail-append contract.
     const val IME_UI_MODE_SMART_CLIPBOARD = -230
@@ -137,7 +137,7 @@ object KeyCode {
     const val IME_HIDE_UI =                 -232
     const val VOICE_INPUT =                 -233
 
-    // DRS v2.21.0: the sixth smart panel (لوحة نصوصي المحفوظة) — a real
+    // the sixth smart panel (لوحة نصوصي المحفوظة) — a real
     // ImeUiMode handled in KeyboardManager + hosted in ImeWindow, joined
     // the unified tool catalogue with the same tail-append contract.
     const val IME_UI_MODE_MY_TEXTS =        -234
@@ -152,7 +152,7 @@ object KeyCode {
 
     const val SETTINGS =                    -301
 
-    // DRS v1.0.6: technical text tool codes (see DrsTextTool for the full
+    // technical text tool codes (see DrsTextTool for the full
     // list and DrsTextTools for the pure transformations behind them).
     const val TEXT_TOOL_UPPERCASE =             -601
     const val TEXT_TOOL_LOWERCASE =             -602
@@ -166,29 +166,29 @@ object KeyCode {
     const val TEXT_TOOL_REMOVE_DUPLICATE_LINES =-616
     const val TEXT_TOOL_NUMBER_LINES =          -617
     const val TEXT_TOOL_REVERSE_LINES =         -618
-    // DRS v1.2.0: locale-aware quote wrapping (inside CODE_RANGE, so the
+    // locale-aware quote wrapping (inside CODE_RANGE, so the
     // existing text-tool dispatch path handles it with no extra wiring).
     const val TEXT_TOOL_WRAP_QUOTES =           -619
     const val TEXT_TOOL_REMOVE_DIACRITICS =     -621
-    // DRS v1.3.0: digit conversion, blank-line collapsing and tatweel
+    // digit conversion, blank-line collapsing and tatweel
     // removal (same pure-transform dispatch path).
     const val TEXT_TOOL_TO_ARABIC_DIGITS =      -605
     const val TEXT_TOOL_TO_WESTERN_DIGITS =     -606
     const val TEXT_TOOL_COLLAPSE_EMPTY_LINES =  -620
     const val TEXT_TOOL_REMOVE_TATWEEL =        -622
-    // DRS v1.4.0: descending line sort (the real counterpart of
+    // descending line sort (the real counterpart of
     // TEXT_TOOL_SORT_LINES) and Arabic letter normalization (same
     // pure-transform dispatch path via DrsTextTool.CODE_RANGE).
     const val TEXT_TOOL_SORT_LINES_DESC =       -624
     const val TEXT_TOOL_NORMALIZE_ARABIC =      -623
-    // DRS v1.5.0: case inversion, Arabic punctuation mapping, zero-width
+    // case inversion, Arabic punctuation mapping, zero-width
     // cleanup and tab→space conversion (all pure transforms dispatched via
     // DrsTextTool.CODE_RANGE like every other text tool).
     const val TEXT_TOOL_TOGGLE_CASE =           -607
     const val TEXT_TOOL_TO_ARABIC_PUNCTUATION = -608
     const val TEXT_TOOL_REMOVE_ZERO_WIDTH =     -609
     const val TEXT_TOOL_TABS_TO_SPACES =        -610
-    // DRS v1.5.0: length sort, word-level dedup, paren wrapping and one
+    // length sort, word-level dedup, paren wrapping and one
     // sentence per line (same pure-transform dispatch path).
     const val TEXT_TOOL_SORT_LINES_BY_LENGTH =  -625
     const val TEXT_TOOL_REMOVE_DUPLICATE_WORDS =-626
@@ -197,14 +197,14 @@ object KeyCode {
     const val TEXT_TOOL_NORMALIZE_PUNCTUATION = -631
     const val TEXT_TOOL_CLEAN_TEXT =            -632
 
-    // DRS v1.6.0: inverse tab/space + punctuation mappings, edge-only
+    // inverse tab/space + punctuation mappings, edge-only
     // blank trim and word-order reversal (same pure-transform families).
     const val TEXT_TOOL_SPACES_TO_TABS =        -629
     const val TEXT_TOOL_TO_WESTERN_PUNCTUATION =-630
     const val TEXT_TOOL_TRIM_BLANK_EDGES =      -633
     const val TEXT_TOOL_REVERSE_WORDS =         -634
 
-    // DRS v1.7.0: PDF presentation-form repair, list<->lines, hashtag
+    // PDF presentation-form repair, list<->lines, hashtag
     // space removal, emoji stripping and the URL encode/decode pair
     // (same pure-transform families; dispatch flows through CODE_RANGE).
     const val TEXT_TOOL_NORMALIZE_ARABIC_FORMS =-635
@@ -214,7 +214,7 @@ object KeyCode {
     const val TEXT_TOOL_STRIP_EMOJI =           -639
     const val TEXT_TOOL_URL_ENCODE =            -642
     const val TEXT_TOOL_URL_DECODE =            -643
-    // DRS v1.19.0: constants for the two v1.8.0 tools that shipped without
+    // constants for the two tools that shipped without
     // KeyCode entries — their presses flow through DrsTextTool.CODE_RANGE as
     // before, but the constants make the SmartToolCodes stats register
     // self-documenting instead of magic numbers.
@@ -240,7 +240,7 @@ object KeyCode {
     const val CHAR_WIDTH_FULL =            -9702
     const val CHAR_WIDTH_HALF =            -9703
 
-    // DRS v1.23.0: the dead KANA_SMALL constant (12307) is gone — it had
+    // the dead KANA_SMALL constant (12307) is gone — it had
     // zero references in code or assets (the kana-small toggle uses the
     // KeyboardState flag, not a key code).
 

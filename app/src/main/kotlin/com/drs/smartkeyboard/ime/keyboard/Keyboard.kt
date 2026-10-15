@@ -42,7 +42,7 @@ abstract class Keyboard {
      * Layouts the keys according the the dimensions and parameters provided by given arguments. This method's
      * exact behavior is highly dependent aon the actual subclass.
      *
-     * DRS v1.18.0: [splitGapWidth] is the central split-keyboard gap in pixels;
+ * [splitGapWidth] is the central split-keyboard gap in pixels;
      * 0f (the default) lays the row out exactly as before.
      */
     abstract fun layout(

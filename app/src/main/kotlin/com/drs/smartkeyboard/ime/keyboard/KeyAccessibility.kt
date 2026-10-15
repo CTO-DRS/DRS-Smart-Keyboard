@@ -10,7 +10,7 @@ import com.drs.smartkeyboard.ime.input.InputShiftState
 import com.drs.smartkeyboard.ime.text.key.KeyCode
 
 /**
- * DRS v1.17.0: accessibility support for the keyboard. Until this file
+ * accessibility support for the keyboard. Until this file
  * existed the keys were unlabeled boxes as far as TalkBack was concerned —
  * explore-by-touch announced nothing, because icon keys render no text and
  * the renderer passed `contentDescription = null`.
@@ -36,13 +36,13 @@ fun keyA11yLabelRes(code: Int): Int? = when (code) {
     KeyCode.VIEW_SYMBOLS -> R.string.key__a11y_view_symbols
     KeyCode.VIEW_SYMBOLS2 -> R.string.key__a11y_view_symbols2
     KeyCode.VIEW_NUMERIC_ADVANCED -> R.string.key__a11y_view_numeric
-    // DRS v1.15.0 panels: the diacritics panel key speaks as its page name.
+    // panels: the diacritics panel key speaks as its page name.
     KeyCode.IME_UI_MODE_DIACRITICS -> R.string.key__a11y_view_harakat
     else -> null
 }
 
 /**
- * DRS v2.4.0 — «اللوحة الحية الشاملة»: the shift key's STATE, spoken.
+ * «اللوحة الحية الشاملة»: the shift key's STATE, spoken.
  * Until this mapping existed TalkBack announced «Shift key» identically
  * whether the board was lowercase, shifted, or caps-locked — the state
  * rode a silent theme attribute alone (and, since this version, a small

@@ -178,7 +178,7 @@ class SubtypeManager(context: Context) {
      */
     fun switchToPrevSubtype() = scope.launch {
         val subtypeList = subtypes
-        // DRS v1.28.0 audit fix (Low): an empty subtype list (settings edge:
+        // audit fix (Low): an empty subtype list (settings edge:
         // every subtype removed while the IME process is alive) made
         // last() throw NoSuchElementException inside the coroutine. A no-op
         // switch is the honest behavior when there is nothing to switch to.
@@ -206,7 +206,7 @@ class SubtypeManager(context: Context) {
      */
     fun switchToNextSubtype() = scope.launch {
         val subtypeList = subtypes
-        // DRS v1.28.0 audit fix (Low): empty-list guard, see switchToPrevSubtype.
+        // audit fix (Low): empty-list guard, see switchToPrevSubtype.
         if (subtypeList.isEmpty()) return@launch
         val cachedActiveSubtype = activeSubtype
         var triggerNextSubtype = false

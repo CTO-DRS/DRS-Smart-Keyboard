@@ -134,7 +134,7 @@ private class DrsScreenScopeImpl : DrsScreenScope {
                 onClick = { navController.popBackStack() },
                 modifier = Modifier.autoMirrorForRtl(),
                 icon = Icons.AutoMirrored.Filled.ArrowBack,
-                // DRS v1.28.0 audit fix (High, a11y): the back button on every
+                // audit fix (High, a11y): the back button on every
                 // screen was silent to TalkBack. It now announces its purpose.
                 contentDescription = stringResource(R.string.action__navigate_back),
             )

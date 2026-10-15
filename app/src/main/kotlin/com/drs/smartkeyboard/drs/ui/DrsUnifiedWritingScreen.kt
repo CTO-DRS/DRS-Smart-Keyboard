@@ -38,7 +38,7 @@ import org.drs.jetpref.datastore.ui.ListPreference
 import org.drs.jetpref.datastore.ui.PreferenceGroup
 
 /**
- * DRS v1.0.7 — الكتابة والأدوات الموحدة (Unified Writing & Tools).
+ * الكتابة والأدوات الموحدة (Unified Writing & Tools).
  *
  * One screen over the whole writing pipeline of the unified system:
  *  - الكتابة الأساسية: what the engine already does for everyone.
@@ -173,7 +173,7 @@ fun DrsUnifiedWritingScreen() = DrsScreen {
                 TextButton(onClick = { navController.navigate(Routes.Settings.DrsShortcuts) }) {
                     Text(stringRes(R.string.drs__shortcuts__title))
                 }
-                // DRS v2.21.0: نصوصي المحفوظة — the manager of the
+                // نصوصي المحفوظة — the manager of the
                 // sixth smart panel, a sibling of the shortcuts system.
                 Text(
                     text = stringRes(R.string.drs__unified__writing_mytexts_body),
@@ -183,7 +183,7 @@ fun DrsUnifiedWritingScreen() = DrsScreen {
                 TextButton(onClick = { navController.navigate(Routes.Settings.DrsMyTexts) }) {
                     Text(stringRes(R.string.drs__mytexts__title))
                 }
-                // DRS v2.22.0: قاموسي التشكيلي — the harakat system's
+                // قاموسي التشكيلي — the harakat system's
                 // personal lexicon manager, a sibling of the saved-texts
                 // system: teach words, and the board vocalizes them first.
                 Text(

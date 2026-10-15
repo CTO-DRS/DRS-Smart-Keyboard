@@ -142,7 +142,7 @@ fun BoxScope.ImeWindow() {
     val density = LocalDensity.current
     val windowController = LocalWindowController.current
 
-    // DRS v2.8.0 «خلفيتك من ألبومك»: readability scrim strength for the user
+    // «خلفيتك من ألبومك»: readability scrim strength for the user
     // background image. Injected at the composition level exactly like the
     // dynamic accent color — outside the stylesheet contract.
     val prefs by DrsPreferenceStore
@@ -234,15 +234,15 @@ private fun ImeInnerWindow() {
                 ImeUiMode.MEDIA -> ProvideActualLayoutDirection { MediaInputLayout() }
                 ImeUiMode.CLIPBOARD -> ProvideActualLayoutDirection { ClipboardInputLayout() }
                 ImeUiMode.TEXT_TOOLS -> ProvideActualLayoutDirection { DrsTextToolsPanel() }
-                // DRS v1.15.0: the three smart panels.
+                // the three smart panels.
                 ImeUiMode.DIACRITICS -> ProvideActualLayoutDirection { DrsDiacriticsPanel() }
                 ImeUiMode.SMART_SYMBOLS -> ProvideActualLayoutDirection { DrsSmartSymbolsPanel() }
                 ImeUiMode.ARABIC_LETTERS -> ProvideActualLayoutDirection { DrsArabicLettersPanel() }
-                // DRS v1.2.0: the fourth smart panel.
+                // the fourth smart panel.
                 ImeUiMode.SMART_NUMBER -> ProvideActualLayoutDirection { DrsSmartNumberPanel() }
-                // DRS v1.3.0: the fifth smart panel.
+                // the fifth smart panel.
                 ImeUiMode.SMART_CLIPBOARD -> ProvideActualLayoutDirection { DrsSmartClipboardPanel() }
-                // DRS v2.21.0: the sixth smart panel (لوحة نصوصي المحفوظة).
+                // the sixth smart panel (لوحة نصوصي المحفوظة).
                 ImeUiMode.MY_TEXTS -> ProvideActualLayoutDirection { DrsMyTextsPanel() }
             }
             ImeSystemUiFloating()

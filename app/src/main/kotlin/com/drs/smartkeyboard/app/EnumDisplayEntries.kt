@@ -689,7 +689,7 @@ private val ENUM_DISPLAY_ENTRIES = mapOf<Pair<KClass<*>, String>, @Composable ()
             )
             entry(
                 key = SwipeAction.SHOW_SUBTYPE_PICKER,
-                // DRS v1.19.0: was a hardcoded "Show subtype picker"
+                // was a hardcoded "Show subtype picker"
                 // English literal shown to users of every locale.
                 label = stringRes(R.string.enum__swipe_action__show_subtype_picker)
             )
@@ -899,7 +899,7 @@ private val ENUM_DISPLAY_ENTRIES = mapOf<Pair<KClass<*>, String>, @Composable ()
             )
         }
     },
-    // DRS v1.14.0 — the comprehensive settings list: the popup edit
+    // the comprehensive settings list: the popup edit
     // window surface, size, and dimming enums join the registry.
     ClipEditorRoute::class to DEFAULT to {
         listPrefEntries {
@@ -949,7 +949,7 @@ private val ENUM_DISPLAY_ENTRIES = mapOf<Pair<KClass<*>, String>, @Composable ()
             )
         }
     },
-    // DRS v1.25.0 — the second voice gate: which recognizer may listen
+    // the second voice gate: which recognizer may listen
     // (auto / strictly on-device / classic standard), honest labels so
     // the privacy promise in each choice is visible before it is made.
     VoiceRecognizerMode::class to DEFAULT to {

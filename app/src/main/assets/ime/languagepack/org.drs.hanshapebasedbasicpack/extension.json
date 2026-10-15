@@ -2,7 +2,7 @@
   "$": "ime.extension.languagepack",
   "meta": {
     "id": "org.drs.hanshapebasedbasicpack",
-    "version": "0.0.0",
+    "version": "1.0.0",
     "title": "الحزمة الصينية الشكلية الأساسية (DRS)",
     "description": "الحزمة الصينية الشكلية الافتراضية المتوفرة دائماً في لوحة المفاتيح DRS.",
     "maintainers": [

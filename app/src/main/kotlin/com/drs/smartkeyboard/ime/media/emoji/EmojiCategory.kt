@@ -46,7 +46,7 @@ enum class EmojiCategory(val id: String) {
     }
 
     /**
-     * DRS v1.21.0: the localized tab name — the palette tabs used to be
+ * the localized tab name — the palette tabs used to be
      * icon-only, so TalkBack announced an unlabeled tab for each one.
      */
     fun labelRes(): Int {

@@ -42,7 +42,7 @@ enum class LayoutType(val id: String) {
     SYMBOLS2_MOD(LayoutTypeId.SYMBOLS2_MOD);
 }
 
-// DRS v2.1.1: internal لا private — مُجمِّع 2.4.20 يحذر من مُسلسِل أضيق
+// internal لا private — مُجمِّع 2.4.20 يحذر من مُسلسِل أضيق
 // رؤية من نوعه (CUSTOM_SERIALIZER_MAY_BE_INACCESSIBLE) لأنه قد يسبب
 // «serializer not found» في مواضع الاستخدام خارج الملف.
 internal class LayoutTypeSerializer : KSerializer<LayoutType> {

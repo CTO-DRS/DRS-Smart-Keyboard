@@ -2,7 +2,7 @@
   "$": "ime.extension.theme",
   "meta": {
     "id": "org.drs.themes.drs",
-    "version": "1.2.0",
+    "version": "1.0.0",
     "title": "سمات DRS الإضافية",
     "description": "سمات إضافية مخصصة (نهارية وليلية) بألوان عربية أنيقة للوحة المفاتيح DRS.",
     "maintainers": [

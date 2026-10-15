@@ -66,11 +66,11 @@ private fun myTextErrorLabel(error: DrsMyTexts.Error): Int = when (error) {
 }
 
 /**
- * DRS v2.21.0 — نصوصي المحفوظة (the saved-texts manager): the full CRUD
+ * نصوصي المحفوظة (the saved-texts manager): the full CRUD
  * home of the user's curated texts behind the sixth smart panel. The
  * doctrine mirrors the shortcuts manager: a master switch (gates the
  * PANEL and insertion, never management), confirmed destructive actions
- * (the v1.28.0 audit doctrine — deletion never fires from one slip), an
+ * (the audit doctrine — deletion never fires from one slip), an
  * honest capacity counter (N/100), template badges, and a search that
  * matches exactly what was saved.
  */
@@ -84,7 +84,7 @@ fun DrsMyTextsScreen() = DrsScreen {
 
     var editorState by remember { mutableStateOf<DrsMyTextEditorState?>(null) }
     var editorError by remember { mutableStateOf<DrsMyTexts.Error?>(null) }
-    // DRS v1.28.0 audit doctrine: deletion confirms first, and the pending
+    // audit doctrine: deletion confirms first, and the pending
     // id survives configuration changes via rememberSaveable.
     var pendingDeleteId by rememberSaveable { mutableStateOf<Long?>(null) }
     var showRemoveAllDialog by remember { mutableStateOf(false) }

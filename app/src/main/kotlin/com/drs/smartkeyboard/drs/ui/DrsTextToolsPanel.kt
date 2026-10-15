@@ -184,7 +184,7 @@ private sealed interface TileFilter {
 }
 
 /**
- * DRS v2.2.0: the favorites' local persistence — the same SharedPreferences
+ * the favorites' local persistence — the same SharedPreferences
  * file the panel counters live in (`drs_panel_usage`), a JSON list of tile
  * codes under its own key. Local only; the stored values are CODES of the
  * tiles the user pinned — never any text, on the house doctrine.
@@ -235,14 +235,14 @@ private val PANEL_SECTIONS: List<DrsTextToolsPanelSection> = listOf(
                 R.string.drs__text_tools__desc_sentence_case,
                 Icons.Default.ShortText,
             ),
-            // DRS v1.5.0: inverts the case of every cased letter.
+            // inverts the case of every cased letter.
             toolItem(
                 DrsTextTool.TOGGLE_CASE,
                 R.string.drs__text_tools__tool_toggle_case,
                 R.string.drs__text_tools__desc_toggle_case,
                 Icons.Default.SwapVert,
             ),
-            // DRS v2.2.0: the code-style case pair — snake joins with
+            // the code-style case pair — snake joins with
             // underscores (Arabic words join too, no case invented),
             // camel refuses non-ASCII tokens byte-identically.
             toolItem(
@@ -274,14 +274,14 @@ private val PANEL_SECTIONS: List<DrsTextToolsPanelSection> = listOf(
                 R.string.drs__text_tools__desc_trim_line_edges,
                 Icons.Default.ClearAll,
             ),
-            // DRS v1.5.0: whitespace family additions.
+            // whitespace family additions.
             toolItem(
                 DrsTextTool.TABS_TO_SPACES,
                 R.string.drs__text_tools__tool_tabs_to_spaces,
                 R.string.drs__text_tools__desc_tabs_to_spaces,
                 Icons.Default.KeyboardTab,
             ),
-            // DRS v2.16.0: the writing assistant's spacing normalizer —
+            // the writing assistant's spacing normalizer —
             // runs collapse to one space, spaces before closing
             // punctuation vanish, punctuation runs collapse to one mark —
             // all to a bounded fixed point, idempotent by construction:
@@ -292,21 +292,21 @@ private val PANEL_SECTIONS: List<DrsTextToolsPanelSection> = listOf(
                 R.string.drs__text_tools__desc_normalize_spacing,
                 Icons.Default.FormatLineSpacing,
             ),
-            // DRS v1.6.0: the inverse mapping — runs of 4 spaces -> tab.
+            // the inverse mapping — runs of 4 spaces -> tab.
             toolItem(
                 DrsTextTool.SPACES_TO_TABS,
                 R.string.drs__text_tools__tool_spaces_to_tabs,
                 R.string.drs__text_tools__desc_spaces_to_tabs,
                 Icons.Default.KeyboardTab,
             ),
-            // DRS v1.7.0: removes EVERY horizontal space (hashtag style).
+            // removes EVERY horizontal space (hashtag style).
             toolItem(
                 DrsTextTool.REMOVE_ALL_SPACES,
                 R.string.drs__text_tools__tool_remove_all_spaces,
                 R.string.drs__text_tools__desc_remove_all_spaces,
                 Icons.Default.SpaceBar,
             ),
-            // DRS v1.8.0: one space between digits and letters (both ways).
+            // one space between digits and letters (both ways).
             toolItem(
                 DrsTextTool.SEPARATE_DIGIT_LETTERS,
                 R.string.drs__text_tools__tool_separate_digit_letters,
@@ -325,14 +325,14 @@ private val PANEL_SECTIONS: List<DrsTextToolsPanelSection> = listOf(
                 R.string.drs__text_tools__desc_remove_empty_lines,
                 Icons.Default.FormatLineSpacing,
             ),
-            // DRS v1.3.0: collapse runs of blank lines into one.
+            // collapse runs of blank lines into one.
             toolItem(
                 DrsTextTool.COLLAPSE_EMPTY_LINES,
                 R.string.drs__text_tools__tool_collapse_empty_lines,
                 R.string.drs__text_tools__desc_collapse_empty_lines,
                 Icons.Default.Compress,
             ),
-            // DRS v1.6.0: blank lines at the text's edges only.
+            // blank lines at the text's edges only.
             toolItem(
                 DrsTextTool.TRIM_BLANK_EDGES,
                 R.string.drs__text_tools__tool_trim_blank_edges,
@@ -345,7 +345,7 @@ private val PANEL_SECTIONS: List<DrsTextToolsPanelSection> = listOf(
                 R.string.drs__text_tools__desc_remove_line_breaks,
                 Icons.Default.SubdirectoryArrowRight,
             ),
-            // DRS v1.7.0: list <-> lines (Arabic comma aware) — the two
+            // list <-> lines (Arabic comma aware) — the two
             // directions of turning a comma list into one item per line.
             toolItem(
                 DrsTextTool.SPLIT_TO_LINES,
@@ -359,7 +359,7 @@ private val PANEL_SECTIONS: List<DrsTextToolsPanelSection> = listOf(
                 R.string.drs__text_tools__desc_join_lines,
                 Icons.Default.MergeType,
             ),
-            // DRS v1.7.0: strips emoji so pasted social text stops
+            // strips emoji so pasted social text stops
             // polluting the counting/sorting tools.
             toolItem(
                 DrsTextTool.STRIP_EMOJI,
@@ -379,7 +379,7 @@ private val PANEL_SECTIONS: List<DrsTextToolsPanelSection> = listOf(
                 R.string.drs__text_tools__desc_remove_duplicate_lines,
                 Icons.Default.FilterList,
             ),
-            // DRS v1.1.0: line-ordering additions.
+            // line-ordering additions.
             toolItem(
                 DrsTextTool.NUMBER_LINES,
                 R.string.drs__text_tools__tool_number_lines,
@@ -392,21 +392,21 @@ private val PANEL_SECTIONS: List<DrsTextToolsPanelSection> = listOf(
                 R.string.drs__text_tools__desc_reverse_lines,
                 Icons.Default.SwapVert,
             ),
-            // DRS v1.4.0: descending counterpart of SORT_LINES.
+            // descending counterpart of SORT_LINES.
             toolItem(
                 DrsTextTool.SORT_LINES_DESC,
                 R.string.drs__text_tools__tool_sort_lines_desc,
                 R.string.drs__text_tools__desc_sort_lines_desc,
                 Icons.Default.SortByAlpha,
             ),
-            // DRS v1.5.0: stable sort by line length.
+            // stable sort by line length.
             toolItem(
                 DrsTextTool.SORT_LINES_BY_LENGTH,
                 R.string.drs__text_tools__tool_sort_lines_by_length,
                 R.string.drs__text_tools__desc_sort_lines_by_length,
                 Icons.Default.FormatLineSpacing,
             ),
-            // DRS v2.2.0: the natural sort — numbers the way a human
+            // the natural sort — numbers the way a human
             // reads them (file2 قبل file10، قائمة 2 قبل قائمة 10)،
             // بأرقام عشوائية الدقة لا تفيض أبدًا.
             toolItem(
@@ -415,14 +415,14 @@ private val PANEL_SECTIONS: List<DrsTextToolsPanelSection> = listOf(
                 R.string.drs__text_tools__desc_sort_lines_natural,
                 Icons.Default.Sort,
             ),
-            // DRS v1.5.0: word-level dedup (first occurrence wins).
+            // word-level dedup (first occurrence wins).
             toolItem(
                 DrsTextTool.REMOVE_DUPLICATE_WORDS,
                 R.string.drs__text_tools__tool_remove_duplicate_words,
                 R.string.drs__text_tools__desc_remove_duplicate_words,
                 Icons.Default.WrapText,
             ),
-            // DRS v1.6.0: word-order reversal of every line.
+            // word-order reversal of every line.
             toolItem(
                 DrsTextTool.REVERSE_WORDS,
                 R.string.drs__text_tools__tool_reverse_words,
@@ -440,7 +440,7 @@ private val PANEL_SECTIONS: List<DrsTextToolsPanelSection> = listOf(
                 R.string.drs__text_tools__desc_remove_diacritics,
                 Icons.Default.FormatClear,
             ),
-            // DRS v1.4.0 (public): the sentence vocalization — the honest
+            // (public): the sentence vocalization — the honest
             // counterpart: known words take their canonical harakat, unknown
             // words stay untouched, never guessed.
             toolItem(
@@ -449,7 +449,7 @@ private val PANEL_SECTIONS: List<DrsTextToolsPanelSection> = listOf(
                 R.string.drs__text_tools__desc_tashkeel_text,
                 Icons.Default.Spellcheck,
             ),
-            // DRS v2.16.0: the writing assistant speaks — sixteen
+            // the writing assistant speaks — sixteen
             // deterministic Arabic phrase rewrites that fire ONLY on the
             // FULL normalized tail of the text (never a containment hit):
             // «انشاء الله» becomes «إن شاء الله» only when it ends the
@@ -461,7 +461,7 @@ private val PANEL_SECTIONS: List<DrsTextToolsPanelSection> = listOf(
                 R.string.drs__text_tools__desc_improve_phrases,
                 Icons.Default.AutoFixHigh,
             ),
-            // DRS v1.6.0: the number-to-words rendering — a clean integer
+            // the number-to-words rendering — a clean integer
             // field speaks its Arabic words, prose stays untouched.
             toolItem(
                 DrsTextTool.NUMBER_WORDS,
@@ -469,7 +469,7 @@ private val PANEL_SECTIONS: List<DrsTextToolsPanelSection> = listOf(
                 R.string.drs__text_tools__desc_number_words,
                 Icons.Default.Calculate,
             ),
-            // DRS v1.7.0: the financial tafqit — a clean amount speaks its
+            // the financial tafqit — a clean amount speaks its
             // formal check words «فقط … لا غير», prose stays untouched.
             toolItem(
                 DrsTextTool.TAFQIT,
@@ -477,7 +477,7 @@ private val PANEL_SECTIONS: List<DrsTextToolsPanelSection> = listOf(
                 R.string.drs__text_tools__desc_tafqit,
                 Icons.Default.Paid,
             ),
-            // DRS v1.8.0: the date in words — a clean date speaks its formal
+            // the date in words — a clean date speaks its formal
             // documentary phrase, prose stays untouched. The trilogy closes:
             // numbers, amounts, dates.
             toolItem(
@@ -486,7 +486,7 @@ private val PANEL_SECTIONS: List<DrsTextToolsPanelSection> = listOf(
                 R.string.drs__text_tools__desc_date_words,
                 Icons.Default.Event,
             ),
-            // DRS v1.9.0: the clock time in words — a clean clock time speaks
+            // the clock time in words — a clean clock time speaks
             // its formal spoken phrase, prose stays untouched. The quartet
             // closes: numbers, amounts, dates, times.
             toolItem(
@@ -495,7 +495,7 @@ private val PANEL_SECTIONS: List<DrsTextToolsPanelSection> = listOf(
                 R.string.drs__text_tools__desc_time_words,
                 Icons.Default.Schedule,
             ),
-            // DRS v1.10.0: the fraction in words — a clean fraction speaks
+            // the fraction in words — a clean fraction speaks
             // its formal written words, prose stays untouched. The fifth
             // round opens: fractions, ordinals, weekdays.
             toolItem(
@@ -504,7 +504,7 @@ private val PANEL_SECTIONS: List<DrsTextToolsPanelSection> = listOf(
                 R.string.drs__text_tools__desc_fraction_words,
                 Icons.Default.PieChart,
             ),
-            // DRS v1.10.0: the weekday — a clean date resolves to its
+            // the weekday — a clean date resolves to its
             // weekday name by the closed Sakamoto congruence, prose stays
             // untouched.
             toolItem(
@@ -513,7 +513,7 @@ private val PANEL_SECTIONS: List<DrsTextToolsPanelSection> = listOf(
                 R.string.drs__text_tools__desc_weekday,
                 Icons.Default.Today,
             ),
-            // DRS v1.10.0: the ordinal in words — a clean integer speaks
+            // the ordinal in words — a clean integer speaks
             // its ordinal (الأول، الحادي والعشرون، الألف), prose stays
             // untouched. The fifth round closes its trio.
             toolItem(
@@ -522,7 +522,7 @@ private val PANEL_SECTIONS: List<DrsTextToolsPanelSection> = listOf(
                 R.string.drs__text_tools__desc_ordinal_words,
                 Icons.Default.EmojiEvents,
             ),
-            // DRS v2.0.0: the decimal in words — a clean decimal speaks
+            // the decimal in words — a clean decimal speaks
             // its digit-by-digit words (واحد فاصلة خمسة صفر), prose
             // stays untouched. The sixth round opens: the decimal tail
             // speaks, and the words speak back numbers.
@@ -532,7 +532,7 @@ private val PANEL_SECTIONS: List<DrsTextToolsPanelSection> = listOf(
                 R.string.drs__text_tools__desc_decimal_words,
                 Icons.Default.Percent,
             ),
-            // DRS v2.0.0: words to number — the release lexicon speaks
+            // words to number — the release lexicon speaks
             // back: «ثلاثة وعشرون» returns 23. The words family now
             // round-trips on one source of truth.
             toolItem(
@@ -541,7 +541,7 @@ private val PANEL_SECTIONS: List<DrsTextToolsPanelSection> = listOf(
                 R.string.drs__text_tools__desc_words_to_number,
                 Icons.Default.Functions,
             ),
-            // DRS v2.1.0: the Gregorian→Hijri conversion — a clean date
+            // the Gregorian→Hijri conversion — a clean date
             // speaks its Hijri phrase (الأول من رمضان عام ...) on the
             // platform's Umm al-Qura table, the zone closed 1300..1600.
             toolItem(
@@ -550,7 +550,7 @@ private val PANEL_SECTIONS: List<DrsTextToolsPanelSection> = listOf(
                 R.string.drs__text_tools__desc_gregorian_to_hijri,
                 Icons.Default.CalendarMonth,
             ),
-            // DRS v2.1.0: the Hijri→Gregorian conversion — the inverse:
+            // the Hijri→Gregorian conversion — the inverse:
             // a clean Hijri date speaks its Gregorian phrase through
             // the DATE_WORDS formatter. The calendar round-trips.
             toolItem(
@@ -559,7 +559,7 @@ private val PANEL_SECTIONS: List<DrsTextToolsPanelSection> = listOf(
                 R.string.drs__text_tools__desc_hijri_to_gregorian,
                 Icons.Default.DateRange,
             ),
-            // DRS v1.3.0: tatweel removal + digit conversions.
+            // tatweel removal + digit conversions.
             toolItem(
                 DrsTextTool.REMOVE_TATWEEL,
                 R.string.drs__text_tools__tool_remove_tatweel,
@@ -578,7 +578,7 @@ private val PANEL_SECTIONS: List<DrsTextToolsPanelSection> = listOf(
                 R.string.drs__text_tools__desc_to_western_digits,
                 Icons.Default.SwapHoriz,
             ),
-            // DRS v2.2.0: the link-safe slug — العربية تحتفظ بحروفها
+            // the link-safe slug — العربية تحتفظ بحروفها
             // المطوية لا بنقل صوتي مخترَع، والترقيم الصافي يعود كما هو.
             toolItem(
                 DrsTextTool.SLUGIFY,
@@ -586,28 +586,28 @@ private val PANEL_SECTIONS: List<DrsTextToolsPanelSection> = listOf(
                 R.string.drs__text_tools__desc_slugify,
                 Icons.Default.Link,
             ),
-            // DRS v1.4.0: unify Arabic letter variants for copy/search.
+            // unify Arabic letter variants for copy/search.
             toolItem(
                 DrsTextTool.NORMALIZE_ARABIC,
                 R.string.drs__text_tools__tool_normalize_arabic,
                 R.string.drs__text_tools__desc_normalize_arabic,
                 Icons.Default.TextFields,
             ),
-            // DRS v1.7.0: repairs PDF/web Arabic presentation forms.
+            // repairs PDF/web Arabic presentation forms.
             toolItem(
                 DrsTextTool.NORMALIZE_ARABIC_FORMS,
                 R.string.drs__text_tools__tool_normalize_arabic_forms,
                 R.string.drs__text_tools__desc_normalize_arabic_forms,
                 Icons.Default.TextFields,
             ),
-            // DRS v1.5.0: Latin sentence punctuation → Arabic marks.
+            // Latin sentence punctuation → Arabic marks.
             toolItem(
                 DrsTextTool.TO_ARABIC_PUNCTUATION,
                 R.string.drs__text_tools__tool_to_arabic_punctuation,
                 R.string.drs__text_tools__desc_to_arabic_punctuation,
                 Icons.Default.QuestionMark,
             ),
-            // DRS v1.6.0: the inverse mapping back to Latin marks.
+            // the inverse mapping back to Latin marks.
             toolItem(
                 DrsTextTool.TO_WESTERN_PUNCTUATION,
                 R.string.drs__text_tools__tool_to_western_punctuation,
@@ -631,21 +631,21 @@ private val PANEL_SECTIONS: List<DrsTextToolsPanelSection> = listOf(
                 R.string.drs__text_tools__desc_clean_text,
                 Icons.Default.AutoFixHigh,
             ),
-            // DRS v1.8.0: strips every Unicode punctuation mark.
+            // strips every Unicode punctuation mark.
             toolItem(
                 DrsTextTool.REMOVE_PUNCTUATION,
                 R.string.drs__text_tools__tool_remove_punctuation,
                 R.string.drs__text_tools__desc_remove_punctuation,
                 Icons.Default.Block,
             ),
-            // DRS v1.2.0: locale-aware quote wrapping.
+            // locale-aware quote wrapping.
             toolItem(
                 DrsTextTool.WRAP_QUOTES,
                 R.string.drs__text_tools__tool_wrap_quotes,
                 R.string.drs__text_tools__desc_wrap_quotes,
                 Icons.Default.FormatQuote,
             ),
-            // DRS v1.5.0: paren wrapping + one sentence per line.
+            // paren wrapping + one sentence per line.
             toolItem(
                 DrsTextTool.WRAP_PARENS,
                 R.string.drs__text_tools__tool_wrap_parens,
@@ -658,7 +658,7 @@ private val PANEL_SECTIONS: List<DrsTextToolsPanelSection> = listOf(
                 R.string.drs__text_tools__desc_sentence_per_line,
                 Icons.Default.FormatListBulleted,
             ),
-            // DRS v1.7.0: the URL encode/decode pair — Arabic links become
+            // the URL encode/decode pair — Arabic links become
             // shareable percent-encoded components and back.
             toolItem(
                 DrsTextTool.URL_ENCODE,
@@ -697,7 +697,7 @@ private val PANEL_SECTIONS: List<DrsTextToolsPanelSection> = listOf(
             ),
         ),
     ),
-    // DRS v1.21.0: the invisible directional/joining marks — the tools
+    // the invisible directional/joining marks — the tools
     // RTL authors keep reaching for: RLM/LRM steer neutral punctuation
     // between mixed-direction runs, ZWJ/ZWNJ (نصف المسافة) join or break
     // cursive connections and emoji sequences.
@@ -780,7 +780,7 @@ private val PANEL_SECTIONS: List<DrsTextToolsPanelSection> = listOf(
 )
 
 /**
- * DRS v2.2.0 — the flat tile catalogue shared by the recents engine and
+ * the flat tile catalogue shared by the recents engine and
  * the favorites resolution: every tile the panel renders, in panel order.
  * Declared AFTER [PANEL_SECTIONS] on purpose — top-level initializers run
  * in file order, and a forward reference would see a null catalogue.
@@ -792,7 +792,7 @@ private val ITEMS_BY_CODE: Map<Int, DrsTextToolsPanelItem> =
     ALL_ITEMS.associateBy { it.code }
 
 /**
- * DRS v1.5.0: the panel title of every text tool, shared with the smart
+ * the panel title of every text tool, shared with the smart
  * bar's most-used tiles so a heavy text-tool user sees real names instead
  * of the invalid-fatal placeholder. Mirrors [PANEL_SECTIONS] labels.
  */
@@ -815,7 +815,7 @@ fun textToolTitleRes(tool: DrsTextTool): Int = when (tool) {
     DrsTextTool.STRIP_EMOJI -> R.string.drs__text_tools__tool_strip_emoji
     DrsTextTool.URL_ENCODE -> R.string.drs__text_tools__tool_url_encode
     DrsTextTool.URL_DECODE -> R.string.drs__text_tools__tool_url_decode
-    // DRS v1.8.0: the mixed-script cleanup pair.
+    // the mixed-script cleanup pair.
     DrsTextTool.SEPARATE_DIGIT_LETTERS -> R.string.drs__text_tools__tool_separate_digit_letters
     DrsTextTool.REMOVE_PUNCTUATION -> R.string.drs__text_tools__tool_remove_punctuation
     DrsTextTool.REMOVE_ZERO_WIDTH -> R.string.drs__text_tools__tool_remove_zero_width
@@ -830,29 +830,29 @@ fun textToolTitleRes(tool: DrsTextTool): Int = when (tool) {
     DrsTextTool.NUMBER_LINES -> R.string.drs__text_tools__tool_number_lines
     DrsTextTool.REVERSE_LINES -> R.string.drs__text_tools__tool_reverse_lines
     DrsTextTool.REMOVE_DIACRITICS -> R.string.drs__text_tools__tool_remove_diacritics
-    // DRS v1.4.0 (public): the sentence vocalization (REMOVE_DIACRITICS' counterpart).
+    // (public): the sentence vocalization (REMOVE_DIACRITICS' counterpart).
     DrsTextTool.TASHKEEL_TEXT -> R.string.drs__text_tools__tool_tashkeel_text
-    // DRS v1.6.0: the number-to-words rendering.
+    // the number-to-words rendering.
     DrsTextTool.NUMBER_WORDS -> R.string.drs__text_tools__tool_number_words
-    // DRS v1.7.0: the financial tafqit.
+    // the financial tafqit.
     DrsTextTool.TAFQIT -> R.string.drs__text_tools__tool_tafqit
-    // DRS v1.8.0: the date in words.
+    // the date in words.
     DrsTextTool.DATE_WORDS -> R.string.drs__text_tools__tool_date_words
-    // DRS v1.9.0: the clock time in words.
+    // the clock time in words.
     DrsTextTool.TIME_WORDS -> R.string.drs__text_tools__tool_time_words
-    // DRS v1.10.0: the fraction in words.
+    // the fraction in words.
     DrsTextTool.FRACTION_WORDS -> R.string.drs__text_tools__tool_fraction_words
-    // DRS v1.10.0: the weekday resolution.
+    // the weekday resolution.
     DrsTextTool.WEEKDAY -> R.string.drs__text_tools__tool_weekday
-    // DRS v1.10.0: the ordinal in words.
+    // the ordinal in words.
     DrsTextTool.ORDINAL_WORDS -> R.string.drs__text_tools__tool_ordinal_words
-    // DRS v2.0.0: the decimal in words.
+    // the decimal in words.
     DrsTextTool.DECIMAL_WORDS -> R.string.drs__text_tools__tool_decimal_words
-    // DRS v2.0.0: the words-to-number mirror.
+    // the words-to-number mirror.
     DrsTextTool.WORDS_TO_NUMBER -> R.string.drs__text_tools__tool_words_to_number
     DrsTextTool.GREGORIAN_TO_HIJRI -> R.string.drs__text_tools__tool_gregorian_to_hijri
     DrsTextTool.HIJRI_TO_GREGORIAN -> R.string.drs__text_tools__tool_hijri_to_gregorian
-    // DRS v2.2.0: the four new tiles.
+    // the four new tiles.
     DrsTextTool.SORT_LINES_NATURAL -> R.string.drs__text_tools__tool_sort_lines_natural
     DrsTextTool.SLUGIFY -> R.string.drs__text_tools__tool_slugify
     DrsTextTool.TO_SNAKE_CASE -> R.string.drs__text_tools__tool_to_snake_case
@@ -880,7 +880,7 @@ fun textToolTitleRes(tool: DrsTextTool): Int = when (tool) {
     DrsTextTool.INSERT_ZWNJ -> R.string.drs__text_tools__tool_insert_zwnj
 }
 
-/** DRS v1.5.0: the panel description of every text tool (tile tooltips). */
+/** the panel description of every text tool (tile tooltips). */
 fun textToolDescRes(tool: DrsTextTool): Int = when (tool) {
     DrsTextTool.UPPERCASE -> R.string.drs__text_tools__desc_uppercase
     DrsTextTool.LOWERCASE -> R.string.drs__text_tools__desc_lowercase
@@ -900,7 +900,7 @@ fun textToolDescRes(tool: DrsTextTool): Int = when (tool) {
     DrsTextTool.STRIP_EMOJI -> R.string.drs__text_tools__desc_strip_emoji
     DrsTextTool.URL_ENCODE -> R.string.drs__text_tools__desc_url_encode
     DrsTextTool.URL_DECODE -> R.string.drs__text_tools__desc_url_decode
-    // DRS v1.8.0: the mixed-script cleanup pair.
+    // the mixed-script cleanup pair.
     DrsTextTool.SEPARATE_DIGIT_LETTERS -> R.string.drs__text_tools__desc_separate_digit_letters
     DrsTextTool.REMOVE_PUNCTUATION -> R.string.drs__text_tools__desc_remove_punctuation
     DrsTextTool.REMOVE_ZERO_WIDTH -> R.string.drs__text_tools__desc_remove_zero_width
@@ -915,29 +915,29 @@ fun textToolDescRes(tool: DrsTextTool): Int = when (tool) {
     DrsTextTool.NUMBER_LINES -> R.string.drs__text_tools__desc_number_lines
     DrsTextTool.REVERSE_LINES -> R.string.drs__text_tools__desc_reverse_lines
     DrsTextTool.REMOVE_DIACRITICS -> R.string.drs__text_tools__desc_remove_diacritics
-    // DRS v1.4.0 (public): the sentence vocalization (REMOVE_DIACRITICS' counterpart).
+    // (public): the sentence vocalization (REMOVE_DIACRITICS' counterpart).
     DrsTextTool.TASHKEEL_TEXT -> R.string.drs__text_tools__desc_tashkeel_text
-    // DRS v1.6.0: the number-to-words rendering.
+    // the number-to-words rendering.
     DrsTextTool.NUMBER_WORDS -> R.string.drs__text_tools__desc_number_words
-    // DRS v1.7.0: the financial tafqit.
+    // the financial tafqit.
     DrsTextTool.TAFQIT -> R.string.drs__text_tools__desc_tafqit
-    // DRS v1.8.0: the date in words.
+    // the date in words.
     DrsTextTool.DATE_WORDS -> R.string.drs__text_tools__desc_date_words
-    // DRS v1.9.0: the clock time in words.
+    // the clock time in words.
     DrsTextTool.TIME_WORDS -> R.string.drs__text_tools__desc_time_words
-    // DRS v1.10.0: the fraction in words.
+    // the fraction in words.
     DrsTextTool.FRACTION_WORDS -> R.string.drs__text_tools__desc_fraction_words
-    // DRS v1.10.0: the weekday resolution.
+    // the weekday resolution.
     DrsTextTool.WEEKDAY -> R.string.drs__text_tools__desc_weekday
-    // DRS v1.10.0: the ordinal in words.
+    // the ordinal in words.
     DrsTextTool.ORDINAL_WORDS -> R.string.drs__text_tools__desc_ordinal_words
-    // DRS v2.0.0: the decimal in words.
+    // the decimal in words.
     DrsTextTool.DECIMAL_WORDS -> R.string.drs__text_tools__desc_decimal_words
-    // DRS v2.0.0: the words-to-number mirror.
+    // the words-to-number mirror.
     DrsTextTool.WORDS_TO_NUMBER -> R.string.drs__text_tools__desc_words_to_number
     DrsTextTool.GREGORIAN_TO_HIJRI -> R.string.drs__text_tools__desc_gregorian_to_hijri
     DrsTextTool.HIJRI_TO_GREGORIAN -> R.string.drs__text_tools__desc_hijri_to_gregorian
-    // DRS v2.2.0: the four new tiles.
+    // the four new tiles.
     DrsTextTool.SORT_LINES_NATURAL -> R.string.drs__text_tools__desc_sort_lines_natural
     DrsTextTool.SLUGIFY -> R.string.drs__text_tools__desc_slugify
     DrsTextTool.TO_SNAKE_CASE -> R.string.drs__text_tools__desc_to_snake_case
@@ -966,7 +966,7 @@ fun textToolDescRes(tool: DrsTextTool): Int = when (tool) {
 }
 
 /**
- * DRS v2.2.0 — الجولة الثامنة «البلاطة الذكية»: the technical text tools
+ * الجولة الثامنة «البلاطة الذكية»: the technical text tools
  * panel, rebuilt around its TILES. Shown when the keyboard UI mode is
  * [ImeUiMode.TEXT_TOOLS]. Every tile dispatches a real key event through
  * the input pipeline; transformations run inside the editor's batch-edit
@@ -1001,14 +1001,14 @@ fun DrsTextToolsPanel(modifier: Modifier = Modifier) {
     val editorInstance by context.editorInstance()
     val prefs by DrsPreferenceStore
 
-    // DRS v2.3.0 «اللوحات الحيّة الصادقة»: the panel joins the two
-    // contracts the strips above it have lived by since v2.2.1/v2.2.2 —
+    // «اللوحات الحيّة الصادقة»: the panel joins the two
+    // contracts the strips above it have lived by since /
     // feedback at the interaction site (the dispatcher owns NO feedback,
     // so every tile used to be silent) and the motion-respect gate (the
     // system «remove animations» switch snaps every pulse/wave below).
     val feedback = LocalInputFeedbackController.current
     val motionEnabled = rememberDrsMotionEnabled()
-    // DRS v2.3.0: the LIVE smartbar evaluator — the same single source of
+    // the LIVE smartbar evaluator — the same single source of
     // truth QuickActionButton and the unified strip ask. The context-gated
     // clipboard tools (copy/cut/paste/select-all) dim and refuse honestly
     // when the editor context says their action would be a silent no-op.
@@ -1027,7 +1027,7 @@ fun DrsTextToolsPanel(modifier: Modifier = Modifier) {
             TextKeyData(type = KeyType.FUNCTION, code = code, label = "drs_text_tool"),
         )
         DrsAdaptationEngine.recordTechToolUse()
-        // DRS v2.2.0: the per-tile LOCAL counter (the tile's code only —
+        // the per-tile LOCAL counter (the tile's code only —
         // never text). The incognito mode records nothing, exactly like
         // the harakat/symbols/letters panels' counters.
         if (!keyboardManager.activeState.isIncognitoMode) {
@@ -1037,7 +1037,7 @@ fun DrsTextToolsPanel(modifier: Modifier = Modifier) {
         commitStamp++
     }
 
-    // DRS v2.3.0 «البلاطة الصادقة سياقيًا»: the panel's single gate
+    // «البلاطة الصادقة سياقيًا»: the panel's single gate
     // question. Codes outside DrsPanelGates' closed set are deterministically
     // always-applicable (text transforms have no master); the gated four ask
     // the same evaluateEnabled the strip's slots ask. UNDO/REDO stay
@@ -1096,7 +1096,7 @@ fun DrsTextToolsPanel(modifier: Modifier = Modifier) {
             SnyggIconButton(
                 elementName = DrsImeUi.ClipboardHeaderButton.elementName,
                 onClick = {
-                    // DRS v2.3.0: the header buttons speak too — the close
+                    // the header buttons speak too — the close
                     // button and the undo/redo pair used to be the panel's
                     // only silent controls.
                     feedback.keyPress()
@@ -1211,7 +1211,7 @@ fun DrsTextToolsPanel(modifier: Modifier = Modifier) {
                                         selected = false,
                                         accent = accent,
                                         onClick = { dispatch(tool.code) },
-                                        // DRS v2.3.0: the picks read as one
+                                        // the picks read as one
                                         // capped wave per new advisory set.
                                         entranceIndex = pickIndex,
                                         entranceKey = contextPicks,
@@ -1347,10 +1347,10 @@ private fun HintText(text: String) {
 
 /**
  * One chip of the tiles' filter bar — the shared accent-pill pattern the
- * panel switcher chips established (v1.16.0); a tap filters, the selected
+ * panel switcher chips established (); a tap filters, the selected
  * chip carries the stronger accent wash.
  *
- * DRS v2.3.0 «اللوحات الحيّة»: the chip lives — the same press pulse the
+ * «اللوحات الحيّة»: the chip lives — the same press pulse the
  * strip slots and the board keys use (draw-only graphicsLayer), feedback
  * at the interaction site, and an optional entrance-wave slot so dynamic
  * chip rows (the contextual picks) read as one capped wave, never a
@@ -1416,7 +1416,7 @@ private fun FilterChip(
  * The compact two-column grid tile: the icon plus a one-line label. A tap
  * dispatches the tool; a LONG-PRESS pins or unpins it (the favorites).
  *
- * DRS v2.3.0 «البلاطة الحيّة الصادقة»: the tile joins the strips' two
+ * «البلاطة الحيّة الصادقة»: the tile joins the strips' two
  * contracts. It lives (press pulse + click/long-press feedback, draw-only
  * graphicsLayer so the grid geometry never shifts) and it tells the truth
  * (a context-gated action — paste on an empty clipboard, copy with no

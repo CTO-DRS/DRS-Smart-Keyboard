@@ -43,9 +43,9 @@
         <item name="android:windowIsTranslucent">true</item>
     </style>
 
-    <!-- DRS v1.11.0: the popup clipboard editor window. Dialog-styled
-         translucent window: the app behind stays visible, the editor card
-         floats centered, and the system keyboard opens inside (resize). -->
+    <!-- the popup clipboard editor window. Dialog-styled
+ translucent window: the app behind stays visible, the editor card
+ floats centered, and the system keyboard opens inside (resize). -->
     <style name="DrsAppTheme.ClipEditorPopup" parent="android:style/Theme.Material.NoActionBar">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:colorBackground">@android:color/transparent</item>

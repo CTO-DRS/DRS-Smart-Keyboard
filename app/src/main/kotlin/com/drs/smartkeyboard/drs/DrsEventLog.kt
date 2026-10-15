@@ -10,7 +10,7 @@ import java.util.Date
 import java.util.Locale
 
 /**
- * DRS v1.0.6: bounded, sanitized local event log for technical diagnostics.
+ * bounded, sanitized local event log for technical diagnostics.
  *
  * Hard privacy rules, enforced by the API itself:
  *  - Only event CATEGORY + machine-level detail strings may be recorded.

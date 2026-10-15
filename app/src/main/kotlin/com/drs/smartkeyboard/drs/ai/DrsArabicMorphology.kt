@@ -33,7 +33,7 @@ import java.util.Collections
  *     removed (مدرسة → مدرس) — it is the unit the ranker and the
  *     personal-learning tables reason about.
  *
- * DRS v1.6.0 added FIVE weights (15 → 20). The additions were gated by
+ * added FIVE weights (15 → 20). The additions were gated by
  * a collision audit against the existing templates, and the one real
  * trap resolved itself through the template constants:
  *
@@ -60,12 +60,12 @@ object DrsArabicMorphology {
      */
     private data class Weight(val template: String, val endsWithTaMarbuta: Boolean)
 
-    // The twenty documented weights (DRS v1.6.0 added the last five
+    // The twenty documented weights ( added the last five
     // families: فعّيل، فعّول، مفعَل، تفعّل، مُفاعلة). Note the
     // VOWEL-LETTER POSITIONS are the whole game: فاعل (ف ا ع ل) drops
     // the alif at position 1, while the فعّال shape (ف ع ا ل) drops the
     // seat alif at position 2 — swapping those two produced wrong roots
-    // for every participle. The v1.6.0 ordering rules: فاعل/فعال sit
+    // for every participle. The ordering rules: فاعل/فعال sit
     // BEFORE تفعل so the index-1 ف constant of the latter keeps تابع
     // (فاعل-family) and تدرس (تفعل-family) disambiguated automatically.
     private val PATTERNS: List<Weight> = listOf(

@@ -182,7 +182,7 @@ class SnyggThemeTest {
 
     @Test
     fun `theme with boolean voice attribute`() {
-        // DRS v1.27.0: the listening-state contract — a plain rule keeps
+        // the listening-state contract — a plain rule keeps
         // matching a query that carries an attribute (rule attributes are
         // iterated, not the query's), while an explicit attribute rule
         // matches only queries carrying that exact value. This is what

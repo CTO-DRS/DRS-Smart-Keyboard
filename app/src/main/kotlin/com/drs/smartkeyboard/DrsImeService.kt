@@ -357,7 +357,7 @@ class DrsImeService : LifecycleInputMethodService() {
         // DRS (H2): teardown is best-effort — a dead recognizer, a dead
         // receiver or a half-torn-down manager must never crash the
         // service shutdown path.
-        // DRS v1.23.0: a live voice session must never outlive the service.
+        // a live voice session must never outlive the service.
         runCatching { keyboardManager.destroyVoiceInput() }.onFailure {
             flogError(LogTopic.IMS_EVENTS) { "destroyVoiceInput failed: $it" }
         }
@@ -504,7 +504,7 @@ class DrsImeService : LifecycleInputMethodService() {
         com.drs.smartkeyboard.drs.DrsStore.flushAsync()
         if (windowController.onWindowHidden()) {
             flogInfo(LogTopic.IMS_EVENTS)
-            // DRS v1.23.0: the keyboard went away — a live dictation
+            // the keyboard went away — a live dictation
             // session must die with it (never keep the mic hot in the
             // background).
             keyboardManager.stopVoiceInput()
@@ -512,9 +512,9 @@ class DrsImeService : LifecycleInputMethodService() {
                 activeState.imeUiMode = ImeUiMode.TEXT
                 activeState.isActionsOverflowVisible = false
                 activeState.isActionsEditorVisible = false
-                // DRS v1.8.0: never persist a stale tools drawer across hides.
+                // never persist a stale tools drawer across hides.
                 activeState.isToolsDrawerVisible = false
-                // DRS v1.16.0: ...nor a stale strip slot editor.
+                //...nor a stale strip slot editor.
                 DrsRuntimeState.closeStripSlotEditor()
             }
         } else {
@@ -621,7 +621,7 @@ class DrsImeService : LifecycleInputMethodService() {
             .onFailure { flogError(LogTopic.KEY_EVENTS) { "onHardwareKeyDown failed: $it" } }
             .getOrDefault(false)
         if (handled) return true
-        // DRS v2.7.0: volume-key cursor control (opt-in). Only reached when
+        // volume-key cursor control (opt-in). Only reached when
         // the hardware path declined the key, so physical-keyboard behavior
         // is never shadowed. Same shielded-degrade contract as above.
         val volumeHandled = runCatching { keyboardManager.onVolumeKeyCursor(keyCode) }
@@ -638,7 +638,7 @@ class DrsImeService : LifecycleInputMethodService() {
             .onFailure { flogError(LogTopic.KEY_EVENTS) { "onHardwareKeyUp failed: $it" } }
             .getOrDefault(false)
         if (handled) return true
-        // DRS v2.7.0: a consumed volume DOWN must pair with a consumed UP,
+        // a consumed volume DOWN must pair with a consumed UP,
         // otherwise the system half-handles the chord (stray click/beep).
         val volumeHandled = runCatching { keyboardManager.onVolumeKeyCursor(keyCode) }
             .onFailure { flogError(LogTopic.KEY_EVENTS) { "volume-key cursor failed: $it" } }

@@ -33,7 +33,7 @@ object DrsIntegration {
             val rawExpansion = DrsShortcuts.findExpansion(word) ?: return false
             val placesCursor = DrsShortcuts.hasCursorMarker(rawExpansion)
             val expansion = DrsShortcuts.expandTemplate(rawExpansion, clipboardText)
-            // DRS v1.0.6: a {cursor} marker inside the template moves the
+            // a {cursor} marker inside the template moves the
             // cursor there after insertion instead of appending a trailing
             // space - essential for letter templates with a fill-in gap.
             val (finalText, cursorOffset) = if (placesCursor) {

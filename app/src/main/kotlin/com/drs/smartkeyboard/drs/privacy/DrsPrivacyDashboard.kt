@@ -123,7 +123,7 @@ class DrsPrivacyDashboard(
             exportedAt = exportedAt,
             words = words,
             bigrams = bigrams,
-            // v2.13.0 «السياق الأعمق» — the two-word habits ride the same
+            // «السياق الأعمق» — the two-word habits ride the same
             // E2E container (validated, capped, sealed with everything else).
             trigrams = trigrams,
         )

@@ -51,7 +51,7 @@ import org.drs.lib.snygg.ui.SnyggColumn
 import org.drs.lib.snygg.ui.SnyggText
 
 /**
- * DRS v2.21.0 — لوحة نصوصي المحفوظة (the saved-texts panel) — the SIXTH
+ * لوحة نصوصي المحفوظة (the saved-texts panel) — the SIXTH
  * smart panel, built on the exact anatomy of the smart clipboard panel:
  * the shared header and switcher chips, a category chip bar (الكل + the
  * user's own categories), the saved texts in the deterministic order

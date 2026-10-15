@@ -25,7 +25,7 @@ import java.io.File
 import java.nio.file.Files
 
 /**
- * DRS v2.2.0-alpha1 — Phase 3 of the grand roadmap (privacy & trust):
+ * alpha1 — Phase 3 of the grand roadmap (privacy & trust):
  * the provable-privacy stack in drs/privacy. Every unit here is PURE
  * (JVM only, no Android framework), matching the ADR 0005/0006
  * testability constraint:

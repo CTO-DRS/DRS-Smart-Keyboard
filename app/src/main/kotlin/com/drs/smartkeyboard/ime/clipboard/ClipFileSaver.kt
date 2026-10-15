@@ -11,7 +11,7 @@ import android.provider.MediaStore
 import java.io.File
 
 /**
- * DRS v1.9.0 — the "save clip as file" engine behind the clipboard panel
+ * the "save clip as file" engine behind the clipboard panel
  * dialog. Text is written with UTF-8, no storage permission is ever
  * requested:
  *

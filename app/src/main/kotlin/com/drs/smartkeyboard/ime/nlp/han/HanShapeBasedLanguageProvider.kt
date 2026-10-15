@@ -44,21 +44,21 @@ class HanShapeBasedLanguageProvider(val context: Context) : SpellingProvider, Su
     private val maxFreqBySubType = mutableMapOf<String, Int>();
     private val extensionManager by context.extensionManager()
     private val subtypeManager by context.subtypeManager()
-    // DRS v1.24.0: the pack index is a StateFlow (ExtensionIndex) — a
+    // the pack index is a StateFlow (ExtensionIndex) — a
     // plain collector in the provider's scope observes it on any thread,
     // no main-thread handler needed.
     private var packObserversWired = false
     private val allLanguagePacks: List<LanguagePackExtension>
         // Assume other types of extensions do not extend LanguagePackExtension
         get() = extensionManager.languagePacks.value
-    private var __connectedActiveLanguagePacks: Set<LanguagePackExtension> = setOf() // DRS v1.24.0 note: the live pack observer below retired the old "can't observe" hack — this snapshot stays as the belt-and-braces guard in suggest()
+    private var __connectedActiveLanguagePacks: Set<LanguagePackExtension> = setOf() // note: the live pack observer below retired the old "can't observe" hack — this snapshot stays as the belt-and-braces guard in suggest()
     private var languagePackItems: Map<String, LanguagePackComponent> = mapOf() // init in refreshLanguagePacks()
     private var keyCode: Map<String, Set<Char>> = mapOf() // init in refreshLanguagePacks()
     private val activeLanguagePacks  // language packs referenced in subtypes
         get() = buildSet {
             val locales = subtypeManager.subtypes.map { it.primaryLocale.localeTag() }.toSet()
             for (languagePack in allLanguagePacks) {
-                // DRS v1.24.0 honest audit: the upstream FIXME asked for a
+                // honest audit: the upstream FIXME asked for a
                 // language-pack type check, but no Han-specific extension
                 // subtype exists in the codebase — every pack reaching this
                 // provider ships the Han shape-based tables by asset
@@ -82,7 +82,7 @@ class HanShapeBasedLanguageProvider(val context: Context) : SpellingProvider, Su
         // Here we initialize our provider, set up all things which are not language dependent.
         // Refresh language pack parsing
 
-        // DRS v1.24.0: the upstream FIXME "observeForever only callable on
+        // the upstream FIXME "observeForever only callable on
         // the main thread" is finally resolved — the pack index turned out
         // to be a StateFlow (ExtensionIndex : StateFlow<List<T>>), so a
         // plain collector in the provider's own scope observes it without
@@ -102,7 +102,7 @@ class HanShapeBasedLanguageProvider(val context: Context) : SpellingProvider, Su
         // build index of available language packs
         languagePackItems = buildMap {
             for (languagePack in allLanguagePacks) {
-                // DRS v1.24.0 honest audit: same as the activeLanguagePacks
+                // honest audit: same as the activeLanguagePacks
                 // note — no Han-specific extension subtype exists to check
                 // against; the asset contract is the type system here.
                 for (languagePackItem in languagePack.items) {
@@ -177,7 +177,7 @@ class HanShapeBasedLanguageProvider(val context: Context) : SpellingProvider, Su
         isPrivateSession: Boolean,
     ): List<SuggestionCandidate> {
         if (__connectedActiveLanguagePacks != activeLanguagePacks) {
-            // DRS v1.24.0: belt-and-braces only — the live observer wired
+            // belt-and-braces only — the live observer wired
             // in create() refreshes eagerly; this lazy guard costs nothing
             // and covers any observer-delivery gap.
             refreshLanguagePacks()

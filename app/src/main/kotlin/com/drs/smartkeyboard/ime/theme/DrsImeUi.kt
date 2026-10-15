@@ -403,7 +403,7 @@ enum class DrsImeUi(val elementName: String, val resId: Int?) {
         const val Code = "code"
         const val Mode = "mode"
         const val ShiftState = "shiftstate"
-        // DRS v1.23.0: the modifier latch states join the theme surface —
+        // the modifier latch states join the theme surface —
         // keys carrying CTRL/ALT/FN can now be painted per latch state
         // ("off"/"latched"/"locked") exactly like the shift family has
         // always been through ShiftState.
@@ -411,7 +411,7 @@ enum class DrsImeUi(val elementName: String, val resId: Int?) {
         const val AltState = "altstate"
         const val FnState = "fnstate"
         const val WindowMode = "windowmode"
-        // DRS v1.27.0: the listening state joins the theme surface — the
+        // the listening state joins the theme surface — the
         // dictation bar keeps painting itself through the exact "smartbar"
         // rules every theme already owns (a rule without attributes matches
         // any attribute query), while a theme that wants to tell the

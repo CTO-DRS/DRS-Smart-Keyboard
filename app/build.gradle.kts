@@ -119,8 +119,8 @@ configure<ApplicationExtension> {
             applicationIdSuffix = ".beta"
             versionNameSuffix = projectVersionNameSuffix
 
-            // DRS v1.18.0: R8 re-enabled. Root cause investigation of the
-            // v1.7-era "blank screen" release (3.1MB dex without any UI):
+            // DRS: R8 re-enabled. Root cause investigation of the
+            // earlier "blank screen" release (3.1MB dex without any UI):
             // with the current AGP 9.0.0 toolchain the failure does NOT
             // reproduce — a controlled experiment (minify run with and
             // without explicit entry-point keeps) produced a complete dex
@@ -141,7 +141,7 @@ configure<ApplicationExtension> {
             versionNameSuffix = projectVersionNameSuffix
 
             signingConfig = signingConfigs.getByName("release")
-            // DRS v1.18.0: see the beta block comment — R8 is re-enabled
+            // DRS: see the beta block comment — R8 is re-enabled
             // with the dex-completeness validation gate.
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
             isMinifyEnabled = true
@@ -271,7 +271,7 @@ dependencies {
     androidTestImplementation(libs.androidx.test.espresso.core)
 }
 
-// DRS v1.18.0: R8 dex-completeness gate. The v1.7-era "blank screen"
+// DRS: R8 dex-completeness gate. The earlier "blank screen"
 // release shipped a minified dex from which every Compose screen had
 // been pruned — a failure that is invisible at build time and only
 // shows up as an empty UI on the device. These tasks scan the R8 output
@@ -314,7 +314,7 @@ listOf("beta", "release").forEach { variantName ->
             if (missing.isNotEmpty()) {
                 throw GradleException(
                     "R8 dex validation FAILED for $variantName: marker classes missing from the " +
-                        "minified dex (the v1.7 blank-screen signature): $missing",
+                        "minified dex (the blank-screen signature): $missing",
                 )
             }
         }

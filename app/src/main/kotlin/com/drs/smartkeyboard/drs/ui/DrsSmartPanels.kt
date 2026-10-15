@@ -109,9 +109,9 @@ import org.drs.lib.snygg.ui.SnyggText
 import org.drs.lib.snygg.SnyggSelector
 
 /**
- * DRS v1.15.0/v1.16.0 — الوحات الذكية الثلاث.
+ * /الوحات الذكية الثلاث.
  *
- *  - لوحة الحركات (DrsDiacriticsPanel): v1.16.0 أُعيد بناؤها كلوحة
+ * - لوحة الحركات (DrsDiacriticsPanel): أُعيد بناؤها كلوحة
  *    مفاتيح كاملة «مشابهة تمامًا للوحة الحروف أو الأرقام» — أربعة صفوف
  *    من مفاتيح العنصر المرئي نفسه الذي ترسم به المفاتيح الحقيقية، بارتفاع
  *    الصف والهوامش نفسهما: التنوينات، الحركات الأساسية، الشدة والتطويل
@@ -122,7 +122,7 @@ import org.drs.lib.snygg.SnyggSelector
  *  - لوحة الحروف الموسعة (DrsArabicLettersPanel): همزات ومشتقات وحروف
  *    الفارسية/الأردية/الكردية مع صف الأكثر استخدامًا.
  *
- * v1.16.0 — «أعد ترتيب وتطوير جميع الوحات بنظام مرتب وذكي»: رقاقات
+ * «أعد ترتيب وتطوير جميع الوحات بنظام مرتب وذكي»: رقاقات
  * المبدّل في اللوحات الثلاث تُرتَّب ذكيًا من عدّادات فتح اللوحات المحلية
  * (اللوحة الحالية أولًا ثم الأكثر فتحًا)، وكل لوحة تسجّل فتحها محليًا فقط
  * (الوضع الخفي لا يسجّل شيئًا إطلاقًا).
@@ -186,7 +186,7 @@ object DrsArabicLettersCatalog {
 
 /**
  * The shared panel-switcher chips row, smart-ordered by local open counts.
- * DRS v1.2.0: shared with the fourth smart panel (لوحة الأرقام الذكية)
+ * shared with the fourth smart panel (لوحة الأرقام الذكية)
  * — internal so the numbers panel mounts the exact same chips row.
  */
 @OptIn(ExperimentalFoundationApi::class)
@@ -217,7 +217,7 @@ internal fun PanelSwitcherChips(current: ImeUiMode, keyboardManager: com.drs.sma
             .padding(horizontal = 8.dp, vertical = 4.dp),
         horizontalArrangement = Arrangement.spacedBy(6.dp),
     ) {
-        // DRS v2.3.0 «اللوحات الحيّة": the switcher chips speak and pulse —
+        // «اللوحات الحيّة": the switcher chips speak and pulse —
         // they are shared by EVERY smart panel, so this one change carries
         // the strips' motion language to all of them at once.
         val motionEnabled = rememberDrsMotionEnabled()
@@ -259,7 +259,7 @@ internal fun PanelSwitcherChips(current: ImeUiMode, keyboardManager: com.drs.sma
  * Records one open of [mode] into the LOCAL panel-open counters (the
  * smart ordering input). Counts only — the incognito mode records
  * nothing at all, exactly like every other DRS usage counter.
- * DRS v1.2.0: internal — shared with the smart numbers panel.
+ * internal — shared with the smart numbers panel.
  */
 @Composable
 internal fun RecordPanelOpen(mode: ImeUiMode) {
@@ -274,7 +274,7 @@ internal fun RecordPanelOpen(mode: ImeUiMode) {
 
 /**
  * The shared header of the smart panels (back + title + actions).
- * DRS v1.2.0: internal — the smart numbers panel mounts it too.
+ * internal — the smart numbers panel mounts it too.
  */
 @Composable
 internal fun SmartPanelHeader(
@@ -296,7 +296,7 @@ internal fun SmartPanelHeader(
         SnyggIconButton(
             elementName = DrsImeUi.ClipboardHeaderButton.elementName,
             onClick = {
-                // DRS v2.3.0: the shared back button speaks too — every
+                // the shared back button speaks too — every
                 // smart panel's close used to be silent.
                 headerFeedback.keyPress()
                 keyboardManager.activeState.imeUiMode = ImeUiMode.TEXT
@@ -320,7 +320,7 @@ internal fun SmartPanelHeader(
 
 /**
  * One tile of the char grids: the big glyph plus its small local name.
- * DRS v2.3.0 «اللوحات الحيّة": the tile pulses with the shared DrsMotion
+ * «اللوحات الحيّة": the tile pulses with the shared DrsMotion
  * contract and speaks at the interaction site (it used to be silent).
  */
 @OptIn(ExperimentalFoundationApi::class)
@@ -384,14 +384,14 @@ private fun gridSubheader(text: String) {
 }
 
 /**
- * لوحة الحركات — DRS v1.1.0: اللوحة الكاملة «مشابهة للوحة الحروف» —
+ * لوحة الحركات — اللوحة الكاملة «مشابهة للوحة الحروف» —
  * three full-width rows (nine marks, then tatweel + double vocalizations +
  * madd forms + the definite-article lam, then the REAL bottom row
  * حروف · ، · حذف · مسافة · . · إدخال) at the real row height, rendered
  * through DrsImeUi.Key. Every mark key previews its effect in the corner
  * (دَ) the same way the letters board previews number/symbol hints.
  *
- * The smart layer (v1.1.0): a contextual advice strip above the rows —
+ * The smart layer (): a contextual advice strip above the rows —
  * the on-device advisor ([DrsHarakatAdvisor]) ranks the haraka that makes
  * sense at the cursor (tanween completion, shadda's vowel, the
  * definite-article lam, mark replacement, then the user's most-used),
@@ -399,7 +399,7 @@ private fun gridSubheader(text: String) {
  * the cursor word with its canonical vocalization and نزع التشكيل peels
  * every mark off it, both atomically through the editor's word op.
  * Smart insert (a mark over a mark replaces it, shadda+haraka appends)
- * and the hold-to-repeat delete stay from v1.16/v1.21.
+ * and the hold-to-repeat delete stay from /.
  */
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -418,9 +418,9 @@ fun DrsDiacriticsPanel(modifier: Modifier = Modifier) {
 
     RecordPanelOpen(ImeUiMode.DIACRITICS)
 
-    // DRS v2.22.0 — «المستخدم تفوز»: the personal tashkeel lexicon
+    // «المستخدم تفوز»: the personal tashkeel lexicon
     // (قاموسي التشكيلي) feeds the word-vocalization chain; disabled or
-    // empty it degrades to the exact pre-v2.22.0 references-only chain.
+    // empty it degrades to the exact pre- references-only chain.
     // Declared BEFORE the local closures so they capture it.
     val drsState by DrsStore.state.collectAsState()
     val userOverrides = remember(drsState.myLexicon, drsState.myLexiconEnabled) {
@@ -431,7 +431,7 @@ fun DrsDiacriticsPanel(modifier: Modifier = Modifier) {
         if (keyboardManager.activeState.isIncognitoMode) return
         DrsPanelUsageStore.record(context, USAGE_PANEL_HARAKAT, key)
         recents = DrsPanelUsageStore.load(context, USAGE_PANEL_HARAKAT)
-        // DRS v2.22.0: the harakat board's own feature counter — the same
+        // the harakat board's own feature counter — the same
         // single-drain doctrine every surface obeys.
         DrsAdaptationEngine.recordHarakatUse()
     }
@@ -463,7 +463,7 @@ fun DrsDiacriticsPanel(modifier: Modifier = Modifier) {
         val word = DrsHarakatWordOps.currentWordBefore(before)
         val vocalized = DrsWordTashkeel.vocalize(word, userOverrides) ?: return
         if (editorInstance.replaceWordBeforeCursor(vocalized, word.length)) {
-            // DRS v2.22.0: a hit served by the PERSONAL lexicon counts as
+            // a hit served by the PERSONAL lexicon counts as
             // its own feature use — the references' hits stay anonymous.
             if (vocalized == userOverrides[DrsHarakatWordOps.stripDiacritics(word)]) {
                 DrsMyLexicon.recordUse()
@@ -474,7 +474,7 @@ fun DrsDiacriticsPanel(modifier: Modifier = Modifier) {
     }
 
     /**
-     * DRS v2.20.0 — شهادة الجلالة (the majesty certification): replaces
+ * شهادة الجلالة (the majesty certification): replaces
      * the cursor word with its majesty-shadda form when the word is
      * exactly one of the nine closed لفظ الجلالة tokens (والله ← واللَّه).
      * The seed lexicon wins (seeded members keep their fuller
@@ -571,7 +571,7 @@ fun DrsDiacriticsPanel(modifier: Modifier = Modifier) {
     val windowSpec by windowController.activeWindowSpec.collectAsState()
     val rowHeight = DrsImeSizing.keyboardRowBaseHeight
 
-    // DRS v2.22.0 — رقاقة «علّم القاموس»: the honest unknown state of the
+    // رقاقة «علّم القاموس»: the honest unknown state of the
     // tashkeel chip becomes a teachable moment — the word the references
     // don't know can be taught to the personal lexicon from the panel
     // itself (incognito never teaches, the lexicon switch gates the
@@ -654,7 +654,7 @@ fun DrsDiacriticsPanel(modifier: Modifier = Modifier) {
                         },
                     )
                 }
-                // DRS v2.20.0 — رقاقة شهادة الجلالة: العائلة المغلقة التي
+                // رقاقة شهادة الجلالة: العائلة المغلقة التي
                 // لا تملكها البذرة تُعرض هنا — استبدال الكلمة بالشدة
                 // الجزئية (والله ← واللَّه) لأن الشدة وسط الكلمة لا عند
                 // المؤشر. البذرة تفوز: رقاقة التشكيل الكامل تغيب عن
@@ -675,7 +675,7 @@ fun DrsDiacriticsPanel(modifier: Modifier = Modifier) {
                         },
                     )
                 }
-                // DRS v2.22.0 — رقاقة التعليم: the word neither the
+                // رقاقة التعليم: the word neither the
                 // references nor the majesty family know gets a teach
                 // chip — the personal lexicon learns it in one dialog,
                 // and the tashkeel chip lights up right after.
@@ -758,7 +758,7 @@ fun DrsDiacriticsPanel(modifier: Modifier = Modifier) {
         Spacer(Modifier.height(4.dp))
     }
 
-    // DRS v2.22.0 — حوار التعليم: word (prefilled, editable) + the full
+    // حوار التعليم: word (prefilled, editable) + the full
     // vocalization; the engine's closed contract answers honestly and
     // a successful teach lights the tashkeel chip up in place.
     if (showTeachDialog) {
@@ -835,10 +835,10 @@ private fun adviceReasonLabel(reason: DrsHarakatAdvisor.AdviceReason): Int = whe
 
 /**
  * One chip of the smart advice strip ([leading] chips get the accent fill).
- * DRS v1.2.0: internal — the smart numbers panel reuses it for its
+ * internal — the smart numbers panel reuses it for its
  * context bar and its ready-formats strip.
  *
- * DRS v2.3.0 «اللوحات الحيّة»: the chip lives — the same press pulse the
+ * «اللوحات الحيّة»: the chip lives — the same press pulse the
  * strips and the board keys use (draw-only graphicsLayer), feedback at the
  * interaction site (clickable chips used to be silent), and an optional
  * entrance-wave slot so dynamic chip rows (clipboard variants, number
@@ -852,7 +852,7 @@ internal fun AdviceChip(
     accent: androidx.compose.ui.graphics.Color,
     leading: Boolean,
     onClick: (() -> Unit)? = null,
-    // DRS v2.22.0: the optional secondary action (hold) — the numbers
+    // the optional secondary action (hold) — the numbers
     // panel's formats save to نصوصي with a long-press; null keeps the
     // chip tap-only. Same pulse/entrance contract, zero visual change.
     onLongClick: (() -> Unit)? = null,
@@ -923,7 +923,7 @@ internal fun AdviceChip(
  * turns the key into the hold-to-repeat delete key; the corner hint
  * previews the mark on the sample letter (دَ) like the real hinted keys.
  *
- * DRS v1.2.0: internal — the smart numbers panel renders its grid and
+ * internal — the smart numbers panel renders its grid and
  * bottom row through the very same themed key element.
  */
 @OptIn(ExperimentalFoundationApi::class)
@@ -936,7 +936,7 @@ internal fun HarakatKeyboardKey(
 ) {
     val interaction = remember { MutableInteractionSource() }
     val pressed by interaction.collectIsPressedAsState()
-    // DRS v2.3.0 «اللوحات الحيّة»: the board key pulses with the same
+    // «اللوحات الحيّة»: the board key pulses with the same
     // DrsMotion contract the letters keys and the strips use — one motion
     // language everywhere — and it respects the system «remove animations»
     // switch (draw-only graphicsLayer, zero geometry change).
@@ -947,7 +947,7 @@ internal fun HarakatKeyboardKey(
         label = "drsBoardKeyPulse",
     )
 
-    // DRS v1.21.0: the hold-to-repeat key fires its first press the moment
+    // the hold-to-repeat key fires its first press the moment
     // the finger lands — a quick tap deletes immediately (it used to need a
     // full 400 ms hold before the first delete, leaving quick taps inert).
     LaunchedEffect(pressed, holdRepeat) {
@@ -1076,7 +1076,7 @@ fun DrsSmartSymbolsPanel(modifier: Modifier = Modifier) {
         if (!keyboardManager.activeState.isIncognitoMode) {
             DrsPanelUsageStore.record(context, USAGE_PANEL_SYMBOLS, text)
             recents = DrsPanelUsageStore.load(context, USAGE_PANEL_SYMBOLS)
-            // DRS v2.22.0: the symbols board's own feature counter.
+            // the symbols board's own feature counter.
             DrsAdaptationEngine.recordSymbolUse()
         }
         commitStamp++
@@ -1198,7 +1198,7 @@ fun DrsArabicLettersPanel(modifier: Modifier = Modifier) {
         if (!keyboardManager.activeState.isIncognitoMode) {
             DrsPanelUsageStore.record(context, USAGE_PANEL_LETTERS, text)
             recents = DrsPanelUsageStore.load(context, USAGE_PANEL_LETTERS)
-            // DRS v2.22.0: the letters board's own feature counter.
+            // the letters board's own feature counter.
             DrsAdaptationEngine.recordLetterUse()
         }
     }

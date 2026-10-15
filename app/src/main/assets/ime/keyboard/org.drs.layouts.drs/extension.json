@@ -2,7 +2,7 @@
   "$": "ime.extension.keyboard",
   "meta": {
     "id": "org.drs.layouts.drs",
-    "version": "1.1.0",
+    "version": "1.0.0",
     "title": "التخطيطات العربية المخصصة (DRS)",
     "description": "تخطيطات عربية إضافية بتصميم مخصص: نمط الحاسوب، النمط المغاربي، وصفحة رموز عربية كاملة.",
     "maintainers": [

@@ -2,7 +2,7 @@
   "$": "ime.extension.theme",
   "meta": {
     "id": "org.drs.themes",
-    "version": "0.2.0",
+    "version": "1.0.0",
     "title": "السمات الافتراضية (DRS)",
     "description": "السمات الافتراضية النهارية والليلية لواجهة لوحة المفاتيح DRS.",
     "maintainers": [

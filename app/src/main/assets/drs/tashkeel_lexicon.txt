@@ -1,11 +1,11 @@
-# DRS Smart Keyboard v1.2.0 — قاموس التشكيل (the vocalization lexicon)
+# DRS Smart Keyboard قاموس التشكيل (the vocalization lexicon)
 # Format: stripped<TAB>vocalized — one entry per line; '#' comments.
 # 3000 entries · matched on the STRIPPED form (partial marks still resolve).
 # Contract: strip(vocalized) == key · the nine canonical marks only ·
 #   MSA pause-friendly forms (final i'rab dropped; verb-final fatha kept
 #   when it is the corpus-majority continuation form; tanween-fath + alef kept).
 # Sources:
-#   * hand-reviewed seed (function words + frequent verbs, v1.1.0 lineage)
+# * hand-reviewed seed (function words + frequent verbs, lineage)
 #   * Tashkeela corpus (GPL-2.0) via community-datasets/tashkeela on
 #     HuggingFace — top-frequency forms from a 21.2M-token diacritized
 #     MSA/classical sample, extracted by the deterministic pause-form

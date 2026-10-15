@@ -87,7 +87,7 @@ class CacheManager(context: Context) {
                     val nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
                     val sizeIndex = cursor.getColumnIndex(OpenableColumns.SIZE)
                     cursor.moveToFirst()
-                    // DRS v1.28.0 audit fix (HIGH): the provider-supplied
+                    // audit fix (HIGH): the provider-supplied
                     // DISPLAY_NAME was used unvalidated as the destination
                     // filename. A malicious app could hand out a name like
                     // "../../database/clipboard_history" and make the
@@ -119,7 +119,7 @@ class CacheManager(context: Context) {
     }
 
     /**
-     * DRS v1.28.0 audit fix: reduces a provider-provided display name to a
+ * audit fix: reduces a provider-provided display name to a
      * safe single path segment. Falls back to "import.bin" when the name is
      * blank after sanitization so the write target is always deterministic.
      */

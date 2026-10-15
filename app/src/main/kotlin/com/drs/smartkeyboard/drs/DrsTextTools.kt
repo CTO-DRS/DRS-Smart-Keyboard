@@ -11,7 +11,7 @@ import java.text.Collator
 import java.util.Locale
 
 /**
- * DRS v1.0.6: pure text transformation engine for the technical user system.
+ * pure text transformation engine for the technical user system.
  *
  * Every tool operates on a plain [String] and returns a new [String] - no
  * input-connection or UI dependency here, so all transformations are fully
@@ -56,46 +56,46 @@ private val SPACE_AFTER_PUNCT = Regex("([,;:!?،؛…])(?=[\\p{IsAlphabetic}])")
 /** Arabic letter following a '.' (sentence dot in Arabic text). */
 private val DOT_BEFORE_ARABIC = Regex("\\.(?=[\\u0600-\\u06FF])")
 
-/** DRS v1.5.0: zero-width / invisible formatting characters that carry no
+/** zero-width / invisible formatting characters that carry no
  *  visible content and break search and copy. U+200C (ZWNJ) is deliberately
  *  NOT here: نصف المسافة is a real Arabic keyboard character with meaning. */
-// DRS v2.2.0: internal — the tiles' context advisor (DrsTileSmart) shares
+// internal — the tiles' context advisor (DrsTileSmart) shares
 // the SAME closed mark class instead of re-spelling it (مصدر حقيقة واحد).
 internal val ZERO_WIDTH_CHARS = Regex("[\\u200B\\u200D\\u200E\\u200F\\uFEFF\\u2066-\\u2069]")
 
-/** DRS v1.5.0: sentence ender followed by horizontal whitespace — the
+/** sentence ender followed by horizontal whitespace — the
  *  boundary where SENTENCE_PER_LINE inserts the line break. The lookahead
  *  guarantees the ender is between sentences (not at the text's end), and
  *  existing newlines are left untouched so the tool is idempotent. */
 private val SENTENCE_BOUNDARY = Regex("([.!؟?…])[ \\t\\u00A0]+(?=[^\\s])")
 
-/** DRS v1.6.0: a run of one or more whitespace characters — the word
+/** a run of one or more whitespace characters — the word
  *  separator REVERSE_WORDS splits each line on. */
 private val WHITESPACE_RUN = Regex("\\s+")
 
-/** DRS v1.7.0: emoji and pictograph blocks plus their joiners and
+/** emoji and pictograph blocks plus their joiners and
  *  selectors (VS16, skin-tone modifiers, ZWJ). Letters, digits,
  *  punctuation, whitespace and every script pass through untouched.
  *  NOTE: the supplementary-plane bounds use \x{...} — Java/Kotlin \uXXXX
  *  is exactly four digits, so \u1F000 would silently parse as U+1F00+"0"
  *  and corrupt the whole class (this really broke the first draft). */
-// DRS v2.2.0: internal — shared with the tiles' context advisor
+// internal — shared with the tiles' context advisor
 // (DrsTileSmart) so the emoji signal has one closed definition.
 internal val EMOJI_CHARS = Regex(
     "[\\u2600-\\u27BF\\uFE0F\\u200D\\uD83C-\\uD83E\\uDC00-\\uDFFF\\x{1F000}-\\x{1FAFF}]",
 )
 
-/** DRS v1.7.0: list separators recognized by SPLIT_TO_LINES — both the
+/** list separators recognized by SPLIT_TO_LINES — both the
  *  Latin comma/semicolon and their Arabic counterparts (، ؛). */
 private val LIST_SEPARATORS = Regex("[,،;؛]")
 
-/** DRS v1.8.0: the boundary between a digit and a letter (either
+/** the boundary between a digit and a letter (either
  *  direction). \p{N} covers 0-9 and ٠-۹ alike, \p{L} covers Arabic and
  *  Latin letters; lookaround means insertion never consumes characters. */
 private val DIGIT_THEN_LETTER = Regex("(?<=\\p{N})(?=\\p{L})")
 private val LETTER_THEN_DIGIT = Regex("(?<=\\p{L})(?=\\p{N})")
 
-/** DRS v1.8.0: every Unicode punctuation mark (category P) — the Latin
+/** every Unicode punctuation mark (category P) — the Latin
  *  set plus the Arabic ، ؛ ؟ and quotes, brackets, dashes and more. */
 private val PUNCTUATION_CHARS = Regex("\\p{IsPunctuation}")
 
@@ -105,7 +105,7 @@ enum class DrsTextTool(
     val isInfoOnly: Boolean = false,
     /** Editor-level tools that need the cursor position, not a transform. */
     val isEditorOp: Boolean = false,
-    /** DRS v1.21.0: tools that commit an invisible mark at the cursor. */
+    /** tools that commit an invisible mark at the cursor. */
     val isInsertMark: Boolean = false,
 ) {
     // ---- Case transformation (applies to selection, else whole field) ----
@@ -122,53 +122,53 @@ enum class DrsTextTool(
     SORT_LINES(-615),
     REMOVE_DUPLICATE_LINES(-616),
 
-    // DRS v1.1.0: line-ordering additions (same pure-transform family).
+    // line-ordering additions (same pure-transform family).
     NUMBER_LINES(-617),
     REVERSE_LINES(-618),
 
-    // DRS v1.2.0: locale-aware quote wrapping (same pure-transform family).
+    // locale-aware quote wrapping (same pure-transform family).
     WRAP_QUOTES(-619),
 
-    // DRS v1.3.0: collapse runs of blank lines into one (same family).
+    // collapse runs of blank lines into one (same family).
     COLLAPSE_EMPTY_LINES(-620),
 
-    // DRS v1.4.0: descending line sort (the counterpart of SORT_LINES).
+    // descending line sort (the counterpart of SORT_LINES).
     SORT_LINES_DESC(-624),
 
     // ---- Arabic-specific ----
     REMOVE_DIACRITICS(-621),
 
-    // DRS v1.3.0: Arabic digit conversions + tatweel removal.
+    // Arabic digit conversions + tatweel removal.
     REMOVE_TATWEEL(-622),
     TO_ARABIC_DIGITS(-605),
     TO_WESTERN_DIGITS(-606),
 
-    // DRS v1.4.0: unifies Arabic letter variants (hamza-carriers,
+    // unifies Arabic letter variants (hamza-carriers,
     // ta-marbuta, alef maqsura) — same letter-normalization family.
     NORMALIZE_ARABIC(-623),
 
-    // DRS v1.5.0: case inversion, Arabic punctuation mapping, zero-width
+    // case inversion, Arabic punctuation mapping, zero-width
     // cleanup and tab→space conversion (same pure-transform families).
     TOGGLE_CASE(-607),
     TO_ARABIC_PUNCTUATION(-608),
     REMOVE_ZERO_WIDTH(-609),
     TABS_TO_SPACES(-610),
 
-    // DRS v1.5.0: length sort, word-level dedup, paren wrapping and one
+    // length sort, word-level dedup, paren wrapping and one
     // sentence per line (same line/quick families).
     SORT_LINES_BY_LENGTH(-625),
     REMOVE_DUPLICATE_WORDS(-626),
     WRAP_PARENS(-627),
     SENTENCE_PER_LINE(-628),
 
-    // DRS v1.6.0: the inverse tab↔space and punctuation mappings, the
+    // the inverse tab↔space and punctuation mappings, the
     // edge-only blank trim and word-order reversal (same families).
     SPACES_TO_TABS(-629),
     TO_WESTERN_PUNCTUATION(-630),
     TRIM_BLANK_EDGES(-633),
     REVERSE_WORDS(-634),
 
-    // DRS v1.7.0: PDF/web paste repair (presentation forms), list↔lines
+    // PDF/web paste repair (presentation forms), list↔lines
     // splitting (Arabic comma aware), hashtag-style space removal, emoji
     // stripping and the URL encode/decode pair (same pure families).
     NORMALIZE_ARABIC_FORMS(-635),
@@ -179,7 +179,7 @@ enum class DrsTextTool(
     URL_ENCODE(-642),
     URL_DECODE(-643),
 
-    // DRS v1.8.0: mixed-script cleanup — a single space between digits and
+    // mixed-script cleanup — a single space between digits and
     // letters in both directions, and full Unicode punctuation removal
     // (same pure families).
     SEPARATE_DIGIT_LETTERS(-644),
@@ -197,7 +197,7 @@ enum class DrsTextTool(
     DELETE_TO_LINE_START(-652, isEditorOp = true),
     DELETE_TO_LINE_END(-653, isEditorOp = true),
 
-    // DRS v1.21.0: invisible directional/joining marks committed at the
+    // invisible directional/joining marks committed at the
     // cursor — the tools RTL authors keep reaching for in every other
     // editor («إدراج RLM/LRM/ZWJ/ZWNJ»). Insertion needs no text, works
     // on an empty field, and never replaces anything.
@@ -206,7 +206,7 @@ enum class DrsTextTool(
     INSERT_ZWJ(-656, isEditorOp = true, isInsertMark = true),
     INSERT_ZWNJ(-657, isEditorOp = true, isInsertMark = true),
 
-    // DRS v1.4.0 (public): the deterministic sentence vocalization — the
+    // (public): the deterministic sentence vocalization — the
     // exact counterpart of REMOVE_DIACRITICS. Every Arabic word run is
     // looked up in the local lexicons (the reviewed seed first, then the
     // 3000-word asset); a known word takes its canonical vocalized form,
@@ -214,22 +214,22 @@ enum class DrsTextTool(
     // Pure, offline, on-device: the doctrine holds.
     TASHKEEL_TEXT(-658),
 
-    // DRS v1.6.0: the deterministic number-to-Arabic-words rendering —
+    // the deterministic number-to-Arabic-words rendering —
     // 1234 → «ألف ومائتان وأربعة وثلاثون». The WHOLE field must be a
     // clean integer (Western, Arabic-Indic or Extended digits, optional
     // leading minus); anything else returns byte-identical — the tool
     // never rewrites prose it does not understand. See [DrsNumberWords].
     NUMBER_WORDS(-659),
 
-    // DRS v1.7.0: the deterministic financial tafqit — a clean monetary
+    // the deterministic financial tafqit — a clean monetary
     // amount becomes its formal check-writing words «فقط … لا غير»
     // (see [DrsTafqit]): closed five-currency catalog, documented
     // counted-noun agreement, feminine subunit counting; anything that
     // is not a clean amount returns byte-identical, never a guess.
     TAFQIT(-660),
 
-    // DRS v1.8.0: the deterministic date-in-words rendering — the trilogy
-    // closes (v1.6.0 numbers, v1.7.0 amounts, v1.8.0 dates): a clean
+    // the deterministic date-in-words rendering — the trilogy
+    // closes ( numbers, amounts, dates): a clean
     // three-component date over one consistent separator becomes its
     // formal documentary phrase «الثالث من أكتوبر عام ألفين وستة وعشرين»
     // (see [DrsDateWords]): closed 31-day ordinal table, closed 12-month
@@ -237,9 +237,9 @@ enum class DrsTextTool(
     // ambiguous or invalid shape returns byte-identical, never a guess.
     DATE_WORDS(-661),
 
-    // DRS v1.9.0: the deterministic clock-time-in-words rendering — the
-    // quartet closes (v1.6.0 numbers, v1.7.0 amounts, v1.8.0 dates,
-    // v1.9.0 times): a clean two-component clock time over the single
+    // the deterministic clock-time-in-words rendering — the
+    // quartet closes ( numbers, amounts, dates,
+    // times): a clean two-component clock time over the single
     // colon separator becomes its formal spoken phrase «الثالثة إلا
     // الربع» (see [DrsTimeWords]): closed 12-entry feminine hour table,
     // the documented quarter/half/إلا branches and feminine counted-noun
@@ -247,8 +247,8 @@ enum class DrsTextTool(
     // never a guess.
     TIME_WORDS(-662),
 
-    // DRS v1.10.0: the deterministic fraction-in-words rendering — the
-    // first expansion of the fifth round (v1.10.0 fractions, ordinals,
+    // the deterministic fraction-in-words rendering — the
+    // first expansion of the fifth round ( fractions, ordinals,
     // weekdays): a clean two-component fraction over one fraction slash
     // becomes its formal written words «ثلاثة أرباع» (see
     // [DrsFractionWords]): the closed Arabic fraction-word zone
@@ -258,7 +258,7 @@ enum class DrsTextTool(
     // never a guess.
     FRACTION_WORDS(-663),
 
-    // DRS v1.10.0: the deterministic weekday resolution — a clean date
+    // the deterministic weekday resolution — a clean date
     // resolves to its weekday name «السبت» (see [DrsDateWords]): the
     // same closed date parser as DATE_WORDS plus the documented
     // Sakamoto congruence (exhaustively verified against the reference
@@ -266,7 +266,7 @@ enum class DrsTextTool(
     // invalid shape returns byte-identical, never a guess.
     WEEKDAY(-664),
 
-    // DRS v1.10.0: the deterministic ordinal-in-words rendering — a clean
+    // the deterministic ordinal-in-words rendering — a clean
     // integer speaks its ordinal «الحادي والعشرون» (see
     // [DrsOrdinalWords]): the closed zone 1..9999, the documented
     // masculine-nominative-with-article convention (the citation form),
@@ -275,7 +275,7 @@ enum class DrsTextTool(
     // clean number returns byte-identical, never a guess.
     ORDINAL_WORDS(-665),
 
-    // DRS v2.0.0: the deterministic decimal-in-words rendering — the
+    // the deterministic decimal-in-words rendering — the
     // sixth round opens with the decimal tail speaking: a clean
     // two-component decimal over one separator from the closed pair
     // { . ، ٫ } becomes its formal digit-by-digit words «واحد فاصلة
@@ -287,7 +287,7 @@ enum class DrsTextTool(
     // guess.
     DECIMAL_WORDS(-666),
 
-    // DRS v2.0.0: the deterministic words-to-number mirror — the sixth
+    // the deterministic words-to-number mirror — the sixth
     // round closes with the words speaking back: a clean release-lexicon
     // composition returns its number «ثلاثة وعشرون» → 23 (see
     // [DrsWordsToNumber]): the closed lexicon of exactly the words
@@ -298,7 +298,7 @@ enum class DrsTextTool(
     // byte-identical, never a guess.
     WORDS_TO_NUMBER(-667),
 
-    // DRS v2.1.0: the deterministic Gregorian→Hijri conversion — the
+    // the deterministic Gregorian→Hijri conversion — the
     // seventh round opens with the calendar speaking: a clean date
     // becomes its Hijri documentary phrase «2026-02-18» → «الأول من
     // رمضان عام ألف وأربعمائة وسبعة وأربعين هجري» (see
@@ -310,7 +310,7 @@ enum class DrsTextTool(
     // never a guess.
     GREGORIAN_TO_HIJRI(-668),
 
-    // DRS v2.1.0: the deterministic Hijri→Gregorian conversion — the
+    // the deterministic Hijri→Gregorian conversion — the
     // seventh round closes with the calendar speaking both ways: a
     // clean Hijri date in digits becomes its Gregorian documentary
     // phrase through the SAME formatter as DATE_WORDS — «1447/9/1» →
@@ -322,7 +322,7 @@ enum class DrsTextTool(
     // grammar returns byte-identical, never a guess.
     HIJRI_TO_GREGORIAN(-669),
 
-    // DRS v2.2.0: the natural line sort — the eighth round opens with
+    // the natural line sort — the eighth round opens with
     // the tiles speaking: the line sort that reads NUMBERS the way a
     // human does (file2 before file10, قائمة 2 before قائمة 10),
     // digit chunks compared numerically at arbitrary precision (no
@@ -332,7 +332,7 @@ enum class DrsTextTool(
     // deterministic, no locale surprises beyond the collator.
     SORT_LINES_NATURAL(-670),
 
-    // DRS v2.2.0: the deterministic URL slug — a text becomes its
+    // the deterministic URL slug — a text becomes its
     // link-safe path: diacritics, tatweel and invisible marks stripped,
     // hamza carriers folded (أإآٱ→ا، ة→ه، ى→ي)، spaces and underscores
     // to one dash, everything outside letters/digits/dashes removed,
@@ -341,14 +341,14 @@ enum class DrsTextTool(
     // punctuation returns byte-identical, never an empty slug.
     SLUGIFY(-671),
 
-    // DRS v2.2.0: the deterministic snake_case — words separated by
+    // the deterministic snake_case — words separated by
     // spaces, underscores or dashes (plus lower→upper camel boundaries
     // inside each word) join with one underscore, lowercased; Arabic
     // words join the same way with no case invented. Anything that
     // would not change returns byte-identical, never a rewrite.
     TO_SNAKE_CASE(-672),
 
-    // DRS v2.2.0: the deterministic camelCase — the honest sibling:
+    // the deterministic camelCase — the honest sibling:
     // tokens join with NO separator, the first lowercased and the rest
     // capitalized — and any token carrying a non-ASCII letter REFUSES
     // the whole transform byte-identically (camelCase is a Latin code
@@ -356,7 +356,7 @@ enum class DrsTextTool(
     // same closed honesty: no change returns byte-identical.
     TO_CAMEL_CASE(-673),
 
-    // DRS v2.16.0: the writing assistant speaks — the orphaned M1.5
+    // the writing assistant speaks — the orphaned M1.5
     // engine (DrsWritingAssistant) joins the tool surface through its
     // OWN firing contract, verbatim: sixteen deterministic Arabic
     // phrase rewrites that fire ONLY when the FULL normalized TAIL of
@@ -366,7 +366,7 @@ enum class DrsTextTool(
     // partial rewrite, never a guess. See [DrsWritingAssistant.improveTail].
     IMPROVE_PHRASES(-674),
 
-    // DRS v2.16.0: the spacing normalizer — the assistant's second
+    // the spacing normalizer — the assistant's second
     // public function, wired verbatim: whitespace runs collapse to one
     // space, edges trim, spaces BEFORE closing punctuation (؟ ! ، ؛ . :)
     // and after opening ones vanish, punctuation runs collapse to a
@@ -387,7 +387,7 @@ enum class DrsTextTool(
 object DrsTextTools {
 
     /**
-     * DRS v1.21.0 — the invisible mark each insertion tool commits at the
+ * the invisible mark each insertion tool commits at the
      * cursor (pure, JVM-testable): RLM (U+200F) and LRM (U+200E) steer the
      * bidi resolution of neutral characters, ZWJ (U+200D) joins letters or
      * emoji into ligatures/sequences, ZWNJ (U+200C) — نصف المسافة — breaks
@@ -440,7 +440,7 @@ object DrsTextTools {
                         }
                         .joinToString("\n")
                 }
-                // DRS v1.1.0: prefix every line with its 1-based order, and
+                // prefix every line with its 1-based order, and
                 // flip the line order. Both preserve a trailing newline and
                 // keep blank lines exactly where they are.
                 DrsTextTool.NUMBER_LINES -> {
@@ -459,7 +459,7 @@ object DrsTextTools {
                         .joinToString("\n")
                     if (trailingNewline) "$reversed\n" else reversed
                 }
-                // DRS v1.2.0: surround the text with quotation marks that
+                // surround the text with quotation marks that
                 // match the active locale — Arabic guillemets «» for Arabic,
                 // straight quotes for everything else.
                 DrsTextTool.WRAP_QUOTES -> {
@@ -467,66 +467,66 @@ object DrsTextTools {
                         if (locale.language == "ar") "«" to "»" else "\"" to "\""
                     openQuote + text + closeQuote
                 }
-                // DRS v1.3.0: turn every run of consecutive blank lines
+                // turn every run of consecutive blank lines
                 // into exactly one blank line. Leading and trailing runs
                 // are collapsed to one blank line as well (this tool's
                 // purpose IS removal — of the extra blanks only; single
                 // blank separators and the trailing newline are kept).
                 DrsTextTool.COLLAPSE_EMPTY_LINES -> collapseEmptyLines(text)
                 DrsTextTool.REMOVE_DIACRITICS -> text.replace(ARABIC_DIACRITICS, "")
-                // DRS v1.4.0 (public): the sentence vocalization — the
+                // (public): the sentence vocalization — the
                 // lexicon-based counterpart of REMOVE_DIACRITICS (see
                 // [tashkeelText]): known words vocalized, unknown words
                 // byte-identical, everything else verbatim.
                 DrsTextTool.TASHKEEL_TEXT -> tashkeelText(text)
-                // DRS v1.6.0: the number-to-words rendering — a clean
+                // the number-to-words rendering — a clean
                 // integer field becomes its Arabic words, anything else
                 // stays byte-identical (see [DrsNumberWords]).
                 DrsTextTool.NUMBER_WORDS -> DrsNumberWords.arabicWordsOrNull(text) ?: text
-                // DRS v1.7.0: the financial tafqit — a clean amount speaks
+                // the financial tafqit — a clean amount speaks
                 // its formal check words, anything else stays byte-identical
                 // (see [DrsTafqit]).
                 DrsTextTool.TAFQIT -> DrsTafqit.tafqitOrNull(text) ?: text
-                // DRS v1.8.0: the date-in-words rendering — a clean date
+                // the date-in-words rendering — a clean date
                 // speaks its formal documentary phrase, anything else
                 // stays byte-identical (see [DrsDateWords]).
                 DrsTextTool.DATE_WORDS -> DrsDateWords.dateWordsOrNull(text) ?: text
-                // DRS v1.9.0: the clock-time-in-words rendering — a clean
+                // the clock-time-in-words rendering — a clean
                 // clock time speaks its formal spoken phrase, anything
                 // else stays byte-identical (see [DrsTimeWords]).
                 DrsTextTool.TIME_WORDS -> DrsTimeWords.timeWordsOrNull(text) ?: text
-                // DRS v1.10.0: the fraction-in-words rendering — a clean
+                // the fraction-in-words rendering — a clean
                 // fraction field speaks its Arabic words, prose stays
                 // byte-identical (see [DrsFractionWords]).
                 DrsTextTool.FRACTION_WORDS -> DrsFractionWords.fractionWordsOrNull(text) ?: text
-                // DRS v1.10.0: the weekday resolution — a clean date
+                // the weekday resolution — a clean date
                 // resolves to its weekday name, prose stays byte-identical
                 // (see [DrsDateWords.weekdayOrNull]).
                 DrsTextTool.WEEKDAY -> DrsDateWords.weekdayOrNull(text) ?: text
-                // DRS v1.10.0: the ordinal-in-words rendering — a clean
+                // the ordinal-in-words rendering — a clean
                 // integer speaks its ordinal, prose stays byte-identical
                 // (see [DrsOrdinalWords]).
                 DrsTextTool.ORDINAL_WORDS -> DrsOrdinalWords.ordinalWordsOrNull(text) ?: text
-                // DRS v2.0.0: the decimal-in-words rendering — a clean
+                // the decimal-in-words rendering — a clean
                 // decimal field speaks its digit-by-digit words, prose
                 // stays byte-identical (see [DrsDecimalWords]).
                 DrsTextTool.DECIMAL_WORDS -> DrsDecimalWords.decimalWordsOrNull(text) ?: text
-                // DRS v2.0.0: the words-to-number mirror — a clean
+                // the words-to-number mirror — a clean
                 // lexical composition returns its number, prose stays
                 // byte-identical (see [DrsWordsToNumber]).
                 DrsTextTool.WORDS_TO_NUMBER -> DrsWordsToNumber.wordsToNumberOrNull(text)?.toString() ?: text
-                // DRS v2.1.0: the Gregorian→Hijri conversion — a clean
+                // the Gregorian→Hijri conversion — a clean
                 // date speaks its Hijri phrase, prose and out-of-zone
                 // dates stay byte-identical (see [DrsHijriWords]).
                 DrsTextTool.GREGORIAN_TO_HIJRI ->
                     DrsHijriWords.gregorianToHijriWordsOrNull(text) ?: text
-                // DRS v2.1.0: the Hijri→Gregorian conversion — a clean
+                // the Hijri→Gregorian conversion — a clean
                 // Hijri date speaks its Gregorian phrase through the
                 // DATE_WORDS formatter, prose and out-of-zone dates
                 // stay byte-identical (see [DrsHijriWords]).
                 DrsTextTool.HIJRI_TO_GREGORIAN ->
                     DrsHijriWords.hijriToGregorianWordsOrNull(text) ?: text
-                // DRS v2.2.0: the natural line sort — numbers the way a
+                // the natural line sort — numbers the way a
                 // human reads them, letter chunks through the same locale
                 // collator as SORT_LINES (see [compareNaturalLines]).
                 DrsTextTool.SORT_LINES_NATURAL -> {
@@ -538,21 +538,21 @@ object DrsTextTools {
                         .joinToString("\n")
                     if (trailingNewline) "$sorted\n" else sorted
                 }
-                // DRS v2.2.0: the link-safe slug (see [slugify]).
+                // the link-safe slug (see [slugify]).
                 DrsTextTool.SLUGIFY -> slugify(text)
-                // DRS v2.2.0: the snake_case / camelCase pair (see the
+                // the snake_case / camelCase pair (see the
                 // two helpers — the camel one refuses non-ASCII tokens
                 // byte-identically, the honest sibling).
                 DrsTextTool.TO_SNAKE_CASE -> toSnakeCase(text)
                 DrsTextTool.TO_CAMEL_CASE -> toCamelCase(text)
-                // DRS v2.16.0: the writing assistant speaks — both tools
+                // the writing assistant speaks — both tools
                 // delegate VERBATIM to the M1.5 engine's public functions
                 // (see [DrsWritingAssistant]): the tail-only phrase
                 // rewrites and the fixed-point spacing normalizer. No
                 // firing / no change returns the text byte-identical.
                 DrsTextTool.IMPROVE_PHRASES -> DrsWritingAssistant.improveTail(text)
                 DrsTextTool.NORMALIZE_SPACING -> DrsWritingAssistant.normalizeSpacing(text)
-                // DRS v1.3.0: strip tatweel (kashida) elongation and
+                // strip tatweel (kashida) elongation and
                 // convert digits between Western and Arabic-Indic forms.
                 // Both are per-character, lossless-for-everything-else
                 // conversions that never touch letters or punctuation.
@@ -561,7 +561,7 @@ object DrsTextTools {
                     when {
                         ch in '0'..'9' ->
                             (ch.code - '0'.code + ARABIC_INDIC_ZERO.code).toChar()
-                        // DRS v1.5.0: Persian/Urdu digits (۰-۹) map to the
+                        // Persian/Urdu digits (۰-۹) map to the
                         // Arabic-Indic forms as well so ALL eastern digits
                         // normalize to one system.
                         ch.code in EXTENDED_ARABIC_INDIC_ZERO.code..EXTENDED_ARABIC_INDIC_ZERO.code + 9 ->
@@ -578,7 +578,7 @@ object DrsTextTools {
                         else -> ch
                     }
                 }
-                // DRS v1.4.0: sort lines in DESCENDING order with the same
+                // sort lines in DESCENDING order with the same
                 // locale collator (deterministic counterpart of SORT_LINES).
                 DrsTextTool.SORT_LINES_DESC -> {
                     val trailingNewline = text.endsWith("\n")
@@ -589,11 +589,11 @@ object DrsTextTools {
                         .joinToString("\n")
                     if (trailingNewline) "$sorted\n" else sorted
                 }
-                // DRS v1.4.0: unify Arabic letter variants that carry no
+                // unify Arabic letter variants that carry no
                 // meaning once the text is copied elsewhere — per-character,
                 // lossless for everything else (see [normalizeArabicLetters]).
                 DrsTextTool.NORMALIZE_ARABIC -> normalizeArabicLetters(text)
-                // DRS v1.5.0: invert the case of every cased Latin/Cyrillic/
+                // invert the case of every cased Latin/Cyrillic/
                 // Greek letter; Arabic (and every other script without case
                 // pairs) passes through unchanged.
                 DrsTextTool.TOGGLE_CASE -> mapChars(text) { ch ->
@@ -608,7 +608,7 @@ object DrsTextTools {
                         else -> ch
                     }
                 }
-                // DRS v1.5.0: map the three Latin sentence punctuation marks
+                // map the three Latin sentence punctuation marks
                 // to their Arabic counterparts — per-character, everything
                 // else untouched.
                 DrsTextTool.TO_ARABIC_PUNCTUATION -> mapChars(text) { ch ->
@@ -619,15 +619,15 @@ object DrsTextTools {
                         else -> ch
                     }
                 }
-                // DRS v1.5.0: strip invisible zero-width formatting marks
+                // strip invisible zero-width formatting marks
                 // that break search/copy (ZWSP, ZWJ, LRM/RLM, BOM, Unicode
                 // isolates). ZWNJ (نصف المسافة) is intentionally kept.
                 DrsTextTool.REMOVE_ZERO_WIDTH -> text.replace(ZERO_WIDTH_CHARS, "")
-                // DRS v1.5.0: every tab becomes four real spaces so the
+                // every tab becomes four real spaces so the
                 // text is safe in fields that collapse or misrender tabs.
                 DrsTextTool.TABS_TO_SPACES -> text.replace("\t", "    ")
                 DrsTextTool.NORMALIZE_PUNCTUATION -> normalizePunctuation(text)
-                // DRS v1.5.0: stable sort by line length (ties keep the
+                // stable sort by line length (ties keep the
                 // original relative order); trailing newline preserved.
                 DrsTextTool.SORT_LINES_BY_LENGTH -> {
                     val trailingNewline = text.endsWith("\n")
@@ -637,23 +637,23 @@ object DrsTextTools {
                         .joinToString("\n")
                     if (trailingNewline) "$sorted\n" else sorted
                 }
-                // DRS v1.5.0: remove repeated words across the whole text
+                // remove repeated words across the whole text
                 // (first occurrence wins, all whitespace separators kept
                 // verbatim) — see [removeDuplicateWords].
                 DrsTextTool.REMOVE_DUPLICATE_WORDS -> removeDuplicateWords(text)
-                // DRS v1.5.0: surround the text with parentheses.
+                // surround the text with parentheses.
                 DrsTextTool.WRAP_PARENS -> "(" + text + ")"
-                // DRS v1.5.0: one sentence per line — break after sentence
+                // one sentence per line — break after sentence
                 // enders when horizontal whitespace follows and another
                 // non-space character comes after it (idempotent, existing
                 // newlines untouched).
                 DrsTextTool.SENTENCE_PER_LINE -> text.replace(SENTENCE_BOUNDARY, "$1\n")
-                // DRS v1.6.0: the inverse of TABS_TO_SPACES — every run of
+                // the inverse of TABS_TO_SPACES — every run of
                 // four consecutive spaces becomes one real tab. The regex
                 // scans left-to-right, so longer runs split deterministically
                 // (8 spaces -> 2 tabs, 5 spaces -> tab + one space).
                 DrsTextTool.SPACES_TO_TABS -> text.replace(" ".repeat(4).toRegex(), "\t")
-                // DRS v1.6.0: the inverse of TO_ARABIC_PUNCTUATION — the
+                // the inverse of TO_ARABIC_PUNCTUATION — the
                 // three Arabic sentence marks map back to their Latin
                 // counterparts, per-character, everything else untouched.
                 DrsTextTool.TO_WESTERN_PUNCTUATION -> mapChars(text) { ch ->
@@ -664,13 +664,13 @@ object DrsTextTools {
                         else -> ch
                     }
                 }
-                // DRS v1.6.0: strips blank lines at the text's EDGES only —
+                // strips blank lines at the text's EDGES only —
                 // blank separators inside the text are kept exactly as they
                 // are (distinct from COLLAPSE_EMPTY_LINES, which keeps one
                 // blank separator, and REMOVE_EMPTY_LINES, which removes
                 // them all). See [trimBlankEdges].
                 DrsTextTool.TRIM_BLANK_EDGES -> trimBlankEdges(text)
-                // DRS v1.6.0: reverses the word order of every line — the
+                // reverses the word order of every line — the
                 // word-level sibling of REVERSE_LINES. Tokens are joined
                 // with a single space; blank lines stay blank and a
                 // trailing newline survives as-is.
@@ -679,7 +679,7 @@ object DrsTextTools {
                         .asReversed()
                         .joinToString(" ")
                 }
-                // DRS v1.7.0: repairs Arabic text copied from PDFs and some
+                // repairs Arabic text copied from PDFs and some
                 // websites, where letters arrive as PRESENTATION FORMS
                 // (U+FB50–U+FDFF, U+FE70–U+FEFF) that break search and are
                 // invisible to NORMALIZE_ARABIC. NFKC folds them back to the
@@ -687,31 +687,31 @@ object DrsTextTools {
                 // (letters, digits, spacing) passes through untouched.
                 DrsTextTool.NORMALIZE_ARABIC_FORMS ->
                     java.text.Normalizer.normalize(text, java.text.Normalizer.Form.NFKC)
-                // DRS v1.7.0: turns a comma/semicolon list (Latin or Arabic
+                // turns a comma/semicolon list (Latin or Arabic
                 // separators) into one item per line — the natural inverse
                 // of JOIN_LINES, and a natural pre-step for NUMBER_LINES.
                 DrsTextTool.SPLIT_TO_LINES -> text
                     .split(LIST_SEPARATORS)
                     .joinToString("\n") { it.trim(' ', '\t', '\u00A0') }
-                // DRS v1.7.0: joins every line into a single list — Arabic
+                // joins every line into a single list — Arabic
                 // comma (،) for Arabic locales, Latin comma elsewhere. The
                 // inverse of SPLIT_TO_LINES; blank lines are skipped.
                 DrsTextTool.JOIN_LINES -> text.lines()
                     .filter { it.isNotBlank() }
                     .joinToString(if (locale.language == "ar") "، " else ", ") { it.trim(' ', '\t', '\u00A0') }
-                // DRS v1.7.0: removes EVERY horizontal space (hashtag style
+                // removes EVERY horizontal space (hashtag style
                 // #وسم_عربي) — newlines are kept so multi-line text stays
                 // line-per-tag. The aggressive sibling of TRIM_SPACES.
                 DrsTextTool.REMOVE_ALL_SPACES -> text.replace(HORIZONTAL_SPACES, "")
-                // DRS v1.7.0: strips emoji/pictographs (and their selectors
+                // strips emoji/pictographs (and their selectors
                 // and joiners) so pasted social text no longer pollutes the
                 // counting/sorting/search tools downstream.
                 DrsTextTool.STRIP_EMOJI -> text.replace(EMOJI_CHARS, "")
-                // DRS v1.7.0: percent-encodes the text as a UTF-8 URL
+                // percent-encodes the text as a UTF-8 URL
                 // component (Arabic links become shareable everywhere).
                 // Spaces become %20, not '+', per RFC 3986 paths.
                 DrsTextTool.URL_ENCODE -> java.net.URLEncoder.encode(text, "UTF-8").replace("+", "%20")
-                // DRS v1.7.0: decodes percent-encoded text back to UTF-8;
+                // decodes percent-encoded text back to UTF-8;
                 // malformed sequences return the input untouched so typing
                 // is never destroyed (decode must never throw).
                 DrsTextTool.URL_DECODE -> try {
@@ -719,7 +719,7 @@ object DrsTextTools {
                 } catch (_: Throwable) {
                     text
                 }
-                // DRS v1.8.0: one space between digits and letters in BOTH
+                // one space between digits and letters in BOTH
                 // directions (12abc -> 12 abc، ٣س -> ٣ س) — the mixed-script
                 // cleanup pasted prices and codes need. The lookarounds never
                 // consume characters, so punctuation and newlines survive;
@@ -727,7 +727,7 @@ object DrsTextTools {
                 DrsTextTool.SEPARATE_DIGIT_LETTERS -> text
                     .replace(DIGIT_THEN_LETTER, " ")
                     .replace(LETTER_THEN_DIGIT, " ")
-                // DRS v1.8.0: removes EVERY Unicode punctuation mark (Latin
+                // removes EVERY Unicode punctuation mark (Latin
                 // and Arabic ،؛؟ alike). Letters, digits, spaces, symbols and
                 // currency survive — the search-prep sibling of CLEAN_TEXT.
                 DrsTextTool.REMOVE_PUNCTUATION -> text.replace(PUNCTUATION_CHARS, "")
@@ -818,7 +818,7 @@ object DrsTextTools {
         text.replace(HORIZONTAL_SPACES, " ")
 
     /**
-     * DRS v1.5.0: removes repeated whitespace-delimited words across the
+ * removes repeated whitespace-delimited words across the
      * whole text — the word-level sibling of REMOVE_DUPLICATE_LINES. A
      * manual scanner with a one-run lookbehind keeps the output clean:
      * when a word is dropped, the whitespace run immediately before it is
@@ -853,7 +853,7 @@ object DrsTextTools {
         return sb.toString()
     }
 
-    /** DRS v1.3.0: maps every character through [transform] (pure, per-char). */
+    /** maps every character through [transform] (pure, per-char). */
     private inline fun mapChars(text: String, transform: (Char) -> Char): String {
         var changed = false
         for (ch in text) {
@@ -869,7 +869,7 @@ object DrsTextTools {
     }
 
     /**
-     * DRS v1.6.0: removes blank lines at the START and END of the text
+ * removes blank lines at the START and END of the text
      * only. Blank lines between content are kept exactly as they are —
      * the edge-only sibling of COLLAPSE_EMPTY_LINES and
      * REMOVE_EMPTY_LINES. A trailing newline survives as-is when any
@@ -886,7 +886,7 @@ object DrsTextTools {
     }
 
     /**
-     * DRS v1.3.0: collapses every run of consecutive blank lines into a
+ * collapses every run of consecutive blank lines into a
      * single blank line. The line's own content (spacing included) is kept
      * for non-blank lines, and a trailing newline survives as-is.
      */
@@ -909,7 +909,7 @@ object DrsTextTools {
     }
 
     /**
-     * DRS v1.4.0 (public) — المُشكِّل الحتمي للنص الكامل (the deterministic
+ * (public) — المُشكِّل الحتمي للنص الكامل (the deterministic
      * whole-text vocalizer). Scans [text] once: every maximal run of
      * Arabic word characters (letters, the nine harakat, tatweel — see
      * [DrsHarakatWordOps.isArabicWordChar]) is a word token; each token
@@ -918,7 +918,7 @@ object DrsTextTools {
      * form, so partially-marked words still resolve to the canonical
      * form). A known token is replaced by its canonical vocalization.
      *
-     * DRS v2.17.0 — طبقة القانون (the law layer): a token the lexicons
+ * طبقة القانون (the law layer): a token the lexicons
      * do NOT know is no longer always byte-identical. When the pure
      * DrsArabicLetters engine classifies it as a definite-article token
      * followed by a SUN letter and it carries no mark anywhere, the
@@ -935,7 +935,7 @@ object DrsTextTools {
      * non-article words — is emitted BYTE-IDENTICAL (the honest rule:
      * the tool never invents what the law does not fix).
      *
-     * DRS v2.19.0 — العقد الخاص المعلن في v2.17.0: the COLLAPSED glued
+ * العقد الخاص المعلن في the COLLAPSED glued
      * form لل (ل + ال، الألف المنحلة) joins the law layer — every token
      * opening with لل + letter IS the preposition + the article, so a
      * sun follower takes the same partial-style shadda (للناس ← للنَّاس).
@@ -945,14 +945,14 @@ object DrsTextTools {
      * dictionary knowledge, the guessing territory the creed forbids.
      * See [DrsArabicLetters.gluedShaddaForm].
      *
-     * DRS v2.20.0 — شهادة الجلالة (the majesty certification): the
+ * شهادة الجلالة (the majesty certification): the
      * CLOSED hand-pinned family of لفظ الجلالة tokens (لله والله
      * بالله فالله كالله تالله ولله وبالله فلله) joins the law layer —
      * each member is an exact enumerated string whose only reading is
      * the majesty name, so its lam takes the same partial-style shadda
      * (والله ← واللَّه) — a table like the fourteen sun letters, never
      * a pattern over an open class. The open [حرف + ال + شمسية] shape
-     * (والد، بالش، بالطو) stays byte-identical per v2.19.0's proof —
+ * (والد، بالش، بالطو) stays byte-identical per 's proof —
      * none of its members ends in لله. The seed lexicon still wins for
      * the members it hand-reviews (لله والله بالله). See
      * [DrsArabicLetters.majestyShaddaForm].
@@ -989,7 +989,7 @@ object DrsTextTools {
     }
 
     /**
-     * DRS v1.4.0: unifies Arabic letter variants commonly interchanged in
+ * unifies Arabic letter variants commonly interchanged in
      * search and copy contexts: hamza-carried alefs (أ إ آ ٱ) become a bare
      * alef (ا), ta-marbuta (ة) becomes ha (ه) and alef maqsura (ى) becomes
      * ya (ي). Pure per-character mapping — diacritics, digits, punctuation
@@ -1019,7 +1019,7 @@ object DrsTextTools {
     }
 
     // ------------------------------------------------------------
-    // DRS v2.2.0 — the four new tiles' pure helpers
+    // the four new tiles' pure helpers
     // ------------------------------------------------------------
 
     /** The natural-sort chunking: digit runs vs non-digit runs. */

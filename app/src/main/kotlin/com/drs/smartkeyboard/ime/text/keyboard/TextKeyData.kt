@@ -113,7 +113,7 @@ data class TextKeyData(
                 CLIPBOARD_CLEAR_FULL_HISTORY,
                 CLIPBOARD_CLEAR_PRIMARY_CLIP,
                 CLIPBOARD_SHARE,
-                // DRS v1.7.0: the active-clip pin toggle joins the
+                // the active-clip pin toggle joins the
                 // clipboard family (catalogue tool + counted usage).
                 CLIPBOARD_PIN_ACTIVE,
                 TOGGLE_COMPACT_LAYOUT,
@@ -129,11 +129,11 @@ data class TextKeyData(
                 IME_UI_MODE_MEDIA,
                 IME_UI_MODE_CLIPBOARD,
                 IME_UI_MODE_TEXT_TOOLS,
-                // DRS v1.15.0: the three smart panels resolve as internal keys.
+                // the three smart panels resolve as internal keys.
                 IME_UI_MODE_DIACRITICS,
                 IME_UI_MODE_SMART_SYMBOLS,
                 IME_UI_MODE_ARABIC_LETTERS,
-                // DRS v1.0.6: every technical text tool code is internal.
+                // every technical text tool code is internal.
                 *DrsTextTool.entries.map { tool ->
                     TextKeyData(type = KeyType.FUNCTION, code = tool.code, label = "drs_text_tool")
                 }.toTypedArray(),
@@ -153,23 +153,23 @@ data class TextKeyData(
                 TOGGLE_ACTIONS_EDITOR,
                 TOGGLE_INCOGNITO_MODE,
                 TOGGLE_AUTOCORRECT,
-                // DRS v1.1.0: the unified-strip feature tools surface in the
+                // the unified-strip feature tools surface in the
                 // "most used" quick-action tiles, so they must be internal.
                 THEME_CYCLE,
                 INSERT_DATE_TIME,
-                // DRS v1.3.0 integration fix: TOGGLE_NUMBER_ROW was missing
-                // here since v1.1.0 (its stats counted, but the tile never
+                // integration fix: TOGGLE_NUMBER_ROW was missing
+                // here since (its stats counted, but the tile never
                 // rendered because getCodeInfoAsTextKeyData(-217) was null).
                 TOGGLE_NUMBER_ROW,
-                // DRS v1.7.0 integration fix: FLOATING_WINDOW and RESIZE_MODE
-                // have been counted in SmartToolCodes since v1.4.0/v1.5.0 but
+                // integration fix: FLOATING_WINDOW and RESIZE_MODE
+                // have been counted in SmartToolCodes since / but
                 // their most-used tiles never rendered (null key data), and
                 // the fixed LANGUAGE tool never counted at all. All three
                 // join InternalKeys so getCodeInfoAsTextKeyData() resolves.
                 TOGGLE_FLOATING_WINDOW,
                 TOGGLE_RESIZE_MODE,
                 SHOW_SUBTYPE_PICKER,
-                // DRS v1.19.0: the split/merge keyboard toggles are quick-action
+                // the split/merge keyboard toggles are quick-action
                 // surfaceable tools, so their key data must resolve too.
                 SPLIT_LAYOUT,
                 MERGE_LAYOUT,
@@ -312,14 +312,14 @@ data class TextKeyData(
             label = "move_end_of_line",
         )
 
-        /** DRS v1.0.5: predefined key data for [KeyCode.MOVE_WORD_LEFT] */
+        /** predefined key data for [KeyCode.MOVE_WORD_LEFT] */
         val MOVE_WORD_LEFT = TextKeyData(
             type = KeyType.NAVIGATION,
             code = KeyCode.MOVE_WORD_LEFT,
             label = "move_word_left",
         )
 
-        /** DRS v1.0.5: predefined key data for [KeyCode.MOVE_WORD_RIGHT] */
+        /** predefined key data for [KeyCode.MOVE_WORD_RIGHT] */
         val MOVE_WORD_RIGHT = TextKeyData(
             type = KeyType.NAVIGATION,
             code = KeyCode.MOVE_WORD_RIGHT,
@@ -375,14 +375,14 @@ data class TextKeyData(
             label = "clipboard_clear_primary_clip",
         )
 
-        /** DRS v1.0.5: predefined key data for [KeyCode.CLIPBOARD_SHARE] */
+        /** predefined key data for [KeyCode.CLIPBOARD_SHARE] */
         val CLIPBOARD_SHARE = TextKeyData(
             type = KeyType.SYSTEM_GUI,
             code = KeyCode.CLIPBOARD_SHARE,
             label = "clipboard_share",
         )
 
-        /** DRS v1.7.0: predefined key data for [KeyCode.CLIPBOARD_PIN_ACTIVE] */
+        /** predefined key data for [KeyCode.CLIPBOARD_PIN_ACTIVE] */
         val CLIPBOARD_PIN_ACTIVE = TextKeyData(
             type = KeyType.SYSTEM_GUI,
             code = KeyCode.CLIPBOARD_PIN_ACTIVE,
@@ -402,22 +402,22 @@ data class TextKeyData(
             label = "toggle_compact_layout",
         )
 
-        /** DRS v1.1.0: predefined key data for [KeyCode.THEME_CYCLE] */
+        /** predefined key data for [KeyCode.THEME_CYCLE] */
         val THEME_CYCLE = TextKeyData(
             type = KeyType.FUNCTION,
             code = KeyCode.THEME_CYCLE,
             label = "theme_cycle",
         )
 
-        /** DRS v1.1.0: predefined key data for [KeyCode.INSERT_DATE_TIME] */
+        /** predefined key data for [KeyCode.INSERT_DATE_TIME] */
         val INSERT_DATE_TIME = TextKeyData(
             type = KeyType.FUNCTION,
             code = KeyCode.INSERT_DATE_TIME,
             label = "insert_date_time",
         )
 
-        /** DRS v1.3.0: predefined key data for [KeyCode.TOGGLE_NUMBER_ROW] —
-        was missing since v1.1.0, so the number-row toggle never surfaced
+        /** predefined key data for [KeyCode.TOGGLE_NUMBER_ROW] —
+ was missing since, so the number-row toggle never surfaced
         as a "most used" quick-action tile. */
         val TOGGLE_NUMBER_ROW = TextKeyData(
             type = KeyType.FUNCTION,
@@ -430,8 +430,8 @@ data class TextKeyData(
             code = KeyCode.COMPACT_LAYOUT_TO_LEFT,
             label = "compact_layout_to_left",
         )
-        /** DRS v1.19.0: predefined key data for [KeyCode.SPLIT_LAYOUT] — the
-        split keyboard shipped in v1.18.0 but only reachable through the
+        /** predefined key data for [KeyCode.SPLIT_LAYOUT] — the
+ split keyboard shipped in but only reachable through the
         settings screen; these two codes activate/merge it in one tap and
         join InternalKeys so most-used tiles resolve. */
         val SPLIT_LAYOUT = TextKeyData(
@@ -439,7 +439,7 @@ data class TextKeyData(
             code = KeyCode.SPLIT_LAYOUT,
             label = "split_layout",
         )
-        /** DRS v1.19.0: predefined key data for [KeyCode.MERGE_LAYOUT]. */
+        /** predefined key data for [KeyCode.MERGE_LAYOUT]. */
         val MERGE_LAYOUT = TextKeyData(
             type = KeyType.FUNCTION,
             code = KeyCode.MERGE_LAYOUT,
@@ -514,29 +514,29 @@ data class TextKeyData(
             code = KeyCode.IME_UI_MODE_CLIPBOARD,
             label = "ime_ui_mode_clipboard",
         )
-        /** DRS v1.0.6: predefined key data for [KeyCode.IME_UI_MODE_TEXT_TOOLS] */
+        /** predefined key data for [KeyCode.IME_UI_MODE_TEXT_TOOLS] */
         val IME_UI_MODE_TEXT_TOOLS = TextKeyData(
             type = KeyType.SYSTEM_GUI,
             code = KeyCode.IME_UI_MODE_TEXT_TOOLS,
             label = "ime_ui_mode_text_tools",
         )
 
-        // DRS v1.15.0: the three smart panels join the internal keys so
+        // the three smart panels join the internal keys so
         // they resolve everywhere a tool code does (most-used tiles, the
         // unified strip, the quick actions editor).
-        /** DRS v1.15.0: predefined key data for [KeyCode.IME_UI_MODE_DIACRITICS] */
+        /** predefined key data for [KeyCode.IME_UI_MODE_DIACRITICS] */
         val IME_UI_MODE_DIACRITICS = TextKeyData(
             type = KeyType.SYSTEM_GUI,
             code = KeyCode.IME_UI_MODE_DIACRITICS,
             label = "ime_ui_mode_diacritics",
         )
-        /** DRS v1.15.0: predefined key data for [KeyCode.IME_UI_MODE_SMART_SYMBOLS] */
+        /** predefined key data for [KeyCode.IME_UI_MODE_SMART_SYMBOLS] */
         val IME_UI_MODE_SMART_SYMBOLS = TextKeyData(
             type = KeyType.SYSTEM_GUI,
             code = KeyCode.IME_UI_MODE_SMART_SYMBOLS,
             label = "ime_ui_mode_smart_symbols",
         )
-        /** DRS v1.15.0: predefined key data for [KeyCode.IME_UI_MODE_ARABIC_LETTERS] */
+        /** predefined key data for [KeyCode.IME_UI_MODE_ARABIC_LETTERS] */
         val IME_UI_MODE_ARABIC_LETTERS = TextKeyData(
             type = KeyType.SYSTEM_GUI,
             code = KeyCode.IME_UI_MODE_ARABIC_LETTERS,

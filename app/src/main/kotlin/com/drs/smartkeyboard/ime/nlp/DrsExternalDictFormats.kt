@@ -8,7 +8,7 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializer
 
 /**
- * DRS v2.8.0 «قاموسك من ملفك» — the pure external-dictionary file parser.
+ * «قاموسك من ملفك» — the pure external-dictionary file parser.
  *
  * Two deterministic text formats are accepted, auto-detected by the first
  * non-whitespace character:

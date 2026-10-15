@@ -34,7 +34,7 @@ object DrsSyncBundle {
         val exportedAt: Long = 0L,
         val words: Map<String, Long> = emptyMap(),
         val bigrams: Map<String, Map<String, Long>> = emptyMap(),
-        // v2.13.0 «السياق الأعمق» — personal trigrams ride the container
+        // «السياق الأعمق» — personal trigrams ride the container
         // additively: older builds ignore the field (ignoreUnknownKeys),
         // older containers decode here with an empty map — no version bump,
         // no migration, no breakage in either direction.
@@ -139,7 +139,7 @@ object DrsSyncBundle {
             }
             if (payload.words.size.toLong() + row.size > Int.MAX_VALUE) throw BundleError.TooManyEntries
         }
-        // v2.13.0 — trigram rows follow the same shape law: p2 keys are
+        // trigram rows follow the same shape law: p2 keys are
         // words, each p2 row holds at most MAX_TRIGRAM_ROWS p1 rows, each
         // p1 row holds at most MAX_TRIGRAM_ROW continuations, counts ≥ 0.
         payload.trigrams.forEach { (p2, row1) ->

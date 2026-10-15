@@ -206,7 +206,7 @@
     <string name="pref__theme__theme_accent_color__label" comment="Label of accent color preference in Theme">
         Accent color (Material You themes)
     </string>
-    <!-- DRS v2.8.0: user background image for the keyboard theme -->
+    <!-- user background image for the keyboard theme -->
     <string name="pref__theme__group_background__label" comment="Theme screen group title for the user background image">Background image</string>
     <string name="pref__theme__background_image__label" comment="Preference title: pick a background image">Keyboard background image</string>
     <string name="pref__theme__background_image__summary_none" comment="Summary when no image is set">No image — the background comes from the current theme. Tap to pick one from your device</string>
@@ -513,7 +513,7 @@
     <string name="settings__smartbar__title" comment="Title of Smartbar screen">Smartbar</string>
     <string name="pref__smartbar__enabled__label" comment="Preference title">Enable smartbar</string>
     <string name="pref__smartbar__enabled__summary" comment="Preference summary">Will show on top of the keyboard</string>
-    <!-- DRS v2.11.0: the honest contextual ranker -->
+    <!-- the honest contextual ranker -->
     <string name="pref__smartbar__contextual_ranking__label" comment="Preference title">Honest contextual ranking</string>
     <string name="pref__smartbar__contextual_ranking__summary" comment="Preference summary">Promotes your own enabled actions to the front by field type (URL, search, message, password) — no new tiles, no removals; your manual order stays the base, and password fields never promote clipboard or voice</string>
     <string name="pref__smartbar__layout__label" comment="Preference title">Layout</string>
@@ -567,7 +567,7 @@
     <string name="pref__dictionary__learn_from_suggestions__summary" comment="DRS: Preference summary">Words you pick from the suggestion row are remembered and suggested first next time (stored on this device only)</string>
     <string name="pref__dictionary__learn_typed_words__label" comment="DRS: Preference title">Learn words you type</string>
     <string name="pref__dictionary__learn_typed_words__summary" comment="DRS: Preference summary">Words you type and commit with space are remembered locally so the keyboard grows with your vocabulary</string>
-    <!-- DRS v2.8.0: external dictionary import -->
+    <!-- external dictionary import -->
     <string name="pref__external_dict__group__label" comment="Dictionary screen group title for external dictionaries">External dictionaries</string>
     <string name="pref__external_dict__import__label" comment="Preference title: import external dictionary">Import a dictionary from a file</string>
     <string name="pref__external_dict__import__summary" comment="Preference summary: accepted formats">JSON shaped {“word”: freq} or “word,freq” lines — merged INTO the language dictionary, never replacing it</string>
@@ -1355,7 +1355,7 @@
     <string name="drs__search__history__clear" comment="Action that clears the entire search history">Clear all</string>
     <string name="pref__search__history_enabled__label" comment="Label of the search-history preference">Search history</string>
     <string name="pref__search__history_enabled__summary" comment="Summary of the search-history preference">Remember recent searches and offer them as quick suggestions inside smart search</string>
-    <!-- DRS v1.0.5: smart tools — share, word navigation, most-used tools -->
+    <!-- smart tools — share, word navigation, most-used tools -->
     <string name="quick_action__clipboard_share">Share text</string>
     <string name="quick_action__clipboard_share__tooltip">Share the selected text (or the whole field) via another app</string>
     <string name="quick_action__move_word_left">Move word left</string>
@@ -1367,10 +1367,10 @@
     <string name="smart_tools__most_used">Most used</string>
     <string name="pref__smartbar__customize_hint__label" comment="Informational row pointing to the in-IME tools editor">Customize quick tools</string>
     <string name="pref__smartbar__customize_hint__summary" comment="Explains where tool customization lives">Open the keyboard in any app, tap the tools button (⋮) in the strip then "Customize tools" — drag to reorder, hide or pin tools</string>
-    <!-- DRS v1.0.5: emoji search -->
+    <!-- emoji search -->
     <string name="emoji__search__hint" comment="Placeholder of the emoji search field — search works on English names/keywords">Search emoji (English: heart, fire…)</string>
     <string name="emoji__search__no_results">No matching emoji — try another English word like smile or star</string>
-    <!-- DRS v1.0.5: help center -->
+    <!-- help center -->
     <string name="help__title" comment="Title of the help center screen">Help</string>
     <string name="help__entry_summary" comment="Summary of the help entry in the maintenance group">Plain-language guidance for key features with direct access to every screen</string>
     <string name="help__maintenance_group" comment="Title of the maintenance group in Other settings">Maintenance &amp; support</string>
@@ -1400,7 +1400,7 @@
     <string name="help__faq_backup__summary">Backup saves your settings, themes and profiles into a single file you can restore on any device</string>
     <string name="help__faq_update__title">How do I update the app?</string>
     <string name="help__faq_update__summary">The update center checks for the latest release and downloads and installs it in-app with SHA-256 verification</string>
-    <!-- DRS v1.0.5: factory reset -->
+    <!-- factory reset -->
     <string name="factory_reset__title" comment="Title of the factory reset preference">Factory reset settings</string>
     <string name="factory_reset__summary" comment="Summary of the factory reset preference">Reset all keyboard, customization and adaptive-layer settings back to their defaults</string>
     <string name="factory_reset__confirm_title">Reset to default settings?</string>
@@ -1799,7 +1799,7 @@
     <string name="packages__type_keyboard">Keyboard</string>
     <string name="packages__type_languagepack">Language pack</string>
 
-    <!-- DRS v1.0.6: technical text tools panel -->
+    <!-- technical text tools panel -->
     <string name="drs__text_tools__header_title">Text tools</string>
     <string name="drs__text_tools__section_case">Letter case</string>
     <string name="drs__text_tools__section_spaces">Spaces &amp; lines</string>
@@ -1807,8 +1807,8 @@
     <string name="drs__text_tools__section_punctuation">Punctuation &amp; clean-up</string>
     <string name="drs__text_tools__section_lines">Line operations</string>
     <string name="drs__text_tools__section_quick">Quick actions</string>
-    <!-- DRS v2.2.0: the smart tiles — chips, favorites, recents and the
-         contextual advisory row of the text tools panel -->
+    <!-- the smart tiles — chips, favorites, recents and the
+ contextual advisory row of the text tools panel -->
     <string name="drs__text_tools__chip_all">All</string>
     <string name="drs__text_tools__section_favorites">Favorites</string>
     <string name="drs__text_tools__section_recents">Most used</string>
@@ -1901,7 +1901,7 @@
     <string name="quick_action__ime_ui_mode_text_tools">Text tools</string>
     <string name="quick_action__ime_ui_mode_text_tools__tooltip">Open the advanced text tools panel</string>
     <string name="drs__shortcuts__duplicate_error">This abbreviation is already in use - pick a different one</string>
-    <!-- DRS v1.0.6: technical toolbar editor -->
+    <!-- technical toolbar editor -->
     <string name="drs__tech_toolbar__title">Customize tech toolbar</string>
     <string name="drs__tech_toolbar__description">Choose which keys appear in the technical strip above the keyboard and in what order. The text tools toggle is fixed at the start and cannot be removed. Changes apply to the keyboard immediately.</string>
     <string name="drs__tech_toolbar__keys_section">Strip keys (in order)</string>
@@ -1935,7 +1935,7 @@
     <string name="drs__tech_toolbar__key_caret">Caret ^</string>
     <string name="drs__tech_toolbar__key_amp">Ampersand &amp;</string>
     <string name="drs__tech_toolbar__key_asterisk">Asterisk *</string>
-    <!-- DRS v1.0.6: diagnostics full test, event log, state backup, performance -->
+    <!-- diagnostics full test, event log, state backup, performance -->
     <string name="drs__diagnostics__test_section">Full technical test</string>
     <string name="drs__diagnostics__test_run">Run full test</string>
     <string name="drs__diagnostics__test_summary">Passed: {passed} • Warnings: {warnings} • Errors: {errors}</string>
@@ -1987,7 +1987,7 @@
     <string name="pref__keyboard__accelerated_delete__label">Accelerating delete</string>
     <string name="pref__keyboard__accelerated_delete__summary">Keeps your repeat rate for the first six repeats, then descends a fixed three-gear deterministic ladder — erase paragraphs without waiting</string>
 
-    <!-- DRS v1.0.7: unified "Both" system -->
+    <!-- unified "Both" system -->
     <string name="drs__unified__dashboard_title">Unified Dashboard</string>
     <string name="drs__unified__home_summary">The unified control panel for all three systems</string>
     <string name="drs__unified__tools_title">Unified Tools</string>
@@ -2138,7 +2138,7 @@
     <string name="drs__unified__system_diagnostics_summary">Full checks of the service, engine, languages and tools</string>
     <string name="drs__unified__system_backup_summary">Back up and restore your keyboard data locally</string>
 
-    <!-- DRS v1.0.8: comprehensive feature development round -->
+    <!-- comprehensive feature development round -->
     <string name="pref__keyboard__height_scale__label">Keyboard height</string>
     <string name="drs__unified__basics_height_summary">Scale the whole keyboard height up or down — applies instantly to every row and key</string>
     <string name="drs__unified__tool_theme_cycle">Cycle theme</string>
@@ -2172,13 +2172,13 @@
     <string name="drs__diagnostics__check_daily_stats">Daily statistics counters sanity</string>
     <string name="drs__diagnostics__hint_daily_stats">Daily statistics data contains an invalid day or a negative value — use "Reset statistics" in the Daily Statistics screen to clean it up</string>
 
-    <!-- DRS v1.1.0: new unified-strip tools -->
+    <!-- new unified-strip tools -->
     <string name="drs__unified__tool_one_handed">One-handed mode</string>
     <string name="drs__unified__tool_one_handed_desc">Shrink the keyboard to one side for easier thumb typing — press again to restore full width</string>
     <string name="drs__unified__tool_number_row">Number row</string>
     <string name="drs__unified__tool_number_row_desc">Show or hide the number row above the letters instantly, without opening settings</string>
 
-    <!-- DRS v1.1.0: quick-action tile names for the unified tools -->
+    <!-- quick-action tile names for the unified tools -->
     <string name="quick_action__theme_cycle">Cycle theme</string>
     <string name="quick_action__theme_cycle__tooltip">Switch to the next installed theme</string>
     <string name="quick_action__insert_date_time">Date &amp; time</string>
@@ -2186,13 +2186,13 @@
     <string name="quick_action__toggle_number_row">Number row</string>
     <string name="quick_action__toggle_number_row__tooltip">Show or hide the number row</string>
 
-    <!-- DRS v1.1.0: new text tools -->
+    <!-- new text tools -->
     <string name="drs__text_tools__tool_number_lines">Number lines</string>
     <string name="drs__text_tools__desc_number_lines">Prefixes every line with its order: 1. 2. 3. — keeping the lines themselves untouched</string>
     <string name="drs__text_tools__tool_reverse_lines">Reverse line order</string>
     <string name="drs__text_tools__desc_reverse_lines">Flips the line order so the last line becomes the first and vice versa</string>
 
-    <!-- DRS v1.1.0: stats chart + CSV export -->
+    <!-- stats chart + CSV export -->
     <string name="drs__unified__stats_chart_title">Key presses — last 14 days</string>
     <string name="drs__unified__stats_chart_peak">Busiest day: {date} ({keys} keys)</string>
     <string name="drs__unified__stats_export">Export CSV</string>
@@ -2200,37 +2200,37 @@
     <string name="drs__unified__stats_export_failed">Could not write the CSV file — try another location</string>
     <string name="drs__unified__stats_export_empty">No recorded days to export yet</string>
 
-    <!-- DRS v1.1.0: diagnostics checks #20 and #21 -->
+    <!-- diagnostics checks #20 and #21 -->
     <string name="drs__diagnostics__check_storage">Available storage space</string>
     <string name="drs__diagnostics__hint_storage">The device storage is nearly full — state saves, clipboard media and backups may fail; remove unneeded files</string>
     <string name="drs__diagnostics__check_backup_age">Backup freshness</string>
     <string name="drs__diagnostics__hint_backup_age">No DRS-state backup was exported in the last 30 days (or ever) — use the export button on this screen to protect your profiles, themes and shortcuts</string>
     <string name="drs__diagnostics__backup_last">Last backup: {when}</string>
     <string name="drs__diagnostics__backup_never">No backup has been exported yet</string>
-    <!-- DRS v1.2.0: smartbar height scale -->
+    <!-- smartbar height scale -->
     <string name="pref__keyboard__smartbar_height_scale__label">Smartbar height scale</string>
     <string name="drs__unified__basics_smartbar_summary">Adjust the smartbar height above the letters — applied instantly to the live keyboard, suggestion chips and headers</string>
 
-    <!-- DRS v1.2.0: new unified-strip tools -->
+    <!-- new unified-strip tools -->
     <string name="drs__unified__tool_incognito">Incognito mode</string>
     <string name="drs__unified__tool_incognito_desc">Type without learning or saving what you write — suggestions reset after each session, ideal for sensitive fields</string>
     <string name="drs__unified__tool_autocorrect">Auto-correction</string>
     <string name="drs__unified__tool_autocorrect_desc">Toggle automatic word correction while typing — switch instantly from the strip without opening settings</string>
 
-    <!-- DRS v1.2.0: quote wrapping text tool -->
+    <!-- quote wrapping text tool -->
     <string name="drs__text_tools__tool_wrap_quotes">Wrap in quotes</string>
     <string name="drs__text_tools__desc_wrap_quotes">Surrounds the selection (or the whole text) with «» for Arabic text or \"\" for everything else</string>
 
-    <!-- DRS v1.2.0: all-time totals card -->
+    <!-- all-time totals card -->
     <string name="drs__unified__stats_totals_title">All-time totals — every recorded day</string>
     <string name="drs__unified__stats_streak">Activity streak: {count} day(s)</string>
     <string name="drs__unified__stats_best_day">Best day ever: {date} ({keys} presses)</string>
 
-    <!-- DRS v1.3.0: real autocorrect toggle toasts -->
+    <!-- real autocorrect toggle toasts -->
     <string name="drs__autocorrect__toast_enabled">Auto-correction is now ON — word suggestions and corrections will appear again</string>
     <string name="drs__autocorrect__toast_disabled">Auto-correction is now OFF — words will be typed as-is without suggestions</string>
 
-    <!-- DRS v1.3.0: text tools — digit conversion, tatweel, blank lines -->
+    <!-- text tools — digit conversion, tatweel, blank lines -->
     <string name="drs__text_tools__tool_to_arabic_digits">Convert digits to Arabic</string>
     <string name="drs__text_tools__desc_to_arabic_digits">Converts every Western digit 123 in the selection (or the whole text) to Arabic-Indic digits ١٢٣ — letters and punctuation are untouched</string>
     <string name="drs__text_tools__tool_to_western_digits">Convert digits to Western</string>
@@ -2240,13 +2240,13 @@
     <string name="drs__text_tools__tool_collapse_empty_lines">Collapse empty lines</string>
     <string name="drs__text_tools__desc_collapse_empty_lines">Turns every run of consecutive empty lines into a single empty line — cleaner spacing without removing separators or the trailing line</string>
 
-    <!-- DRS v1.3.0: unified catalogue tools -->
+    <!-- unified catalogue tools -->
     <string name="drs__unified__tool_clipboard_clear">Clear current clipboard</string>
     <string name="drs__unified__tool_clipboard_clear_desc">Instantly clears the current primary clipboard — useful after copying sensitive data; pinned history items stay according to your setting</string>
     <string name="drs__unified__tool_voice_input">Voice input</string>
     <string name="drs__unified__tool_voice_input_desc">Switches straight to the system voice input to dictate text instead of typing — you return to the keyboard when done</string>
 
-    <!-- DRS v1.3.0: diagnostics checks #22-#24 -->
+    <!-- diagnostics checks #22-#24 -->
     <string name="drs__diagnostics__check_battery">Battery and power state</string>
     <string name="drs__diagnostics__hint_battery">The battery is low or power-save mode is on — the system may slow down keyboard background work (suggestions and adaptation); charge the device or exempt this app from power saving</string>
     <string name="drs__text_tools__tool_sort_lines_desc">Sort lines descending</string>
@@ -2268,13 +2268,13 @@
     <string name="drs__diagnostics__check_active_theme">Active theme loads cleanly</string>
     <string name="drs__diagnostics__hint_active_theme">The active theme failed to load and the keyboard fell back to the base theme — try selecting the theme again or reinstall its theme package</string>
 
-    <!-- DRS v1.3.0: stats — numbers/symbols counters + week-over-week -->
+    <!-- stats — numbers/symbols counters + week-over-week -->
     <string name="drs__unified__stats_numbers">Number presses</string>
     <string name="drs__unified__stats_symbols">Symbol presses</string>
     <string name="drs__unified__stats_week_over_week">Week over week: {delta} vs the previous week (key presses)</string>
 
 
-    <!-- DRS v1.5.0: fifth round — text ops, catalog tools, tile names, stats, diagnostics, backup ceiling, theme cycle -->
+    <!-- fifth round — text ops, catalog tools, tile names, stats, diagnostics, backup ceiling, theme cycle -->
     <string name="drs__text_tools__tool_toggle_case">Invert case</string>
     <string name="drs__text_tools__desc_toggle_case">Flips the case of every letter: lower becomes upper and vice versa; caseless scripts like Arabic pass through unchanged</string>
     <string name="drs__text_tools__tool_to_arabic_punctuation">Arabic punctuation</string>
@@ -2415,7 +2415,7 @@
     <string name="drs__context_mode__password">Password</string>
     <string name="drs__context_mode__technical">Technical</string>
 
-    <!-- DRS v1.8.0: pinned-tools drawer (the side-pull handle) -->
+    <!-- pinned-tools drawer (the side-pull handle) -->
     <string name="drs__tools_drawer__title">Pinned tools</string>
     <string name="drs__tools_drawer__count">{count} of {total}</string>
     <string name="drs__tools_drawer__filter_all">All</string>
@@ -2427,12 +2427,12 @@
     <string name="drs__tools_drawer__reset">Reset strip customization</string>
     <string name="drs__tools_drawer__on">On</string>
     <string name="drs__tools_drawer__off">Off</string>
-    <!-- DRS v1.8.0: the two new catalogue tools -->
+    <!-- the two new catalogue tools -->
     <string name="drs__unified__tool_quick_actions">Quick actions</string>
     <string name="drs__unified__tool_quick_actions_desc">Opens the quick-actions panel with your most-used tool tiles — the same path the smartbar actions toggle uses</string>
     <string name="drs__unified__tool_actions_editor">Actions editor</string>
     <string name="drs__unified__tool_actions_editor_desc">Opens the smartbar quick-action buttons editor to rearrange and hide them</string>
-    <!-- DRS v1.8.0: the two new text operations -->
+    <!-- the two new text operations -->
     <string name="drs__text_tools__tool_separate_digit_letters">Separate digits from letters</string>
     <string name="drs__text_tools__desc_separate_digit_letters">Inserts one space between every adjacent digit and letter in both directions (12abc becomes 12 abc) — Arabic and Latin alike</string>
     <string name="drs__text_tools__tool_remove_punctuation">Remove punctuation</string>
@@ -2575,7 +2575,7 @@
     <string name="pref__clipboard__large_text_warning__label">Huge-text warning</string>
     <string name="pref__clipboard__large_text_warning__summary">Warn when the text reaches sizes that may slow editing down</string>
     <string name="clipboard__group_flat">All</string>
-    <!-- DRS v1.15.0: the pinned-tasks cap of 10 + the three smart panels -->
+    <!-- the pinned-tasks cap of 10 + the three smart panels -->
     <string name="drs__unified__tool_diacritics_panel">Harakat panel</string>
     <string name="drs__unified__tool_diacritics_panel_desc">Opens the smart harakat panel: a mark over a mark replaces it instead of stacking, with shadda combos and most-used rows</string>
     <string name="drs__unified__tool_smart_symbols">Smart symbols panel</string>
@@ -2624,7 +2624,7 @@
     <string name="pref__panels__symbol_suggestions__summary">A symbols row that fits the text before the cursor automatically</string>
     <string name="pref__panels__recents__label">Panel most-used rows</string>
     <string name="pref__panels__recents__summary">Remembers your most-used tiles across the harakat, symbols and letters panels — local only</string>
-    <!-- DRS v1.16.0: the fixed tasks bar (10 slots) + the slot editor + the harakat keyboard panel + the smart panel ordering -->
+    <!-- the fixed tasks bar (10 slots) + the slot editor + the harakat keyboard panel + the smart panel ordering -->
     <string name="drs__strip_slot__title">Change task — slot {slot}</string>
     <string name="drs__strip_slot__hint">Pick a catalogue task to occupy this fixed-bar slot. Long-press any tasks-bar slot to open this editor.</string>
     <string name="drs__strip_slot__pick">Replace</string>
@@ -2632,7 +2632,7 @@
     <string name="drs__unified__bar_slots_hint">The tasks bar is now FIXED: it shows 10 tasks only above the suggestions strip — your pins first, then filled from the catalogue. Long-press any task to change it, and open the drawer (side-pull handle) to reorder or pin others.</string>
     <string name="pref__panels__smart_order__label">Smart panel ordering</string>
     <string name="pref__panels__smart_order__summary">The panels switcher reorders itself: the current panel leads, then the most-opened ones — local only</string>
-    <!-- DRS v1.1.0: the full smart harakat board — contextual advisor and word tashkeel -->
+    <!-- the full smart harakat board — contextual advisor and word tashkeel -->
     <string name="panel__harakat__advice_after_shadda">shadda + fatha</string>
     <string name="panel__harakat__advice_definite_lam">sukun of the definite lam</string>
     <string name="panel__harakat__advice_definite_sun">sun-letter shadda</string>
@@ -2773,15 +2773,15 @@
     <string name="clip__dictation_stop" comment="Accessibility label of the popup editor's dictate button while listening">Stop dictation</string>
     <string name="clip__dictation_hint" comment="Popup editor dictation strip shown before any partial transcript arrives">Speak now…</string>
 
-    <string name="action__navigate_back" comment="Accessibility label for the back button on every settings screen (DRS v1.28.0 a11y fix)">Back</string>
-    <string name="general__confirm" comment="Generic confirm button label (DRS v1.28.0 shortcut delete confirmation)">Confirm</string>
-    <string name="drs__shortcuts__delete_confirm_title" comment="Title of the delete-confirmation dialog for a shortcut (DRS v1.28.0)">Delete shortcut?</string>
-    <string name="drs__shortcuts__delete_confirm_message" comment="Message of the delete-confirmation dialog for a shortcut (DRS v1.28.0)">This shortcut will be permanently deleted. This cannot be undone.</string>
+    <string name="action__navigate_back" comment="Accessibility label for the back button on every settings screen ( a11y fix)">Back</string>
+    <string name="general__confirm" comment="Generic confirm button label ( shortcut delete confirmation)">Confirm</string>
+    <string name="drs__shortcuts__delete_confirm_title" comment="Title of the delete-confirmation dialog for a shortcut ()">Delete shortcut?</string>
+    <string name="drs__shortcuts__delete_confirm_message" comment="Message of the delete-confirmation dialog for a shortcut ()">This shortcut will be permanently deleted. This cannot be undone.</string>
 
     <string name="clipboard__a11y_search" comment="Accessibility label of the clipboard panel header search toggle (ClipboardInputLayout)">Search clipboard</string>
     <string name="clipboard__a11y_filter" comment="Accessibility label of the clipboard panel header type-filter toggle (ClipboardInputLayout)">Filter history</string>
     <string name="drs__unified__a11y_open_drawer" comment="Accessibility label for the tasks-bar side-pull handle that opens the pinned-tools drawer (DRS a11y/i18n/ux r0-I)">Open tools drawer</string>
-    <string name="drs__unified__a11y_unavailable" comment="Suffix appended to a task-slot accessibility label when the editor context makes the action a silent no-op — the strip tells the truth instead of acting fake (DRS v2.2.2)">Unavailable now</string>
+    <string name="drs__unified__a11y_unavailable" comment="Suffix appended to a task-slot accessibility label when the editor context makes the action a silent no-op — the strip tells the truth instead of acting fake ()">Unavailable now</string>
     <string name="action__more_options" comment="UserDictionaryScreen: contentDescription of the app-bar overflow (MoreVert) icon button">More options</string>
     <string name="db__error_null_handle_fmt" comment="UserDictionaryScreen: toast when the dictionary database handle is null; {op} is filled with db__op_import / db__op_export / db__op_clear">Database handle is null, failed to {op}</string>
     <string name="db__op_import" comment="UserDictionaryScreen: operation name inside db__error_null_handle_fmt">import</string>

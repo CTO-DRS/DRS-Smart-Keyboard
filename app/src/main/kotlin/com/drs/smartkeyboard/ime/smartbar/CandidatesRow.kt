@@ -71,11 +71,11 @@ fun CandidatesRow(modifier: Modifier = Modifier) {
     val displayMode by prefs.suggestion.displayMode.collectAsState()
     val candidates by nlpManager.activeCandidatesFlow.collectAsState()
 
-    // DRS v2.2.1 «مرشحون أحياء»: haptics at the interaction site — the
+    // «مرشحون أحياء»: haptics at the interaction site — the
     // candidates row was silent on commit AND on long-press removal,
     // while the quick actions beside it always spoke (QuickActionButton).
     val feedback = LocalInputFeedbackController.current
-    // DRS v2.2.1: the entrance wave replays ONLY when the candidate SET
+    // the entrance wave replays ONLY when the candidate SET
     // changes — the signature keys the per-item animation below, so a
     // re-emission of the same suggestions (e.g. a re-rank with identical
     // order) never re-runs the wave.
@@ -166,12 +166,12 @@ private fun CandidateItem(
     entranceKey: String = "",
 ) = with(LocalDensity.current) {
     var isPressed by remember { mutableStateOf(false) }
-    // DRS v2.2.2 «عقد احترام الإيقاع»: the system «remove animations»
+    // «عقد احترام الإيقاع»: the system «remove animations»
     // accessibility switch collapses the entrance wave below to an
     // instant, target-identical appearance.
     val motionEnabled = rememberDrsMotionEnabled()
 
-    // DRS v2.2.1: the deterministic entrance wave (مرشحون أحياء). Each
+    // the deterministic entrance wave (مرشحون أحياء). Each
     // candidate fades/slides in with the capped DrsMotion stagger so the
     // row reads as one quick start-to-end wave, never a pop-in. The
     // remember keys on the row's signature: re-renders with the same set
@@ -183,7 +183,7 @@ private fun CandidateItem(
     val entrance by animateFloatAsState(
         targetValue = if (entered) 1f else 0f,
         animationSpec = tween(
-            // DRS v2.2.2: duration AND stagger snap to 0 under the system
+            // duration AND stagger snap to 0 under the system
             // «remove animations» switch — candidates appear instantly at
             // full alpha, identical final state, zero animation time.
             durationMillis = DrsMotion.durationOrSnap(DrsMotion.ENTRANCE_DURATION_MS, motionEnabled),

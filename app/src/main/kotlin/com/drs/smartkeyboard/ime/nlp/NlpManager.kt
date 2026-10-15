@@ -86,7 +86,7 @@ class NlpManager(context: Context) {
     private var autoCommitComposingSnapshot: EditorRange = EditorRange.Unspecified
 
     /**
-     * DRS v1.20.0: uptime stamp of the last direct (glide preview) publish. Non-zero
+ * uptime stamp of the last direct (glide preview) publish. Non-zero
      * means a glide gesture is (or very recently was) publishing word previews through
      * [suggestDirectly], and the candidate row must keep showing them instead of
      * letting the clipboard chip take over mid-gesture.
@@ -168,7 +168,7 @@ class NlpManager(context: Context) {
     }
 
     /**
-     * DRS v2.8.0 «قاموسك من ملفك»: drops the cached dictionary index for [lang]
+ * «قاموسك من ملفك»: drops the cached dictionary index for [lang]
      * so the next suggestion pass re-loads it merged with the user's currently
      * imported external dictionaries. Called by the settings screen (same
      * process) right after an import or a removal — the change reaches the live
@@ -258,7 +258,7 @@ class NlpManager(context: Context) {
                         allowPossiblyOffensive = !prefs.suggestion.blockPossiblyOffensive.get(),
                         isPrivateSession = keyboardManager.activeState.isIncognitoMode,
                     )
-                    // DRS v2.7.0: multilingual typing (HeliBoard heritage,
+                    // multilingual typing (HeliBoard heritage,
                     // opt-in). The dictionaries of up to two OTHER enabled
                     // subtypes that share the current subtype's suggestion
                     // provider AND speak a different language also feed the
@@ -302,7 +302,7 @@ class NlpManager(context: Context) {
                 // stamp only, so two batches in the SAME millisecond used to
                 // keep the older one and silently drop the newer input.
                 if (internalSuggestions.first <= reqTime) {
-                    // DRS v1.20.0: regular (typed) suggestions supersede any pending
+                    // regular (typed) suggestions supersede any pending
                     // glide preview — the gesture is over once real typing resumes.
                     directSuggestionStamp = 0L
                     // DRS (M5): remember the composing region this WINNING batch
@@ -338,7 +338,7 @@ class NlpManager(context: Context) {
 
     fun suggestDirectly(suggestions: List<SuggestionCandidate>) {
         val reqTime = SystemClock.uptimeMillis()
-        // DRS v1.20.0: stamp the direct publish so assembleCandidates keeps the live
+        // stamp the direct publish so assembleCandidates keeps the live
         // glide word preview instead of silently swapping in the clipboard chip.
         directSuggestionStamp = reqTime
         // DRS (M5): a glide preview publish must never become an auto-commit —
@@ -424,7 +424,7 @@ class NlpManager(context: Context) {
                         addAll(internalSuggestions.second)
                     }
                 }
-                // DRS v1.20.0: during a glide the word preview IS the candidate row.
+                // during a glide the word preview IS the candidate row.
                 // It used to lose to the clipboard chip whenever any clip was recent
                 // (the most common state right after a copy), leaving the user with
                 // no visual feedback for the gesture in progress.
@@ -444,7 +444,7 @@ class NlpManager(context: Context) {
         if (!prefs.smartbar.enabled.get()) {// || !prefs.smartbar.sharedActionsAutoExpandCollapse.get()) {
             return
         }
-        // TODO: this is a mess and needs to be cleaned up in v0.5 with the NLP development
+        // TODO: this is a mess and needs to be cleaned up in with the NLP development
         /*if (keyboardManager.inputEventDispatcher.isRepeatableCodeLastDown()
             && !keyboardManager.inputEventDispatcher.isPressed(KeyCode.DELETE)
             && !keyboardManager.inputEventDispatcher.isPressed(KeyCode.FORWARD_DELETE)
@@ -505,7 +505,7 @@ class NlpManager(context: Context) {
         }
 
         suspend fun destroyIfNecessary() {
-            // DRS v1.19.0 fix: the flag was getAndSet(true) — destroy() ran on
+            // fix: the flag was getAndSet(true) — destroy() ran on
             // EVERY call (not only when alive) and left the flag true forever,
             // so a later createIfNecessary() could never re-create the provider.
             // Now: destroy exactly when alive, and mark the instance dead.
@@ -527,12 +527,12 @@ class NlpManager(context: Context) {
         }
 
         /**
-         * DRS v2.15.0 «ذاكرة الحافظة الأمينة» — قرار موثق بشأن
+ * «ذاكرة الحافظة الأمينة» — قرار موثق بشأن
          * [isPrivateSession]: المعامل **متعمد عدم استخدامه هنا** لا ميت
          * سهوًا. شريحة الحافظة ليست ذاكرة: هي بصقٌ حي فوق المقص النظامي
          * الدائم (يقرأ primaryClip ولا يخزن شيئًا، والتقاطُ السجلّ يُحكم
          * ببوابة [com.drs.smartkeyboard.ime.clipboard.DrsClipboardCaptureGate]
-         * في مسار التخزين المستقل). نفس العقيدة التي وثّقتها v2.14.0
+ * في مسار التخزين المستقل). نفس العقيدة التي وثّقتها 
          * للإيموجي: العرض في السياقات الخاصة حق مشروع (لصق كلمة مرورك
          * من شريحتك في جلسة تخفي استخدامٌ مشروع)، والالتقاط وحده
          * الممنوع. لذا الجلسة الخاصة لا تحجب الشريحة، وحساسية المقص
@@ -573,7 +573,7 @@ class NlpManager(context: Context) {
                             if (match.value != text && isUniqueMatch) {
                                 add(ClipboardSuggestionCandidate(
                                     clipboardItem = currentItem.copy(
-                                        // DRS v1.26.0: the old inline
+                                        // the old inline
                                         // strip (and its TODO) moved into
                                         // NetworkUtils.normalizePhoneNumberMatch
                                         // — a pure, JVM-tested step that
@@ -635,7 +635,7 @@ class NlpManager(context: Context) {
 }
 
 /**
- * DRS v1.20.0: pure precedence decision — a live glide preview (direct publish,
+ * pure precedence decision — a live glide preview (direct publish,
  * stamped non-zero) with actual content beats the clipboard chip even when a recent
  * clip exists. Top-level so the JVM contract tests can exercise it without a Context.
  */

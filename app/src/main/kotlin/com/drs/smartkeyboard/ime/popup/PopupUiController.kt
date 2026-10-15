@@ -73,7 +73,7 @@ class PopupUiController(
     private var activeElementIndex by mutableIntStateOf(-1)
 
     /**
-     * DRS v2.6.0 «المنبثق الحي الصادق» — fired exactly when the active
+ * «المنبثق الحي الصادق» — fired exactly when the active
      * extended-popup element CHANGES during a finger slide (gated by
      * [DrsPopupMotion.shouldAnnounceHover]: never on extend() init, never
      * on re-hovering the same element, never on slide-out). The keyboard
@@ -334,7 +334,7 @@ class PopupUiController(
             return false
         }
 
-        // DRS v2.6.0: capture the previous active index BEFORE the move so
+        // capture the previous active index BEFORE the move so
         // the honest hover gate (DrsPopupMotion.shouldAnnounceHover) can
         // tell a real element change from a re-hover or an init.
         val previousElementIndex = activeElementIndex
@@ -387,7 +387,7 @@ class PopupUiController(
             }
         }
 
-        // DRS v2.6.0 «المنبثق الحي الصادق»: a real move between popup
+        // «المنبثق الحي الصادق»: a real move between popup
         // elements is announced through the feedback contract — once per
         // change, never on init, never on re-hover, never on slide-out.
         if (DrsPopupMotion.shouldAnnounceHover(previousElementIndex, activeElementIndex)) {

@@ -46,7 +46,7 @@ private fun formatBytes(bytes: Long): String = when {
 }
 
 /**
- * DRS v1.0.6: real-time performance monitor. Every figure here is MEASURED
+ * real-time performance monitor. Every figure here is MEASURED
  * from the running process - no estimates, no placeholders:
  *  - Engine response: actual key-handler durations sampled per press.
  *  - Memory: live Java and native heap usage.
@@ -80,7 +80,7 @@ fun DrsPerformanceScreen() = DrsScreen {
     val clipboardCount = remember(tick) { clipboardManager.historyFlow.value.all.size }
 
     content {
-        // DRS fix (v1.0.9): DrsScreen already scrolls — a nested verticalScroll
+        // DRS fix (): DrsScreen already scrolls — a nested verticalScroll
         // here was measured with infinite height constraints and crashed the
         // screen on open.
         Column(

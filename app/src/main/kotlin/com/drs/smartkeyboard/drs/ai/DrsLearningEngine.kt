@@ -16,7 +16,7 @@ import kotlinx.serialization.json.Json
  * WHAT it stores (local only, noBackupFilesDir):
  *  - committed word counts (the user's real vocabulary with real weights)
  *  - personal bigram counts (the user's real word-pair habits)
- *  - personal trigram counts (v2.13.0 «السياق الأعمق» — the user's real
+ * - personal trigram counts ( «السياق الأعمق» — the user's real
  *    two-word-context habits: what follows WHAT after WHAT)
  *
  * WHAT it NEVER stores: full sentences, field contents, timestamps per
@@ -44,7 +44,7 @@ object DrsLearningEngine {
 
     private const val MAX_WORDS = 2000
     private const val MAX_BIGRAMS = 1024
-    // v2.13.0 «السياق الأعمق» — the trigram table rides the same store,
+    // «السياق الأعمق» — the trigram table rides the same store,
     // the same discipline: bounded rows, bounded counts, bounded file.
     const val MAX_TRIGRAMS = 512
     private const val MAX_TRIGRAM_COUNT = 100L
@@ -57,7 +57,7 @@ object DrsLearningEngine {
     private val lock = Any()
     private var words = LinkedHashMap<String, Long>()
     private var bigrams = LinkedHashMap<String, LinkedHashMap<String, Long>>()
-    // v2.13.0 — personal trigrams: p2 → p1 → next → count. NESTED keys (no
+    // personal trigrams: p2 → p1 → next → count. NESTED keys (no
     // joined-string key) so a learned "word" containing a space can never
     // collide with the row delimiter.
     private var trigrams = LinkedHashMap<String, LinkedHashMap<String, LinkedHashMap<String, Long>>>()
@@ -85,7 +85,7 @@ object DrsLearningEngine {
     }
 
     /**
-     * v2.13.0 «السياق الأعمق» — learns one [p2]→[p1]→[next] chain. Same
+ * «السياق الأعمق» — learns one [p2]→[p1]→[next] chain. Same
      * gating and guarantees as [learnBigram]: capped rows (evicting the
      * weakest row on overflow), capped counts (saturation), capped row
      * width (evicting the weakest continuation), never throws.
@@ -150,7 +150,7 @@ object DrsLearningEngine {
     }
 
     /**
-     * v2.13.0 — the personal trigram row for a two-word context (p2, p1):
+ * the personal trigram row for a two-word context (p2, p1):
      * (next, count) pairs, strongest first, at most [limit].
      */
     fun personalTrigramNext(p2: String, p1: String, limit: Int): List<Pair<String, Int>> {
@@ -348,7 +348,7 @@ object DrsLearningEngine {
     }
 
     /**
-     * v2.13.0 «السياق الأعمق» — read-only snapshot of the trigram table
+ * «السياق الأعمق» — read-only snapshot of the trigram table
      * for the E2E sync bundle (additive companion of [exportState] — the
      * existing signature is untouched so today's callers never change).
      * p2 → p1 → next → count, copies under the lock.
@@ -358,7 +358,7 @@ object DrsLearningEngine {
     }
 
     /**
-     * v2.13.0 — restores a trigram snapshot produced by
+ * restores a trigram snapshot produced by
      * [exportTrigramState] (validated by DrsSyncBundle before it reaches
      * here). Same replace/merge semantics as [importState]; the clamps
      * guarantee an import can never overflow what locally-learned state
@@ -412,7 +412,7 @@ object DrsLearningEngine {
         // DRS M1.6 — the lemma table rides the same file; the default keeps
         // older payloads decoding unchanged (backward compatibility).
         val lemmas: Map<String, Long> = emptyMap(),
-        // v2.13.0 «السياق الأعمق» — personal trigrams (p2 → p1 → nexts).
+        // «السياق الأعمق» — personal trigrams (p2 → p1 → nexts).
         // Additive field with an empty default: files written by older
         // versions decode unchanged, and THIS version's files decode on
         // older versions (ignoreUnknownKeys = true) with trigrams simply
@@ -469,7 +469,7 @@ object DrsLearningEngine {
                 val aged = c - (c * DECAY_PERCENT / 100)
                 if (aged >= 1L) agedLemmas[l] = aged
             }
-            // v2.13.0 — trigrams decay exactly like bigrams: what the user
+            // trigrams decay exactly like bigrams: what the user
             // stopped writing fades; the two-word habits age toward the caps.
             val agedTrigrams = LinkedHashMap<String, LinkedHashMap<String, LinkedHashMap<String, Long>>>()
             for ((a, row1) in trigrams) {

@@ -53,14 +53,14 @@ fun TextInputLayout(
             .fillMaxWidth()
             .wrapContentHeight(),
     ) {
-        // DRS v1.0.7: unified strip for all three systems - renders the
+        // unified strip for all three systems - renders the
         // right tools per active display level (بسيط/تقني/مزدوج) and
         // supersedes the former technical-only toolbar.
-        // DRS v1.8.0: the strip is now the TASKS BAR above the suggestions
+        // the strip is now the TASKS BAR above the suggestions
         // strip for every user system, and its side-pull handle opens the
         // pinned-tools drawer over the keyboard area.
         DrsUnifiedStrip()
-        // DRS v1.23.0: while the built-in voice recognizer owns a session
+        // while the built-in voice recognizer owns a session
         // the live dictation bar replaces the Smartbar (same slot, same
         // theme elements) — partial transcript + cancel, keyboard alive.
         val voiceUiState by DrsVoiceInputBus.uiState.collectAsState()
@@ -69,7 +69,7 @@ fun TextInputLayout(
         } else {
             VoiceInputBar()
         }
-        // DRS v1.16.0: the strip slot editor (تغيير مهمة من العشر) swaps
+        // the strip slot editor (تغيير مهمة من العشر) swaps
         // the keyboard area the same way the drawer and the overflow do.
         val slotEditorOpen by DrsRuntimeState.stripSlotEditor.collectAsState()
         when {

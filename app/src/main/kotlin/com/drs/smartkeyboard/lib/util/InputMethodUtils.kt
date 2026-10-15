@@ -109,7 +109,7 @@ object InputMethodUtils {
         return component?.packageName == context.packageName && component.className == IME_SERVICE_CLASS_NAME
     }
 
-    // DRS v2.9.1 — the enable button must never kill the process. Some ROMs
+    // the enable button must never kill the process. Some ROMs
     // ship without any activity resolving ACTION_INPUT_METHOD_SETTINGS, so
     // the bare startActivity below used to throw ActivityNotFoundException
     // and the app closed instantly the moment the user pressed "enable"

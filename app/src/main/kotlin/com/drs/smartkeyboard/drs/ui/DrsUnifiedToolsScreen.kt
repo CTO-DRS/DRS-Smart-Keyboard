@@ -59,7 +59,7 @@ import androidx.navigation.NavHostController
 import com.drs.smartkeyboard.app.LocalNavController
 
 /**
- * DRS v1.0.7 — مركز الأدوات الذكية الموحد.
+ * مركز الأدوات الذكية الموحد.
  *
  * Full manager over the unified strip's catalogue: every tool here is a
  * real keyboard action (see [DrsUnifiedTools]), and every control on this
@@ -93,7 +93,7 @@ fun DrsUnifiedToolsScreen() = DrsScreen {
     }
 
     content {
-        // DRS fix (v1.0.9): DrsScreen already scrolls — a nested verticalScroll
+        // DRS fix (): DrsScreen already scrolls — a nested verticalScroll
         // here was measured with infinite height constraints and crashed the
         // screen on open.
         Column(
@@ -116,7 +116,7 @@ fun DrsUnifiedToolsScreen() = DrsScreen {
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
                     Spacer(Modifier.height(8.dp))
-                    // DRS v1.16.0: the bar is now the FIXED ten-slot strip.
+                    // the bar is now the FIXED ten-slot strip.
                     Text(
                         text = stringRes(R.string.drs__unified__bar_slots_hint),
                         fontSize = 13.sp,
@@ -172,7 +172,7 @@ fun DrsUnifiedToolsScreen() = DrsScreen {
             }
 
             // ---------------- tasks-bar master switch ----------------
-            // DRS v1.8.0: the bar above the suggestions strip now applies
+            // the bar above the suggestions strip now applies
             // to ALL three systems; this is its single honest switch (also
             // available inside the keyboard from the tools drawer).
             ToolSwitchCard(
@@ -402,50 +402,39 @@ fun toolTitle(id: String): String = when (id) {
     "line_end" -> stringRes(R.string.drs__unified__tool_line_end)
     "delete_word" -> stringRes(R.string.drs__unified__tool_delete_word)
     "hide_keyboard" -> stringRes(R.string.drs__unified__tool_hide_keyboard)
-    // DRS v1.0.8
     "theme_cycle" -> stringRes(R.string.drs__unified__tool_theme_cycle)
     "insert_date_time" -> stringRes(R.string.drs__unified__tool_insert_date_time)
     "text_start" -> stringRes(R.string.drs__unified__tool_text_start)
     "text_end" -> stringRes(R.string.drs__unified__tool_text_end)
-    // DRS v1.1.0
     "one_handed" -> stringRes(R.string.drs__unified__tool_one_handed)
     "number_row" -> stringRes(R.string.drs__unified__tool_number_row)
-    // DRS v1.2.0
     "incognito" -> stringRes(R.string.drs__unified__tool_incognito)
     "autocorrect" -> stringRes(R.string.drs__unified__tool_autocorrect)
-    // DRS v1.3.0
     "clipboard_clear" -> stringRes(R.string.drs__unified__tool_clipboard_clear)
     "voice_input" -> stringRes(R.string.drs__unified__tool_voice_input)
-    // DRS v1.4.0
     "floating_mode" -> stringRes(R.string.drs__unified__tool_floating_mode)
     "smartbar_toggle" -> stringRes(R.string.drs__unified__tool_smartbar_toggle)
-    // DRS v1.5.0
     "clipboard_history_clear" -> stringRes(R.string.drs__unified__tool_clipboard_history_clear)
     "next_language" -> stringRes(R.string.drs__unified__tool_next_language)
     "resize_mode" -> stringRes(R.string.drs__unified__tool_resize_mode)
-    // DRS v1.6.0
     "clipboard_full_clear" -> stringRes(R.string.drs__unified__tool_clipboard_full_clear)
     "prev_language" -> stringRes(R.string.drs__unified__tool_prev_language)
     "one_handed_left" -> stringRes(R.string.drs__unified__tool_one_handed_left)
     "one_handed_right" -> stringRes(R.string.drs__unified__tool_one_handed_right)
     "next_keyboard_app" -> stringRes(R.string.drs__unified__tool_next_keyboard_app)
-    // DRS v1.7.0
     "clipboard_pin" -> stringRes(R.string.drs__unified__tool_clipboard_pin)
-    // DRS v1.8.0
     "quick_actions" -> stringRes(R.string.drs__unified__tool_quick_actions)
     "actions_editor" -> stringRes(R.string.drs__unified__tool_actions_editor)
-    // DRS v1.15.0
     "diacritics_panel" -> stringRes(R.string.drs__unified__tool_diacritics_panel)
     "smart_symbols" -> stringRes(R.string.drs__unified__tool_smart_symbols)
     "arabic_letters" -> stringRes(R.string.drs__unified__tool_arabic_letters)
-    // DRS v1.19.0
     "split_keyboard" -> stringRes(R.string.drs__unified__tool_split_keyboard)
     "merge_keyboard" -> stringRes(R.string.drs__unified__tool_merge_keyboard)
-    // DRS v1.2.0 (الإصدار العام): لوحة الأرقام الذكية
+    // (الإصدار العام): لوحة الأرقام الذكية
     "smart_number_panel" -> stringRes(R.string.drs__unified__tool_smart_number_panel)
-    // DRS v1.3.0 (الإصدار العام): لوحة الحافظة الذكية
+    // (الإصدار العام): لوحة الحافظة الذكية
     "smart_clipboard_panel" -> stringRes(R.string.drs__unified__tool_smart_clipboard_panel)
-    // DRS v2.21.0: لوحة نصوصي المحفوظة
+    // لوحة نصوصي المحفوظة
     "my_texts_panel" -> stringRes(R.string.drs__unified__tool_my_texts_panel)
     else -> id
 }
@@ -474,50 +463,39 @@ fun toolDesc(id: String): String = when (id) {
     "line_end" -> stringRes(R.string.drs__unified__tool_line_end_desc)
     "delete_word" -> stringRes(R.string.drs__unified__tool_delete_word_desc)
     "hide_keyboard" -> stringRes(R.string.drs__unified__tool_hide_keyboard_desc)
-    // DRS v1.0.8
     "theme_cycle" -> stringRes(R.string.drs__unified__tool_theme_cycle_desc)
     "insert_date_time" -> stringRes(R.string.drs__unified__tool_insert_date_time_desc)
     "text_start" -> stringRes(R.string.drs__unified__tool_text_start_desc)
     "text_end" -> stringRes(R.string.drs__unified__tool_text_end_desc)
-    // DRS v1.1.0
     "one_handed" -> stringRes(R.string.drs__unified__tool_one_handed_desc)
     "number_row" -> stringRes(R.string.drs__unified__tool_number_row_desc)
-    // DRS v1.2.0
     "incognito" -> stringRes(R.string.drs__unified__tool_incognito_desc)
     "autocorrect" -> stringRes(R.string.drs__unified__tool_autocorrect_desc)
-    // DRS v1.3.0
     "clipboard_clear" -> stringRes(R.string.drs__unified__tool_clipboard_clear_desc)
     "voice_input" -> stringRes(R.string.drs__unified__tool_voice_input_desc)
-    // DRS v1.4.0
     "floating_mode" -> stringRes(R.string.drs__unified__tool_floating_mode_desc)
     "smartbar_toggle" -> stringRes(R.string.drs__unified__tool_smartbar_toggle_desc)
-    // DRS v1.5.0
     "clipboard_history_clear" -> stringRes(R.string.drs__unified__tool_clipboard_history_clear_desc)
     "next_language" -> stringRes(R.string.drs__unified__tool_next_language_desc)
     "resize_mode" -> stringRes(R.string.drs__unified__tool_resize_mode_desc)
-    // DRS v1.6.0
     "clipboard_full_clear" -> stringRes(R.string.drs__unified__tool_clipboard_full_clear_desc)
     "prev_language" -> stringRes(R.string.drs__unified__tool_prev_language_desc)
     "one_handed_left" -> stringRes(R.string.drs__unified__tool_one_handed_left_desc)
     "one_handed_right" -> stringRes(R.string.drs__unified__tool_one_handed_right_desc)
     "next_keyboard_app" -> stringRes(R.string.drs__unified__tool_next_keyboard_app_desc)
-    // DRS v1.7.0
     "clipboard_pin" -> stringRes(R.string.drs__unified__tool_clipboard_pin_desc)
-    // DRS v1.8.0
     "quick_actions" -> stringRes(R.string.drs__unified__tool_quick_actions_desc)
     "actions_editor" -> stringRes(R.string.drs__unified__tool_actions_editor_desc)
-    // DRS v1.15.0
     "diacritics_panel" -> stringRes(R.string.drs__unified__tool_diacritics_panel_desc)
     "smart_symbols" -> stringRes(R.string.drs__unified__tool_smart_symbols_desc)
     "arabic_letters" -> stringRes(R.string.drs__unified__tool_arabic_letters_desc)
-    // DRS v1.19.0
     "split_keyboard" -> stringRes(R.string.drs__unified__tool_split_keyboard_desc)
     "merge_keyboard" -> stringRes(R.string.drs__unified__tool_merge_keyboard_desc)
-    // DRS v1.2.0 (الإصدار العام): لوحة الأرقام الذكية
+    // (الإصدار العام): لوحة الأرقام الذكية
     "smart_number_panel" -> stringRes(R.string.drs__unified__tool_smart_number_panel_desc)
-    // DRS v1.3.0 (الإصدار العام): لوحة الحافظة الذكية
+    // (الإصدار العام): لوحة الحافظة الذكية
     "smart_clipboard_panel" -> stringRes(R.string.drs__unified__tool_smart_clipboard_panel_desc)
-    // DRS v2.21.0: لوحة نصوصي المحفوظة
+    // لوحة نصوصي المحفوظة
     "my_texts_panel" -> stringRes(R.string.drs__unified__tool_my_texts_panel_desc)
     else -> ""
 }

@@ -5,7 +5,7 @@
 package com.drs.smartkeyboard.drs.ai
 
 /**
- * DRS v2.13.0 «السياق الأعمق» — جدول السلاسل الثلاثية الثابتة (the static
+ * «السياق الأعمق» — جدول السلاسل الثلاثية الثابتة (the static
  * trigram-chain table) — the loader and the strict contract parser of the
  * asset `assets/drs/trigram_chains.txt`.
  *
@@ -23,7 +23,7 @@ package com.drs.smartkeyboard.drs.ai
  *     characters;
  *  3. [strength] is an integer 5..9 — everything weaker is stylistic
  *     preference, NOT contextual certainty, and has no place here (the
- *     same يقين doctrine as the v2.12.0 real-errors reference);
+ * same يقين doctrine as the real-errors reference);
  *  4. the lookup keys are the NORMALIZED forms — produced by the
  *     CALLER-INJECTED normalizer, the exact same function the provider
  *     uses for its bigram keys ([LatinWordNormalize.normalize]: alef

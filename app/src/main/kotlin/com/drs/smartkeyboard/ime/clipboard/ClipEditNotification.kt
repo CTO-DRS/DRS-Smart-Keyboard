@@ -15,8 +15,8 @@ import com.drs.smartkeyboard.ime.clipboard.provider.ClipboardItem
 import com.drs.smartkeyboard.ime.clipboard.provider.ItemType
 
 /**
- * DRS v1.21.0 — «نافذة الاشعارات المنبثقه الخاصه بالتعديل»: the
- * notification-style edit window the user asked for since v1.11 and that
+ * «نافذة الاشعارات المنبثقه الخاصه بالتعديل»: the
+ * notification-style edit window the user asked for since and that
  * never actually shipped. When a new text clip is captured, a heads-up
  * notification offers a «تعديل» action; tapping it opens the floating
  * editor OUTSIDE the keyboard panel, exactly like the in-panel entry
@@ -28,7 +28,7 @@ import com.drs.smartkeyboard.ime.clipboard.provider.ItemType
  * content never surface in a notification, and the whole channel is
  * pref-gated from the comprehensive clipboard settings.
  *
- * DRS v2.15.0 «ذاكرة الحافظة الأمينة»: السياسة تُقيّد إضافيًا بأن يكون
+ * «ذاكرة الحافظة الأمينة»: السياسة تُقيّد إضافيًا بأن يكون
  * التقاط العنصر قد قُبِل أصلًا (captureAccepted) — الإشعار سطح عرض
  * مشتق من التقاط، ورفضٌ من بوابة الالتقاط (تخفي/كلمة مرور/حساس/قفل)
  * لا يُعلن ولا يُسرَّب معاينته. الوثيقة القديمة كانت تدّعي أن مسار
@@ -87,7 +87,7 @@ object ClipEditNotification {
      * approves and notifications are actually granted. Never throws: the
      * capture path must not break because a notification could not post.
      *
-     * DRS v2.15.0: [captureAccepted] إلزامي — قيمة إرجاع مسار التخزين
+ * [captureAccepted] إلزامي — قيمة إرجاع مسار التخزين
      * نفسها (false ⟺ رفض بوابة الالتقاط الخصوصي)؛ لا افتراضي فلا مسار
      * استدعاء صامت يعلن التقاطًا مرفوضًا.
      */
@@ -119,7 +119,7 @@ object ClipEditNotification {
                     context.getString(R.string.clip__notification_channel),
                     NotificationManager.IMPORTANCE_HIGH,
                 ).apply {
-                    // DRS v1.28.0 audit fix (Medium): the notification carries up
+                    // audit fix (Medium): the notification carries up
                     // to ~220 characters of copied text; on the lock screen it
                     // must be redacted like the system redacts sensitive
                     // notifications. VISIBILITY_SECRET hides the preview

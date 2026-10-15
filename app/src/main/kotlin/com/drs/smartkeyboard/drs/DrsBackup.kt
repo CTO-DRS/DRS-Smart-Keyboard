@@ -18,7 +18,7 @@ import kotlinx.serialization.json.Json
 import org.drs.lib.kotlin.tryOrNull
 
 /**
- * DRS v1.0.6: export/import of the DRS layer state (profiles, shortcuts,
+ * export/import of the DRS layer state (profiles, shortcuts,
  * wallet, usage counters, technical toolbar arrangement) as a single JSON
  * file chosen via the system file picker.
  *
@@ -35,7 +35,7 @@ import org.drs.lib.kotlin.tryOrNull
 object DrsBackup {
 
     /**
-     * DRS v1.5.0: the highest state-schema version this build understands.
+ * the highest state-schema version this build understands.
      * A file written by a NEWER build may carry fields this build drops
      * silently on import (ignoreUnknownKeys) — restoring it here would
      * destroy data on a downgrade-restore, so it is rejected up front.
@@ -67,7 +67,7 @@ object DrsBackup {
     )
 
     /**
-     * DRS v1.5.0: structural validation of a parsed state, split out of
+ * structural validation of a parsed state, split out of
      * [importFrom] so it stays pure and JVM-testable. Returns null when
      * the state is acceptable, else the error message resource.
      */
@@ -75,7 +75,7 @@ object DrsBackup {
         if (parsed.version < 1) {
             return R.string.drs__diagnostics__backup_error_invalid
         }
-        // DRS v1.5.0: reject files from a NEWER schema — this build would
+        // reject files from a NEWER schema — this build would
         // silently drop the fields it does not know, destroying data.
         if (parsed.version > SUPPORTED_STATE_VERSION) {
             return R.string.drs__diagnostics__backup_error_version_newer
@@ -100,7 +100,7 @@ object DrsBackup {
     }
 
     /**
-     * DRS v1.7.0: reads and parses a backup file WITHOUT applying it —
+ * reads and parses a backup file WITHOUT applying it —
      * the first half of [importFrom], split out so the UI can show a
      * describe-before-restore preview ([describeBackup]) and only then
      * confirm through [importParsed]. Returns null on read/parse failure
@@ -176,7 +176,7 @@ object DrsBackup {
     }
 
     /**
-     * DRS v1.7.0: human-readable counts of what a backup file contains —
+ * human-readable counts of what a backup file contains —
      * shown in a confirm dialog BEFORE a restore overwrites live state
      * (the import used to apply immediately: the only destructive
      * unconfirmed action in the app). Pure and JVM-testable.
@@ -204,7 +204,7 @@ object DrsBackup {
     }
 
     /**
-     * DRS v1.7.0: applies an ALREADY-PARSED state after [validateParsed] —
+ * applies an ALREADY-PARSED state after [validateParsed] —
      * the second half of [importFrom], so the preview-then-confirm flow
      * runs the exact same validation and update path the direct import
      * always did.

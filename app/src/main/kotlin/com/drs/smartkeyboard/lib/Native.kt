@@ -5,7 +5,7 @@
 package com.drs.smartkeyboard.lib
 
 /**
- * DRS v1.28.0 audit cleanup: this file previously carried a full native
+ * audit cleanup: this file previously carried a full native
  * toolbox (NativeStr converters, NativeInstanceWrapper) with ZERO callers
  * anywhere in the app — only NATIVE_NULLPTR was (mis)used as a literal 0 by
  * a handful of unrelated call sites. The dead surface is gone; the constant

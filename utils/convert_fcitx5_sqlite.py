@@ -7,7 +7,7 @@
 # https://github.com/fcitx/fcitx5-table-extra/tree/master/tables
 # The tables are in public domain per their README.
 #
-# DRS v1.25.0 provenance: the shipped Han shape-based pack was produced
+# provenance: the shipped Han shape-based pack was produced
 # by exactly this script with
 #     python3 convert_fcitx5_sqlite.py cangjie-large.txt boshiamy.txt zhengma.txt
 # giving the three sqlite tables the HanShapeBasedLanguageProvider
@@ -218,7 +218,7 @@ print({schema: table['KeyCode'] for schema, table in tables.items()})
 # Final display
 with sqlite3.connect(database) as con:
     cur = con.cursor()
-    # DRS v1.25.0: the display list now names the three tables the
+    # the display list now names the three tables the
     # shipped pack actually carries (guarded the same way as before —
     # a table absent from this run is simply skipped).
     for schema in ['cangjielarge', 'boshiamy', 'zhengma']:

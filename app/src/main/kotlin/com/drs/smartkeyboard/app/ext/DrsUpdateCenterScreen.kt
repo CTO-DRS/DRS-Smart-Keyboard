@@ -63,7 +63,7 @@ import org.drs.jetpref.datastore.ui.SwitchPreference
 import org.drs.lib.compose.stringRes
 import java.util.Locale
 
-/** v2.5.0: the honest front doors — opened in the user's browser via
+/** the honest front doors — opened in the user's browser via
  *  launchUrl, never fetched by the keyboard itself. The site is served
  *  from docs/ on the same repo through GitHub Pages: no third-party host,
  *  no ads, no tracking, and it dies only if the repo dies.
@@ -119,7 +119,7 @@ fun DrsUpdateCenterScreen() = DrsScreen {
                         )
                     }
                     is DrsUpdateCenter.CheckState.Available -> {
-                        // DRS v1.0.2: name the exact upgrade target so the user
+                        // name the exact upgrade target so the user
                         // always knows what they are about to download.
                         IconChip(
                             icon = { Icon(modifier=Modifier.size(18.dp), imageVector = Icons.Filled.SystemUpdateAlt, contentDescription = null, tint = MaterialTheme.colorScheme.primary) },
@@ -247,7 +247,7 @@ fun DrsUpdateCenterScreen() = DrsScreen {
             )
         }
 
-        // DRS v1.0.2: a compact walkthrough card — every step of the update
+        // a compact walkthrough card — every step of the update
         // flow in plain language, so a stalled install (wrong system dialog,
         // missing install-permission, interrupted download) is never a
         // dead end for the user.
@@ -276,7 +276,7 @@ fun DrsUpdateCenterScreen() = DrsScreen {
             )
         }
 
-        // v2.5.0: the honest front door — the official ad-free project page
+        // the honest front door — the official ad-free project page
         // and the signed releases listing, opened in the user's browser via
         // launchUrl (ACTION_VIEW). The keyboard itself fetches nothing: zero
         // network here, and a missing browser is announced honestly by the

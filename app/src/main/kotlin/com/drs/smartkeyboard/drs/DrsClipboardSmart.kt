@@ -7,7 +7,7 @@ package com.drs.smartkeyboard.drs
 import java.util.Locale
 
 /**
- * DRS v1.3.0 — الحافظة الذكية الحتمية (the deterministic smart
+ * الحافظة الذكية الحتمية (the deterministic smart
  * clipboard) — the PURE content-intelligence core. The doctrine holds:
  * a deterministic on-device algorithm, no cloud, no AI — whatever the
  * user copied is classified by explicit first-wins shape rules, and

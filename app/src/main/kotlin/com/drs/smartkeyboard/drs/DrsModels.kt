@@ -64,10 +64,10 @@ data class DrsShortcut(
     val shortcut: String,
     val expansion: String,
     val isTechnical: Boolean = false,
-    /** DRS v1.0.6: disabled shortcuts stay stored but never expand. */
+    /** disabled shortcuts stay stored but never expand. */
     val enabled: Boolean = true,
     /**
-     * DRS v1.0.7: where the shortcut is available inside the unified
+ * where the shortcut is available inside the unified
      * system - one of DrsShortcutScope names (NORMAL / TECHNICAL / BOTH).
      * The expansion engine really filters by the active system and (for
      * the hybrid system) the current display level, so a BOTH-only
@@ -77,7 +77,7 @@ data class DrsShortcut(
 )
 
 /**
- * DRS v1.0.7: availability scope of a shortcut across the unified
+ * availability scope of a shortcut across the unified
  * system's levels.
  */
 enum class DrsShortcutScope {
@@ -103,10 +103,10 @@ data class DrsUsageStats(
     val emojiUses: Long = 0,
     val clipboardUses: Long = 0,
     val shortcutUses: Long = 0,
-    // DRS v2.21.0: anonymous count of saved-text insertions (نصوصي).
+    // anonymous count of saved-text insertions (نصوصي).
     // Counts only — never WHICH text was inserted.
     val myTextsUses: Long = 0,
-    // DRS v2.22.0: anonymous per-feature counters completing the
+    // anonymous per-feature counters completing the
     // per-feature integration fabric (counts only — never WHAT was
     // inserted, never WHICH word was vocalized).
     val myLexiconUses: Long = 0,
@@ -116,15 +116,15 @@ data class DrsUsageStats(
     val numberUses: Long = 0,
     val techToolUses: Long = 0,
     val gestureUses: Long = 0,
-    // DRS v1.6.0: how many times a suggestion/candidate row entry was
+    // how many times a suggestion/candidate row entry was
     // actually committed (auto-completion accepts included). Anonymous
     // count only — never WHICH word was accepted.
     val suggestionAccepts: Long = 0,
-    // DRS v1.0.5: anonymous per-tool usage counts (KeyCode -> count) used to
+    // anonymous per-tool usage counts (KeyCode -> count) used to
     // surface the smart tools the user actually relies on. Counts only —
     // never text, never timestamps. Capped on merge to stay tiny.
     val toolUses: Map<Int, Long> = emptyMap(),
-    // DRS v1.7.0: how many input sessions STARTED in each context mode
+    // how many input sessions STARTED in each context mode
     // (normal/writing/password/…). Anonymous counts of a DETECTED attribute
     // of the focused field — never the field's content or identity.
     // Capped to the known mode names on merge to stay tiny.
@@ -132,7 +132,7 @@ data class DrsUsageStats(
 )
 
 /**
- * DRS v1.0.8: one local day of anonymous usage counters, keyed by an ISO
+ * one local day of anonymous usage counters, keyed by an ISO
  * day stamp (e.g. "2026-09-24") inside [DrsState.dailyStats]. Counts only
  * — never text, never keystroke timing, nothing leaves the device. Powers
  * the real daily usage statistics screen.
@@ -142,9 +142,9 @@ data class DrsDayStats(
     /** ISO day stamp this bucket belongs to, e.g. "2026-09-24". */
     val day: String = "",
     val keyPresses: Long = 0,
-    /** DRS v1.3.0: digit-key presses (numbers row / numeric layouts). */
+    /** digit-key presses (numbers row / numeric layouts). */
     val numberPresses: Long = 0,
-    /** DRS v1.3.0: symbol presses (non-digit, non-letter characters). */
+    /** symbol presses (non-digit, non-letter characters). */
     val symbolPresses: Long = 0,
     /** Unified strip / smartbar tool presses (any catalogue tool). */
     val toolUses: Long = 0,
@@ -154,22 +154,22 @@ data class DrsDayStats(
     val emojiUses: Long = 0,
     val clipboardUses: Long = 0,
     val shortcutUses: Long = 0,
-    /** DRS v2.21.0: saved-text insertions (counts only). */
+    /** saved-text insertions (counts only). */
     val myTextsUses: Long = 0,
-    /** DRS v2.22.0: the per-feature counters of the smart surfaces. */
+    /** the per-feature counters of the smart surfaces. */
     val myLexiconUses: Long = 0,
     val harakatUses: Long = 0,
     val symbolUses: Long = 0,
     val letterUses: Long = 0,
     val numberUses: Long = 0,
-    /** DRS v1.6.0: committed suggestion-row entries (accepts). */
+    /** committed suggestion-row entries (accepts). */
     val suggestionAccepts: Long = 0,
-    /** DRS v1.7.0: input starts per context mode (counts only). */
+    /** input starts per context mode (counts only). */
     val contextStarts: Map<String, Long> = emptyMap(),
 )
 
 /**
- * DRS v2.21.0: one SAVED text of the «نصوصي» system (نص محفوظ واحد).
+ * one SAVED text of the «نصوصي» system (نص محفوظ واحد).
  * Unlike the clipboard history (auto-captured, auto-cleaned, transient),
  * a saved text is USER-CURATED permanent content: an address, a greeting,
  * a bank IBAN, a reply template — browsable from the sixth smart panel
@@ -195,7 +195,7 @@ data class DrsMyText(
 )
 
 /**
- * DRS v2.22.0: one USER-TAUGHT word of «قاموسي التشكيلي» (the personal
+ * one USER-TAUGHT word of «قاموسي التشكيلي» (the personal
  * tashkeel lexicon) — the harakat system's own curated store. The 3000-word
  * asset lexicon and the seed are READ-ONLY references; this entry is the
  * user's explicit teaching: a stripped word mapped to its full vocalization.
@@ -278,26 +278,26 @@ data class DrsState(
     val profiles: List<DrsProfile> = emptyList(),
     val shortcuts: List<DrsShortcut> = emptyList(),
     /**
-     * DRS v2.21.0: the user's saved texts (نصوصي) — curated permanent
+ * the user's saved texts (نصوصي) — curated permanent
      * content for the sixth smart panel. Bounded by [DrsMyTexts.MAX_ITEMS];
      * local only, covered structurally by the backup like every other
      * [DrsState] field.
      */
     val myTexts: List<DrsMyText> = emptyList(),
-    /** DRS v2.21.0: id allocator of the saved texts. */
+    /** id allocator of the saved texts. */
     val nextMyTextId: Long = 1,
-    /** DRS v2.21.0: master switch — gates the panel + insertion, not management. */
+    /** master switch — gates the panel + insertion, not management. */
     val myTextsEnabled: Boolean = true,
     /**
-     * DRS v2.22.0: the user's taught tashkeel words (قاموسي التشكيلي) —
+ * the user's taught tashkeel words (قاموسي التشكيلي) —
      * the harakat system's personal lexicon. Bounded by
      * [DrsMyLexicon.MAX_ITEMS]; local only, covered structurally by the
      * backup like every other [DrsState] field.
      */
     val myLexicon: List<DrsMyLexiconEntry> = emptyList(),
-    /** DRS v2.22.0: id allocator of the personal lexicon. */
+    /** id allocator of the personal lexicon. */
     val nextMyLexiconId: Long = 1,
-    /** DRS v2.22.0: master switch — gates the override lookup, not management. */
+    /** master switch — gates the override lookup, not management. */
     val myLexiconEnabled: Boolean = true,
     val usage: DrsUsageStats = DrsUsageStats(),
     val dismissedSuggestionIds: List<String> = emptyList(),
@@ -307,47 +307,47 @@ data class DrsState(
     val nextShortcutId: Long = 1,
     val wallet: DrsWallet = DrsWallet(),
     /**
-     * DRS v1.0.6: the user's customized technical toolbar key order.
+ * the user's customized technical toolbar key order.
      * Key ids follow [DrsTechToolbarKeys catalogue ids]; an empty list means
      * "use the default arrangement". Persisted with the rest of the DRS
      * state so the strip survives restarts exactly as customized.
      */
     val techToolbarKeys: List<String> = emptyList(),
     /**
-     * DRS v1.0.7 (نظام كلاهما الموحد): the active display level of the
+ * (نظام كلاهما الموحد): the active display level of the
      * unified system (SIMPLE / ADVANCED / DUAL). Switching the level only
      * changes visibility - profiles, shortcuts, clipboard data and themes
      * are never touched, so level switches are lossless.
      */
     val hybridViewMode: String = DrsHybridViewMode.DUAL.name,
-    /** DRS v1.0.7: gates the advanced groups of the unified System screen. */
+    /** gates the advanced groups of the unified System screen. */
     val advancedControlsEnabled: Boolean = false,
-    /** DRS v1.0.7: opts the normal system's keyboard into the unified strip. */
+    /** opts the normal system's keyboard into the unified strip. */
     val unifiedStripForNormal: Boolean = false,
-    /** DRS v1.0.7: explicit unified strip tool order (catalogue ids). */
+    /** explicit unified strip tool order (catalogue ids). */
     val unifiedToolOrder: List<String> = emptyList(),
-    /** DRS v1.0.7: tools the user removed from the unified strip. */
+    /** tools the user removed from the unified strip. */
     val hiddenUnifiedTools: List<String> = emptyList(),
-    /** DRS v1.0.7: tools pinned to the head of the unified strip. */
+    /** tools pinned to the head of the unified strip. */
     val pinnedUnifiedTools: List<String> = emptyList(),
-    /** DRS v1.0.7: per-tool visibility override (tool id -> DrsToolView name). */
+    /** per-tool visibility override (tool id -> DrsToolView name). */
     val unifiedToolViews: Map<String, String> = emptyMap(),
     /**
-     * DRS v1.0.8: per-day anonymous usage counters keyed by ISO day stamp
+ * per-day anonymous usage counters keyed by ISO day stamp
      * (see [DrsDayStats]). Bounded to a fixed retention window; used by the
      * daily usage statistics screen. Local only, never synced.
      */
     val dailyStats: Map<String, DrsDayStats> = emptyMap(),
-    /** DRS v1.0.8: master switch of the daily usage statistics recording. */
+    /** master switch of the daily usage statistics recording. */
     val dailyStatsEnabled: Boolean = true,
     /**
-     * DRS v1.1.0: epoch millis of the last successful DRS-state backup
+ * epoch millis of the last successful DRS-state backup
      * export (0 = never). Consumed by the diagnostics backup-age check.
      * Local only, never synced; old states/backups decode to 0 safely.
      */
     val lastBackupAt: Long = 0L,
     /**
-     * DRS v1.8.0: master switch of the tasks bar (شريط المهام) that now
+ * master switch of the tasks bar (شريط المهام) that now
      * sits ABOVE the suggestions strip for ALL three user systems. Default
      * ON — everyone gets the bar; the tools drawer's side-pull button can
      * hide it. Old states/backups decode to true (the new default), so the

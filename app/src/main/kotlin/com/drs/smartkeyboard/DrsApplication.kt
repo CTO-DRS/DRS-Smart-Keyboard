@@ -65,7 +65,7 @@ class DrsApplication : Application() {
     val subtypeManager = lazy { SubtypeManager(this) }
     val themeManager = lazy { ThemeManager(this) }
 
-    // DRS v2.8.0: app-private store of the user's picked background image and
+    // app-private store of the user's picked background image and
     // of imported external dictionaries — same-process singletons, instantly
     // visible to both the settings UI and the live IME.
     val backgroundStore = lazy { com.drs.smartkeyboard.ime.theme.DrsBackgroundImageStore(this) }
@@ -75,7 +75,7 @@ class DrsApplication : Application() {
         super.onCreate()
         DrsApplicationReference = WeakReference(this)
         if (BuildConfig.DEBUG) {
-            // DRS v1.17.0: strict mode in debug builds only — an app whose
+            // strict mode in debug builds only — an app whose
             // core promise is never dropping a keystroke must never
             // silently do disk I/O on the main thread during development.
             StrictMode.setThreadPolicy(
@@ -156,7 +156,7 @@ class DrsApplication : Application() {
         extensionManager.value.init()
         clipboardManager.value.initializeForContext(this)
         DictionaryManager.init(this)
-        // DRS v1.2.0: the 3000-word vocalization lexicon lands on a
+        // the 3000-word vocalization lexicon lands on a
         // background thread — an atomic install, no locks; the seed
         // lexicon of DrsWordTashkeel serves until it arrives, and a
         // failed load only means the seed keeps serving (the extended

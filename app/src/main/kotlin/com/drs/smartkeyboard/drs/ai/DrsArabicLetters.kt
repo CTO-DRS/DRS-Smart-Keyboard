@@ -5,7 +5,7 @@
 package com.drs.smartkeyboard.drs.ai
 
 /**
- * DRS v1.6.0 — the deterministic sun/moon letter classification
+ * the deterministic sun/moon letter classification
  * (حروف الشمسية والقمرية) behind the definite article ال.
  *
  * The linguistic law this encodes: the lam of the definite article is
@@ -95,7 +95,7 @@ object DrsArabicLetters {
      *  - sun follower: Sukun on the lam, Shadda on the sun letter (الْشَّمس)
      *  - anything else: Sukun on the lam (الْقمر, الْأمل)
      *
-     * DRS v2.17.0 (honest correction): the moon branch previously emitted
+ * (honest correction): the moon branch previously emitted
      * a FATHA on the lam (الَقمر) — a form no standard orthography writes.
      * The lam of the definite article is SAKINAH in both branches (that is
      * exactly what the live definite-lam advisor rule has always offered);
@@ -121,7 +121,7 @@ object DrsArabicLetters {
     }
 
     /**
-     * DRS v2.17.0 — the partial-style assimilation mark for a definite-
+ * the partial-style assimilation mark for a definite-
      * article sun token, the form the whole-text vocalizer applies to
      * tokens its lexicons do not know.
      *
@@ -149,8 +149,8 @@ object DrsArabicLetters {
     }
 
     /**
-     * DRS v2.19.0 — the glued-particle contract (العقد الخاص المعلن في
-     * v2.17.0): the COLLAPSED preposition-article form لِلْ — ل + ال written
+ * the glued-particle contract (العقد الخاص المعلن في
+ *): the COLLAPSED preposition-article form لِلْ — ل + ال written
      * as لل with the alif dropped by orthographic law (ل + الشمس = للشمس).
      *
      * This is the ONE glued shape the law can fire on at token level with
@@ -167,7 +167,7 @@ object DrsArabicLetters {
      * simultaneously و + الدِّين and the noun والدِين; بالطو is a single
      * loanword) — deciding between them needs dictionary knowledge, and
      * dictionary knowledge is the guessing territory the creed forbids.
-     * The DRS v2.17.0 deferral «حتى يأتي قرارها بعقد خاص» is hereby
+ * The deferral «حتى يأتي قرارها بعقد خاص» is hereby
      * resolved: revived where determinism holds (لل), reasoned silence
      * where it cannot (the rest), and the pins in DrsV21900Tests guard
      * both verdicts.
@@ -190,7 +190,7 @@ object DrsArabicLetters {
     }
 
     /**
-     * DRS v2.20.0 — the majesty certification (شهادة الجلالة): the CLOSED
+ * the majesty certification (شهادة الجلالة): the CLOSED
      * hand-pinned family of tokens whose ONLY reading is لفظ الجلالة —
      * the name الله preceded by a single functional letter (و العطف،
      * ب والف والك الجر، ف العطف، ت القسم) or the bare jar ل itself:
@@ -199,7 +199,7 @@ object DrsArabicLetters {
      *
      * The lam of the majesty name is doubled by the SAME assimilation
      * law the bare article speaks (الله = al + lāh, the lam is a sun
-     * letter assimilating into itself) — the bare layer (v2.17.0)
+ * letter assimilating into itself) — the bare layer ()
      * already owns الله and اللهم, and the seed lexicon owns لله
      * والله بالله with fuller hand-reviewed harakat («البذرة تفوز»).
      * What nobody owned is this closed prefixed family — six members

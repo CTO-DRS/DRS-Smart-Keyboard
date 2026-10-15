@@ -251,7 +251,7 @@ object Routes {
         @Deeplink("settings/drs/performance")
         object DrsPerformance
 
-        // DRS v1.0.7: unified "كلاهما" system screens.
+        // unified "كلاهما" system screens.
         @Serializable
         @Deeplink("settings/drs/unified-dashboard")
         object DrsUnifiedDashboard
@@ -272,7 +272,7 @@ object Routes {
         @Deeplink("settings/drs/unified-system")
         object DrsUnifiedSystem
 
-        // DRS v1.0.8: real daily usage statistics (local counts only).
+        // real daily usage statistics (local counts only).
         @Serializable
         @Deeplink("settings/drs/unified-stats")
         object DrsUnifiedStats
@@ -419,7 +419,7 @@ object Routes {
             composableWithDeepLink(Settings.DrsTechToolbar::class) { DrsTechToolbarScreen() }
             composableWithDeepLink(Settings.DrsPerformance::class) { DrsPerformanceScreen() }
 
-            // DRS v1.0.7: unified "كلاهما" system screens.
+            // unified "كلاهما" system screens.
             composableWithDeepLink(Settings.DrsUnifiedDashboard::class) { DrsUnifiedDashboardScreen() }
             composableWithDeepLink(Settings.DrsUnifiedTools::class) { DrsUnifiedToolsScreen() }
             composableWithDeepLink(Settings.DrsUnifiedBasics::class) { DrsUnifiedBasicsScreen() }

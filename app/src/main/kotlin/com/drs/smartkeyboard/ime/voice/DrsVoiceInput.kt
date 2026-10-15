@@ -29,7 +29,7 @@ import kotlinx.coroutines.launch
 import org.drs.lib.android.AndroidVersion
 
 /**
- * DRS v1.23.0: built-in voice dictation — «الميكروفون يستيقظ». Until this
+ * built-in voice dictation — «الميكروفون يستيقظ». Until this
  * round the mic key ended in one of two dead ends: switch to an external
  * voice IME if the ROM ships one, or a toast saying none was found. The
  * controller below drives the platform recognizer directly, shows the
@@ -38,7 +38,7 @@ import org.drs.lib.android.AndroidVersion
  * mainstream keyboard offers, with zero network code of our own (the
  * platform recognition service owns its own transport).
  *
- * Privacy contract (mirrors the v1.20 forced-privacy rule):
+ * Privacy contract (mirrors the forced-privacy rule):
  * - password / incognito contexts never reach the recognizer;
  * - the RECORD_AUDIO permission is requested through a dedicated
  *   translucent trampoline ([VoicePermissionActivity]) because an IME
@@ -52,7 +52,7 @@ sealed interface VoiceUiState {
     data object Idle : VoiceUiState
 
     /**
-     * DRS v1.26.0: [onDevice] tells the bar whether this session actually
+ * [onDevice] tells the bar whether this session actually
      * runs on the ROM's on-device recognizer — «الشارة الصادقة». AUTO
      * sessions that got the local engine show it exactly like strict
      * ON_DEVICE_ONLY sessions, because the user deserves to see when
@@ -68,7 +68,7 @@ sealed interface VoiceUiState {
 }
 
 /**
- * DRS v1.26.0: the pure badge truth — does the recognizer this session
+ * the pure badge truth — does the recognizer this session
  * created run on the device? `ON_DEVICE_ONLY` with an incapable ROM never
  * reaches a listening state at all (createRecognizer yields null → the
  * honest error path), so the only combination that must NOT use the
@@ -90,11 +90,11 @@ object DrsVoiceInputBus {
     val uiState = MutableStateFlow<VoiceUiState>(VoiceUiState.Idle)
 
     /**
-     * DRS v1.25.0: the live microphone amplitude channel — [rmsToAmplitude]
+ * the live microphone amplitude channel — [rmsToAmplitude]
      * quantizes every [android.speech.RecognitionListener.onRmsChanged]
      * report into `0f..1f` so the bar can breathe with the user's actual
      * voice instead of a fixed animation. Many services never deliver RMS
-     * at all, so consumers must keep the v1.24 pulse as the fallback and
+ * at all, so consumers must keep the pulse as the fallback and
      * only trust this channel while it actually flows.
      */
     val rmsAmplitude = MutableStateFlow(0f)
@@ -127,13 +127,13 @@ enum class VoiceInputRoute {
     /** Password fields and incognito mode never see the microphone. */
     DISABLED_SENSITIVE,
     /**
-     * DRS v1.24.0: the user switched built-in dictation off in the typing
+ * the user switched built-in dictation off in the typing
      * settings — an explicit choice the mic key must honor with an honest
      * toast, never silently resurrecting the external-IME switch either.
      */
     DISABLED_BY_SETTING,
     /**
-     * DRS v1.25.0: the user demanded the strictly on-device recognizer
+ * the user demanded the strictly on-device recognizer
      * ([VoiceRecognizerMode.ON_DEVICE_ONLY]) but this ROM cannot honor
      * that demand — the honest answer is a toast, never a silent cloud
      * fallback the user explicitly refused.
@@ -142,8 +142,8 @@ enum class VoiceInputRoute {
 }
 
 /**
- * DRS v1.25.0: which recognizer may listen — «المستخدم يختار أين يُسمع
- * كلامه». [AUTO] keeps the v1.23 behavior (on-device when the ROM offers
+ * which recognizer may listen — «المستخدم يختار أين يُسمع
+ * كلامه». [AUTO] keeps the behavior (on-device when the ROM offers
  * it, standard otherwise); [ON_DEVICE_ONLY] refuses to speak to any
  * network-backed service (privacy-first users, offline ROMs); [STANDARD]
  * pins the classic recognizer for users whose on-device engine quality
@@ -156,9 +156,9 @@ enum class VoiceRecognizerMode {
 }
 
 /**
- * DRS v1.28.0 audit fix (Medium): the single platform recognizer factory.
+ * audit fix (Medium): the single platform recognizer factory.
  * Previously only the IME-side controller consulted the user's privacy
- * mode, while the v1.27 popup-editor dictation always created the classic
+ * mode, while the popup-editor dictation always created the classic
  * (cloud-capable) recognizer — a user who pinned ON_DEVICE_ONLY still got
  * the network engine in the editor window. Both surfaces now route through
  * this function so the «أين يُسمع كلامك» contract is one contract.
@@ -183,7 +183,7 @@ fun createPlatformRecognizer(
             } else {
                 null
             }
-        // AUTO — the exact v1.23.0 preference order: on-device when the
+        // AUTO — the exact preference order: on-device when the
         // ROM offers it, standard otherwise, null when neither.
         VoiceRecognizerMode.AUTO ->
             if (onDevicePossible) {
@@ -198,7 +198,7 @@ fun createPlatformRecognizer(
 }
 
 /**
- * DRS v1.28.0 audit fix: the one truth for "can this ROM listen on
+ * audit fix: the one truth for "can this ROM listen on
  * device?", shared by every recognizer creation site.
  */
 fun onDeviceRecognitionPossible(context: Context): Boolean =
@@ -207,12 +207,12 @@ fun onDeviceRecognitionPossible(context: Context): Boolean =
 /**
  * The pure mic-key decision — JVM-tested. Order matters: sensitivity
  * first (privacy beats everything), then the explicit user setting
- * (DRS v1.24.0 — a chosen-off feature stays off), then the recognizer
- * mode demand (DRS v1.25.0 — a chosen-strict on-device gate answers
+ * (a chosen-off feature stays off), then the recognizer
+ * mode demand (a chosen-strict on-device gate answers
  * honestly when the ROM cannot honor it), then availability, then
  * permission. Every call site must pass the pref-backed [userEnabled]
  * and [recognizerMode] so the settings gates are the real gates. The
- * two v1.25.0 parameters default to the v1.23/v1.24 behavior so older
+ * two parameters default to the / behavior so older
  * call sites and tests stay honest without edits.
  */
 fun decideVoiceInputRoute(
@@ -233,7 +233,7 @@ fun decideVoiceInputRoute(
 }
 
 /**
- * DRS v1.25.0: normalizes the recognizer's raw RMS dB report onto the
+ * normalizes the recognizer's raw RMS dB report onto the
  * `0f..1f` amplitude the bar's live wave renders. Android services
  * typically report roughly `-2..12` dB with silence wobbling around
  * `0`, so the linear window below maps that band to the full range and
@@ -261,7 +261,7 @@ class DrsVoiceInputController(
     private val context: Context,
     private val onCommit: (String) -> Unit,
     /**
-     * DRS v1.25.0: read lazily at every start so a settings change
+ * read lazily at every start so a settings change
      * between sessions is honored without recreating the controller.
      */
     private val recognizerMode: () -> VoiceRecognizerMode = { VoiceRecognizerMode.AUTO },
@@ -285,7 +285,7 @@ class DrsVoiceInputController(
     private var recognizer: SpeechRecognizer? = null
 
     /**
-     * DRS v1.26.0: whether the recognizer of the live session is the
+ * whether the recognizer of the live session is the
      * on-device one — decided once per session in [start] alongside the
      * recognizer creation, and carried on every [VoiceUiState.Listening]
      * the session publishes so the bar's badge stays honest.
@@ -312,7 +312,7 @@ class DrsVoiceInputController(
         mainHandler.post {
             // One session at a time — a re-start tears the old one down.
             destroyRecognizer()
-            // DRS v1.26.0: classify the session once, before creating the
+            // classify the session once, before creating the
             // recognizer, so the badge flag and the created instance can
             // never disagree.
             val mode = recognizerMode()
@@ -341,7 +341,7 @@ class DrsVoiceInputController(
                 putExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS, true)
                 putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, context.packageName)
             }
-            // DRS v1.25.0: a fresh session starts from silence, never
+            // a fresh session starts from silence, never
             // from the previous session's last amplitude.
             DrsVoiceInputBus.rmsAmplitude.value = 0f
             DrsVoiceInputBus.uiState.value =
@@ -391,7 +391,7 @@ class DrsVoiceInputController(
         sessionOnDevice = false
     }
 
-    // DRS v1.28.0 audit fix: the private createRecognizer() body moved to the
+    // audit fix: the private createRecognizer() body moved to the
     // shared top-level createPlatformRecognizer() so the popup-editor
     // dictation honors the same privacy mode (see file header note).
 
@@ -403,7 +403,7 @@ class DrsVoiceInputController(
 
         override fun onBeginningOfSpeech() = Unit
 
-        // DRS v1.25.0: the live amplitude channel — quantized to 2%
+        // the live amplitude channel — quantized to 2%
         // steps so the bar recomposes with the voice, not with jitter.
         override fun onRmsChanged(rmsdB: Float) {
             DrsVoiceInputBus.rmsAmplitude.value = rmsToAmplitude(rmsdB)

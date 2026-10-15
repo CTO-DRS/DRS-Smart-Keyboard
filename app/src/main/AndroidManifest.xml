@@ -5,10 +5,10 @@
     <!-- Permission needed to vibrate if the user has key press vibration enabled -->
     <uses-permission android:name="android.permission.VIBRATE"/>
 
-    <!-- DRS v1.23.0: built-in voice dictation — the platform recognizer
-         requires the microphone permission. Requested lazily through the
-         translucent VoicePermissionActivity trampoline on the first mic
-         press; password/incognito contexts never reach the recognizer. -->
+    <!-- built-in voice dictation — the platform recognizer
+ requires the microphone permission. Requested lazily through the
+ translucent VoicePermissionActivity trampoline on the first mic
+ press; password/incognito contexts never reach the recognizer. -->
     <uses-permission android:name="android.permission.RECORD_AUDIO"/>
 
     <!-- Permission needed to create notifications on devices running Android 13+ -->
@@ -158,10 +158,10 @@
             </intent-filter>
         </activity>
 
-        <!-- DRS v1.11.0: Popup Clipboard Editor Window — a dialog-styled
-             translucent activity that floats above the whole screen (the
-             app behind stays visible through the scrim). Serves the smart
-             clipboard text editor outside the keyboard panel, as requested. -->
+        <!-- Popup Clipboard Editor Window — a dialog-styled
+ translucent activity that floats above the whole screen (the
+ app behind stays visible through the scrim). Serves the smart
+ clipboard text editor outside the keyboard panel, as requested. -->
         <activity
             android:name="com.drs.smartkeyboard.ime.clipboard.ClipEditorPopupActivity"
             android:theme="@style/DrsAppTheme.ClipEditorPopup"
@@ -171,11 +171,11 @@
             android:configChanges="orientation|screenSize|screenLayout|keyboard|keyboardHidden|navigation|uiMode|smallestScreenSize"
             android:windowSoftInputMode="adjustResize"/>
 
-        <!-- DRS v1.23.0: the microphone permission trampoline — a
-             translucent activity the IME service launches on the first
-             mic press (an IME cannot host permission dialogs itself).
-             Grants/denies hand back through DrsVoiceInputBus, then the
-             activity finishes immediately. -->
+        <!-- the microphone permission trampoline — a
+ translucent activity the IME service launches on the first
+ mic press (an IME cannot host permission dialogs itself).
+ Grants/denies hand back through DrsVoiceInputBus, then the
+ activity finishes immediately. -->
         <activity
             android:name="com.drs.smartkeyboard.ime.voice.VoicePermissionActivity"
             android:theme="@style/DrsAppTheme.Transparent"

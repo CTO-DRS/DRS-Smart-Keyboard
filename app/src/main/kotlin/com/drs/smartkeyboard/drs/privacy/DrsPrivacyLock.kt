@@ -17,7 +17,7 @@ import com.drs.smartkeyboard.ime.voice.VoiceRecognizerMode
  *   2. the flex package center (catalog manifest + package downloads),
  *   3. the voice recognizer when the user picked AUTO/STANDARD — a
  *      system service that MAY be a cloud recognizer on some ROMs
- *      (the shipped default is already ON_DEVICE_ONLY since v1.25.0).
+ * (the shipped default is already ON_DEVICE_ONLY since).
  * The keyboard core (the ime and drs source trees) contains zero network code and
  * the CI canary fails the build if that ever changes.
  *
@@ -75,7 +75,7 @@ object DrsPrivacyLock {
      * ON_DEVICE_ONLY — a network-backed recognizer is refused, while a
      * ROM-honored on-device recognizer keeps working (no network socket
      * in our process, matching the attestation contract). Returning the
-     * effective mode (instead of a boolean) keeps the v1.25.0 route
+ * effective mode (instead of a boolean) keeps the route
      * plumbing intact at the call site.
      */
     fun effectiveRecognizer(

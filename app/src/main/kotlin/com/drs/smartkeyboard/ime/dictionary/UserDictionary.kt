@@ -124,7 +124,7 @@ interface UserDictionaryDao {
     @Query("$SELECT_ALL_FROM_WORDS$ORDER_FREQ_DESC")
     fun queryAll(): List<UserDictionaryEntry>
 
-    // DRS v1.20.0: entries stored WITHOUT a locale are global ("all languages") words.
+    // entries stored WITHOUT a locale are global ("all languages") words.
     // The old query returned them only when asking for null, so a word learned while a
     // different locale was active (or imported as "all") never surfaced in suggestions
     // for any specific language — the documented contract said the opposite.
@@ -232,7 +232,7 @@ interface UserDictionaryDatabase {
     }
 
     /**
-     * DRS v1.21.0: writes the whole DRS user dictionary in the same
+ * writes the whole DRS user dictionary in the same
      * combined-list text format [importCombinedList] parses — the backup
      * archive carries the learned words so a restore/factory-reset no
      * longer loses them. Returns the entry count.
@@ -247,7 +247,7 @@ interface UserDictionaryDatabase {
     }
 
     /**
-     * DRS v1.21.0: reads the combined-list text format from [src] and
+ * reads the combined-list text format from [src] and
      * merges it into the dictionary (existing words are updated, new ones
      * inserted — the same dedup [importCombinedList] applies). Malformed
      * lines are skipped honestly; returns the entries merged.
@@ -274,7 +274,7 @@ interface UserDictionaryDatabase {
 }
 
 /**
- * DRS v1.21.0: the pure line-format helpers of the combined-list text
+ * the pure line-format helpers of the combined-list text
  * format — [entryLine] renders one entry the way `exportCombinedList`
  * always has, [parseEntryLine] parses one data line back (null when the
  * line is malformed or lacks a word/freq). JVM-testable round trip.
@@ -333,7 +333,7 @@ abstract class DrsUserDictionaryDatabase : RoomDatabase(), UserDictionaryDatabas
     abstract override fun userDictionaryDao(): UserDictionaryDao
 
     /**
-     * DRS v1.19.0: real reset — wipes every personal word from the Room
+ * real reset — wipes every personal word from the Room
      * database. The method was a `TODO("Not yet implemented")` landmine
      * since the beginning: any caller would have crashed the process.
      */
@@ -428,7 +428,7 @@ class SystemUserDictionaryDatabase(context: Context) : UserDictionaryDatabase {
                     sortOrder = SORT_BY_FREQ_DESC,
                 )
             } else {
-                // DRS v1.20.0: mirror queryExactFuzzyLocale's semantics — match the full
+                // mirror queryExactFuzzyLocale's semantics — match the full
                 // tag, the bare language, AND global (null-locale) entries, so system
                 // words stored for "en" serve an "en_US" subtype and null-locale words
                 // serve every language.
@@ -579,7 +579,7 @@ class SystemUserDictionaryDatabase(context: Context) : UserDictionaryDatabase {
         }
 
         override fun deleteAll() {
-            // DRS v1.19.0: real wipe through the system provider. The
+            // real wipe through the system provider. The
             // "Unsupported action" stub left deleteAll() silently doing
             // nothing and reset() as a TODO crash — both are real now.
             val resolver = applicationContext.get()?.contentResolver ?: return

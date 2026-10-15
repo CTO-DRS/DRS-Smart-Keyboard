@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-v2.13.0 «السياق الأعمق» — generator for assets/drs/trigram_chains.txt
+«السياق الأعمق» — generator for assets/drs/trigram_chains.txt
 
 The file maps two-word Arabic contexts to continuations carrying REAL
 contextual certainty (fixed expressions, function chains, greetings,
@@ -150,7 +150,7 @@ ROWS_BY_CATEGORY = [
     ]),
 ]
 
-HEADER = """# DrsTrigramChains — جدول السلاسل الثلاثية الثابتة (v2.13.0 «السياق الأعمق»)
+HEADER = """# DrsTrigramChains — جدول السلاسل الثلاثية الثابتة ( «السياق الأعمق»)
 #
 # كل سطر: p2<TAB>p1<TAB>next<TAB>strength   (تبويبان بين الحقول الثلاثة الأولين… ثلاثة تبويبات لا غير)
 # العقد كامل موثق في DrsTrigramChains.parse — المخالفة تُرفض ولا تُرقَّع.

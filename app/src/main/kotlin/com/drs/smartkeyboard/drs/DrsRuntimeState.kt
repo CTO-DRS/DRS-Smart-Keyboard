@@ -25,7 +25,7 @@ object DrsRuntimeState {
     val contextMode: StateFlow<DrsContextMode> = _contextMode.asStateFlow()
 
     /**
-     * DRS v1.2.0: the raw number-field class of the focused editor —
+ * the raw number-field class of the focused editor —
      * the input the smart numbers panel (لوحة الأرقام الذكية) detects
      * its context from. Set at EVERY input start BEFORE the
      * context-modes pref gate: the raw EditorInfo truth is not a user
@@ -37,7 +37,7 @@ object DrsRuntimeState {
     val numberFieldClass: StateFlow<DrsNumberFieldClass> = _numberFieldClass.asStateFlow()
 
     /**
-     * DRS v2.11.0 «المُرتّب السياقي الصادق»: the fine-grained field kind
+ * «المُرتّب السياقي الصادق»: the fine-grained field kind
      * the smartbar's contextual ranker reads. Set at EVERY input start
      * BEFORE the context-modes pref gate — the declared EditorInfo truth
      * is not a user preference (same covenant as [numberFieldClass]):
@@ -50,7 +50,7 @@ object DrsRuntimeState {
     val fieldKind: StateFlow<DrsFieldKind> = _fieldKind.asStateFlow()
 
     /**
-     * DRS v1.16.0: the open slot editor of the fixed tasks bar — null
+ * the open slot editor of the fixed tasks bar — null
      * when closed, otherwise the index of the slot being changed
      * («إمكانية تغيير المهام»). Runtime-only state like the drawer flag;
      * the panel itself reads [DrsStore] for everything persisted.
@@ -76,11 +76,11 @@ object DrsRuntimeState {
 
     /** Called from EditorInstance.handleStartInputView for every new input. */
     fun onInputStarted(editorInfo: DrsEditorInfo) {
-        // DRS v1.2.0: the raw number-field class lands FIRST — before
+        // the raw number-field class lands FIRST — before
         // the pref gate returns early — so the smart numbers panel sees
         // every field, not just the adaptive-UI-enabled ones.
         _numberFieldClass.value = detectNumberFieldClass(editorInfo)
-        // DRS v2.11.0: the fine field kind lands beside it, also before
+        // the fine field kind lands beside it, also before
         // the gate — the honest ranker reads declared attributes, not
         // adaptive-UI switches.
         _fieldKind.value = DrsFieldKind.kindOf(
@@ -93,7 +93,7 @@ object DrsRuntimeState {
             return
         }
         _contextMode.value = detect(editorInfo, state.userPath)
-        // DRS v1.7.0: the detected mode was discarded before — it only
+        // the detected mode was discarded before — it only
         // drove adaptive UI. Now the (anonymous) START of every input in
         // each mode is counted so the stats screen shows how typing time
         // splits across contexts (password/numbers/coding/...).
@@ -138,7 +138,7 @@ object DrsRuntimeState {
     }
 
     /**
-     * DRS v1.2.0: the raw field class of the number panel — OTP (a
+ * the raw field class of the number panel — OTP (a
      * number+password field), PHONE, DATE, MONEY (a decimal field),
      * MATH (a plain number field) or GENERAL. Pure and honest: no
      * guessing beyond what the editor actually declares.

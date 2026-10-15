@@ -83,7 +83,7 @@ class InputEventDispatcher private constructor(private val repeatableKeyCodes: I
             KeyCode.DELETE_WORD, KeyCode.FORWARD_DELETE_WORD, KeyCode.UNDO, KeyCode.REDO -> 5.0f
             else -> 1.0f
         }
-        // DRS v1.0.6: honor the user's repeat-rate percentage (50..300).
+        // honor the user's repeat-rate percentage (50..300).
         // Higher rate = shorter delay, so the platform delay is divided by
         // the factor. The pref read is cheap (jetpref in-memory cache).
         val ratePercent = try {
@@ -128,7 +128,7 @@ class InputEventDispatcher private constructor(private val repeatableKeyCodes: I
                     } else if (repeatableKeyCodes.contains(data.code)) {
                         val repeatData = determineRepeatData(data)
                         val repeatDelay = determineRepeatDelay(repeatData)
-                        // DRS v2.4.0: the accelerating delete ladder — the
+                        // the accelerating delete ladder — the
                         // delay is re-derived PER REPEAT through the pure
                         // DrsAcceleratedRepeat contract, so the first six
                         // repeats run at the user's exact configured rate

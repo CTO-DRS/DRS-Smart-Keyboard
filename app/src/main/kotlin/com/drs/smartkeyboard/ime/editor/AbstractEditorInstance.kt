@@ -89,7 +89,7 @@ abstract class AbstractEditorInstance(context: Context) {
     val lastCommitPosition
         get() = LastCommitPosition(_lastCommitPosition)
 
-    // DRS v2.10.0 — «التراجع والإعادة المحليان الصادقان»: bounded self-verifying
+    // «التراجع والإعادة المحليان الصادقان»: bounded self-verifying
     // history of the mutations this editor itself performs. Pure contract in
     // ime/nlp/DrsEditHistory.kt; recording happens at the central mutation
     // paths below, application happens through tryLocalUndo/tryLocalRedo.
@@ -265,13 +265,13 @@ abstract class AbstractEditorInstance(context: Context) {
         // DRS (r0-D perf): queue clear is monitor-locked and non-suspending now.
         expectedContentQueue.clear()
         _lastCommitPosition.reset()
-        // DRS v2.10.0: a restarted input is a different world — the history
+        // a restarted input is a different world — the history
         // recorded for the previous field must never rewrite this one.
         editHistoryStore.clear()
     }
 
     /**
-     * DRS v2.10.0: converts an expected-content snapshot into the fixed-radius
+ * converts an expected-content snapshot into the fixed-radius
      * window the edit history is anchored on. Returns null for raw editors,
      * invalid/unspecified selections and selection mode — those states are
      * outside what the history may describe (fail-closed barrier).
@@ -295,7 +295,7 @@ abstract class AbstractEditorInstance(context: Context) {
     }
 
     /**
-     * DRS v2.10.0: applies a verified undo/redo patch as ONE undoable surgery
+ * applies a verified undo/redo patch as ONE undoable surgery
      * (select the changed range, commit the original text, restore the exact
      * cursor). Recording is suppressed for this commit — the entry already
      * sits on the opposite stack, and re-recording it as a fresh edit would
@@ -324,7 +324,7 @@ abstract class AbstractEditorInstance(context: Context) {
     }
 
     /**
-     * DRS v2.10.0: local undo — verify the live editor window against the
+ * local undo — verify the live editor window against the
      * newest recorded mutation's after-state, then restore the original text.
      * Returns false (with the history untouched when the window merely does
      * not match a cursor move, cleared when the text drifted) so the caller
@@ -337,7 +337,7 @@ abstract class AbstractEditorInstance(context: Context) {
         return applyEditPatch(patch)
     }
 
-    /** DRS v2.10.0: local redo — the mirror of [tryLocalUndo]. */
+    /** local redo — the mirror of [tryLocalUndo]. */
     fun tryLocalRedo(): Boolean {
         if (activeInfo.isRawInputEditor) return false
         val window = editWindowOf(activeContent) ?: return false
@@ -432,7 +432,7 @@ abstract class AbstractEditorInstance(context: Context) {
         val content = activeContent
         if (content.selection == selection) return true
         val ic = currentInputConnection() ?: return false
-        // DRS v1.28.0 audit fix: batch edits opened on the hot paths are now
+        // audit fix: batch edits opened on the hot paths are now
         // exception-safe. A DeadObjectException or editor crash mid-batch used
         // to leak the beginBatchEdit() reference and leave the host editor in
         // batch mode (deferred updates, broken undo) until the input restarted.
@@ -512,7 +512,7 @@ abstract class AbstractEditorInstance(context: Context) {
         if (rm <= 0) {
             commitTextInternal(finalText)
         } else runBlocking {
-            // DRS v1.28.0 audit fix: exception-safe batch edit (see setSelection).
+            // audit fix: exception-safe batch edit (see setSelection).
             ic.beginBatchEdit()
             try {
                 val newSelection = EditorRange.cursor(selection.start - rm + finalText.length)
@@ -531,7 +531,7 @@ abstract class AbstractEditorInstance(context: Context) {
                 ic.setComposingText(finalText, 1)
                 // Now set the proper composing region we expect
                 ic.setComposingRegion(newContent.composing)
-                // DRS v2.10.0: composer rewrite (e.g. SHARK2 layouts) is a real
+                // composer rewrite (e.g. SHARK2 layouts) is a real
                 // mutation — track it like every other commit path.
                 recordEdit(content, newContent)
             } finally {
@@ -547,11 +547,11 @@ abstract class AbstractEditorInstance(context: Context) {
         val ic = currentInputConnection() ?: return false
         val content = activeContent
         val selection = content.selection
-        // DRS v2.10.0: the post-state snapshot for the local edit history —
+        // the post-state snapshot for the local edit history —
         // only the rich (expected-content) path can describe its own result;
         // raw editors record nothing (honest barrier).
         var postContent: EditorContent? = null
-        // DRS v1.28.0 audit fix: exception-safe batch edit (see setSelection).
+        // audit fix: exception-safe batch edit (see setSelection).
         ic.beginBatchEdit()
         try {
             ic.finishComposingText()
@@ -583,7 +583,7 @@ abstract class AbstractEditorInstance(context: Context) {
         val ic = currentInputConnection() ?: return false
         val content = activeContent
         val composing = content.composing
-        // DRS v1.28.0 audit fix (HIGH): this early return used to run AFTER
+        // audit fix (HIGH): this early return used to run AFTER
         // beginBatchEdit() below had already been issued, leaking the batch
         // reference and leaving the host editor stuck in batch mode (broken
         // undo, deferred UI updates) until the input connection was reset.
@@ -621,7 +621,7 @@ abstract class AbstractEditorInstance(context: Context) {
     }
 
     /**
-     * DRS v1.17.0: deletes exactly ONE diacritic codepoint before the
+ * deletes exactly ONE diacritic codepoint before the
      * cursor — the haraka-first backspace. Mirrors the rich-editor path
      * of [deleteAroundCursor] with a fixed single-codepoint length; raw
      * editors and empty text fall back to the full cluster delete.
@@ -700,7 +700,7 @@ abstract class AbstractEditorInstance(context: Context) {
                         textBeforeSelection = scopeText.dropLast(length),
                     )
                     expectedContentQueue.push(newContent)
-                    // DRS v1.28.0 audit fix: exception-safe batch edit (see setSelection).
+                    // audit fix: exception-safe batch edit (see setSelection).
                     ic.beginBatchEdit()
                     try {
                         ic.finishComposingText()
@@ -709,7 +709,7 @@ abstract class AbstractEditorInstance(context: Context) {
                     } finally {
                         ic.endBatchEdit()
                     }
-                    // DRS v2.10.0: the deletion is a tracked mutation.
+                    // the deletion is a tracked mutation.
                     recordEdit(content, newContent)
                 }
                 OperationScope.AFTER_CURSOR -> {
@@ -724,7 +724,7 @@ abstract class AbstractEditorInstance(context: Context) {
                         textAfterSelection = scopeText.drop(length),
                     )
                     expectedContentQueue.push(newContent)
-                    // DRS v1.28.0 audit fix: exception-safe batch edit (see setSelection).
+                    // audit fix: exception-safe batch edit (see setSelection).
                     ic.beginBatchEdit()
                     try {
                         ic.finishComposingText()
@@ -733,7 +733,7 @@ abstract class AbstractEditorInstance(context: Context) {
                     } finally {
                         ic.endBatchEdit()
                     }
-                    // DRS v2.10.0: the forward deletion is tracked as well.
+                    // the forward deletion is tracked as well.
                     recordEdit(content, newContent)
                 }
             }

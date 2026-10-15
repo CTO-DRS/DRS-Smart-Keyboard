@@ -5,7 +5,7 @@
 package com.drs.smartkeyboard.drs
 
 /**
- * DRS v2.0.0 — the deterministic Arabic-words-to-number engine
+ * the deterministic Arabic-words-to-number engine
  * (الكلمات إلى عدد) behind the WORDS_TO_NUMBER text tool: the written
  * words of the words family return to their number — «ثلاثة وعشرون»
  * → 23، «مائة ألف» → 100000 — the exact inverse of [DrsNumberWords]

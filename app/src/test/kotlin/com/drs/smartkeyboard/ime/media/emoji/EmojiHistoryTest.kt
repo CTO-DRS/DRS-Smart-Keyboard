@@ -22,7 +22,7 @@ import io.kotest.matchers.shouldBe
 class EmojiHistoryTest : FunSpec({
 
     /**
-     * DRS v2.14.0: the recording path now requires the privacy gate's
+ * the recording path now requires the privacy gate's
      * record context. These heritage contracts exercise the mutation
      * strategies in a fully clean context — the gate's own contracts live
      * in DrsV21400Tests (exhaustive refusal table + full-loop gating).

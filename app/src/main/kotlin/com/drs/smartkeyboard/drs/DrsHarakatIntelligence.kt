@@ -7,10 +7,10 @@ package com.drs.smartkeyboard.drs
 import com.drs.smartkeyboard.drs.ai.DrsArabicLetters
 
 /**
- * DRS v1.1.0 — الذكاء العربي للوحة الحركات الكاملة (the smart harakat
+ * الذكاء العربي للوحة الحركات الكاملة (the smart harakat
  * BOARD intelligence core).
  *
- * The v1.16.0 harakat panel became a FULL keyboard-style board «مشابهة
+ * The harakat panel became a FULL keyboard-style board «مشابهة
  * للوحة الحروف» with three on-device, offline, deterministic algorithms:
  *
  *  1. المستشار السياقي ([DrsHarakatAdvisor]) — reads ONLY the text before
@@ -18,8 +18,8 @@ import com.drs.smartkeyboard.drs.ai.DrsArabicLetters
  *     fath not sitting on an alef asks for its alef, a fresh shadda asks
  *     for its haraka, the lam of a fresh definite article asks for its
  *     sukun, a sun letter fresh after that article asks for its shadda
- *     (v2.17.0 — the law of the fourteen, decided by the pure
- *     DrsArabicLetters engine that sat orphaned since v1.6.0), a mark
+ * (the law of the fourteen, decided by the pure
+ * DrsArabicLetters engine that sat orphaned since), a mark
  *     under the cursor asks to be replaced, and everything
  *     else falls back to the user's most-used harakat. Every rule is a
  *     documented orthography convention — never a guess, never a network
@@ -239,13 +239,13 @@ object DrsWordTashkeel {
      * typed with (partial or full) marks still resolves to the canonical
      * form.
      *
-     * DRS v1.2.0: the seed map answers first («البذرة تفوز» — the
+ * the seed map answers first («البذرة تفوز» — the
      * hand-reviewed forms are canonical), then the installed 3000-word
      * asset lexicon ([DrsTashkeelLexicon]) — an atomic read, no locks;
      * before the asset lands (or if it never does) the seed serves
      * alone and unknown words still return null honestly.
      *
-     * DRS v2.22.0: the user's personal lexicon ([DrsMyLexicon]) answers
+ * the user's personal lexicon ([DrsMyLexicon]) answers
      * BEFORE both references — «المستخدم تفوز» — an explicit teaching
      * overrides the canonical references by the user's own hand. The
      * default empty map keeps the pure reference behavior byte-identical
@@ -265,7 +265,7 @@ object DrsWordTashkeel {
     /** The seed lexicon size — surfaced in tests and diagnostics. */
     val size: Int get() = LEXICON.size
 
-    /** DRS v1.2.0: the installed extended lexicon size (0 until load). */
+    /** the installed extended lexicon size (0 until load). */
     val extendedSize: Int get() = DrsTashkeelLexicon.size
 }
 
@@ -293,7 +293,7 @@ object DrsHarakatAdvisor {
         DEFINITE_LAM,
 
         /**
-         * DRS v2.17.0 — the cursor is right after «ال» + a SUN letter —
+ * the cursor is right after «ال» + a SUN letter —
          * the letter takes the shadda the assimilation law demands
          * (الشَّ: the lam is silent, the sun letter doubles).
          */
@@ -340,7 +340,7 @@ object DrsHarakatAdvisor {
             }
         }
 
-        // R3b — DRS v2.17.0: الشمسية بعد أل — الشدة قانون الرسم لا اختيار
+        // R3b — الشمسية بعد أل — الشدة قانون الرسم لا اختيار
         // جمالي: «الش» تطلب شدة على الشين (الْشّ — اللام ساكنة والحرف
         // مشدود). الحكم من محرك الشمس والقمر النقي (DrsArabicLetters)
         // لا من قائمة يدوية. الحدود موثقة: أل المجردة في موقع الأداة
@@ -360,7 +360,7 @@ object DrsHarakatAdvisor {
             }
         }
 
-        // R3c — DRS v2.19.0: العقد الخاص المعلن في v2.17.0 — للّ الملتصقة.
+        // R3c — العقد الخاص المعلن في للّ الملتصقة.
         // ل + ال تُكتب لل بالقطر الإملائي (انحلال الألف)، وكل توكن يفتتح
         // بل + ل + حرف هو ل + أل + حرف بلا قراءة ثانية — فالشمسية بعدها
         // تطلب شدتها بالقانون نفسه الذي تطلبه بعد أل المجردة (للش ← للشَّ).
@@ -371,7 +371,7 @@ object DrsHarakatAdvisor {
         // فصمتها معلَّل بالدليل لا مؤجل: والد/والدين وبالطو توكنات
         // حقيقية بلا أل داخلها تتشارك الشكل نفسه — والفصل بينها معرفة
         // قاموسية، وهي أرض التخمين المحرَّمة. الدبوسان في DrsV21900Tests.
-        // v2.20.0 — نحتٌ لا نقض: العائلة المغلقة المثبتة أسماء (لله
+        // نحتٌ لا نقض: العائلة المغلقة المثبتة أسماء (لله
         // والله بالله فالله كالله تالله ولله وبالله فلله) ذيلها ثابت
         // (لله) فلا تشارك الشكل المفتوح صامتًا — شهدها المحرك النقي
         // (majestyShaddaForm) ولوحة الحركات تعرضها رقاقة استبدال لا

@@ -171,7 +171,7 @@ fun DrsControlCenterScreen() = DrsScreen {
 
             // ---------------- ime status ----------------
             DrsSectionCard(title = stringRes(R.string.drs__control_center__ime_status)) {
-                // DRS v1.28.0 audit fix (UI consistency): the ✓/✗ glyphs used to
+                // audit fix (UI consistency): the ✓/✗ glyphs used to
                 // live inside the translated strings; the state is now carried
                 // by a themed vector icon next to the clean text.
                 Row(verticalAlignment = Alignment.CenterVertically) {
@@ -278,7 +278,7 @@ fun DrsControlCenterScreen() = DrsScreen {
 
             // ---------------- links to existing sections ----------------
             DrsSectionCard(title = stringRes(R.string.drs__control_center__sections)) {
-                // DRS v1.0.7: the unified «كلاهما» screens lead the list.
+                // the unified «كلاهما» screens lead the list.
                 Text(
                     text = stringRes(R.string.drs__unified__section_hint),
                     fontSize = 13.sp,
@@ -307,7 +307,7 @@ fun DrsControlCenterScreen() = DrsScreen {
                 DrsLinkRow(stringRes(R.string.settings__typing__title)) { navController.navigate(Routes.Settings.Typing) }
                 DrsLinkRow(stringRes(R.string.settings__gestures__title)) { navController.navigate(Routes.Settings.Gestures) }
                 DrsLinkRow(stringRes(R.string.drs__shortcuts__title)) { navController.navigate(Routes.Settings.DrsShortcuts) }
-                // DRS v1.0.6: technical toolbar key editor.
+                // technical toolbar key editor.
                 DrsLinkRow(stringRes(R.string.drs__tech_toolbar__title)) { navController.navigate(Routes.Settings.DrsTechToolbar) }
                 DrsLinkRow(stringRes(R.string.settings__clipboard__title)) { navController.navigate(Routes.Settings.Clipboard) }
                 DrsLinkRow(stringRes(R.string.settings__localization__title)) { navController.navigate(Routes.Settings.Localization) }
@@ -587,7 +587,7 @@ private fun DrsSystemFeaturesCard(spec: DrsSystemSpec) {
     DrsSectionCard(title = stringRes(R.string.drs__control_center__system_features)) {
         listOf(spec.feature1Res, spec.feature2Res, spec.feature3Res, spec.feature4Res).forEach { featureRes ->
             Row(verticalAlignment = Alignment.Top) {
-                // DRS v1.28.0 audit fix (UI consistency): the "✓" Text glyph is
+                // audit fix (UI consistency): the "✓" Text glyph is
                 // a font-dependent render — replaced by a themed vector icon.
                 Icon(
                     imageVector = Icons.Filled.Check,

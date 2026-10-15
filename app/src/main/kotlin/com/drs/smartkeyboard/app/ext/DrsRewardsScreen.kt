@@ -192,7 +192,7 @@ fun DrsRewardsScreen() = DrsScreen {
 
             // ---------------- earning rules ----------------
             RewardsSectionCard(title = stringRes(R.string.drs__rewards__how_to_earn)) {
-                // DRS v1.28.0 audit fix (UI consistency): the earn-rule rows used
+                // audit fix (UI consistency): the earn-rule rows used
                 // raw emoji glyphs (⌨ ✨ 🔥) as icons — platform-dependent,
                 // visually inconsistent with the app's vector iconography.
                 // Proper Material icons render identically everywhere and

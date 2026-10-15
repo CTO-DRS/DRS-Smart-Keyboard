@@ -60,7 +60,7 @@ import org.drs.lib.snygg.ui.SnyggBox
 import org.drs.lib.snygg.ui.SnyggColumn
 
 /**
- * DRS v1.2.0 — لوحة الأرقام الذكية (the smart numbers panel) — the
+ * لوحة الأرقام الذكية (the smart numbers panel) — the
  * fourth smart panel, built on the exact anatomy of the harakat board:
  * the shared header and switcher chips, a context bar whose chips
  * reorder themselves (the detected field context first, then the local
@@ -125,13 +125,13 @@ fun DrsSmartNumberPanel(modifier: Modifier = Modifier) {
         if (!keyboardManager.activeState.isIncognitoMode) {
             DrsPanelUsageStore.record(context, USAGE_PANEL_NUMBERS, text)
             recents = DrsPanelUsageStore.load(context, USAGE_PANEL_NUMBERS)
-            // DRS v2.22.0: the numbers board's own feature counter.
+            // the numbers board's own feature counter.
             DrsAdaptationEngine.recordNumberUse()
         }
         commitStamp++
     }
 
-    // DRS v2.22.0 — تكامل الأرقام مع نصوصي: a ready format (phone,
+    // تكامل الأرقام مع نصوصي: a ready format (phone,
     // currency, date) becomes a permanent saved text with a long-press —
     // the numbers feature no longer stops at the field's edge. The save
     // is user-explicit (a hold, never a slip), lands in the localized
@@ -229,7 +229,7 @@ fun DrsSmartNumberPanel(modifier: Modifier = Modifier) {
                         feedback.keyPress()
                         selected = candidate
                     },
-                    // DRS v2.3.0: the context bar reads as one capped wave
+                    // the context bar reads as one capped wave
                     // whenever the usage-ordered set changes.
                     entranceIndex = contextIndex,
                     entranceKey = contextOrder,
@@ -247,7 +247,7 @@ fun DrsSmartNumberPanel(modifier: Modifier = Modifier) {
                     .horizontalScroll(rememberScrollState()),
                 horizontalArrangement = Arrangement.spacedBy(6.dp),
             ) {
-                // DRS v2.22.0: the hold-to-save gesture, announced where
+                // the hold-to-save gesture, announced where
                 // the formats live — the same honest note-chip pattern
                 // the harakat board established (non-clickable).
                 AdviceChip(
@@ -264,11 +264,11 @@ fun DrsSmartNumberPanel(modifier: Modifier = Modifier) {
                             feedback.keyPress()
                             commitText(format)
                         },
-                        // DRS v2.22.0: hold a format to keep it — the
+                        // hold a format to keep it — the
                         // numbers-to-نصوصي bridge, announced by the panel
                         // header hint.
                         onLongClick = { saveFormatToMyTexts(format) },
-                        // DRS v2.3.0: one capped wave per new formats set —
+                        // one capped wave per new formats set —
                         // never a pop-in.
                         entranceIndex = formatIndex,
                         entranceKey = formats,

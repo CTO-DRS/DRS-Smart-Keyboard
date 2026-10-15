@@ -129,7 +129,7 @@ fun DrsDiagnosticsScreen() = DrsScreen {
             false
         }
     }
-    // DRS v1.1.0: real free-space probe of the storage volume that holds
+    // real free-space probe of the storage volume that holds
     // the DRS state file, clipboard media and the exported backups. A
     // failing probe never raises a false alarm.
     val storageAvailableBytes = remember {
@@ -140,7 +140,7 @@ fun DrsDiagnosticsScreen() = DrsScreen {
         }
     }
 
-    // DRS v1.3.0: real battery / power-save state of the device. A power-
+    // real battery / power-save state of the device. A power-
     // saving system may throttle background work of the IME (suggestions,
     // adaptation flush) — that is degraded-but-usable, so it is a warning.
     // An unreadable battery level is unknown, never a false alarm.
@@ -163,7 +163,7 @@ fun DrsDiagnosticsScreen() = DrsScreen {
         }
     }
 
-    // DRS v1.3.0: whether the device supports per-step vibration amplitude
+    // whether the device supports per-step vibration amplitude
     // control. When absent, the configured haptic strength silently falls
     // back to the system default amplitude (the settings key still works,
     // just without fine-grained steps) — degraded, so a warning. Null =
@@ -176,7 +176,7 @@ fun DrsDiagnosticsScreen() = DrsScreen {
         }
     }
 
-    // DRS v1.3.0: whether the ACTIVE theme loaded cleanly. A load failure
+    // whether the ACTIVE theme loaded cleanly. A load failure
     // means the keyboard falls back to the base theme — degraded, warning.
     val activeThemeLoadFailure = remember {
         try {
@@ -186,7 +186,7 @@ fun DrsDiagnosticsScreen() = DrsScreen {
         }
     }
 
-    // DRS v1.4.0: real p95 key latency from the in-process performance
+    // real p95 key latency from the in-process performance
     // window. A verdict is meaningful only once enough samples exist —
     // with fewer, the state is unknown and must not false-alarm.
     val typingLatencyHealthy = remember {
@@ -198,7 +198,7 @@ fun DrsDiagnosticsScreen() = DrsScreen {
         }
     }
 
-    // DRS v1.4.0: Java-heap pressure of this process, straight from the
+    // Java-heap pressure of this process, straight from the
     // runtime. An unreadable maximum (0) passes — degraded-but-usable at
     // worst, so this check warns and never errors.
     val memoryPressureHealthy = remember {
@@ -211,7 +211,7 @@ fun DrsDiagnosticsScreen() = DrsScreen {
         }
     }
 
-    // DRS v1.5.0: whether the system spell checker points at THIS app.
+    // whether the system spell checker points at THIS app.
     // The spell-checker service (DrsSpellCheckerService) only receives
     // queries when it is both enabled and selected system-wide — the same
     // Settings.Secure keys the spell-checker settings screen reads.
@@ -233,7 +233,7 @@ fun DrsDiagnosticsScreen() = DrsScreen {
         }
     }
 
-    // DRS v1.5.0: the update notifications preference silently does
+    // the update notifications preference silently does
     // nothing on Android 13+ when POST_NOTIFICATIONS is denied — the
     // grant state becomes a real diagnostic, not a guess. Older Android
     // versions need no grant, so they pass.
@@ -252,7 +252,7 @@ fun DrsDiagnosticsScreen() = DrsScreen {
         }
     }
 
-    // DRS v1.5.0: haptics configuration sanity — when the settings ask for
+    // haptics configuration sanity — when the settings ask for
     // direct vibrator control but the device has no vibrator, every key
     // press silently skips haptic feedback. A failing probe is unknown
     // and must not false-alarm.
@@ -271,7 +271,7 @@ fun DrsDiagnosticsScreen() = DrsScreen {
         }
     }
 
-    // ---------------- DRS v1.0.6: full technical test runner ----------------
+    // ---------------- full technical test runner ----------------
     var testResults by remember { mutableStateOf<List<DrsTestResult>?>(null) }
     fun runFullTest() {
         testResults = computeDrsFullTest(
@@ -314,32 +314,32 @@ fun DrsDiagnosticsScreen() = DrsScreen {
                 val pinnedKnown = drsState.pinnedUnifiedTools.all { it in knownToolIds }
                 validView && orderKnown && viewsValid && hiddenKnown && pinnedKnown
             }(),
-            // DRS v1.0.8: the daily usage buckets must stay bounded, keyed
+            // the daily usage buckets must stay bounded, keyed
             // by valid ISO days and non-negative — a corrupted state file
             // degrades to a warning, never a crash.
             dailyStatsSane = DrsDailyStats.isSane(drsState.dailyStats),
-            // DRS v1.1.0: real storage headroom + last-backup age.
+            // real storage headroom + last-backup age.
             storageAvailableBytes = storageAvailableBytes,
             lastBackupAt = drsState.lastBackupAt,
-            // DRS v1.3.0: device power state + hardware capability + theme health.
+            // device power state + hardware capability + theme health.
             // A capacity <= 0 means "unknown" (BatteryManager returns 0 or
             // MIN_VALUE when the property is unavailable) — never a false alarm.
             batteryHealthy = batteryPercent <= 0 || (!powerSaveMode && batteryPercent > BATTERY_WARN_PERCENT),
             amplitudeControlAvailable = amplitudeControlAvailable,
             activeThemeLoadFailure = activeThemeLoadFailure,
-            // DRS v1.4.0: real latency/memory verdicts from this process.
+            // real latency/memory verdicts from this process.
             typingLatencyHealthy = typingLatencyHealthy,
             memoryPressureHealthy = memoryPressureHealthy,
-            // DRS v1.5.0: spell checker wiring + notification grant + haptics
+            // spell checker wiring + notification grant + haptics
             // configuration sanity.
             spellCheckerWired = spellCheckerWired,
             notificationsHealthy = notificationsHealthy,
             hapticsHealthy = hapticsHealthy,
-            // DRS v1.6.0: state-file decode integrity (the silent-wipe
+            // state-file decode integrity (the silent-wipe
             // detector) + whether a crash log from a previous run exists.
             stateFileParses = DrsStore.stateFileParses(),
             crashLogPresent = crashLog.isNotBlank(),
-            // DRS v1.7.0: shortcut template typos — {dat] or {Datee} in an
+            // shortcut template typos — {dat] or {Datee} in an
             // expansion used to commit literally with zero signal. Null
             // (no templates at all) degrades to a pass, never a false alarm.
             shortcutTemplatesValid = DrsShortcuts.templatesValid(drsState),
@@ -368,7 +368,7 @@ fun DrsDiagnosticsScreen() = DrsScreen {
                 )
             }
 
-            // ---------------- full technical test (DRS v1.0.6) ----------------
+            // ---------------- full technical test () ----------------
             DrsDiagCard(title = stringRes(R.string.drs__diagnostics__test_section)) {
                 OutlinedButton(onClick = { runFullTest() }) {
                     Text(stringRes(R.string.drs__diagnostics__test_run))
@@ -573,7 +573,7 @@ fun DrsDiagnosticsScreen() = DrsScreen {
                 }
             }
 
-            // ---------------- sanitized event log (DRS v1.0.6) ----------------
+            // ---------------- sanitized event log () ----------------
             DrsDiagCard(title = stringRes(R.string.drs__diagnostics__events_section)) {
                 val eventEntries = remember { DrsEventLog.snapshot() }
                 if (eventEntries.isEmpty()) {
@@ -586,7 +586,7 @@ fun DrsDiagnosticsScreen() = DrsScreen {
                     Column(
                         modifier = Modifier
                             .fillMaxWidth()
-                            // DRS fix (v1.0.9): the fixed height MUST come
+                            // DRS fix (): the fixed height MUST come
                             // before the scroll modifier — the scroll node has
                             // to receive bounded constraints, otherwise it
                             // crashes when measured inside DrsScreen's own
@@ -617,7 +617,7 @@ fun DrsDiagnosticsScreen() = DrsScreen {
                         Text(stringRes(R.string.drs__performance__title))
                     }
                 }
-                // DRS v1.7.0: the renderReport() renderer existed since v1.0.6
+                // the renderReport() renderer existed since 
                 // but NOTHING ever called it — the report is now actually
                 // exportable (same SAF pattern as the stats CSV above).
                 val reportPayload = remember { mutableStateOf<String?>(null) }
@@ -665,14 +665,14 @@ fun DrsDiagnosticsScreen() = DrsScreen {
                 )
             }
 
-            // ---------------- DRS data backup / restore (DRS v1.0.6) --------
+            // ---------------- DRS data backup / restore () --------
             DrsDiagCard(title = stringRes(R.string.drs__diagnostics__backup_section)) {
                 Text(
                     text = stringRes(R.string.drs__diagnostics__backup_hint),
                     fontSize = 13.sp,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
-                // DRS v1.1.0: real "last backup" timestamp from the state.
+                // real "last backup" timestamp from the state.
                 Text(
                     text = if (drsState.lastBackupAt > 0L) {
                         val formatted = java.text.DateFormat.getDateTimeInstance(
@@ -697,7 +697,7 @@ fun DrsDiagnosticsScreen() = DrsScreen {
                                 out.write(payload.toByteArray(Charsets.UTF_8))
                             } ?: throw IllegalStateException("output stream null")
                             DrsEventLog.recordInfo(DrsEventLog.Categories.STORE, "backup exported")
-                            // DRS v1.1.0: stamp the real export moment so
+                            // stamp the real export moment so
                             // the backup-age check reflects this artifact.
                             DrsUnified.markBackupExported()
                         }
@@ -711,7 +711,7 @@ fun DrsDiagnosticsScreen() = DrsScreen {
                     Text(stringRes(R.string.drs__diagnostics__backup_export))
                 }
                 var importError by remember { mutableStateOf<String?>(null) }
-                // DRS v1.7.0: describe-before-restore — the file is parsed
+                // describe-before-restore — the file is parsed
                 // FIRST and a confirm dialog shows what it contains; the
                 // import used to overwrite live state with zero preview.
                 var pendingImport by remember { mutableStateOf<DrsState?>(null) }
@@ -879,26 +879,26 @@ private fun DrsCheckRow(label: String, passed: Boolean) {
     }
 }
 
-// ---------------- DRS v1.0.6: full technical test runner ----------------
+// ---------------- full technical test runner ----------------
 
 private enum class DrsTestSeverity { PASS, WARNING, ERROR }
 
-/** DRS v1.1.0: free-storage thresholds for check #20. */
+/** free-storage thresholds for check #20. */
 private const val STORAGE_PASS_BYTES = 200L * 1024 * 1024
 private const val STORAGE_ERROR_BYTES = 50L * 1024 * 1024
 
-/** DRS v1.1.0: a backup exported within 30 days keeps check #21 green. */
+/** a backup exported within 30 days keeps check #21 green. */
 private const val BACKUP_PASS_MILLIS = 30L * 24 * 60 * 60 * 1000
 
-/** DRS v1.3.0: below this battery percentage (or in power-save mode) the
+/** below this battery percentage (or in power-save mode) the
  * power checks warn that the system may throttle the IME. */
 private const val BATTERY_WARN_PERCENT = 20
 
-/** DRS v1.4.0: at or below this p95 key latency (50 ms) the latency check
+/** at or below this p95 key latency (50 ms) the latency check
  * passes; above it the keyboard still works, just measurably slower. */
 private const val LATENCY_PASS_MICROS = 50_000L
 
-/** DRS v1.4.0: the memory check warns once the Java heap is at or above
+/** the memory check warns once the Java heap is at or above
  * this share of its maximum — degraded-but-usable, so a warning at most. */
 private const val MEMORY_WARN_PERCENT = 80L
 
@@ -977,10 +977,10 @@ private fun computeDrsFullTest(
     spellCheckerWired: Boolean,
     notificationsHealthy: Boolean,
     hapticsHealthy: Boolean,
-    // DRS v1.6.0: state-file decode integrity + crash-log presence.
+    // state-file decode integrity + crash-log presence.
     stateFileParses: Boolean?,
     crashLogPresent: Boolean,
-    // DRS v1.7.0: shortcut template validity (null = no templates).
+    // shortcut template validity (null = no templates).
     shortcutTemplatesValid: Boolean?,
 ): List<DrsTestResult> {
     fun result(pass: Boolean, warn: Boolean, label: Int, hint: Int): DrsTestResult =
@@ -1010,7 +1010,7 @@ private fun computeDrsFullTest(
         result(activeProfileOk, warn = false, R.string.drs__diagnostics__check_active_profile, R.string.drs__diagnostics__hint_profile),
         result(walletHealthy, warn = true, R.string.drs__diagnostics__check_wallet, R.string.drs__diagnostics__hint_restart),
         result(eventErrorCount == 0, warn = true, R.string.drs__diagnostics__check_events_clean, R.string.drs__diagnostics__hint_events),
-        // DRS v1.0.7: unified «كلاهما» layer consistency - unknown tool ids
+        // unified «كلاهما» layer consistency - unknown tool ids
         // or invalid level names in the customization are dropped by the
         // resolver, so this only ever degrades to a warning.
         result(
@@ -1019,21 +1019,21 @@ private fun computeDrsFullTest(
             R.string.drs__diagnostics__check_unified,
             R.string.drs__diagnostics__hint_unified,
         ),
-        // DRS v1.0.8: daily usage statistics buckets sanity.
+        // daily usage statistics buckets sanity.
         result(
             dailyStatsSane,
             warn = true,
             R.string.drs__diagnostics__check_daily_stats,
             R.string.drs__diagnostics__hint_daily_stats,
         ),
-        // DRS v1.1.0: real free space of the volume holding the state file.
+        // real free space of the volume holding the state file.
         result(
             storageAvailableBytes >= STORAGE_PASS_BYTES,
             warn = storageAvailableBytes >= STORAGE_ERROR_BYTES,
             R.string.drs__diagnostics__check_storage,
             R.string.drs__diagnostics__hint_storage,
         ),
-        // DRS v1.1.0: age of the last DRS-state backup export. This is
+        // age of the last DRS-state backup export. This is
         // always at most a warning (missing protection, not a broken
         // feature): the hint points at the export button on this screen.
         result(
@@ -1042,7 +1042,7 @@ private fun computeDrsFullTest(
             R.string.drs__diagnostics__check_backup_age,
             R.string.drs__diagnostics__hint_backup_age,
         ),
-        // DRS v1.3.0: battery level / power-save mode. The system may
+        // battery level / power-save mode. The system may
         // throttle IME background work in power-save or at very low
         // charge — degraded-but-usable, so a warning at most. An unknown
         // battery level (failed read) passes to avoid false alarms.
@@ -1052,7 +1052,7 @@ private fun computeDrsFullTest(
             R.string.drs__diagnostics__check_battery,
             R.string.drs__diagnostics__hint_battery,
         ),
-        // DRS v1.3.0: vibration amplitude control capability. Without it
+        // vibration amplitude control capability. Without it
         // the configured haptic strength silently falls back to the
         // system's default amplitude. Unknown (no vibrator or failed
         // probe) passes so devices without a vibrator are not flagged.
@@ -1062,7 +1062,7 @@ private fun computeDrsFullTest(
             R.string.drs__diagnostics__check_amplitude,
             R.string.drs__diagnostics__hint_amplitude,
         ),
-        // DRS v1.3.0: the active theme loaded cleanly (no fallback to the
+        // the active theme loaded cleanly (no fallback to the
         // base theme).
         result(
             !activeThemeLoadFailure,
@@ -1070,7 +1070,7 @@ private fun computeDrsFullTest(
             R.string.drs__diagnostics__check_active_theme,
             R.string.drs__diagnostics__hint_active_theme,
         ),
-        // DRS v1.4.0: real p95 key latency from the in-process window.
+        // real p95 key latency from the in-process window.
         // Unknown (too few samples) passes so a fresh process never
         // false-alarms; above the threshold it is degraded-but-usable.
         result(
@@ -1079,7 +1079,7 @@ private fun computeDrsFullTest(
             R.string.drs__diagnostics__check_latency,
             R.string.drs__diagnostics__hint_latency,
         ),
-        // DRS v1.4.0: Java-heap pressure of this process. An unreadable
+        // Java-heap pressure of this process. An unreadable
         // maximum passes; high pressure means the system may slow the
         // keyboard down — degraded-but-usable, so a warning at most.
         result(
@@ -1088,7 +1088,7 @@ private fun computeDrsFullTest(
             R.string.drs__diagnostics__check_memory,
             R.string.drs__diagnostics__hint_memory,
         ),
-        // DRS v1.5.0: the system spell checker must point at this app for
+        // the system spell checker must point at this app for
         // DrsSpellCheckerService to receive queries. A spell checker that
         // is off entirely is the user's choice — only the "enabled but
         // someone else selected" case degrades to a warning.
@@ -1098,7 +1098,7 @@ private fun computeDrsFullTest(
             R.string.drs__diagnostics__check_spell_checker,
             R.string.drs__diagnostics__hint_spell_checker,
         ),
-        // DRS v1.5.0: update notifications need the Android-13+
+        // update notifications need the Android-13+
         // POST_NOTIFICATIONS grant; a denied grant silently silences
         // them, so it warns only when update notifications are wanted.
         result(
@@ -1107,7 +1107,7 @@ private fun computeDrsFullTest(
             R.string.drs__diagnostics__check_notifications,
             R.string.drs__diagnostics__hint_notifications,
         ),
-        // DRS v1.5.0: haptics requested with direct vibrator control but
+        // haptics requested with direct vibrator control but
         // no vibrator present means every key press silently skips the
         // haptic channel — a real misconfiguration, warning only.
         result(
@@ -1116,7 +1116,7 @@ private fun computeDrsFullTest(
             R.string.drs__diagnostics__check_haptics,
             R.string.drs__diagnostics__hint_haptics,
         ),
-        // DRS v1.6.0: the persisted state file must still decode. A
+        // the persisted state file must still decode. A
         // corrupt file means the whole DRS layer silently resets to
         // defaults on the next write — a genuine ERROR, not a warning.
         // Unknown (store not initialized) passes to avoid false alarms.
@@ -1126,7 +1126,7 @@ private fun computeDrsFullTest(
             R.string.drs__diagnostics__check_state_file_integrity,
             R.string.drs__diagnostics__hint_state_file_integrity,
         ),
-        // DRS v1.6.0: a recorded crash log from a previous run. Purely
+        // a recorded crash log from a previous run. Purely
         // informational — the keyboard recovered, but the user should
         // know (and can review/clear the log on this very screen).
         result(
@@ -1135,7 +1135,7 @@ private fun computeDrsFullTest(
             R.string.drs__diagnostics__check_crash_log,
             R.string.drs__diagnostics__hint_crash_log,
         ),
-        // DRS v1.7.0: shortcut template typos. expandTemplate keeps
+        // shortcut template typos. expandTemplate keeps
         // unknown {variables} literal, so {dat] or {Datee} silently
         // committed garbage on every expansion until now. Null (no
         // templates at all) passes to avoid false alarms.

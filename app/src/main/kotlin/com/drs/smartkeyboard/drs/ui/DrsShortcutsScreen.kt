@@ -55,7 +55,7 @@ private data class DrsShortcutEditorState(
     val shortcut: String = "",
     val expansion: String = "",
     val isTechnical: Boolean = false,
-    // DRS v1.0.7: where the shortcut is available (unified system scope).
+    // where the shortcut is available (unified system scope).
     val scope: DrsShortcutScope = DrsShortcutScope.BOTH,
 )
 
@@ -75,7 +75,7 @@ fun DrsShortcutsScreen() = DrsScreen {
 
     var editorState by remember { mutableStateOf<DrsShortcutEditorState?>(null) }
     var showDuplicateError by remember { mutableStateOf(false) }
-    // DRS v1.28.0 audit fix (Medium): deletion used to fire immediately from
+    // audit fix (Medium): deletion used to fire immediately from
     // the row's trash icon — one slip of the finger destroyed a shortcut
     // with no undo, unlike every other destructive action in the app which
     // confirms first. The pending id (Long) survives configuration changes
@@ -215,7 +215,7 @@ fun DrsShortcutsScreen() = DrsScreen {
                                     .padding(vertical = 4.dp),
                                 verticalAlignment = Alignment.CenterVertically,
                             ) {
-                                // DRS v1.0.6: per-shortcut enable/disable.
+                                // per-shortcut enable/disable.
                                 Switch(
                                     checked = sc.enabled,
                                     onCheckedChange = { checked ->
@@ -256,7 +256,7 @@ fun DrsShortcutsScreen() = DrsScreen {
                                             color = MaterialTheme.colorScheme.tertiary,
                                         )
                                     }
-                                    // DRS v1.0.7: availability scope badge.
+                                    // availability scope badge.
                                     Text(
                                         text = scopeLabel(sc.scope.toScopeSafe()),
                                         fontSize = 10.sp,
@@ -301,7 +301,7 @@ fun DrsShortcutsScreen() = DrsScreen {
             },
             onSave = { shortcut, expansion, scope ->
                 val saved = if (editing.id != null) {
-                    // DRS v1.0.6: edit by id - the old abbreviation is really
+                    // edit by id - the old abbreviation is really
                     // replaced now (it used to stay behind as a duplicate).
                     DrsShortcuts.update(
                         editing.id,
@@ -345,7 +345,7 @@ fun DrsShortcutsScreen() = DrsScreen {
         )
     }
 
-    // DRS v1.28.0 audit fix (Medium): confirm-before-delete for a single
+    // audit fix (Medium): confirm-before-delete for a single
     // shortcut, matching the "remove all" dialog above.
     pendingDeleteId?.let { targetId ->
         AlertDialog(
@@ -405,7 +405,7 @@ private fun DrsShortcutEditorDialog(
 ) {
     var shortcut by remember { mutableStateOf(initial.shortcut) }
     var expansion by remember { mutableStateOf(initial.expansion) }
-    // DRS v1.0.7: per-shortcut availability scope (عادي/تقني/كلاهما).
+    // per-shortcut availability scope (عادي/تقني/كلاهما).
     var scope by remember { mutableStateOf(initial.scope) }
 
     AlertDialog(

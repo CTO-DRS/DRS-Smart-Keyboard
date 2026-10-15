@@ -98,7 +98,7 @@ import org.drs.lib.compose.ProvideLocalizedResources
 import org.drs.lib.compose.stringRes
 
 /**
- * DRS v1.11.0: the popup clipboard editor window. The user asked for the
+ * the popup clipboard editor window. The user asked for the
  * editor to live in a real floating popup window above the whole screen —
  * like a system alert — and NOT inside the clipboard panel anymore.
  *
@@ -119,15 +119,15 @@ enum class ClipEditorRoute {
 }
 
 /**
- * DRS v1.14.0: the size of the popup editor window, chosen in the app
+ * the size of the popup editor window, chosen in the app
  * settings — the comprehensive settings list covers the popup window the
- * user asked for in v1.11.0 too. Pure and JVM-testable.
+ * user asked for in too. Pure and JVM-testable.
  */
 enum class ClipEditorPopupSize {
     /** A discreet card — most of the app stays visible around it. */
     COMPACT,
 
-    /** The pinned v1.11.0 geometry. */
+    /** The pinned geometry. */
     NORMAL,
 
     /** Nearly the whole screen — the widest editing canvas. */
@@ -135,7 +135,7 @@ enum class ClipEditorPopupSize {
 }
 
 /**
- * DRS v1.14.0: how strongly the underlying app is dimmed behind the popup
+ * how strongly the underlying app is dimmed behind the popup
  * editor window, chosen in the app settings. Pure and JVM-testable.
  */
 enum class ClipEditorScrim {
@@ -145,7 +145,7 @@ enum class ClipEditorScrim {
     /** A gentle hint of separation. */
     LIGHT,
 
-    /** The pinned v1.11.0 dimming. */
+    /** The pinned dimming. */
     NORMAL,
 
     /** The strongest focus short of full black. */
@@ -153,7 +153,7 @@ enum class ClipEditorScrim {
 }
 
 /**
- * DRS v1.11.0: decides where an edit request goes. Only real text items are
+ * decides where an edit request goes. Only real text items are
  * served by the popup window — images/videos and the defensive null-text
  * case stay with the in-panel editor. Pure and JVM-testable.
  */
@@ -167,10 +167,10 @@ object ClipEditorPopupPolicy {
     }
 
     /**
-     * DRS v1.14.0: the user's chosen edit surface from the app settings
+ * the user's chosen edit surface from the app settings
      * («قائمة الإعدادات الشاملة») joins the decision: a preferred in-panel
      * editor always stays in-panel, and the popup preference keeps the
-     * v1.11.0 media/null-text honesty — the popup window never receives
+ * media/null-text honesty — the popup window never receives
      * what it cannot render. Pure and JVM-testable.
      */
     fun routeFor(type: ItemType, text: String?, preferred: ClipEditorRoute): ClipEditorRoute {
@@ -193,7 +193,7 @@ object ClipEditorPopupPolicy {
 }
 
 /**
- * DRS v1.11.0: the popup window geometry contract. The card covers a fixed
+ * the popup window geometry contract. The card covers a fixed
  * fraction of the screen so the dimmed app stays visible around it, exactly
  * like a system alert. Fractions are pinned and JVM-tested.
  */
@@ -208,8 +208,8 @@ object ClipEditorPopupSpec {
     const val SCRIM_ALPHA: Float = 0.55f
 
     /**
-     * DRS v1.14.0: the card width fraction for the user's chosen window
-     * size — NORMAL is the pinned v1.11.0 geometry, and every choice stays
+ * the card width fraction for the user's chosen window
+ * size — NORMAL is the pinned geometry, and every choice stays
      * strictly inside (0, 1] so the card never leaves the screen.
      */
     fun widthFractionFor(size: ClipEditorPopupSize): Float = when (size) {
@@ -218,14 +218,14 @@ object ClipEditorPopupSpec {
         ClipEditorPopupSize.NEARLY_FULL -> 0.98f
     }
 
-    /** DRS v1.14.0: the card height fraction for the chosen window size. */
+    /** the card height fraction for the chosen window size. */
     fun heightFractionFor(size: ClipEditorPopupSize): Float = when (size) {
         ClipEditorPopupSize.COMPACT -> 0.70f
         ClipEditorPopupSize.NORMAL -> HEIGHT_FRACTION
         ClipEditorPopupSize.NEARLY_FULL -> 0.96f
     }
 
-    /** DRS v1.14.0: the scrim strength for the user's chosen dimming. */
+    /** the scrim strength for the user's chosen dimming. */
     fun scrimAlphaFor(scrim: ClipEditorScrim): Float = when (scrim) {
         ClipEditorScrim.NONE -> 0.00f
         ClipEditorScrim.LIGHT -> 0.30f
@@ -245,7 +245,7 @@ object ClipEditorPopupSpec {
 }
 
 /**
- * DRS v1.11.0: one pending edit handed from the IME to the popup activity.
+ * one pending edit handed from the IME to the popup activity.
  * Both components live in the same process, so the item travels by
  * reference — no Intent size limits even at the 50,000-char cap.
  */
@@ -256,7 +256,7 @@ data class PendingClipEdit(
 )
 
 /**
- * DRS v1.13.0: adapts the editor's real TextLayoutResult to the pure
+ * adapts the editor's real TextLayoutResult to the pure
  * ClipLineLayout — the wrapped visual rows the direct line jump reads.
  * The transformation is identity, so the field offsets and the layout
  * offsets agree one to one.
@@ -270,7 +270,7 @@ internal class ClipTextLineLayout(private val layout: TextLayoutResult) : ClipLi
 }
 
 /**
- * DRS v1.11.0: the process-wide handoff slot for the popup editor. The IME
+ * the process-wide handoff slot for the popup editor. The IME
  * puts the request, the activity consumes it exactly once; the slot never
  * survives a finished session. JVM-testable.
  */
@@ -301,7 +301,7 @@ object ClipEditorPopupStore {
 }
 
 /**
- * DRS v1.11.0: opens the popup editor window from the IME composition.
+ * opens the popup editor window from the IME composition.
  * Returns [ClipEditorRoute.POPUP_WINDOW] on a successful launch and
  * [ClipEditorRoute.IN_PANEL] when the policy says panel or the system
  * blocked the start — the caller then serves the request in-panel instead.
@@ -330,7 +330,7 @@ object ClipEditorPopupLauncher {
 }
 
 /**
- * DRS v1.11.0: the floating popup editor window itself. A dialog-styled
+ * the floating popup editor window itself. A dialog-styled
  * translucent activity: the app behind stays visible through the scrim, the
  * editor card floats centered, and the system keyboard opens inside the
  * window (adjustResize) for text input. Saving walks the same engine path
@@ -342,7 +342,7 @@ class ClipEditorPopupActivity : ComponentActivity() {
 
     companion object {
         /**
-         * DRS v1.21.0: the notification-style edit window hands the clip
+ * the notification-style edit window hands the clip
          * text through the intent so the popup survives process death —
          * the in-memory [ClipEditorPopupStore] handoff only works inside
          * the live IME process, while the notification can arrive later.
@@ -383,7 +383,7 @@ class ClipEditorPopupActivity : ComponentActivity() {
     }
 
     /**
-     * DRS v1.21.0: builds the pending edit from the notification intent
+ * builds the pending edit from the notification intent
      * extras (process-death-safe), or null when this launch is not the
      * notification route — then the classic store handoff applies.
      */
@@ -402,8 +402,8 @@ class ClipEditorPopupActivity : ComponentActivity() {
     }
 
     /**
-     * DRS v1.27.0: the permanently-denied microphone's way out — the
-     * same honest escape hatch the v1.26 IME dictation route opens.
+ * the permanently-denied microphone's way out — the
+ * same honest escape hatch the IME dictation route opens.
      */
     private fun launchAppSettings() {
         startActivity(
@@ -417,11 +417,11 @@ class ClipEditorPopupActivity : ComponentActivity() {
     @Composable
     private fun PopupSurface(pending: PendingClipEdit) {
         val scope = rememberCoroutineScope()
-        // DRS v1.12.0: the editor honors the app settings defaults — the
+        // the editor honors the app settings defaults — the
         // font family/size, the case matching, the editor character limit
         // (up to the 500,000 policy cap), the colored result cards, and
         // the code-line detection.
-        // DRS v1.14.0: the comprehensive settings list — the window size
+        // the comprehensive settings list — the window size
         // and dimming, the direct line jump behavior, and the badges and
         // warnings all follow the app settings too.
         val prefs by DrsPreferenceStore
@@ -439,7 +439,7 @@ class ClipEditorPopupActivity : ComponentActivity() {
         var text by remember { mutableStateOf(pending.text) }
         val history = remember { ClipEditorHistory() }
 
-        // DRS v1.27.0: the editor listens — a dictation session owned by
+        // the editor listens — a dictation session owned by
         // this window. The final transcript is appended into the editor's
         // text state through the pure ClipDictationPlan (no
         // InputConnection exists here), and the controller dies with the
@@ -463,7 +463,7 @@ class ClipEditorPopupActivity : ComponentActivity() {
             if (granted) {
                 dictation.start()
             } else {
-                // DRS v1.27.0: the honest denied path mirrors the v1.26
+                // the honest denied path mirrors the 
                 // IME route — a plain denial gets the explanation toast,
                 // a permanent one walks the user to the app settings
                 // page because re-prompting is impossible.
@@ -494,7 +494,7 @@ class ClipEditorPopupActivity : ComponentActivity() {
         var showSaveAsFile by remember { mutableStateOf(false) }
         var saveName by remember { mutableStateOf("") }
 
-        // DRS v1.13.0: the direct line jump — the editor viewport's scroll
+        // the direct line jump — the editor viewport's scroll
         // state, its laid-out snapshot, its visible height, and the result
         // cards' list state. Tapping a card (or the navigation arrows)
         // animates the field straight to the match's row.
@@ -504,7 +504,7 @@ class ClipEditorPopupActivity : ComponentActivity() {
         var editorViewportPx by remember { mutableStateOf(0) }
 
         fun jumpToMatchLine(offset: Int) {
-            // DRS v1.14.0: the jump itself is a setting — when the user
+            // the jump itself is a setting — when the user
             // turns the direct line jump off, tapping a card (or the
             // arrows) only activates the match without scrolling.
             if (!jumpEnabled) return
@@ -520,9 +520,9 @@ class ClipEditorPopupActivity : ComponentActivity() {
             }
         }
 
-        // DRS v1.12.0: detected code switches to the monospace family
+        // detected code switches to the monospace family
         // once, at open time, when detection is enabled.
-        // DRS v1.14.0: the auto switch itself has its own setting now.
+        // the auto switch itself has its own setting now.
         LaunchedEffect(pending.item.id) {
             if (codeAutoMonospace &&
                 codeDetection &&
@@ -533,7 +533,7 @@ class ClipEditorPopupActivity : ComponentActivity() {
             }
         }
 
-        // DRS v1.17.0: the match scan moved OFF the main thread behind a
+        // the match scan moved OFF the main thread behind a
         // short debounce — a 500,000-char field no longer rescans
         // synchronously on every keystroke while typing the query or
         // editing the text; results arrive a frame later, indistinguishably.
@@ -606,7 +606,7 @@ class ClipEditorPopupActivity : ComponentActivity() {
                         detectTapGestures { /* swallow */ }
                     },
             ) {
-                // DRS v1.11.0: the save-as-file dialog floats over the editor
+                // the save-as-file dialog floats over the editor
                 // card, so the card content lives in a Box with both layers.
                 Box(modifier = Modifier.fillMaxSize()) {
                 Column(modifier = Modifier.fillMaxSize().padding(horizontal = 14.dp, vertical = 10.dp)) {
@@ -615,7 +615,7 @@ class ClipEditorPopupActivity : ComponentActivity() {
                         PopupIconButton(icon = Icons.Default.Close, description = stringRes(R.string.clip__a11y_close)) {
                             finish()
                         }
-                        // DRS v1.11.0: the title plus the honest hint that
+                        // the title plus the honest hint that
                         // this editor is an independent popup window, not
                         // the in-panel surface.
                         Column(
@@ -659,7 +659,7 @@ class ClipEditorPopupActivity : ComponentActivity() {
                         modifier = Modifier.fillMaxWidth(),
                     )
 
-                    // DRS v1.12.0: the programming-line badge — language,
+                    // the programming-line badge — language,
                     // code-line share, and the auto monospace switch live
                     // behind the same pure detector as the panel editor.
                     val codeAnalysis = remember(text, codeDetection) {
@@ -682,8 +682,8 @@ class ClipEditorPopupActivity : ComponentActivity() {
                             modifier = Modifier.fillMaxWidth(),
                         )
                     }
-                    // DRS v1.12.0: the slowdown warning for huge texts.
-                    // DRS v1.14.0: the warning itself is a setting now.
+                    // the slowdown warning for huge texts.
+                    // the warning itself is a setting now.
                     if (largeTextWarning && text.length >= ClipboardTextPolicy.LARGE_TEXT_WARNING_CHARS) {
                         Text(
                             text = "⚠ " + stringRes(R.string.clip__large_text_warning),
@@ -799,9 +799,9 @@ class ClipEditorPopupActivity : ComponentActivity() {
                         }
                     }
 
-                    // DRS v1.12.0: the colored search-result cards — every
+                    // the colored search-result cards — every
                     // match becomes a card with its line number and the
-                    // same-line context; DRS v1.13.0: tapping a card jumps
+                    // same-line context; tapping a card jumps
                     // the editor straight to that match's row, and the
                     // cards list tracks the active card both ways.
                     if (cardsEnabled && matches.isNotEmpty()) {
@@ -840,7 +840,7 @@ class ClipEditorPopupActivity : ComponentActivity() {
                             }
                             // Keep the active card in sight — from the
                             // arrows, from a card tap, and after edits.
-                            // DRS v1.14.0: the tracking itself is a setting.
+                            // the tracking itself is a setting.
                             LaunchedEffect(activeIndex, resultCards) {
                                 if (followCards && activeIndex >= 0 && resultCards.isNotEmpty()) {
                                     cardsListState.animateScrollToItem(
@@ -924,7 +924,7 @@ class ClipEditorPopupActivity : ComponentActivity() {
                                 showShortToastSync(R.string.clip__extract_done, "count" to found.size)
                             }
                         }
-                        // DRS v1.12.0: the line numbering and the code-line
+                        // the line numbering and the code-line
                         // surgery chips — extract keeps only code lines,
                         // remove drops them; both undoable like the rest.
                         PopupChip(label = stringRes(R.string.clip__transform_number_lines), active = false) {
@@ -990,10 +990,10 @@ class ClipEditorPopupActivity : ComponentActivity() {
                             .onSizeChanged { editorViewportPx = it.height }
                             .verticalScroll(textScrollState),
                     ) {
-                // DRS v1.12.0: the matches glow inside the text —
+                // the matches glow inside the text —
                 // each match paints its palette color, the active
                 // one strongest, matching the result cards.
-                // DRS v1.21.0: ranges are normalized against the current
+                // ranges are normalized against the current
                 // text, and re-filtered per apply — the debounced matches
                 // can never paint past the shrinking field text.
                 val highlightRanges = remember(matches, activeIndex, text) {
@@ -1054,7 +1054,7 @@ class ClipEditorPopupActivity : ComponentActivity() {
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier.fillMaxWidth(),
                     )
-                    // DRS v1.27.0: the dictation strip — a live transcript
+                    // the dictation strip — a live transcript
                     // line while the microphone session lives, and an
                     // honest error line when it fails. It occupies no
                     // space while idle, so the editor layout is untouched
@@ -1098,7 +1098,7 @@ class ClipEditorPopupActivity : ComponentActivity() {
                         ) {
                             history.redo(text)?.let { text = it }
                         }
-                        // DRS v1.27.0: the dictate button — starts the
+                        // the dictate button — starts the
                         // session (asking for the microphone when needed)
                         // or stops the live one. A recognizer that heard
                         // silence never fabricates an edit.
@@ -1323,7 +1323,7 @@ class ClipEditorPopupActivity : ComponentActivity() {
     }
 
     // ------------------------------------------------------------------
-    // DRS v1.12.0 — the complete smart clipboard system helpers.
+    // the complete smart clipboard system helpers.
     // ------------------------------------------------------------------
 
     /** The display label of a detected code language. */

@@ -5,7 +5,7 @@
 package com.drs.smartkeyboard.ime.nlp
 
 /**
- * DRS v1.17.0: the pure decider behind TRUE autocorrect. Until now no
+ * the pure decider behind TRUE autocorrect. Until now no
  * candidate was ever marked auto-commit eligible, so pressing space
  * always committed the typo verbatim. This decider gates the (already
  * existing) auto-commit plumbing conservatively — an auto-fix may fire

@@ -311,7 +311,7 @@ object Flog {
 
     private fun fileLog(level: FlogLevel, msg: String) {
         val context = applicationContext.get() ?: return
-        // DRS v1.27.0 — the former "introduce file logging" TODO is closed
+        // the former "introduce file logging" TODO is closed
         // as a documented deferral, not silently kept: (1) the path is dead
         // in production — the app installs Flog with OUTPUT_CONSOLE only
         // and nothing ever requests OUTPUT_FILE; (2) this `when` executes

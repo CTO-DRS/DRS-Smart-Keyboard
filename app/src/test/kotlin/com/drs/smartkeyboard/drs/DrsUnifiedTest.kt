@@ -13,7 +13,7 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
 /**
- * DRS v1.0.7: unit tests for the unified «كلاهما» layer - the catalogue
+ * unit tests for the unified «كلاهما» layer - the catalogue
  * integrity, display-level resolution, tool customization, shortcut
  * availability scopes, and backward-compatible state migration.
  */
@@ -187,10 +187,10 @@ class DrsUnifiedTest : FunSpec({
     }
 
     // -----------------------------------------------------------
-    // DRS v1.0.8: the four new catalogue tools
+    // the four new catalogue tools
     // -----------------------------------------------------------
 
-    test("v1.0.8 tools exist and dispatch real engine codes") {
+    test("tools exist and dispatch real engine codes") {
         DrsUnifiedTools.byId("theme_cycle")?.code shouldBe com.drs.smartkeyboard.ime.text.key.KeyCode.THEME_CYCLE
         DrsUnifiedTools.byId("insert_date_time")?.code shouldBe
             com.drs.smartkeyboard.ime.text.key.KeyCode.INSERT_DATE_TIME
@@ -200,7 +200,7 @@ class DrsUnifiedTest : FunSpec({
             com.drs.smartkeyboard.ime.text.key.KeyCode.MOVE_END_OF_PAGE
     }
 
-    test("v1.0.8 basic tools are visible in the simple level, cursor tools are technical") {
+    test("basic tools are visible in the simple level, cursor tools are technical") {
         val simple = DrsUnifiedTools.resolveFor(
             DrsHybridViewMode.SIMPLE, emptyList(), emptyList(), emptyList(), emptyMap(),
         ).map { it.id }
@@ -219,17 +219,17 @@ class DrsUnifiedTest : FunSpec({
     }
 
     // -----------------------------------------------------------
-    // DRS v1.1.0: the new catalogue tools
+    // the new catalogue tools
     // -----------------------------------------------------------
 
-    test("v1.1.0 tools exist and dispatch real engine codes") {
+    test("tools exist and dispatch real engine codes") {
         DrsUnifiedTools.byId("one_handed")?.code shouldBe
             com.drs.smartkeyboard.ime.text.key.KeyCode.TOGGLE_COMPACT_LAYOUT
         DrsUnifiedTools.byId("number_row")?.code shouldBe
             com.drs.smartkeyboard.ime.text.key.KeyCode.TOGGLE_NUMBER_ROW
     }
 
-    test("v1.1.0 tools are basic-scope and visible in both levels") {
+    test("tools are basic-scope and visible in both levels") {
         val simple = DrsUnifiedTools.resolveFor(
             DrsHybridViewMode.SIMPLE, emptyList(), emptyList(), emptyList(), emptyMap(),
         ).map { it.id }
@@ -243,14 +243,14 @@ class DrsUnifiedTest : FunSpec({
         advanced shouldContain "number_row"
     }
 
-    test("v1.2.0 tools exist and dispatch real engine codes") {
+    test("tools exist and dispatch real engine codes") {
         DrsUnifiedTools.byId("incognito")?.code shouldBe
             com.drs.smartkeyboard.ime.text.key.KeyCode.TOGGLE_INCOGNITO_MODE
         DrsUnifiedTools.byId("autocorrect")?.code shouldBe
             com.drs.smartkeyboard.ime.text.key.KeyCode.TOGGLE_AUTOCORRECT
     }
 
-    test("v1.2.0 tools are basic-scope and visible in both levels") {
+    test("tools are basic-scope and visible in both levels") {
         val simple = DrsUnifiedTools.resolveFor(
             DrsHybridViewMode.SIMPLE, emptyList(), emptyList(), emptyList(), emptyMap(),
         ).map { it.id }
@@ -264,27 +264,27 @@ class DrsUnifiedTest : FunSpec({
         advanced shouldContain "autocorrect"
     }
 
-    test("v1.3.0 tools exist and dispatch real engine codes") {
+    test("tools exist and dispatch real engine codes") {
         DrsUnifiedTools.byId("clipboard_clear")?.code shouldBe
             com.drs.smartkeyboard.ime.text.key.KeyCode.CLIPBOARD_CLEAR_PRIMARY_CLIP
         DrsUnifiedTools.byId("voice_input")?.code shouldBe
             com.drs.smartkeyboard.ime.text.key.KeyCode.VOICE_INPUT
     }
 
-    test("v1.4.0 tools exist and dispatch real engine codes") {
+    test("tools exist and dispatch real engine codes") {
         DrsUnifiedTools.byId("floating_mode")?.code shouldBe
             com.drs.smartkeyboard.ime.text.key.KeyCode.TOGGLE_FLOATING_WINDOW
         DrsUnifiedTools.byId("smartbar_toggle")?.code shouldBe
             com.drs.smartkeyboard.ime.text.key.KeyCode.TOGGLE_SMARTBAR_VISIBILITY
     }
 
-    test("v1.4.0 tools keep the tail-append order contract of the catalogue") {
-        // DRS v1.6.0: the two v1.4.0 tools sit before the v1.5.0 tail (3)
-        // and the v1.6.0 tail (5); v1.7.0 appended one, v1.8.0 two more,
-        // v1.15.0 three (the smart panels), v1.19.0 two (split/merge),
-        // the v1.2.0 release one (the smart numbers panel), the
-        // v1.3.0 release one (the smart clipboard panel) and the
-        // v2.21.0 release one (the saved-texts panel)
+    test("tools keep the tail-append order contract of the catalogue") {
+        // the two tools sit before the tail (3)
+        // and the tail (5); appended one, two more,
+        // three (the smart panels), two (split/merge),
+        // the release one (the smart numbers panel), the
+        // release one (the smart clipboard panel) and the
+        // release one (the saved-texts panel)
         // — combined tail after them is now 19 — same relative order.
         DrsUnifiedTools.ALL.dropLast(19).takeLast(2).map { it.id } shouldBe
             listOf("floating_mode", "smartbar_toggle")
@@ -293,7 +293,7 @@ class DrsUnifiedTest : FunSpec({
         DrsUnifiedTools.ALL[DrsUnifiedTools.ALL.size - 22].id shouldBe "voice_input"
     }
 
-    test("v1.5.0 tools exist and dispatch real engine codes") {
+    test("tools exist and dispatch real engine codes") {
         DrsUnifiedTools.byId("clipboard_history_clear")?.code shouldBe
             com.drs.smartkeyboard.ime.text.key.KeyCode.CLIPBOARD_CLEAR_HISTORY
         DrsUnifiedTools.byId("next_language")?.code shouldBe
@@ -302,27 +302,27 @@ class DrsUnifiedTest : FunSpec({
             com.drs.smartkeyboard.ime.text.key.KeyCode.TOGGLE_RESIZE_MODE
     }
 
-    test("v1.5.0 tools keep the tail-append order contract of the catalogue") {
-        // DRS v1.6.0: the v1.5.0 tail of three is now followed by the
-        // v1.6.0 tail of five, the v1.7.0 tool, the two v1.8.0 tools,
-        // the three v1.15.0 smart panels, the two v1.19.0 tools, the
-        // v1.2.0 smart numbers panel, the v1.3.0 smart clipboard
-        // panel and the v2.21.0 saved-texts panel — same relative
+    test("tools keep the tail-append order contract of the catalogue") {
+        // the tail of three is now followed by the
+        // tail of five, the tool, the two tools,
+        // the three smart panels, the two tools, the
+        // smart numbers panel, the smart clipboard
+        // panel and the saved-texts panel — same relative
         // order, longer catalogue.
         DrsUnifiedTools.ALL.dropLast(16).takeLast(3).map { it.id } shouldBe
             listOf("clipboard_history_clear", "next_language", "resize_mode")
         DrsUnifiedTools.ALL.first().id shouldBe "emoji"
     }
 
-    test("v1.5.0 fix: the language tool now points at the REAL picker code") {
-        // v1.0.8 regression: LANGUAGE pointed at IME_SUBTYPE_PICKER (-224),
+    test("fix: the language tool now points at the REAL picker code") {
+        // regression: LANGUAGE pointed at IME_SUBTYPE_PICKER (-224),
         // a code with no KeyboardManager handler (silent no-op). It must
         // use the in-keyboard subtype picker path instead.
         DrsUnifiedTools.byId("language")?.code shouldBe
             com.drs.smartkeyboard.ime.text.key.KeyCode.SHOW_SUBTYPE_PICKER
     }
 
-    test("v1.3.0 tools are basic-scope and visible in both levels") {
+    test("tools are basic-scope and visible in both levels") {
         val simple = DrsUnifiedTools.resolveFor(
             DrsHybridViewMode.SIMPLE, emptyList(), emptyList(), emptyList(), emptyMap(),
         ).map { it.id }
@@ -386,7 +386,7 @@ class DrsUnifiedTest : FunSpec({
     // State migration (old states parse with safe defaults)
     // -----------------------------------------------------------
 
-    test("state from v1.0.6 parses with unified defaults") {
+    test("state from parses with unified defaults") {
         val legacyJson = """
             {
               "version": 1,
@@ -412,10 +412,10 @@ class DrsUnifiedTest : FunSpec({
         state.hiddenUnifiedTools.isEmpty() shouldBe true
         state.pinnedUnifiedTools.isEmpty() shouldBe true
         state.unifiedToolViews.isEmpty() shouldBe true
-        // DRS v1.0.8: daily statistics default to empty + enabled
+        // daily statistics default to empty + enabled
         state.dailyStats.isEmpty() shouldBe true
         state.dailyStatsEnabled shouldBe true
-        // DRS v1.1.0: backup timestamp defaults to "never"
+        // backup timestamp defaults to "never"
         state.lastBackupAt shouldBe 0L
         // legacy shortcut keeps BOTH scope -> still expands
         DrsShortcuts.isShortcutAvailable(state, state.shortcuts.first().scope) shouldBe true

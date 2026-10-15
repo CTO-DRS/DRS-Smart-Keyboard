@@ -5,7 +5,7 @@
 package com.drs.smartkeyboard.ime.clipboard
 
 /**
- * DRS v1.12.0 — the programming-line detector of the smart clipboard.
+ * the programming-line detector of the smart clipboard.
  * A copied snippet is analyzed line by line with language-agnostic syntax
  * signals (braces, semicolons, comment markers, assignment operators,
  * keyword vocabulary, tag/JSON shapes); the aggregate decides whether the
@@ -105,7 +105,7 @@ object ClipCodeDetector {
         val trimmed = line.trim()
         if (trimmed.length < 3) return false
 
-        // DRS v1.21.0: a leading '*' is ambiguous — it opens a JSDoc/doc
+        // a leading '*' is ambiguous — it opens a JSDoc/doc
         // continuation AND a Markdown bullet («* item one») — so it no
         // longer decides alone: it is stripped and the remainder scored.
         // The unambiguous markers below still decide immediately.

@@ -2,7 +2,7 @@
   "$": "ime.extension.languagepack",
   "meta": {
     "id": "org.drs.languagepack",
-    "version": "0.0.0",
+    "version": "1.0.0",
     "title": "الحزمة اللغوية الأساسية (DRS)",
     "description": "الحزم اللغوية الافتراضية المتوفرة دائماً في لوحة المفاتيح DRS.",
     "maintainers": [

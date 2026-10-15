@@ -9,7 +9,7 @@ import com.drs.smartkeyboard.ime.text.key.KeyCode
 import com.drs.smartkeyboard.ime.text.keyboard.TextKeyData
 
 /**
- * DRS v2.11.0 «المُرتّب السياقي الصادق» — the honest contextual ranker for
+ * «المُرتّب السياقي الصادق» — the honest contextual ranker for
  * the smartbar's quick-action rows (roadmap M1.4).
  *
  * WHAT it does: for a focused field of kind [DrsFieldKind], a closed,
@@ -28,7 +28,7 @@ import com.drs.smartkeyboard.ime.text.keyboard.TextKeyData
  *     same row geometry, zero layout flicker.
  *  3. **The user is the base truth** — their manual arrangement is the
  *     order being permuted; nothing is removed, hidden or disabled. Every
- *     tile keeps its own evaluateEnabled verdict (the v2.2.2 oath), so a
+ * tile keeps its own evaluateEnabled verdict (the oath), so a
  *     promoted tile on an empty clipboard still refuses to lie.
  *  4. **The privacy claw** — password fields never promote clipboard or
  *     voice actions, full stop. The matrix itself is the suppression: no

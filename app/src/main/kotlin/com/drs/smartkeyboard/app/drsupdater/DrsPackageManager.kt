@@ -143,7 +143,7 @@ object DrsPackageManager {
         return packages.mapNotNull { element ->
             val pkg = runCatching { element.jsonObject }.getOrNull() ?: return@mapNotNull null
             fun str(key: String) = pkg[key]?.jsonPrimitive?.content
-            // DRS v1.28.0 audit fix (defense-in-depth, L-4): the package id and
+            // audit fix (defense-in-depth, L-4): the package id and
             // version are interpolated into local file paths (packageFile =
             // "<id>-<version>.flex"), and the download URL is fetched over
             // HTTPS only. Catalog entries with path-bearing or non-contractual
@@ -162,7 +162,7 @@ object DrsPackageManager {
             // "<id>-<version>.flex", so a manifest-supplied version carrying
             // separators ("../x", "/etc/passwd", "a\\b") could traverse out
             // of cache/packages. parseManifest now enforces the same contract
-            // as the v1.28.0 L-4 id/sha256/url gates: only dotted-numeric
+            // as the L-4 id/sha256/url gates: only dotted-numeric
             // versions pass; anything else drops the catalog entry (the
             // existing failure path), so the manifest is treated as invalid
             // for that package.

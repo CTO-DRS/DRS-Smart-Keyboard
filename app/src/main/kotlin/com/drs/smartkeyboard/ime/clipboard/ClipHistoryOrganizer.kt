@@ -11,7 +11,7 @@ import java.time.ZoneId
 import java.time.LocalDate
 
 /**
- * DRS v1.12.0 — the comprehensive clipboard organization core.
+ * the comprehensive clipboard organization core.
  *
  * - [ClipHistorySort] / [ClipHistorySorter]: the user-facing sort orders
  *   of the history (newest, oldest, longest, shortest) as a pure,

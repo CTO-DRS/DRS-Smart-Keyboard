@@ -9,7 +9,7 @@ import android.os.Debug
 import java.util.concurrent.atomic.AtomicLong
 
 /**
- * DRS v1.0.6: real, in-process performance instrumentation.
+ * real, in-process performance instrumentation.
  *
  * Every number produced here is MEASURED, never estimated or faked:
  *  - Key-handling latency: the actual wall-clock time the key event handler

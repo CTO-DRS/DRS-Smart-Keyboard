@@ -9,7 +9,7 @@ import com.drs.smartkeyboard.ime.text.key.KeyCode
 import com.drs.smartkeyboard.ime.text.key.KeyType
 
 /**
- * DRS v1.0.7 — نظام «كلاهما» الموحد (Unified Dual System).
+ * نظام «كلاهما» الموحد (Unified Dual System).
  *
  * This is the pure-logic core of the unified system: one catalogue of REAL
  * tools (every entry maps to a KeyCode the keyboard engine actually
@@ -125,7 +125,7 @@ data class DrsUnifiedTool(
 object DrsUnifiedTools {
 
     /**
-     * DRS v1.15.0: the hard cap of the tasks bar's pinned head — «المهام
+ * the hard cap of the tasks bar's pinned head — «المهام
      * المثبتة 10 فقط». The user's explicit pins always win (in pin order)
      * and the default pins fill the remaining slots; anything beyond the
      * cap stays in the catalogue and in the strip tail, never lost.
@@ -172,7 +172,7 @@ object DrsUnifiedTools {
 
     val LANGUAGE = DrsUnifiedTool(
         id = "language",
-        // DRS v1.5.0 fix: this tool pointed at IME_SUBTYPE_PICKER (-224),
+        // fix: this tool pointed at IME_SUBTYPE_PICKER (-224),
         // a code with NO handler — pressing it silently logged "unknown
         // key". SHOW_SUBTYPE_PICKER is the real in-keyboard subtype picker
         // path (KeyboardManager sets isSubtypeSelectionVisible).
@@ -329,7 +329,7 @@ object DrsUnifiedTools {
     )
 
     /**
-     * DRS v1.0.8: cycles the keyboard theme of the currently effective
+ * cycles the keyboard theme of the currently effective
      * day/night slot (real pref write — the live keyboard re-styles).
      */
     val THEME_CYCLE = DrsUnifiedTool(
@@ -342,7 +342,7 @@ object DrsUnifiedTools {
     )
 
     /**
-     * DRS v1.0.8: commits the current date & time formatted with the
+ * commits the current date & time formatted with the
      * active subtype's locale through the normal commitText path.
      */
     val INSERT_DATE_TIME = DrsUnifiedTool(
@@ -354,7 +354,7 @@ object DrsUnifiedTools {
         group = DrsToolGroup.TOOLS,
     )
 
-    /** DRS v1.0.8: moves the cursor to the very start of the whole text. */
+    /** moves the cursor to the very start of the whole text. */
     val TEXT_START = DrsUnifiedTool(
         id = "text_start",
         code = KeyCode.MOVE_START_OF_PAGE,
@@ -364,7 +364,7 @@ object DrsUnifiedTools {
         group = DrsToolGroup.CURSOR,
     )
 
-    /** DRS v1.0.8: moves the cursor to the very end of the whole text. */
+    /** moves the cursor to the very end of the whole text. */
     val TEXT_END = DrsUnifiedTool(
         id = "text_end",
         code = KeyCode.MOVE_END_OF_PAGE,
@@ -375,7 +375,7 @@ object DrsUnifiedTools {
     )
 
     /**
-     * DRS v1.1.0: toggles the compact one-handed window mode through the
+ * toggles the compact one-handed window mode through the
      * real window-controller action (same path as the existing on-panel
      * one-handed controls and its KeyCode dispatch).
      */
@@ -389,7 +389,7 @@ object DrsUnifiedTools {
     )
 
     /**
-     * DRS v1.1.0: toggles the top number row on the character layout —
+ * toggles the top number row on the character layout —
      * a real pref write; the LayoutManager recomputes the layout through
      * the existing pref collector.
      */
@@ -403,7 +403,7 @@ object DrsUnifiedTools {
     )
 
     /**
-     * DRS v1.2.0: toggles incognito typing through the real engine action
+ * toggles incognito typing through the real engine action
      * (same KeyCode the existing quick actions use — handled in
      * KeyboardManager.handleToggleIncognitoMode).
      */
@@ -417,7 +417,7 @@ object DrsUnifiedTools {
     )
 
     /**
-     * DRS v1.2.0: toggles auto-correction through the real engine action
+ * toggles auto-correction through the real engine action
      * (same KeyCode the existing quick actions use — handled in
      * KeyboardManager.handleToggleAutocorrect).
      */
@@ -431,7 +431,7 @@ object DrsUnifiedTools {
     )
 
     /**
-     * DRS v1.3.0: clears the primary clipboard through the real engine
+ * clears the primary clipboard through the real engine
      * action (KeyCode.CLIPBOARD_CLEAR_PRIMARY_CLIP — handled in
      * KeyboardManager with the existing history-aware path + toast).
      */
@@ -445,7 +445,7 @@ object DrsUnifiedTools {
     )
 
     /**
-     * DRS v1.3.0: switches to the voice input method through the real
+ * switches to the voice input method through the real
      * engine action (KeyCode.VOICE_INPUT — handled in KeyboardManager via
      * DrsImeService.switchToVoiceInputMethod).
      */
@@ -459,7 +459,7 @@ object DrsUnifiedTools {
     )
 
     /**
-     * DRS v1.4.0: toggles the floating-window mode through the real engine
+ * toggles the floating-window mode through the real engine
      * action (KeyCode.TOGGLE_FLOATING_WINDOW — handled in KeyboardManager
      * via windowController.actions.toggleFloatingWindow, the same path the
      * existing quick action uses).
@@ -474,7 +474,7 @@ object DrsUnifiedTools {
     )
 
     /**
-     * DRS v1.4.0: shows/hides the smart bar through the real engine action
+ * shows/hides the smart bar through the real engine action
      * (KeyCode.TOGGLE_SMARTBAR_VISIBILITY — handled in KeyboardManager on
      * the same path the swipe action uses).
      */
@@ -488,7 +488,7 @@ object DrsUnifiedTools {
     )
 
     /**
-     * DRS v1.5.0: clears the UNPINNED clipboard history through the real
+ * clears the UNPINNED clipboard history through the real
      * engine action (KeyCode.CLIPBOARD_CLEAR_HISTORY — handled in
      * KeyboardManager via clipboardManager.clearHistory). Pinned items
      * survive, so the tool is a safe one-tap history wipe.
@@ -503,7 +503,7 @@ object DrsUnifiedTools {
     )
 
     /**
-     * DRS v1.5.0: switches to the NEXT configured subtype through the real
+ * switches to the NEXT configured subtype through the real
      * engine action (KeyCode.IME_NEXT_SUBTYPE — handled in KeyboardManager
      * via subtypeManager.switchToNextSubtype), the same switch the
      * language key performs under its "next language" utility action.
@@ -518,7 +518,7 @@ object DrsUnifiedTools {
     )
 
     /**
-     * DRS v1.5.0: enters/leaves the window-resize mode through the real
+ * enters/leaves the window-resize mode through the real
      * engine action (KeyCode.TOGGLE_RESIZE_MODE — handled in
      * KeyboardManager via windowController.editor.toggleEnabled, the same
      * path the existing quick action uses).
@@ -533,7 +533,7 @@ object DrsUnifiedTools {
     )
 
     /**
-     * DRS v1.6.0: clears the FULL clipboard history (pinned items
+ * clears the FULL clipboard history (pinned items
      * included) through the real engine action
      * (KeyCode.CLIPBOARD_CLEAR_FULL_HISTORY — handled in KeyboardManager
      * via clipboardManager.clearFullHistory). The destructive sibling of
@@ -549,7 +549,7 @@ object DrsUnifiedTools {
     )
 
     /**
-     * DRS v1.6.0: switches to the PREVIOUS configured subtype through the
+ * switches to the PREVIOUS configured subtype through the
      * real engine action (KeyCode.IME_PREV_SUBTYPE — handled in
      * KeyboardManager via subtypeManager.switchToPrevSubtype), the exact
      * counterpart of [NEXT_LANGUAGE].
@@ -564,7 +564,7 @@ object DrsUnifiedTools {
     )
 
     /**
-     * DRS v1.6.0: moves the compact one-handed window to the LEFT edge
+ * moves the compact one-handed window to the LEFT edge
      * through the real engine action (KeyCode.COMPACT_LAYOUT_TO_LEFT —
      * handled in KeyboardManager via
      * windowController.actions.compactLayoutToLeft), the deterministic
@@ -580,7 +580,7 @@ object DrsUnifiedTools {
     )
 
     /**
-     * DRS v1.6.0: moves the compact one-handed window to the RIGHT edge
+ * moves the compact one-handed window to the RIGHT edge
      * through the real engine action (KeyCode.COMPACT_LAYOUT_TO_RIGHT —
      * handled in KeyboardManager via
      * windowController.actions.compactLayoutToRight).
@@ -595,7 +595,7 @@ object DrsUnifiedTools {
     )
 
     /**
-     * DRS v1.6.0: switches to the NEXT input method in the system list
+ * switches to the NEXT input method in the system list
      * through the real engine action (KeyCode.SYSTEM_NEXT_INPUT_METHOD —
      * handled in KeyboardManager via DrsImeService.switchToNextInputMethod,
      * the same path the utility key's SWITCH_KEYBOARD_APP action uses).
@@ -610,7 +610,7 @@ object DrsUnifiedTools {
     )
 
     /**
-     * DRS v1.7.0: pins/unpins the ACTIVE clipboard entry through the real
+ * pins/unpins the ACTIVE clipboard entry through the real
      * engine action (KeyCode.CLIPBOARD_PIN_ACTIVE — handled in
      * KeyboardManager via the same pinClip/unpinClip pair the clipboard
      * panel long-press popup uses). Pinned entries survive clearHistory
@@ -626,7 +626,7 @@ object DrsUnifiedTools {
     )
 
     /**
-     * DRS v1.8.0: opens the quick-actions overflow panel (most-used tiles
+ * opens the quick-actions overflow panel (most-used tiles
      * + the user's quick actions) through the REAL engine action
      * (KeyCode.TOGGLE_ACTIONS_OVERFLOW — handled in KeyboardManager by
      * flipping isActionsOverflowVisible, the same path the sticky action
@@ -642,7 +642,7 @@ object DrsUnifiedTools {
     )
 
     /**
-     * DRS v1.8.0: opens the quick-actions EDITOR through the real engine
+ * opens the quick-actions EDITOR through the real engine
      * action (KeyCode.TOGGLE_ACTIONS_EDITOR — handled in KeyboardManager
      * via isActionsEditorVisible). Everyone can now rearrange their quick
      * actions without leaving the keyboard.
@@ -657,7 +657,7 @@ object DrsUnifiedTools {
     )
 
     /**
-     * DRS v1.15.0: opens the smart harakat panel (لوحة الحركات) through
+ * opens the smart harakat panel (لوحة الحركات) through
      * the REAL engine action (KeyCode.IME_UI_MODE_DIACRITICS — handled in
      * KeyboardManager). The panel's smart stacking replaces a tap on a
      * mark with a mark instead of stacking, and shadda combos commit
@@ -672,7 +672,7 @@ object DrsUnifiedTools {
         group = DrsToolGroup.TOOLS,
     )
 
-    // DRS v1.19.0: one-tap split keyboard activation/merge — the v1.18.0
+    // one-tap split keyboard activation/merge — the 
     // split layout was settings-only; these two catalogue tools drive the
     // same splitMode pref with a status toast.
     val SPLIT_KEYBOARD = DrsUnifiedTool(
@@ -694,7 +694,7 @@ object DrsUnifiedTools {
     )
 
     /**
-     * DRS v1.15.0: opens the context-aware smart symbols panel (لوحة
+ * opens the context-aware smart symbols panel (لوحة
      * الرموز الذكية) through the REAL engine action
      * (KeyCode.IME_UI_MODE_SMART_SYMBOLS). The suggestions row reads the
      * text before the cursor and leads with the symbols the context
@@ -710,7 +710,7 @@ object DrsUnifiedTools {
     )
 
     /**
-     * DRS v1.15.0: opens the extended Arabic letters panel (لوحة الحروف
+ * opens the extended Arabic letters panel (لوحة الحروف
      * الموسعة) through the REAL engine action
      * (KeyCode.IME_UI_MODE_ARABIC_LETTERS) — hamza variants and the
      * Persian/Urdu/Kurdish letters the base layout has no room for.
@@ -725,7 +725,7 @@ object DrsUnifiedTools {
     )
 
     /**
-     * DRS v1.2.0: opens the context-aware smart numbers panel (لوحة
+ * opens the context-aware smart numbers panel (لوحة
      * الأرقام الذكية) through the REAL engine action
      * (KeyCode.IME_UI_MODE_SMART_NUMBER) — the raw field class, the live
      * text and the local open counts decide the context, and every
@@ -742,7 +742,7 @@ object DrsUnifiedTools {
     )
 
     /**
-     * DRS v1.3.0: opens the deterministic smart clipboard panel (لوحة
+ * opens the deterministic smart clipboard panel (لوحة
      * الحافظة الذكية) through the REAL engine action
      * (KeyCode.IME_UI_MODE_SMART_CLIPBOARD) — the copied content is
      * classified by explicit shape rules, and every ready variant (the
@@ -759,7 +759,7 @@ object DrsUnifiedTools {
     )
 
     /**
-     * DRS v2.21.0: opens the saved-texts panel (لوحة نصوصي المحفوظة)
+ * opens the saved-texts panel (لوحة نصوصي المحفوظة)
      * through the REAL engine action (KeyCode.IME_UI_MODE_MY_TEXTS) —
      * the user's curated permanent texts, browsable and insertable with
      * one tap, templates expanded at insert time, all local.
@@ -779,40 +779,40 @@ object DrsUnifiedTools {
         UNDO, REDO, SELECT_ALL, COPY, CUT, PASTE, SHARE,
         SELECT_WORD, WORD_LEFT, WORD_RIGHT, LINE_START, LINE_END,
         DELETE_WORD, HIDE_KEYBOARD, SETTINGS,
-        // DRS v1.0.8: appended at the tail so every existing persisted
+        // appended at the tail so every existing persisted
         // order/pin arrangement keeps its exact meaning.
         THEME_CYCLE, INSERT_DATE_TIME, TEXT_START, TEXT_END,
-        // DRS v1.1.0: same tail-append contract for the new tools.
+        // same tail-append contract for the new tools.
         ONE_HANDED, NUMBER_ROW,
-        // DRS v1.2.0: same tail-append contract for the new tools.
+        // same tail-append contract for the new tools.
         INCOGNITO, AUTOCORRECT,
-        // DRS v1.3.0: same tail-append contract for the new tools.
+        // same tail-append contract for the new tools.
         CLIPBOARD_CLEAR, VOICE_INPUT,
-        // DRS v1.4.0: same tail-append contract for the new tools.
+        // same tail-append contract for the new tools.
         FLOATING_MODE, SMARTBAR_TOGGLE,
-        // DRS v1.5.0: same tail-append contract for the new tools.
+        // same tail-append contract for the new tools.
         CLIPBOARD_HISTORY_CLEAR, NEXT_LANGUAGE, RESIZE_MODE,
-        // DRS v1.6.0: same tail-append contract for the new tools.
+        // same tail-append contract for the new tools.
         CLIPBOARD_FULL_CLEAR, PREV_LANGUAGE, ONE_HANDED_LEFT, ONE_HANDED_RIGHT,
         NEXT_KEYBOARD_APP,
-        // DRS v1.7.0: same tail-append contract for the new tools.
+        // same tail-append contract for the new tools.
         CLIPBOARD_PIN,
-        // DRS v1.8.0: same tail-append contract for the new tools.
+        // same tail-append contract for the new tools.
         QUICK_ACTIONS, ACTIONS_EDITOR,
-        // DRS v1.15.0: same tail-append contract for the new tools.
+        // same tail-append contract for the new tools.
         DIACRITICS_PANEL, SMART_SYMBOLS, ARABIC_LETTERS,
-        // DRS v1.19.0: same tail-append contract for the new tools.
+        // same tail-append contract for the new tools.
         SPLIT_KEYBOARD, MERGE_KEYBOARD,
-        // DRS v1.2.0 (الإصدار العام): same tail-append contract —
+        // (الإصدار العام): same tail-append contract —
         // لوحة الأرقام الذكية joins last so every persisted
         // order/pin arrangement keeps its exact meaning.
         SMART_NUMBER_PANEL,
 
-        // DRS v1.3.0: لوحة الحافظة الذكية joins the tail with the same
+        // لوحة الحافظة الذكية joins the tail with the same
         // append contract — every persisted arrangement stays intact.
         SMART_CLIPBOARD_PANEL,
 
-        // DRS v2.21.0: لوحة نصوصي المحفوظة joins the tail with the same
+        // لوحة نصوصي المحفوظة joins the tail with the same
         // append contract — every persisted arrangement stays intact.
         MY_TEXTS_PANEL,
     )
@@ -877,7 +877,7 @@ object DrsUnifiedTools {
     }
 
     /**
-     * DRS v1.15.0: the capped effective pinned set — «المهام المثبتة 10
+ * the capped effective pinned set — «المهام المثبتة 10
      * فقط». The user's explicit pins keep their order and always win;
      * the [defaultPinnedIds] fill the remaining slots only. Pure and
      * deterministic: the same inputs always resolve the same 10 (or less).
@@ -896,7 +896,7 @@ object DrsUnifiedTools {
     }
 
     /**
-     * DRS v1.15.0: whether one more user pin still fits under the cap —
+ * whether one more user pin still fits under the cap —
      * the user's own pins are capped at [MAX_PINNED_TOOLS]; the default
      * pins only fill the remaining rendered slots. The tools drawer uses
      * this to refuse the 11th pin with an honest message instead of a
@@ -907,7 +907,7 @@ object DrsUnifiedTools {
     }
 
     /**
-     * DRS v1.16.0: «شريط المهام الثابت» — the FIXED slots list of the
+ * «شريط المهام الثابت» — the FIXED slots list of the
      * tasks bar. The bar always renders exactly ten tasks: the user's
      * explicit pins lead in pin order, the default pins fill the next
      * slots, and the visible catalogue order pads the tail so the bar
@@ -935,7 +935,7 @@ object DrsUnifiedTools {
     }
 
     /**
-     * DRS v1.22.0: the pure core of «إعادة الترتيب بالسحب» — moving the
+ * the pure core of «إعادة الترتيب بالسحب» — moving the
      * task at [from] to [to] inside the pinned head. Out-of-range indexes
      * and no-op moves return the input unchanged; the result stays
      * deduplicated and capped so a malformed drag can never fabricate an
@@ -950,7 +950,7 @@ object DrsUnifiedTools {
     }
 
     /**
-     * DRS v1.16.0: the pure core of «إمكانية تغيير المهام» — replacing
+ * the pure core of «إمكانية تغيير المهام» — replacing
      * the tool at slot [index] with [newId] in the CURRENT slots list.
      * The result is the materialized pinned list (every slot becomes an
      * explicit pin, so the replacement stays exactly where the user put
@@ -975,7 +975,7 @@ object DrsUnifiedTools {
      * filters by visibility + hidden list, then applies order and pins.
      * Tools marked [DrsUnifiedTool.defaultPinned] float to the head unless
      * the user explicitly unpinned them, and the pinned head is capped at
-     * [MAX_PINNED_TOOLS] since v1.15.0. Pure and side-effect free - the
+ * [MAX_PINNED_TOOLS] since. Pure and side-effect free - the
      * same function feeds the IME strip, the tools manager preview and the
      * unit tests.
      */
@@ -1010,7 +1010,7 @@ object DrsUnifiedTools {
     }
 
     /**
-     * DRS v1.8.0: returns the per-tool view override name that GUARANTEES
+ * returns the per-tool view override name that GUARANTEES
      * [tool] renders in [view] given its current stored [override], or
      * null when it is already visible and the state must stay untouched.
      * Pure and side-effect free.
@@ -1039,7 +1039,7 @@ object DrsUnifiedTools {
     }
 
     /**
-     * DRS v1.8.0: snapshot of the REAL on/off state of every strip toggle
+ * snapshot of the REAL on/off state of every strip toggle
      * tool. The strip reads each value from its own engine source (IME
      * state flags, jetpref settings, the window controller), while this
      * pure structure keeps the mapping testable on the JVM.
@@ -1050,16 +1050,16 @@ object DrsUnifiedTools {
         val numberRow: Boolean = false,
         val smartbarVisible: Boolean = true,
         val floatingWindow: Boolean = false,
-        // DRS v1.22.0: the revived CTRL/ALT modifier latches (شريط التقني)
+        // the revived CTRL/ALT modifier latches (شريط التقني)
         // — the dot shows the truth, LOCKED and LATCHED alike.
         val ctrlArmed: Boolean = false,
         val altArmed: Boolean = false,
-        // DRS v1.23.0: FN completes the modifier family — same honest dot.
+        // FN completes the modifier family — same honest dot.
         val fnArmed: Boolean = false,
     )
 
     /**
-     * DRS v1.8.0: the live on/off state of a toggle tool, or null when the
+ * the live on/off state of a toggle tool, or null when the
      * tool is not a toggle (it has no state to show). Drives the small
      * active dot on the strip tiles so «مفعّل» is visible at a glance.
      */
@@ -1069,10 +1069,10 @@ object DrsUnifiedTools {
         "number_row" -> states.numberRow
         "smartbar_toggle" -> states.smartbarVisible
         "floating_mode" -> states.floatingWindow
-        // DRS v1.22.0: the modifier latch toggles of the tech toolbar.
+        // the modifier latch toggles of the tech toolbar.
         "ctrl" -> states.ctrlArmed
         "alt" -> states.altArmed
-        // DRS v1.23.0: FN joins the family.
+        // FN joins the family.
         "fn" -> states.fnArmed
         else -> null
     }
@@ -1103,7 +1103,7 @@ object DrsUnified {
     }
 
     /**
-     * DRS v1.8.0: master switch of the tasks bar above the suggestions
+ * master switch of the tasks bar above the suggestions
      * strip. Applies to ALL three user systems (العادي/التقني/كلاهما) —
      * the bar is on by default and this is the single honest way off.
      */
@@ -1112,19 +1112,19 @@ object DrsUnified {
     }
 
     /**
-     * DRS v1.8.0: pins a tool AND guarantees it is actually visible in the
+ * pins a tool AND guarantees it is actually visible in the
      * [view] the user is currently on. Pinning a technical-only tool from
      * the drawer while on the simple level used to swallow the pin
      * silently (pinned but never rendered); now the same update also
      * widens the per-tool view override so the pin really shows up.
      *
-     * DRS v1.15.0: the pin is refused honestly (returns false) once the
+ * the pin is refused honestly (returns false) once the
      * user already holds [DrsUnifiedTools.MAX_PINNED_TOOLS] pins — the
      * drawer tells the user to unpin one first. Unpinning frees a slot.
      */
     fun setToolPinnedEnsureVisible(id: String, view: DrsHybridViewMode): Boolean {
         val tool = DrsUnifiedTools.byId(id) ?: return false
-        // DRS v1.28.0 audit fix (High): the decision used to be computed by
+        // audit fix (High): the decision used to be computed by
         // mutating `applied` inside DrsStore.update {} — a fire-and-forget
         // coroutine. The return statement read the flag BEFORE the transform
         // ever ran, so this function (and its siblings) reported refusal on
@@ -1178,10 +1178,10 @@ object DrsUnified {
 
     /**
      * Pins/unpins one tool; pinned tools float to the strip head under the
-     * v1.15.0 cap of [DrsUnifiedTools.MAX_PINNED_TOOLS] — the 11th pin is
+ * cap of [DrsUnifiedTools.MAX_PINNED_TOOLS] — the 11th pin is
      * refused honestly (returns false), unpinning always works.
      *
-     * DRS v1.28.0 audit fix (High): synchronous snapshot decision, see
+ * audit fix (High): synchronous snapshot decision, see
      * [setToolPinnedEnsureVisible] — the old in-transform flag mutation
      * reported refusal on every call.
      */
@@ -1222,7 +1222,7 @@ object DrsUnified {
     }
 
     /**
-     * DRS v1.16.0: «إمكانية تغيير المهام» — replaces the tool rendered at
+ * «إمكانية تغيير المهام» — replaces the tool rendered at
      * bar slot [index] with [newId]. The replacement materializes the
      * current ten slots into explicit pins (so the swapped-in tool stays
      * exactly at that slot), and the swapped-in tool is guaranteed
@@ -1232,7 +1232,7 @@ object DrsUnified {
      */
     fun replaceStripSlot(index: Int, newId: String, view: DrsHybridViewMode): Boolean {
         if (DrsUnifiedTools.byId(newId) == null) return false
-        // DRS v1.28.0 audit fix (High): synchronous slot-range decision against
+        // audit fix (High): synchronous slot-range decision against
         // the visible state — the old in-transform `applied` flag was read
         // before the async transform ran, so this never returned true and the
         // slot editor panel never closed on a successful pick.
@@ -1292,7 +1292,7 @@ object DrsUnified {
     }
 
     /**
-     * DRS v1.22.0: «إعادة الترتيب بالسحب» — moves the task rendered at
+ * «إعادة الترتيب بالسحب» — moves the task rendered at
      * pinned-head position [from] to position [to] (the same ten-slot
      * geometry [replaceStripSlot] uses). The strip order list is rewritten
      * so the pinned head keeps the dragged order, and the explicit pin
@@ -1302,7 +1302,7 @@ object DrsUnified {
      */
     fun reorderPinnedTool(from: Int, to: Int, view: DrsHybridViewMode): Boolean {
         if (from == to) return false
-        // DRS v1.28.0 audit fix (High): synchronous range decision, see
+        // audit fix (High): synchronous range decision, see
         // [replaceStripSlot] — the in-transform flag was read too early.
         val snapshot = DrsStore.state.value
         val snapshotHead = run {
@@ -1393,18 +1393,18 @@ object DrsUnified {
         }
     }
 
-    /** DRS v1.0.8: master switch of the daily usage statistics recording. */
+    /** master switch of the daily usage statistics recording. */
     fun setDailyStatsEnabled(enabled: Boolean) {
         DrsStore.update { it.copy(dailyStatsEnabled = enabled) }
     }
 
-    /** DRS v1.0.8: wipes all recorded daily usage buckets (local privacy action). */
+    /** wipes all recorded daily usage buckets (local privacy action). */
     fun resetDailyStats() {
         DrsStore.update { it.copy(dailyStats = emptyMap()) }
     }
 
     /**
-     * DRS v1.1.0: stamps the moment of the last successful DRS-state backup
+ * stamps the moment of the last successful DRS-state backup
      * export (epoch millis). Consumed by the diagnostics backup-age check.
      */
     fun markBackupExported() {

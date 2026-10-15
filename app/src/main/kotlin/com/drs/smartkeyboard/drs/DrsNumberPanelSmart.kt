@@ -9,7 +9,7 @@ import java.time.chrono.HijrahDate
 import java.time.temporal.ChronoField
 
 /**
- * DRS v1.2.0 — لوحة الأرقام الذكية (the smart numbers panel) — the PURE
+ * لوحة الأرقام الذكية (the smart numbers panel) — the PURE
  * logic core. The doctrine holds: a deterministic on-device algorithm,
  * no cloud, no AI — the field class reported by the editor plus the live
  * text before the cursor decide the active context, and every ready
@@ -238,7 +238,7 @@ object DrsNumberPanelSmart {
 
     /**
      * The three-by-three grouping of a unified amount — «12345.60» →
-     * «12,345.60» — the step the v1.2.0 currency generator used to get
+ * «12,345.60» — the step the currency generator used to get
      * wrong («12345.6.0»); now a single pure pass.
      */
     fun formatGrouped(unified: String): String {

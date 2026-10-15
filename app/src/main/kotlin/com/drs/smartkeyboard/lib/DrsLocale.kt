@@ -216,7 +216,7 @@ class DrsLocale private constructor(val base: Locale) {
      */
     val supportsAutoSpace: Boolean
         get() = when (language) {
-            // DRS v1.28.0 audit fix (Low): "jp" is not an ISO 639 code —
+            // audit fix (Low): "jp" is not an ISO 639 code —
             // Japanese is "ja", so the no-auto-space contract never matched
             // and CJK candidates got a trailing space after selection.
             "zh", "ko", "ja", "th" -> false

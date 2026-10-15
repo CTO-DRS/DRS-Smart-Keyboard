@@ -51,7 +51,7 @@ import org.drs.lib.snygg.SnyggStylesheet
  * @param supportsBackgroundImage controls if this Box supports background images.
  * @param backgroundImageDim An optional dimming scrim (alpha 0..1) drawn between the background
  *   image and the content, so keys/text stay readable over bright pictures. Only applies when a
- *   background image is actually rendered. DRS v2.8.0: wired to the user background-image
+ * background image is actually rendered. wired to the user background-image
  *   preference (see ImeWindow), the same injection pattern as the dynamic accent color.
  * @param backgroundImageDescription The content description of the background image.
  * @param allowClip If clipping should be allowed on this box.
@@ -111,7 +111,7 @@ fun SnyggBox(
                     contentScale = style.contentScale(),
                     contentDescription = backgroundImageDescription,
                 )
-                // DRS v2.8.0: honest readability scrim — sits between the image and the
+                // honest readability scrim — sits between the image and the
                 // content, never over the content itself.
                 val scrimAlpha = backgroundImageDim.coerceIn(0f, 1f)
                 if (scrimAlpha > 0f) {

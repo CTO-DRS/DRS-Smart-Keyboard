@@ -447,7 +447,7 @@ private fun Modifier.imeWindowEditorHandle(
             }
         }
         .pointerInput(Unit) {
-            // DRS v1.27.0 — the v1.25-era evaluation TODO is closed as a
+            // the era evaluation TODO is closed as a
             // documented decision: the current scheme (accumulate raw px
             // deltas during the drag, convert to dp once per event, apply
             // to a captured initialSpec) is the correct one, not a

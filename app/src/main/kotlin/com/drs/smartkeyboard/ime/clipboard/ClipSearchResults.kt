@@ -5,7 +5,7 @@
 package com.drs.smartkeyboard.ime.clipboard
 
 /**
- * DRS v1.12.0 — the colored search-result cards of the smart editor.
+ * the colored search-result cards of the smart editor.
  * Every match becomes a card showing its line number and the surrounding
  * same-line context with the matched span identified; the cards cycle a
  * fixed color palette so the results are visually navigable, and tapping
@@ -68,7 +68,7 @@ object ClipSearchResults {
     const val MAX_CARDS: Int = 50
 
     /**
-     * DRS v1.21.0 — guards against the stale-snapshot crash window: the
+ * guards against the stale-snapshot crash window: the
      * matches list is computed on a debounced (150 ms old) text snapshot,
      * while the text the cards and highlights render can shrink underneath
      * (replace-with-shorter, undo). A match computed on the old text must
@@ -91,7 +91,7 @@ object ClipSearchResults {
     }
 
     /**
-     * DRS v1.21.0 — the stale-snapshot crash guard: matches wholly outside
+ * the stale-snapshot crash guard: matches wholly outside
      * the current text are dropped, partially-out ones clamped to bounds.
      */
     fun normalizeAgainst(text: String, matches: List<ClipMatch>): List<ClipMatch> {
@@ -117,7 +117,7 @@ object ClipSearchResults {
     }
 
     /**
-     * DRS v1.21.0 — the highlight ranges filtered against the CURRENT field
+ * the highlight ranges filtered against the CURRENT field
      * text length. The UI transformation loop applies these to the text it
      * receives at transform time, which can be newer than the matches; a
      * range beyond the field text would throw inside addStyle, so anything
@@ -153,7 +153,7 @@ object ClipSearchResults {
         maxCards: Int = MAX_CARDS,
     ): List<ClipResultCard> {
         if (matches.isEmpty()) return emptyList()
-        // DRS v1.21.0: stale matches never index the current text out of
+        // stale matches never index the current text out of
         // bounds, and each survivor keeps its ORIGINAL match index so the
         // navigation arrows and the active highlight stay on target.
         val safeMatches = normalizedWithIndexes(text, matches)
@@ -203,7 +203,7 @@ object ClipSearchResults {
     }
 
     /**
-     * DRS v1.21.0 — the text-aware variant the editors render through:
+ * the text-aware variant the editors render through:
      * the matches are normalized against the current text first, so the
      * produced ranges can never exceed the text they will paint over,
      * and the original indexes drive both the active flag and the palette.
@@ -238,7 +238,7 @@ data class ClipHighlightRange(
 }
 
 /**
- * DRS v1.13.0 — a minimal read-only view of the editor's laid-out text:
+ * a minimal read-only view of the editor's laid-out text:
  * the visual rows (wrapping included) the direct line jump positions
  * itself by. The UI adapts the real TextLayoutResult into this; the JVM
  * tests pin the jump math against tiny fakes. Offsets are characters,
@@ -263,7 +263,7 @@ interface ClipLineLayout {
 }
 
 /**
- * DRS v1.13.0 — the direct line jump the user asked for («اضغط على البطاقة
+ * the direct line jump the user asked for («اضغط على البطاقة
  * فينتقل مباشرة إلى السطر»): tapping a result card — or walking the matches
  * with the navigation arrows — scrolls the editor straight to the row that
  * holds that match. The row is centered inside the viewport when it fits
@@ -284,9 +284,9 @@ object ClipResultJump {
      * the laid-out text. [viewportPx] is the visible height of the editor
      * viewport and [maxScrollPx] the scroll range's upper bound.
      *
-     * DRS v1.14.0: [centerRow] is the user's chosen jump alignment from
+ * [centerRow] is the user's chosen jump alignment from
      * the comprehensive app settings — true centers the row in the
-     * viewport (the v1.13.0 behavior), false always pins the row head
+ * viewport (the behavior), false always pins the row head
      * just under the top edge. Both are clamped to the real scroll range.
      */
     fun scrollOffsetFor(
