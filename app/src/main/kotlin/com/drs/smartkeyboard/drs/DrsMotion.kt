@@ -11,7 +11,7 @@ package com.drs.smartkeyboard.drs
  * back slower ([PULSE_RELEASE_DURATION_MS]) — the asymmetry is what makes
  * the tap feel physical instead of mechanical.
  *
- * DRS v2.2.1 — the same source of truth now owns the two strips above
+ * the same source of truth now owns the two strips above
  * the keyboard too: the toggle-dot grow/shrink contract and the
  * candidates' capped stagger entrance. All contracts are DRAW-ONLY
  * (graphicsLayer): layout is never re-measured per frame. Pinned by
@@ -39,7 +39,7 @@ object DrsMotion {
     fun scaleFor(pressed: Boolean): Float =
         if (pressed) PULSE_PRESSED_SCALE else PULSE_IDLE_SCALE
 
-    // DRS v2.2.1 — «الشريطان الحيّان»: عقدا الحركة للشريطين أعلى اللوحة
+    // «الشريطان الحيّان»: عقدا الحركة للشريطين أعلى اللوحة
     // (شريط المهام الموحد وشريط الاقتراحات). نقيّان بنيويًا مثل عقد النبضة
     // أعلاه: بلا UI ولا Context، فيُثبتهما المُجمِّع والاختبار معًا.
 
@@ -92,7 +92,7 @@ object DrsMotion {
     fun staggerFor(index: Int): Int =
         (index.coerceAtLeast(0) * ENTRANCE_STAGGER_STEP_MS).coerceAtMost(ENTRANCE_STAGGER_MAX_MS)
 
-    // DRS v2.2.2 — «الشريطان الصادقان سياقيًا»: عقدا الإتاحة والإيقاع.
+    // «الشريطان الصادقان سياقيًا»: عقدا الإتاحة والإيقاع.
     // نقيا بنيويًا كأسلافهما: بلا UI ولا Context، فيُثبتهما المُجمِّع
     // والاختبار معًا.
 
@@ -110,7 +110,7 @@ object DrsMotion {
      * «remove animations» accessibility switch is on (ANIMATOR_DURATION_SCALE
      * = 0), every DrsMotion duration SNAPS to 0 — states still land on the
      * same final targets, they just stop animating. The contract is a pure
-     * passthrough while motion is enabled, so the pinned v2.2.1 timings
+ * passthrough while motion is enabled, so the pinned timings
      * are untouched in the default world.
      */
     fun durationOrSnap(durationMs: Int, motionEnabled: Boolean): Int =

@@ -7,7 +7,7 @@ package com.drs.smartkeyboard.ime.smartbar
 import com.drs.smartkeyboard.ime.editor.InputAttributes
 
 /**
- * DRS v2.11.0 «المُرتّب السياقي الصادق» — the honest fine-grained field
+ * «المُرتّب السياقي الصادق» — the honest fine-grained field
  * classification that drives the smartbar's contextual action ranking.
  *
  * WHY a second classifier beside [com.drs.smartkeyboard.drs.DrsContextMode]:

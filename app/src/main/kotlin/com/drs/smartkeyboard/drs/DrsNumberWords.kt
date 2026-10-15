@@ -5,7 +5,7 @@
 package com.drs.smartkeyboard.drs
 
 /**
- * DRS v1.6.0 — the deterministic number-to-Arabic-words engine
+ * the deterministic number-to-Arabic-words engine
  * (الأرقام إلى كلمات عربية) behind the NUMBER_WORDS text tool.
  *
  * Pure integer grammar, no model, no dictionary, no guesswork:
@@ -24,11 +24,11 @@ package com.drs.smartkeyboard.drs
  *
  * A negative number keeps its sign as the word سالب before the words.
  *
- * DRS v1.8.0 — the written grammatical case becomes an explicit,
+ * the written grammatical case becomes an explicit,
  * documented parameter. The house orthography drops tanwin, so the
  * accusative and the genitive share one written shape for every form
  * the engine emits; a single oblique table serves both. The default
- * stays NOMINATIVE — the v1.6.0 public contract, byte-identical —
+ * stays NOMINATIVE — the public contract, byte-identical —
  * while the date engine asks for GENITIVE («عام ألفين وستة وعشرين»,
  * never «عام ألفان وستة وعشرون»). Five families inflect in writing:
  * اثنان→اثنين، اثنا عشر→اثني عشر، عشرون→عشرين، مائتان→مائتين،
@@ -40,7 +40,7 @@ object DrsNumberWords {
     const val MAX_DIGITS = 12
 
     /**
-     * DRS v2.0.0 — the shared spoken digit alphabet «صفر»..«تسعة», the
+ * the shared spoken digit alphabet «صفر»..«تسعة», the
      * digit-by-digit voice. The decimal-tail renderer speaks every tail
      * digit through this one table — the same single source of truth the
      * integer part already renders through — so the whole words family
@@ -52,12 +52,12 @@ object DrsNumberWords {
 
     /**
      * The written grammatical case of the rendered words. NOMINATIVE is
-     * the v1.6.0 default output; GENITIVE is the written oblique shape
+ * the default output; GENITIVE is the written oblique shape
      * (the accusative shares it — tanwin is never written).
      */
     enum class Case { NOMINATIVE, GENITIVE }
 
-    /** DRS v2.0.0: the render tables are INTERNAL — the module-level source
+    /** the render tables are INTERNAL — the module-level source
      *  of truth shared with the inverse engine [DrsWordsToNumber], whose
      *  lexicon is exactly the words these tables emit. */
     internal val UNITS = listOf(
@@ -83,7 +83,7 @@ object DrsNumberWords {
     )
 
     /** The scale-word family: singular, dual, plural (3..10) — plus the
-     *  written oblique dual (v1.8.0): ألفان → ألفين. */
+ * written oblique dual (): ألفان → ألفين. */
     private data class Scale(
         val one: String,
         val two: String,
@@ -95,18 +95,18 @@ object DrsNumberWords {
     private val MILLION = Scale("مليون", "مليونان", "ملايين", "مليونين")
     private val BILLION = Scale("مليار", "ملياران", "مليارات", "مليارين")
 
-    /** The oblique tens (v1.8.0): عشرون → عشرين … تسعون → تسعين. */
+    /** The oblique tens (): عشرون → عشرين … تسعون → تسعين. */
     internal val TENS_GEN = listOf(
         "", "", "عشرين", "ثلاثين", "أربعين", "خمسين", "ستين", "سبعين", "ثمانين", "تسعين",
     )
 
-    /** The written oblique unit TWO: اثنان → اثنين (v1.8.0). */
+    /** The written oblique unit TWO: اثنان → اثنين (). */
     private const val UNIT_TWO_GEN = "اثنين"
 
-    /** The written oblique compound TWO-TEN: اثنا عشر → اثني عشر (v1.8.0). */
+    /** The written oblique compound TWO-TEN: اثنا عشر → اثني عشر (). */
     private const val TEEN_TWELVE_GEN = "اثني عشر"
 
-    /** The written oblique dual hundred: مائتان → مائتين (v1.8.0). */
+    /** The written oblique dual hundred: مائتان → مائتين (). */
     internal const val HUNDRED_TWO_GEN = "مائتين"
 
     /** Maps every accepted digit to its value, or null when not a digit. */
@@ -122,13 +122,13 @@ object DrsNumberWords {
      * understands, or null when it is an honest no-op (empty, signed with
      * something other than a leading minus, carrying letters or separators
      * inside, longer than [MAX_DIGITS], or numerically beyond the scales).
-     * The words render in the NOMINATIVE — the v1.6.0 contract.
+ * The words render in the NOMINATIVE — the contract.
      */
     fun arabicWordsOrNull(text: String): String? =
         arabicWordsOrNull(text, Case.NOMINATIVE)
 
     /**
-     * The same grammar with an explicit written [case] (v1.8.0): the
+ * The same grammar with an explicit written [case] (): the
      * date engine asks for GENITIVE so «عام 2026» speaks «عام ألفين
      * وستة وعشرين». Parsing, ceilings and the honest no-op are identical
      * for both cases; only the written inflection differs.

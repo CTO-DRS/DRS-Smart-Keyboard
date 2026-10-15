@@ -91,8 +91,8 @@ class DrsLocaleTagTest : FunSpec({
             DrsLocale.fromTag("th").supportsAutoSpace shouldBe false
         }
 
-        test("jp (non-ISO code) still gets auto spacing (v1.28.0 regression guard)") {
-            // DRS v1.28.0 audit fix: the no-auto-space contract now lists the
+        test("jp (non-ISO code) still gets auto spacing ( regression guard)") {
+            // audit fix: the no-auto-space contract now lists the
             // real "ja" code; the legacy "jp" code therefore must NOT disable
             // auto spacing.
             DrsLocale.fromTag("jp").supportsAutoSpace shouldBe true

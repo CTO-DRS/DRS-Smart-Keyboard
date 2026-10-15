@@ -5,7 +5,7 @@
 package com.drs.smartkeyboard.ime.nlp.latin
 
 /**
- * DRS v1.18.0: pure word-normalization pipeline for the dictionary provider,
+ * pure word-normalization pipeline for the dictionary provider,
  * extracted from LatinLanguageProvider so both the loaded dictionary and the
  * typed prefix go through ONE tested code path.
  *

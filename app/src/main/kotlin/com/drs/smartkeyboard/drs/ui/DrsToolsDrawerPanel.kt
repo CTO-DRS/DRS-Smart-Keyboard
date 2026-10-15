@@ -69,7 +69,7 @@ import org.drs.lib.snygg.ui.SnyggRow
 import org.drs.lib.snygg.ui.SnyggText
 
 /**
- * DRS v1.8.0 — درج المهام المثبتة (the pinned-tools drawer).
+ * درج المهام المثبتة (the pinned-tools drawer).
  *
  * Opened by the side-pull handle (زر السحب الجانبي) that now leads the
  * tasks bar above the suggestions strip. It replaces the keyboard area
@@ -108,7 +108,7 @@ fun DrsToolsDrawerPanel(modifier: Modifier = Modifier) {
     val isHybrid = drsState.userPath == DrsUserPath.HYBRID.name
 
     val view = DrsUnifiedTools.viewForSystem(drsState.userPath, drsState.hybridViewMode)
-    // DRS v1.15.0: «المهام المثبتة 10 فقط» — the pinned section mirrors
+    // «المهام المثبتة 10 فقط» — the pinned section mirrors
     // the CAPPED effective set (explicit pins first in pin order, then the
     // default pins), so the drawer never shows or creates an 11th pin.
     val defaultPinnedIds = DrsUnifiedTools.ALL.filter { it.defaultPinned }.map { it.id }
@@ -149,7 +149,7 @@ fun DrsToolsDrawerPanel(modifier: Modifier = Modifier) {
     }
 
     // ---------------------------------------------------------
-    // DRS v1.22.0: «إعادة الترتيب بالسحب» — long-press on a pinned
+    // «إعادة الترتيب بالسحب» — long-press on a pinned
     // row then drag; crossing another pinned row swaps them through
     // DrsUnified.reorderPinnedTool, the same persisted store every
     // other control writes, so the dragged order survives restarts.
@@ -251,7 +251,7 @@ fun DrsToolsDrawerPanel(modifier: Modifier = Modifier) {
             }
         }
 
-        // DRS v1.16.0: the hybrid display-level selector moved here from
+        // the hybrid display-level selector moved here from
         // the tasks bar (the bar now shows the ten fixed task slots only,
         // «يعرض 10 مهام فقط») — the level stays switchable in-IME.
         if (isHybrid) {
@@ -328,7 +328,7 @@ fun DrsToolsDrawerPanel(modifier: Modifier = Modifier) {
                         text = stringRes(R.string.drs__tools_drawer__pinned_empty),
                     )
                 }
-                // DRS v1.22.0: the drag hint appears only where the drag
+                // the drag hint appears only where the drag
                 // actually works — two or more pinned rows.
                 if (pinnedTools.size >= 2) {
                     SnyggText(
@@ -460,7 +460,7 @@ fun DrsToolsDrawerPanel(modifier: Modifier = Modifier) {
                                         DrsUnified.setToolPinned(tool.id, false)
                                     } else {
                                         // Pin + guarantee visibility on the CURRENT
-                                        // level (the v1.8.0 contract); the v1.15.0 cap
+                                        // level (the contract); the cap
                                         // refuses the 11th pin with an honest toast.
                                         val applied = DrsUnified.setToolPinnedEnsureVisible(tool.id, view)
                                         if (!applied) {

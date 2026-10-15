@@ -116,7 +116,7 @@ class ExtensionManager(context: Context) {
 
     fun import(ext: Extension) {
         val workingDir = requireNotNull(ext.workingDir) { "No working dir specified" }
-        // DRS v1.28.0 audit fix (Medium): the meta id was never validated at
+        // audit fix (Medium): the meta id was never validated at
         // import time — only the interactive editor ran validation. An imported
         // manifest with an id containing '/' or '..' steered the per-extension
         // cache dir (Extension.load builds FsDir(cacheDir, meta.id)) outside

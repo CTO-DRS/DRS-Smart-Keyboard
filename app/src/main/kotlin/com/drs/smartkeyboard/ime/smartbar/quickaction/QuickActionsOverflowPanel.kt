@@ -52,7 +52,7 @@ fun QuickActionsOverflowPanel() {
         actionArrangement.dynamicActions.takeLast(dynamicActionsCountToShow)
     }
 
-    // DRS v1.0.5: "most used tools" — the three tools this user actually
+    // "most used tools" — the three tools this user actually
     // presses the most, straight from the local anonymous usage counters.
     // Only known tool codes count; hidden and sticky actions are excluded
     // so the user's customization is always respected.

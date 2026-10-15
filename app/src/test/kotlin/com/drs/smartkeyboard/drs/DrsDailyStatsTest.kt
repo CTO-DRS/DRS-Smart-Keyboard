@@ -11,7 +11,7 @@ import io.kotest.matchers.shouldBe
 import java.time.LocalDate
 
 /**
- * DRS v1.0.8: unit tests for the pure daily statistics layer — merge and
+ * unit tests for the pure daily statistics layer — merge and
  * day rollover, retention pruning, sanity validation and the last-days
  * window used by the statistics screen.
  */
@@ -152,7 +152,7 @@ class DrsDailyStatsTest : FunSpec({
     }
 
     // -----------------------------------------------------------
-    // DRS v1.1.0: lastDaysZeroFilled (bar-chart / CSV window)
+    // lastDaysZeroFilled (bar-chart / CSV window)
     // -----------------------------------------------------------
 
     test("lastDaysZeroFilled returns an ascending zero-filled window") {
@@ -228,7 +228,7 @@ class DrsDailyStatsTest : FunSpec({
     }
 
     // -----------------------------------------------------------
-    // DRS v1.3.0: number/symbol counters + week-over-week growth
+    // number/symbol counters + week-over-week growth
     // -----------------------------------------------------------
 
     test("mergeInto persists the number and symbol counters of the delta") {
@@ -303,7 +303,7 @@ class DrsDailyStatsTest : FunSpec({
     }
 
     // -----------------------------------------------------------
-    // DRS v1.4.0: activeDaysCount + dailyAveragePresses
+    // activeDaysCount + dailyAveragePresses
     // -----------------------------------------------------------
 
     test("activeDaysCount counts only days with real activity") {

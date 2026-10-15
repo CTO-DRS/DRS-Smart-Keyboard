@@ -5,7 +5,7 @@
 package com.drs.smartkeyboard.drs
 
 /**
- * DRS v2.22.0 — نظام «قاموسي التشكيلي» (the personal tashkeel lexicon) —
+ * نظام «قاموسي التشكيلي» (the personal tashkeel lexicon) —
  * the deterministic engine behind the harakat system's USER-TAUGHT
  * vocabulary and its manager screen.
  *
@@ -213,7 +213,7 @@ object DrsMyLexicon {
      * The lookup seam the vocalize chain consumes: the enabled personal
      * overrides as a stripped-word → vocalized map. A disabled lexicon
      * (or an empty one) yields an empty map — the references serve alone,
-     * exactly the pre-v2.22.0 behavior.
+ * exactly the pre- behavior.
      */
     fun overridesOf(state: DrsState): Map<String, String> {
         if (!state.myLexiconEnabled) return emptyMap()

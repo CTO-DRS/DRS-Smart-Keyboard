@@ -28,11 +28,11 @@ class GlideTypingGesture {
         private val listeners: ArrayList<Listener> = arrayListOf()
         private var pointerId: Int = -1
 
-        /** DRS v1.20.0: sliding (position, eventTime) window used for the gesture decision. */
+        /** sliding (position, eventTime) window used for the gesture decision. */
         private val recentWindow = ArrayDeque<Pair<Position, Long>>()
 
         companion object {
-            // DRS v1.20.0: this is no longer a hard deadline that permanently latches the
+            // this is no longer a hard deadline that permanently latches the
             // touch as "not a gesture". It is a SLIDING window: velocity is measured over
             // the most recent ~500ms of movement, so a slow start (press, dwell, then
             // glide) still becomes a glide once the finger actually moves — the way
@@ -43,7 +43,7 @@ class GlideTypingGesture {
             internal val SWIPE_GESTURE_KEYS = arrayOf(KeyCode.DELETE, KeyCode.SHIFT, KeyCode.SPACE, KeyCode.CJK_SPACE)
 
             /**
-             * DRS v1.20.0: pure gesture-start decision, extracted for JVM testing.
+ * pure gesture-start decision, extracted for JVM testing.
              * [distDp] is the distance travelled within the sliding window, [windowMs]
              * the window duration, [keySizeDp] the minimum travel expected of a real
              * glide and [initialKeyCode] the key the touch stream started on (swipe
@@ -84,7 +84,7 @@ class GlideTypingGesture {
                     return false
                 }
                 MotionEvent.ACTION_MOVE -> {
-                    // DRS v1.20.0: the old guard compared our pointer id against
+                    // the old guard compared our pointer id against
                     // event.getPointerId(event.actionIndex) — but for ACTION_MOVE the
                     // actionIndex is always 0, so a glide tracked on any non-zero pointer
                     // was silently ignored. The correct guard is: does our pointer still
@@ -127,7 +127,7 @@ class GlideTypingGesture {
                                     }
                                 }
                             }
-                            // DRS v1.20.0: the permanent `isActuallyGesture = false` latch
+                            // the permanent `isActuallyGesture = false` latch
                             // after 500 ms is gone — with the sliding window the decision
                             // simply re-evaluates on every new sample, so slow starts recover.
                         }

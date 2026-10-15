@@ -62,7 +62,7 @@ import com.drs.smartkeyboard.clipboardManager
 import com.drs.smartkeyboard.themeManager
 
 /**
- * DRS v1.0.7 — لوحة كلاهما (Unified Dashboard).
+ * لوحة كلاهما (Unified Dashboard).
  *
  * The single control panel of the unified system: every number shown here
  * is MEASURED from live state (store, prefs, clipboard, performance
@@ -124,7 +124,7 @@ fun DrsUnifiedDashboardScreen() = DrsScreen {
     }
 
     content {
-        // DRS fix (v1.0.9): DrsScreen already wraps the content in its own
+        // DRS fix (): DrsScreen already wraps the content in its own
         // vertical scroll (with the shared scrollbar) — a nested verticalScroll
         // here was measured with infinite height constraints and crashed the
         // screen on open ("Vertically scrollable component was measured with
@@ -193,7 +193,7 @@ fun DrsUnifiedDashboardScreen() = DrsScreen {
 
             // ---------------- keyboard status (live) ----------------
             UnifiedStatusCard(title = stringRes(R.string.drs__unified__dashboard_ime_status)) {
-                // DRS v1.28.0 audit fix (UI consistency): state glyphs moved from
+                // audit fix (UI consistency): state glyphs moved from
                 // translated strings into themed vector icons (mirror of the
                 // control center card).
                 Row(verticalAlignment = Alignment.CenterVertically) {
@@ -378,7 +378,7 @@ fun DrsUnifiedDashboardScreen() = DrsScreen {
                         modifier = Modifier.weight(1f),
                     ) { Text(stringRes(R.string.drs__gestures__title), maxLines = 1) }
                 }
-                // DRS v1.0.8: daily usage statistics + performance quick links.
+                // daily usage statistics + performance quick links.
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.fillMaxWidth()) {
                     OutlinedButton(
                         onClick = { navController.navigate(Routes.Settings.DrsUnifiedStats) },

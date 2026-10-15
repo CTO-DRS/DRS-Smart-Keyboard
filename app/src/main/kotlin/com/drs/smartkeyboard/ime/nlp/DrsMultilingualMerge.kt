@@ -5,7 +5,7 @@
 package com.drs.smartkeyboard.ime.nlp
 
 /**
- * DRS v2.7.0 «مزايا البحث الخارجي» — multilingual candidate merging.
+ * «مزايا البحث الخارجي» — multilingual candidate merging.
  *
  * Researched from HeliBoard's multilingual typing: while typing with one
  * subtype active, the dictionaries of the user's OTHER enabled subtypes

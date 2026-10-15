@@ -8,10 +8,10 @@ from the EXACT bytes of packages/*.flex — the same bytes the signing tool
 signed and the release pipeline uploads. Never touches `signature` /
 `pubkey_id`: signatures stay valid because the bytes do not change.
 
-Why this tool exists (the v2.1.0 theme-install incident): the catalog's
+Why this tool exists (an early theme-install incident): the catalog's
 hash/size fields were computed over one build of the theme archives while
 the signature was created over another, and the download URLs pointed to
-release v1.0.0 which never carried the .flex assets at all — every on-device
+an early release which never carried the .flex assets at all — every on-device
 install failed with "file verification failed". A catalog whose hash does
 not describe its own signed bytes is silently broken until a user taps
 install. This tool closes that gap; the `DrsCatalogConsistencyTest` keeps

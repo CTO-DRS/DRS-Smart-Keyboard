@@ -5,12 +5,12 @@
 package com.drs.smartkeyboard.drs
 
 /**
- * DRS v2.0.0 — the deterministic decimal-to-Arabic-words engine
+ * the deterministic decimal-to-Arabic-words engine
  * (العشري بالكلمات) behind the DECIMAL_WORDS text tool: a clean decimal
  * number becomes its formal spoken words — «1.5» → «واحد فاصلة خمسة»،
  * «1.50» → «واحد فاصلة خمسة صفر» — digit-by-digit, no simplification.
  * The words family gains its second direction in this release: the
- * integer side has spoken since v1.6.0, and v2.0.0 makes the decimal
+ * integer side has spoken since, and makes the decimal
  * tail speak the same way.
  *
  * Pure decimal grammar, no model, no dictionary, no guesswork:

@@ -5,7 +5,7 @@
 package com.drs.smartkeyboard.drs
 
 /**
- * DRS v1.2.0 — قاموس التشكيل الموسع (the 3000-word vocalization
+ * قاموس التشكيل الموسع (the 3000-word vocalization
  * lexicon) — the loader and the strict contract parser of the asset
  * `assets/drs/tashkeel_lexicon.txt`.
  *

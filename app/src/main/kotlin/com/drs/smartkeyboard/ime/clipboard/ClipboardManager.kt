@@ -99,7 +99,7 @@ class ClipboardManager(
     private val keyboardManager by context.keyboardManager()
     private val systemClipboardManager = context.systemService(AndroidClipboardManager::class)
 
-    // DRS v2.15.0 «ذاكرة الحافظة الأمينة»: مدير القفل الشاشي — حقيقة
+    // «ذاكرة الحافظة الأمينة»: مدير القفل الشاشي — حقيقة
     // البيئة لبوابة الالتقاط. تُقرأ حالتُها لحظة كل حدث التقط لا عند
     // البناء، فالقفل يتقلب والخدمة تبقى (نفس نمط مُقيّم السياق في
     // KeyboardManager ومزوّد اقتراح الإيموجي).
@@ -398,7 +398,7 @@ class ClipboardManager(
 
                 val isEqual = internalPrimaryClip?.isEqualTo(systemPrimaryClip) == true
                 if (!isEqual) {
-                    // DRS p8 (S-1) + v2.15.0: the history-refusal gate is
+                    // DRS p8 (S-1) + the history-refusal gate is
                     // evaluated BEFORE any media clone. fromClipData
                     // (cloneUri = false) never touches disk — a media clip
                     // whose capture verdict refuses (incognito mode /
@@ -456,7 +456,7 @@ class ClipboardManager(
     }
 
     /**
-     * DRS v2.15.0 «ذاكرة الحافظة الأمينة»: حقيقة القفل لحظة الحدث —
+ * «ذاكرة الحافظة الأمينة»: حقيقة القفل لحظة الحدث —
      * يُقرأ عند كل التقاط لا مرة واحدة، فالبوابة تحكم بحقائق حية.
      */
     private fun isDeviceLockedNow(): Boolean {
@@ -467,14 +467,14 @@ class ClipboardManager(
      * Change the current text on clipboard, update history (if enabled).
      */
     private fun addNewClip(item: ClipboardItem) {
-        // DRS v2.15.0: قيمة الإرجاع صارت إلزامية الاستهلاك — false تعني
+        // قيمة الإرجاع صارت إلزامية الاستهلاك — false تعني
         // رفضًا خصوصيًا (تخفي/كلمة مرور/حساس/قفل)، وإشعار «تعديل» سطح
         // عرض مشتق من التقاطٍ قَبِلَ فقط: رفضٌ لا يُعلن ولا يُسرَّب،
         // ولا صف يفتحه الإشعار أصلًا. عطْل السجل يعيد true هنا لكن
         // السياسة نفسها ترفض الإشعار بعدها (historyEnabled).
         val captureAccepted = insertOrMoveBeginning(item)
         updatePrimaryClip(item)
-        // DRS v1.21.0: «نافذة الاشعارات المنبثقه الخاصه بالتعديل» — a new
+        // «نافذة الاشعارات المنبثقه الخاصه بالتعديل» — a new
         // capture can surface a heads-up «تعديل» notification that opens
         // the floating editor from anywhere. The pure policy keeps it
         // honest (text only, non-sensitive, pref + history gated).
@@ -498,7 +498,7 @@ class ClipboardManager(
     /**
      * Adds a new item to the clipboard history (if enabled).
      *
-     * DRS v2.15.0 «ذاكرة الحافظة الأمينة»: الحكم الواحد من
+ * «ذاكرة الحافظة الأمينة»: الحكم الواحد من
      * [DrsClipboardCaptureGate] يحكم التخزين حصريًا — الفحوص اليدوية
      * المتفرقة (تخفي/كلمة مرور/حساس) صارت حقائق تُغذّي البوابة مع
      * إضافة العلة المفقودة: القفل الشاشي (اللصق محجوب مقفولًا فالالتقاط
@@ -514,7 +514,7 @@ class ClipboardManager(
      * [DrsClipboardCaptureGate.storageRefused] translation).
      */
     private fun insertOrMoveBeginning(newItem: ClipboardItem): Boolean {
-        // DRS v2.15.0: بوابة واحدة، حقائق حية لحظة الحدث — التخفي
+        // بوابة واحدة، حقائق حية لحظة الحدث — التخفي
         // وكلمة المرور من حالة المحرر الحية، الحساسية من العنصر نفسه،
         // والقفل من مدير القفل. الرفض صامت في الذاكرة: لا استثناء ولا
         // سجل أخطاء ولا أثر.
@@ -533,7 +533,7 @@ class ClipboardManager(
             // مع سلوك التراث (استنساخ الوسائط الليفي يظل ظهرَ المقص الحي).
             return true
         }
-        // DRS v1.9.0: one history text retains at most 50,000 characters
+        // one history text retains at most 50,000 characters
         // (ClipboardTextPolicy). The primary clip keeps the full text;
         // the stored history variant is what the panel re-pastes.
         val historyVariant = if (newItem.type == ItemType.TEXT && newItem.text != null) {
@@ -648,7 +648,7 @@ class ClipboardManager(
      */
     fun clearHistory() {
         ioScope.launch {
-            // DRS v1.28.0 audit fix (Medium-Low): close() deletes the backing
+            // audit fix (Medium-Low): close() deletes the backing
             // media file, but only UNPINNED rows are removed from the DB. The
             // old loop closed EVERY item, so a pinned image survived in the
             // history pointing at a deleted file — pasting it failed silently
@@ -722,7 +722,7 @@ class ClipboardManager(
     }
 
     /**
-     * DRS v1.22.0: pins one history item — honestly bounded now. The cap
+ * pins one history item — honestly bounded now. The cap
      * (clipboard__pinned_max_size, default 50) is checked synchronously
      * against the in-memory history before the DB write; the caller shows
      * the honest toast when the pin is refused. Re-pinning an already
@@ -751,7 +751,7 @@ class ClipboardManager(
     }
 
     /**
-     * DRS v1.9.0: replaces the text of a history item through
+ * replaces the text of a history item through
      * [ClipboardEditPlan] (policy-capped, timestamp bumped so the item
      * floats to the top). If the item currently sits on the primary clip
      * (matched by id), the primary clip is refreshed with the edited text
@@ -769,7 +769,7 @@ class ClipboardManager(
     }
 
     /**
-     * DRS v1.9.0: the whole text history as one portable JSON document
+ * the whole text history as one portable JSON document
      * (text items only — media bytes cannot round-trip through JSON).
      */
     fun exportHistoryJson(): String {
@@ -780,18 +780,18 @@ class ClipboardManager(
         val editorInstance by appContext.editorInstance()
         editorInstance.commitClipboardItem(item).also { result ->
             if (!result) {
-                // DRS v1.19.0: the failure toast is localized now (was a
+                // the failure toast is localized now (was a
                 // hardcoded English literal in every locale).
                 appContext.showShortToastSync(R.string.clipboard__paste_failed)
             }
         }
-        // DRS v1.0.5: clipboard use from the clipboard panel is now credited
+        // clipboard use from the clipboard panel is now credited
         // (the hook existed in the adaptation engine but was never called).
         DrsAdaptationEngine.recordClipboardUse()
     }
 
     /**
-     * DRS v1.0.6: "copy again" - puts a history item back as the primary
+ * "copy again" - puts a history item back as the primary
      * system clipboard content without inserting it into the editor. Text
      * items only (media stays where it is); the call goes through the same
      * sync path as a normal clipboard set, so behavior is identical.

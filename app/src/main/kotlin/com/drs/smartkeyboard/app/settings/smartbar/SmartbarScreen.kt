@@ -26,7 +26,7 @@ fun SmartbarScreen() = DrsScreen {
     previewFieldVisible = true
 
     content {
-        // DRS v1.0.5: actionable pointer to the in-IME tool customization —
+        // actionable pointer to the in-IME tool customization —
         // informational row (not clickable) because the drag-and-drop editor
         // lives inside the keyboard itself.
         Preference(
@@ -40,7 +40,7 @@ fun SmartbarScreen() = DrsScreen {
                 title = stringRes(R.string.pref__smartbar__enabled__label),
                 summary = stringRes(R.string.pref__smartbar__enabled__summary),
             )
-            // DRS v2.11.0 «المُرتّب السياقي الصادق»: the honest contextual
+            // «المُرتّب السياقي الصادق»: the honest contextual
             // ranker — promotes the user's OWN enabled actions by field
             // kind. Off = identity ranking (the manual order is the base).
             SwitchPreference(
@@ -96,7 +96,7 @@ fun SmartbarScreen() = DrsScreen {
             )
         }
 
-        // DRS v1.15.0: the smart panels' behavior switches (لوحة الحركات /
+        // the smart panels' behavior switches (لوحة الحركات /
         // لوحة الرموز الذكية / لوحة الحروف الموسعة). Real behavior toggles
         // the panels read live — not decoration.
         PreferenceGroup(title = stringRes(R.string.pref__panels__group__label)) {
@@ -115,14 +115,14 @@ fun SmartbarScreen() = DrsScreen {
                 title = stringRes(R.string.pref__panels__recents__label),
                 summary = stringRes(R.string.pref__panels__recents__summary),
             )
-            // DRS v1.16.0: the smart panel ordering (أعد ترتيب الوحات بنظام
+            // the smart panel ordering (أعد ترتيب الوحات بنظام
             // مرتب وذكي) — the switcher reorders from local open counts.
             SwitchPreference(
                 prefs.panels.panelSmartOrder,
                 title = stringRes(R.string.pref__panels__smart_order__label),
                 summary = stringRes(R.string.pref__panels__smart_order__summary),
             )
-            // DRS v2.2.0: the tiles' contextual advisory row — the
+            // the tiles' contextual advisory row — the
             // deterministic «مقترحات لهذا النص» of the text tools panel.
             SwitchPreference(
                 prefs.panels.textToolsSmartContext,

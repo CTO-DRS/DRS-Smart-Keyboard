@@ -74,7 +74,7 @@ fun MediaInputLayout(
 ) {
     val context = LocalContext.current
     val keyboardManager by context.keyboardManager()
-    // DRS v1.19.0: the palette follows the active subtype's locale so the emoji
+    // the palette follows the active subtype's locale so the emoji
     // metadata (names + keywords) matches the user's language — native search in
     // ar/en/de/es/fr/it/pt, honest English fallback elsewhere. Previously the
     // palette was hard-wired to "root.txt" whose metadata columns are empty for
@@ -87,7 +87,7 @@ fun MediaInputLayout(
         emojiLayoutDataMap = EmojiData.get(context, activeSubtype.primaryLocale)
     }
 
-    // DRS v1.23.0: the kaomoji palette — the 21-entry emoticons.json
+    // the kaomoji palette — the 21-entry emoticons.json
     // shipped in the APK while its loader stayed a stubbed null, so the
     // whole asset was invisible for 23 rounds. The bottom-row toggle
     // swaps the emoji palette for the kaomoji grid (and back); the asset
@@ -144,7 +144,7 @@ fun MediaInputLayout(
                     fontWeight = FontWeight.Bold,
                 )
             }
-            // DRS v1.23.0: the kaomoji toggle — «:-)» swaps the emoji
+            // the kaomoji toggle — «:-)» swaps the emoji
             // palette for the kaomoji grid (and back). Hidden entirely
             // when the asset failed to parse so the button never lies.
             if (!emoticonLoadFailed) {
@@ -165,7 +165,7 @@ fun MediaInputLayout(
                     )
                 }
             }
-            // DRS v1.21.0: the in-palette skin-tone selector — a tap cycles
+            // the in-palette skin-tone selector — a tap cycles
             // the preferred tone right here (Gboard parity); it used to
             // require a trip to the app settings. The dot paints the tone
             // the palette renders people emoji with.

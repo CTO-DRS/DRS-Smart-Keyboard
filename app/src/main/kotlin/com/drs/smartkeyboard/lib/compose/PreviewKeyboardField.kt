@@ -161,7 +161,7 @@ class PreviewFieldController {
      * keyboard opens. Safe to call at any time, even while the field is not
      * composed yet (unlike raw [FocusRequester.requestFocus]).
      *
-     * DRS v1.0.2: `isEditing` is now driven ONLY by explicit actions (this
+ * `isEditing` is now driven ONLY by explicit actions (this
      * method and [collapse]) — never by transient focus callbacks. The old
      * focus-writes-state loop let a single dropped focus event during the
      * AnimatedContent transition cancel the focus-retry coroutine and leave
@@ -172,7 +172,7 @@ class PreviewFieldController {
     }
 
     /**
-     * DRS v1.0.2: explicit collapse. Called when the preview area hides
+ * explicit collapse. Called when the preview area hides
      * (navigation), when the user dismisses the field, or when focus is lost
      * after a successful editing session — so a stuck editing flag can never
      * replace the pill with an unfocused, dead-looking field.
@@ -199,7 +199,7 @@ fun PreviewKeyboardField(
     val context = LocalContext.current
     val focusManager = LocalFocusManager.current
 
-    // DRS v1.0.2: the bottom slot lives across navigation (activity level).
+    // the bottom slot lives across navigation (activity level).
     // Whenever the current screen hides the preview, tear the editing state
     // down with it — otherwise returning to a preview screen could show a
     // stale, unfocused field instead of the tappable pill.
@@ -534,7 +534,7 @@ private fun DrsPreviewPillContent(
                                 // slop: the drag already handled the move; do not
                                 // fire the click as well.
                                 if (!dragStarted) {
-                                    // DRS v1.0.2: a light tactile tick that confirms
+                                    // a light tactile tick that confirms
                                     // the tap registered — on real hardware users must
                                     // FEEL that the pill accepted the touch, even when
                                     // the transition to the field takes a few frames.
@@ -607,9 +607,9 @@ private fun PreviewFloatingField(
     var fieldHasFocus by remember { mutableStateOf(false) }
     var everFocused by remember { mutableStateOf(false) }
 
-    // DRS v1.0.2 hardening — the focus bootstrap is now keyed to Unit, so it
+    // hardening — the focus bootstrap is now keyed to Unit, so it
     // lives exactly as long as this field composition and can NEVER be
-    // cancelled mid-retry by a transient `isEditing` flip (the v1.0.1 loop was
+    // cancelled mid-retry by a transient `isEditing` flip (the loop was
     // keyed on controller.isEditing, which onFocusChanged wrote back to — a
     // single dropped focus event during the AnimatedContent transition then
     // killed the retry wave and left an unfocused, dead-looking field).
@@ -633,7 +633,7 @@ private fun PreviewFloatingField(
             withFrameNanos { }
             keyboard?.show()
         }
-        // DRS v1.0.2 last-resort guarantee: if focus STILL never landed after
+        // last-resort guarantee: if focus STILL never landed after
         // ~1s, quietly fall back to the pill instead of stranding the user on
         // a dead, unfocused field. An empty preview has nothing to preserve —
         // and on the pill, retrying is always exactly one tap away.
@@ -666,7 +666,7 @@ private fun PreviewFloatingField(
                     .focusRequester(controller.focusRequester)
                     .onFocusChanged {
                         fieldHasFocus = it.isFocused
-                        // DRS v1.0.2: focus LOSS after a successful editing
+                        // focus LOSS after a successful editing
                         // session (tap outside, Done action, back key) collapses
                         // back to the pill. Focus events no longer write into
                         // isEditing directly — that feedback loop was the deep

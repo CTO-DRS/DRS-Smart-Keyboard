@@ -13,7 +13,7 @@ import java.security.MessageDigest
 /**
  * DRS — the catalog consistency guard (the theme-install incident guard).
  *
- * The v2.1.0 incident: packages/manifest.json shipped download URLs pointing
+ * The incident: packages/manifest.json shipped download URLs pointing
  * to a release that never carried the .flex assets (404 on device), and
  * sha256/file_size fields computed over a DIFFERENT build than the bytes the
  * signatures covered. Every on-device theme install failed with the generic

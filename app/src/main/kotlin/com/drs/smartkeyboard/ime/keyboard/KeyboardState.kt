@@ -44,9 +44,9 @@ import kotlin.properties.Delegates
  *          | 1        |          |          | Is Kana small
  *      111 |          |          |          | Ime Ui Mode
  *     1    |          |          |          | Layout Direction (0=LTR, 1=RTL)
- *       11 |          |          |          | DRS v1.22.0: InputModifierState (CTRL latch, bits 18-19)
- *     11   |          |          |          | DRS v1.22.0: InputModifierState (ALT latch, bits 28-29)
- *       11 |          |          |          | DRS v1.23.0: InputModifierState (FN latch, bits 30-31)
+ * 11 | | | | InputModifierState (CTRL latch, bits 18-19)
+ * 11 | | | | InputModifierState (ALT latch, bits 28-29)
+ * 11 | | | | InputModifierState (FN latch, bits 30-31)
  *
  * <Byte 7> | <Byte 6> | <Byte 5> | <Byte 4> | Description
  * ---------|----------|----------|----------|---------------------------------
@@ -67,7 +67,7 @@ open class KeyboardState protected constructor(open var rawValue: ULong) {
         const val O_KEY_VARIATION: Int =                    4
         const val M_INPUT_SHIFT_STATE: ULong =              0x03u
         const val O_INPUT_SHIFT_STATE: Int =                8
-        // DRS v1.22.0: the revived CTRL/ALT latch states (3 values each —
+        // the revived CTRL/ALT latch states (3 values each —
         // OFF/LATCHED/LOCKED). Free bit pairs: 18-19 (between the actions
         // flags and the composing flag) and 28-29 (above the RTL flag at
         // bit 27); bits 24-26 are the ImeUiMode region.
@@ -75,7 +75,7 @@ open class KeyboardState protected constructor(open var rawValue: ULong) {
         const val O_INPUT_CTRL_STATE: Int =                 18
         const val M_INPUT_ALT_STATE: ULong =                0x03u
         const val O_INPUT_ALT_STATE: Int =                  28
-        // DRS v1.23.0: the FN latch takes the last free pair of the lower
+        // the FN latch takes the last free pair of the lower
         // byte region (bits 30-31 — bit 32+ holds the window/dialog flags),
         // completing the modifier family CTRL/ALT/FN with the same 3-state
         // latch contract and zero bit collisions.
@@ -101,11 +101,11 @@ open class KeyboardState protected constructor(open var rawValue: ULong) {
 
         const val F_IS_SUBTYPE_SELECTION_VISIBLE: ULong =   0x1_0000_0000u
 
-        // DRS v1.0.5: emoji search mode — keyboard characters are routed to
+        // emoji search mode — keyboard characters are routed to
         // the emoji search query instead of the host editor.
         const val F_IS_MEDIA_SEARCH_ACTIVE: ULong =         0x2_0000_0000u
 
-        // DRS v1.8.0: the pinned-tools drawer (درج المهام المثبتة) is open
+        // the pinned-tools drawer (درج المهام المثبتة) is open
         // over the text layout — the side-pull handle on the tasks bar.
         const val F_IS_TOOLS_DRAWER_VISIBLE: ULong =        0x4_0000_0000u
 
@@ -160,7 +160,7 @@ open class KeyboardState protected constructor(open var rawValue: ULong) {
         get() = InputShiftState.fromInt(getRegion(M_INPUT_SHIFT_STATE, O_INPUT_SHIFT_STATE))
         set(v) { setRegion(M_INPUT_SHIFT_STATE, O_INPUT_SHIFT_STATE, v.toInt()) }
 
-    // DRS v1.22.0: the revived CTRL/ALT modifier latches — the input
+    // the revived CTRL/ALT modifier latches — the input
     // pipeline arms/consumes them, the tech toolbar tile shows the truth.
     var inputCtrlState: InputModifierState
         get() = InputModifierState.fromInt(getRegion(M_INPUT_CTRL_STATE, O_INPUT_CTRL_STATE))
@@ -170,7 +170,7 @@ open class KeyboardState protected constructor(open var rawValue: ULong) {
         get() = InputModifierState.fromInt(getRegion(M_INPUT_ALT_STATE, O_INPUT_ALT_STATE))
         set(v) { setRegion(M_INPUT_ALT_STATE, O_INPUT_ALT_STATE, v.toInt()) }
 
-    // DRS v1.23.0: the last dead modifier revives — FN latches exactly like
+    // the last dead modifier revives — FN latches exactly like
     // CTRL/ALT, and while armed the digit keys send real F1–F10 key events
     // to the host (terminals, remote desktop, emulators).
     var inputFnState: InputModifierState
@@ -227,12 +227,12 @@ open class KeyboardState protected constructor(open var rawValue: ULong) {
         get() = getFlag(F_IS_SUBTYPE_SELECTION_VISIBLE)
         set(v) { setFlag(F_IS_SUBTYPE_SELECTION_VISIBLE, v) }
 
-    /** DRS v1.0.5: true while the emoji search field is capturing input. */
+    /** true while the emoji search field is capturing input. */
     var isMediaSearchActive: Boolean
         get() = getFlag(F_IS_MEDIA_SEARCH_ACTIVE)
         set(v) { setFlag(F_IS_MEDIA_SEARCH_ACTIVE, v) }
 
-    /** DRS v1.8.0: true while the pinned-tools drawer replaces the keyboard. */
+    /** true while the pinned-tools drawer replaces the keyboard. */
     var isToolsDrawerVisible: Boolean
         get() = getFlag(F_IS_TOOLS_DRAWER_VISIBLE)
         set(v) { setFlag(F_IS_TOOLS_DRAWER_VISIBLE, v) }

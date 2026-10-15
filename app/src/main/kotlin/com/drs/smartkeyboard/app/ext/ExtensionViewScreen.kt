@@ -136,7 +136,7 @@ private fun ViewScreen(ext: com.drs.smartkeyboard.lib.ext.Extension, isEnabled: 
                 }
             }
             ExtensionMetaRowSimpleText(label = stringRes(R.string.ext__meta__license)) {
-                // DRS v1.27.0: the human-readable license title — the
+                // the human-readable license title — the
                 // raw SPDX identifier/expression stays the machine truth
                 // inside the manifest and the edit screen; the view row
                 // speaks the world's language for every known id and

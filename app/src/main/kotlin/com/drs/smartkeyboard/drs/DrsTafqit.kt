@@ -5,7 +5,7 @@
 package com.drs.smartkeyboard.drs
 
 /**
- * DRS v1.7.0 — the deterministic financial tafqit engine (التفقيط المالي)
+ * the deterministic financial tafqit engine (التفقيط المالي)
  * behind the TAFQIT text tool: a clean monetary amount becomes its formal
  * check-writing Arabic words — «فقط ألف ومائتان وأربعة وثلاثون ريال
  * وخمسون هللة لا غير» — the exact phrase a bank clerk expects on a cheque.

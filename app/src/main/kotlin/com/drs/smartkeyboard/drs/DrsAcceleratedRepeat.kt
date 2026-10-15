@@ -7,7 +7,7 @@ package com.drs.smartkeyboard.drs
 import com.drs.smartkeyboard.ime.text.key.KeyCode
 
 /**
- * DRS v2.4.0 — «اللوحة الحية الشاملة»: عقد الحذف المتسارع الحتمي.
+ * «اللوحة الحية الشاملة»: عقد الحذف المتسارع الحتمي.
  *
  * Holding the delete key used to repeat at ONE fixed delay forever — the
  * first deleted character and the hundredth arrived at the same pace, so

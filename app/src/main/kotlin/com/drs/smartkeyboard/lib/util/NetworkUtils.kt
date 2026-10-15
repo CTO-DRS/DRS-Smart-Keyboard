@@ -44,7 +44,7 @@ object NetworkUtils {
     }
 
     /**
-     * DRS v1.26.0: the tested normalization of a phone-number match — the
+ * the tested normalization of a phone-number match — the
      * regex deliberately tolerates a fully parenthesized number like
      * `(0541234567)` (java.util.regex has no `\K`, so the capture cannot
      * exclude its own surrounding parens), and this pure step strips the

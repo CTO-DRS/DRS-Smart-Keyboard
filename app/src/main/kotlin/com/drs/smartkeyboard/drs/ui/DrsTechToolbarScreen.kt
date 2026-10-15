@@ -43,7 +43,7 @@ import com.drs.smartkeyboard.lib.compose.DrsScreen
 import org.drs.lib.compose.stringRes
 
 /**
- * DRS v1.0.6: editor for the technical toolbar arrangement. The user picks
+ * editor for the technical toolbar arrangement. The user picks
  * which keys appear in the strip, in which order, and can hide the ones they
  * never use. The arrangement is persisted in the DRS state and read live by
  * the IME strip - changes apply on the next keyboard show without restart.
@@ -80,7 +80,7 @@ fun DrsTechToolbarScreen() = DrsScreen {
     }
 
     content {
-        // DRS fix (v1.0.9): DrsScreen already scrolls — a nested verticalScroll
+        // DRS fix (): DrsScreen already scrolls — a nested verticalScroll
         // here was measured with infinite height constraints and crashed the
         // screen on open.
         Column(

@@ -8,7 +8,7 @@ import com.drs.smartkeyboard.drs.ai.DrsWritingAssistant
 import java.util.Locale
 
 /**
- * DRS v2.2.0 — الجولة الثامنة «البلاطة الذكية»: عقل البلاطات الحتمي.
+ * الجولة الثامنة «البلاطة الذكية»: عقل البلاطات الحتمي.
  *
  * This file is the PURE logic core of the tiles' intelligence — the same
  * doctrine as [DrsPanelSmart] beside it: nothing here touches Android UI

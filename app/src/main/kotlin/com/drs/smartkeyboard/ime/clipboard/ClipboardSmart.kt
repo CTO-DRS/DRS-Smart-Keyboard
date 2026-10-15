@@ -11,12 +11,12 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
 /**
- * DRS v1.9.0 — the smart clipboard core: every pure, JVM-testable rule of
+ * the smart clipboard core: every pure, JVM-testable rule of
  * the integrated clipboard system lives here so the engine owns the policy
  * and the UI only renders it.
  *
  * - [ClipboardTextPolicy] caps one stored text at 500,000 characters (the
- *   user-facing contract «النص الواحد يقبل حتى 500,000 حرف» since v1.12.0).
+ * user-facing contract «النص الواحد يقبل حتى 500,000 حرف» since).
  * - [ClipFileNamer] turns a user-supplied file name into a safe, portable
  *   `.txt` name for the save-as-file feature.
  * - [ClipTextStats] computes the real character/word/line counts shown in
@@ -29,7 +29,7 @@ import kotlinx.serialization.json.Json
 object ClipboardTextPolicy {
     /**
      * The maximum number of characters one clipboard history entry may
-     * retain. DRS v1.12.0 raised the cap from 50,000 to 500,000 at the
+ * retain. raised the cap from 50,000 to 500,000 at the
      * user's explicit request («تدعم حتى 500000 الف حرف»). The primary
      * (system) clip is never truncated — the cap protects the history
      * database and the panel rendering.
@@ -70,7 +70,7 @@ object ClipboardTextPolicy {
     fun truncateForStorage(text: String): String = truncateForStorage(text, MAX_TEXT_CHARS)
 
     /**
-     * DRS v1.22.0: the pure pin-cap decision — «سقف التثبيتات». A pin is
+ * the pure pin-cap decision — «سقف التثبيتات». A pin is
      * allowed when the item is already pinned (idempotent re-pin) or the
      * pinned store still has room under [cap]. A cap of zero refuses every
      * new pin; the pins that already exist are never auto-destroyed by a
@@ -83,7 +83,7 @@ object ClipboardTextPolicy {
 }
 
 /**
- * DRS v1.12.0: the editor character limit the user picks in the app
+ * the editor character limit the user picks in the app
  * settings. The default is the full half-million the storage policy now
  * allows; the effective limit always respects the policy's hard cap.
  */

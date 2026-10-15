@@ -65,7 +65,7 @@ fun ThemeScreen() = DrsScreen {
 
     val context = LocalContext.current
     val navController = LocalNavController.current
-    // DRS v1.5.0: cycleTheme was only reachable from the keyboard strip —
+    // cycleTheme was only reachable from the keyboard strip —
     // the theme screen never offered it. One tap switches the effective
     // day/night slot to the next installed theme and confirms with its
     // real label (null = fewer than two themes installed).
@@ -73,7 +73,7 @@ fun ThemeScreen() = DrsScreen {
     val themeManager by context.themeManager()
     val prefs by DrsPreferenceStore
 
-    // DRS v2.8.0 «خلفيتك من ألبومك»: pick ONE image from the device; it is
+    // «خلفيتك من ألبومك»: pick ONE image from the device; it is
     // copied app-privately, named after its own SHA-256, and injected into the
     // active theme's window rule IN MEMORY at load time. Honest toasts for
     // every outcome — no silent failures.
@@ -138,7 +138,7 @@ fun ThemeScreen() = DrsScreen {
         }
 
         PreferenceGroup(title = stringRes(R.string.pref__theme__group_themes__label)) {
-        // DRS v1.5.0: surface the real cycleTheme engine action here.
+        // surface the real cycleTheme engine action here.
         Preference(
             icon = Icons.Default.Palette,
             title = stringRes(R.string.pref__theme__cycle_now__label),

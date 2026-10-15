@@ -129,7 +129,7 @@ data class DrsSearchEntry(
 )
 
 /**
- * DRS v1.0.4: persistent recent-search history. Queries the user actually
+ * persistent recent-search history. Queries the user actually
  * acted on are stored most-recent-first, deduplicated (Arabic-normalized
  * comparison) and capped — then surfaced as one-tap rows the next time the
  * search dialog opens. Serialized as JSON into the JetPref datastore,
@@ -223,7 +223,7 @@ private fun isSubsequence(query: String, text: String): Boolean {
 }
 
 /**
- * DRS v1.0.3: score ONE normalized query token against ONE normalized
+ * score ONE normalized query token against ONE normalized
  * candidate (title or keyword). Higher wins; 0 = no match. The subsequence
  * fallback keeps typos and dropped letters productive (e.g. "ثمت" still
  * finds السمات) so the no-results dead end almost never happens.
@@ -244,7 +244,7 @@ private fun DrsSearchEntry.matches(normalizedQuery: String): Boolean {
 }
 
 /**
- * DRS v1.0.3: ranked, multi-word matching. The query is split into tokens;
+ * ranked, multi-word matching. The query is split into tokens;
  * EVERY token must hit somewhere in the title or keywords (AND semantics),
  * title hits weigh double, and the per-token scores sum into a ranking score
  * so the best matches always float to the top instead of index order.
@@ -270,7 +270,7 @@ private fun DrsSearchEntry.score(normalizedQuery: String): Int {
 @Composable
 private fun rememberDrsSearchEntries(): List<DrsSearchEntry> {
     return listOf(
-        // DRS v1.0.7: the unified «كلاهما» screens.
+        // the unified «كلاهما» screens.
         DrsSearchEntry(
             title = stringRes(R.string.drs__unified__dashboard_title),
             keywords = listOf(
@@ -316,7 +316,7 @@ private fun rememberDrsSearchEntries(): List<DrsSearchEntry> {
             icon = Icons.Default.Settings,
             route = Routes.Settings.DrsUnifiedSystem,
         ),
-        // DRS v1.0.8: daily usage statistics + height scale keywords.
+        // daily usage statistics + height scale keywords.
         DrsSearchEntry(
             title = stringRes(R.string.drs__unified__stats_title),
             keywords = listOf(
@@ -428,7 +428,7 @@ private fun rememberDrsSearchEntries(): List<DrsSearchEntry> {
             icon = Icons.Outlined.Info,
             route = Routes.Settings.About,
         ),
-        // DRS v1.0.3: previously unreachable screens — the update center,
+        // previously unreachable screens — the update center,
         // package center, rewards store and backup/restore are now all
         // one search away.
         DrsSearchEntry(
@@ -455,7 +455,7 @@ private fun rememberDrsSearchEntries(): List<DrsSearchEntry> {
             icon = Icons.Default.SettingsBackupRestore,
             route = Routes.Settings.Backup,
         ),
-        // DRS v1.0.4: deeper reach — sub-screens and individual settings are
+        // deeper reach — sub-screens and individual settings are
         // now searchable, routing straight to the page that owns them.
         DrsSearchEntry(
             title = stringRes(R.string.settings__input_feedback__title),
@@ -535,7 +535,7 @@ private fun rememberDrsSearchEntries(): List<DrsSearchEntry> {
             icon = Icons.Default.Help,
             route = Routes.Settings.Help,
         ),
-        // DRS v1.0.6: technical system surfaces.
+        // technical system surfaces.
         DrsSearchEntry(
             title = stringRes(R.string.drs__tech_toolbar__title),
             keywords = listOf("tech toolbar", "toolbar", "strip", "الشريط التقني", "تخصيص الشريط", "مفاتيح", "ترتيب"),
@@ -558,7 +558,7 @@ private fun rememberDrsSearchEntries(): List<DrsSearchEntry> {
 }
 
 /**
- * Quick suggestions shown before the user types anything. DRS v1.0.4:
+ * Quick suggestions shown before the user types anything. 
  * resolved by ROUTE (not list index) so the list can grow without silently
  * pointing at the wrong entries.
  */
@@ -601,7 +601,7 @@ private fun DrsSearchResultRow(
             )
         }
         Spacer(modifier = Modifier.width(12.dp))
-        // DRS v1.0.3: word-level match highlighting — the words that caused
+        // word-level match highlighting — the words that caused
         // the hit are bolded in the primary color, so the user immediately
         // sees WHY each result matched.
         Text(
@@ -617,7 +617,7 @@ private fun DrsSearchResultRow(
             tint = colorScheme.onSurfaceVariant.copy(alpha = 0.5f),
             modifier = Modifier
                 .size(18.dp)
-                // DRS v1.28.0 audit fix (High, RTL): mirror the result chevron,
+                // audit fix (High, RTL): mirror the result chevron,
                 // see HomeScreen — it pointed backward in Arabic.
                 .autoMirrorForRtl(),
         )
@@ -625,7 +625,7 @@ private fun DrsSearchResultRow(
 }
 
 /**
- * DRS v1.0.3: bolds every word of the title that contributed to the match
+ * bolds every word of the title that contributed to the match
  * (word-level, so no fragile index mapping across normalization — diacritics
  * stripped, hamza folded, etc. never break the styling).
  */
@@ -650,7 +650,7 @@ private fun buildHighlightedTitle(title: String, rawQuery: String): AnnotatedStr
 }
 
 /**
- * DRS v1.0.4: one-tap row for a recent search — tap re-runs the query,
+ * one-tap row for a recent search — tap re-runs the query,
  * the trailing X removes it from the history.
  */
 @Composable
@@ -717,7 +717,7 @@ fun DrsSmartSearchDialog(
     val focusRequester = remember { FocusRequester() }
     val entries = rememberDrsSearchEntries()
 
-    // DRS v1.0.4: persistent recent-searches — every result the user actually
+    // persistent recent-searches — every result the user actually
     // opens is recorded (NonCancellable so the write survives the dialog
     // leaving composition) and shown as one-tap rows next time.
     val prefs by DrsPreferenceStore
@@ -736,7 +736,7 @@ fun DrsSmartSearchDialog(
     }
 
     val normalizedQuery = drsSearchNormalize(query)
-    // DRS v1.0.3: ranked results — best match first (title hits weigh double,
+    // ranked results — best match first (title hits weigh double,
     // per-token scores sum). Stable sort keeps the index order for ties.
     val results = if (normalizedQuery.isEmpty()) {
         emptyList()
@@ -808,7 +808,7 @@ fun DrsSmartSearchDialog(
 
                 LazyColumn(modifier = Modifier.fillMaxWidth()) {
                     if (normalizedQuery.isEmpty()) {
-                        // DRS v1.0.4: persistent recent searches first — one
+                        // persistent recent searches first — one
                         // tap re-runs the query, X removes a single row,
                         // "مسح الكل" drops the whole history.
                         if (historyEnabled && historyQueries.isNotEmpty()) {

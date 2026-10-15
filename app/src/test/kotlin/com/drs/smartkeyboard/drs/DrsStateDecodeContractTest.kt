@@ -21,7 +21,7 @@ class DrsStateDecodeContractTest : FunSpec({
 
     val json = Json { ignoreUnknownKeys = true; encodeDefaults = true }
 
-    test("a v1.0.6-era state subset decodes with safe defaults for everything newer") {
+    test("a era state subset decodes with safe defaults for everything newer") {
         val legacy = """
             {"version":1,"onboardingDone":true,"userPath":"TECHNICAL","techToolbarKeys":["tab","esc"]}
         """.trimIndent()
@@ -30,7 +30,7 @@ class DrsStateDecodeContractTest : FunSpec({
         state.onboardingDone shouldBe true
         state.userPath shouldBe "TECHNICAL"
         state.techToolbarKeys shouldBe listOf("tab", "esc")
-        // everything added after v1.0.6 arrives at its documented default
+        // everything added after arrives at its documented default
         state.wallet shouldBe DrsWallet()
         state.hybridViewMode shouldBe DrsHybridViewMode.DUAL.name
         state.unifiedStripEnabled shouldBe true

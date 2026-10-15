@@ -2,7 +2,7 @@
   "$": "ime.extension.keyboard",
   "meta": {
     "id": "org.drs.localization",
-    "version": "0.2.0",
+    "version": "1.0.0",
     "title": "القواعد والقوائم المنبثقة (DRS)",
     "description": "قواعد علامات الترقيم وقوائم الضغط المطوّل الافتراضية في لوحة المفاتيح DRS.",
     "maintainers": [

@@ -27,13 +27,13 @@ enum class EmojiSkinTone(val id: Int) {
     DARK_SKIN_TONE(0x1F3FF);
 
     /**
-     * DRS v1.21.0: the next tone in the palette selector's cycle (pure,
+ * the next tone in the palette selector's cycle (pure,
      * JVM-testable) — DEFAULT → LIGHT → … → DARK → DEFAULT.
      */
     fun next(): EmojiSkinTone = entries[(ordinal + 1) % entries.size]
 
     /**
-     * DRS v1.21.0: the swatch color the in-palette selector dot paints
+ * the swatch color the in-palette selector dot paints
      * with (pure, JVM-testable) — the twemoji skin-tone palette so the
      * dot reads as the exact tone the people emoji will render with.
      */

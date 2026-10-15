@@ -5,12 +5,12 @@
 package com.drs.smartkeyboard.drs
 
 /**
- * DRS v1.8.0 — the deterministic date-to-Arabic-words engine (التاريخ
+ * the deterministic date-to-Arabic-words engine (التاريخ
  * بالكلمات) behind the DATE_WORDS text tool: a clean numeric date becomes
  * its formal documentary phrase — «2026-10-03» → «الثالث من أكتوبر عام
  * ألفين وستة وعشرين» — the phrase official letters, contracts and
- * invitations spell out. The trilogy closes: v1.6.0 made numbers speak,
- * v1.7.0 made amounts speak, v1.8.0 makes dates speak.
+ * invitations spell out. The trilogy closes: made numbers speak,
+ * made amounts speak, makes dates speak.
  *
  * Pure calendar grammar, no model, no dictionary, no guesswork:
  *  - The whole field must be a clean three-component date over ONE
@@ -42,7 +42,7 @@ package com.drs.smartkeyboard.drs
  *    output itself carries no separator, so applying the tool to its
  *    own output is a fixed point.
  *
- * DRS v1.10.0 — the same closed date parser now also speaks the
+ * the same closed date parser now also speaks the
  * weekday (يوم الأسبوع): «2026-10-03» → «السبت». The day-of-week is
  * the documented Sakamoto congruence over the proleptic Gregorian
  * calendar (exhaustively verified against the reference calendar for
@@ -50,7 +50,7 @@ package com.drs.smartkeyboard.drs
  * calendar, no guesswork. The weekday is a read-only projection of a
  * clean date: it never mutates the field, and prose stays untouched.
  *
- * DRS v2.1.0 — the closed parser, the day-ordinal table and the
+ * the closed parser, the day-ordinal table and the
  * Gregorian-words formatter are now the module-level source of truth
  * shared with the calendar-conversion engine [DrsHijriWords] (a
  * behavior-preserving visibility refactor): the Hijri words speak
@@ -71,7 +71,7 @@ object DrsDateWords {
      * بلا تنوين — house style): «في العاشر»، «في العشرين»،
      * «في الحادي والعشرين». Index 0 is unused padding.
      *
-     * DRS v2.1.0: INTERNAL — the module-level source of truth shared
+ * INTERNAL — the module-level source of truth shared
      * with [DrsHijriWords] (the same day speaks the same words in
      * both calendars).
      */
@@ -99,7 +99,7 @@ object DrsDateWords {
 
     /**
      * Maps every accepted digit to its value, mirroring [DrsNumberWords].
-     * DRS v2.1.0: INTERNAL — the locale-blind digit alphabet shared
+ * INTERNAL — the locale-blind digit alphabet shared
      * with [DrsHijriWords] (one digit system for the whole family).
      */
     internal fun digitValue(c: Char): Int? = when (c) {
@@ -129,12 +129,12 @@ object DrsDateWords {
         run.fold(0) { acc, c -> acc * 10 + digitValue(c)!! }
 
     /** One parsed calendar date: the year, the month, the day of month.
-     *  DRS v2.1.0: INTERNAL — shared with [DrsHijriWords]. */
+ * INTERNAL — shared with [DrsHijriWords]. */
     internal data class ParsedDate(val year: Int, val month: Int, val day: Int)
 
     /**
      * The closed date parser shared by the date-words and the weekday
-     * engines (v1.10.0 refactor — behavior-preserving): the trimmed
+ * engines ( refactor — behavior-preserving): the trimmed
      * field must be a clean three-component date over ONE consistent
      * separator, the year is wherever the four-digit component stands
      * (both ends or neither is ambiguous — rejected), and validation
@@ -186,7 +186,7 @@ object DrsDateWords {
     }
 
     /**
-     * DRS v2.1.0 — the Gregorian-words formatter, extracted verbatim
+ * the Gregorian-words formatter, extracted verbatim
      * from [dateWordsOrNull] (behavior-preserving) as the module-level
      * source of truth for the documentary phrase shape: «الثالث من
      * أكتوبر عام ألفين وستة وعشرين». The Hijri→Gregorian conversion
@@ -203,7 +203,7 @@ object DrsDateWords {
     /**
      * The Arabic weekday name for [text] when it is a clean date the
      * engine understands (the same closed parser as [dateWordsOrNull]),
-     * or null when it is an honest no-op (v1.10.0). The day-of-week is
+ * or null when it is an honest no-op (). The day-of-week is
      * the documented Sakamoto congruence: pure integer arithmetic over
      * the proleptic Gregorian calendar, 0 = الأحد .. 6 = السبت.
      */

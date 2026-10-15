@@ -237,7 +237,7 @@ fun OtherScreen() = DrsScreen {
             )
         }
 
-        // DRS v1.0.5: maintenance — plain-language help for the normal user
+        // maintenance — plain-language help for the normal user
         // and a guarded factory reset for all keyboard settings.
         PreferenceGroup(title = stringRes(R.string.help__maintenance_group)) {
             Preference(

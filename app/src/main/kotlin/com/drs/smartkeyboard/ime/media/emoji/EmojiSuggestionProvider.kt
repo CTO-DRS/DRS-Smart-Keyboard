@@ -126,7 +126,7 @@ class EmojiSuggestionProvider(private val context: Context) : SuggestionProvider
                     emoji to (nameWeight * 0.7 + keywordWeight * 0.3)
                 }
                 .sorted { (_, a), (_, b) -> b.compareTo(a) }
-                // DRS v1.20.0: the zero-weight cut used to run AFTER the limit, so when
+                // the zero-weight cut used to run AFTER the limit, so when
                 // some of the top-N scored 0 the caller silently got fewer than N emoji
                 // even though real matches existed further down. Filter first, then cut.
                 .filter { (_, a) -> a > 0 }
@@ -148,7 +148,7 @@ class EmojiSuggestionProvider(private val context: Context) : SuggestionProvider
         if (!updateHistory || candidate !is EmojiSuggestionCandidate) {
             return
         }
-        // DRS v2.14.0: قبول الاقتراح التِقَاطٌ أيضًا — يمرّ بالبوابة نفسها.
+        // قبول الاقتراح التِقَاطٌ أيضًا — يمرّ بالبوابة نفسها.
         // عقلية learnExternalWord في NlpManager: التخفي وعطْل التكوين
         // وتنويعات كلمات المرور «أفلِ الاقتراحات فأفلِ التعلم». المحرر الخام
         // يُقرأ من معلومات المحرر الحية، والقفل الشاشي من مدير القفل —

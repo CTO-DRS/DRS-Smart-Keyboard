@@ -8,7 +8,7 @@ import android.view.KeyEvent
 import com.drs.smartkeyboard.ime.text.gestures.SwipeAction
 
 /**
- * DRS v2.7.0 «مزايا البحث الخارجي» — volume-key cursor control.
+ * «مزايا البحث الخارجي» — volume-key cursor control.
  *
  * Researched from the AOSP/OpenBoard heritage (LatinIME's volume-key
  * cursor affordance): while the keyboard owns key events, VOLUME_UP and

@@ -25,7 +25,7 @@ import com.drs.smartkeyboard.ime.theme.DrsImeUi
 import org.drs.lib.snygg.ui.SnyggText
 
 /**
- * DRS v1.23.0: the kaomoji palette — «لوحة الكاوموجي». The 21-entry
+ * the kaomoji palette — «لوحة الكاوموجي». The 21-entry
  * emoticons.json shipped in the APK since day one while its loader stayed
  * a stubbed null, so the whole asset was invisible. The grid renders it
  * through the exact same keyboard-like tile the emoji palette uses, and a

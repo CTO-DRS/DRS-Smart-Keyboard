@@ -5,7 +5,7 @@
 package com.drs.smartkeyboard.ime.clipboard
 
 /**
- * DRS v1.10.0 — the smart popup editor core: every pure, JVM-testable
+ * the smart popup editor core: every pure, JVM-testable
  * rule of the full-screen clipboard text editor lives here so the engine
  * owns the intelligence and the popup screen only renders it.
  *
@@ -112,7 +112,7 @@ object ClipTextTransforms {
     }
 
     /**
-     * DRS v1.12.0: prefixes every line with its 1-based number
+ * prefixes every line with its 1-based number
      * (`1. first`) — the code-review and list-editing helper.
      */
     fun numberLines(text: String): String {
@@ -124,7 +124,7 @@ object ClipTextTransforms {
 
     // Arabic-aware smart normalization ----------------------------------
 
-    // DRS v1.21.0: unified with DrsTextTools.ARABIC_DIACRITICS — the same
+    // unified with DrsTextTools.ARABIC_DIACRITICS — the same
     // tashkeel (harakat + superscript alef + wasla + the small Quranic
     // annotation marks U+06D6–U+06ED) is stripped in the editor and the
     // text-tools panel alike, so «طمس التشكيل» means one thing everywhere.

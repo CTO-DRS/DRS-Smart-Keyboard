@@ -68,7 +68,7 @@ internal fun myLexiconErrorLabel(error: DrsMyLexicon.Error): Int = when (error) 
 }
 
 /**
- * DRS v2.22.0 — قاموسي التشكيلي (the personal tashkeel lexicon manager):
+ * قاموسي التشكيلي (the personal tashkeel lexicon manager):
  * the full CRUD home of the words the user taught the harakat system,
  * behind the smart board's teach chip. The doctrine mirrors the
  * saved-texts manager: a master switch (gates the OVERRIDE LOOKUP, never
@@ -90,7 +90,7 @@ fun DrsMyLexiconScreen() = DrsScreen {
 
     var editorState by remember { mutableStateOf<DrsMyLexiconEditorState?>(null) }
     var editorError by remember { mutableStateOf<DrsMyLexicon.Error?>(null) }
-    // DRS v1.28.0 audit doctrine: deletion confirms first, and the pending
+    // audit doctrine: deletion confirms first, and the pending
     // id survives configuration changes via rememberSaveable.
     var pendingDeleteId by rememberSaveable { mutableStateOf<Long?>(null) }
     var showRemoveAllDialog by remember { mutableStateOf(false) }

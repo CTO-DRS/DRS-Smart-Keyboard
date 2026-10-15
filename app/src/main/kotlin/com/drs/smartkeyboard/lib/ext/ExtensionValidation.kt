@@ -14,7 +14,7 @@ import org.drs.lib.snygg.value.SnyggVarValue
 
 object ExtensionValidation {
     /**
-     * DRS v1.28.0 audit fix: shared contract for extension/package ids.
+ * audit fix: shared contract for extension/package ids.
      * Kept in sync with [MetaId]'s validator below and now also enforced
      * by ExtensionManager.import() and DrsPackageManager at import time.
      */

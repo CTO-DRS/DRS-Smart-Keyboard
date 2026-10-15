@@ -2,7 +2,7 @@
   "$": "ime.extension.keyboard",
   "meta": {
     "id": "org.drs.composers",
-    "version": "0.1.1",
+    "version": "1.0.0",
     "title": "المركّبات الافتراضية (DRS)",
     "description": "المركّبات الافتراضية المتوفرة دائماً في لوحة المفاتيح DRS.",
     "maintainers": [

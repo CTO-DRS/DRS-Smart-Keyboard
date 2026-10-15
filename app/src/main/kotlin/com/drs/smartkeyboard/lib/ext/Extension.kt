@@ -17,7 +17,7 @@ import org.drs.lib.kotlin.resultOk
 import java.security.MessageDigest
 
 /**
- * DRS v1.26.0: the source fingerprint marker — a SIBLING file of the
+ * the source fingerprint marker — a SIBLING file of the
  * cache directory (`<ext-id>.drs-fp`), never inside [Extension.workingDir],
  * so extension components never see it and the language-pack database
  * path resolution stays untouched. It stores the content fingerprint of
@@ -26,7 +26,7 @@ import java.security.MessageDigest
 internal const val FINGERPRINT_MARKER_SUFFIX = ".drs-fp"
 
 /**
- * DRS v1.26.0: the pure cache-reuse decision — JVM-tested. Reuse only
+ * the pure cache-reuse decision — JVM-tested. Reuse only
  * when the load was not forced AND both fingerprints are known AND they
  * match: a forced reload must always rebuild, and an unknown fingerprint
  * (exotic source ref, unreadable source, legacy cache without a marker)
@@ -44,7 +44,7 @@ private fun hexOf(digest: ByteArray): String =
     digest.joinToString(separator = "") { "%02x".format(it) }
 
 /**
- * DRS v1.26.0: stable content fingerprint of an (relativePath, size)
+ * stable content fingerprint of an (relativePath, size)
  * entry list — JVM-tested. Entries are sorted by path first, so listing
  * order can never change the fingerprint, while any path or size change
  * always does. Used for asset-tree sources (an APK's assets cannot change
@@ -96,7 +96,7 @@ abstract class Extension {
 
     fun load(context: Context, force: Boolean = false): Result<Unit> {
         val cacheDir = FsDir(context.cacheDir, meta.id)
-        // DRS v1.26.0: «الكاش الصادق» — the cache is reused when it was
+        // «الكاش الصادق» — the cache is reused when it was
         // built from the very same source content, instead of the old
         // unconditional delete+unzip on every single load (the TODO asked
         // for exactly this). An unknown fingerprint keeps the conservative
@@ -143,14 +143,14 @@ abstract class Extension {
             workingDir = null
             onAfterUnload(context, cacheDir)
         }
-        // DRS v1.26.0: keep the cache root tidy — a stale marker next to a
+        // keep the cache root tidy — a stale marker next to a
         // deleted cache is harmless (reuse requires the cache itself), but
         // deleting it keeps the directory honest.
         runCatching { markerFile(cacheDir).delete() }
     }
 
     /**
-     * DRS v1.26.0: the fingerprint marker of this extension — a sibling
+ * the fingerprint marker of this extension — a sibling
      * file of [cacheDir] (see [FINGERPRINT_MARKER_SUFFIX]).
      */
     private fun markerFile(cacheDir: FsDir): FsFile {
@@ -167,7 +167,7 @@ abstract class Extension {
         }.getOrNull()
 
     /**
-     * DRS v1.26.0: computes the content fingerprint of the source this
+ * computes the content fingerprint of the source this
      * extension would be extracted from. Asset-tree sources fingerprint
      * as sorted (path, size) entries; flex archives fingerprint as the
      * SHA-256 of their bytes. `null` for any source that cannot be

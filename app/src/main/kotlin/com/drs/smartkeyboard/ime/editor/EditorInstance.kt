@@ -68,9 +68,9 @@ class EditorInstance(context: Context) : AbstractEditorInstance(context) {
         }
         activeState.isActionsOverflowVisible = false
         activeState.isActionsEditorVisible = false
-        // DRS v1.8.0: a fresh input view never opens behind the tools drawer.
+        // a fresh input view never opens behind the tools drawer.
         activeState.isToolsDrawerVisible = false
-        // DRS v1.16.0: ...nor behind an open strip slot editor.
+        //...nor behind an open strip slot editor.
         DrsRuntimeState.closeStripSlotEditor()
         super.handleStartInputView(editorInfo, isRestart)
         val keyboardMode = when (editorInfo.inputAttributes.type) {
@@ -82,7 +82,7 @@ class EditorInstance(context: Context) : AbstractEditorInstance(context) {
                 activeState.keyVariation = KeyVariation.NORMAL
                 KeyboardMode.PHONE
             }
-            // DRS v1.28.0 audit fix (Medium): TYPE_CLASS_DATETIME fields used to
+            // audit fix (Medium): TYPE_CLASS_DATETIME fields used to
             // fall into the generic `else` branch and open the alphabetic
             // keyboard, trapping the user without any letter escape. Digits are
             // the primary alphabet of date/time inputs (e.g. datetime-local),
@@ -138,7 +138,7 @@ class EditorInstance(context: Context) : AbstractEditorInstance(context) {
             IncognitoMode.FORCE_OFF -> false
             IncognitoMode.FORCE_ON -> true
             IncognitoMode.DYNAMIC_ON_OFF -> {
-                // DRS v1.20.0: password fields force no-learning even when the editor
+                // password fields force no-learning even when the editor
                 // does not advertise IME_FLAG_NO_PERSONALIZED_LEARNING — Gboard/SwiftKey
                 // treat every password field as private, and so does the indicator that
                 // users rely on to trust the keyboard.
@@ -407,7 +407,7 @@ class EditorInstance(context: Context) : AbstractEditorInstance(context) {
                 enabled = prefs.keyboard.backspaceStripsHarakat.get(),
             )
         ) {
-            // DRS v1.17.0: haraka-first backspace — peel ONE diacritic off
+            // haraka-first backspace — peel ONE diacritic off
             // the letter instead of deleting the whole grapheme cluster
             // (the helper lives in AbstractEditorInstance beside the
             // delete path it mirrors).
@@ -498,7 +498,7 @@ class EditorInstance(context: Context) : AbstractEditorInstance(context) {
         if (text != null) {
             clipboardManager.addNewPlaintext(text.toString())
         } else {
-            // DRS v1.28.0 audit fix (Medium): with no selection the old code
+            // audit fix (Medium): with no selection the old code
             // showed the "cut failed" toast and then STILL ran
             // deleteBackwards(), silently removing one character before the
             // cursor — one-character data loss from a plain cut tap. A failed
@@ -543,7 +543,7 @@ class EditorInstance(context: Context) : AbstractEditorInstance(context) {
         phantomSpace.setInactive()
         return commitClipboardItem(clipboardManager.primaryClip).also { result ->
             if (!result) {
-                // DRS v1.19.0: the failure toast is localized now (was a
+                // the failure toast is localized now (was a
                 // hardcoded English literal in every locale).
                 appContext.showShortToastSync(R.string.clipboard__paste_failed)
             }
@@ -569,7 +569,7 @@ class EditorInstance(context: Context) : AbstractEditorInstance(context) {
     }
 
     /**
-     * DRS v1.0.5: shares the selected text through the system share sheet.
+ * shares the selected text through the system share sheet.
      * When nothing is selected, the entire field content is shared instead.
      * Nothing is stored or transmitted by the keyboard itself — the user
      * explicitly picks the receiving app in the system chooser.
@@ -603,7 +603,7 @@ class EditorInstance(context: Context) : AbstractEditorInstance(context) {
     }
 
     /**
-     * DRS v1.0.6: applies a technical text tool (see [DrsTextTool]) to the
+ * applies a technical text tool (see [DrsTextTool]) to the
      * current selection, or to the whole field when nothing is selected.
      * Runs inside a single input-connection batch edit so the host app sees
      * one atomic change and its own undo stack stays usable. Password fields
@@ -673,7 +673,7 @@ class EditorInstance(context: Context) : AbstractEditorInstance(context) {
         val to = maxOf(selectionStart, selectionEnd).coerceIn(0, full.length)
         val hasSelection = from != to
         if (tool.isInsertMark) {
-            // DRS v1.21.0: the invisible directional/joining marks commit
+            // the invisible directional/joining marks commit
             // straight at the cursor — no text needed, nothing replaced.
             val mark = DrsTextTools.insertionMarkFor(tool) ?: return false
             val ok = ic.commitText(mark.toString(), 1)
@@ -741,7 +741,7 @@ class EditorInstance(context: Context) : AbstractEditorInstance(context) {
     }
 
     /**
-     * DRS v1.1.0: لوحة الحركات الذكية — replaces the Arabic word ending at
+ * لوحة الحركات الذكية — replaces the Arabic word ending at
      * the cursor (the trailing [wordLength] characters before the cursor,
      * marks included) with [transformed], in one atomic batch edit the host
      * app sees as a single change. Used by the smart harakat board's word

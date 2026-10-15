@@ -5,7 +5,7 @@
 package com.drs.smartkeyboard.ime.keyboard
 
 /**
- * DRS v1.18.0: split keyboard mode — when active, the character keyboard
+ * split keyboard mode — when active, the character keyboard
  * is laid out in two halves with a vertical gap in the middle of every
  * row, so thumbs reach both edges comfortably on wide screens (landscape
  * phones, foldables, tablets) instead of stretching across the full width.

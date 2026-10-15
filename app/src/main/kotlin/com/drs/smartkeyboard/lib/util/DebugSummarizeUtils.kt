@@ -48,7 +48,7 @@ private fun Bundle.debugSummarize(): String {
             }
             append(key)
             append("=")
-            // DRS v1.25.0 audit: values stay unprinted on purpose — a
+            // audit: values stay unprinted on purpose — a
             // bundle value can be any Parcelable-derived type, and a
             // naive getString(key) cast is exactly the
             // ClassCastException the old TODO warned about. Keys-only is

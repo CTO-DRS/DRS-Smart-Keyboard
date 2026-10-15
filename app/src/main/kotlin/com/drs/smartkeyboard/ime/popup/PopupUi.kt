@@ -55,10 +55,10 @@ fun PopupBaseBox(
         }
     }
 
-    // DRS v2.6.0 «المنبثق الحي الصادق»: the preview bubble GROWS into
+    // «المنبثق الحي الصادق»: the preview bubble GROWS into
     // place instead of popping — attached to the finger, quicker than a
     // panel (90ms vs the candidates' 130ms). The `entered` flag is the
-    // project's entrance-wave pattern (CandidatesRow, v2.2.1): the first
+    // project's entrance-wave pattern (CandidatesRow,): the first
     // composition snaps to the from-scale, then the flag flips and the
     // same frame animates to 1. DRAW-ONLY (graphicsLayer): layout is
     // never re-measured, pointer and semantics bounds are untouched.
@@ -127,7 +127,7 @@ fun PopupExtBox(
                         null
                     }
                     val localAttrs = attributes.plus(DrsImeUi.Attr.Code to element.data.code)
-                    // DRS v2.6.0 «المنبثق الحي الصادق» — the active element
+                    // «المنبثق الحي الصادق» — the active element
                     // PULSES with the pressed-key contract itself
                     // (DrsMotion.scaleFor/durationFor: 0.94 in 60ms, back in
                     // 140ms) — the popup speaks the exact language of the

@@ -5,12 +5,12 @@
 package com.drs.smartkeyboard.drs
 
 /**
- * DRS v1.10.0 — the deterministic fraction-to-Arabic-words engine
+ * the deterministic fraction-to-Arabic-words engine
  * (الكسور بالكلمات) behind the FRACTION_WORDS text tool: a clean numeric
  * fraction becomes its formal written words — «3/4» → «ثلاثة أرباع»،
  * «1/2» → «النصف»، «2/3» → «ثلثان» — the shapes formal prose spells out.
- * The numbers family widens: v1.6.0 made numbers speak, v1.7.0 amounts,
- * v1.8.0 dates, v1.9.0 times, and v1.10.0 makes fractions speak.
+ * The numbers family widens: made numbers speak, amounts,
+ * dates, times, and makes fractions speak.
  *
  * Pure fraction grammar, no model, no dictionary, no guesswork:
  *  - The whole field must be a clean two-component fraction over ONE

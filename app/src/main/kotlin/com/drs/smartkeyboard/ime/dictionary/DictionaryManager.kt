@@ -34,7 +34,7 @@ class DictionaryManager private constructor(context: Context) {
         private var defaultInstance: DictionaryManager? = null
 
         /**
-         * DRS v1.20.0: pure demotion arithmetic — the new frequency, or null when the
+ * pure demotion arithmetic — the new frequency, or null when the
          * entry must be deleted (drained to zero or below). JVM-tested.
          */
         internal fun demoteTarget(freq: Int, by: Int): Int? = (freq - by).takeIf { it > 0 }
@@ -125,7 +125,7 @@ class DictionaryManager private constructor(context: Context) {
     }
 
     /**
-     * DRS v1.20.0: drains [by] frequency points from a personally learned word after a
+ * drains [by] frequency points from a personally learned word after a
      * REJECTED (reverted) suggestion, and deletes the entry entirely once its frequency
      * drops to zero — unlearning what the user explicitly refused, instead of keeping
      * it at full strength forever. Returns true when the dictionary was modified.

@@ -172,7 +172,7 @@ fun ComputingEvaluator.computeLabel(data: KeyData): String? {
             KeyCode.KESHIDA -> {
                 evaluator.context()?.getString(R.string.key__view_keshida)
             }
-            // DRS v1.23.0: the modifier family finally gets a face. Until
+            // the modifier family finally gets a face. Until
             // this round a CTRL/ALT/FN key declared in a custom layout
             // rendered as a blank box (label null, icon null) — the same
             // round that revived the FN latch gives the whole family its
@@ -218,7 +218,7 @@ fun ComputingEvaluator.computeImageVector(data: KeyData): ImageVector? {
         KeyCode.CLIPBOARD_SELECT_ALL -> {
             Icons.Default.SelectAll
         }
-        // DRS v1.0.5: share + word navigation tools for the normal user.
+        // share + word navigation tools for the normal user.
         KeyCode.CLIPBOARD_SHARE -> {
             Icons.Default.Share
         }
@@ -236,7 +236,7 @@ fun ComputingEvaluator.computeImageVector(data: KeyData): ImageVector? {
         KeyCode.TOGGLE_COMPACT_LAYOUT -> {
             context()?.vectorResource(id = R.drawable.ic_accessibility_one_handed)
         }
-        // DRS v1.1.0: unified-strip feature tools on quick-action tiles.
+        // unified-strip feature tools on quick-action tiles.
         KeyCode.THEME_CYCLE -> {
             Icons.Default.Palette
         }
@@ -297,7 +297,7 @@ fun ComputingEvaluator.computeImageVector(data: KeyData): ImageVector? {
         KeyCode.IME_UI_MODE_TEXT_TOOLS -> {
             Icons.Default.Build
         }
-        // DRS v1.15.0: the three smart panels.
+        // the three smart panels.
         KeyCode.IME_UI_MODE_DIACRITICS -> {
             Icons.Default.TextFormat
         }

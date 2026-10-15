@@ -7,7 +7,7 @@ package com.drs.smartkeyboard.drs
 import java.time.LocalDate
 
 /**
- * DRS v1.0.8: pure logic of the daily usage statistics — day buckets,
+ * pure logic of the daily usage statistics — day buckets,
  * merge/rollover, retention pruning and sanity validation. Everything here
  * is side-effect free and JVM-testable; the Android layers (adaptation
  * engine, stats screen, diagnostics) only call these helpers.
@@ -39,7 +39,7 @@ object DrsDailyStats {
             emojiUses == 0L && clipboardUses == 0L &&
             shortcutUses == 0L && techToolUses == 0L && gestureUses == 0L &&
             suggestionAccepts == 0L && toolUses.isEmpty() && contextStarts.isEmpty() &&
-            // DRS v2.22.0: the per-feature counters count too — a flush
+            // the per-feature counters count too — a flush
             // carrying only a panel press is still a real delta.
             myTextsUses == 0L && myLexiconUses == 0L && harakatUses == 0L &&
             symbolUses == 0L && letterUses == 0L && numberUses == 0L
@@ -64,7 +64,7 @@ object DrsDailyStats {
         val existing = current[today] ?: DrsDayStats(day = today)
         val merged = existing.copy(
             keyPresses = existing.keyPresses + delta.keyPresses,
-            // DRS v1.3.0: the digit/symbol counters were recorded by the
+            // the digit/symbol counters were recorded by the
             // adaptation engine but silently dropped here — now they persist.
             numberPresses = existing.numberPresses + delta.numberPresses,
             symbolPresses = existing.symbolPresses + delta.symbolPresses,
@@ -74,7 +74,7 @@ object DrsDailyStats {
             emojiUses = existing.emojiUses + delta.emojiUses,
             clipboardUses = existing.clipboardUses + delta.clipboardUses,
             shortcutUses = existing.shortcutUses + delta.shortcutUses,
-            // DRS v2.22.0: the per-feature counters persist too — v2.21.0
+            // the per-feature counters persist too — 
             // added myTextsUses to the model but this merge silently
             // dropped it (the day buckets never saw a saved-text
             // insertion). The whole closed set now merges.
@@ -84,9 +84,9 @@ object DrsDailyStats {
             symbolUses = existing.symbolUses + delta.symbolUses,
             letterUses = existing.letterUses + delta.letterUses,
             numberUses = existing.numberUses + delta.numberUses,
-            // DRS v1.6.0: committed suggestion-row entries persist too.
+            // committed suggestion-row entries persist too.
             suggestionAccepts = existing.suggestionAccepts + delta.suggestionAccepts,
-            // DRS v1.7.0: context-mode starts persist as a summed map —
+            // context-mode starts persist as a summed map —
             // keys are bounded by the known modes (kept via mergeContextMap).
             contextStarts = mergeContextMap(existing.contextStarts, delta.contextStarts),
         )
@@ -94,7 +94,7 @@ object DrsDailyStats {
     }
 
     /**
-     * DRS v1.7.0: the known context-mode names — the whitelist both the
+ * the known context-mode names — the whitelist both the
      * merge cap and the sanity check validate against, so a hand-tampered
      * state file can never smuggle arbitrary keys into the stats.
      */
@@ -116,7 +116,7 @@ object DrsDailyStats {
     }
 
     /**
-     * DRS v1.7.0: the [limit] most frequent context modes across [buckets],
+ * the [limit] most frequent context modes across [buckets],
      * descending, ties broken deterministically by mode name so the display
      * never flickers. Pure — zero-total modes are dropped so an empty
      * recording window yields an empty list.
@@ -167,7 +167,7 @@ object DrsDailyStats {
                 bucket.clipboardUses >= 0 &&
                 bucket.shortcutUses >= 0 &&
                 bucket.suggestionAccepts >= 0 &&
-                // DRS v1.7.0: context-mode starts — counts non-negative,
+                // context-mode starts — counts non-negative,
                 // keys restricted to the known modes, no smuggled keys.
                 bucket.contextStarts.all { (mode, count) ->
                     mode in KNOWN_CONTEXT_MODES && count >= 0
@@ -188,7 +188,7 @@ object DrsDailyStats {
                 emojiUses = acc.emojiUses + bucket.emojiUses,
                 clipboardUses = acc.clipboardUses + bucket.clipboardUses,
                 shortcutUses = acc.shortcutUses + bucket.shortcutUses,
-                // DRS v2.22.0: the per-feature counters aggregate like
+                // the per-feature counters aggregate like
                 // their siblings — the totals view never drops a feature.
                 myTextsUses = acc.myTextsUses + bucket.myTextsUses,
                 myLexiconUses = acc.myLexiconUses + bucket.myLexiconUses,
@@ -197,7 +197,7 @@ object DrsDailyStats {
                 letterUses = acc.letterUses + bucket.letterUses,
                 numberUses = acc.numberUses + bucket.numberUses,
                 suggestionAccepts = acc.suggestionAccepts + bucket.suggestionAccepts,
-                // DRS v1.7.0: the lifetime context view aggregates too.
+                // the lifetime context view aggregates too.
                 contextStarts = mergeContextMap(acc.contextStarts, bucket.contextStarts),
             )
         }
@@ -221,7 +221,7 @@ object DrsDailyStats {
     }
 
     /**
-     * DRS v1.1.0: a continuous, ASCENDING (oldest -> today) window of the
+ * a continuous, ASCENDING (oldest -> today) window of the
      * last [days] day buckets with every missing day zero-filled — the
      * exact shape the bar chart and the CSV export need. Returns exactly
      * [days] buckets when [today] parses (oldest first, today last).
@@ -243,7 +243,7 @@ object DrsDailyStats {
     }
 
     /**
-     * DRS v1.2.0: the single most active recorded day by key presses.
+ * the single most active recorded day by key presses.
      * Ties resolve to the LATER day so the result is deterministic.
      * Null when no recorded day has any activity at all.
      */
@@ -253,7 +253,7 @@ object DrsDailyStats {
             .maxWithOrNull(compareBy({ it.keyPresses }, { it.day }))
 
     /**
-     * DRS v1.2.0: consecutive active days ending today — or ending
+ * consecutive active days ending today — or ending
      * yesterday when today has no activity yet (a live streak is not
      * broken while the current day is still ongoing). Pure and
      * JVM-testable; a malformed [today] degrades to 0.
@@ -280,7 +280,7 @@ object DrsDailyStats {
     }
 
     /**
-     * DRS v1.3.0: week-over-week growth of key presses, computed from two
+ * week-over-week growth of key presses, computed from two
      * real zero-filled 7-day windows ending today. Null when the previous
      * week had no activity at all (a percentage would be meaningless).
      * Pure and JVM-testable.
@@ -298,14 +298,14 @@ object DrsDailyStats {
     }
 
     /**
-     * DRS v1.4.0: number of recorded days with at least one non-zero
+ * number of recorded days with at least one non-zero
      * counter. Pure and JVM-testable.
      */
     fun activeDaysCount(stats: Map<String, DrsDayStats>): Int =
         stats.values.count { it.hasActivity() }
 
     /**
-     * DRS v1.4.0: mean key presses per ACTIVE day — days without any
+ * mean key presses per ACTIVE day — days without any
      * activity are excluded so idle days never dilute the average.
      * 0 when no recorded day has activity. Pure and JVM-testable.
      */
@@ -316,7 +316,7 @@ object DrsDailyStats {
     }
 
     /**
-     * DRS v1.5.0: the LONGEST run of consecutive active days anywhere in
+ * the LONGEST run of consecutive active days anywhere in
      * the recorded window — the all-time sibling of [currentStreak], which
      * is anchored to today. A malformed day stamp simply cannot form a
      * consecutive pair, so it never inflates the run. Pure and
@@ -344,7 +344,7 @@ object DrsDailyStats {
     }
 
     /**
-     * DRS v1.5.0: the weekday with the highest total of key presses across
+ * the weekday with the highest total of key presses across
      * all recorded days (e.g. "you type most on Sundays"). Ties resolve
      * deterministically to the first-encountered weekday (the one whose
      * total was reached first); null when no recorded day has any key
@@ -374,7 +374,7 @@ object DrsDailyStats {
     }
 
     /**
-     * DRS v1.5.0: how many days the statistics window spans — from the
+ * how many days the statistics window spans — from the
      * OLDEST recorded day through [today] inclusive. Null when nothing is
      * recorded or [today] is malformed. Pure and JVM-testable.
      */
@@ -400,16 +400,16 @@ object DrsDailyStats {
             techToolUses > 0L || gestureUses > 0L ||
             emojiUses > 0L || clipboardUses > 0L || shortcutUses > 0L ||
             suggestionAccepts > 0L ||
-            // DRS v2.22.0: the per-feature counters count as activity —
+            // the per-feature counters count as activity —
             // a day of panel work is a real usage day.
             myTextsUses > 0L || myLexiconUses > 0L || harakatUses > 0L ||
             symbolUses > 0L || letterUses > 0L || numberUses > 0L ||
-            // DRS v1.7.0: input starts alone count as activity — a day
+            // input starts alone count as activity — a day
             // spent opening password/number fields is a real usage day.
             contextStarts.values.any { it > 0L }
 
     /**
-     * DRS v1.6.0: how many days of the recorded span have NO activity —
+ * how many days of the recorded span have NO activity —
      * the exact complement of the active-day count inside the recorded
      * window (span − active). Null when the span itself is unknown.
      * Pure and JVM-testable.
@@ -423,7 +423,7 @@ object DrsDailyStats {
     }
 
     /**
-     * DRS v1.6.0: the share of ACTIVE days inside the recorded window,
+ * the share of ACTIVE days inside the recorded window,
      * as a percentage (0–100). Null when the span is unknown. Pure and
      * JVM-testable.
      */
@@ -436,7 +436,7 @@ object DrsDailyStats {
     }
 
     /**
-     * DRS v1.6.0: the weekday with the LOWEST total of key presses among
+ * the weekday with the LOWEST total of key presses among
      * the weekdays that have at least one key press recorded — the quiet
      * counterpart of [busiestWeekday]. Ties resolve deterministically to
      * the first-encountered weekday; null when no recorded day has key

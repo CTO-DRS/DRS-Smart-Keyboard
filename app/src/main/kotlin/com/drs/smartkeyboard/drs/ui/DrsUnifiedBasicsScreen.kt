@@ -43,7 +43,7 @@ import org.drs.jetpref.datastore.ui.PreferenceGroup
 import org.drs.jetpref.datastore.ui.SwitchPreference
 
 /**
- * DRS v1.0.7 — الأساسيات الموحدة (Unified Basics).
+ * الأساسيات الموحدة (Unified Basics).
  *
  * One screen where both levels meet:
  *  - المجموعة الأساسية: the essential switches, always visible.
@@ -74,7 +74,7 @@ fun DrsUnifiedBasicsScreen() = DrsScreen {
                 title = stringRes(R.string.pref__keyboard__number_row__label),
                 summary = stringRes(R.string.drs__unified__basics_number_row_summary),
             )
-            // DRS v1.0.8: keyboard height scale — a real sizing control the
+            // keyboard height scale — a real sizing control the
             // live keyboard obeys through ImeWindowSpec.calcRowHeight.
             DialogSliderPreference(
                 prefs.keyboard.heightScalePercent,
@@ -85,7 +85,7 @@ fun DrsUnifiedBasicsScreen() = DrsScreen {
                 max = com.drs.smartkeyboard.ime.window.ImeWindowSpec.HEIGHT_SCALE_MAX_PERCENT,
                 stepIncrement = 5,
             )
-            // DRS v1.2.0: Smartbar height scale — the live Smartbar follows
+            // Smartbar height scale — the live Smartbar follows
             // it through the sizing layer (ProvideKeyboardRowBaseHeight).
             DialogSliderPreference(
                 prefs.keyboard.smartbarHeightScalePercent,
@@ -101,7 +101,7 @@ fun DrsUnifiedBasicsScreen() = DrsScreen {
                 title = stringRes(R.string.pref__keyboard__popup_enabled__label),
                 summary = stringRes(R.string.drs__unified__basics_popups_summary),
             )
-            // DRS v1.6.0: key-preview scale — the live long-press popup
+            // key-preview scale — the live long-press popup
             // follows it through the popup bounds provider.
             DialogSliderPreference(
                 prefs.keyboard.previewScalePercent,
@@ -112,7 +112,7 @@ fun DrsUnifiedBasicsScreen() = DrsScreen {
                 max = com.drs.smartkeyboard.ime.window.ImeWindowSpec.KEY_PREVIEW_SCALE_MAX_PERCENT,
                 stepIncrement = 10,
             )
-            // DRS v1.7.0: glide trail width — the drawn ribbon (and its
+            // glide trail width — the drawn ribbon (and its
             // fade-out) derive from a density-correct baseline times this
             // factor, read at draw time.
             DialogSliderPreference(
@@ -124,7 +124,7 @@ fun DrsUnifiedBasicsScreen() = DrsScreen {
                 max = com.drs.smartkeyboard.ime.window.ImeWindowSpec.GLIDE_TRAIL_SCALE_MAX_PERCENT,
                 stepIncrement = 10,
             )
-            // DRS v1.7.0: emoji size — the palette grid cell and the glyph
+            // emoji size — the palette grid cell and the glyph
             // font size both multiply by this factor.
             DialogSliderPreference(
                 prefs.emoji.sizePercent,

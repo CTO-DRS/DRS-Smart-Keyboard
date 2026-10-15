@@ -34,7 +34,7 @@ import com.drs.smartkeyboard.ime.keyboard.SpaceBarMode
 import com.drs.smartkeyboard.ime.keyboard.SplitMode
 import com.drs.smartkeyboard.ime.landscapeinput.LandscapeInputUiMode
 import com.drs.smartkeyboard.app.settings.DrsSearchHistory
-// DRS v1.20.0: EmojiHairStyle import removed with the dead emoji__preferred_hair_style pref.
+// EmojiHairStyle import removed with the dead emoji__preferred_hair_style pref.
 import com.drs.smartkeyboard.ime.media.emoji.EmojiHistory
 import com.drs.smartkeyboard.ime.media.emoji.EmojiSkinTone
 import com.drs.smartkeyboard.ime.media.emoji.EmojiSuggestionType
@@ -101,7 +101,7 @@ abstract class DrsPreferenceModel : PreferenceModel() {
         )
         val historyEnabled = boolean(
             key = "clipboard__history_enabled",
-            // DRS v1.0.5: default ON — every user system package enables it
+            // default ON — every user system package enables it
             // anyway, and a fresh install (or a user who skipped choosing a
             // system) now gets a working clipboard panel out of the box.
             // Users can still turn it off from the clipboard panel or settings.
@@ -148,7 +148,7 @@ abstract class DrsPreferenceModel : PreferenceModel() {
             key = "clipboard__history_size_limit",
             default = 20,
         )
-        // DRS v1.22.0: the honest ceiling of the PINNED clipboard items —
+        // the honest ceiling of the PINNED clipboard items —
         // «سقف التثبيتات». Pinned items were the one unbounded store in
         // the clipboard (history limits explicitly exempt them), so the
         // cap refuses a new pin with an honest toast instead of silently
@@ -171,7 +171,7 @@ abstract class DrsPreferenceModel : PreferenceModel() {
             default = true,
         )
 
-        // DRS v1.12.0 — the complete smart clipboard system: the editor
+        // the complete smart clipboard system: the editor
         // character limit (up to the 500,000 policy cap), the colored
         // search-result cards with navigation, the code-line detection,
         // the editor defaults, and the panel sort order.
@@ -208,7 +208,7 @@ abstract class DrsPreferenceModel : PreferenceModel() {
             default = ClipHistorySort.NEWEST,
         )
 
-        // DRS v1.14.0 — the comprehensive settings list in the app covers
+        // the comprehensive settings list in the app covers
         // everything the recent rounds built: the floating edit popup
         // window (surface, size, dimming), the direct line jump of the
         // result cards, the code-line detection details, and the panel
@@ -225,7 +225,7 @@ abstract class DrsPreferenceModel : PreferenceModel() {
             key = "clipboard__popup_scrim",
             default = ClipEditorScrim.NORMAL,
         )
-        // DRS v1.21.0 — «نافذة الاشعارات المنبثقه الخاصه بالتعديل»: a new
+        // «نافذة الاشعارات المنبثقه الخاصه بالتعديل»: a new
         // text capture may surface a heads-up notification whose «تعديل»
         // action opens the floating editor outside the panel. Sensitive
         // and non-text clips never notify (lock-screen privacy).
@@ -270,7 +270,7 @@ abstract class DrsPreferenceModel : PreferenceModel() {
         )
     }
 
-    // DRS v2.10.0 — «التراجع والإعادة المحليان الصادقان»: the keyboard keeps
+    // «التراجع والإعادة المحليان الصادقان»: the keyboard keeps
     // its own bounded self-verifying edit history so undo/redo work in hosts
     // that implement none. Off switches the strip tools back to pure host
     // delegation (Ctrl+Z keyevents) — the pre-2.10.0 behavior.
@@ -296,7 +296,7 @@ abstract class DrsPreferenceModel : PreferenceModel() {
             key = "correction__double_space_period",
             default = true,
         )
-        // DRS v2.7.0: Gboard/AOSP-style smart punctuation — a whitespace-
+        // Gboard/AOSP-style smart punctuation — a whitespace-
         // (or text-start) preceded double hyphen is rewritten to a real em
         // dash when the following space is committed. Deterministic,
         // local-only, and disabled inside the same non-TEXT/numeric guards
@@ -310,7 +310,7 @@ abstract class DrsPreferenceModel : PreferenceModel() {
             key = "correction__remember_caps_lock_state",
             default = false,
         )
-        // DRS v2.9.0: HeliBoard/OpenBoard heritage — the first backspace
+        // HeliBoard/OpenBoard heritage — the first backspace
         // right after a silent auto-correction restores the word exactly as
         // the user typed it (one-shot, self-verifying, never for manual
         // picks). Default on: it is the affordance AOSP-derived keyboards
@@ -387,7 +387,7 @@ abstract class DrsPreferenceModel : PreferenceModel() {
             key = "emoji__preferred_skin_tone",
             default = EmojiSkinTone.DEFAULT,
         )
-        // DRS v1.7.0: emoji size scale as a percentage of the default
+        // emoji size scale as a percentage of the default
         // grid cell (42dp) and glyph (22sp). 100 = default. Real behavior
         // change: the emoji palette multiplies both its adaptive grid cell
         // and the glyph font size by this factor — density of the grid and
@@ -396,7 +396,7 @@ abstract class DrsPreferenceModel : PreferenceModel() {
             key = "emoji__size_percent",
             default = ImeWindowSpec.EMOJI_SCALE_DEFAULT_PERCENT,
         )
-        // DRS v1.20.0: `emoji__preferred_hair_style` removed — hair style is derived
+        // `emoji__preferred_hair_style` removed — hair style is derived
         // from the emoji's own code points at parse time (Emoji.kt), so the pref was
         // declared but never read by anything, a dead setting.
         val historyEnabled = boolean(
@@ -450,7 +450,7 @@ abstract class DrsPreferenceModel : PreferenceModel() {
         )
     }
 
-    // DRS v1.0.4: persistent smart-search history — recent queries are stored
+    // persistent smart-search history — recent queries are stored
     // here (most recent first, deduplicated, capped) and surfaced as one-tap
     // chips inside the search dialog.
     val search = Search()
@@ -532,7 +532,7 @@ abstract class DrsPreferenceModel : PreferenceModel() {
             key = "glide__trail_fade_duration",
             default = 200,
         )
-        // DRS v1.7.0: glide trail WIDTH scale as a percentage of the
+        // glide trail WIDTH scale as a percentage of the
         // density-correct baseline (20dp). 100 = default. Real behavior
         // change: the trail draw call and the fade-out animator both
         // derive from this factor, so the ribbon really follows the
@@ -638,7 +638,7 @@ abstract class DrsPreferenceModel : PreferenceModel() {
 
     val internal = Internal()
     inner class Internal {
-        // DRS v1.20.0: `internal__home_is_beta_toolbox_collapsed_040a01` removed —
+        // `internal__home_is_beta_toolbox_collapsed_040a01` removed —
         // declared but never read anywhere, a leftover migration marker.
         val isImeSetUp = boolean(
             key = "internal__is_ime_set_up",
@@ -688,7 +688,7 @@ abstract class DrsPreferenceModel : PreferenceModel() {
             key = "keyboard__number_row",
             default = false,
         )
-        // DRS v2.7.0: AOSP/OpenBoard-heritage accessibility affordance —
+        // AOSP/OpenBoard-heritage accessibility affordance —
         // while the IME owns key events, VOLUME_UP/DOWN move the cursor a
         // line up/down instead of changing media volume. Default OFF: the
         // volume keys keep their system meaning unless the user opts in.
@@ -760,7 +760,7 @@ abstract class DrsPreferenceModel : PreferenceModel() {
             key = "keyboard__long_press_delay",
             default = 300,
         )
-        // DRS v1.0.6: key repeat RATE as a percentage of the platform rate.
+        // key repeat RATE as a percentage of the platform rate.
         // 100 = system default, higher = faster repeating (shorter delay).
         // Real behavior change: InputEventDispatcher divides the platform
         // repeat delay by this factor.
@@ -768,7 +768,7 @@ abstract class DrsPreferenceModel : PreferenceModel() {
             key = "keyboard__key_repeat_rate_percent",
             default = 100,
         )
-        // DRS v2.4.0: accelerating delete ladder — holding delete keeps the
+        // accelerating delete ladder — holding delete keeps the
         // user's repeat rate for the first six repeats, then descends a
         // fixed three-gear ladder (×1.5 → ×2 → ×2.5). Real behavior change:
         // InputEventDispatcher feeds the repeat count through
@@ -777,7 +777,7 @@ abstract class DrsPreferenceModel : PreferenceModel() {
             key = "keyboard__accelerated_delete",
             default = true,
         )
-        // DRS v1.0.8: keyboard HEIGHT scale as a percentage of the baseline
+        // keyboard HEIGHT scale as a percentage of the baseline
         // height. 100 = default. Real behavior change: ImeWindowController
         // feeds it into ImeWindowSpec.UserPreferredOptions.heightScale and
         // ImeWindowSpec.calcRowHeight() scales every rendered row/key.
@@ -785,7 +785,7 @@ abstract class DrsPreferenceModel : PreferenceModel() {
             key = "keyboard__height_scale_percent",
             default = ImeWindowSpec.HEIGHT_SCALE_DEFAULT_PERCENT,
         )
-        // DRS v1.2.0: Smartbar HEIGHT scale as a percentage of the baseline
+        // Smartbar HEIGHT scale as a percentage of the baseline
         // Smartbar row height. 100 = default. Real behavior change: the
         // sizing layer multiplies the provided Smartbar row height by this
         // factor, so the live Smartbar (and every consumer of
@@ -794,7 +794,7 @@ abstract class DrsPreferenceModel : PreferenceModel() {
             key = "keyboard__smartbar_height_scale_percent",
             default = ImeWindowSpec.SMARTBAR_HEIGHT_SCALE_DEFAULT_PERCENT,
         )
-        // DRS v1.6.0: key-popup (long-press preview) scale as a percentage
+        // key-popup (long-press preview) scale as a percentage
         // of the default popup box size. 100 = default. Real behavior
         // change: the popup bounds provider in TextKeyboardLayout
         // multiplies the per-orientation popup multipliers by this factor,
@@ -808,7 +808,7 @@ abstract class DrsPreferenceModel : PreferenceModel() {
             default = true,
         )
         /**
-         * DRS v1.17.0: haraka-first backspace — deleting peels the diacritic
+ * haraka-first backspace — deleting peels the diacritic
          * off the letter first (one mark per tap) instead of the ICU
          * grapheme cluster (letter + all its marks in one tap).
          */
@@ -816,7 +816,7 @@ abstract class DrsPreferenceModel : PreferenceModel() {
             key = "keyboard__backspace_strips_harakat",
             default = true,
         )
-        // DRS v1.18.0: split keyboard — two halves with a central gap so
+        // split keyboard — two halves with a central gap so
         // thumbs reach on wide screens. AUTO splits only on wide keyboards
         // (>= 560dp, i.e. landscape phones / foldables / tablets); the gap
         // renders on the letters page in the normal fixed window mode only.
@@ -892,7 +892,7 @@ abstract class DrsPreferenceModel : PreferenceModel() {
     inner class Updates {
         val checkMode = enum(
             key = "updates__check_mode",
-            // DRS v1.28.0 audit fix (Medium): the default now matches the
+            // audit fix (Medium): the default now matches the
             // documented opt-in contract in DrsUpdateCenter ("MANUAL is the
             // honest default of an opt-in system"). No network request is
             // made unless the user opens the update center or opts into a
@@ -965,7 +965,7 @@ abstract class DrsPreferenceModel : PreferenceModel() {
             key = "smartbar__extended_actions_placement",
             default = ExtendedActionsPlacement.ABOVE_CANDIDATES,
         )
-        // DRS v2.11.0 «المُرتّب السياقي الصادق»: promotes the user's OWN
+        // «المُرتّب السياقي الصادق»: promotes the user's OWN
         // enabled quick actions to the front of the row by field kind
         // (URI/email/chat/search/password). A pure permutation of their
         // manual arrangement — no new tiles, no removals; the master
@@ -977,7 +977,7 @@ abstract class DrsPreferenceModel : PreferenceModel() {
     }
 
     /**
-     * DRS v1.15.0: the smart panels' behavior switches (لوحة الحركات /
+ * the smart panels' behavior switches (لوحة الحركات /
      * لوحة الرموز الذكية / لوحة الحروف الموسعة). Every default preserves
      * the smart behavior, and every switch is a real behavior toggle.
      */
@@ -999,7 +999,7 @@ abstract class DrsPreferenceModel : PreferenceModel() {
             default = true,
         )
         /**
-         * DRS v1.16.0: the smart ordering of the panels' switcher chips —
+ * the smart ordering of the panels' switcher chips —
          * the current panel leads, the rest follow the local open counts.
          * Off = the fixed catalogue order.
          */
@@ -1008,7 +1008,7 @@ abstract class DrsPreferenceModel : PreferenceModel() {
             default = true,
         )
         /**
-         * DRS v1.1.0: the smart harakat board's contextual advice strip —
+ * the smart harakat board's contextual advice strip —
          * the on-device advisor ranks the harakat that make sense at the
          * cursor (tanween completion, shadda's vowel, the definite-article
          * lam) plus the lexicon word-tashkeel action. Off = a plain board.
@@ -1018,7 +1018,7 @@ abstract class DrsPreferenceModel : PreferenceModel() {
             default = true,
         )
         /**
-         * DRS v2.2.0: the text tools panel's contextual advisory row —
+ * the text tools panel's contextual advisory row —
          * the deterministic tiles' brain (DrsTileContextAdvisor) ranks
          * the tools that make sense for the text before the cursor.
          * Off = a plain panel without the advisory row.
@@ -1035,14 +1035,14 @@ abstract class DrsPreferenceModel : PreferenceModel() {
             key = "spelling__language_mode",
             default = SpellingLanguageMode.USE_KEYBOARD_SUBTYPES,
         )
-        // DRS v1.19.0: real typo marking behind the conservative SpellingDecider
+        // real typo marking behind the conservative SpellingDecider
         // gates (rich dictionaries only, plausible correction required). Default
         // on — the spell-checker channel finally does what the system expects.
         val typoFlaggingEnabled = boolean(
             key = "spelling__typo_flagging_enabled",
             default = true,
         )
-        // DRS v1.20.0: `spelling__use_contacts` / `spelling__use_udm_entries` removed —
+        // `spelling__use_contacts` / `spelling__use_udm_entries` removed —
         // they were declared and UI-stubbed with visibleIf=false but no contacts
         // integration exists anywhere in the IME; a setting that promises a behavior
         // nothing implements is a false promise. (Contacts lookups would also need
@@ -1074,7 +1074,7 @@ abstract class DrsPreferenceModel : PreferenceModel() {
             default = true,
         )
         /**
-         * DRS v1.17.0: TRUE autocorrect — when the typed word matches NO
+ * TRUE autocorrect — when the typed word matches NO
          * dictionary prefix and a very common word sits within edit
          * distance 1, space silently commits the fix (backspace reverts).
          * Gated by [com.drs.smartkeyboard.ime.nlp.AutocorrectDecider].
@@ -1083,7 +1083,7 @@ abstract class DrsPreferenceModel : PreferenceModel() {
             key = "suggestion__autocorrect_enabled",
             default = true,
         )
-        // DRS v2.7.0: HeliBoard-style multilingual typing — when enabled,
+        // HeliBoard-style multilingual typing — when enabled,
         // the dictionaries of up to two OTHER enabled subtypes that share
         // the current subtype's suggestion provider also feed the
         // candidate row (round-robin interleaved, deduped, capped).
@@ -1104,8 +1104,8 @@ abstract class DrsPreferenceModel : PreferenceModel() {
     }
 
     /**
-     * DRS v1.24.0: the built-in voice dictation gate — «الميكروفون في
-     * قبضة المستخدم». v1.23.0 woke the microphone up with no explicit
+ * the built-in voice dictation gate — «الميكروفون في
+ * قبضة المستخدم». woke the microphone up with no explicit
      * user-facing switch; the settings gate below is the real gate the
      * pure [com.drs.smartkeyboard.ime.voice.decideVoiceInputRoute]
      * consults on every mic-key press, so switching it off silences the
@@ -1118,8 +1118,8 @@ abstract class DrsPreferenceModel : PreferenceModel() {
             default = true,
         )
         /**
-         * DRS v1.25.0: which recognizer may listen — the second voice
-         * gate. AUTO keeps the v1.23 behavior; ON_DEVICE_ONLY refuses
+ * which recognizer may listen — the second voice
+ * gate. AUTO keeps the behavior; ON_DEVICE_ONLY refuses
          * any network-backed service (and answers with an honest toast
          * when the ROM cannot honor the demand); STANDARD pins the
          * classic recognizer. Consulted by
@@ -1142,7 +1142,7 @@ abstract class DrsPreferenceModel : PreferenceModel() {
          * user taps the mic again or speaks a terminating command
          * («إيقاف الإملاء» / «امسح الكل» / «stop dictation» / «clear all»).
          * Off by default: every session still starts from an explicit mic
-         * press (the same privacy gate v1.24.0 established).
+ * press (the same privacy gate established).
          */
         val continuousDictation = boolean(
             key = "voice__continuous_dictation",
@@ -1207,7 +1207,7 @@ abstract class DrsPreferenceModel : PreferenceModel() {
             key = "theme__editor_level",
             default = SnyggLevel.ADVANCED,
         )
-        // DRS v2.8.0 «خلفيتك من ألبومك»: one user background image, injected
+        // «خلفيتك من ألبومك»: one user background image, injected
         // in-memory into the active theme's window rule at load time. The value
         // is the stored file name (SHA-256 prefix of the content) or "" for none.
         val backgroundImage = string(

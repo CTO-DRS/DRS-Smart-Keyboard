@@ -11,7 +11,7 @@ import org.drs.lib.snygg.SnyggStylesheet
 import org.drs.lib.snygg.value.SnyggUriValue
 
 /**
- * DRS v2.8.0 «خلفيتك من ألبومك» — pure, total stylesheet patcher.
+ * «خلفيتك من ألبومك» — pure, total stylesheet patcher.
  *
  * Given a freshly-parsed theme stylesheet, injects the user background image as a
  * `background-image` property on the `window` element rule. The existing rule (and

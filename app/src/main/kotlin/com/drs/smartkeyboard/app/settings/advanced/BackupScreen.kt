@@ -71,7 +71,7 @@ object Backup {
     const val CLIPBOARD_TEXT_ITEMS_JSON_NAME = "clipboard_text_items.json"
     const val CLIPBOARD_IMAGES_JSON_NAME = "clipboard_images.json"
     const val CLIPBOARD_VIDEO_JSON_NAME = "clipboard_video.json"
-    // DRS v1.21.0: the personal user dictionary travels in the archive —
+    // the personal user dictionary travels in the archive —
     // a factory reset used to silently lose every learned word.
     const val USER_DICTIONARY_TXT_NAME = "user_dictionary.txt"
 
@@ -143,7 +143,7 @@ fun BackupScreen() = DrsScreen {
 
     var backupDestination by remember { mutableStateOf(Backup.Destination.FILE_SYS) }
     val backupFilesSelector = remember { Backup.FilesSelector() }
-    // DRS v1.20.0: this workspace handle used to be a plain local `var`, so a config
+    // this workspace handle used to be a plain local `var`, so a config
     // change or process death while the SAF picker was open lost it and the launcher
     // callbacks crashed on `backupWorkspace!!` — reported to the user as a bogus
     // "backup failed". It must survive recomposition like RestoreScreen's does.
@@ -165,7 +165,7 @@ fun BackupScreen() = DrsScreen {
                 return@rememberLauncherForActivityResult
             }
             scope.launch {
-                // DRS v1.20.0: writing the archive through the SAF and closing the
+                // writing the archive through the SAF and closing the
                 // workspace are file IO — they used to run on the main thread here.
                 runCatching {
                     withContext(Dispatchers.IO) {
@@ -185,7 +185,7 @@ fun BackupScreen() = DrsScreen {
     )
 
     suspend fun prepareBackupWorkspace() {
-        // DRS v1.20.0: zipping and copying the whole backup workspace (potentially
+        // zipping and copying the whole backup workspace (potentially
         // hundreds of MB of clipboard media) used to run on the main dispatcher —
         // a guaranteed jank/ANR source. Pure file IO belongs on IO.
         withContext(Dispatchers.IO) {
@@ -209,7 +209,7 @@ fun BackupScreen() = DrsScreen {
                 }
             }
 
-            // DRS v1.21.0: the personal user dictionary travels in the
+            // the personal user dictionary travels in the
             // archive (combined-list text format) — a restore/factory
             // reset used to silently lose every learned word.
             if (backupFilesSelector.userDictionary) {
@@ -241,7 +241,7 @@ fun BackupScreen() = DrsScreen {
                     clipboardFilesDir.subFile(Backup.CLIPBOARD_IMAGES_JSON_NAME)
                         .writeJson(clipboardHistory.filter { it.type == ItemType.IMAGE })
                     for (item in clipboardHistory.filter { it.type == ItemType.IMAGE }) {
-                        // DRS v1.20.0: one broken/missing media URI must not abort the
+                        // one broken/missing media URI must not abort the
                         // whole backup — skip the broken item and keep the archive.
                         val id = item.uri?.let { runCatching { ContentUris.parseId(it) }.getOrNull() } ?: continue
                         runCatching {
@@ -377,7 +377,7 @@ internal fun BackupFilesSelector(
             checked = filesSelector.imeTheme,
             text = stringRes(R.string.backup_and_restore__back_up__files_ime_theme),
         )
-        // DRS v1.21.0: the learned personal words ride the archive too.
+        // the learned personal words ride the archive too.
         CheckboxListItem(
             onClick = { filesSelector.userDictionary = !filesSelector.userDictionary },
             checked = filesSelector.userDictionary,

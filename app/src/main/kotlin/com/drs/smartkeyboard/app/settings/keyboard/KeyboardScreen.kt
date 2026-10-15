@@ -79,7 +79,7 @@ fun KeyboardScreen() = DrsScreen {
             title = stringRes(R.string.pref__keyboard__capitalization_behavior__label),
             entries = enumDisplayEntriesOf(CapitalizationBehavior::class),
         )
-        // DRS v2.7.0: volume-key cursor control (AOSP/OpenBoard heritage,
+        // volume-key cursor control (AOSP/OpenBoard heritage,
         // opt-in — default OFF so the volume keys keep their system meaning).
         SwitchPreference(
             prefs.keyboard.volumeKeyCursor,
@@ -89,7 +89,7 @@ fun KeyboardScreen() = DrsScreen {
         }
 
         PreferenceGroup(title = stringRes(R.string.pref__keyboard__group_look__label)) {
-        // DRS v1.28.0 audit fix (Medium, exposure): keyboard height was wired
+        // audit fix (Medium, exposure): keyboard height was wired
         // end-to-end into ImeWindowSpec but only reachable through the unified
         // basics screen — classic settings users never saw it. The same
         // slider now lives in the classic Look group as well.
@@ -161,7 +161,7 @@ fun KeyboardScreen() = DrsScreen {
                 max = 700,
                 stepIncrement = 10,
             )
-            // DRS v1.0.6: real repeat-rate control - wired into the input
+            // real repeat-rate control - wired into the input
             // event dispatcher, so holding a key actually repeats faster.
             DialogSliderPreference(
                 prefs.keyboard.keyRepeatRatePercent,
@@ -171,7 +171,7 @@ fun KeyboardScreen() = DrsScreen {
                 max = 300,
                 stepIncrement = 10,
             )
-            // DRS v2.4.0: the accelerating delete ladder — the repeat rate
+            // the accelerating delete ladder — the repeat rate
             // above stays the base speed; this toggle lets the delay descend
             // a fixed three-gear ladder while delete is held. Delete-family
             // keys only, pure deterministic contract, no guessing.
@@ -185,14 +185,14 @@ fun KeyboardScreen() = DrsScreen {
                 title = stringRes(R.string.pref__keyboard__space_bar_switches_to_characters__label),
                 summary = stringRes(R.string.pref__keyboard__space_bar_switches_to_characters__summary),
             )
-            // DRS v1.17.0: haraka-first backspace — the delete key peels
+            // haraka-first backspace — the delete key peels
             // diacritics off letter by letter instead of one cluster tap.
             SwitchPreference(
                 prefs.keyboard.backspaceStripsHarakat,
                 title = stringRes(R.string.pref__keyboard__backspace_strips_harakat__label),
                 summary = stringRes(R.string.pref__keyboard__backspace_strips_harakat__summary),
             )
-            // DRS v1.18.0: split keyboard — the letters page renders in two
+            // split keyboard — the letters page renders in two
             // halves with a central gap so thumbs reach both edges on wide
             // screens (landscape phones, foldables, tablets).
             ListPreference(

@@ -97,7 +97,7 @@ val DrsImeThemeBaseStyle = SnyggStylesheet.v2 {
     ) {
         foreground = rgbaColor(255, 152, 0)
     }
-    // DRS v1.23.0: the modifier family gets its face. A CTRL/ALT/FN key on
+    // the modifier family gets its face. A CTRL/ALT/FN key on
     // any layout lights up while its latch is armed — light blue for a
     // one-shot latch (same semantics as a mechanical LED), the shift
     // caps-lock orange for a lock. The latch state arrives through the

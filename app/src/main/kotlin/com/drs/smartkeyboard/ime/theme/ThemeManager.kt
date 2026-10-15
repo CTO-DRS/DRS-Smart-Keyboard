@@ -86,7 +86,7 @@ class ThemeManager(context: Context) {
             } to version
         }
         indexedThemeConfigs.collectIn(scope) {
-            // DRS v1.5.0: the extension-driven cache reset used to leak
+            // the extension-driven cache reset used to leak
             // EVERY loaded dir (the cache is cleared, but the unzipped
             // folders stayed in cacheDir/loaded forever). Delete the
             // folders of the infos being dropped before clearing.
@@ -111,7 +111,7 @@ class ThemeManager(context: Context) {
         ) {}.collectIn(scope) {
             updateActiveTheme()
         }
-        // DRS v2.8.0 «خلفيتك من ألبومك»: the user background image is patched
+        // «خلفيتك من ألبومك»: the user background image is patched
         // into the stylesheet AT LOAD TIME, so any change must evict the cached
         // theme infos (same eviction pattern as the extension-driven reset
         // above) — the next updateActiveTheme re-loads and re-patches.
@@ -157,7 +157,7 @@ class ThemeManager(context: Context) {
         if (themeConfig == null) {
             return@withLock
         }
-        // DRS v1.5.0: bound the loaded-dir cache — the upstream TODO said
+        // bound the loaded-dir cache — the upstream TODO said
         // "this leaks the loaded dir": every theme switch unzipped into a
         // fresh cacheDir/loaded/<uuid> folder and never cleaned up. Keep
         // at most 3 cached infos (day + night + preview alternation fits)
@@ -194,7 +194,7 @@ class ThemeManager(context: Context) {
             }
             val stylesheetJson = stylesheetFile.readText()
             val parsed = SnyggStylesheet.fromJson(stylesheetJson).getOrThrow()
-            // DRS v2.8.0: inject the user background image IN MEMORY — the theme
+            // inject the user background image IN MEMORY — the theme
             // file on disk is never modified, and the total patcher means a
             // broken preference value can never fail a theme load.
             DrsThemeBackgroundPatcher.apply(
@@ -205,7 +205,7 @@ class ThemeManager(context: Context) {
         }.fold(
             onSuccess = { newStylesheet ->
                 val newInfo = ThemeInfo(activeName, themeConfig, newStylesheet, loadedDir, null)
-                // DRS v1.5.0: evict the oldest cached infos beyond the
+                // evict the oldest cached infos beyond the
                 // 3-entry bound and delete their loaded dirs so repeated
                 // theme switching cannot grow the cache without limit.
                 // The info currently live in _activeThemeInfo is never
@@ -226,7 +226,7 @@ class ThemeManager(context: Context) {
                 _activeThemeInfo.value = newInfo
             },
             onFailure = { cause ->
-                // DRS v1.0.6: sanitized event log entry for theme load
+                // sanitized event log entry for theme load
                 // failures (class name only - never file or user content).
                 runCatching {
                     DrsEventLog.recordError(
@@ -276,7 +276,7 @@ class ThemeManager(context: Context) {
     }
 
     /**
-     * DRS v1.0.8: cycles the keyboard theme of the currently effective
+ * cycles the keyboard theme of the currently effective
      * day/night slot to the next installed theme (deterministic order by
      * extension id then component id). The live keyboard re-styles
      * immediately because the theme prefs drive [updateActiveTheme].
@@ -296,9 +296,9 @@ class ThemeManager(context: Context) {
             ThemeMode.FOLLOW_SYSTEM -> appContext.resources.configuration.uiMode and
                 Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES
             ThemeMode.FOLLOW_TIME -> {
-                // DRS v1.28.0 audit fix (Medium): cycleTheme used the old
+                // audit fix (Medium): cycleTheme used the old
                 // non-wrapping `now !in sunrise..sunset` test while the real
-                // evaluator uses ThemeDayWindow.isDaytime (v1.21.0 midnight
+                // evaluator uses ThemeDayWindow.isDaytime ( midnight
                 // wrap). With a night-shift schedule (sunrise 22:00, sunset
                 // 06:00) the two disagreed — at 03:00 the evaluator showed
                 // the day theme but cycleTheme wrote the night slot, so
@@ -427,7 +427,7 @@ class ThemeManager(context: Context) {
     }
 
     /**
-     * DRS v1.21.0 — the pure FOLLOW_TIME day-window decision. The old
+ * the pure FOLLOW_TIME day-window decision. The old
      * inline `current in sunrise..sunset` collapsed to an empty range
      * whenever sunset ≤ sunrise (a night-shift schedule like 22:00→06:00,
      * or the degenerate equal pair), silently forcing night forever; the

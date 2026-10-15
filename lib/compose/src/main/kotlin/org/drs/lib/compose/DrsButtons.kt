@@ -103,7 +103,7 @@ fun DrsTextButton(
 }
 
 /**
- * Icon-only button; [contentDescription] feeds TalkBack (a DRS v1.28.0 audit
+ * Icon-only button; [contentDescription] feeds TalkBack (a audit
  * fix — the old implicit null made buttons announce nothing at all), while
  * disabled icons render at the Material disabled-content alpha 0.38.
  */

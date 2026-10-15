@@ -208,7 +208,7 @@ fun PrivacyScreen() = DrsScreen {
                                         payload.bigrams,
                                         replace = false,
                                     )
-                                    // v2.13.0 — trigrams merge along the same
+                                    // trigrams merge along the same
                                     // restore path (validated by the bundle's caps).
                                     DrsLearningEngine.importTrigramState(
                                         payload.trigrams,

@@ -209,10 +209,10 @@ fun ClipboardInputLayout(
     var searchQuery by remember { mutableStateOf("") }
     val activeFilterTypes = remember { mutableStateSetOf<ItemType>() }
 
-    // DRS v1.12.0 — the complete smart clipboard system: the persisted
+    // the complete smart clipboard system: the persisted
     // sort order, the editor defaults from the app settings, and the
     // toggles of the colored search-result cards and code detection.
-    // DRS v1.14.0 — the comprehensive settings list: the edit surface,
+    // the comprehensive settings list: the edit surface,
     // the jump behavior, the badges and warnings, and the panel
     // organization toggles all flow from the app settings too.
     val historySortPref by prefs.clipboard.historySort.collectAsState()
@@ -244,7 +244,7 @@ fun ClipboardInputLayout(
         if (searchQuery.isNotBlank()) {
             items = items.filter { it.text?.contains(searchQuery, ignoreCase = true) == true }
         }
-        // DRS v1.12.0: the user-chosen sort order of the panel
+        // the user-chosen sort order of the panel
         // (newest / oldest / longest / shortest) — pure and persisted.
         items = ClipHistorySorter.sort(items, historySortPref)
         ClipboardHistory(items)
@@ -253,13 +253,13 @@ fun ClipboardInputLayout(
     val gridState = rememberLazyStaggeredGridState()
     var popupItem by remember(filteredHistory) { mutableStateOf<ClipboardItem?>(null) }
     var showClearAllHistory by remember { mutableStateOf(false) }
-    // DRS v1.9.0: the integrated clipboard system — an in-panel text editor
+    // the integrated clipboard system — an in-panel text editor
     // and a save-as-file dialog with a user-named file.
     var editingItem by remember { mutableStateOf<ClipboardItem?>(null) }
     var editingText by remember { mutableStateOf("") }
     var savingItem by remember { mutableStateOf<ClipboardItem?>(null) }
     var saveName by remember { mutableStateOf("") }
-    // DRS v1.10.0: the popup editor's smart state — bounded undo/redo,
+    // the popup editor's smart state — bounded undo/redo,
     // font customization, and the find/replace engine.
     val editorHistory = remember { ClipEditorHistory() }
     var editorFont by remember { mutableStateOf(ClipFontOption.DEFAULT) }
@@ -272,7 +272,7 @@ fun ClipboardInputLayout(
     fun isPopupSurfaceActive() = popupItem != null || showClearAllHistory ||
         editingItem != null || savingItem != null
 
-    // DRS v1.10.0: shares any text through the system share sheet. The
+    // shares any text through the system share sheet. The
     // chooser activity needs FLAG_ACTIVITY_NEW_TASK because the IME
     // service context is not an activity context.
     fun shareText(text: String) {
@@ -289,7 +289,7 @@ fun ClipboardInputLayout(
     }
 
     // ------------------------------------------------------------------
-    // DRS v1.12.0 — the complete smart clipboard system helpers.
+    // the complete smart clipboard system helpers.
     // ------------------------------------------------------------------
 
     /** The title of a calendar section of the panel. */
@@ -351,7 +351,7 @@ fun ClipboardInputLayout(
                 ?: LocalContentColor.current
         }
         val category = remember(card.item.text) { ClipItemCategoryDetector.detect(card.item.text) }
-        // DRS v1.14.0: the category badges are a setting — with them off,
+        // the category badges are a setting — with them off,
         // the card loses its badge and its "important" border weight.
         val badgeCategory = if (categoryBadgesPref) category else ClipItemCategory.TEXT
         val annotated = buildAnnotatedString {
@@ -588,7 +588,7 @@ fun ClipboardInputLayout(
             if (item.type == ItemType.IMAGE) {
                 val id = ContentUris.parseId(item.uri!!)
                 val file = ClipboardFileStorage.getFileForId(context, id)
-                // DRS v1.19.0: the decode used to run synchronously INSIDE
+                // the decode used to run synchronously INSIDE
                 // composition (remember{} on the main thread) — a large photo
                 // froze the whole keyboard for hundreds of ms. It now decodes
                 // on Dispatchers.IO with a small LRU cache, so scrolling the
@@ -604,7 +604,7 @@ fun ClipboardInputLayout(
                     Image(
                         modifier = Modifier.fillMaxWidth(),
                         bitmap = decoded.getOrThrow(),
-                        // DRS v1.17.0: media tiles speak — TalkBack announces
+                        // media tiles speak — TalkBack announces
                         // what the tile holds instead of skipping it.
                         contentDescription = stringRes(R.string.clipboard__a11y_image_tile),
                         contentScale = ContentScale.FillWidth,
@@ -618,7 +618,7 @@ fun ClipboardInputLayout(
             } else if (item.type == ItemType.VIDEO) {
                 val id = ContentUris.parseId(item.uri!!)
                 val file = ClipboardFileStorage.getFileForId(context, id)
-                // DRS v1.19.0: async twin of the image fix above —
+                // async twin of the image fix above —
                 // MediaMetadataRetriever + thumbnail extraction leave the
                 // main thread for good.
                 val bitmap = rememberMediaThumbnail(id) {
@@ -641,7 +641,7 @@ fun ClipboardInputLayout(
                     Image(
                         modifier = Modifier.fillMaxWidth(),
                         bitmap = decoded.getOrThrow(),
-                        // DRS v1.17.0: media tiles speak — see image twin above.
+                        // media tiles speak — see image twin above.
                         contentDescription = stringRes(R.string.clipboard__a11y_video_tile),
                         contentScale = ContentScale.FillWidth,
                     )
@@ -676,7 +676,7 @@ fun ClipboardInputLayout(
                     )
                 }
             }
-            // DRS v1.9.0: a real state badge on pinned tiles — the pin is
+            // a real state badge on pinned tiles — the pin is
             // the first-class citizen of the smart clipboard system.
             if (item.isPinned) {
                 Icon(
@@ -685,15 +685,15 @@ fun ClipboardInputLayout(
                         .padding(4.dp)
                         .background(Color.White, CircleShape),
                     imageVector = Icons.Outlined.PushPin,
-                    // DRS v1.17.0: the pinned badge is spoken too.
+                    // the pinned badge is spoken too.
                     contentDescription = stringRes(R.string.clipboard__a11y_pinned_badge),
                     tint = Color.Black,
                 )
             }
-            // DRS v1.12.0: the smart category badge of text tiles — a link,
+            // the smart category badge of text tiles — a link,
             // an email, a phone number, or a code snippet is flagged on
             // sight (plain text stays unbadged to avoid noise).
-            // DRS v1.14.0: the badges themselves are a setting now.
+            // the badges themselves are a setting now.
             if (item.type == ItemType.TEXT && categoryBadgesPref) {
                 val category = remember(item.text) { ClipItemCategoryDetector.detect(item.text) }
                 if (category != ClipItemCategory.TEXT) {
@@ -715,7 +715,7 @@ fun ClipboardInputLayout(
     @Composable
     fun SearchRow() {
         if (!isSearchRowShown) return
-        // DRS v1.7.0: the search text used to be hardcoded WHITE — on any
+        // the search text used to be hardcoded WHITE — on any
         // light theme (drs_day and friends) it was invisible while typing.
         // It follows the themed window foreground now, falling back to a
         // luminance-derived readable color when the theme leaves it open.
@@ -849,7 +849,7 @@ fun ClipboardInputLayout(
 
                         FilterChip(
                             imageVector = Icons.Default.TextFields,
-                            // DRS v1.19.0: was a hardcoded "Text" literal.
+                            // was a hardcoded "Text" literal.
                             text = stringRes(R.string.clipboard__filter_text),
                             itemType = ItemType.TEXT,
                         )
@@ -864,7 +864,7 @@ fun ClipboardInputLayout(
                             itemType = ItemType.VIDEO,
                         )
 
-                        // DRS v1.12.0: the sort orders of the panel — a
+                        // the sort orders of the panel — a
                         // persisted choice rendered right beside the type
                         // filters, so the full organization is one tap deep.
                         @Composable
@@ -908,7 +908,7 @@ fun ClipboardInputLayout(
                         )
                     }
                 }
-                // DRS v1.12.0: while searching with the colored result
+                // while searching with the colored result
                 // cards on, the results render as navigable colored cards
                 // (tap opens the item's action ladder, long-press pastes);
                 // otherwise the organized calendar sections render.
@@ -936,11 +936,11 @@ fun ClipboardInputLayout(
                             .fillMaxWidth()
                             .weight(1f),
                     ) {
-                        // DRS v1.12.0: the calendar-aware sections (pinned,
+                        // the calendar-aware sections (pinned,
                         // today, yesterday, this week, this month, older)
                         // replace the old pinned/recent/other split — the
                         // comprehensive reorganization of the panel.
-                        // DRS v1.14.0: the calendar sections themselves are
+                        // the calendar sections themselves are
                         // a setting — with them off the panel falls back to
                         // one honest flat grid of the same sorted items.
                         val sectionGroups = remember(filteredHistory.all, calendarSectionsPref) {
@@ -1008,7 +1008,7 @@ fun ClipboardInputLayout(
                     }
                     SnyggColumn(modifier = Modifier.weight(0.5f)) {
                         SnyggColumn(DrsImeUi.ClipboardItemActions.elementName) {
-                            // DRS v1.9.0: the organized action ladder of the
+                            // the organized action ladder of the
                             // smart clipboard — paste, copy back, pin, edit,
                             // save as file, delete (edit/save for text only).
                             PopupAction(
@@ -1018,7 +1018,7 @@ fun ClipboardInputLayout(
                                 clipboardManager.pasteItem(popupItem!!)
                                 popupItem = null
                             }
-                            // DRS v1.0.6: copy the item back to the system
+                            // copy the item back to the system
                             // clipboard without inserting it anywhere.
                             PopupAction(
                                 icon = Icons.Default.ContentCopy,
@@ -1038,7 +1038,7 @@ fun ClipboardInputLayout(
                                 if (popupItem!!.isPinned) {
                                     clipboardManager.unpinClip(popupItem!!)
                                 } else if (!clipboardManager.pinClip(popupItem!!)) {
-                                    // DRS v1.22.0: the honest pin cap —
+                                    // the honest pin cap —
                                     // «سقف التثبيتات بلغ حده» instead of a
                                     // silent no-op.
                                     context.showShortToastSync(R.string.clipboard__pin_cap_toast)
@@ -1046,7 +1046,7 @@ fun ClipboardInputLayout(
                                 popupItem = null
                             }
                             if (popupItem!!.type == ItemType.TEXT) {
-                                // DRS v1.10.0: share straight from the item
+                                // share straight from the item
                                 // ladder through the system share sheet.
                                 PopupAction(
                                     icon = Icons.Default.Share,
@@ -1061,12 +1061,12 @@ fun ClipboardInputLayout(
                                 ) {
                                     val target = popupItem!!
                                     popupItem = null
-                                    // DRS v1.11.0: the edit request now opens
+                                    // the edit request now opens
                                     // the floating popup window above the whole
                                     // screen (outside the panel). The in-panel
                                     // editor stays as the honest fallback when
                                     // the launch is blocked by the system.
-                                    // DRS v1.14.0: the user's chosen edit
+                                    // the user's chosen edit
                                     // surface from the comprehensive settings
                                     // joins the routing — the in-panel choice
                                     // skips the popup window entirely.
@@ -1082,10 +1082,10 @@ fun ClipboardInputLayout(
                                         editingItem = target
                                         editingText = target.text.orEmpty()
                                         editorHistory.clear()
-                                        // DRS v1.12.0: the editor honors the app
+                                        // the editor honors the app
                                         // settings defaults, and detected code
                                         // switches to the monospace family once.
-                                        // DRS v1.14.0: the auto switch is its
+                                        // the auto switch is its
                                         // own setting.
                                         editorFont = if (codeAutoMonospacePref &&
                                             codeDetectionPref &&
@@ -1126,11 +1126,11 @@ fun ClipboardInputLayout(
                 }
             }
 
-            // DRS v1.10.0: the small v1.9.0 edit dialog was promoted to the
+            // the small edit dialog was promoted to the
             // full-panel popup smart editor (ClipEditorScreen) that takes
             // over the whole clipboard surface — see the root composition.
 
-            // DRS v1.9.0: save-as-file with a user-named file — the name is
+            // save-as-file with a user-named file — the name is
             // normalized by ClipFileNamer and written by ClipFileSaver
             // (MediaStore Downloads on Android 10+, private dir before).
             if (savingItem != null) {
@@ -1283,14 +1283,14 @@ fun ClipboardInputLayout(
         }
     }
 
-    // DRS v1.10.0: the popup smart editor — a full-panel takeover replacing
-    // the small v1.9.0 dialog. Find/replace with match navigation and case
+    // the popup smart editor — a full-panel takeover replacing
+    // the small dialog. Find/replace with match navigation and case
     // control, sixteen smart transform/extract chips, font family and size
     // customization, live statistics, bounded undo/redo, share, and
     // save-as-file — all on top of the same engine-owned pure core.
     @Composable
     fun ClipEditorScreen() {
-        // DRS v1.17.0: same background-debounced scan as the popup window —
+        // same background-debounced scan as the popup window —
         // huge texts no longer rescan synchronously per keystroke.
         var matches by remember { mutableStateOf(emptyList<ClipMatch>()) }
         LaunchedEffect(editingText, findQuery, matchCase) {
@@ -1306,7 +1306,7 @@ fun ClipboardInputLayout(
         }
         val activeIndex = if (matches.isEmpty()) -1 else activeMatch.coerceIn(0, matches.size - 1)
 
-        // DRS v1.13.0: the direct line jump — the editor viewport's scroll
+        // the direct line jump — the editor viewport's scroll
         // state, its laid-out snapshot, its visible height, and the result
         // cards' list state. Tapping a card (or the navigation arrows)
         // animates the field straight to the match's row.
@@ -1317,7 +1317,7 @@ fun ClipboardInputLayout(
         var editorViewportPx by remember { mutableStateOf(0) }
 
         fun jumpToMatchLine(offset: Int) {
-            // DRS v1.14.0: the jump itself is a setting — when the user
+            // the jump itself is a setting — when the user
             // turns the direct line jump off, tapping a card (or the
             // arrows) only activates the match without scrolling.
             if (!jumpToLinePref) return
@@ -1412,7 +1412,7 @@ fun ClipboardInputLayout(
                 ),
             )
 
-            // DRS v1.12.0: the programming-line badge — when the text is
+            // the programming-line badge — when the text is
             // detected as code (and detection is on), the language, the
             // code-line share, and the auto monospace family light up.
             val codeAnalysis = remember(editingText, codeDetectionPref) {
@@ -1434,8 +1434,8 @@ fun ClipboardInputLayout(
                     ),
                 )
             }
-            // DRS v1.12.0: the slowdown warning for huge texts.
-            // DRS v1.14.0: the warning itself is a setting now.
+            // the slowdown warning for huge texts.
+            // the warning itself is a setting now.
             if (largeTextWarningPref && editingText.length >= ClipboardTextPolicy.LARGE_TEXT_WARNING_CHARS) {
                 SnyggText(
                     elementName = DrsImeUi.ClipboardItemTimestamp.elementName,
@@ -1603,9 +1603,9 @@ fun ClipboardInputLayout(
                 }
             }
 
-            // DRS v1.12.0: the colored search-result cards — every match
+            // the colored search-result cards — every match
             // becomes a card with its line number and same-line context.
-            // DRS v1.13.0: tapping a card jumps the editor straight to
+            // tapping a card jumps the editor straight to
             // that match's row, and the cards list tracks the active card
             // both ways.
             if (findQuery.isNotEmpty() && searchResultCardsPref && matches.isNotEmpty()) {
@@ -1649,7 +1649,7 @@ fun ClipboardInputLayout(
                     }
                     // Keep the active card in sight — from the arrows,
                     // from a card tap, and after edits.
-                    // DRS v1.14.0: the tracking itself is a setting.
+                    // the tracking itself is a setting.
                     LaunchedEffect(activeIndex, resultCards) {
                         if (followCardsPref && activeIndex >= 0 && resultCards.isNotEmpty()) {
                             cardsListState.animateScrollToItem(
@@ -1702,7 +1702,7 @@ fun ClipboardInputLayout(
                 EditorChip(stringRes(R.string.clip__transform_reverse)) {
                     applyTransform(ClipTextTransforms.reverseLines(editingText))
                 }
-                // DRS v1.12.0: the line numbering and the code-line
+                // the line numbering and the code-line
                 // surgery chips (extract keeps only code lines, remove
                 // drops them) — the programming helpers of the editor.
                 EditorChip(stringRes(R.string.clip__transform_number_lines)) {
@@ -1805,10 +1805,10 @@ fun ClipboardInputLayout(
                     .onSizeChanged { editorViewportPx = it.height }
                     .drsVerticalScroll(state = editorScrollState),
             ) {
-                // DRS v1.12.0: the matches glow inside the text itself —
+                // the matches glow inside the text itself —
                 // every match paints its palette color, the active one
                 // strongest, so the cards and the field tell one story.
-                // DRS v1.21.0: ranges are normalized against the current
+                // ranges are normalized against the current
                 // text and re-filtered per apply — the debounced matches
                 // can never paint past the shrinking field text.
                 val highlightRanges = remember(matches, activeIndex, editingText) {
@@ -1977,7 +1977,7 @@ fun ClipboardInputLayout(
             .height(DrsImeSizing.imeUiHeight()),
     ) {
         if (editingItem != null) {
-            // DRS v1.10.0: the popup smart editor takes over the whole panel.
+            // the popup smart editor takes over the whole panel.
             ClipEditorScreen()
         } else {
             HeaderRow()
@@ -2000,7 +2000,7 @@ fun ClipboardInputLayout(
 }
 
 /**
- * DRS v1.7.0: picks a readable text color for [background] by relative
+ * picks a readable text color for [background] by relative
  * luminance (the same threshold the system-bar contrast logic uses).
  * Pure and JVM-testable — the clipboard search row was hardcoded white
  * before, which was invisible on light themes.
@@ -2086,7 +2086,7 @@ private fun PopupAction(
 }
 
 /**
- * DRS v1.19.0: bounded LRU of decoded media thumbnails keyed by clip id.
+ * bounded LRU of decoded media thumbnails keyed by clip id.
  * Synchronized because decodes run on Dispatchers.IO while the UI thread
  * reads on recomposition. 48 entries keeps memory in the low tens of MB
  * worst case (mini-kind video thumbs are small) without thrashing.
@@ -2098,7 +2098,7 @@ private val mediaThumbnailCache = object : LinkedHashMap<Long, ImageBitmap>(16, 
 }
 
 /**
- * DRS v1.19.0: decodes a media thumbnail OFF the main thread. Previously
+ * decodes a media thumbnail OFF the main thread. Previously
  * BitmapFactory.decodeFile / MediaMetadataRetriever ran synchronously inside
  * remember{} during composition, freezing the keyboard for large media and
  * re-decoding on every recomposition. Now the decode is a produceState job on

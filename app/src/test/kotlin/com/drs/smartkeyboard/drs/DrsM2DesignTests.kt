@@ -42,10 +42,10 @@ class DrsM2DesignTests : FunSpec({
             night["@defines"]!!.jsonObject["--primary"]!!.toString() shouldBe "\"#14B8A6\""
         }
 
-        test("both themes are registered in the manifest (version 1.2.0, 14 themes)") {
+        test("both themes are registered in the manifest (version 1.0.0, 14 themes)") {
             val manifestJson = Json.parseToJsonElement(manifest.readText()).jsonObject
             val meta = manifestJson["meta"]!!.jsonObject
-            meta["version"]!!.toString() shouldBe "\"1.2.0\""
+            meta["version"]!!.toString() shouldBe "\"1.0.0\""
             val themes = manifestJson["themes"]!!.toString()
             themes.contains("drs_halo_day") shouldBe true
             themes.contains("drs_halo_night") shouldBe true

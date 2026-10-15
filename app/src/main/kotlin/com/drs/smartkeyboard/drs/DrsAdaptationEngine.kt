@@ -36,9 +36,9 @@ object DrsAdaptationEngine {
     private val shortcutUses = AtomicLong()
     private val techToolUses = AtomicLong()
     private val gestureUses = AtomicLong()
-    // DRS v2.22.0: the per-feature counters (نصوصي، قاموسي التشكيلي،
+    // the per-feature counters (نصوصي، قاموسي التشكيلي،
     // الحركات، الرموز، الحروف، الأرقام) — completing the single-drain
-    // doctrine for every feature: v2.21.0's saved-texts counter wrote the
+    // doctrine for every feature: 's saved-texts counter wrote the
     // lifetime stat directly, bypassing the one drain point and silently
     // dropping from the day buckets. Every feature counter now flows
     // through the same drain the rest of the counters obey.
@@ -48,16 +48,16 @@ object DrsAdaptationEngine {
     private val symbolUses = AtomicLong()
     private val letterUses = AtomicLong()
     private val numberUses = AtomicLong()
-    // DRS v1.6.0: committed suggestion-row entries (the engine already
+    // committed suggestion-row entries (the engine already
     // routes every accept through KeyboardManager.commitCandidate —
     // this counts the event, never the word itself).
     private val suggestionAccepts = AtomicLong()
-    // DRS v1.0.5: per-tool counts for the "most used tools" surface. Only
+    // per-tool counts for the "most used tools" surface. Only
     // tool KeyCodes are counted (never characters), in-memory, flushed
     // aggregated with the rest of the usage stats.
     private val toolCounts = java.util.concurrent.ConcurrentHashMap<Int, Long>()
     private val toolUseTotal = AtomicLong()
-    // DRS v1.7.0: input starts per context mode — recorded from
+    // input starts per context mode — recorded from
     // DrsRuntimeState.onInputStarted (a DETECTED attribute of the focused
     // field, never its content) and drained into the day buckets so the
     // stats screen can show how typing time splits across contexts.
@@ -110,7 +110,7 @@ object DrsAdaptationEngine {
     }
 
     /**
-     * DRS v1.6.0: records one committed suggestion-row entry. The call
+ * records one committed suggestion-row entry. The call
      * site is KeyboardManager.commitCandidate — the single real accept
      * path (tapped candidates AND auto-committed completions). Anonymous
      * count only; which word was accepted is never stored.
@@ -123,7 +123,7 @@ object DrsAdaptationEngine {
     }
 
     /**
-     * DRS v1.0.5: records one use of a smart tool (quick action) by its
+ * records one use of a smart tool (quick action) by its
      * KeyCode. Anonymous count only — the tool code tells which button was
      * pressed, never what was typed. Powers the "most used tools" section.
      */
@@ -139,7 +139,7 @@ object DrsAdaptationEngine {
     }
 
     /**
-     * DRS v2.22.0: records one use of a smart FEATURE (panel insertion,
+ * records one use of a smart FEATURE (panel insertion,
      * saved-text insertion, personal-lexicon hit) — the closed set the
      * per-feature surfaces report. Anonymous count only; never WHAT was
      * inserted, never WHICH word was vocalized. The call sites gate
@@ -188,7 +188,7 @@ object DrsAdaptationEngine {
     }
 
     /**
-     * DRS v1.7.0: records one input session start in a context mode (the
+ * records one input session start in a context mode (the
      * mode name only — a detected field attribute, never content). Cheap,
      * never throws.
      */
@@ -209,7 +209,7 @@ object DrsAdaptationEngine {
     }
 
     /**
-     * DRS v1.0.8: drains the pending counters ONCE and merges them into
+ * drains the pending counters ONCE and merges them into
      * both the lifetime usage stats and (when enabled) today's daily
      * bucket. Single drain point keeps the two views consistent.
      */
@@ -276,7 +276,7 @@ object DrsAdaptationEngine {
                 .take(32)
                 .associate { it.toPair() }
         }
-        // DRS v1.7.0: context-mode starts merge too, capped to the known
+        // context-mode starts merge too, capped to the known
         // mode names so the stored map stays tiny by construction.
         val mergedContexts = if (delta.contextStarts.isEmpty()) {
             contextStarts

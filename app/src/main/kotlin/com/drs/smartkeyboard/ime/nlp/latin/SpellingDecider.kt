@@ -5,7 +5,7 @@
 package com.drs.smartkeyboard.ime.nlp.latin
 
 /**
- * DRS v1.19.0: pure, testable decision engine for real spell-check typo marking.
+ * pure, testable decision engine for real spell-check typo marking.
  *
  * Until now [LatinLanguageProvider.spell] unconditionally returned
  * `SpellingResult.validWord()`, so the fully-wired DrsSpellCheckerService could
@@ -27,7 +27,7 @@ internal object SpellingDecider {
      * Typo marking is only honest when the dictionary is rich enough that a
      * miss usually has a close neighbor and a hit usually exists. The bundled
      * Arabic (50k) and English (50k) dictionaries pass; the eight curated
-     * v1.18.0 dictionaries (700–1,515 words) intentionally do not — flagging
+ * dictionaries (700–1,515 words) intentionally do not — flagging
      * against them would underline half of every sentence.
      */
     const val MIN_DICT_ENTRIES_FOR_TYPO = 10_000

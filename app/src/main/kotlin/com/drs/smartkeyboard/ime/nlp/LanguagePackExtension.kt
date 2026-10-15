@@ -69,7 +69,7 @@ class LanguagePackExtension( // FIXME: how to make this support multiple types o
         if (databasePath == null) {
             flogError { "Han shape-based language pack not found or loaded" }
         } else try {
-            // DRS v1.25.0 audit: no lock is needed here — the database is
+            // audit: no lock is needed here — the database is
             // opened OPEN_READONLY, only this single accessor ever touches
             // it, and close-before-reopen runs on the pack's own load path,
             // so there is no concurrent writer to synchronize against.

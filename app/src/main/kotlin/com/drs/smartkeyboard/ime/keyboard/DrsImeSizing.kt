@@ -116,7 +116,7 @@ fun ProvideKeyboardRowBaseHeight(content: @Composable () -> Unit) {
     val prefs by DrsPreferenceStore
 
     val windowSpec by windowController.activeWindowSpec.collectAsState()
-    // DRS v1.2.0: the Smartbar height scale multiplies the provided
+    // the Smartbar height scale multiplies the provided
     // Smartbar row height, so the live Smartbar — and every consumer of
     // DrsImeSizing.smartbarHeight (Smartbar rows, clipboard/emoji headers,
     // autofill chip height) — really follows the preference. The window

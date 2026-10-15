@@ -7,7 +7,7 @@ package com.drs.smartkeyboard.ime.input
 import com.drs.smartkeyboard.ime.text.key.KeyCode
 
 /**
- * DRS v1.22.0: the latch state of the revived CTRL/ALT modifier keys —
+ * the latch state of the revived CTRL/ALT modifier keys —
  * «إحياء المفاتيح الميتة». Until this round the CTRL/ALT key codes fell
  * into the unknown-key branch of the input pipeline (drawn if a layout
  * declares them, dead on press, logged as an error). The latching
@@ -50,7 +50,7 @@ enum class InputModifierState(val value: Int) {
 }
 
 /**
- * The pure latch cycle — DRS v1.22.0. A plain modifier tap walks
+ * The pure latch cycle —. A plain modifier tap walks
  * OFF -> LATCHED -> LOCKED -> OFF; the *_LOCK codes jump straight to
  * [InputModifierState.LOCKED] in one press. Pure and testable: the
  * same function feeds the input pipeline and the unit contracts.
@@ -63,7 +63,7 @@ fun cycleModifierLatch(current: InputModifierState, lock: Boolean): InputModifie
 }
 
 /**
- * DRS v1.23.0: the FN latch's real work — mapping the digit keys onto
+ * the FN latch's real work — mapping the digit keys onto
  * the function keys F1–F10 of the host (android.view.KeyEvent codes
  * KEYCODE_F1=131 … KEYCODE_F12=142; only F1–F10 have digits). The on-screen
  * digit keys carry the ASCII digit codes ('0'=48 … '9'=57), so the honest
@@ -72,7 +72,7 @@ fun cycleModifierLatch(current: InputModifierState, lock: Boolean): InputModifie
  * console emulators. Returns null for anything that is not a digit key:
  * the caller then keeps the normal digit commit. Pure and JVM-tested.
  *
- * DRS v1.24.0: the row extends to its natural end — on a physical
+ * the row extends to its natural end — on a physical
  * keyboard '-' and '=' sit right after '0' on the top letter row, and
  * F11/F12 sit right after F10, so the Fn-row contract maps them onto
  * each other: '-'(45)→KEYCODE_F11(141), '='(61)→KEYCODE_F12(142).
@@ -88,7 +88,7 @@ fun fnFunctionKeyCodeOf(digitCode: Int): Int? = when (digitCode) {
 }
 
 /**
- * DRS v1.24.0: which keys keep the FN latch alive instead of consuming
+ * which keys keep the FN latch alive instead of consuming
  * it. F11 and F12 live on different pages than the digits do ('-' on
  * numeric/symbols, '=' on symbols2), so a page hop must never eat the
  * latch the user just armed — otherwise the extended Fn row would be

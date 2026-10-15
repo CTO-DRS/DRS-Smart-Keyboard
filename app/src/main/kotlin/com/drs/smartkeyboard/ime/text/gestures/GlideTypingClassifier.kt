@@ -24,7 +24,7 @@ interface GlideTypingClassifier {
      */
     fun setLayout(keyViews: List<TextKey>, subtype: Subtype)
 
-    // DRS v1.20.0: `setWordData` was removed from this interface — it was only ever
+    // `setWordData` was removed from this interface — it was only ever
     // called from the classifier's own setLayout, and word-data loading now happens
     // on a background scope inside the classifier (the ready gate covers it).
 

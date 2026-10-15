@@ -63,7 +63,7 @@ data class QuickActionArrangement(
                 QuickAction.InsertKey(TextKeyData.TOGGLE_RESIZE_MODE),
                 QuickAction.InsertKey(TextKeyData.IME_UI_MODE_CLIPBOARD),
                 QuickAction.InsertKey(TextKeyData.IME_UI_MODE_MEDIA),
-                // DRS v1.0.6: opens the technical text tools panel.
+                // opens the technical text tools panel.
                 QuickAction.InsertKey(TextKeyData.IME_UI_MODE_TEXT_TOOLS),
                 QuickAction.InsertKey(TextKeyData.TOGGLE_COMPACT_LAYOUT),
                 QuickAction.InsertKey(TextKeyData.TOGGLE_AUTOCORRECT),
@@ -72,7 +72,7 @@ data class QuickActionArrangement(
                 QuickAction.InsertKey(TextKeyData.ARROW_DOWN),
                 QuickAction.InsertKey(TextKeyData.ARROW_LEFT),
                 QuickAction.InsertKey(TextKeyData.ARROW_RIGHT),
-                // DRS v1.0.5: word-by-word cursor navigation.
+                // word-by-word cursor navigation.
                 QuickAction.InsertKey(TextKeyData.MOVE_WORD_LEFT),
                 QuickAction.InsertKey(TextKeyData.MOVE_WORD_RIGHT),
                 QuickAction.InsertKey(TextKeyData.CLIPBOARD_CLEAR_PRIMARY_CLIP),
@@ -80,7 +80,7 @@ data class QuickActionArrangement(
                 QuickAction.InsertKey(TextKeyData.CLIPBOARD_CUT),
                 QuickAction.InsertKey(TextKeyData.CLIPBOARD_PASTE),
                 QuickAction.InsertKey(TextKeyData.CLIPBOARD_SELECT_ALL),
-                // DRS v1.0.5: share the selected text (or the whole field).
+                // share the selected text (or the whole field).
                 QuickAction.InsertKey(TextKeyData.CLIPBOARD_SHARE),
                 QuickAction.InsertKey(TextKeyData.LANGUAGE_SWITCH),
                 QuickAction.InsertKey(TextKeyData.FORWARD_DELETE),

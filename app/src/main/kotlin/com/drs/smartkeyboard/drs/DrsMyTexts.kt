@@ -5,7 +5,7 @@
 package com.drs.smartkeyboard.drs
 
 /**
- * DRS v2.21.0 — نظام «نصوصي» (the saved-texts system) — the deterministic
+ * نظام «نصوصي» (the saved-texts system) — the deterministic
  * engine behind the SIXTH smart panel and its manager screen.
  *
  * The doctrine is the clipboard's mirror image: the clipboard history is
@@ -296,8 +296,8 @@ object DrsMyTexts {
 
     /**
      * One anonymous insertion counter bump (counts only — never WHICH
-     * text). DRS v2.22.0: routed through the adaptation engine's single
-     * drain point — v2.21.0 wrote the lifetime stat directly, which
+ * text). routed through the adaptation engine's single
+ * drain point — wrote the lifetime stat directly, which
      * bypassed the day buckets entirely (the daily stats never saw a
      * saved-text insertion). Same contract as recordShortcutUse.
      */

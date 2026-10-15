@@ -39,7 +39,7 @@ import org.drs.jetpref.datastore.ui.PreferenceGroup
 import org.drs.jetpref.datastore.ui.SwitchPreference
 
 /**
- * DRS v1.0.7 — النظام والتطبيق الموحد (Unified System & App).
+ * النظام والتطبيق الموحد (Unified System & App).
  *
  * The unified control center section: basic system settings first (the
  * ones every level needs), then the advanced engine controls (haptic

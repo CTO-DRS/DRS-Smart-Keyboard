@@ -5,7 +5,7 @@
 package com.drs.smartkeyboard.ime.nlp
 
 /**
- * DRS v2.7.0 «مزايا البحث الخارجي» — smart punctuation, the honest slice.
+ * «مزايا البحث الخارجي» — smart punctuation, the honest slice.
  *
  * Researched from the reference keyboards (Gboard / AOSP LatinIME
  * heritage): when the user types a double hyphen directly after whitespace

@@ -72,7 +72,7 @@ object NlpInlineAutofill {
             }
 
             val inflatedSuggestions = suggestionsArray.filterNotNull().sortedByDescending { it.info.isPinned }
-            // DRS v1.28.0 audit fix (Low-Medium): lock()/unlock() pairs with no
+            // audit fix (Low-Medium): lock()/unlock() pairs with no
             // try/finally — an exception between them (inflated view touch,
             // flow set) permanently wedged ALL future inline-suggestion
             // updates for the session. Mutex.withLock guarantees release.
@@ -98,7 +98,7 @@ object NlpInlineAutofill {
 
     private fun clearInlineSuggestions(sequenceId: Int) {
         scope.launch {
-            // DRS v1.28.0 audit fix: exception-safe lock, see above.
+            // audit fix: exception-safe lock, see above.
             setterGuard.withLock {
                 flogInfo { "clearInlineSuggestions: [${sequenceId}] clearing suggestions" }
                 suggestions.value = emptyList()

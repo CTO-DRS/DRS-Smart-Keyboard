@@ -66,7 +66,7 @@ jobs:
       - name: Run unit tests + coverage floor (release gate, DRS M0.5)
         run: ./gradlew --no-daemon testDebugUnitTest :app:koverVerifyDebug --stacktrace
 
-      # DRS v1.21.0: the release path had no static-analysis step at all —
+      # DRS: the release path had no static-analysis step at all —
       # lint reports now build with every release (non-fatal while the
       # existing baseline is noisy, but produced for review).
       - name: Lint release build (report)
@@ -104,7 +104,7 @@ jobs:
           fi
           ls -la dist/
 
-      # DRS v1.22.0: a manual workflow_dispatch run built signed binaries
+      # DRS: a manual workflow_dispatch run built signed binaries
       # and then threw them away with the runner — the only publishing path
       # was a v* tag. Manual runs now keep the signed APK/AAB as workflow
       # artifacts (tag runs still publish the real GitHub Release).

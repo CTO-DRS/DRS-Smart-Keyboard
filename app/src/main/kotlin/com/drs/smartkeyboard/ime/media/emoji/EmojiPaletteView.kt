@@ -115,7 +115,7 @@ private val EmojiBaseWidth = 42.dp
 private val EmojiDefaultFontSize = 22.sp
 
 /**
- * DRS v1.7.0: emoji SIZE scale (70–200%) read from the preference at
+ * emoji SIZE scale (70–200%) read from the preference at
  * composition time. Both the adaptive grid cell width and the glyph font
  * size multiply by this factor, so grid density and glyph legibility
  * really follow the slider. Sanitization lives in ImeWindowSpec beside
@@ -220,7 +220,7 @@ fun EmojiPaletteView(
             onEmojiInput = { emoji ->
                 keyboardManager.inputEventDispatcher.sendDownUp(emoji)
                 scope.launch {
-                    // DRS v2.14.0: الالتقاط يُحكم بالبوابة عند الحدث نفسه —
+                    // الالتقاط يُحكم بالبوابة عند الحدث نفسه —
                     // حقائق السياق تُقرأ من الحالة الحية لحظة النقر (لا لقطة
                     // متراكمة)، فلا جلسة تخفي ولا حقل كلمة مرور ولا محرر خام
                     // ولا حقل بلا تكوين ولا قفل شاشي يترك أثرًا في الذاكرة.
@@ -297,7 +297,7 @@ fun EmojiPaletteView(
                 if (category == EmojiCategory.RECENTLY_USED && !emojiHistoryEnabled) {
                     continue
                 }
-                // DRS v1.21.0: the tabs used to be icon-only — TalkBack
+                // the tabs used to be icon-only — TalkBack
                 // announced an unlabeled tab. The localized category name
                 // rides the tab's semantics now.
                 val context = LocalContext.current
@@ -323,13 +323,13 @@ fun EmojiPaletteView(
     Column(
         modifier = modifier
     ) {
-        // DRS v1.0.5: emoji search — while active, keyboard characters are
+        // emoji search — while active, keyboard characters are
         // routed by KeyboardManager into mediaSearchQuery (IME-internal
         // fields can't receive the IME's own key events directly). Matches
         // emoji names/keywords from the :name suggestion metadata.
         val mediaSearchActive = keyboardManager.activeState.collectAsState().value.isMediaSearchActive
         val mediaSearchQuery by keyboardManager.mediaSearchQuery.collectAsState()
-        // DRS v1.21.0: the search row used to paint itself from the default
+        // the search row used to paint itself from the default
         // MaterialTheme while every other panel follows the snygg keyboard
         // theme — on any custom theme the pill clashed. It reads the themed
         // window colors now, with a luminance-derived readable fallback.
@@ -478,7 +478,7 @@ fun EmojiPaletteView(
                         modifier = Modifier
                             .fillMaxSize()
                             .drsScrollbar(lazyGridState),
-                        // DRS v1.7.0: the grid cell follows the emoji size scale.
+                        // the grid cell follows the emoji size scale.
                         columns = GridCells.Adaptive(minSize = EmojiBaseWidth * emojiSizeScale()),
                         state = lazyGridState,
                     ) {
@@ -486,7 +486,7 @@ fun EmojiPaletteView(
                             header("header_pinned") {
                                 GridHeader(text = stringRes(R.string.emoji__history__pinned))
                             }
-                            // DRS v1.19.0: edge-aware reorder arrows — the move arrows
+                            // edge-aware reorder arrows — the move arrows
                             // only render when a neighboring slot actually exists.
                             itemsIndexed(emojiMapping.pinned) { index, emojiSet ->
                                 EmojiKeyWrapper(
@@ -520,7 +520,7 @@ fun EmojiPaletteView(
             }
         }
         } else {
-            // DRS v1.0.5: live search results across every category, using
+            // live search results across every category, using
             // the same emoji metadata that powers :name suggestions.
             val searchGridState = rememberLazyGridState()
             val query = trimmedSearchQuery.lowercase()
@@ -556,7 +556,7 @@ fun EmojiPaletteView(
                     modifier = Modifier
                         .fillMaxSize()
                         .drsScrollbar(searchGridState),
-                    // DRS v1.7.0: the search grid follows the scale too.
+                    // the search grid follows the scale too.
                     columns = GridCells.Adaptive(minSize = EmojiBaseWidth * emojiSizeScale()),
                     state = searchGridState,
                 ) {
@@ -589,7 +589,7 @@ private fun EmojiKey(
     SnyggBox(DrsImeUi.MediaEmojiKey.elementName,
         modifier = Modifier
             .aspectRatio(1f)
-            // DRS v1.17.0: the emoji itself is its own spoken label —
+            // the emoji itself is its own spoken label —
             // TalkBack resolves emoji characters to localized names.
             .semantics { contentDescription = base.value }
             .pointerInput(Unit) {
@@ -725,7 +725,7 @@ private fun EmojiHistoryPopup(
     val context = LocalContext.current
     val pinnedUS by prefs.emoji.historyPinnedUpdateStrategy.collectAsState()
     val recentUS by prefs.emoji.historyRecentUpdateStrategy.collectAsState()
-    // DRS v1.19.0: the two conditions were copy-pasted identical, so both arrows
+    // the two conditions were copy-pasted identical, so both arrows
     // rendered at list edges where moveEmoji is a no-op, and the manual-sort gate
     // tested the wrong strategy for non-pinned emojis. Now: a pinned emoji reorders
     // the pinned list (gated by the pinned strategy), a recent emoji reorders the
@@ -758,7 +758,7 @@ private fun EmojiHistoryPopup(
         }
     }
 
-    // DRS v1.19.0: the popup offset was computed from a hardcoded numActions = 1,
+    // the popup offset was computed from a hardcoded numActions = 1,
     // so the row floated too high whenever 2–4 actions were visible. It now counts
     // the actions actually shown.
     val numActions = 1 + (if (showMoveLeft) 1 else 0) + (if (showMoveRight) 1 else 0)
@@ -830,7 +830,7 @@ fun EmojiText(
     color: Color = Color.Black,
     fontSize: TextUnit = TextUnit.Unspecified,
 ) {
-    // DRS v1.7.0: the glyph follows the emoji size scale (70–200%) unless
+    // the glyph follows the emoji size scale (70–200%) unless
     // the caller pinned an explicit size — the text view factory below
     // receives the effective size in sp.
     val effectiveSize =

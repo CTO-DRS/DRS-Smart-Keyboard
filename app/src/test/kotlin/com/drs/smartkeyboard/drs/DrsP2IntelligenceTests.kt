@@ -23,7 +23,7 @@ import io.kotest.matchers.shouldBe
 import java.io.File
 
 /**
- * DRS v2.1.0-alpha1 — Phase 2 of the grand roadmap (tasks 8–14): the
+ * alpha1 — Phase 2 of the grand roadmap (tasks 8–14): the
  * on-device intelligence stack in drs/ai. Every unit here is PURE (JVM
  * only, no Android), matching the ADR 0005 testability constraint:
  *  - the quantized weighted Damerau-Levenshtein engine (Int-only costs,

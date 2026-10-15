@@ -120,7 +120,7 @@ data class EmojiData(
         }
 
         /**
-         * DRS v1.19.0: pure, testable resolution of the emoji asset file for a locale.
+ * pure, testable resolution of the emoji asset file for a locale.
          *
          * The previous behavior was the root cause of the dead emoji search: the palette
          * loaded "root.txt" whose metadata columns are empty for ~99.8% of the lines, so
@@ -164,7 +164,7 @@ data class EmojiData(
         }
 
         /**
-         * DRS v1.19.0: resolves the emoji annotation file for a locale with honest fallbacks
+ * resolves the emoji annotation file for a locale with honest fallbacks
          * so the palette (and the emoji suggestions) never degrade to metadata-less data:
          * 1. The locale's own annotation file (native-language keyword search).
          * 2. The English annotation file — search still works via the documented English

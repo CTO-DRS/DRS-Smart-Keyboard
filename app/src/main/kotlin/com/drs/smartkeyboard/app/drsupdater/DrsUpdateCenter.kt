@@ -53,7 +53,7 @@ enum class UpdateCheckMode {
 
 /** Metadata of the latest official GitHub release (app update). */
 data class ReleaseInfo(
-    /** Raw tag as published, e.g. "v1.0.0". */
+    /** Raw tag as published, e.g. "". */
     val tag: String,
     /** Tag without the leading "v", e.g. "1.0.0". */
     val version: String,
@@ -63,7 +63,7 @@ data class ReleaseInfo(
     val body: String?,
     /** ISO-8601 publish timestamp of the release. */
     val publishedAt: String,
-    /** APK asset file name, e.g. "DRS-Smart-Keyboard-v1.0.0.apk". */
+    /** APK asset file name, e.g. "DRS-Smart-Keyboard-.apk". */
     val assetName: String,
     /** Browser download URL of the APK asset. */
     val assetUrl: String,
@@ -231,7 +231,7 @@ object DrsUpdateCenter {
      * response and used to be joined into File(downloadsDir(context),
      * assetName) unvalidated — a crafted payload could walk out of
      * cache/downloads ("../"). This mirrors CacheManager.sanitizeImportFileName
-     * (the v1.28.0 HIGH fix; that helper lives in a file outside this task's
+ * (the HIGH fix; that helper lives in a file outside this task's
      * edit set, so the 3-line sanitize is reimplemented here instead of
      * reused): reduce to a single path segment (strip everything up to the
      * last '/' and '\\', trim, refuse dot segments). Instead of CacheManager's
@@ -403,7 +403,7 @@ object DrsUpdateCenter {
     }
 
     /**
-     * DRS v1.28.0 audit fix (HIGH): the old parser built the map as
+ * audit fix (HIGH): the old parser built the map as
      * hash -> filename (standard `sha256sum` output is "<hash>  <name>"),
      * but verifyDownload() looks entries up by FILENAME — so every lookup
      * missed and the load-bearing integrity gate failed closed forever
@@ -423,7 +423,7 @@ object DrsUpdateCenter {
     private val HEX64 = Regex("^[0-9a-fA-F]{64}$")
 
     /**
-     * DRS v1.28.0 audit fix: the pure checksum-line parser, extracted from
+ * audit fix: the pure checksum-line parser, extracted from
      * [fetchChecksums] so the load-bearing integrity gate is JVM-testable.
      */
     internal fun parseChecksumLines(body: String): Map<String, String> {

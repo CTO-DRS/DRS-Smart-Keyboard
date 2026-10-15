@@ -65,7 +65,7 @@ fun TypingScreen() = DrsScreen {
                 title = stringRes(R.string.pref__suggestion__enabled__label),
                 summary = stringRes(R.string.pref__suggestion__enabled__summary),
             )
-            // DRS v1.17.0: the REAL autocorrect — space may silently fix a
+            // the REAL autocorrect — space may silently fix a
             // genuine typo when a very common word sits within edit distance 1.
             SwitchPreference(
                 prefs.suggestion.autocorrectEnabled,
@@ -73,7 +73,7 @@ fun TypingScreen() = DrsScreen {
                 summary = stringRes(R.string.pref__suggestion__autocorrect_enabled__summary),
                 enabledIf = { prefs.suggestion.enabled isEqualTo true },
             )
-            // DRS v2.7.0: HeliBoard-heritage multilingual typing. Lives
+            // HeliBoard-heritage multilingual typing. Lives
             // under the same master switch as autocorrect — no suggestions,
             // no multilingual merge.
             SwitchPreference(
@@ -108,7 +108,7 @@ fun TypingScreen() = DrsScreen {
             )
         }
 
-        // DRS v1.24.0: the voice dictation gate — «الميكروفون في قبضة
+        // the voice dictation gate — «الميكروفون في قبضة
         // المستخدم». The switch flips the exact pref the mic key consults
         // on every press (decideVoiceInputRoute), so a chosen-off
         // microphone answers with an honest toast on the very next press.
@@ -118,7 +118,7 @@ fun TypingScreen() = DrsScreen {
                 title = stringRes(R.string.pref__voice__enabled__label),
                 summary = stringRes(R.string.pref__voice__enabled__summary),
             )
-            // DRS v1.25.0 — the second voice gate: the user picks where
+            // the second voice gate: the user picks where
             // their speech is recognized (auto / strictly on-device /
             // classic standard), and the mic key honors it on the very
             // next press. (jetpref's ListPreference derives its summary
@@ -170,20 +170,20 @@ fun TypingScreen() = DrsScreen {
                 title = stringRes(R.string.pref__correction__double_space_period__label),
                 summary = stringRes(R.string.pref__correction__double_space_period__summary),
             )
-            // DRS v2.7.0: Gboard/AOSP-heritage smart punctuation (-- → —).
+            // Gboard/AOSP-heritage smart punctuation (-- → —).
             SwitchPreference(
                 prefs.correction.smartPunctuation,
                 title = stringRes(R.string.pref__correction__smart_punctuation__label),
                 summary = stringRes(R.string.pref__correction__smart_punctuation__summary),
             )
-            // DRS v2.9.0: HeliBoard/OpenBoard heritage — the first backspace
+            // HeliBoard/OpenBoard heritage — the first backspace
             // right after a silent auto-correction restores the typed word.
             SwitchPreference(
                 prefs.correction.undoAutoCorrectOnBackspace,
                 title = stringRes(R.string.pref__correction__undo_autocorrect_on_backspace__label),
                 summary = stringRes(R.string.pref__correction__undo_autocorrect_on_backspace__summary),
             )
-            // DRS v2.10.0: local undo/redo — the strip tools work through the
+            // local undo/redo — the strip tools work through the
             // keyboard's own self-verifying history in every host, with the
             // host's own undo kept as the honest fallback.
             SwitchPreference(
@@ -203,7 +203,7 @@ fun TypingScreen() = DrsScreen {
                 entries = enumDisplayEntriesOf(SpellingLanguageMode::class),
                 enabledIf = { drsSpellCheckerEnabled.value },
             )
-            // DRS v1.19.0: the spell checker finally marks real typos (red
+            // the spell checker finally marks real typos (red
             // underline + tap-to-fix suggestions) behind conservative gates —
             // rich dictionaries (Arabic/English) only, plain words only, and a
             // plausible correction must exist. This switch turns it off.
@@ -214,7 +214,7 @@ fun TypingScreen() = DrsScreen {
                 summary = stringRes(R.string.pref__spelling__typo_flagging_enabled__summary),
                 enabledIf = { drsSpellCheckerEnabled.value },
             )
-            // DRS v1.20.0: the visibleIf=false stubs for "use contacts" / "use user
+            // the visibleIf=false stubs for "use contacts" / "use user
             // dictionary entries" are gone together with their dead prefs — no contacts
             // integration exists in the IME, and hidden switches that promise behavior
             // nothing implements are removed, not shipped disabled.

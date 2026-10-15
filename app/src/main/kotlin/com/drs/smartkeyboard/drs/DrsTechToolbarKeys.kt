@@ -9,7 +9,7 @@ import com.drs.smartkeyboard.ime.text.key.KeyCode
 import com.drs.smartkeyboard.ime.text.key.KeyType
 
 /**
- * DRS v1.0.6: catalogue of every key the technical toolbar can host, plus
+ * catalogue of every key the technical toolbar can host, plus
  * the shared resolution logic used by both the IME strip and the editor
  * screen. A key is identified by a stable string id so the persisted
  * arrangement survives code changes.
@@ -52,7 +52,7 @@ object DrsTechToolbarKeys {
         DrsTechToolbarKey("caret", "^", '^'.code, KeyType.CHARACTER),
         DrsTechToolbarKey("amp", "&", '&'.code, KeyType.CHARACTER),
         DrsTechToolbarKey("asterisk", "*", '*'.code, KeyType.CHARACTER),
-        // DRS v1.22.0: the revived modifier latches — until this round the
+        // the revived modifier latches — until this round the
         // CTRL/ALT codes were drawn-but-dead (they fell into the unknown-key
         // branch). They now latch like shift (tap = one-shot, tap again =
         // lock, third tap = release) and arm word/line/page navigation and
@@ -60,12 +60,12 @@ object DrsTechToolbarKeys {
         // ToggleStates the other toggle tools use.
         DrsTechToolbarKey("ctrl", "Ctrl", KeyCode.CTRL, KeyType.MODIFIER),
         DrsTechToolbarKey("alt", "Alt", KeyCode.ALT, KeyType.MODIFIER),
-        // DRS v1.23.0: the modifier family is complete — FN latches like
+        // the modifier family is complete — FN latches like
         // CTRL/ALT and turns the digit keys into real F1–F10 hardware
         // events while armed. The live active dot comes from the same
         // ToggleStates the other toggle tools use.
         DrsTechToolbarKey("fn", "Fn", KeyCode.FN, KeyType.MODIFIER),
-        // DRS v1.26.0: the microphone rides the technical strip — one tap
+        // the microphone rides the technical strip — one tap
         // reaches the same built-in dictation route the mic key on the
         // letters board drives (privacy gates included). The label follows
         // the Tab/Esc/Fn Latin convention; the key is momentary, so it has

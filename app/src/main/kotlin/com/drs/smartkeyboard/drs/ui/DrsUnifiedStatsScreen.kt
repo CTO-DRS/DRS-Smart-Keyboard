@@ -57,7 +57,7 @@ import java.time.format.FormatStyle
 import org.drs.lib.compose.stringRes
 
 /**
- * DRS v1.0.8 — الإحصاءات اليومية (Unified Daily Usage Statistics).
+ * الإحصاءات اليومية (Unified Daily Usage Statistics).
  *
  * A REAL usage statistics screen: every number comes from the local daily
  * buckets recorded by the adaptation engine while typing (counts only —
@@ -75,7 +75,7 @@ fun DrsUnifiedStatsScreen() = DrsScreen {
     val drsState by DrsStore.state.collectAsState()
     var showResetDialog by remember { mutableStateOf(false) }
 
-    // DRS v1.1.0: local CSV export of the recorded daily buckets through
+    // local CSV export of the recorded daily buckets through
     // SAF (user picks the destination; nothing leaves without a choice).
     val csvPayload = remember { mutableStateOf<String?>(null) }
     val exportLauncher = rememberLauncherForActivityResult(
@@ -161,9 +161,9 @@ fun DrsUnifiedStatsScreen() = DrsScreen {
             StatsRow(stringRes(R.string.drs__unified__stats_emoji), todayStats.emojiUses)
             StatsRow(stringRes(R.string.drs__unified__stats_clipboard), todayStats.clipboardUses)
             StatsRow(stringRes(R.string.drs__unified__stats_shortcuts), todayStats.shortcutUses)
-            // DRS v1.6.0: committed suggestion-row entries.
+            // committed suggestion-row entries.
             StatsRow(stringRes(R.string.drs__unified__stats_suggestion_accepts), todayStats.suggestionAccepts)
-            // DRS v2.22.0: the per-feature counters — every smart surface
+            // the per-feature counters — every smart surface
             // reports its own honest count in the same table.
             StatsRow(stringRes(R.string.drs__unified__stats_mytexts), todayStats.myTextsUses)
             StatsRow(stringRes(R.string.drs__unified__stats_mylexicon), todayStats.myLexiconUses)
@@ -188,7 +188,7 @@ fun DrsUnifiedStatsScreen() = DrsScreen {
             StatsRow(stringRes(R.string.drs__unified__stats_gestures), last7.gestureUses)
             StatsRow(stringRes(R.string.drs__unified__stats_emoji), last7.emojiUses)
             StatsRow(stringRes(R.string.drs__unified__stats_clipboard), last7.clipboardUses)
-            // DRS v2.22.0: the per-feature counters in the weekly view.
+            // the per-feature counters in the weekly view.
             StatsRow(stringRes(R.string.drs__unified__stats_mytexts), last7.myTextsUses)
             StatsRow(stringRes(R.string.drs__unified__stats_mylexicon), last7.myLexiconUses)
             StatsRow(stringRes(R.string.drs__unified__stats_harakat), last7.harakatUses)
@@ -197,28 +197,28 @@ fun DrsUnifiedStatsScreen() = DrsScreen {
             StatsRow(stringRes(R.string.drs__unified__stats_numbers_panel), last7.numberUses)
         }
 
-        // ---------------- all-time totals (DRS v1.2.0) ----------------
+        // ---------------- all-time totals () ----------------
         // Every number is a pure aggregation of the local day buckets —
         // the same counters the rest of this screen renders.
         val totalAll = DrsDailyStats.sum(drsState.dailyStats.values)
         val best = DrsDailyStats.bestDay(drsState.dailyStats)
         val streak = DrsDailyStats.currentStreak(drsState.dailyStats, today)
-        // DRS v1.3.0: week-over-week growth from two real 7-day windows.
+        // week-over-week growth from two real 7-day windows.
         val wowPercent = DrsDailyStats.lastWeeksGrowthPercent(drsState.dailyStats, today)
-        // DRS v1.4.0: real active-day count + per-active-day average.
+        // real active-day count + per-active-day average.
         val activeDays = DrsDailyStats.activeDaysCount(drsState.dailyStats)
         val dailyAvg = DrsDailyStats.dailyAveragePresses(drsState.dailyStats)
-        // DRS v1.5.0: all-time best streak, the busiest weekday of the
+        // all-time best streak, the busiest weekday of the
         // recorded window, and how many days that window spans.
         val longestStreak = DrsDailyStats.longestStreak(drsState.dailyStats)
         val busiestWeekday = DrsDailyStats.busiestWeekday(drsState.dailyStats)
         val recordedSpan = DrsDailyStats.recordedSpanDays(drsState.dailyStats, today)
-        // DRS v1.6.0: missed days inside the recorded window, the active
+        // missed days inside the recorded window, the active
         // share of it, and the quietest typing weekday (all pure).
         val missedDays = DrsDailyStats.missedDaysCount(drsState.dailyStats, today)
         val activeRatio = DrsDailyStats.activeDayRatioPercent(drsState.dailyStats, today)
         val quietestWeekday = DrsDailyStats.quietestWeekday(drsState.dailyStats)
-        // DRS v1.7.0: how input starts split across the detected context
+        // how input starts split across the detected context
         // modes (password/numbers/coding/…) — the mode was detected all
         // along but never recorded; now the top of the real distribution
         // shows here (all pure aggregations of the same buckets).
@@ -233,20 +233,20 @@ fun DrsUnifiedStatsScreen() = DrsScreen {
             StatsRow(stringRes(R.string.drs__unified__stats_emoji), totalAll.emojiUses)
             StatsRow(stringRes(R.string.drs__unified__stats_clipboard), totalAll.clipboardUses)
             StatsRow(stringRes(R.string.drs__unified__stats_shortcuts), totalAll.shortcutUses)
-            // DRS v1.6.0: committed suggestion-row entries.
+            // committed suggestion-row entries.
             StatsRow(stringRes(R.string.drs__unified__stats_suggestion_accepts), totalAll.suggestionAccepts)
-            // DRS v2.22.0: the per-feature counters in the all-time view.
+            // the per-feature counters in the all-time view.
             StatsRow(stringRes(R.string.drs__unified__stats_mytexts), totalAll.myTextsUses)
             StatsRow(stringRes(R.string.drs__unified__stats_mylexicon), totalAll.myLexiconUses)
             StatsRow(stringRes(R.string.drs__unified__stats_harakat), totalAll.harakatUses)
             StatsRow(stringRes(R.string.drs__unified__stats_symbols_panel), totalAll.symbolUses)
             StatsRow(stringRes(R.string.drs__unified__stats_letters), totalAll.letterUses)
             StatsRow(stringRes(R.string.drs__unified__stats_numbers_panel), totalAll.numberUses)
-            // DRS v1.4.0: recorded active days and the mean presses of
+            // recorded active days and the mean presses of
             // those days — both pure aggregations of the same buckets.
             StatsRow(stringRes(R.string.drs__unified__stats_active_days), activeDays.toLong())
             StatsRow(stringRes(R.string.drs__unified__stats_daily_average), dailyAvg)
-            // DRS v1.5.0: longest streak, busiest weekday and the span of
+            // longest streak, busiest weekday and the span of
             // the recorded window (all pure aggregations, hidden when the
             // data cannot answer them).
             if (longestStreak > 0) {
@@ -275,7 +275,7 @@ fun DrsUnifiedStatsScreen() = DrsScreen {
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
             }
-            // DRS v1.6.0: missed days + the active share of the window.
+            // missed days + the active share of the window.
             if (missedDays != null) {
                 Text(
                     text = stringRes(
@@ -309,7 +309,7 @@ fun DrsUnifiedStatsScreen() = DrsScreen {
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
             }
-            // DRS v1.7.0: the real context-mode mix — hidden when no input
+            // the real context-mode mix — hidden when no input
             // start was ever recorded so an empty install stays clean.
             if (topContexts.isNotEmpty()) {
                 // @Composable display names resolve in this scope; the for
@@ -361,7 +361,7 @@ fun DrsUnifiedStatsScreen() = DrsScreen {
             }
         }
 
-        // ---------------- 14-day bar chart (DRS v1.1.0) ----------------
+        // ---------------- 14-day bar chart () ----------------
         val chartDays = DrsDailyStats.lastDaysZeroFilled(drsState.dailyStats, 14, today)
         StatsCard(title = stringRes(R.string.drs__unified__stats_chart_title)) {
             StatsBarChart(buckets = chartDays)
@@ -433,7 +433,7 @@ fun DrsUnifiedStatsScreen() = DrsScreen {
         ) {
             OutlinedButton(
                 onClick = {
-                    // DRS v1.5.0: the CSV is now a CONTINUOUS ascending
+                    // the CSV is now a CONTINUOUS ascending
                     // zero-filled window across the full retention span
                     // (exactly the documented lastDaysZeroFilled contract),
                     // so exported timelines have no missing-day gaps. The
@@ -501,7 +501,7 @@ private fun formatDayLabel(isoDay: String): String {
 private fun csvStamp(): String = SimpleDateFormat("yyyyMMdd_HHmm", Locale.US).format(Date())
 
 /**
- * DRS v1.3.0: renders the week-over-week growth with a real sign and
+ * renders the week-over-week growth with a real sign and
  * locale-independent digits (e.g. "+12.5%" / "-4.0%").
  */
 private fun formatGrowth(percent: Double): String {
@@ -511,7 +511,7 @@ private fun formatGrowth(percent: Double): String {
 }
 
 /**
- * DRS v1.6.0: renders a percentage with one decimal and locale-independent
+ * renders a percentage with one decimal and locale-independent
  * digits (e.g. "83.3%"), mirroring [formatGrowth].
  */
 private fun formatRatio(percent: Double): String {
@@ -520,7 +520,7 @@ private fun formatRatio(percent: Double): String {
 }
 
 /**
- * DRS v1.7.0: localized display name of a context-mode enum name (the
+ * localized display name of a context-mode enum name (the
  * stats surface shows real names, never raw enum tokens). Falls back to
  * the raw name for unknown tokens so a future mode never renders empty.
  */
@@ -538,7 +538,7 @@ private fun contextModeDisplayName(modeName: String): String = when (modeName) {
 }
 
 /**
- * DRS v1.1.0: builds the CSV payload of the recorded day buckets
+ * builds the CSV payload of the recorded day buckets
  * (ascending). Counts only — the file can never contain typed text.
  */
 private fun buildStatsCsv(buckets: List<DrsDayStats>): String {
@@ -555,7 +555,7 @@ private fun buildStatsCsv(buckets: List<DrsDayStats>): String {
             b.emojiUses,
             b.clipboardUses,
             b.shortcutUses,
-            // DRS v2.22.0: the per-feature counters export with the rest.
+            // the per-feature counters export with the rest.
             b.myTextsUses,
             b.myLexiconUses,
             b.harakatUses,
@@ -563,7 +563,7 @@ private fun buildStatsCsv(buckets: List<DrsDayStats>): String {
             b.letterUses,
             b.numberUses,
             b.suggestionAccepts,
-            // DRS v1.7.0: the day's full context-start map, compact
+            // the day's full context-start map, compact
             // 'mode:count;mode:count' — empty cell when nothing recorded.
             b.contextStarts.entries
                 .sortedWith(compareByDescending<Map.Entry<String, Long>> { it.value }.thenBy { it.key })
@@ -573,7 +573,7 @@ private fun buildStatsCsv(buckets: List<DrsDayStats>): String {
 }
 
 /**
- * DRS v1.1.0: real bar chart of the daily key presses (ascending window).
+ * real bar chart of the daily key presses (ascending window).
  * Drawn on Canvas from the local counters only; today's bar is emphasized.
  */
 @Composable

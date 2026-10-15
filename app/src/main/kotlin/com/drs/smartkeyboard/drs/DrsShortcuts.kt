@@ -69,7 +69,7 @@ object DrsShortcuts {
     const val CURSOR_MARKER = "{cursor}"
 
     /**
-     * DRS v1.7.0: pure template validation for the diagnostics runner.
+ * pure template validation for the diagnostics runner.
      * Every {variable} in every enabled shortcut's expansion must belong
      * to the known set (case-insensitive, matching expandTemplate).
      * Returns null when NO shortcut uses templates at all — the caller
@@ -137,7 +137,7 @@ object DrsShortcuts {
     }
 
     /**
-     * DRS v1.0.7: real availability filter for the unified system. A
+ * real availability filter for the unified system. A
      * shortcut is expandable only when its scope matches the active
      * system - and for the hybrid system, the current display level.
      * Unknown scope names fall back to BOTH so legacy data stays usable.
@@ -195,7 +195,7 @@ object DrsShortcuts {
     }
 
     /**
-     * DRS v1.0.6: edits an existing shortcut in place, keyed by id.
+ * edits an existing shortcut in place, keyed by id.
      * Returns false (without touching anything) when the new abbreviation is
      * already owned by a DIFFERENT shortcut - previously this collision
      * silently created a duplicate entry with the old abbreviation left
@@ -205,7 +205,7 @@ object DrsShortcuts {
         return update(id, shortcut, expansion, isTechnical, null)
     }
 
-    /** DRS v1.0.7: edit that also persists the availability scope (null keeps it). */
+    /** edit that also persists the availability scope (null keeps it). */
     fun update(
         id: Long,
         shortcut: String,
@@ -238,7 +238,7 @@ object DrsShortcuts {
         return true
     }
 
-    /** DRS v1.0.6: enables/disables a single shortcut without removing it. */
+    /** enables/disables a single shortcut without removing it. */
     fun setItemEnabled(id: Long, enabled: Boolean) {
         DrsStore.update { state ->
             state.copy(

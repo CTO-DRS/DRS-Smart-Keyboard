@@ -5,7 +5,7 @@
 package com.drs.smartkeyboard.ime.nlp
 
 /**
- * DRS v2.9.0 «التراجع الصادق» — the pure contract behind "backspace undoes
+ * «التراجع الصادق» — the pure contract behind "backspace undoes
  * the auto-correction" (HeliBoard/OpenBoard heritage, the same affordance
  * AOSP-derived keyboards have shipped for years).
  *

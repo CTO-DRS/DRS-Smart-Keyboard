@@ -101,7 +101,7 @@ class InputFeedbackController private constructor(private val ims: InputMethodSe
             val customRes = style.resId
             if (customRes != null) {
                 // DRS custom sound pack: play the bundled sample. DRS
-                // v1.3.0: the playback rate shifts the pitch per key
+                // the playback rate shifts the pitch per key
                 // category, so space/enter/delete sound distinct instead
                 // of one identical tone for everything.
                 val rate = when (data.code) {

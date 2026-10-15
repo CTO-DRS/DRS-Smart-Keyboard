@@ -13,7 +13,7 @@ import java.util.Locale
 
 /**
  * Unit tests for the pure text transformation engine behind the technical
- * text tools panel (DRS v1.0.6). Every tool the UI exposes must behave
+ * text tools panel (). Every tool the UI exposes must behave
  * exactly as its description promises - these tests pin that behavior.
  */
 class DrsTextToolsTest : FunSpec({
@@ -121,7 +121,7 @@ class DrsTextToolsTest : FunSpec({
         lines shouldBe 2
     }
 
-    // DRS v1.3.0: digit conversion, tatweel removal, blank-line collapsing.
+    // digit conversion, tatweel removal, blank-line collapsing.
 
     test("to arabic digits converts only western digits") {
         DrsTextTools.apply(DrsTextTool.TO_ARABIC_DIGITS, "سنة 2026", en) shouldBe "سنة ٢٠٢٦"
@@ -263,70 +263,70 @@ class DrsTextToolsTest : FunSpec({
 
             DrsTextTool.COUNT -> result shouldBe input // the info tool never transforms
 
-            // DRS v1.4.0 (public): the hostile input carries NO Arabic
+            // (public): the hostile input carries NO Arabic
             // LETTERS — only bare combining marks (ٍَّ), which strip to
             // nothing and are honestly kept as-is — so nothing can be
             // vocalized: the byte-identical passthrough IS the contract.
             DrsTextTool.TASHKEEL_TEXT -> result shouldBe input
 
-            // DRS v1.6.0: the hostile input carries NO digits — the
+            // the hostile input carries NO digits — the
             // number-to-words tool is a byte-identical passthrough on
             // anything it cannot parse as a clean integer.
             DrsTextTool.NUMBER_WORDS -> result shouldBe input
 
-            // DRS v1.7.0: the hostile input ends in «most» — no closed
+            // the hostile input ends in «most» — no closed
             // currency token peels from the tail and no clean amount
             // parses, so the tafqit tool is a byte-identical passthrough.
             DrsTextTool.TAFQIT -> result shouldBe input
 
-            // DRS v1.8.0: the hostile input carries no separator from the
+            // the hostile input carries no separator from the
             // closed date set {- / .} and no digit components — no clean
             // date parses, so the date-words tool is a byte-identical
             // passthrough.
             DrsTextTool.DATE_WORDS -> result shouldBe input
 
-            // DRS v1.9.0: the hostile input carries no clock colon and
+            // the hostile input carries no clock colon and
             // no clean two-component time — the clock-time-words tool is
             // a byte-identical passthrough.
             DrsTextTool.TIME_WORDS -> result shouldBe input
 
-            // DRS v1.10.0: the hostile input carries no fraction slash
+            // the hostile input carries no fraction slash
             // and no digit components — the fraction-words tool is a
             // byte-identical passthrough.
             DrsTextTool.FRACTION_WORDS -> result shouldBe input
 
-            // DRS v1.10.0: the hostile input carries no separator from
+            // the hostile input carries no separator from
             // the closed date set {- / .} and no digit components — the
             // weekday tool is a byte-identical passthrough.
             DrsTextTool.WEEKDAY -> result shouldBe input
 
-            // DRS v1.10.0: the hostile input carries no digits at all —
+            // the hostile input carries no digits at all —
             // the ordinal-words tool is a byte-identical passthrough.
             DrsTextTool.ORDINAL_WORDS -> result shouldBe input
 
-            // DRS v2.0.0: the hostile input carries no decimal separator
+            // the hostile input carries no decimal separator
             // from the closed pair { . ، ٫ } — the decimal-words tool is
             // a byte-identical passthrough.
             DrsTextTool.DECIMAL_WORDS -> result shouldBe input
 
-            // DRS v2.0.0: the hostile input carries no Arabic number
+            // the hostile input carries no Arabic number
             // words — the words-to-number mirror is a byte-identical
             // passthrough.
             DrsTextTool.WORDS_TO_NUMBER -> result shouldBe input
 
-            // DRS v2.1.0: the hostile input carries no separator from
+            // the hostile input carries no separator from
             // the closed date set {- / .} and no digit components —
             // the Gregorian→Hijri conversion is a byte-identical
             // passthrough.
             DrsTextTool.GREGORIAN_TO_HIJRI -> result shouldBe input
 
-            // DRS v2.1.0: the hostile input carries no separator from
+            // the hostile input carries no separator from
             // the closed date set {- / .} and no digit components —
             // the Hijri→Gregorian conversion is a byte-identical
             // passthrough.
             DrsTextTool.HIJRI_TO_GREGORIAN -> result shouldBe input
 
-            // DRS v2.2.0: the natural sort is a pure PERMUTATION of the
+            // the natural sort is a pure PERMUTATION of the
             // lines — every line in, every line out, none invented and
             // none lost (the collator may order them either way on a
             // hostile pair; the multiset may never change). Both sides
@@ -334,7 +334,7 @@ class DrsTextToolsTest : FunSpec({
             DrsTextTool.SORT_LINES_NATURAL ->
                 result.lines().sorted() shouldBe input.lines().sorted()
 
-            // DRS v2.2.0: the slug is never empty (the punctuation-only
+            // the slug is never empty (the punctuation-only
             // passthrough keeps the input verbatim) and never carries
             // whitespace — every run became one dash or fell away.
             DrsTextTool.SLUGIFY -> {
@@ -342,22 +342,22 @@ class DrsTextToolsTest : FunSpec({
                 result.none { it.isWhitespace() }.shouldBeTrue()
             }
 
-            // DRS v2.2.0: snake_case owns the whitespace — every run is
+            // snake_case owns the whitespace — every run is
             // a word boundary, so the result carries none.
             DrsTextTool.TO_SNAKE_CASE ->
                 result.none { it.isWhitespace() }.shouldBeTrue()
 
-            // DRS v2.2.0: the hostile tokens carry emoji and fullwidth
+            // the hostile tokens carry emoji and fullwidth
             // marks (non-ASCII) — the camel transform refuses the whole
             // text byte-identically, the honest sibling.
             DrsTextTool.TO_CAMEL_CASE -> result shouldBe input
 
-            // DRS v2.16.0: the hostile tail is Latin («most») — no
+            // the hostile tail is Latin («most») — no
             // Arabic trigger equals the normalized tail, so no rule
             // fires and the text returns byte-identical.
             DrsTextTool.IMPROVE_PHRASES -> result shouldBe input
 
-            // DRS v2.16.0: the hostile input carries single spaces only
+            // the hostile input carries single spaces only
             // (no whitespace runs), no space-before-closing-punctuation
             // shapes and no edge whitespace — the bounded fixed-point
             // normalizer returns it byte-identically.
@@ -389,7 +389,7 @@ class DrsTextToolsTest : FunSpec({
     }
 
     // -----------------------------------------------------------
-    // DRS v1.4.0: SORT_LINES_DESC
+    // SORT_LINES_DESC
     // -----------------------------------------------------------
 
     test("sort lines descending orders lines with the locale collator") {
@@ -408,7 +408,7 @@ class DrsTextToolsTest : FunSpec({
     }
 
     // -----------------------------------------------------------
-    // DRS v1.4.0: NORMALIZE_ARABIC
+    // NORMALIZE_ARABIC
     // -----------------------------------------------------------
 
     test("normalize arabic unifies hamza carriers, ta-marbuta and alef maqsura") {

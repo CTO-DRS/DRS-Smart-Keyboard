@@ -1,10 +1,10 @@
 # سياسة الخصوصية — Privacy Policy — Politique de confidentialité
 
-> يصلح هذا الملف مع الإصدار v2.2.0 وما بعده. الخلاصة بسطر واحد
+> يصلح هذا الملف مع الإصدار 1.0.0 وما بعده. الخلاصة بسطر واحد
 > بكل اللغات: **لوحة المفاتيح لا ترسل كتابتك أو صوتك أو بياناتك إلى
 > أي مكان — والحوسبة كلها على جهازك.**
 >
-> This policy applies from v2.2.0. One-line summary in every language:
+> This policy applies from 1.0.0. One-line summary in every language:
 > **the keyboard never sends your typing, voice, or data anywhere —
 > all computation happens on your device.**
 

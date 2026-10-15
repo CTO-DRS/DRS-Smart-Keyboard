@@ -5,7 +5,7 @@
 package com.drs.smartkeyboard.lib.ext
 
 /**
- * DRS v1.27.0: human-readable SPDX license names — «الترخيص بلغة
+ * human-readable SPDX license names — «الترخيص بلغة
  * الناس». The extension manifest stores the license as an SPDX
  * identifier or expression ([ExtensionMeta.license] — the machine
  * truth, exactly what the SPDX spec demands), but the extension view

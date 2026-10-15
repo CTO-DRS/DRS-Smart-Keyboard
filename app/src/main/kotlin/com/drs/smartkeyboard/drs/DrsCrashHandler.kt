@@ -52,7 +52,7 @@ object DrsCrashHandler {
                     DrsCrashReports.get()?.record(thread, throwable)
                 }
                 runCatching {
-                    // DRS v1.0.6: also surface the crash in the sanitized
+                    // also surface the crash in the sanitized
                     // in-memory event log (class name only, no user data).
                     DrsEventLog.record(
                         DrsEventLog.Level.ERROR,

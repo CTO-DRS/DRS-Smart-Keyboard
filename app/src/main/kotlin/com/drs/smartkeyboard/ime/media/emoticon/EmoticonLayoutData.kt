@@ -20,7 +20,7 @@ data class EmoticonLayoutData(
 ) {
     companion object {
         /**
-         * DRS v1.23.0: the loader finally exists — until this round the
+ * the loader finally exists — until this round the
          * function was a stubbed `return null` while the 21-entry
          * emoticons.json shipped dead inside the APK. Loads the kaomoji
          * arrangement through the same DrsRef asset pipeline every other

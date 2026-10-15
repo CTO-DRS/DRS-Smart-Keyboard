@@ -108,7 +108,7 @@ class KeyboardManager(context: Context) : InputKeyEventReceiver {
     private val extensionManager by context.extensionManager()
     private val nlpManager by context.nlpManager()
     private val subtypeManager by context.subtypeManager()
-    // DRS v1.0.8: theme cycling from the unified strip needs the theme
+    // theme cycling from the unified strip needs the theme
     // index + the theme prefs (see handleThemeCycle / ThemeManager.cycleTheme).
     private val themeManager by context.themeManager()
 
@@ -116,7 +116,7 @@ class KeyboardManager(context: Context) : InputKeyEventReceiver {
     val layoutManager = LayoutManager(context)
     private val keyboardCache = TextKeyboardCache()
 
-    // DRS v1.23.0: the built-in voice dictation controller — created on
+    // the built-in voice dictation controller — created on
     // first mic press (lazy), commits transcripts at the cursor, torn
     // down with the service. See DrsVoiceInput.kt for the full contract.
     // DRS (M1): this used to be a `lazy` singleton on this app-scoped
@@ -135,7 +135,7 @@ class KeyboardManager(context: Context) : InputKeyEventReceiver {
                 voiceControllerInstance ?: DrsVoiceInputController(
                     appContext,
                     onCommit = { text -> editorInstance.commitText(text) },
-                    // DRS v1.25.0: read lazily at every start so a settings
+                    // read lazily at every start so a settings
                     // change between sessions is honored without recreating
                     // the controller.
                     recognizerMode = { prefs.voice.recognizerMode.get() },
@@ -148,13 +148,13 @@ class KeyboardManager(context: Context) : InputKeyEventReceiver {
             }
         }
 
-    /** DRS v1.23.0: the keyboard window hid — a live session must die. */
+    /** the keyboard window hid — a live session must die. */
     fun stopVoiceInput() {
         // DRS (M1): nullable read — a mere stop must not create a controller.
         voiceControllerInstance?.stop()
     }
 
-    /** DRS v1.23.0: the service is going away — full teardown. */
+    /** the service is going away — full teardown. */
     fun destroyVoiceInput() {
         // DRS (M1): null the reference so the next mic press re-creates the
         // controller instead of reusing the destroyed one.
@@ -255,7 +255,7 @@ class KeyboardManager(context: Context) : InputKeyEventReceiver {
     @Volatile
     private var isSyntheticSwipeShiftDispatch = false
 
-    // DRS v2.9.0: the armed «honest revert» opportunity — an auto-committed
+    // the armed «honest revert» opportunity — an auto-committed
     // correction whose first backspace restores the typed word. One-shot,
     // self-verifying against the editor text at fire time (DrsCorrectionRevert),
     // and disarmed by every other key-up so it can never reach unrelated text.
@@ -286,7 +286,7 @@ class KeyboardManager(context: Context) : InputKeyEventReceiver {
     ).also { it.keyEventReceiver = this }
 
     /**
-     * DRS v1.0.5: live query of the emoji search. While
+ * live query of the emoji search. While
      * [KeyboardState.isMediaSearchActive] is true, character/delete/space
      * key events are routed into this flow instead of the host editor —
      * the standard way IME-internal search fields receive input.
@@ -518,7 +518,7 @@ class KeyboardManager(context: Context) : InputKeyEventReceiver {
     }
 
     /**
-     * DRS v2.7.0: volume-key cursor control (AOSP/OpenBoard heritage).
+ * volume-key cursor control (AOSP/OpenBoard heritage).
      * When the user opted in, VOLUME_UP/DOWN move the cursor one line
      * up/down through the same synthetic-dispatch path the board's swipe
      * language uses — same key data, same feedback pipeline, zero new
@@ -538,11 +538,11 @@ class KeyboardManager(context: Context) : InputKeyEventReceiver {
     }
 
     fun commitCandidate(candidate: SuggestionCandidate, isAutoCommit: Boolean = false) {
-        // DRS v1.6.0: every committed suggestion-row entry — tapped
+        // every committed suggestion-row entry — tapped
         // candidates AND auto-committed completions — flows through this
         // single path, so this is the one real accept counter.
         DrsAdaptationEngine.recordSuggestionAccept()
-        // DRS v2.9.0: a manual pick from the suggestion row is a deliberate
+        // a manual pick from the suggestion row is a deliberate
         // choice — it is never reverted, so it disarms any pending
         // auto-commit revert. Auto-commits (isAutoCommit = true) arm at
         // their own call sites, where the typed word is still observable
@@ -586,7 +586,7 @@ class KeyboardManager(context: Context) : InputKeyEventReceiver {
      */
     fun handleArrow(code: Int, count: Int = 1) = editorInstance.apply {
         val isShiftPressed = activeState.isManualSelectionMode || inputEventDispatcher.isPressed(KeyCode.SHIFT)
-        // DRS v1.22.0: the revived modifier latches ride along — an armed
+        // the revived modifier latches ride along — an armed
         // CTRL turns an arrow into word movement, an armed ALT into
         // line/page jumps (the same meta semantics physical keyboards
         // deliver; sendDownUpKeyEvent already carries META_*_ON). LOCKED
@@ -652,7 +652,7 @@ class KeyboardManager(context: Context) : InputKeyEventReceiver {
                 }
                 sendDownUpKeyEvent(KeyEvent.KEYCODE_DPAD_RIGHT, meta(alt = true, shift = isShiftPressed), count)
             }
-            // DRS v1.0.5: word-by-word cursor jumps (Ctrl+DPAD) — works with
+            // word-by-word cursor jumps (Ctrl+DPAD) — works with
             // the same editors that support Ctrl+Arrow word movement, and
             // respects manual selection mode for word-wise selection.
             KeyCode.MOVE_WORD_LEFT -> {
@@ -706,7 +706,7 @@ class KeyboardManager(context: Context) : InputKeyEventReceiver {
      * Handles a [KeyCode.DELETE] event.
      */
     private fun handleBackwardDelete(unit: OperationUnit) {
-        // DRS v2.9.0: the honest revert is one-shot — the DELETE key consumes
+        // the honest revert is one-shot — the DELETE key consumes
         // the armed opportunity on every path (applied, refused, redirected).
         val revertPending = correctionRevertPending
         correctionRevertPending = null
@@ -797,7 +797,7 @@ class KeyboardManager(context: Context) : InputKeyEventReceiver {
     }
 
     /**
-     * DRS v1.0.8: handles a [KeyCode.INSERT_DATE_TIME] event by committing
+ * handles a [KeyCode.INSERT_DATE_TIME] event by committing
      * the current date & time formatted with the ACTIVE SUBTYPE's locale
      * (system locale as fallback). The text goes through the normal
      * commitText path, so undo/composing/clipboard integrations all apply.
@@ -881,7 +881,7 @@ class KeyboardManager(context: Context) : InputKeyEventReceiver {
      * but skips handling changing to characters keyboard and double space periods.
      */
     fun handleHardwareKeyboardSpace() {
-        // DRS v1.28.0 audit fix (Low, dedup): this tail duplicated
+        // audit fix (Low, dedup): this tail duplicated
         // handleSpace's auto-commit + learning + space-commit block verbatim
         // (including its copied TODO). Both paths now share one helper so
         // behavior can never drift apart again.
@@ -889,12 +889,12 @@ class KeyboardManager(context: Context) : InputKeyEventReceiver {
     }
 
     /**
-     * DRS v1.28.0: the shared auto-correct + word-learning + space-commit
+ * the shared auto-correct + word-learning + space-commit
      * tail used by both the soft space key and the hardware space key.
      */
     private fun commitSpaceWithAutoCommitAndLearning() {
         val candidate = nlpManager.getAutoCommitCandidate()
-        // DRS v2.9.0: the space path is where the silent rewrite happens —
+        // the space path is where the silent rewrite happens —
         // capture what the user typed BEFORE the commit erases it, then arm
         // the honest revert (the arm refuses honestly when nothing was
         // actually corrected: committed == typed, blanks, oversized words).
@@ -964,7 +964,7 @@ class KeyboardManager(context: Context) : InputKeyEventReceiver {
                 }
             }
         }
-        // DRS v2.7.0: smart punctuation — a whitespace- (or text-start)
+        // smart punctuation — a whitespace- (or text-start)
         // preceded double hyphen is rewritten to a real em dash as the
         // following space commits. Same TEXT/CHARACTERS guards as the
         // double-space affordance above; runs of three or more dashes and
@@ -984,7 +984,7 @@ class KeyboardManager(context: Context) : InputKeyEventReceiver {
                 editorInstance.commitText(DrsSmartPunctuation.EM_DASH)
             }
         }
-        // DRS v1.28.0 audit fix (Low, dedup): shared tail, see
+        // audit fix (Low, dedup): shared tail, see
         // commitSpaceWithAutoCommitAndLearning().
         commitSpaceWithAutoCommitAndLearning()
     }
@@ -1013,7 +1013,7 @@ class KeyboardManager(context: Context) : InputKeyEventReceiver {
     }
 
     /**
-     * DRS v1.23.0: handles a [KeyCode.VOICE_INPUT] press — «الميكروفون
+ * handles a [KeyCode.VOICE_INPUT] press — «الميكروفون
      * يستيقظ». The pure [decideVoiceInputRoute] owns the truth: password/
      * incognito contexts are refused with an honest toast, a ROM without
      * any recognition service keeps the legacy external voice-IME switch,
@@ -1026,7 +1026,7 @@ class KeyboardManager(context: Context) : InputKeyEventReceiver {
             appContext,
             Manifest.permission.RECORD_AUDIO,
         ) == PackageManager.PERMISSION_GRANTED
-        // DRS v1.28.0 audit fix (Low, privacy hardening): the password signal
+        // audit fix (Low, privacy hardening): the password signal
         // now includes the resolved KeyVariation (the same primary signal the
         // clipboard guard uses). Previously sensitivity leaned on
         // DrsRuntimeState.contextMode, which is force-normalized to NORMAL
@@ -1036,7 +1036,7 @@ class KeyboardManager(context: Context) : InputKeyEventReceiver {
         val isSensitive = activeState.isIncognitoMode ||
             activeState.keyVariation == com.drs.smartkeyboard.ime.text.key.KeyVariation.PASSWORD ||
             DrsRuntimeState.contextMode.value == DrsContextMode.PASSWORD
-        // DRS v1.25.0: the recognizer mode gate is real — the pref the
+        // the recognizer mode gate is real — the pref the
         // typing settings screen drives is consulted on every press, so
         // a strict on-device demand a ROM cannot honor answers with an
         // honest toast instead of silently falling back to the cloud.
@@ -1075,21 +1075,21 @@ class KeyboardManager(context: Context) : InputKeyEventReceiver {
         }
     }
 
-    /** DRS v1.23.0: the recognizer follows the active subtype's language. */
+    /** the recognizer follows the active subtype's language. */
     private fun activeVoiceLanguageTag(): String =
         subtypeManager.activeSubtypeFlow.value.primaryLocale.base.toLanguageTag()
 
     /**
      * Handles a [KeyCode.TOGGLE_AUTOCORRECT] event.
      *
-     * DRS v1.3.0: REAL toggle — flips an engine pref the settings screen
+ * REAL toggle — flips an engine pref the settings screen
      * and the profile switch drive too, so the change takes effect on the
      * very next keystroke, with a toast confirming the new state.
-     * DRS v1.17.0: flips suggestion__autocorrect_enabled — whether space
+ * flips suggestion__autocorrect_enabled — whether space
      * may silently fix a typo — while the suggestion row stays available.
      */
     private suspend fun handleToggleAutocorrect() {
-        // DRS v1.17.0: the toggle now flips the REAL autocorrect behavior
+        // the toggle now flips the REAL autocorrect behavior
         // (whether a space can silently fix a typo) instead of the old
         // misnomer of hiding the whole suggestion row. The row itself stays
         // available; only auto-commit stops happening when off.
@@ -1185,7 +1185,7 @@ class KeyboardManager(context: Context) : InputKeyEventReceiver {
     }
 
     override fun onInputKeyUp(data: KeyData) {
-        // DRS v1.0.6: measure the REAL wall-clock time the key handler takes
+        // measure the REAL wall-clock time the key handler takes
         // per press (µs) into a bounded in-memory window. Pure RAM sampling,
         // lock-free, allocation-free - it never affects typing behavior.
         val startNs = System.nanoTime()
@@ -1198,7 +1198,7 @@ class KeyboardManager(context: Context) : InputKeyEventReceiver {
 
     private fun onInputKeyUpBody(data: KeyData) = activeState.batchEdit {
         val windowController = DrsImeService.windowControllerOrNull() ?: return@batchEdit
-        // DRS v2.9.0: the honest revert is a ONE-BACKSPACE affordance — every
+        // the honest revert is a ONE-BACKSPACE affordance — every
         // other key-up (typing, space, arrows, navigation, suggestions)
         // disarms a stale opportunity before it can fire on unrelated text.
         // KeyCode.DELETE is exempt: it is the key that consumes the revert
@@ -1206,10 +1206,10 @@ class KeyboardManager(context: Context) : InputKeyEventReceiver {
         if (data.code != KeyCode.DELETE) {
             correctionRevertPending = null
         }
-        // DRS v1.22.0: snapshot the armed modifier latches BEFORE any
+        // snapshot the armed modifier latches BEFORE any
         // branch can consume them — the arrow and delete branches below
         // read these, the CTRL/ALT branches cycle them.
-        // DRS v1.23.0: the FN latch joins the snapshot — armed FN turns
+        // the FN latch joins the snapshot — armed FN turns
         // the digit keys into real F1–F10 key events (see the commit path
         // at the bottom of this function).
         val ctrlArmed = activeState.inputCtrlState.isArmed
@@ -1217,12 +1217,12 @@ class KeyboardManager(context: Context) : InputKeyEventReceiver {
         val fnArmed = activeState.inputFnState.isArmed
         DrsAdaptationEngine.recordKey(data.code)
         DrsEconomy.recordKeyEarn(data.code)
-        // DRS v1.0.5: anonymous count of smart-tool usage (which tool button
+        // anonymous count of smart-tool usage (which tool button
         // was pressed, never what was typed) for the most-used tools surface.
         if (data.code in SmartToolCodes) {
             DrsAdaptationEngine.recordToolUse(data.code)
         }
-        // DRS v1.0.5: while the emoji search field is active, route typing
+        // while the emoji search field is active, route typing
         // into the search query instead of the host editor. Emoji taps and
         // navigation keys still fall through to the normal handling.
         // DRS p7 (E2-1): the capture gate additionally requires
@@ -1270,7 +1270,7 @@ class KeyboardManager(context: Context) : InputKeyEventReceiver {
                 handleArrow(data.code)
             }
             KeyCode.CAPS_LOCK -> handleCapsLock()
-            // DRS v1.22.0: the revived CTRL/ALT — «المفاتيح الميتة تنبض».
+            // the revived CTRL/ALT — «المفاتيح الميتة تنبض».
             // A tap cycles OFF → LATCHED → LOCKED → OFF; the *_LOCK codes
             // jump straight to LOCKED. They used to fall into the
             // unknown-key branch (drawn, dead, logged as an error).
@@ -1286,8 +1286,8 @@ class KeyboardManager(context: Context) : InputKeyEventReceiver {
                     lock = data.code == KeyCode.ALT_LOCK,
                 )
             }
-            // DRS v1.23.0: the last dead modifier of the family revives —
-            // FN latches exactly like CTRL/ALT (the same v1.22.0 contract:
+            // the last dead modifier of the family revives —
+            // FN latches exactly like CTRL/ALT (the same contract:
             // tap = one-shot, tap again = lock, third tap = release), and
             // while armed it transforms the digit keys into F1–F10
             // hardware events for terminals, remote desktop and console
@@ -1305,19 +1305,19 @@ class KeyboardManager(context: Context) : InputKeyEventReceiver {
             KeyCode.CHAR_WIDTH_HALF -> handleCharWidthHalf()
             KeyCode.CLIPBOARD_CUT -> {
                 editorInstance.performClipboardCut()
-                // DRS v1.7.0: cut is a clipboard feature use — credit it the
+                // cut is a clipboard feature use — credit it the
                 // same way paste is credited (economy + adaptation signal).
                 DrsAdaptationEngine.recordClipboardUse()
             }
             KeyCode.CLIPBOARD_COPY -> {
                 editorInstance.performClipboardCopy()
-                // DRS v1.7.0: copy-heavy users were invisible to the
+                // copy-heavy users were invisible to the
                 // clipboard counters and the history suggestion — credit it.
                 DrsAdaptationEngine.recordClipboardUse()
             }
             KeyCode.CLIPBOARD_PASTE -> {
                 editorInstance.performClipboardPaste()
-                // DRS v1.0.5: clipboard use is now actually credited (was
+                // clipboard use is now actually credited (was
                 // dead code before) so points and adaptation suggestions work.
                 DrsAdaptationEngine.recordClipboardUse()
             }
@@ -1333,7 +1333,7 @@ class KeyboardManager(context: Context) : InputKeyEventReceiver {
                 clipboardManager.updatePrimaryClip(null)
                 appContext.showShortToastSync(R.string.clipboard__cleared_primary_clip)
             }
-            // DRS v1.7.0: pin/unpin the ACTIVE clipboard entry through the
+            // pin/unpin the ACTIVE clipboard entry through the
             // exact same real path the clipboard panel long-press popup
             // uses (pinned entries survive clearHistory by contract).
             KeyCode.CLIPBOARD_PIN_ACTIVE -> {
@@ -1342,7 +1342,7 @@ class KeyboardManager(context: Context) : InputKeyEventReceiver {
                         clipboardManager.unpinClip(clip)
                         appContext.showShortToastSync(R.string.clipboard__unpinned_active)
                     } else if (!clipboardManager.pinClip(clip)) {
-                        // DRS v1.22.0: the honest pin cap toast — the
+                        // the honest pin cap toast — the
                         // same refusal the clipboard panel popup shows.
                         appContext.showShortToastSync(R.string.clipboard__pin_cap_toast)
                     } else {
@@ -1355,21 +1355,21 @@ class KeyboardManager(context: Context) : InputKeyEventReceiver {
             KeyCode.COMPACT_LAYOUT_TO_LEFT -> windowController.actions.compactLayoutToLeft()
             KeyCode.COMPACT_LAYOUT_TO_RIGHT -> windowController.actions.compactLayoutToRight()
             KeyCode.TOGGLE_RESIZE_MODE -> windowController.editor.toggleEnabled()
-            // DRS v1.5.0: the tech-toolbar Tab and Esc keys used to fall
+            // the tech-toolbar Tab and Esc keys used to fall
             // into the unknown-key branch (silent no-op). Tab now commits a
             // real tab character and Escape hides the keyboard UI — the
             // same path IME_HIDE_UI uses.
             KeyCode.TAB -> editorInstance.commitText("\t")
             KeyCode.ESCAPE -> DrsImeService.hideUi()
             KeyCode.DELETE -> handleBackwardDelete(
-                // DRS v1.22.0: an armed CTRL upgrades the delete to word
+                // an armed CTRL upgrades the delete to word
                 // granularity — the same contract a physical keyboard has.
                 if (ctrlArmed) OperationUnit.WORDS else OperationUnit.CHARACTERS,
             )
             KeyCode.DELETE_WORD -> handleBackwardDelete(OperationUnit.WORDS)
             KeyCode.ENTER -> handleEnter()
             KeyCode.FORWARD_DELETE -> handleForwardDelete(
-                // DRS v1.22.0: armed CTRL deletes forward by words too.
+                // armed CTRL deletes forward by words too.
                 if (ctrlArmed) OperationUnit.WORDS else OperationUnit.CHARACTERS,
             )
             KeyCode.FORWARD_DELETE_WORD -> handleForwardDelete(OperationUnit.WORDS)
@@ -1397,7 +1397,7 @@ class KeyboardManager(context: Context) : InputKeyEventReceiver {
                 activeState.imeUiMode = ImeUiMode.TEXT_TOOLS
                 DrsRuntimeState.closeStripSlotEditor()
             }
-            // DRS v1.15.0: the three smart panels (الحركات/الرموز/الحروف)
+            // the three smart panels (الحركات/الرموز/الحروف)
             // open through the same path as every other UI mode.
             KeyCode.IME_UI_MODE_DIACRITICS -> {
                 exitMediaSearch()
@@ -1414,21 +1414,21 @@ class KeyboardManager(context: Context) : InputKeyEventReceiver {
                 activeState.imeUiMode = ImeUiMode.ARABIC_LETTERS
                 DrsRuntimeState.closeStripSlotEditor()
             }
-            // DRS v1.2.0: the fourth smart panel (لوحة الأرقام الذكية)
+            // the fourth smart panel (لوحة الأرقام الذكية)
             // opens through the same path as every other UI mode.
             KeyCode.IME_UI_MODE_SMART_NUMBER -> {
                 exitMediaSearch()
                 activeState.imeUiMode = ImeUiMode.SMART_NUMBER
                 DrsRuntimeState.closeStripSlotEditor()
             }
-            // DRS v1.3.0: the fifth smart panel (لوحة الحافظة الذكية)
+            // the fifth smart panel (لوحة الحافظة الذكية)
             // opens through the same path as every other UI mode.
             KeyCode.IME_UI_MODE_SMART_CLIPBOARD -> {
                 exitMediaSearch()
                 activeState.imeUiMode = ImeUiMode.SMART_CLIPBOARD
                 DrsRuntimeState.closeStripSlotEditor()
             }
-            // DRS v2.21.0: the sixth smart panel (لوحة نصوصي المحفوظة)
+            // the sixth smart panel (لوحة نصوصي المحفوظة)
             // opens through the same path as every other UI mode.
             KeyCode.IME_UI_MODE_MY_TEXTS -> {
                 exitMediaSearch()
@@ -1438,7 +1438,7 @@ class KeyboardManager(context: Context) : InputKeyEventReceiver {
             in DrsTextTool.CODE_RANGE -> {
                 DrsTextTool.fromCode(data.code)?.let { editorInstance.performTextTool(it) }
             }
-            // DRS v1.23.0: the mic key finally dictates — the pure route
+            // the mic key finally dictates — the pure route
             // decision sends it to the built-in recognizer, the permission
             // trampoline, or the legacy external voice-IME switch.
             KeyCode.VOICE_INPUT -> handleVoiceInput()
@@ -1448,23 +1448,23 @@ class KeyboardManager(context: Context) : InputKeyEventReceiver {
             KeyCode.KANA_HALF_KATA -> handleKanaHalfKata()
             KeyCode.LANGUAGE_SWITCH -> handleLanguageSwitch()
             KeyCode.REDO -> {
-                // DRS v2.10.0: same local-first, host-fallback discipline.
+                // same local-first, host-fallback discipline.
                 if (!(prefs.editor.localUndoRedo.get() && editorInstance.tryLocalRedo())) {
                     editorInstance.performRedo()
                 }
             }
             KeyCode.SETTINGS -> DrsImeService.launchSettings()
-            // DRS v1.0.8: unified-strip tools (real engine actions).
+            // unified-strip tools (real engine actions).
             KeyCode.THEME_CYCLE -> scope.launch { themeManager.cycleTheme() }
             KeyCode.INSERT_DATE_TIME -> handleInsertDateTime()
-            // DRS v1.1.0: unified-strip tool — flips the number-row pref;
+            // unified-strip tool — flips the number-row pref;
             // the existing pref collector clears the layout cache and the
             // LayoutManager recomputes the character layout, so the row
             // appears/disappears on the very next frame.
             KeyCode.TOGGLE_NUMBER_ROW -> scope.launch {
                 prefs.keyboard.numberRow.set(!prefs.keyboard.numberRow.get())
             }
-            // DRS v1.19.0: the split keyboard (v1.18.0) becomes one-tap
+            // the split keyboard () becomes one-tap
             // actionable — SPLIT_LAYOUT activates the split halves, MERGE_LAYOUT
             // returns to the classic full layout. Same engine pref the settings
             // screen drives, so the change lands on the very next frame, with a
@@ -1483,8 +1483,8 @@ class KeyboardManager(context: Context) : InputKeyEventReceiver {
             KeyCode.SHOW_SUBTYPE_PICKER -> {
                 activeState.isSubtypeSelectionVisible = true
             }
-            // DRS v1.7.0: IME_SUBTYPE_PICKER had predefined key data since
-            // v1.0.x but NO handler — pressing it silently logged "unknown
+            // IME_SUBTYPE_PICKER had predefined key data since
+            //.x but NO handler — pressing it silently logged "unknown
             // key". It is the same action as SHOW_SUBTYPE_PICKER.
             KeyCode.IME_SUBTYPE_PICKER -> {
                 activeState.isSubtypeSelectionVisible = true
@@ -1508,7 +1508,7 @@ class KeyboardManager(context: Context) : InputKeyEventReceiver {
                 }
             }
             KeyCode.TOGGLE_ACTIONS_OVERFLOW -> {
-                // DRS v1.8.0: the overflow panel and the tools drawer share
+                // the overflow panel and the tools drawer share
                 // the same keyboard area — opening one closes the other.
                 activeState.isToolsDrawerVisible = false
                 activeState.isActionsOverflowVisible = !activeState.isActionsOverflowVisible
@@ -1520,7 +1520,7 @@ class KeyboardManager(context: Context) : InputKeyEventReceiver {
             KeyCode.TOGGLE_INCOGNITO_MODE -> scope.launch { handleToggleIncognitoMode() }
             KeyCode.TOGGLE_AUTOCORRECT -> scope.launch { handleToggleAutocorrect() }
             KeyCode.UNDO -> {
-                // DRS v2.10.0: local history first (self-verifying); the host
+                // local history first (self-verifying); the host
                 // delegation stays the honest fallback whenever the keyboard
                 // cannot prove it understands the field.
                 if (!(prefs.editor.localUndoRedo.get() && editorInstance.tryLocalUndo())) {
@@ -1534,7 +1534,7 @@ class KeyboardManager(context: Context) : InputKeyEventReceiver {
             KeyCode.VIEW_PHONE2 -> activeState.keyboardMode = KeyboardMode.PHONE2
             KeyCode.VIEW_SYMBOLS -> activeState.keyboardMode = KeyboardMode.SYMBOLS
             KeyCode.VIEW_SYMBOLS2 -> activeState.keyboardMode = KeyboardMode.SYMBOLS2
-            // DRS v1.20.0: transient placeholder tiles (the quick-actions editor paints
+            // transient placeholder tiles (the quick-actions editor paints
             // empty slots with NOOP/DRAG_MARKER while rearranging) previously fell through
             // to the "unknown key" error path and fired a pointless empty commit. They are
             // layout markers, never actionable keys — swallow them silently.
@@ -1547,14 +1547,14 @@ class KeyboardManager(context: Context) : InputKeyEventReceiver {
                     editorInstance.commitText(data.asString(isForDisplay = false))
                     return@batchEdit
                 }
-                // DRS v1.23.0: armed FN turns the digit keys ('0'..'9',
+                // armed FN turns the digit keys ('0'..'9',
                 // ASCII 48..57) into real F1–F10 hardware events — the
                 // exact contract a physical Fn row delivers in terminals,
                 // remote-desktop clients and console emulators. Anything
                 // else (letters, punctuation) keeps its normal commit and
                 // merely consumes the latch below, mirroring the honest
                 // no-fake-emulation CTRL/ALT behavior.
-                // DRS v1.24.0: the row reaches its natural end — '-'(45)
+                // the row reaches its natural end — '-'(45)
                 // and '='(61) (CHARACTER-typed on the numeric/symbols/
                 // symbols2 pages) become F11/F12, and page hops keep the
                 // latch alive so those keys are actually reachable.
@@ -1596,7 +1596,7 @@ class KeyboardManager(context: Context) : InputKeyEventReceiver {
                             // stays unconditional (it owns empty-input
                             // semantics itself).
                             if (text.isNotEmpty() && !UCharacter.isUAlphabetic(UCharacter.codePointAt(text, 0))) {
-                                // DRS v2.9.0: interword punctuation auto-commits too
+                                // interword punctuation auto-commits too
                                 // («helo,» → «hello,») — arm the same honest revert,
                                 // capturing the typed word before the silent rewrite.
                                 val autoCandidate = nlpManager.getAutoCommitCandidate()
@@ -1621,7 +1621,7 @@ class KeyboardManager(context: Context) : InputKeyEventReceiver {
                 }
             }
         }
-        // DRS v1.22.0: a consuming key releases a one-shot modifier latch —
+        // a consuming key releases a one-shot modifier latch —
         // LOCKED latches persist until the key is tapped again, and the
         // modifier keys never consume themselves (the branch that cycles
         // them is reached before this cleanup). `consumed()` is
@@ -1635,9 +1635,9 @@ class KeyboardManager(context: Context) : InputKeyEventReceiver {
             else -> {
                 activeState.inputCtrlState = activeState.inputCtrlState.consumed()
                 activeState.inputAltState = activeState.inputAltState.consumed()
-                // DRS v1.23.0: the FN latch releases after one consuming
+                // the FN latch releases after one consuming
                 // press exactly like CTRL/ALT — LOCKED persists.
-                // DRS v1.24.0: page/mode switches (VIEW_*/IME_UI_MODE_*)
+                // page/mode switches (VIEW_*/IME_UI_MODE_*)
                 // are NOT consuming keys for FN — F11 lives behind '-' on
                 // the numeric/symbols pages and F12 behind '=' on symbols2,
                 // so the armed latch must survive the hop or the extended
@@ -1837,7 +1837,7 @@ class KeyboardManager(context: Context) : InputKeyEventReceiver {
                 KeyCode.LANGUAGE_SWITCH -> {
                     subtypeManager.subtypes.size > 1
                 }
-                // DRS v2.2.2 «الشريطان الصادقان سياقيًا»: مع اكتساح المهام
+                // «الشريطان الصادقان سياقيًا»: مع اكتساح المهام
                 // الموحدة على evaluator سياقي، بقي ImeNextSubtype/ImePrevSubtype
                 // بلا بوابة — مع نوع فرعي وحيد ينتهيان إلى لا شيء صامت
                 // (switchToNext/PrevSubtype يدوران في المكان). نفس شرط

@@ -9,7 +9,7 @@ import com.drs.smartkeyboard.drs.ai.DrsQuantizedEngine
 import com.drs.smartkeyboard.drs.ai.QwertyCostModel
 
 /**
- * DRS v2.12.0 «تعميق محركات المرحلة 1» — the fused correction pipeline,
+ * «تعميق محركات المرحلة 1» — the fused correction pipeline,
  * extracted PURE from LatinLanguageProvider so the real-errors benchmark
  * (DrsV21200RealErrorsBenchmark) measures THE SAME code the provider runs,
  * never a test-side copy.
@@ -123,7 +123,7 @@ object DrsFusedCorrection {
         }
 
         // 3) The quantized search: direct scan + stem scans in ONE cost-ranked
-        //    pool (v2.12.0 — a zero-cost stem match outranks a cost-3 direct one).
+        // pool (a zero-cost stem match outranks a cost-3 direct one).
         if (prefix.length >= CORRECTION_MIN_LENGTH) {
             val costModel = if (isArabic) DrsArabicCorrector.ArabicCostModel else QwertyCostModel
             val pool = ArrayList<Hit>(64)

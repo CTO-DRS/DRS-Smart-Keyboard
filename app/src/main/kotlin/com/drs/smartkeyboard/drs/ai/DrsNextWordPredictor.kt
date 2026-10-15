@@ -22,7 +22,7 @@ package com.drs.smartkeyboard.drs.ai
  * («كتب») carries the same next-word tendency as its inflection
  * («يكتبها»), just at reduced trust.
  *
- * v2.13.0 «السياق الأعمق» — the TRIGRAM layer: when a two-word context
+ * «السياق الأعمق» — the TRIGRAM layer: when a two-word context
  * row exists (a static chain from [DrsTrigramChains] and/or a personal
  * chain from [DrsLearningEngine.learnTrigram]), the single-word bigram
  * score is interpolated with the two-word score:
@@ -39,7 +39,7 @@ package com.drs.smartkeyboard.drs.ai
  * mirrors ALPHA: personal chains dominate, the curated corpus never dies.
  *
  * THE NO-OP CONTRACT (pinned by tests): with BOTH trigram rows empty the
- * function returns EXACTLY the pre-v2.13.0 ordering — the trigram layer
+ * function returns EXACTLY the pre- ordering — the trigram layer
  * exists only where it has something honest to say.
  */
 object DrsNextWordPredictor {
@@ -47,10 +47,10 @@ object DrsNextWordPredictor {
     const val ALPHA = 0.65
     const val LEMMA_DISCOUNT = 0.7
 
-    /** v2.13.0 — the weight of the two-word context when a trigram row exists. */
+    /** the weight of the two-word context when a trigram row exists. */
     const val TRI_WEIGHT = 0.6
 
-    /** v2.13.0 — personal chains vs static chains inside the trigram layer. */
+    /** personal chains vs static chains inside the trigram layer. */
     const val TRI_PERSONAL_ALPHA = 0.65
 
     data class Prediction(val word: String, val score: Double)
@@ -90,7 +90,7 @@ object DrsNextWordPredictor {
         val hasDirectRow = personal.isNotEmpty() || static.isNotEmpty()
         val fallbackWeight = if (hasDirectRow) 0.0 else LEMMA_DISCOUNT
 
-        // v2.13.0 — the trigram layer is armed only when at least one
+        // the trigram layer is armed only when at least one
         // two-word row actually exists; otherwise every p_tri is 0.0 and
         // the final score is the bigram score, bit-for-bit as before.
         val ptTotal = personalTrigram.sumOf { it.second }.coerceAtLeast(1)

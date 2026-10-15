@@ -2,7 +2,7 @@
   "$": "ime.extension.theme",
   "meta": {
     "id": "org.drs.themes.my",
-    "version": "0.2.0",
+    "version": "1.0.0",
     "title": "سمات Material You (DRS)",
     "description": "سمات Material You النهارية والليلية لواجهة لوحة المفاتيح DRS.",
     "maintainers": [

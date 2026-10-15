@@ -23,7 +23,7 @@ data class SnyggUriValue(val uri: String) : SnyggValue {
     companion object : SnyggValueEncoder {
         private const val EnclosedUriFunction = "uri"
         private const val EnclosedUriId = "enclosedUri"
-        // DRS v2.8.0: `flex:/` stays the theme-package scheme (assets inside the
+        // `flex:/` stays the theme-package scheme (assets inside the
         // unzipped theme dir); `drsimg:/` addresses the app-private user background
         // image dir (noBackupFilesDir/drs_background), resolved by DrsAssetResolver.
         // Both schemes are anchored at the URI root (no authority, single slash).

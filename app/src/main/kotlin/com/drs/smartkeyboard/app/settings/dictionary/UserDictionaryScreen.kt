@@ -86,7 +86,7 @@ fun UserDictionaryScreen(type: UserDictionaryType) = DrsScreen {
     var languageList by remember { mutableStateOf(emptyList<DrsLocale>()) }
     var wordList by remember { mutableStateOf(emptyList<UserDictionaryEntry>()) }
     var userDictionaryEntryForDialog by remember { mutableStateOf<UserDictionaryEntry?>(null) }
-    // DRS v1.19.0: wipe-all confirmation — reset() is destructive, so it
+    // wipe-all confirmation — reset() is destructive, so it
     // asks before it deletes (the very first honest caller of the
     // previously-TODO reset()).
     var showClearDialog by remember { mutableStateOf(false) }
@@ -249,7 +249,7 @@ fun UserDictionaryScreen(type: UserDictionaryType) = DrsScreen {
                     text = { Text(text = stringRes(R.string.settings__udm__open_system_manager_ui)) },
                 )
             }
-            // DRS v1.19.0: clear the DRS personal dictionary (with a
+            // clear the DRS personal dictionary (with a
             // confirmation dialog). Only for the app-private database — the
             // system provider holds words owned by other apps too.
             if (type == UserDictionaryType.DRS) {
@@ -430,7 +430,7 @@ fun UserDictionaryScreen(type: UserDictionaryType) = DrsScreen {
             }
         }
 
-        // DRS v1.19.0: destructive wipe confirmation — reset() clears every
+        // destructive wipe confirmation — reset() clears every
         // personal/learned word from the app-private Room database. The
         // spell checker and the suggestion engine pick up the empty state
         // within the user-words cache TTL (15s), so the effect is honest.

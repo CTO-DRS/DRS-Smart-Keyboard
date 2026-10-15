@@ -57,14 +57,14 @@ fun QuickActionsRow(
         }
     }
 
-    // DRS v2.11.0 «المُرتّب السياقي الصادق»: the row is ranked by the
+    // «المُرتّب السياقي الصادق»: the row is ranked by the
     // focused field's declared kind BEFORE rendering — the user's own
     // actions only, a strict permutation of their manual arrangement
     // (same tiles, same count, zero flicker), every tile still judged by
     // its own evaluateEnabled verdict. GENERAL fields and a switched-off
     // master pref get the identity ranking — the base order IS the
     // context there. Signals are booleans read from the same sources the
-    // tiles' own honesty (v2.2.2) uses: the live selection flag and the
+    // tiles' own honesty () uses: the live selection flag and the
     // primary clip's creation timestamp (no content, ever).
     val contextualRanking by prefs.smartbar.contextualRanking.collectAsState()
     val fieldKind by DrsRuntimeState.fieldKind.collectAsState()

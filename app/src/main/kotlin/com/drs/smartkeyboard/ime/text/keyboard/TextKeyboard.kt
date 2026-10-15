@@ -50,7 +50,7 @@ class TextKeyboard(
 
         for ((r, row) in rows().withIndex()) {
             val posY = (desiredTouchBounds.height + rowMarginV) * r
-            // DRS v1.18.0: split keyboard — the row's usable width shrinks by
+            // split keyboard — the row's usable width shrinks by
             // the central gap, and the gap itself is re-inserted after the
             // midpoint key below, so both halves keep the same grow/shrink
             // distribution the unsplit layout computes.
@@ -99,7 +99,7 @@ class TextKeyboard(
                         bottom = key.touchBounds.bottom - abs(desiredTouchBounds.bottom - desiredVisibleBounds.bottom)
                     }
                     posX += keyWidth
-                    // DRS v1.18.0: re-insert the central gap after the
+                    // re-insert the central gap after the
                     // midpoint key so the right half shifts right as one
                     // block (the width math above already reserved its room).
                     if (k == splitIndex) {
@@ -140,7 +140,7 @@ class TextKeyboard(
                         bottom = key.touchBounds.bottom - abs(desiredTouchBounds.bottom - desiredVisibleBounds.bottom)
                     }
                     posX += keyWidth
-                    // DRS v1.18.0: same gap re-insertion in the shrink
+                    // same gap re-insertion in the shrink
                     // branch — the row only ever gets narrower here, and
                     // the reserved gap room is consumed at the midpoint.
                     if (k == splitIndex) {

@@ -5,7 +5,7 @@
 package com.drs.smartkeyboard.ime.nlp
 
 /**
- * DRS v2.8.0 «قاموسك من ملفك» — the pure merge decision for external
+ * «قاموسك من ملفك» — the pure merge decision for external
  * dictionaries.
  *
  * Honesty rule: an imported dictionary EXTENDS the bundled one, it never

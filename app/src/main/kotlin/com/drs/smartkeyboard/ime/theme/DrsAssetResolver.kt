@@ -21,7 +21,7 @@ class DrsAssetResolver(val context: Context, val themeInfo: ThemeManager.ThemeIn
                 baseDir = checkNotNull(themeInfo.loadedDir) { "Loaded directory was null" },
                 relative = uri.path.orEmpty(),
             )
-            // DRS v2.8.0 «خلفيتك من ألبومك»: the single user background image,
+            // «خلفيتك من ألبومك»: the single user background image,
             // stored app-privately. The name must pass the pure safety contract
             // BEFORE any path math, then the canonical containment check runs
             // exactly like the flex branch.

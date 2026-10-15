@@ -18,7 +18,7 @@ import java.io.File
 import java.util.UUID
 
 /**
- * DRS v2.8.0 «قاموسك من ملفك» — app-private persistence of user-imported
+ * «قاموسك من ملفك» — app-private persistence of user-imported
  * external dictionary files.
  *
  * Deterministic by construction:

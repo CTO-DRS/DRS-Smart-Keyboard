@@ -61,7 +61,7 @@ fun QuickActionButton(
     val inputFeedbackController = LocalInputFeedbackController.current
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
-    // DRS v2.3.0 «اللوحات الحيّة»: the quick actions join the one motion
+    // «اللوحات الحيّة»: the quick actions join the one motion
     // language — the same press pulse the strips and the board keys use
     // (draw-only graphicsLayer), and it snaps under the system
     // «remove animations» switch like every other DrsMotion contract.

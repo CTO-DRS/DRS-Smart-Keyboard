@@ -202,7 +202,7 @@ fun TextKeyboardLayout(
             .drawWithContent {
                 drawContent()
                 if (glideEnabled && glideShowTrail) {
-                    // DRS v1.7.0: the trail geometry is density-correct now
+                    // the trail geometry is density-correct now
                     // (dp converted through the DrawScope's density — the
                     // radius used to be RAW PIXELS, so the ribbon rendered
                     // ~2x thinner on high-density phones) and follows the
@@ -241,7 +241,7 @@ fun TextKeyboardLayout(
         val keyMarginH by remember { derivedStateOf { windowSpec.keyMarginH.toPx() } }
         val keyMarginV by remember { derivedStateOf { windowSpec.keyMarginV.toPx() } }
 
-        // DRS v1.18.0: split keyboard — compute the central gap in pixels
+        // split keyboard — compute the central gap in pixels
         // for this keyboard from the SplitMode preference and the real
         // window width. Only the normal fixed window mode splits (compact
         // one-handed and floating windows are already narrow), and only the
@@ -289,7 +289,7 @@ fun TextKeyboardLayout(
             boundsProvider = { key ->
                 val keyPopupWidth: Float
                 val keyPopupHeight: Float
-                // DRS v1.6.0: the key-preview scale preference multiplies
+                // the key-preview scale preference multiplies
                 // the per-orientation popup multipliers. Read at call time
                 // (popup show) so a settings change applies on the next
                 // preview without any recomposition plumbing.
@@ -337,7 +337,7 @@ fun TextKeyboardLayout(
         )
         popupUiController.evaluator = evaluator
         popupUiController.keyHintConfiguration = prefs.keyboard.keyHintConfiguration()
-        // DRS v2.6.0 «المنبثق الحي الصادق»: sliding between extended-popup
+        // «المنبثق الحي الصادق»: sliding between extended-popup
         // elements now ticks the existing gestureMovingSwipe feedback
         // contract — the same one the spacebar cursor-slide already uses.
         // The last silent surface of the board finally speaks, reusing
@@ -351,13 +351,13 @@ fun TextKeyboardLayout(
         }
         controller.popupUiController = popupUiController
         val debugShowTouchBoundaries by prefs.devtools.showKeyTouchBoundaries.collectAsState()
-        // DRS v2.4.0: the motion-respect signal is read ONCE for the whole
+        // the motion-respect signal is read ONCE for the whole
         // board and handed to every key — the pulse, the caps-lock dot and
         // the row-entrance wave all snap together when the system removes
         // animations (same contract the two strips have honored since
-        // v2.2.2 — the board itself is the last surface to join).
+        // the board itself is the last surface to join).
         val motionEnabled = rememberDrsMotionEnabled()
-        // DRS v2.4.0: rows (not a flat key stream) drive the composition
+        // rows (not a flat key stream) drive the composition
         // order — each key carries its row index so the entrance wave can
         // stagger deterministically.
         for ((rowIndex, row) in keyboard.arrangement.withIndex()) {
@@ -418,7 +418,7 @@ private fun TextKeyButton(
             DrsImeUi.Attr.Code to key.computedData.code,
             DrsImeUi.Attr.Mode to evaluator.keyboard.mode.toString(),
             DrsImeUi.Attr.ShiftState to evaluator.state.inputShiftState.toString(),
-            // DRS v1.23.0: the CTRL/ALT/FN latch states reach the theme — the
+            // the CTRL/ALT/FN latch states reach the theme — the
             // same recompute pipeline that re-renders on shift changes
             // re-renders on latch changes, so the base stylesheet (and any
             // user rule) can highlight the armed keys live.
@@ -438,7 +438,7 @@ private fun TextKeyButton(
     // DRS M2.2 — the Design-2030 key-tap pulse: pressed compresses to
     // 0.94 fast (60ms), release springs back slower (140ms). DRAW-ONLY:
     // the scale rides graphicsLayer so layout is never re-measured.
-    // DRS v2.4.0: the pulse finally respects the system rhythm — when
+    // the pulse finally respects the system rhythm — when
     // «remove animations» zeroes ANIMATOR_DURATION_SCALE the durations
     // snap to 0 and the states still land on identical final targets.
     val pulseScale by animateFloatAsState(
@@ -451,7 +451,7 @@ private fun TextKeyButton(
         ),
         label = "drsKeyPulse",
     )
-    // DRS v2.4.0 — «موجة دخول اللوحة»: whenever the arrangement identity
+    // «موجة دخول اللوحة»: whenever the arrangement identity
     // changes (mode switch, subtype switch, number-row toggle, IME reopen)
     // the rows enter with the same capped wave the candidates row uses:
     // alpha 0→1 plus a 5dp settle, delayed per row by the pinned stagger
@@ -468,7 +468,7 @@ private fun TextKeyButton(
             entrance.animateTo(1f, tween(durationMillis = DrsMotion.ENTRANCE_DURATION_MS))
         }
     }
-    // DRS v1.17.0: every key finally speaks to TalkBack. Icon-only keys
+    // every key finally speaks to TalkBack. Icon-only keys
     // (shift/backspace/enter/arrows…) get a localized spoken label from
     // the pure [keyA11yLabelRes] mapping; all other keys fall back to the
     // evaluator's computed label or the key's own display string.
@@ -478,7 +478,7 @@ private fun TextKeyButton(
             ?: evaluator.computeLabel(key.computedData)
             ?: key.computedData.asString(isForDisplay = true)
     }
-    // DRS v2.4.0: the shift key speaks its STATE — lowercase / shifted /
+    // the shift key speaks its STATE — lowercase / shifted /
     // caps-locked — via the pure shiftStateA11yRes mapping; until now all
     // three states announced identically to TalkBack.
     val shiftStateDescription = if (key.computedData.code == KeyCode.SHIFT) {
@@ -540,9 +540,9 @@ private fun TextKeyButton(
                 contentDescription = null,
             )
         }
-        // DRS v2.4.0 — «نقطة قفل الأحرف الصادقة»: caps lock stops riding a
+        // «نقطة قفل الأحرف الصادقة»: caps lock stops riding a
         // silent theme attribute alone. The shift key carries a small dot
-        // driven by the EXACT v2.2.1 toggle-dot contract (grow 140ms in,
+        // driven by the EXACT toggle-dot contract (grow 140ms in,
         // shrink 90ms out), rendered as a theme-styled SnyggIcon so the
         // color follows the stylesheet's foreground for the key — which
         // the base theme already recolors in caps lock. Draw-only: scale
@@ -585,7 +585,7 @@ private fun TextKeyButton(
 
 @Suppress("unused_parameter")
 private class TextKeyboardLayoutController(
-    // DRS v2.4.0: promoted to a property — the glide-trail fade reads the
+    // promoted to a property — the glide-trail fade reads the
     // system animator scale from it at cancel time (one cheap read per
     // gesture end, more accurate than a cached composition value).
     private val context: Context,
@@ -607,7 +607,7 @@ private class TextKeyboardLayoutController(
     val glideTypingDetector = GlideTypingGesture.Detector(context)
     val glideDataForDrawing = mutableStateListOf<Pair<GlideTypingGesture.Detector.Position, Long>>()
     val fadingGlide = mutableStateListOf<Pair<GlideTypingGesture.Detector.Position, Long>>()
-    // DRS v1.7.0: the fade-out now animates a FRACTION (1 -> 0) instead of
+    // the fade-out now animates a FRACTION (1 -> 0) instead of
     // a raw pixel radius — the px radius is derived at draw time from the
     // density-correct baseline times the trail-width scale, so the fading
     // ribbon matches the live one on every density and setting.
@@ -624,7 +624,7 @@ private class TextKeyboardLayoutController(
         flogDebug { "event=$event" }
         swipeGestureDetector.onTouchEvent(event)
         if (isGlideEnabled && keyboard.mode == KeyboardMode.CHARACTERS) {
-            // DRS v1.20.0: the glide pointer used to be looked up by hardcoded pointer ID 0,
+            // the glide pointer used to be looked up by hardcoded pointer ID 0,
             // so a glide started by a second finger inherited (or missed) the long-press
             // blocking state of the FIRST touch. Blocking must consider every active pointer,
             // and the gesture's initial key comes from the stream's first touch (which is
@@ -1143,7 +1143,7 @@ private class TextKeyboardLayoutController(
 
             val animator = ValueAnimator.ofFloat(1.0f, 0.0f)
             animator.interpolator = AccelerateInterpolator()
-            // DRS v2.4.0: the trail fade respects the system rhythm too —
+            // the trail fade respects the system rhythm too —
             // when animations are removed system-wide the fade collapses
             // to a 0ms jump to the same final target (fraction 0, trail
             // gone); the state machine below is untouched either way.
@@ -1165,7 +1165,7 @@ private class TextKeyboardLayoutController(
             }
             animator.start()
         }
-        // DRS v1.20.0: the buffer clear and the state reset previously lived INSIDE the
+        // the buffer clear and the state reset previously lived INSIDE the
         // showTrail gate, so with the trail disabled every gesture kept accumulating
         // points in glideDataForDrawing for the whole process lifetime and isGliding
         // stayed true forever after the first glide. The fading animation is cosmetic

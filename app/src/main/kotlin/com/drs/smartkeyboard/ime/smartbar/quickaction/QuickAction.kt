@@ -66,7 +66,7 @@ fun QuickAction.keyData(): KeyData {
 }
 
 /**
- * DRS v1.0.5: the KeyCodes that count as "smart tools" for the anonymous
+ * the KeyCodes that count as "smart tools" for the anonymous
  * most-used-tools statistics (and hence the most-used section in the tools
  * overflow). Deliberately excludes plain editing keys (characters, shift,
  * ctrl modifiers, delete...) so only actual tool button presses count.
@@ -95,7 +95,7 @@ val SmartToolCodes = setOf(
     KeyCode.IME_UI_MODE_MEDIA,
     KeyCode.IME_UI_MODE_CLIPBOARD,
     KeyCode.IME_UI_MODE_TEXT_TOOLS,
-    // DRS v1.0.6: every technical text tool counts as a tool press.
+    // every technical text tool counts as a tool press.
     KeyCode.TEXT_TOOL_UPPERCASE,
     KeyCode.TEXT_TOOL_LOWERCASE,
     KeyCode.TEXT_TOOL_TITLE_CASE,
@@ -122,27 +122,27 @@ val SmartToolCodes = setOf(
     KeyCode.SETTINGS,
     KeyCode.TOGGLE_ACTIONS_OVERFLOW,
     KeyCode.IME_HIDE_UI,
-    // DRS v1.0.8: the new unified-strip tools count as tool presses too.
+    // the new unified-strip tools count as tool presses too.
     KeyCode.THEME_CYCLE,
     KeyCode.INSERT_DATE_TIME,
-    // DRS v1.1.0: new catalogue tools + line text ops count as well.
+    // new catalogue tools + line text ops count as well.
     KeyCode.TOGGLE_NUMBER_ROW,
     KeyCode.TEXT_TOOL_NUMBER_LINES,
     KeyCode.TEXT_TOOL_REVERSE_LINES,
-    // DRS v1.2.0 integration fix: WRAP_QUOTES was missing here, so its
+    // integration fix: WRAP_QUOTES was missing here, so its
     // usage never surfaced in the most-used tools stats.
     KeyCode.TEXT_TOOL_WRAP_QUOTES,
-    // DRS v1.3.0: digit conversion, blank-line collapsing, tatweel removal.
+    // digit conversion, blank-line collapsing, tatweel removal.
     KeyCode.TEXT_TOOL_TO_ARABIC_DIGITS,
     KeyCode.TEXT_TOOL_TO_WESTERN_DIGITS,
     KeyCode.TEXT_TOOL_COLLAPSE_EMPTY_LINES,
     KeyCode.TEXT_TOOL_REMOVE_TATWEEL,
-    // DRS v1.4.0: descending sort + Arabic letter normalization, plus the
+    // descending sort + Arabic letter normalization, plus the
     // smartbar-visibility toggle whose usage never surfaced before.
     KeyCode.TEXT_TOOL_SORT_LINES_DESC,
     KeyCode.TEXT_TOOL_NORMALIZE_ARABIC,
     KeyCode.TOGGLE_SMARTBAR_VISIBILITY,
-    // DRS v1.5.0: the eight new text tools count as tool presses, and the
+    // the eight new text tools count as tool presses, and the
     // clipboard-history / next-language catalogue tools join the set.
     KeyCode.TEXT_TOOL_TOGGLE_CASE,
     KeyCode.TEXT_TOOL_TO_ARABIC_PUNCTUATION,
@@ -154,25 +154,25 @@ val SmartToolCodes = setOf(
     KeyCode.TEXT_TOOL_SENTENCE_PER_LINE,
     KeyCode.CLIPBOARD_CLEAR_HISTORY,
     KeyCode.IME_NEXT_SUBTYPE,
-    // DRS v1.6.0: the five new catalogue tools count as tool presses too.
+    // the five new catalogue tools count as tool presses too.
     KeyCode.CLIPBOARD_CLEAR_FULL_HISTORY,
     KeyCode.IME_PREV_SUBTYPE,
     KeyCode.COMPACT_LAYOUT_TO_LEFT,
     KeyCode.COMPACT_LAYOUT_TO_RIGHT,
     KeyCode.SYSTEM_NEXT_INPUT_METHOD,
-    // DRS v1.6.0: the four new text tools count as tool presses.
+    // the four new text tools count as tool presses.
     KeyCode.TEXT_TOOL_SPACES_TO_TABS,
     KeyCode.TEXT_TOOL_TO_WESTERN_PUNCTUATION,
     KeyCode.TEXT_TOOL_TRIM_BLANK_EDGES,
     KeyCode.TEXT_TOOL_REVERSE_WORDS,
-    // DRS v1.7.0: the subtype picker (the LANGUAGE catalogue tool since
-    // v1.5.0 never counted in the stats), the actions-editor toggle (its
+    // the subtype picker (the LANGUAGE catalogue tool since
+    // never counted in the stats), the actions-editor toggle (its
     // tiles would have rendered the invalid-fatal placeholder) and the
     // active-clip pin toggle all count as tool presses now.
     KeyCode.SHOW_SUBTYPE_PICKER,
     KeyCode.TOGGLE_ACTIONS_EDITOR,
     KeyCode.CLIPBOARD_PIN_ACTIVE,
-    // DRS v1.7.0: the seven new text tools count as tool presses too.
+    // the seven new text tools count as tool presses too.
     KeyCode.TEXT_TOOL_NORMALIZE_ARABIC_FORMS,
     KeyCode.TEXT_TOOL_SPLIT_TO_LINES,
     KeyCode.TEXT_TOOL_JOIN_LINES,
@@ -180,12 +180,12 @@ val SmartToolCodes = setOf(
     KeyCode.TEXT_TOOL_STRIP_EMOJI,
     KeyCode.TEXT_TOOL_URL_ENCODE,
     KeyCode.TEXT_TOOL_URL_DECODE,
-    // DRS v1.15.0: the three smart panels count as tool presses too.
+    // the three smart panels count as tool presses too.
     KeyCode.IME_UI_MODE_DIACRITICS,
     KeyCode.IME_UI_MODE_SMART_SYMBOLS,
     KeyCode.IME_UI_MODE_ARABIC_LETTERS,
-    // DRS v1.19.0: the split/merge keyboard toggles count as tool presses,
-    // and the two v1.8.0 text tools that were missed by every stats register
+    // the split/merge keyboard toggles count as tool presses,
+    // and the two text tools that were missed by every stats register
     // since their introduction (SEPARATE_DIGIT_LETTERS / REMOVE_PUNCTUATION)
     // finally surface in the most-used tiles.
     KeyCode.SPLIT_LAYOUT,
@@ -227,11 +227,11 @@ fun QuickAction.computeDisplayName(evaluator: ComputingEvaluator): String {
             // TODO: In the future this will be merged into the resize keyboard panel, for now it is a separate action
             KeyCode.TOGGLE_COMPACT_LAYOUT -> R.string.quick_action__one_handed_mode
             KeyCode.TOGGLE_RESIZE_MODE -> R.string.quick_action__resize_mode
-            // DRS v1.1.0: unified-strip tools that can surface as most-used tiles.
+            // unified-strip tools that can surface as most-used tiles.
             KeyCode.THEME_CYCLE -> R.string.quick_action__theme_cycle
             KeyCode.INSERT_DATE_TIME -> R.string.quick_action__insert_date_time
             KeyCode.TOGGLE_NUMBER_ROW -> R.string.quick_action__toggle_number_row
-            // DRS v1.5.0: remaining smart-tool codes that used to fall
+            // remaining smart-tool codes that used to fall
             // through to the invalid-fatal placeholder when they surfaced
             // as most-used tiles.
             KeyCode.MOVE_START_OF_PAGE -> R.string.quick_action__move_start_of_page
@@ -240,7 +240,7 @@ fun QuickAction.computeDisplayName(evaluator: ComputingEvaluator): String {
             KeyCode.MOVE_END_OF_LINE -> R.string.quick_action__move_end_of_line
             KeyCode.CLIPBOARD_SELECT -> R.string.quick_action__clipboard_select
             KeyCode.TOGGLE_SMARTBAR_VISIBILITY -> R.string.quick_action__toggle_smartbar_visibility
-            // DRS v1.6.0: the two remaining smart-tool codes that used to
+            // the two remaining smart-tool codes that used to
             // fall through to the invalid-fatal placeholder when they
             // surfaced as most-used tiles, plus the five new catalogue
             // tools (which enter the most-used set via SmartToolCodes).
@@ -251,19 +251,19 @@ fun QuickAction.computeDisplayName(evaluator: ComputingEvaluator): String {
             KeyCode.COMPACT_LAYOUT_TO_LEFT -> R.string.quick_action__compact_layout_to_left
             KeyCode.COMPACT_LAYOUT_TO_RIGHT -> R.string.quick_action__compact_layout_to_right
             KeyCode.SYSTEM_NEXT_INPUT_METHOD -> R.string.quick_action__system_next_input_method
-            // DRS v1.7.0: the subtype picker (LANGUAGE tool), the
+            // the subtype picker (LANGUAGE tool), the
             // actions-editor toggle and the active-clip pin toggle.
             KeyCode.SHOW_SUBTYPE_PICKER -> R.string.quick_action__show_subtype_picker
             KeyCode.TOGGLE_ACTIONS_EDITOR -> R.string.quick_action__toggle_actions_editor
             KeyCode.CLIPBOARD_PIN_ACTIVE -> R.string.quick_action__clipboard_pin_active
-            // DRS v1.15.0: the three smart panels.
+            // the three smart panels.
             KeyCode.IME_UI_MODE_DIACRITICS -> R.string.quick_action__ime_ui_mode_diacritics
             KeyCode.IME_UI_MODE_SMART_SYMBOLS -> R.string.quick_action__ime_ui_mode_smart_symbols
             KeyCode.IME_UI_MODE_ARABIC_LETTERS -> R.string.quick_action__ime_ui_mode_arabic_letters
-            // DRS v1.19.0: the split/merge keyboard toggles.
+            // the split/merge keyboard toggles.
             KeyCode.SPLIT_LAYOUT -> R.string.quick_action__split_layout
             KeyCode.MERGE_LAYOUT -> R.string.quick_action__merge_layout
-            // DRS v1.5.0: text tools show their real panel titles instead
+            // text tools show their real panel titles instead
             // of the invalid-fatal placeholder.
             in DrsTextTool.CODE_RANGE -> DrsTextTool.fromCode(data.code)
                 ?.let { textToolTitleRes(it) }
@@ -312,11 +312,11 @@ fun QuickAction.computeTooltip(evaluator: ComputingEvaluator): String {
             // TODO: In the future this will be merged into the resize keyboard panel, for now it is a separate action
             KeyCode.TOGGLE_COMPACT_LAYOUT -> R.string.quick_action__one_handed_mode__tooltip
             KeyCode.TOGGLE_RESIZE_MODE -> R.string.quick_action__resize_mode__tooltip
-            // DRS v1.1.0: unified-strip tools that can surface as most-used tiles.
+            // unified-strip tools that can surface as most-used tiles.
             KeyCode.THEME_CYCLE -> R.string.quick_action__theme_cycle__tooltip
             KeyCode.INSERT_DATE_TIME -> R.string.quick_action__insert_date_time__tooltip
             KeyCode.TOGGLE_NUMBER_ROW -> R.string.quick_action__toggle_number_row__tooltip
-            // DRS v1.5.0: tooltips for the codes that used to render the
+            // tooltips for the codes that used to render the
             // invalid-fatal placeholder as most-used tiles.
             KeyCode.MOVE_START_OF_PAGE -> R.string.quick_action__move_start_of_page__tooltip
             KeyCode.MOVE_END_OF_PAGE -> R.string.quick_action__move_end_of_page__tooltip
@@ -324,7 +324,7 @@ fun QuickAction.computeTooltip(evaluator: ComputingEvaluator): String {
             KeyCode.MOVE_END_OF_LINE -> R.string.quick_action__move_end_of_line__tooltip
             KeyCode.CLIPBOARD_SELECT -> R.string.quick_action__clipboard_select__tooltip
             KeyCode.TOGGLE_SMARTBAR_VISIBILITY -> R.string.quick_action__toggle_smartbar_visibility__tooltip
-            // DRS v1.6.0: tooltips for the two previously-placeholdered
+            // tooltips for the two previously-placeholdered
             // codes and the five new catalogue tools.
             KeyCode.CLIPBOARD_CLEAR_HISTORY -> R.string.quick_action__clipboard_clear_history__tooltip
             KeyCode.IME_NEXT_SUBTYPE -> R.string.quick_action__ime_next_subtype__tooltip
@@ -333,19 +333,19 @@ fun QuickAction.computeTooltip(evaluator: ComputingEvaluator): String {
             KeyCode.COMPACT_LAYOUT_TO_LEFT -> R.string.quick_action__compact_layout_to_left__tooltip
             KeyCode.COMPACT_LAYOUT_TO_RIGHT -> R.string.quick_action__compact_layout_to_right__tooltip
             KeyCode.SYSTEM_NEXT_INPUT_METHOD -> R.string.quick_action__system_next_input_method__tooltip
-            // DRS v1.7.0: the subtype picker (LANGUAGE tool), the
+            // the subtype picker (LANGUAGE tool), the
             // actions-editor toggle and the active-clip pin toggle.
             KeyCode.SHOW_SUBTYPE_PICKER -> R.string.quick_action__show_subtype_picker__tooltip
             KeyCode.TOGGLE_ACTIONS_EDITOR -> R.string.quick_action__toggle_actions_editor__tooltip
             KeyCode.CLIPBOARD_PIN_ACTIVE -> R.string.quick_action__clipboard_pin_active__tooltip
-            // DRS v1.15.0: the three smart panels.
+            // the three smart panels.
             KeyCode.IME_UI_MODE_DIACRITICS -> R.string.quick_action__ime_ui_mode_diacritics__tooltip
             KeyCode.IME_UI_MODE_SMART_SYMBOLS -> R.string.quick_action__ime_ui_mode_smart_symbols__tooltip
             KeyCode.IME_UI_MODE_ARABIC_LETTERS -> R.string.quick_action__ime_ui_mode_arabic_letters__tooltip
-            // DRS v1.19.0: the split/merge keyboard toggles.
+            // the split/merge keyboard toggles.
             KeyCode.SPLIT_LAYOUT -> R.string.quick_action__split_layout__tooltip
             KeyCode.MERGE_LAYOUT -> R.string.quick_action__merge_layout__tooltip
-            // DRS v1.5.0: text tools show their real panel descriptions.
+            // text tools show their real panel descriptions.
             in DrsTextTool.CODE_RANGE -> DrsTextTool.fromCode(data.code)
                 ?.let { textToolDescRes(it) }
                 ?: R.string.general__empty_string
@@ -357,7 +357,7 @@ fun QuickAction.computeTooltip(evaluator: ComputingEvaluator): String {
             KeyCode.NOOP -> R.string.quick_action__noop__tooltip
             else -> R.string.general__invalid_fatal
         })
-        // DRS v1.19.0: the tooltip is localized now (was a hardcoded
+        // the tooltip is localized now (was a hardcoded
         // English literal leaking into every locale).
         is QuickAction.InsertText -> stringRes(
             R.string.quick_action__insert_text_tooltip,

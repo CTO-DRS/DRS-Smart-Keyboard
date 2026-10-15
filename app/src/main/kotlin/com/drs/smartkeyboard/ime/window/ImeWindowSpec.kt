@@ -71,7 +71,7 @@ sealed class ImeWindowSpec {
     /**
      * Calculates the row height for given baseline [keyboardHeight].
      *
-     * DRS v1.0.8: the result is scaled by the user's keyboard height scale
+ * the result is scaled by the user's keyboard height scale
      * ([UserPreferredOptions.heightScale]), so the preference really
      * changes the rendered keyboard: every consumer (row height, Smartbar
      * blend, touch bounds, resize conversions) derives from this method.
@@ -283,7 +283,7 @@ sealed class ImeWindowSpec {
         val keySpacingFactorV: Float,
         val fontScale: Float,
         /**
-         * DRS v1.0.8: multiplier applied to the keyboard height (and thus
+ * multiplier applied to the keyboard height (and thus
          * every row/key height derived from it). 1f = default height; the
          * value is sanitized from the [companion object] bounds.
          */
@@ -292,7 +292,7 @@ sealed class ImeWindowSpec {
 
     companion object {
         /**
-         * DRS v1.0.8: bounds of the keyboard height scale preference, in
+ * bounds of the keyboard height scale preference, in
          * percent. Kept here so the slider, the controller and the unit
          * tests share one source of truth.
          */
@@ -301,7 +301,7 @@ sealed class ImeWindowSpec {
         const val HEIGHT_SCALE_DEFAULT_PERCENT = 100
 
         /**
-         * DRS v1.2.0: bounds of the Smartbar height scale preference, in
+ * bounds of the Smartbar height scale preference, in
          * percent. Kept beside the keyboard height scale so the slider,
          * the sizing layer and the unit tests share one source of truth.
          * The scale is applied at the presentation layer
@@ -314,7 +314,7 @@ sealed class ImeWindowSpec {
         const val SMARTBAR_HEIGHT_SCALE_DEFAULT_PERCENT = 100
 
         /**
-         * DRS v1.6.0: bounds of the key-preview (popup) scale preference,
+ * bounds of the key-preview (popup) scale preference,
          * in percent, beside the two height scales so the slider, the
          * popup bounds provider and the unit tests share one source of
          * truth. Applied at the presentation layer only — window and row
@@ -325,7 +325,7 @@ sealed class ImeWindowSpec {
         const val KEY_PREVIEW_SCALE_DEFAULT_PERCENT = 100
 
         /**
-         * DRS v1.7.0: bounds of the glide-trail WIDTH scale, in percent of
+ * bounds of the glide-trail WIDTH scale, in percent of
          * the density-correct baseline radius (20dp). Beside the other
          * visual scales so the slider, the trail draw call and the unit
          * tests share one source of truth. Applied at the presentation
@@ -336,7 +336,7 @@ sealed class ImeWindowSpec {
         const val GLIDE_TRAIL_SCALE_DEFAULT_PERCENT = 100
 
         /**
-         * DRS v1.7.0: bounds of the emoji SIZE scale, in percent of the
+ * bounds of the emoji SIZE scale, in percent of the
          * default grid cell (42dp) and glyph (22sp). Same contract as the
          * other presentation-layer scales.
          */
@@ -349,22 +349,22 @@ sealed class ImeWindowSpec {
             return percent.coerceIn(HEIGHT_SCALE_MIN_PERCENT, HEIGHT_SCALE_MAX_PERCENT) / 100f
         }
 
-        /** DRS v1.2.0: same clamp-and-convert contract for the Smartbar scale. */
+        /** same clamp-and-convert contract for the Smartbar scale. */
         fun sanitizeSmartbarHeightScale(percent: Int): Float {
             return percent.coerceIn(SMARTBAR_HEIGHT_SCALE_MIN_PERCENT, SMARTBAR_HEIGHT_SCALE_MAX_PERCENT) / 100f
         }
 
-        /** DRS v1.6.0: same clamp-and-convert contract for the key-preview scale. */
+        /** same clamp-and-convert contract for the key-preview scale. */
         fun sanitizeKeyPreviewScale(percent: Int): Float {
             return percent.coerceIn(KEY_PREVIEW_SCALE_MIN_PERCENT, KEY_PREVIEW_SCALE_MAX_PERCENT) / 100f
         }
 
-        /** DRS v1.7.0: same clamp-and-convert contract for the glide-trail width scale. */
+        /** same clamp-and-convert contract for the glide-trail width scale. */
         fun sanitizeGlideTrailScale(percent: Int): Float {
             return percent.coerceIn(GLIDE_TRAIL_SCALE_MIN_PERCENT, GLIDE_TRAIL_SCALE_MAX_PERCENT) / 100f
         }
 
-        /** DRS v1.7.0: same clamp-and-convert contract for the emoji size scale. */
+        /** same clamp-and-convert contract for the emoji size scale. */
         fun sanitizeEmojiScale(percent: Int): Float {
             return percent.coerceIn(EMOJI_SCALE_MIN_PERCENT, EMOJI_SCALE_MAX_PERCENT) / 100f
         }

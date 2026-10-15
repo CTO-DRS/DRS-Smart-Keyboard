@@ -15,7 +15,7 @@ import java.io.File
 import java.security.MessageDigest
 
 /**
- * DRS v2.8.0 «خلفيتك من ألبومك» — app-private storage of the single user
+ * «خلفيتك من ألبومك» — app-private storage of the single user
  * background image.
  *
  * Deterministic by construction:

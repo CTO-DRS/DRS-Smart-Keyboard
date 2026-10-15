@@ -7,7 +7,7 @@ package com.drs.smartkeyboard.drs
 import com.drs.smartkeyboard.ime.ImeUiMode
 
 /**
- * DRS v1.15.0 — الأنظمة الذكية للوحات الجديدة (لوحة الحركات، لوحة الرموز
+ * الأنظمة الذكية للوحات الجديدة (لوحة الحركات، لوحة الرموز
  * الذكية، لوحة الحروف الموسعة).
  *
  * This file is the PURE logic core of the three new smart panels: the
@@ -64,7 +64,7 @@ object DrsHarakat {
     )
 
     /**
-     * DRS v1.1.0: true for the alef family (bare, hamza-carriers, alif
+ * true for the alef family (bare, hamza-carriers, alif
      * wasla, alef maqsura) — letters that can never carry a combining
      * haraka, so the smart advisor honestly refuses to recommend one.
      */
@@ -93,7 +93,7 @@ enum class HarakaInsertMode {
 object HarakatSmartInsert {
 
     /**
-     * DRS v1.17.0: haraka-first backspace — true when the delete key may
+ * haraka-first backspace — true when the delete key may
      * peel ONE diacritic off the letter before the cursor instead of
      * deleting the whole ICU grapheme cluster (letter + all marks) in a
      * single tap. Repeated taps therefore remove شدة then the haraka then
@@ -178,14 +178,14 @@ object SymbolSmartSuggestor {
 }
 
 /**
- * DRS v1.16.0 — لوحة الحركات كلوحة مفاتيح كاملة (the harakat KEYBOARD
+ * لوحة الحركات كلوحة مفاتيح كاملة (the harakat KEYBOARD
  * panel). The user asked for a panel «مشابه تمامًا للوحة الحروف أو
  * الأرقام» — exactly like the letters/numbers panels — so the catalogue
  * is arranged as a real keyboard rendered through the very same themed key
  * element the real keys use. Pure data + pure labels so the arrangement
  * and its display are pinned by unit tests.
  *
- * DRS v1.1.0 — اللوحة الكاملة «مشابهة للوحة الحروف في كل صفوفها»: two
+ * اللوحة الكاملة «مشابهة للوحة الحروف في كل صفوفها»: two
  * full-width harakat rows (nine marks, then tatweel + the double
  * vocalizations + the madd forms + the definite-article lam) followed by
  * the REAL bottom-row anatomy of the letters board — back-to-letters,
@@ -318,7 +318,7 @@ object DrsKeyboardHarakat {
 }
 
 /**
- * DRS v1.16.0 — «أعد ترتيب وتطوير جميع الوحات بنظام مرتب وذكي» — the
+ * «أعد ترتيب وتطوير جميع الوحات بنظام مرتب وذكي» — the
  * smart panel ordering. The switcher chips of the three smart panels
  * reorder themselves from the LOCAL panel-open counters: the current
  * panel always leads (stable anchor), the rest follow by usage with
@@ -335,7 +335,7 @@ object DrsPanelOrder {
      * used), then the remaining panels by their usage counts (most
      * used first, ties break by [catalogue] order). A panel missing
      * from the usage map counts as zero. Pure and deterministic.
-     * DRS v1.2.0: generic over the enum — the smart numbers panel
+ * generic over the enum — the smart numbers panel
      * orders its seven contexts with the very same rule.
      */
     fun <T : Enum<T>> smartSwitcher(

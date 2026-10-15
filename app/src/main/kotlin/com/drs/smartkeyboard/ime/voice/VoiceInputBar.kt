@@ -53,7 +53,7 @@ import org.drs.lib.snygg.ui.SnyggIconButton
 import org.drs.lib.snygg.ui.SnyggText
 
 /**
- * DRS v1.23.0: the live dictation bar — «شريط الاستماع». While the
+ * the live dictation bar — «شريط الاستماع». While the
  * built-in recognizer owns the session it replaces the Smartbar: a
  * microphone glyph, the live partial transcript (or the honest
  * «تحدث الآن…» hint before any words arrive, or the localized error),
@@ -62,12 +62,12 @@ import org.drs.lib.snygg.ui.SnyggText
  * Themed through the exact smartbar snygg elements, so every user theme
  * paints it consistently.
  *
- * DRS v1.26.0: when the live session runs on the ROM's on-device
+ * when the live session runs on the ROM's on-device
  * recognizer, a small «بدون شبكة» chip appears next to the transcript —
  * the session's privacy truth, not a promise. AUTO sessions that got
  * the local engine show it exactly like strict ON_DEVICE_ONLY ones.
  *
- * DRS v1.27.0: the bar declares its listening state to the theme
+ * the bar declares its listening state to the theme
  * engine — the root element stays "smartbar" (so every existing rule
  * keeps painting it, plain rules match any attribute query) but now
  * carries the voice attribute, letting any theme add
@@ -87,19 +87,19 @@ fun VoiceInputBar() {
         VoiceUiState.Idle -> hintText
     }
     val stopLabel = stringResource(R.string.voice__cancel)
-    // DRS v1.26.0: the badge flag rides on the state itself, so the chip
+    // the badge flag rides on the state itself, so the chip
     // appears and disappears with the session that owns the truth.
     val onDeviceActive = (uiState as? VoiceUiState.Listening)?.onDevice == true
     val onDeviceLabel = stringResource(R.string.voice__on_device_badge)
 
-    // DRS v1.24.0: «الشريط يتنفس» — the mic glyph breathes while the
+    // «الشريط يتنفس» — the mic glyph breathes while the
     // recognizer is actually listening (a calm 620ms scale pulse, the
     // standard Material emphasis curve) and rests at its natural size
     // for idle/error states. Pure presentation: the state flow stays
     // the single source of truth, and the animation touches nothing
     // outside its own graphicsLayer.
     val listening = uiState is VoiceUiState.Listening
-    // DRS v1.25.0: the live amplitude channel. Many recognition
+    // the live amplitude channel. Many recognition
     // services never deliver RMS at all, so the wave only replaces the
     // pulse once actual samples flowed this session — the pulse stays
     // the honest fallback everywhere else. remember(listening) gives
@@ -136,7 +136,7 @@ fun VoiceInputBar() {
 
     SnyggBox(
         elementName = DrsImeUi.Smartbar.elementName,
-        // DRS v1.27.0: the listening-state declaration — plain "smartbar"
+        // the listening-state declaration — plain "smartbar"
         // rules still match (rule attributes are matched against the
         // query, an attribute-less rule matches anything), while explicit
         // "smartbar[voice=`true`]" rules paint ONLY this bar.
@@ -163,7 +163,7 @@ fun VoiceInputBar() {
                     contentDescription = null,
                 )
             }
-            // DRS v1.25.0: the wave takes the mic's place as the live
+            // the wave takes the mic's place as the live
             // breathing element once real RMS samples flow; the spacer
             // rhythm stays identical either way.
             if (waveVisible) {
@@ -183,7 +183,7 @@ fun VoiceInputBar() {
                 modifier = Modifier.weight(1f),
                 text = message,
             )
-            // DRS v1.26.0: the «بدون شبكة» chip — a hairline outline in
+            // the «بدون شبكة» chip — a hairline outline in
             // the bar's own foreground so every theme paints it honestly.
             // Plain Text here: the chip's reduced size is a deliberate
             // visual exception, exactly like the tech keys' 14.sp labels.
@@ -234,12 +234,12 @@ private const val VOICE_WAVE_GAP_DP = 3f
 private val VOICE_WAVE_SHAPE = floatArrayOf(0.55f, 0.9f, 1f, 0.75f, 0.45f)
 
 /**
- * DRS v1.25.0: the live voice wave — five rounded bars whose heights
+ * the live voice wave — five rounded bars whose heights
  * follow the quantized RMS amplitude flowing through
  * [DrsVoiceInputBus.rmsAmplitude]. Painted with the smartbar element's
  * own foreground (LocalContentColor as provided by the enclosing snygg
  * style), so every user theme paints it consistently. Shown only while
- * the recognizer actually reports amplitude; the v1.24 mic pulse
+ * the recognizer actually reports amplitude; the mic pulse
  * remains the fallback for services that never deliver RMS.
  */
 @Composable

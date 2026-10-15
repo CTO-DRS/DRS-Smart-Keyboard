@@ -352,7 +352,7 @@ internal fun EditRuleDialog(
                     level = level,
                 )
 
-                // DRS v1.27.0: the listening-state attribute — a single
+                // the listening-state attribute — a single
                 // boolean chip, because the plain "smartbar" rule already
                 // covers every non-listening moment and a "false" value
                 // would be indistinguishable from no attribute at all.

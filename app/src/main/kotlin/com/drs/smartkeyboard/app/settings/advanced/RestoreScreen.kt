@@ -94,7 +94,7 @@ fun RestoreScreen() = DrsScreen {
 
     val restoreFilesSelector = remember { Backup.FilesSelector() }
     var importStrategy by remember { mutableStateOf(ImportStrategy.Merge) }
-    // DRS v1.20.0: this used to be `remember { CoroutineScope(Dispatchers.Main) }` —
+    // this used to be `remember { CoroutineScope(Dispatchers.Main) }` —
     // a scope that is never cancelled when the screen goes away, leaking every job
     // launched through it. rememberCoroutineScope is the correct compose-scoped
     // cancellation-aware equivalent.
@@ -108,7 +108,7 @@ fun RestoreScreen() = DrsScreen {
         onResult = { uri ->
             if (uri == null) return@rememberLauncherForActivityResult
             restoreScope.launch {
-                // DRS v1.20.0: reading the archive through the SAF and unzipping it
+                // reading the archive through the SAF and unzipping it
                 // (potentially hundreds of MB of media) used to run synchronously on
                 // the main thread inside this callback.
                 // DRS security-port (p8-E2-2, ported from the audit line): the
@@ -159,7 +159,7 @@ fun RestoreScreen() = DrsScreen {
     )
 
     suspend fun performRestore() {
-        // DRS v1.20.0: the whole restore (JSON parsing, recursive copies, database
+        // the whole restore (JSON parsing, recursive copies, database
         // writes) used to run on the main dispatcher — a jank/ANR source on large
         // archives. Pure heavy IO belongs on IO.
         withContext(Dispatchers.IO) {
@@ -207,7 +207,7 @@ fun RestoreScreen() = DrsScreen {
                     srcDir.copyRecursively(dstDir, overwrite = true)
                 }
             }
-            // DRS v1.21.0: the learned personal words ride the archive —
+            // the learned personal words ride the archive —
             // merged back (erase-then-import on the erase strategy), so a
             // factory reset no longer loses the user dictionary.
             if (restoreFilesSelector.userDictionary) {
@@ -276,7 +276,7 @@ fun RestoreScreen() = DrsScreen {
                         val clipboardItemsList = clipboardItems.readJson<List<ClipboardItem>>()
                         val restorableItems = mutableListOf<ClipboardItem>()
                         for (item in clipboardItemsList.filter { it.type == ItemType.IMAGE }) {
-                            // DRS v1.20.0: one broken/missing media URI must not abort a
+                            // one broken/missing media URI must not abort a
                             // restore midway and leave the user with partial state —
                             // resolve the file name defensively and skip broken items.
                             // DRS p8 (S-4): the name comes from the UNTRUSTED clipboard

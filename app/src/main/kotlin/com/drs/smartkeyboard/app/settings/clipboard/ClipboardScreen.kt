@@ -49,7 +49,7 @@ fun ClipboardScreen() = DrsScreen {
 
     val context = LocalContext.current
     val clipboardManager by context.clipboardManager()
-    // DRS v1.9.0: the integrated clipboard system exports the whole text
+    // the integrated clipboard system exports the whole text
     // history as one portable JSON document through the system file picker
     // (text items only — media bytes cannot round-trip through JSON).
     val exportPayload = remember { mutableStateOf<String?>(null) }
@@ -180,7 +180,7 @@ fun ClipboardScreen() = DrsScreen {
                 stepIncrement = 5,
                 enabledIf = { prefs.clipboard.historyEnabled isEqualTo true && prefs.clipboard.historySizeLimitEnabled isEqualTo true },
             )
-            // DRS v1.22.0 — «سقف التثبيتات»: pinned items were the one
+            // «سقف التثبيتات»: pinned items were the one
             // unbounded clipboard store; the cap now gates new pins with
             // an honest toast, and pins above a lowered cap are never
             // auto-destroyed.
@@ -214,10 +214,10 @@ fun ClipboardScreen() = DrsScreen {
         }
 
         PreferenceGroup(title = stringRes(R.string.pref__clipboard__group_popup_editor__label)) {
-            // DRS v1.14.0 — the comprehensive settings list covers the
+            // the comprehensive settings list covers the
             // floating edit popup window itself: where the edit opens,
             // how big the window is, and how strongly the app behind it
-            // is dimmed — everything v1.11.0 hardcoded becomes a choice.
+            // is dimmed — everything hardcoded becomes a choice.
             ListPreference(
                 prefs.clipboard.editRoute,
                 title = stringRes(R.string.pref__clipboard__edit_route__label),
@@ -233,7 +233,7 @@ fun ClipboardScreen() = DrsScreen {
                 title = stringRes(R.string.pref__clipboard__popup_scrim__label),
                 entries = enumDisplayEntriesOf(ClipEditorScrim::class),
             )
-            // DRS v1.21.0 — «نافذة الاشعارات المنبثقه الخاصه بالتعديل»: the
+            // «نافذة الاشعارات المنبثقه الخاصه بالتعديل»: the
             // heads-up notification that opens the floating editor from
             // anywhere — not only from inside the panel.
             SwitchPreference(
@@ -244,7 +244,7 @@ fun ClipboardScreen() = DrsScreen {
         }
 
         PreferenceGroup(title = stringRes(R.string.pref__clipboard__group_smart_editor__label)) {
-            // DRS v1.12.0 — the complete smart clipboard system: every
+            // the complete smart clipboard system: every
             // default the editors honor lives here, in the app, the way
             // the user asked for («اضف لها اعداداتها في التطبيق»).
             ListPreference(
@@ -260,7 +260,7 @@ fun ClipboardScreen() = DrsScreen {
         }
 
         PreferenceGroup(title = stringRes(R.string.pref__clipboard__group_search_results__label)) {
-            // DRS v1.12.0 + v1.13.0 + v1.14.0: the colored result cards,
+            // + + the colored result cards,
             // their navigation, and the direct line jump — every part of
             // the search experience the user asked for, in one place.
             SwitchPreference(
@@ -303,7 +303,7 @@ fun ClipboardScreen() = DrsScreen {
         }
 
         PreferenceGroup(title = stringRes(R.string.pref__clipboard__group_code_detection__label)) {
-            // DRS v1.12.0 + v1.14.0: the code-line detection and its two
+            // + the code-line detection and its two
             // details — the language badge and the automatic monospace
             // switch — each with its own honest switch.
             SwitchPreference(
@@ -326,7 +326,7 @@ fun ClipboardScreen() = DrsScreen {
         }
 
         PreferenceGroup(title = stringRes(R.string.pref__clipboard__group_history_organization__label)) {
-            // DRS v1.12.0 + v1.14.0: the panel organization — the sort
+            // + the panel organization — the sort
             // order, the calendar sections, and the smart category
             // badges — the full comprehensive organization as settings.
             ListPreference(

@@ -2,7 +2,7 @@
   "$": "ime.extension.keyboard",
   "meta": {
     "id": "org.drs.layouts",
-    "version": "0.1.0",
+    "version": "1.0.0",
     "title": "التخطيطات الأساسية (DRS)",
     "description": "تخطيطات لوحة المفاتيح الافتراضية المتوفرة دائماً في لوحة المفاتيح DRS.",
     "maintainers": [
