@@ -112,6 +112,11 @@ class DrsApplication : Application() {
             //     during this session" — the number that can only move if OUR
             //     code touched a socket.
             com.drs.smartkeyboard.drs.privacy.DrsNetworkSentinel.captureBaseline()
+            // «الشفافية والتعلم» (ADR-0009 — feature 1): stamp the one-time
+            // firstUseAt anchor + record the process-start attestation into the
+            // 90-day local transparency log. App-scoped by construction (the
+            // recorder lives in drs/privacy and never touches the IME path).
+            com.drs.smartkeyboard.drs.privacy.DrsTransparencyLog.Recorder.start(this)
             // (2) Wire the absolute-privacy-mode reader. If the pref layer is
             //     somehow unavailable, the provider throwing keeps the gates
             //     CLOSED (DrsPrivacyLock treats a throwing provider as locked) —

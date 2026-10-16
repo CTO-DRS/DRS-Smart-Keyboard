@@ -48,6 +48,7 @@ import com.drs.smartkeyboard.app.settings.advanced.PhysicalKeyboardScreen
 import com.drs.smartkeyboard.app.settings.advanced.RestoreScreen
 import com.drs.smartkeyboard.app.settings.help.HelpScreen
 import com.drs.smartkeyboard.app.settings.privacy.PrivacyScreen
+import com.drs.smartkeyboard.app.settings.privacy.TransparencyHubScreen
 import com.drs.smartkeyboard.app.settings.clipboard.ClipboardScreen
 import com.drs.smartkeyboard.app.settings.dictionary.DictionaryScreen
 import com.drs.smartkeyboard.app.settings.dictionary.UserDictionaryScreen
@@ -210,6 +211,10 @@ object Routes {
         @Serializable
         @Deeplink("settings/privacy")
         object Privacy
+
+        @Serializable
+        @Deeplink("settings/privacy/transparency-hub")
+        object DrsTransparencyHub
 
         @Serializable
         @Deeplink("settings/drs/control-center")
@@ -405,6 +410,7 @@ object Routes {
             composableWithDeepLink(Settings.Restore::class) { RestoreScreen() }
             composableWithDeepLink(Settings.Help::class) { HelpScreen() }
             composableWithDeepLink(Settings.Privacy::class) { PrivacyScreen() }
+            composableWithDeepLink(Settings.DrsTransparencyHub::class) { TransparencyHubScreen() }
             composableWithDeepLink(Settings.About::class) { AboutScreen() }
             composableWithDeepLink(Settings.ThirdPartyLicenses::class) { ThirdPartyLicensesScreen() }
 

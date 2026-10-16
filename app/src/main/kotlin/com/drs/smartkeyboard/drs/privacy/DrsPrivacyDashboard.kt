@@ -19,11 +19,13 @@ import java.io.File
  * IDs are stable strings so the UI translations and the policy doc can
  * reference them.
  *
- * Store map (phase 3 audit):
- *   - learning        : personalization words+bigrams (noBackupFilesDir)
- *   - crash_reports   : sanitized crash registry (noBackupFilesDir)
- *   - update_downloads: downloaded APK files awaiting install (cache)
- *   - clipboard_media : clipboard image/audio cache (cache)
+ * Store map (transparency-era audit, ADR-0009):
+ *   - learning            : personalization words+bigrams (noBackupFilesDir)
+ *   - crash_reports       : sanitized crash registry (noBackupFilesDir)
+ *   - update_downloads    : downloaded APK files awaiting install (cache)
+ *   - clipboard_media     : clipboard image/audio cache (noBackupFilesDir)
+ *   - transparency_log    : daily network-attestation snapshots, 90-day
+ *     rotation (noBackupFilesDir)
  *
  * Actions:
  *   - summary()            : everything the dashboard renders.
@@ -137,6 +139,7 @@ class DrsPrivacyDashboard(
         const val STORE_CRASH = "crash_reports"
         const val STORE_UPDATES = "update_downloads"
         const val STORE_CLIPBOARD_MEDIA = "clipboard_media"
+        const val STORE_TRANSPARENCY = "transparency_log"
 
         /** Recursive dir usage — items = file count. */
         fun dirUsage(dir: File?): StoreUsage {
@@ -168,7 +171,7 @@ class DrsPrivacyDashboard(
         }
 
         /**
-         * Android factory: wires the four registered stores to their real
+         * Android factory: wires the five registered stores to their real
          * on-disk locations. The learning/crash engines are consulted
          * through their public APIs so the dashboard never reads their
          * internals; in-memory state is cleared by the same actions.
@@ -185,6 +188,7 @@ class DrsPrivacyDashboard(
                 appContext.noBackupFilesDir,
                 com.drs.smartkeyboard.ime.clipboard.provider.ClipboardFileStorage.CLIPBOARD_FILES_PATH,
             )
+            val transparencyFile = File(appContext.noBackupFilesDir, DrsTransparencyLog.FILE_NAME)
             return DrsPrivacyDashboard(
                 stores = listOf(
                     StoreProbe(
@@ -220,6 +224,15 @@ class DrsPrivacyDashboard(
                         location = "noBackupFilesDir/clipboard_media/",
                         measure = { dirUsage(clipboardMediaDir) },
                         destroy = { destroyPath(clipboardMediaDir) },
+                    ),
+                    StoreProbe(
+                        id = STORE_TRANSPARENCY,
+                        location = "noBackupFilesDir/${DrsTransparencyLog.FILE_NAME}",
+                        measure = { fileUsage(transparencyFile) },
+                        destroy = {
+                            DrsTransparencyLog.clear(transparencyFile)
+                            true
+                        },
                     ),
                 ),
                 attestationProvider = attestationProvider,

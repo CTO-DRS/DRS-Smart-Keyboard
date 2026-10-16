@@ -6,4 +6,10 @@
     <cache-path
         name="downloads"
         path="downloads/"/>
+    <!-- «الشفافية والتعلم» (ADR-0009 — نقطة قرار المالك 2): شهادة العمر
+         تُرسم برمجياً في هذا الدليل وتُشارك عبر FileProvider القائم —
+         مورد، ليس Manifest، وليس صلاحية. -->
+    <cache-path
+        name="transparency"
+        path="transparency/"/>
 </paths>
