@@ -30,6 +30,14 @@ CI (`ci/privacy_canary.sh`) يكسر البناء لو أضاف أي مساهم 
    يدوي بنقرتك.
 3. **إعداداتك ووسائط حافظتك وملفات تحديث مؤقتة:** مواضع معلنة
    ومفصلة في docs/GDPR_COMPLIANCE.md.
+4. **سجل الشفافية (جديد — ADR-0009):** لقطات إقرار يومية لعدادات
+   بايتات هذا التطبيق وحده — التاريخ والبايتات المسجلة وعلامتا الصدق
+   فقط؛ دوران صلب 90 يوماً، في المجلد نفسه المعفي من النسخ السحابية.
+   لا يحتوي أبداً ما تكتبه أو وجهات أي اتصال.
+5. **عدّادات التصحيح (جديد — ADR-0009):** عدد التصحيحات الصامتة
+   المُعدَّلة منذ لحظة التفعيل فصاعدًا — لا حقل تاريخي في الموديل
+   أصلاً. وتوليد مفتاح التصدير المحلي (بذرة 32 بايت) للمصادقة على
+   ملفات قاموسك الموقَّعة.
 
 عرض هذه البيانات وأحجامها: **شاشة الخصوصية والأمان** داخل التطبيق.
 
@@ -88,6 +96,15 @@ any contributor ever introduces a network stack into the engine.
    never any text you typed. Export is manual, one tap.
 3. **Your settings, clipboard media, temporary update files:** all
    documented in docs/GDPR_COMPLIANCE.md.
+4. **Transparency log (new — ADR-0009):** daily attestation snapshots
+   of this app's own byte counters — the date, the recorded bytes and
+   two honesty flags only; a hard 90-day rotation, in the same
+   backup-excluded folder. It NEVER contains what you type or any
+   connection destination.
+5. **Correction counters (new — ADR-0009):** the count of silently
+   rewritten corrections since they were enabled — no historical field
+   exists in the model at all. Plus the device-local export key (a
+   32-byte seed) that signs your lexicon exchange files.
 
 The privacy screen inside the app shows this inventory with real
 sizes, live.
@@ -135,9 +152,11 @@ serveur ne le reçoit, et le noyau du clavier n'a aucune voie réseau
 
 **Données sur l'appareil:** table d'apprentissage personnelle (mots
 fréquents), registre d'accidents anonymisé (nom de classe + empreinte
-seulement), réglages, médias du presse-papiers. Tout est visible avec
-ses tailles dans l'écran « Confidentialité et sécurité » de
-l'application.
+seulement), réglages, médias du presse-papiers, journal de
+transparence local (90 jours, compteurs d'octets de l'app seulement)
+et compteurs de correction honnêtes («à partir de maintenant »).
+Tout est visible avec ses tailles dans l'écran « Confidentialité et
+sécurité » de l'application.
 
 **Aucune collecte:** pas de noms, d'emails, de géolocalisation, d'IDs
 publicitaires, d'analytique, de publicité.
@@ -159,8 +178,10 @@ red (prueba automatizada en nuestro CI).
 
 **Datos en el dispositivo:** tabla de aprendizaje personal (palabras
 frecuentes), registro de fallos anonimizado (solo clase + huella),
-ajustes, medios del portapapeles. Todo visible con tamaños reales en
-la pantalla «Privacidad y seguridad».
+ajustes, medios del portapapeles, registro de transparencia local
+(90 días, solo contadores de bytes de la app) y contadores de
+corrección honestos («desde ahora»). Todo visible con tamaños reales
+en la pantalla «Privacidad y seguridad».
 
 **No recopilamos:** nombres, correos, ubicación, IDs publicitarios,
 analítica, publicidad.
@@ -183,7 +204,9 @@ Server empfängt es, und der Tastatur-Kern hat keinen Netzkanal
 
 **Daten auf dem Gerät:** persönliche Lernliste (häufige Wörter),
 anonymisiertes Absturzregister (nur Klassenname + Fingerabdruck),
-Einstellungen, Zwischenablage-Medien. Alles mit echten Größen im
+Einstellungen, Zwischenablage-Medien, lokales Transparenz-Protokoll
+(90 Tage, nur die Byte-Zähler der App) und ehrliche
+Korrekturzähler („ab jetzt“). Alles mit echten Größen im
 Bildschirm „Privatsphäre und Sicherheit" sichtbar.
 
 **Wir sammeln nichts:** keine Namen, E-Mails, Standort, Werbe-IDs,

@@ -76,6 +76,32 @@ Your last copied items with previews. Copied media is protected by gates: it
 is never written to the system disk nor read before your approval, and its
 orphaned files are cleaned automatically.
 
+### Live transparency hub (transparency & learning era)
+From Settings → Privacy & security → Live transparency hub: a live counter
+of this app's own bytes, a daily-documented connection log with a hard
+90-day rotation (when / documented purpose / size — it never stores what
+you type), and an age certificate rendered from the log's own data and
+shared as a PNG in one tap. Zero stays zero: if your device's counters are
+unsupported the hub says so instead of claiming a zero it cannot prove.
+
+### What we learned about you (transparency & learning era)
+From Settings → Dictionary → What we learned about you: your personal
+lexicon searchable and sortable, the learning tables with their real
+counts, and the silent-correction counters — counting starts NOW, honestly
+(no retroactive history, no estimates). Export your lexicon as an
+ed25519-signed JSON; import accepts SIGNED files only (unsigned and
+tampered are rejected with distinct messages); "erase everything we
+learned" is a real, double-confirmed deletion.
+
+### The popup gesture board (transparency & learning era)
+Long-press any of the 28 Arabic letters (sun & moon) and the eight
+canonical harakat stations pop up above it: the three tanwin forms, fatha,
+damma, kasra, SHADDA (the main station), and sukun. Drag to a station and
+release to insert it; release on the letter itself to insert it bare;
+release outside the board to cancel. The threshold is your existing
+long-press setting, and display/drag/cancel all run on the existing popup
+engine — no new mechanics.
+
 ## 5. Privacy: what actually happens?
 
 - **Network:** the app contacts no server by default. Update checks are manual
