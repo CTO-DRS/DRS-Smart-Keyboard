@@ -51,6 +51,7 @@ import com.drs.smartkeyboard.app.settings.privacy.PrivacyScreen
 import com.drs.smartkeyboard.app.settings.privacy.TransparencyHubScreen
 import com.drs.smartkeyboard.app.settings.clipboard.ClipboardScreen
 import com.drs.smartkeyboard.app.settings.dictionary.DictionaryScreen
+import com.drs.smartkeyboard.app.settings.dictionary.LearningAboutMeScreen
 import com.drs.smartkeyboard.app.settings.dictionary.UserDictionaryScreen
 import com.drs.smartkeyboard.app.settings.dictionary.UserDictionaryType
 import com.drs.smartkeyboard.app.settings.gestures.GesturesScreen
@@ -167,6 +168,10 @@ object Routes {
         @Serializable
         @Deeplink("settings/dictionary/user-dictionary")
         data class UserDictionary(val type: UserDictionaryType)
+
+        @Serializable
+        @Deeplink("settings/dictionary/learning-about-me")
+        object DrsLearningAboutMe
 
         @Serializable
         @Deeplink("settings/gestures")
@@ -397,6 +402,7 @@ object Routes {
                 val payload = navBackStack.toRoute<Settings.UserDictionary>()
                 UserDictionaryScreen(payload.type)
             }
+            composableWithDeepLink(Settings.DrsLearningAboutMe::class) { LearningAboutMeScreen() }
 
             composableWithDeepLink(Settings.Gestures::class) { GesturesScreen() }
 

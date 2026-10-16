@@ -2875,6 +2875,50 @@
     <string name="transparency__cert__png_title" comment="Text drawn on the PNG certificate">Transparency age certificate</string>
     <string name="transparency__cert__png_age_headline" comment="Text drawn on the PNG certificate: the headline number">%1$d documented days</string>
     <string name="transparency__cert__png_brand" comment="Text drawn on the PNG certificate footer">DRS Keyboard — local disclosure, no network</string>
+    <!-- Transparency &amp; learning — feature 2: the visual learning engine (ADR-0009) -->
+    <string name="learned__entry" comment="Dictionary screen: entry row to the learning screen">What we learned about you</string>
+    <string name="learned__entry_summary" comment="Dictionary screen: learning screen entry summary">Your personal lexicon, honest correction counters, signed export, and a full wipe</string>
+    <string name="privacy__data__correction_counters" comment="Dashboard store row: the correction counters">Correction counters</string>
+    <string name="learned__title" comment="Learning screen title">What we learned about you</string>
+    <string name="learned__counters_group" comment="Learning group: the correction counters">Correction counters</string>
+    <string name="learned__counters_none" comment="Counters row: nothing counted yet">No silent corrections recorded yet</string>
+    <string name="learned__counters_value" comment="Counters row: the counted corrections">Silently rewritten corrections: %1$d</string>
+    <string name="learned__counters_started_at" comment="Counters row: the counting anchor date">Counting since: %1$s</string>
+    <string name="learned__counters_from_now_note" comment="Counters honesty note: counting starts now, no retroactive history">Counting starts now — no retroactive history, no estimates: the counters record from the moment they were enabled onward</string>
+    <string name="learned__tables_group" comment="Learning group: the personal tables">Personal learning tables</string>
+    <string name="learned__tables_summary" comment="Tables row: words/bigrams/trigrams counts">Words: %1$d · bigrams: %2$d · trigrams: %3$d</string>
+    <string name="learned__tables_note" comment="Tables note: local only">Stored locally in noBackupFilesDir — never any network</string>
+    <string name="learned__lexicon_group" comment="Learning group: the personal lexicon">Your taught words</string>
+    <string name="learned__lexicon_count" comment="Lexicon row: taught count / cap">Taught: %1$d of %2$d</string>
+    <string name="learned__lexicon_note" comment="Lexicon note: search matches exactly what was taught">Search matches exactly what you taught — the word and its vocalized form</string>
+    <string name="learned__lexicon_search_hint" comment="Lexicon search field hint">Search your words</string>
+    <string name="learned__lexicon_empty" comment="Lexicon empty state">No taught words yet — teach the first one from the harakat board</string>
+    <string name="learned__lexicon_entry_pinned" comment="Lexicon entry with pinned marker">%1$s · pinned</string>
+    <string name="learned__lexicon_truncated" comment="Lexicon list truncation note">and %1$d more — use search to show them</string>
+    <string name="learned__exchange_group" comment="Learning group: signed export/import">Signed export &amp; import</string>
+    <string name="learned__export" comment="Export row title">Export my lexicon (signed JSON)</string>
+    <string name="learned__export__summary" comment="Export explanation: flex signature structure">ed25519 signature in the same package structure (sha256 + signature + pubkey_id) with your device-local key</string>
+    <string name="learned__export__done" comment="Export success toast">Signed export complete</string>
+    <string name="learned__export__failed" comment="Export failure toast">Export failed</string>
+    <string name="learned__export__empty" comment="Export refusal: empty lexicon, honest">No taught words to export yet</string>
+    <string name="learned__import" comment="Import row title">Import a signed lexicon</string>
+    <string name="learned__import__summary" comment="Import explanation: signed only, fail-closed">Signed files only — unsigned and tampered ones are always rejected</string>
+    <string name="learned__import__done" comment="Import success toast: accepted/skipped/rejected counts">Imported: %1$d accepted · %2$d duplicates skipped · %3$d rejected</string>
+    <string name="learned__import__failed" comment="Import I/O failure toast">Could not read the file</string>
+    <string name="learned__import__reject_unsigned" comment="Import rejection: no signature — the mandated distinct message">Unsigned file — free import is deferred for your lexicon safety; signed files only</string>
+    <string name="learned__import__reject_tampered" comment="Import rejection: signature/content mismatch — the mandated distinct message">The file was modified after signing or is corrupted — rejected to protect your lexicon</string>
+    <string name="learned__import__reject_unknown_key" comment="Import rejection: unknown signing key">Signed by an unknown key — accepted keys: the official release key and your device key</string>
+    <string name="learned__import__reject_format" comment="Import rejection: not the exchange format">Unrecognized file format — a DRS lexicon export file is expected</string>
+    <string name="learned__erase_group" comment="Learning group: the wipe">Full wipe</string>
+    <string name="learned__erase" comment="Wipe row title">Erase everything we learned</string>
+    <string name="learned__erase__summary" comment="Wipe explanation">The learning engine + your words + the counters — real, immediate, irreversible deletion</string>
+    <string name="learned__erase_confirm_first_title" comment="Wipe first dialog title">Erase everything we learned?</string>
+    <string name="learned__erase_confirm_first_body" comment="Wipe first dialog body">Permanently erased: personal learning (words, bigrams, trigrams), your taught words, and the correction counters. The transparency log is not learning and stays in its own hub.</string>
+    <string name="learned__erase_next" comment="Wipe first dialog confirm">Continue</string>
+    <string name="learned__erase_confirm_second_title" comment="Wipe second dialog title">Final confirmation</string>
+    <string name="learned__erase_confirm_second_body" comment="Wipe second dialog body">This cannot be undone. Do you really want to wipe?</string>
+    <string name="learned__erase_confirm_word" comment="Wipe second dialog confirm word">Erase now</string>
+    <string name="learned__erase_done" comment="Wipe done toast">Full wipe complete — learning starts from zero</string>
     <string name="panel__switcher_mytexts">My texts</string>
     <string name="panel__mytexts__title">My saved texts panel</string>
     <string name="panel__mytexts__empty">No saved texts yet — save one from the clipboard or add it in the My texts screen</string>

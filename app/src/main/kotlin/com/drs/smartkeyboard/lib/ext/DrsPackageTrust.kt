@@ -29,6 +29,13 @@ object DrsPackageTrust {
     private val releasePubkey: ByteArray = requireNotNull(RELEASE_PUBKEY_HEX.hexToBytes())
 
     /**
+     * «الشفافية والتعلم» (ADR-0009 — feature 2): read access to the
+     * PINNED release public key for the lexicon-exchange verifier —
+     * the same trust root, no new key material, no trust change.
+     */
+    fun pinnedReleasePubkey(): ByteArray = releasePubkey.copyOf()
+
+    /**
      * Verifies a package signature. [signatureHex] and [keyId] come from
      * the catalog entry; [packageBytes] are the exact raw bytes of the
      * .flex archive (the signature covers the file bytes — verification

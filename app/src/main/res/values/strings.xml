@@ -2821,6 +2821,50 @@
     <string name="transparency__cert__png_title" comment="Text drawn on the PNG certificate">شهادة عمر الشفافية</string>
     <string name="transparency__cert__png_age_headline" comment="Text drawn on the PNG certificate: the headline number">%1$d يوماً موثقاً</string>
     <string name="transparency__cert__png_brand" comment="Text drawn on the PNG certificate footer">لوحة المفاتيح DRS — إفصاح محلي بلا شبكة</string>
+    <!-- «الشفافية والتعلم» — الميزة 2: محرك التعلم المرئي (ADR-0009) -->
+    <string name="learned__entry" comment="Dictionary screen: entry row to the learning screen">ماذا تعلمت عني</string>
+    <string name="learned__entry_summary" comment="Dictionary screen: learning screen entry summary">قاموسك الشخصي وعدّادات التصحيح الصادقة وتصدير موقّع ومسح كامل</string>
+    <string name="privacy__data__correction_counters" comment="Dashboard store row: the correction counters">عدّادات التصحيح</string>
+    <string name="learned__title" comment="Learning screen title">ماذا تعلمت عني</string>
+    <string name="learned__counters_group" comment="Learning group: the correction counters">عدّادات التصحيح</string>
+    <string name="learned__counters_none" comment="Counters row: nothing counted yet">لم يُسجَّل أي تصحيح صامت بعد</string>
+    <string name="learned__counters_value" comment="Counters row: the counted corrections">تصحيحات صامتة مُعدَّلة: %1$d</string>
+    <string name="learned__counters_started_at" comment="Counters row: the counting anchor date">يُعدّ من: %1$s</string>
+    <string name="learned__counters_from_now_note" comment="Counters honesty note: counting starts now, no retroactive history">العد يبدأ من الآن — لا تاريخ رجعي ولا تقديرات: العدّادات تسجل من لحظة تفعيلها فصاعدًا</string>
+    <string name="learned__tables_group" comment="Learning group: the personal tables">جداول التعلم الشخصي</string>
+    <string name="learned__tables_summary" comment="Tables row: words/bigrams/trigrams counts">كلمات: %1$d · ثنائيات: %2$d · ثلاثيات: %3$d</string>
+    <string name="learned__tables_note" comment="Tables note: local only">تُحفظ محليًا في noBackupFilesDir — لا شبكة أبدًا</string>
+    <string name="learned__lexicon_group" comment="Learning group: the personal lexicon">كلماتي المعلَّمة</string>
+    <string name="learned__lexicon_count" comment="Lexicon row: taught count / cap">معلَّمة: %1$d من %2$d</string>
+    <string name="learned__lexicon_note" comment="Lexicon note: search matches exactly what was taught">البحث يطابق ما علّمته حرفيًا — الكلمة وشكلها المشكول</string>
+    <string name="learned__lexicon_search_hint" comment="Lexicon search field hint">ابحث في كلماتك</string>
+    <string name="learned__lexicon_empty" comment="Lexicon empty state">لا كلمات معلَّمة بعد — علّم أول كلمة من لوحة التشكيل</string>
+    <string name="learned__lexicon_entry_pinned" comment="Lexicon entry with pinned marker">%1$s · مثبّتة</string>
+    <string name="learned__lexicon_truncated" comment="Lexicon list truncation note">و%1$d كلمة أخرى — استخدم البحث لعرضها</string>
+    <string name="learned__exchange_group" comment="Learning group: signed export/import">تصدير واستيراد موقَّع</string>
+    <string name="learned__export" comment="Export row title">صدّر قاموسي (JSON موقَّع)</string>
+    <string name="learned__export__summary" comment="Export explanation: flex signature structure">توقيع ed25519 ببنية الحزم نفسها (sha256 + signature + pubkey_id) بمفتاح جهازك المحلي</string>
+    <string name="learned__export__done" comment="Export success toast">تم التصدير الموقَّع</string>
+    <string name="learned__export__failed" comment="Export failure toast">فشل التصدير</string>
+    <string name="learned__export__empty" comment="Export refusal: empty lexicon, honest">لا كلمات معلَّمة لتصديرها بعد</string>
+    <string name="learned__import" comment="Import row title">استورد قاموسًا موقَّعًا</string>
+    <string name="learned__import__summary" comment="Import explanation: signed only, fail-closed">الموقَّع فقط يُقبل — غير الموقَّع والمعدَّل يُرفضان دائمًا</string>
+    <string name="learned__import__done" comment="Import success toast: accepted/skipped/rejected counts">تم الاستيراد: %1$d قُبلت · %2$d مكررة تجاهُلت · %3$d رُفضت</string>
+    <string name="learned__import__failed" comment="Import I/O failure toast">تعذر قراءة الملف</string>
+    <string name="learned__import__reject_unsigned" comment="Import rejection: no signature — the mandated distinct message">ملف غير موقَّع — الاستيراد الحر مؤجل لأمان قاموسك، الموقَّع فقط يُقبل</string>
+    <string name="learned__import__reject_tampered" comment="Import rejection: signature/content mismatch — the mandated distinct message">الملف معدَّل بعد التوقيع أو تالف — رُفض لحماية قاموسك</string>
+    <string name="learned__import__reject_unknown_key" comment="Import rejection: unknown signing key">توقيع بمفتاح مجهول — المفاتيح المقبولة: مفتاح الإصدار الرسمي ومفتاح جهازك</string>
+    <string name="learned__import__reject_format" comment="Import rejection: not the exchange format">ملف غير معروف البنية — المتوقع ملف تصدير قاموس DRS</string>
+    <string name="learned__erase_group" comment="Learning group: the wipe">المسح الكامل</string>
+    <string name="learned__erase" comment="Wipe row title">امسح كل ما تعلمته</string>
+    <string name="learned__erase__summary" comment="Wipe explanation">محرك التعلم + كلماتي + العدّادات — حذف فعلي فوري بلا رجعة</string>
+    <string name="learned__erase_confirm_first_title" comment="Wipe first dialog title">مسح كل ما تعلمته؟</string>
+    <string name="learned__erase_confirm_first_body" comment="Wipe first dialog body">سيُمحى نهائيًا: التعلم الشخصي (كلمات وثنائيات وثلاثيات)، كلماتك المعلَّمة، وعدّادات التصحيح. سجل الشفافية ليس تعلمًا وسيبقى في مركزه.</string>
+    <string name="learned__erase_next" comment="Wipe first dialog confirm">متابعة</string>
+    <string name="learned__erase_confirm_second_title" comment="Wipe second dialog title">تأكيد أخير</string>
+    <string name="learned__erase_confirm_second_body" comment="Wipe second dialog body">لا يمكن التراجع بعد التنفيذ. هل تريد المسح فعلاً؟</string>
+    <string name="learned__erase_confirm_word" comment="Wipe second dialog confirm word">امسح الآن</string>
+    <string name="learned__erase_done" comment="Wipe done toast">تم المسح الكامل — التعلم يبدأ من صفر</string>
     <string name="panel__switcher_mytexts">نصوصي</string>
     <string name="panel__mytexts__title">لوحة نصوصي المحفوظة</string>
     <string name="panel__mytexts__empty">لا نصوص محفوظة بعد — احفظ نصًا من الحافظة أو أضفه من شاشة نصوصي</string>

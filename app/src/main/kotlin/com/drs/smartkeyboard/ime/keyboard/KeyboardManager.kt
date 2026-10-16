@@ -27,6 +27,7 @@ import com.drs.smartkeyboard.drs.DrsEconomy
 import com.drs.smartkeyboard.drs.DrsIntegration
 import com.drs.smartkeyboard.drs.DrsPerformance
 import com.drs.smartkeyboard.drs.DrsTextTool
+import com.drs.smartkeyboard.drs.ai.DrsCorrectionCounters
 import com.drs.smartkeyboard.editorInstance
 import com.drs.smartkeyboard.extensionManager
 import com.drs.smartkeyboard.ime.ImeUiMode
@@ -904,7 +905,12 @@ class KeyboardManager(context: Context) : InputKeyEventReceiver {
             correctionRevertPending = DrsCorrectionRevert.arm(
                 typed = typed,
                 committed = candidate.text.toString(),
-            )
+            ).also { armed ->
+                // «الشفافية والتعلم» (ADR-0009 — قرار المالك 1): سطر العدّاد المعلن
+                // الوحيد هنا — يحصي التصحيح الصامت المسلَّح فعلاً (arm يرفض الزائف).
+                // استثناء معلن وحيد على قاعدة «صفر كود IME» — يفرضه اختبار بنيوي.
+                DrsCorrectionCounters.forProcess(appContext).onAutoCommit(armed != null)
+            }
         }
         // DRS: learn manually typed words (not picked from the suggestion row and not
         // auto-committed) into the personal user dictionary. Guarded like all DRS
@@ -1606,7 +1612,11 @@ class KeyboardManager(context: Context) : InputKeyEventReceiver {
                                     correctionRevertPending = DrsCorrectionRevert.arm(
                                         typed = typed,
                                         committed = autoCandidate.text.toString(),
-                                    )
+                                    ).also { armed ->
+                                        // «الشفافية والتعلم» (ADR-0009 — قرار المالك 1):
+                                        // سطر العدّاد المعلن الثاني — نفس عقد الموضع الأول.
+                                        DrsCorrectionCounters.forProcess(appContext).onAutoCommit(armed != null)
+                                    }
                                 }
                             }
                             editorInstance.commitChar(text)
