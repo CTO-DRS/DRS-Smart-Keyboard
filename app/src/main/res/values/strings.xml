@@ -2788,6 +2788,39 @@
     <string name="privacy__delete__summary" comment="Delete-all explanation: wipes learning, crash registry, downloads, clipboard media immediately">مسح التعلم وسجل الأعطال وملفات التحديث ووسائط الحافظة فورًا وبلا رجعة</string>
     <string name="privacy__delete__confirm" comment="Delete-all confirmation dialog title">حذف جميع البيانات؟</string>
     <string name="privacy__delete__confirm_message" comment="Delete-all confirmation body">سيُمحى من الجهاز نهائيًا: التعلم الشخصي، سجل الأعطال، ملفات التحديث، ووسائط الحافظة. لا يمكن التراجع.</string>
+    <!-- «الشفافية والتعلم» — الميزة 1: مركز الشفافية الحي (ADR-0009) -->
+    <string name="privacy__hub__entry" comment="Privacy screen: entry row to the live transparency hub">مركز الشفافية الحي</string>
+    <string name="privacy__hub__entry_summary" comment="Privacy screen: hub entry summary">العدّاد الحي وسجل الاتصال وشهادة العمر القابلة للمشاركة</string>
+    <string name="privacy__data__transparency" comment="Dashboard store row: the transparency log">سجل الشفافية</string>
+    <string name="transparency__title" comment="Transparency hub screen title">مركز الشفافية الحي</string>
+    <string name="transparency__live_group" comment="Hub group: the live byte counter">العدّاد الحي</string>
+    <string name="transparency__live__summary" comment="Hub live counter explanation: only this app's own per-UID bytes">بايتات هذا التطبيق وحده عبر عدادات النظام — كل رقم يُقرأ ويتحقق من الإعدادات</string>
+    <string name="transparency__log_group" comment="Hub group: the connection log">سجل الاتصال (دوران 90 يوماً)</string>
+    <string name="transparency__log__count" comment="Log summary row: documented days / rotation window">أيام موثقة: %1$d من %2$d</string>
+    <string name="transparency__log__purpose" comment="Log row: the documented purpose of every entry">لقطات إقرار الشبكة اليومية — متى / الغرض الموثق / الحجم</string>
+    <string name="transparency__log__day" comment="Log day row title with date placeholder">يوم %1$s</string>
+    <string name="transparency__log__day_traffic" comment="Log day row: recorded bytes that day">بايتات مسجلة: استقبال %1$s · إرسال %2$s</string>
+    <string name="transparency__log__zero_day" comment="Log day row: honest zero">صفر بايت مسجل في هذا اليوم</string>
+    <string name="transparency__log__unsupported_day" comment="Log day row: unsupported counters are recorded, not faked">عدادات النظام غير مدعومة — يُسجَّل ذلك بدل ادعاء صفر</string>
+    <string name="transparency__log__empty_title" comment="Log empty state title">السجل يبدأ من اليوم</string>
+    <string name="transparency__log__empty_summary" comment="Log empty state: no retroactive history">لا تاريخ رجعي — أول لقطة تُكتب عند أول تشغيل بعد التثبيت</string>
+    <string name="transparency__cert_group" comment="Hub group: the age certificate">شهادة العمر</string>
+    <string name="transparency__cert__first_use" comment="Certificate line: documented-since date">بداية التوثيق: %1$s</string>
+    <string name="transparency__cert__age" comment="Certificate line: documented age in days">العمر الموثق: %1$d يوماً</string>
+    <string name="transparency__cert__days" comment="Certificate line: attested days count">أيام موثقة في السجل: %1$d</string>
+    <string name="transparency__cert__totals" comment="Certificate line: total recorded bytes">إجمالي المسجل: %1$s استقبالاً · %2$s إرسالاً</string>
+    <string name="transparency__cert__zero_claim" comment="Certificate line: the zero-bytes claim, earned only with full evidence">صفر بايت مسجل عبر كل الأيام الموثقة ✓</string>
+    <string name="transparency__cert__moved_claim" comment="Certificate line: honest alternative when bytes were recorded">البايتات المسجلة ظاهرة أعلاه — الإفصاح هو الرقم لا الادعاء</string>
+    <string name="transparency__cert__unsupported_note" comment="Certificate note: unsupported counters never earn a zero claim">عدادات غير مدعومة في بعض الأيام — لا يُدّعى صفر بلا إثبات</string>
+    <string name="transparency__cert__honesty_note" comment="Certificate note: what the certificate is and is not">إفصاح قرائي من بيانات جهازك المحلية — ليس وثيقة إثبات مضادة للتزوير</string>
+    <string name="transparency__cert__no_data_title" comment="Certificate empty state title">لا بيانات شهادة بعد</string>
+    <string name="transparency__cert__no_data_summary" comment="Certificate empty state: counting starts now">أول لقطة تُكتب عند أول تشغيل — العد من الآن</string>
+    <string name="transparency__cert__share" comment="Certificate share row title">شارك الشهادة كصورة PNG</string>
+    <string name="transparency__cert__share_summary" comment="Certificate share explanation">تُرسم برمجياً من بيانات السجل وتُشارك عبر مزوّد الملفات القائم</string>
+    <string name="transparency__cert__share_failed" comment="Certificate share failure toast">فشل توليد الصورة</string>
+    <string name="transparency__cert__png_title" comment="Text drawn on the PNG certificate">شهادة عمر الشفافية</string>
+    <string name="transparency__cert__png_age_headline" comment="Text drawn on the PNG certificate: the headline number">%1$d يوماً موثقاً</string>
+    <string name="transparency__cert__png_brand" comment="Text drawn on the PNG certificate footer">لوحة المفاتيح DRS — إفصاح محلي بلا شبكة</string>
     <string name="panel__switcher_mytexts">نصوصي</string>
     <string name="panel__mytexts__title">لوحة نصوصي المحفوظة</string>
     <string name="panel__mytexts__empty">لا نصوص محفوظة بعد — احفظ نصًا من الحافظة أو أضفه من شاشة نصوصي</string>

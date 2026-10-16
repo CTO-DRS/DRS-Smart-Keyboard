@@ -2842,6 +2842,39 @@
     <string name="privacy__delete__summary" comment="Delete-all explanation: wipes learning, crash registry, downloads, clipboard media immediately">Wipe learning, the crash registry, update files, and clipboard media immediately and irreversibly</string>
     <string name="privacy__delete__confirm" comment="Delete-all confirmation dialog title">Delete all data?</string>
     <string name="privacy__delete__confirm_message" comment="Delete-all confirmation body">Permanently wiped from the device: personal learning, the crash registry, update files, and clipboard media. This cannot be undone.</string>
+    <!-- Transparency &amp; learning — feature 1: the live transparency hub (ADR-0009) -->
+    <string name="privacy__hub__entry" comment="Privacy screen: entry row to the live transparency hub">Live transparency hub</string>
+    <string name="privacy__hub__entry_summary" comment="Privacy screen: hub entry summary">The live counter, the connection log, and the shareable age certificate</string>
+    <string name="privacy__data__transparency" comment="Dashboard store row: the transparency log">Transparency log</string>
+    <string name="transparency__title" comment="Transparency hub screen title">Live transparency hub</string>
+    <string name="transparency__live_group" comment="Hub group: the live byte counter">The live counter</string>
+    <string name="transparency__live__summary" comment="Hub live counter explanation: only this app\'s own per-UID bytes">Only this app\'s own bytes via system counters — every number is readable and verifiable</string>
+    <string name="transparency__log_group" comment="Hub group: the connection log">Connection log (90-day rotation)</string>
+    <string name="transparency__log__count" comment="Log summary row: documented days / rotation window">Documented days: %1$d of %2$d</string>
+    <string name="transparency__log__purpose" comment="Log row: the documented purpose of every entry">Daily network attestation snapshots — when / documented purpose / size</string>
+    <string name="transparency__log__day" comment="Log day row title with date placeholder">Day %1$s</string>
+    <string name="transparency__log__day_traffic" comment="Log day row: recorded bytes that day">Recorded bytes: received %1$s · sent %2$s</string>
+    <string name="transparency__log__zero_day" comment="Log day row: honest zero">Zero recorded bytes on this day</string>
+    <string name="transparency__log__unsupported_day" comment="Log day row: unsupported counters are recorded, not faked">System counters unsupported — recorded as such instead of claiming zero</string>
+    <string name="transparency__log__empty_title" comment="Log empty state title">The log starts today</string>
+    <string name="transparency__log__empty_summary" comment="Log empty state: no retroactive history">No retroactive history — the first snapshot is written at first launch after install</string>
+    <string name="transparency__cert_group" comment="Hub group: the age certificate">Age certificate</string>
+    <string name="transparency__cert__first_use" comment="Certificate line: documented-since date">Documented since: %1$s</string>
+    <string name="transparency__cert__age" comment="Certificate line: documented age in days">Documented age: %1$d days</string>
+    <string name="transparency__cert__days" comment="Certificate line: attested days count">Days attested in the log: %1$d</string>
+    <string name="transparency__cert__totals" comment="Certificate line: total recorded bytes">Total recorded: %1$s received · %2$s sent</string>
+    <string name="transparency__cert__zero_claim" comment="Certificate line: the zero-bytes claim, earned only with full evidence">Zero recorded bytes across all attested days ✓</string>
+    <string name="transparency__cert__moved_claim" comment="Certificate line: honest alternative when bytes were recorded">Recorded bytes are shown above — the disclosure is the number, not a claim</string>
+    <string name="transparency__cert__unsupported_note" comment="Certificate note: unsupported counters never earn a zero claim">Unsupported counters on some days — no zero is claimed without proof</string>
+    <string name="transparency__cert__honesty_note" comment="Certificate note: what the certificate is and is not">A readable disclosure from your device\'s local data — not an anti-forgery document</string>
+    <string name="transparency__cert__no_data_title" comment="Certificate empty state title">No certificate data yet</string>
+    <string name="transparency__cert__no_data_summary" comment="Certificate empty state: counting starts now">The first snapshot is written at first launch — counting starts now</string>
+    <string name="transparency__cert__share" comment="Certificate share row title">Share the certificate as a PNG</string>
+    <string name="transparency__cert__share_summary" comment="Certificate share explanation">Rendered programmatically from the log data and shared through the existing file provider</string>
+    <string name="transparency__cert__share_failed" comment="Certificate share failure toast">Failed to render the image</string>
+    <string name="transparency__cert__png_title" comment="Text drawn on the PNG certificate">Transparency age certificate</string>
+    <string name="transparency__cert__png_age_headline" comment="Text drawn on the PNG certificate: the headline number">%1$d documented days</string>
+    <string name="transparency__cert__png_brand" comment="Text drawn on the PNG certificate footer">DRS Keyboard — local disclosure, no network</string>
     <string name="panel__switcher_mytexts">My texts</string>
     <string name="panel__mytexts__title">My saved texts panel</string>
     <string name="panel__mytexts__empty">No saved texts yet — save one from the clipboard or add it in the My texts screen</string>

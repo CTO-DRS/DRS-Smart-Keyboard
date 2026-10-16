@@ -18,6 +18,7 @@ import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Security
 import androidx.compose.material.icons.filled.Storage
 import androidx.compose.material.icons.filled.VerifiedUser
+import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -35,6 +36,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import com.drs.smartkeyboard.BuildConfig
 import com.drs.smartkeyboard.R
+import com.drs.smartkeyboard.app.LocalNavController
+import com.drs.smartkeyboard.app.Routes
 import com.drs.smartkeyboard.drs.ai.DrsLearningEngine
 import com.drs.smartkeyboard.drs.privacy.DrsE2ECrypto
 import com.drs.smartkeyboard.drs.privacy.DrsE2ECrypto.DrsE2EError
@@ -74,6 +77,7 @@ fun PrivacyScreen() = DrsScreen {
 
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
+    val navController = LocalNavController.current
 
     // Live dashboard state, recomputed on entry and after destructive actions.
     var summary by remember { mutableStateOf<DrsPrivacyDashboard.Summary?>(null) }
@@ -293,6 +297,12 @@ fun PrivacyScreen() = DrsScreen {
                     },
             )
             Preference(
+                icon = Icons.Default.Visibility,
+                title = stringRes(R.string.privacy__hub__entry),
+                summary = stringRes(R.string.privacy__hub__entry_summary),
+                onClick = { navController.navigate(Routes.Settings.DrsTransparencyHub) },
+            )
+            Preference(
                 icon = Icons.Default.Security,
                 title = stringRes(R.string.privacy__permissions__title),
                 summary = att?.permissions
@@ -351,6 +361,7 @@ private fun storeTitle(id: String): String = when (id) {
     DrsPrivacyDashboard.STORE_CRASH -> stringResource(R.string.privacy__data__crash)
     DrsPrivacyDashboard.STORE_UPDATES -> stringResource(R.string.privacy__data__updates)
     DrsPrivacyDashboard.STORE_CLIPBOARD_MEDIA -> stringResource(R.string.privacy__data__clipboard_media)
+    DrsPrivacyDashboard.STORE_TRANSPARENCY -> stringResource(R.string.privacy__data__transparency)
     else -> id
 }
 
