@@ -7,6 +7,7 @@ package com.drs.smartkeyboard.ime.text.keyboard
 import com.drs.smartkeyboard.app.DrsPreferenceStore
 import com.drs.smartkeyboard.ime.keyboard.AbstractKeyData
 import com.drs.smartkeyboard.ime.keyboard.ComputingEvaluator
+import com.drs.smartkeyboard.ime.keyboard.DrsHarakatPanel
 import com.drs.smartkeyboard.ime.keyboard.Key
 import com.drs.smartkeyboard.ime.keyboard.KeyData
 import com.drs.smartkeyboard.ime.keyboard.KeyboardMode
@@ -51,6 +52,16 @@ open class TextKey(override val data: AbstractKeyData) : Key(data) {
             computedData = computed
             computedPopups.clear()
             mergePopups(computed, evaluator, computedPopups::merge)
+            // «الشفافية والتعلم» (ADR-0009 — feature 3): the ONE declared
+            // merge point of the popup gesture board. The harakat set is
+            // merged FIRST (main is still empty here → the shadda lands as
+            // the MAIN station, owner decision 3); the existing layout/
+            // extended popups keep merging after it untouched. The gate
+            // (DrsArabicLetters SUN/MOON) lives inside the panel object —
+            // non-letters get null and this line is a no-op. This is the
+            // only ime/ line of feature 3; TextKeyboardLayout stays
+            // byte-identical to v1.0.0 (pinned by a structural test).
+            DrsHarakatPanel.harakatPopupFor(computed.label)?.let { computedPopups.merge(it, evaluator) }
             if (keyboardMode == KeyboardMode.CHARACTERS || keyboardMode == KeyboardMode.NUMERIC_ADVANCED ||
                 keyboardMode == KeyboardMode.SYMBOLS || keyboardMode == KeyboardMode.SYMBOLS2) {
                 val computedLabel = computed.label.lowercase(evaluator.subtype.primaryLocale)
