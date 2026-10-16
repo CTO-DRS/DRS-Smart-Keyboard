@@ -1,8 +1,8 @@
 <div align="center">
 
-# DRS Smart Keyboard v1.0.0 — الإطلاق الأول الرسمي
+# DRS Smart Keyboard v1.1.0 — الشفافية والتعلم
 
-**First Official Release — First Launch**
+**Transparency & Learning — Second Release**
 
 <img src="https://raw.githubusercontent.com/CTO-DRS/DRS-SmartKeyboard/main/docs/images/hero.png" width="100%"/>
 
@@ -30,22 +30,37 @@
   (fail-closed).
 - **مركز الحزم**: امتدادات موقّعة ed25519 مع تحقق قبل فك الضغط (8/8 VALID).
 
-## ⚠️ تحذير إجباري لمستخدمي الإصدارات القديمة (v2.x)
+## جديد في 1.1.0 — الشفافية والتعلم (ADR-0009)
 
-**يجب إلغاء تثبيت الإصدار القديم أولاً قبل تثبيت 1.0.0.**
+- **مركز الشفافية الحي**: عدّاد بايتات حي لهذا التطبيق وحده + سجل اتصالات
+  يومي بدوران 90 يوماً + شهادة عمر قابلة للمشاركة (تُرسم برمجياً وتُصدَّر
+  PNG) — الإثبات من بيانات جهازك لا من وعود مكتوبة.
+- **«ماذا تعلمت عني»**: قاموسك الشخصي المرئي بالبحث والفرز، وعدّادات تصحيح
+  تبدأ «من الآن» بصدق، وتصدير موقَّع ed25519 واستيراد يقبل الموقَّع فقط.
+- **لوحة الحركات المنبثقة**: ضغط مطول على الحرف العربي ينبثق لوحة الحركات
+  الثماني (U+064B..U+0652) والشدة محطة رئيسة — عبر محرك المنبثقة القائم
+  نفسه، والإفلات على الأصل حرف مجرد والإفلات خارجها إلغاء.
+- **صفر صلاحيات جديدة**: فرق صلاحيات الـManifest منذ 1.0.0 فارغ بالدليل،
+  والاختبارات نمت 1780 → 1844 أخضر.
 
-هذا الإطلاق الرسمي يعيد ضبط ترقيم الإصدار من الصفر: `versionCode` عاد إلى
-**1**، والتحديث الموضعي فوق أي إصدار قديم (v2.x أو أقدم) **مستحيل تقنياً** —
-أندرويد يرفض تنزيل `versionCode`. حاول التثبيت فوق القديم وسيُرفض التثبيت.
+## التحديث من الإصدارات السابقة
+
+- ✅ **مستخدمو 1.0.0 يحدّثون موضعياً مباشرة (versionCode 2 > 1)** — ثبّت
+  الحزمة الجديدة فوق القديمة من داخل التطبيق أو من صفحة الإصدارات، دون إلغاء
+  تثبيت ودون فقدان بيانات.
+- ⚠️ **مستخدمو v2.x أو أقدم**: التحديث الموضعي لا يزال مستحيلاً تقنياً
+  (أندرويد يرفض تنزيل `versionCode` أقدم) — ألغِ التثبيت أولاً، ثم ثبّت 1.1.0
+  كتثبيت أول.
 
 ## التثبيت
 
-1. نزّل `DRS-Smart-Keyboard-v1.0.0.apk` من مرفقات هذا الإصدار (أو من موقع
+1. نزّل `DRS-Smart-Keyboard-v1.1.0.apk` من مرفقات هذا الإصدار (أو من موقع
    المشروع).
 2. تحقق من السلامة: قارن بصمة SHA-256 للملف مع ما في مرفق **SHA256SUMS.txt**
    (أو الجدول أسفل هذه الملاحظات).
-3. **مستخدمو v2.x**: ألغِ التثبيت أولاً (التحذير أعلاه) — ثم ثبّت الحزمة الجديدة
-   كتثبيت أول.
+3. **مستخدمو 1.0.0**: ثبّت فوق الحالي مباشرة (التحديث الموضعي مضمون) ·
+   **مستخدمو v2.x**: ألغِ التثبيت أولاً (التنبيه أعلاه) — ثم ثبّت الحزمة
+   الجديدة كتثبيت أول.
 4. فعّل «التثبيت من مصادر غير معروفة» لمتصفحك أو مدير ملفاتك عند الطلب، ثم أكمل
    التثبيت وفعّل لوحة المفاتيح من إعدادات النظام.
 
@@ -61,7 +76,7 @@
 
 ## التحقق
 
-- **1,780 اختبار وحدة أخضر** · بوابة تغطية Kover · بوابات أداء · فحص apksigner
+- **1,844 اختبار وحدة أخضر** · بوابة تغطية Kover · بوابات أداء · فحص apksigner
   مستقل.
 - كل مرفقات هذا الإصدار مجدولة بصماتها في ملف **SHA256SUMS.txt** المرفق.
 - جدول البصمات الكامل ملحق أسفل هذه الملاحظات (مولّد آليًا بواسطة CI).
@@ -98,23 +113,40 @@ you type stays on your device: no accounts, no tracking, no mandatory network.
 - **Package center**: ed25519-signed extensions verified before unpacking
   (8/8 VALID).
 
-## ⚠️ Mandatory warning for users of previous versions (v2.x)
+## New in 1.1.0 — Transparency & Learning (ADR-0009)
 
-**You must uninstall the old version first before installing 1.0.0.**
+- **Live Transparency Hub**: a live byte counter for this app alone + a daily
+  connection log with 90-day rotation + a shareable age certificate (drawn
+  programmatically, exported as PNG) — proof from your device's own data, not
+  written promises.
+- **"What I learned about you"**: your personal visual dictionary with search
+  and sorting, honest correction counters that start "from now", and ed25519
+  signed export with import that accepts signed files only.
+- **Popup Harakat panel**: long-pressing an Arabic letter pops the panel of
+  the eight diacritics (U+064B..U+0652) with the shadda as a primary stop —
+  through the existing popup engine itself; releasing on the origin yields a
+  bare letter, releasing outside cancels.
+- **Zero new permissions**: the Manifest permission diff since 1.0.0 is empty
+  by proof, and tests grew 1780 → 1844 green.
 
-This official launch resets version numbering from scratch: `versionCode`
-is back to **1**, and an in-place update over any older release (v2.x or
-earlier) is **technically impossible** — Android refuses downgrades by
-versionCode.
+## Updating from previous releases
+
+- ✅ **1.0.0 users update in place directly (versionCode 2 > 1)** — install
+  the new package over the old one from inside the app or the releases page,
+  with no uninstall and no data loss.
+- ⚠️ **v2.x or older users**: in-place update remains technically impossible
+  (Android refuses a lower `versionCode`) — uninstall first, then install 1.1.0
+  as a fresh install.
 
 ## Installation
 
-1. Download `DRS-Smart-Keyboard-v1.0.0.apk` from this release's assets (or
+1. Download `DRS-Smart-Keyboard-v1.1.0.apk` from this release's assets (or
    from the project website).
 2. Verify integrity: compare the file's SHA-256 against the attached
    **SHA256SUMS.txt** (or the table below).
-3. **v2.x users**: uninstall first (see warning above) — then install the new
-   package as a fresh install.
+3. **1.0.0 users**: install directly over the current version (in-place update
+   guaranteed) · **v2.x users**: uninstall first (see note above) — then
+   install the new package as a fresh install.
 4. Enable "Install from unknown sources" for your browser or file manager when
    prompted, finish the install, and enable the keyboard in system settings.
 
@@ -131,7 +163,7 @@ root.
 
 ## Verification
 
-- **1,780 green unit tests** · Kover coverage gate · performance gates ·
+- **1,844 green unit tests** · Kover coverage gate · performance gates ·
   independent apksigner inspection.
 - All release assets are listed with their fingerprints in the attached
   **SHA256SUMS.txt**.
