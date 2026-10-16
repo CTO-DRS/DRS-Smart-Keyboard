@@ -20,12 +20,14 @@ import java.io.File
  * reference them.
  *
  * Store map (transparency-era audit, ADR-0009):
- *   - learning            : personalization words+bigrams (noBackupFilesDir)
- *   - crash_reports       : sanitized crash registry (noBackupFilesDir)
- *   - update_downloads    : downloaded APK files awaiting install (cache)
- *   - clipboard_media     : clipboard image/audio cache (noBackupFilesDir)
- *   - transparency_log    : daily network-attestation snapshots, 90-day
+ *   - learning             : personalization words+bigrams (noBackupFilesDir)
+ *   - crash_reports        : sanitized crash registry (noBackupFilesDir)
+ *   - update_downloads     : downloaded APK files awaiting install (cache)
+ *   - clipboard_media      : clipboard image/audio cache (noBackupFilesDir)
+ *   - transparency_log     : daily network-attestation snapshots, 90-day
  *     rotation (noBackupFilesDir)
+ *   - correction_counters  : «العد من الآن» correction counters
+ *     (noBackupFilesDir)
  *
  * Actions:
  *   - summary()            : everything the dashboard renders.
@@ -140,6 +142,7 @@ class DrsPrivacyDashboard(
         const val STORE_UPDATES = "update_downloads"
         const val STORE_CLIPBOARD_MEDIA = "clipboard_media"
         const val STORE_TRANSPARENCY = "transparency_log"
+        const val STORE_CORRECTION_COUNTERS = "correction_counters"
 
         /** Recursive dir usage — items = file count. */
         fun dirUsage(dir: File?): StoreUsage {
@@ -189,6 +192,7 @@ class DrsPrivacyDashboard(
                 com.drs.smartkeyboard.ime.clipboard.provider.ClipboardFileStorage.CLIPBOARD_FILES_PATH,
             )
             val transparencyFile = File(appContext.noBackupFilesDir, DrsTransparencyLog.FILE_NAME)
+            val countersFile = File(appContext.noBackupFilesDir, com.drs.smartkeyboard.drs.ai.DrsCorrectionCounters.FILE_NAME)
             return DrsPrivacyDashboard(
                 stores = listOf(
                     StoreProbe(
@@ -231,6 +235,15 @@ class DrsPrivacyDashboard(
                         measure = { fileUsage(transparencyFile) },
                         destroy = {
                             DrsTransparencyLog.clear(transparencyFile)
+                            true
+                        },
+                    ),
+                    StoreProbe(
+                        id = STORE_CORRECTION_COUNTERS,
+                        location = "noBackupFilesDir/${com.drs.smartkeyboard.drs.ai.DrsCorrectionCounters.FILE_NAME}",
+                        measure = { fileUsage(countersFile) },
+                        destroy = {
+                            com.drs.smartkeyboard.drs.ai.DrsCorrectionCounters.clear(countersFile)
                             true
                         },
                     ),

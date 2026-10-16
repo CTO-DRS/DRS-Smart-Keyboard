@@ -15,6 +15,7 @@ import androidx.compose.foundation.selection.selectable
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.NoteAdd
+import androidx.compose.material.icons.filled.School
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -210,6 +211,14 @@ fun DictionaryScreen() = DrsScreen {
             prefs.dictionary.learnTypedWords,
             title = stringRes(R.string.pref__dictionary__learn_typed_words__label),
             summary = stringRes(R.string.pref__dictionary__learn_typed_words__summary),
+        )
+
+        // «الشفافية والتعلم» (ADR-0009 — الميزة 2): مدخل «ماذا تعلمت عني»
+        Preference(
+            icon = Icons.Default.School,
+            title = stringRes(R.string.learned__entry),
+            summary = stringRes(R.string.learned__entry_summary),
+            onClick = { navController.navigate(Routes.Settings.DrsLearningAboutMe) },
         )
 
         PreferenceGroup(title = stringRes(R.string.pref__external_dict__group__label)) {

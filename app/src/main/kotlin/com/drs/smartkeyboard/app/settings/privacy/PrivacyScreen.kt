@@ -362,6 +362,7 @@ private fun storeTitle(id: String): String = when (id) {
     DrsPrivacyDashboard.STORE_UPDATES -> stringResource(R.string.privacy__data__updates)
     DrsPrivacyDashboard.STORE_CLIPBOARD_MEDIA -> stringResource(R.string.privacy__data__clipboard_media)
     DrsPrivacyDashboard.STORE_TRANSPARENCY -> stringResource(R.string.privacy__data__transparency)
+    DrsPrivacyDashboard.STORE_CORRECTION_COUNTERS -> stringResource(R.string.privacy__data__correction_counters)
     else -> id
 }
 
