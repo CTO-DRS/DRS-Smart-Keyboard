@@ -1,12 +1,12 @@
 <resources>
     <item name="drs_app_name" translatable="false" type="string">@string/app_name</item>
 
-    <string name="drs__repo_url" translatable="false">https://github.com/CTO-DRS/DRS-SmartKeyboard</string>
-    <string name="drs__issue_tracker_url" translatable="false">https://github.com/CTO-DRS/DRS-SmartKeyboard/issues</string>
-    <string name="drs__privacy_policy_url" translatable="false">https://github.com/CTO-DRS/DRS-SmartKeyboard/blob/main/PRIVACY.md</string>
-    <string name="drs__changelog_url" translatable="false">https://github.com/CTO-DRS/DRS-SmartKeyboard/releases/tag/v{version}</string>
-    <string name="drs__commit_by_hash_url" translatable="false">https://github.com/CTO-DRS/DRS-SmartKeyboard/commit/{hash}</string>
-    <string name="drs__internal_key_codes_url" translatable="false">https://github.com/CTO-DRS/DRS-SmartKeyboard/blob/main/app/src/main/kotlin/com/drs/smartkeyboard/ime/text/key/KeyCode.kt</string>
+    <string name="drs__repo_url" translatable="false">https://github.com/CTO-DRS/drs-sk-work</string>
+    <string name="drs__issue_tracker_url" translatable="false">https://github.com/CTO-DRS/drs-sk-work/issues</string>
+    <string name="drs__privacy_policy_url" translatable="false">https://github.com/CTO-DRS/drs-sk-work/blob/main/PRIVACY.md</string>
+    <string name="drs__changelog_url" translatable="false">https://github.com/CTO-DRS/drs-sk-work/releases/tag/v{version}</string>
+    <string name="drs__commit_by_hash_url" translatable="false">https://github.com/CTO-DRS/drs-sk-work/commit/{hash}</string>
+    <string name="drs__internal_key_codes_url" translatable="false">https://github.com/CTO-DRS/drs-sk-work/blob/main/app/src/main/kotlin/com/drs/smartkeyboard/ime/text/key/KeyCode.kt</string>
     <string name="drs__character_key_codes_url" translatable="false">https://unicode-table.com/en</string>
 
     <string name="general__system_string_placeholder" translatable="false">%s</string>

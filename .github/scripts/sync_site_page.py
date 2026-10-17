@@ -190,7 +190,7 @@ def main() -> int:
         <a class="btn primary" href="apk/DRS-Smart-Keyboard-latest.apk" download>
           ⬇ تنزيل APK — v{version} ({apk_mb}MB)
         </a>
-        <a class="btn ghost" href="https://github.com/CTO-DRS/DRS-SmartKeyboard/releases">كل الإصدارات والثيمات</a>
+        <a class="btn ghost" href="https://github.com/CTO-DRS/drs-sk-work/releases">كل الإصدارات والثيمات</a>
       </div>
       ''')
 
@@ -198,7 +198,7 @@ def main() -> int:
         <div class="meta">{apk_mb}MB · حزمة com.drs.smartkeyboard · أندرويد 8.0 فأحدث</div>
         <div class="ctas">
           <a class="btn primary" href="apk/DRS-Smart-Keyboard-latest.apk" download>⬇ تنزيل من الموقع مباشرة</a>
-          <a class="btn ghost" href="https://github.com/CTO-DRS/DRS-SmartKeyboard/releases/download/v{version}/{apk_name}" download>مصدر بديل: إصدارات GitHub</a>
+          <a class="btn ghost" href="https://github.com/CTO-DRS/drs-sk-work/releases/download/v{version}/{apk_name}" download>مصدر بديل: إصدارات GitHub</a>
         </div>
         <details class="sha">
           <summary>التحقق من السلامة — SHA-256</summary>

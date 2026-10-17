@@ -4,7 +4,7 @@
 
 **Transparency & Learning — Second Release**
 
-<img src="https://raw.githubusercontent.com/CTO-DRS/DRS-SmartKeyboard/main/docs/images/hero.png" width="100%"/>
+<img src="https://raw.githubusercontent.com/CTO-DRS/drs-sk-work/main/docs/images/hero.png" width="100%"/>
 
 </div>
 

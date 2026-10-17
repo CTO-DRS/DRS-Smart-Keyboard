@@ -25,11 +25,11 @@ body:
     attributes:
       label: "Checklist"
       options:
-        - label: "I made sure that there are *no existing issues* - [open](https://github.com/CTO-DRS/DRS-SmartKeyboard/issues) or [closed](https://github.com/CTO-DRS/DRS-SmartKeyboard/issues?q=is%3Aissue+is%3Aclosed) - which I could contribute my information to."
+        - label: "I made sure that there are *no existing issues* - [open](https://github.com/CTO-DRS/drs-sk-work/issues) or [closed](https://github.com/CTO-DRS/drs-sk-work/issues?q=is%3Aissue+is%3Aclosed) - which I could contribute my information to."
           required: true
-        - label: "I have read and understood the [contribution guidelines](https://github.com/CTO-DRS/DRS-SmartKeyboard/blob/main/CONTRIBUTING.md)."
+        - label: "I have read and understood the [contribution guidelines](https://github.com/CTO-DRS/drs-sk-work/blob/main/CONTRIBUTING.md)."
           required: true
-        - label: "I have read and understood the [AI policy](https://github.com/CTO-DRS/DRS-SmartKeyboard/blob/main/AI_POLICY.md)."
+        - label: "I have read and understood the [AI policy](https://github.com/CTO-DRS/drs-sk-work/blob/main/AI_POLICY.md)."
           required: true
         - label: "I have taken the time to fill in all the required details. I understand that the feature request will be dismissed otherwise."
           required: true

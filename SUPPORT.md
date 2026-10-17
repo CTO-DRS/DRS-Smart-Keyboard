@@ -6,9 +6,9 @@
 
 | القناة / Channel | الاستخدام / Purpose | الرابط / Link |
 |---|---|---|
-| **GitHub Issues** | الأخطاء والاقتراحات / bugs & feature requests | https://github.com/CTO-DRS/DRS-SmartKeyboard/issues |
-| **GitHub Discussions** | الأسئلة العامة والاستخدام / general questions & usage | https://github.com/CTO-DRS/DRS-SmartKeyboard/discussions |
-| **Releases** | التنزيلات وسجل التغييرات / downloads & changelog | https://github.com/CTO-DRS/DRS-SmartKeyboard/releases |
+| **GitHub Issues** | الأخطاء والاقتراحات / bugs & feature requests | https://github.com/CTO-DRS/drs-sk-work/issues |
+| **GitHub Discussions** | الأسئلة العامة والاستخدام / general questions & usage | https://github.com/CTO-DRS/drs-sk-work/discussions |
+| **Releases** | التنزيلات وسجل التغييرات / downloads & changelog | https://github.com/CTO-DRS/drs-sk-work/releases |
 
 ## قبل فتح بلاغ | Before opening an issue
 

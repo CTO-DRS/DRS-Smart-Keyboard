@@ -81,9 +81,9 @@ configure<ApplicationExtension> {
 
         buildConfigField("String", "BUILD_COMMIT_HASH", "\"${getGitCommitHash().get()}\"")
         buildConfigField("String", "DRS_ADDONS_API_VERSION", "\"v~draft2\"")
-        buildConfigField("String", "DRS_ADDONS_URL", "\"github.com/CTO-DRS/DRS-SmartKeyboard\"")
-        buildConfigField("String", "DRS_RELEASES_API", "\"https://api.github.com/repos/CTO-DRS/DRS-SmartKeyboard/releases/latest\"")
-        buildConfigField("String", "DRS_PACKAGES_MANIFEST_URL", "\"https://raw.githubusercontent.com/CTO-DRS/DRS-SmartKeyboard/main/packages/manifest.json\"")
+        buildConfigField("String", "DRS_ADDONS_URL", "\"github.com/CTO-DRS/drs-sk-work\"")
+        buildConfigField("String", "DRS_RELEASES_API", "\"https://api.github.com/repos/CTO-DRS/drs-sk-work/releases/latest\"")
+        buildConfigField("String", "DRS_PACKAGES_MANIFEST_URL", "\"https://raw.githubusercontent.com/CTO-DRS/drs-sk-work/main/packages/manifest.json\"")
 
         sourceSets {
             maybeCreate("main").apply {

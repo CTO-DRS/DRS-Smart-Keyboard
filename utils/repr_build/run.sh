@@ -5,7 +5,7 @@ IMAGE_TAG="default"
 IMAGE="$IMAGE_NAME:$IMAGE_TAG"
 
 USER_NAME="runner"
-REPO_MOUNT="/home/$USER_NAME/DRS-SmartKeyboard"
+REPO_MOUNT="/home/$USER_NAME/drs-sk-work"
 GRADLE_CACHE_VOLUME_NAME="drs-repr-build-gradle-cache"
 GRADLE_CACHE_VOLUME_BIND="$GRADLE_CACHE_VOLUME_NAME:/home/$USER_NAME/.gradle"
 

@@ -68,8 +68,8 @@ import java.util.Locale
  *  from docs/ on the same repo through GitHub Pages: no third-party host,
  *  no ads, no tracking, and it dies only if the repo dies.
  */
-private const val UPDATES_SITE_URL = "https://cto-drs.github.io/DRS-SmartKeyboard/"
-private const val UPDATES_RELEASES_URL = "https://github.com/CTO-DRS/DRS-SmartKeyboard/releases"
+private const val UPDATES_SITE_URL = "https://cto-drs.github.io/drs-sk-work/"
+private const val UPDATES_RELEASES_URL = "https://github.com/CTO-DRS/drs-sk-work/releases"
 
 /**
  * DRS Update Center — the real in-app update experience: version status,

@@ -13,7 +13,7 @@ body:
         • Describe the bug in a short but concise way.
         • If you have a screenshot or screen recording of the bug, link them at the end of this issue.
         • Also make sure to fill out the environment information. This info is valuable when trying to fix your described bug.
-        • Always test if the bug is present in the [latest preview version](https://github.com/CTO-DRS/DRS-SmartKeyboard/releases).
+        • Always test if the bug is present in the [latest preview version](https://github.com/CTO-DRS/drs-sk-work/releases).
   - type: textarea
     id: description
     attributes:
@@ -69,13 +69,13 @@ body:
     attributes:
       label: "Checklist"
       options:
-        - label: "I made sure that there are *no existing issues* - [open](https://github.com/CTO-DRS/DRS-SmartKeyboard/issues) or [closed](https://github.com/CTO-DRS/DRS-SmartKeyboard/issues?q=is%3Aissue+is%3Aclosed) - which I could contribute my information to."
+        - label: "I made sure that there are *no existing issues* - [open](https://github.com/CTO-DRS/drs-sk-work/issues) or [closed](https://github.com/CTO-DRS/drs-sk-work/issues?q=is%3Aissue+is%3Aclosed) - which I could contribute my information to."
           required: true
-        - label: "I made sure that the bug is present in the [latest preview version](https://github.com/CTO-DRS/DRS-SmartKeyboard/releases)."
+        - label: "I made sure that the bug is present in the [latest preview version](https://github.com/CTO-DRS/drs-sk-work/releases)."
           required: true
-        - label: "I have read and understood the [contribution guidelines](https://github.com/CTO-DRS/DRS-SmartKeyboard/blob/main/CONTRIBUTING.md)."
+        - label: "I have read and understood the [contribution guidelines](https://github.com/CTO-DRS/drs-sk-work/blob/main/CONTRIBUTING.md)."
           required: true
-        - label: "I have read and understood the [AI policy](https://github.com/CTO-DRS/DRS-SmartKeyboard/blob/main/AI_POLICY.md)."
+        - label: "I have read and understood the [AI policy](https://github.com/CTO-DRS/drs-sk-work/blob/main/AI_POLICY.md)."
           required: true
         - label: "I have taken the time to fill in all the required details. I understand that the bug report will be dismissed otherwise."
           required: true

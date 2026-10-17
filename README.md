@@ -8,13 +8,13 @@
 
 A DRS-built keyboard for Android — Arabic-first, fully private, deeply customizable.
 
-[![Version](https://img.shields.io/badge/version-1.1.0-0E9488?style=flat-square)](https://github.com/CTO-DRS/DRS-SmartKeyboard/releases/latest)
-[![Launch](https://img.shields.io/badge/%D8%A7%D9%84%D8%A5%D8%B7%D9%84%D8%A7%D9%82-%D8%A7%D9%84%D8%A3%D9%88%D9%84%20%D8%A7%D9%84%D8%B1%D8%B3%D9%85%D9%8A%20v1.0.0-2E7D32?style=flat-square)](https://github.com/CTO-DRS/DRS-SmartKeyboard/releases)
+[![Version](https://img.shields.io/badge/version-1.1.0-0E9488?style=flat-square)](https://github.com/CTO-DRS/drs-sk-work/releases/latest)
+[![Launch](https://img.shields.io/badge/%D8%A7%D9%84%D8%A5%D8%B7%D9%84%D8%A7%D9%82-%D8%A7%D9%84%D8%A3%D9%88%D9%84%20%D8%A7%D9%84%D8%B1%D8%B3%D9%85%D9%8A%20v1.0.0-2E7D32?style=flat-square)](https://github.com/CTO-DRS/drs-sk-work/releases)
 [![Android](https://img.shields.io/badge/Android-8.0%2B-3DDC84?style=flat-square&logo=android&logoColor=white)](https://android.com)
-[![Release](https://img.shields.io/github/v/release/CTO-DRS/DRS-SmartKeyboard?style=flat-square&display_name=release)](https://github.com/CTO-DRS/DRS-SmartKeyboard/releases/latest)
-[![Build Status](https://img.shields.io/github/actions/workflow/status/CTO-DRS/DRS-SmartKeyboard/release.yml?style=flat-square&label=Release%20Build)](https://github.com/CTO-DRS/DRS-SmartKeyboard/actions/workflows/release.yml)
+[![Release](https://img.shields.io/github/v/release/CTO-DRS/drs-sk-work?style=flat-square&display_name=release)](https://github.com/CTO-DRS/drs-sk-work/releases/latest)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/CTO-DRS/drs-sk-work/release.yml?style=flat-square&label=Release%20Build)](https://github.com/CTO-DRS/drs-sk-work/actions/workflows/release.yml)
 
-**[⬇️ تحميل أحدث إصدار | Download Latest Release](https://github.com/CTO-DRS/DRS-SmartKeyboard/releases/latest)**
+**[⬇️ تحميل أحدث إصدار | Download Latest Release](https://github.com/CTO-DRS/drs-sk-work/releases/latest)**
 
 </div>
 
@@ -137,7 +137,7 @@ A DRS-built keyboard for Android — Arabic-first, fully private, deeply customi
 
 | المصدر | الرابط |
 |---|---|
-| 🚀 أحدث إصدار (مستقر دائمًا) | **[github.com/CTO-DRS/DRS-SmartKeyboard/releases/latest](https://github.com/CTO-DRS/DRS-SmartKeyboard/releases/latest)** |
+| 🚀 أحدث إصدار (مستقر دائمًا) | **[github.com/CTO-DRS/drs-sk-work/releases/latest](https://github.com/CTO-DRS/drs-sk-work/releases/latest)** |
 | 📱 APK الحالي | `DRS-Smart-Keyboard-v<الإصدار>.apk` في صفحة الإصدار الأخير (حاليًا `v1.1.0` — الشفافية والتعلم) — والاسم يتبع رقم كل إصدار جديد |
 | 🔄 من داخل التطبيق | مركز تحديثات DRS — تحقق وتنزيل وتثبيت بلا خروج من التطبيق |
 
@@ -173,9 +173,9 @@ A DRS-built keyboard for Android — Arabic-first, fully private, deeply customi
 
 ## الدعم
 
-- 🐞 المشاكل والاقتراحات: [مستكشف المشاكل](https://github.com/CTO-DRS/DRS-SmartKeyboard/issues)
+- 🐞 المشاكل والاقتراحات: [مستكشف المشاكل](https://github.com/CTO-DRS/drs-sk-work/issues)
 - 🛠️ دليل الدعم الكامل وقنوات التواصل: [SUPPORT.md](SUPPORT.md)
-- 📖 الكود المصدري: [هذا المستودع](https://github.com/CTO-DRS/DRS-SmartKeyboard)
+- 📖 الكود المصدري: [هذا المستودع](https://github.com/CTO-DRS/drs-sk-work)
 
 </div>
 
@@ -211,7 +211,7 @@ These two components serve isolated auxiliary functionality (the preferences sys
 and the theming engine) only; the keyboard itself — its architecture, systems and
 engines — is original DRS work.
 
-**[Download the latest release](https://github.com/CTO-DRS/DRS-SmartKeyboard/releases/latest)** ·
+**[Download the latest release](https://github.com/CTO-DRS/drs-sk-work/releases/latest)** ·
 [Privacy Policy](PRIVACY.md)
 
 Copyright © 2026 The DRS Smart Keyboard Project

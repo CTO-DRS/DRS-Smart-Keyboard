@@ -155,7 +155,7 @@ fun TypingScreen() = DrsScreen {
                         )
                         DrsHyperlinkText(
                             text = "Feedback thread (GitHub)",
-                            url = "https://github.com/CTO-DRS/DRS-SmartKeyboard/discussions",
+                            url = "https://github.com/CTO-DRS/drs-sk-work/discussions",
                         )
                     }
                 }

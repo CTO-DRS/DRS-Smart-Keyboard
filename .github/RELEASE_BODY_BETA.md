@@ -17,5 +17,5 @@ sha256sum -c SHA256SUMS.txt
 - **القناة:** اختبار مغلق (beta) — قد يحوي أخطاء لا تصلح للاستخدام الحساس.
 - **الملاحظات:** سجّل أي عطل من شاشة «التشخيصات» داخل التطبيق (السجل محلي
   بالكامل ومطهّر — لا يخرج من جهازك إلا بمشاركة يدوية منك).
-- **ما الجديد:** راجع [CHANGELOG.md](https://github.com/CTO-DRS/DRS-SmartKeyboard/blob/main/CHANGELOG.md)
+- **ما الجديد:** راجع [CHANGELOG.md](https://github.com/CTO-DRS/drs-sk-work/blob/main/CHANGELOG.md)
   ورسالة الالتزام المرتبطة بالوسم.
