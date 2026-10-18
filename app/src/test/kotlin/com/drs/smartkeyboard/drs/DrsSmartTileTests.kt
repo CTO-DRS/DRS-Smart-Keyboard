@@ -174,6 +174,27 @@ class DrsV2200Tests : FunSpec({
             DrsTextTool.EXTRACT_LINKS
     }
 
+    test("Advisor names the Base64 decoder only under its firing contract") {
+        // كتلة Base64 سليمة تُرشَّح لأن المفكّ سيُطلق حتمًا —
+        // عقد الإطلاق المضمون نفسه الذي يحكم IMPROVE_PHRASES.
+        val token = DrsTileContextAdvisor.advise("SGVsbG8sIHdvcmxkIQ==")
+        token shouldContain DrsTextTool.BASE64_DECODE
+        // وترويسة JWT الكلاسيكية (eyJ) تُرشَّح بها.
+        DrsTileContextAdvisor.advise("eyJhbGciOiJIUzI1NiJ9") shouldContain
+            DrsTextTool.BASE64_DECODE
+        // ما لا يُفك لا يُرشَّح: كلمة إنجليزية عادية بلا حشو، ونص
+        // عربي، ونص مرمّز مئويًا — الصمت هو الصدق.
+        DrsTileContextAdvisor.advise("hello world") shouldNotContain
+            DrsTextTool.BASE64_DECODE
+        DrsTileContextAdvisor.advise("مرحبا بالعالم") shouldNotContain
+            DrsTextTool.BASE64_DECODE
+        DrsTileContextAdvisor.advise("https%3A%2F%2Fexample.com") shouldNotContain
+            DrsTextTool.BASE64_DECODE
+        // والمرشَّح نفسه سيُطلق فعلًا — الدليل داخل الاختبار.
+        DrsTextTools.apply(DrsTextTool.BASE64_DECODE, "SGVsbG8sIHdvcmxkIQ==", ar) shouldBe
+            "Hello, world!"
+    }
+
     // ------------------------------------------------------------
     // 4) المفضلة المحدودة — ترتيب تثبيت ورفض صادق
     // ------------------------------------------------------------
@@ -207,15 +228,17 @@ class DrsV2200Tests : FunSpec({
     // ------------------------------------------------------------
     // 6) الأختام بعد إضافات الدفعة C
     // ------------------------------------------------------------
-    test("seals — the catalogue is 67 tools over -673") {
-        DrsTextTool.entries.size shouldBe 74
-        DrsTextTool.CODE_RANGE.first shouldBe -675
+    test("seals — the catalogue is 76 tools over -676") {
+        DrsTextTool.entries.size shouldBe 76
+        DrsTextTool.CODE_RANGE.first shouldBe -676
         DrsTextTool.CODE_RANGE.last shouldBe -601
-        // round-trip من الكود إلى الأداة ومعهRegistration للأربعة الجدد.
+        // round-trip من الكود إلى الأداة ومعهRegistration للجدد.
         DrsTextTool.fromCode(-670) shouldBe DrsTextTool.SORT_LINES_NATURAL
         DrsTextTool.fromCode(-671) shouldBe DrsTextTool.SLUGIFY
         DrsTextTool.fromCode(-672) shouldBe DrsTextTool.TO_SNAKE_CASE
         DrsTextTool.fromCode(-673) shouldBe DrsTextTool.TO_CAMEL_CASE
+        DrsTextTool.fromCode(-640) shouldBe DrsTextTool.BASE64_ENCODE
+        DrsTextTool.fromCode(-676) shouldBe DrsTextTool.BASE64_DECODE
     }
 
     // ------------------------------------------------------------

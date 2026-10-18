@@ -95,6 +95,17 @@ or more identical Arabic letters collapses to one — «هلا», «جميل» �
 while legitimate doubles stay (الله، عدّ) and Latin letters and digits
 never touch (www survives); nothing stretched returns byte-identical.
 
+**Base64 encode/decode:** need a password, API key or any text to
+survive a field that only accepts letters and digits? «Base64 encode»
+turns the text (as UTF-8) into standard one-line Base64 — letters,
+digits, + and / with padding (=) — so it passes through any field and
+app. When encoded text arrives (a JWT header like `eyJ…`, or a block
+wrapped over lines) «Base64 decode» restores the readable text: wrapped
+lines rejoin, the URL-safe alphabet (- and _) is accepted, and anything
+that is not valid Base64 — an honest word, binary bytes — returns
+byte-identical, so your typing is never corrupted. The smart tiles
+suggest «Base64 decode» only when the decode is guaranteed to fire.
+
 **Deterministic text vocalization:** in the text tools panel,
 «Vocalize text» adds canonical harakat to every word the local 3000-word
 lexicon knows — unknown words stay untouched, never guessed. Works on the

@@ -166,11 +166,11 @@ class DrsPublicV170Tests : FunSpec({
         val tool = DrsTextTool.TAFQIT
         tool.code shouldBe -660
         DrsTextTool.fromCode(-660) shouldBe tool
-        DrsTextTool.CODE_RANGE.first shouldBe -675
+        DrsTextTool.CODE_RANGE.first shouldBe -676
         (tool.code in DrsTextTool.CODE_RANGE) shouldBe true
         // 53 tools through + the tafqit tool + the date
         // tool + the clock-time tool + the fraction tool.
-        DrsTextTool.entries.size shouldBe 74
+        DrsTextTool.entries.size shouldBe 76
         (tool.isInfoOnly) shouldBe false
         (tool.isEditorOp) shouldBe false
         (tool.isInsertMark) shouldBe false

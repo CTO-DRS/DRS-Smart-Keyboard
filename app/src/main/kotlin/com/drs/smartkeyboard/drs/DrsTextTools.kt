@@ -7,6 +7,8 @@ package com.drs.smartkeyboard.drs
 
 import com.drs.smartkeyboard.drs.ai.DrsArabicLetters
 import com.drs.smartkeyboard.drs.ai.DrsWritingAssistant
+import java.nio.ByteBuffer
+import java.nio.charset.CodingErrorAction
 import java.text.Collator
 import java.util.Locale
 
@@ -433,11 +435,31 @@ enum class DrsTextTool(
     // run follows the collapsed letter, and nothing stretched
     // returns byte-identical — never a rewrite of honest text.
     // See [unstretchArabicLetters].
-    REMOVE_LETTER_STRETCH(-650);
+    REMOVE_LETTER_STRETCH(-650),
+
+    // the Base64 encoder — the URL pair's payload sibling: text
+    // speaks the machine's alphabet, UTF-8 bytes over the standard
+    // RFC 4648 alphabet with its padding, ONE line (wrapping belongs
+    // to the channel, not the value). Total and deterministic: every
+    // non-empty text encodes, and the BASE64_DECODE mirror restores
+    // the exact bytes.
+    BASE64_ENCODE(-640),
+
+    // the Base64 decoder — the honest mirror of [BASE64_ENCODE]:
+    // wrapped tokens rejoin (spaces/tabs/newlines/the NBSP family
+    // strip first), the URL-safe alphabet (- _) maps onto the
+    // standard one, and the STRICT padded shape is required
+    // (4-char groups, then 0–2 trailing pads, nothing else).
+    // Decoded bytes must themselves decode as valid UTF-8 — a token
+    // of random binary, an honest Latin word of the right length, a
+    // malformed length or padding all return the input
+    // byte-identically. Decoding must never destroy typing —
+    // never a guess, never a replacement char. See [base64Decode].
+    BASE64_DECODE(-676);
 
     companion object {
         /** Inclusive range covering every tool code, for fast dispatch. */
-        val CODE_RANGE = -675..-601
+        val CODE_RANGE = -676..-601
 
         fun fromCode(code: Int): DrsTextTool? = entries.firstOrNull { it.code == code }
     }
@@ -778,6 +800,17 @@ object DrsTextTools {
                 } catch (_: Throwable) {
                     text
                 }
+                // base64-encodes the text as UTF-8 — the standard
+                // padded alphabet, one line; payloads travel as plain
+                // ASCII through any field (the URL pair's data sibling).
+                DrsTextTool.BASE64_ENCODE -> base64Encode(text)
+                // decodes a Base64 token back to UTF-8: whitespace
+                // rejoins the wrapped token, the URL-safe alphabet maps
+                // onto the standard one, the STRICT padded shape is
+                // required and the bytes must be valid UTF-8 — anything
+                // else returns the input untouched so typing is never
+                // destroyed (see [base64Decode]).
+                DrsTextTool.BASE64_DECODE -> base64Decode(text)
                 // one space between digits and letters in BOTH
                 // directions (12abc -> 12 abc، ٣س -> ٣ س) — the mixed-script
                 // cleanup pasted prices and codes need. The lookarounds never
@@ -1413,6 +1446,61 @@ object DrsTextTools {
             if (link.isNotEmpty()) found += link
         }
         return if (found.isEmpty()) text else found.joinToString("\n")
+    }
+
+    // -----------------------------------------------------------
+    // BASE64_ENCODE / BASE64_DECODE — the payload pair
+    // -----------------------------------------------------------
+
+    /** Whitespace that rejoining a wrapped token strips first:
+     *  spaces, tabs, the CR/LF family and the NBSP family — never
+     *  the token's own alphabet. */
+    private val BASE64_WRAP_WS = Regex("[ \\t\\r\\n\\u00A0\\u2007\\u202F]+")
+
+    /**
+     * The STRICT RFC 4648 shape: four-char groups, then optionally a
+     * final group of two chars + '==' or three chars + '='. Anything
+     * shorter, longer, unpadded or double-padded is NOT the shape.
+     */
+    private val BASE64_SHAPE =
+        Regex("^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$")
+
+    /**
+     * The encoder: UTF-8 bytes over the standard (not URL-safe)
+     * alphabet with its padding, one line — total and deterministic.
+     */
+    private fun base64Encode(text: String): String =
+        java.util.Base64.getEncoder().encodeToString(text.toByteArray(Charsets.UTF_8))
+
+    /**
+     * The decoder: wrapped tokens rejoin (spaces/tabs/newlines/the
+     * NBSP family strip first — the token's own alphabet never
+     * does), the URL-safe alphabet (- _) maps onto the standard one,
+     * and the STRICT padded shape gates the decode; the decoded
+     * bytes must themselves decode as valid UTF-8 (REPORT, never
+     * the replacement char) — anything else returns the input
+     * byte-identically. A whitespace-only field is untouched
+     * (nothing to decode). Decode must never destroy typing.
+     */
+    private fun base64Decode(text: String): String {
+        val compact = BASE64_WRAP_WS.replace(text, "")
+        if (compact.isEmpty()) return text
+        val normalized = compact.replace('-', '+').replace('_', '/')
+        if (!BASE64_SHAPE.matches(normalized)) return text
+        val bytes = try {
+            java.util.Base64.getDecoder().decode(normalized)
+        } catch (_: Throwable) {
+            return text
+        }
+        return try {
+            Charsets.UTF_8.newDecoder()
+                .onMalformedInput(CodingErrorAction.REPORT)
+                .onUnmappableCharacter(CodingErrorAction.REPORT)
+                .decode(ByteBuffer.wrap(bytes))
+                .toString()
+        } catch (_: Throwable) {
+            text
+        }
     }
 
     // -----------------------------------------------------------

@@ -206,6 +206,14 @@ object DrsTileContextAdvisor {
         //      مهدّئ الكتابة — شكلان مغلقان لا انطباع.
         if (LINK_SHAPE.containsMatchIn(t)) picks += DrsTextTool.EXTRACT_LINKS
         if (STRETCH_SHAPE.containsMatchIn(t)) picks += DrsTextTool.REMOVE_LETTER_STRETCH
+        // 1.7) كتلة Base64 سليمة تفكّ ترميزها فعلًا — السبب محكوم
+        //      بعقد الإطلاق نفسه الذي يحكم IMPROVE_PHRASES: المرشَّح
+        //      هو ما سيُطلق حتمًا (المفكّ الصارم رفض الكلمة العادية
+        //      والبايتات الثنائية والطول التالف فعلًا)، وما لا يُفك
+        //      لا يُرشَّح — توصية بنتيجة مضمونة، لا إشارة عامة.
+        if (DrsTextTools.apply(DrsTextTool.BASE64_DECODE, t) != t) {
+            picks += DrsTextTool.BASE64_DECODE
+        }
         // 2) العلامات الصفرية والتطويل نفاية لصق لا تصلح فقرة — انزعها.
         if (hasZeroWidth) picks += DrsTextTool.REMOVE_ZERO_WIDTH
         if (hasTatweel) picks += DrsTextTool.REMOVE_TATWEEL

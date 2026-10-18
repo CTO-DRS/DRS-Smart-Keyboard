@@ -295,7 +295,7 @@ class DrsV1210Tests : FunSpec({
         // (public): the clock-time tool extends it last;
         // (public): the fraction, weekday and ordinal tools
         // extend it last.
-        DrsTextTool.CODE_RANGE.first shouldBe -675
+        DrsTextTool.CODE_RANGE.first shouldBe -676
     }
 
     // -------------------------------------------------------------

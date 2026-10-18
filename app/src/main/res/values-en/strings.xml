@@ -2397,6 +2397,10 @@
     <string name="drs__text_tools__desc_url_encode">Percent-encodes the text as a UTF-8 URL component (space becomes %20) so Arabic links are shareable everywhere</string>
     <string name="drs__text_tools__tool_url_decode">URL decode</string>
     <string name="drs__text_tools__desc_url_decode">Decodes percent-encoded text back to readable UTF-8 — malformed sequences return untouched so typing is never destroyed</string>
+    <string name="drs__text_tools__tool_base64_encode">Base64 encode</string>
+    <string name="drs__text_tools__desc_base64_encode">Encodes the text as UTF-8 Base64 (the standard padded alphabet, one line) so payloads travel as plain ASCII through any field — the Base64 decode tool restores it byte-exact</string>
+    <string name="drs__text_tools__tool_base64_decode">Base64 decode</string>
+    <string name="drs__text_tools__desc_base64_decode">Decodes Base64 back to readable UTF-8: wrapped lines rejoin, the URL-safe alphabet (- and _) is accepted, only the strict padded shape decodes — anything else (an honest word, binary bytes) returns untouched so typing is never destroyed</string>
     <string name="pref__glide__trail_width__label">Glide trail width</string>
     <string name="drs__unified__basics_trail_summary">Adjusts the thickness of the ribbon drawn while glide typing and during its fade-out</string>
     <string name="pref__emoji__size__label">Emoji size</string>

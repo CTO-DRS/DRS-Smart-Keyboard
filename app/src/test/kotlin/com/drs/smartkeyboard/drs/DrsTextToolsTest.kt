@@ -386,6 +386,17 @@ class DrsTextToolsTest : FunSpec({
             // byte-identical passthrough.
             DrsTextTool.REMOVE_LETTER_STRETCH -> result shouldBe input
 
+            // the encoder is TOTAL — the hostile text speaks its
+            // exact UTF-8 Base64 — so the pinned invariant is the
+            // mirror itself: the decoder restores the exact bytes.
+            DrsTextTool.BASE64_ENCODE ->
+                DrsTextTools.apply(DrsTextTool.BASE64_DECODE, result, en) shouldBe input
+
+            // the hostile field carries $ { } ٍَّ and the emoji —
+            // not the strict Base64 alphabet — so the decoder
+            // refuses it byte-identically, never a replacement char.
+            DrsTextTool.BASE64_DECODE -> result shouldBe input
+
             // the census is an INFO tool — apply() is the read-only
             // discipline itself: the text returns byte-identical and
             // callers read [DrsTextTools.inspectText] instead.

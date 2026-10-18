@@ -52,6 +52,7 @@ import androidx.compose.material.icons.filled.Compress
 import androidx.compose.material.icons.filled.ContentCopy
 import androidx.compose.material.icons.filled.ContentCut
 import androidx.compose.material.icons.filled.ContentPaste
+import androidx.compose.material.icons.filled.DataObject
 import androidx.compose.material.icons.filled.DeleteSweep
 import androidx.compose.material.icons.filled.Event
 import androidx.compose.material.icons.filled.PieChart
@@ -73,6 +74,7 @@ import androidx.compose.material.icons.filled.LastPage
 import androidx.compose.material.icons.filled.Link
 import androidx.compose.material.icons.filled.LinkOff
 import androidx.compose.material.icons.filled.MergeType
+import androidx.compose.material.icons.filled.Output
 import androidx.compose.material.icons.filled.Paid
 import androidx.compose.material.icons.filled.QueryStats
 import androidx.compose.material.icons.filled.SentimentNeutral
@@ -713,6 +715,22 @@ private val PANEL_SECTIONS: List<DrsTextToolsPanelSection> = listOf(
                 R.string.drs__text_tools__desc_url_decode,
                 Icons.Default.LinkOff,
             ),
+            // the Base64 encode/decode pair — payloads travel as
+            // plain ASCII through any field and come back byte-exact;
+            // the strict decoder refuses what it does not understand,
+            // so honest typing is never destroyed.
+            toolItem(
+                DrsTextTool.BASE64_ENCODE,
+                R.string.drs__text_tools__tool_base64_encode,
+                R.string.drs__text_tools__desc_base64_encode,
+                Icons.Default.DataObject,
+            ),
+            toolItem(
+                DrsTextTool.BASE64_DECODE,
+                R.string.drs__text_tools__tool_base64_decode,
+                R.string.drs__text_tools__desc_base64_decode,
+                Icons.Default.Output,
+            ),
         ),
     ),
     DrsTextToolsPanelSection(
@@ -865,6 +883,9 @@ fun textToolTitleRes(tool: DrsTextTool): Int = when (tool) {
     DrsTextTool.STRIP_EMOJI -> R.string.drs__text_tools__tool_strip_emoji
     DrsTextTool.URL_ENCODE -> R.string.drs__text_tools__tool_url_encode
     DrsTextTool.URL_DECODE -> R.string.drs__text_tools__tool_url_decode
+    // the Base64 payload pair.
+    DrsTextTool.BASE64_ENCODE -> R.string.drs__text_tools__tool_base64_encode
+    DrsTextTool.BASE64_DECODE -> R.string.drs__text_tools__tool_base64_decode
     // the mixed-script cleanup pair.
     DrsTextTool.SEPARATE_DIGIT_LETTERS -> R.string.drs__text_tools__tool_separate_digit_letters
     DrsTextTool.REMOVE_PUNCTUATION -> R.string.drs__text_tools__tool_remove_punctuation
@@ -960,6 +981,9 @@ fun textToolDescRes(tool: DrsTextTool): Int = when (tool) {
     DrsTextTool.STRIP_EMOJI -> R.string.drs__text_tools__desc_strip_emoji
     DrsTextTool.URL_ENCODE -> R.string.drs__text_tools__desc_url_encode
     DrsTextTool.URL_DECODE -> R.string.drs__text_tools__desc_url_decode
+    // the Base64 payload pair.
+    DrsTextTool.BASE64_ENCODE -> R.string.drs__text_tools__desc_base64_encode
+    DrsTextTool.BASE64_DECODE -> R.string.drs__text_tools__desc_base64_decode
     // the mixed-script cleanup pair.
     DrsTextTool.SEPARATE_DIGIT_LETTERS -> R.string.drs__text_tools__desc_separate_digit_letters
     DrsTextTool.REMOVE_PUNCTUATION -> R.string.drs__text_tools__desc_remove_punctuation
