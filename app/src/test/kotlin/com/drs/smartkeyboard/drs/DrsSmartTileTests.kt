@@ -256,9 +256,9 @@ class DrsV2200Tests : FunSpec({
     // ------------------------------------------------------------
     // 6) الأختام بعد إضافات الدفعة C
     // ------------------------------------------------------------
-    test("seals — the catalogue is 80 tools over -680") {
-        DrsTextTool.entries.size shouldBe 80
-        DrsTextTool.CODE_RANGE.first shouldBe -680
+    test("seals — the catalogue is 82 tools over -682") {
+        DrsTextTool.entries.size shouldBe 82
+        DrsTextTool.CODE_RANGE.first shouldBe -682
         DrsTextTool.CODE_RANGE.last shouldBe -601
         // round-trip من الكود إلى الأداة ومعهRegistration للجدد.
         DrsTextTool.fromCode(-670) shouldBe DrsTextTool.SORT_LINES_NATURAL
@@ -271,6 +271,8 @@ class DrsV2200Tests : FunSpec({
         DrsTextTool.fromCode(-678) shouldBe DrsTextTool.MORSE_DECODE
         DrsTextTool.fromCode(-679) shouldBe DrsTextTool.CALCULATE
         DrsTextTool.fromCode(-680) shouldBe DrsTextTool.CONVERT_UNITS
+        DrsTextTool.fromCode(-681) shouldBe DrsTextTool.HEX_ENCODE
+        DrsTextTool.fromCode(-682) shouldBe DrsTextTool.HEX_DECODE
     }
 
     // ------------------------------------------------------------
@@ -292,6 +294,28 @@ class DrsV2200Tests : FunSpec({
         (DrsTextTool.CONVERT_UNITS in adv("5 كم إلى م")).shouldBe(true)
         (DrsTextTool.CONVERT_UNITS in adv("عمره 25 سنة")).shouldBe(false)
         (DrsTextTool.CONVERT_UNITS in adv("5 فرسخ")).shouldBe(false)
+    }
+
+    // ------------------------------------------------------------
+    // 6.6) الزوج السداسي — عقد الإطلاق المضمون في الذكاء السياقي
+    // ------------------------------------------------------------
+    test("smart advice — the hex decoder fires on guaranteed launch") {
+        fun adv(t: String) = DrsTileContextAdvisor.advise(t)
+        // كتلة سداسية سليمة تُرشّح الفك فقط عندما يُطلق المفكّ فعلًا،
+        // خلف حرسَي مورس المغلقين (الطول 256 + الفئة الملتبسة الوحيدة:
+        // الرقم المجرد الصامت رقمٌ أولًا وسرد بايتات ثانيًا).
+        (DrsTextTool.HEX_DECODE in adv("48 65 6c 6c 6f")).shouldBe(true)
+        (DrsTextTool.HEX_DECODE in adv("48656c6c6f")).shouldBe(true)
+        (DrsTextTool.HEX_DECODE in adv("0x48 0x69")).shouldBe(true)
+        (DrsTextTool.HEX_DECODE in adv("0x4869")).shouldBe(true)
+        // النثر والفئة الملتبسة والمرفوضات كلها تصمت.
+        (DrsTextTool.HEX_DECODE in adv("hello world")).shouldBe(false)
+        (DrsTextTool.HEX_DECODE in adv("beef")).shouldBe(false)
+        (DrsTextTool.HEX_DECODE in adv("مرحبا")).shouldBe(false)
+        (DrsTextTool.HEX_DECODE in adv("1250")).shouldBe(false)
+        (DrsTextTool.HEX_DECODE in adv("4869")).shouldBe(false)
+        (DrsTextTool.HEX_DECODE in adv("12")).shouldBe(false)
+        (DrsTextTool.HEX_DECODE in adv("٤٨")).shouldBe(false)
     }
 
     // ------------------------------------------------------------

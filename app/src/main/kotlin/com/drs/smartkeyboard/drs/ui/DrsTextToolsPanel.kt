@@ -74,6 +74,7 @@ import androidx.compose.material.icons.filled.LastPage
 import androidx.compose.material.icons.filled.Link
 import androidx.compose.material.icons.filled.LinkOff
 import androidx.compose.material.icons.filled.MergeType
+import androidx.compose.material.icons.filled.Memory
 import androidx.compose.material.icons.filled.Output
 import androidx.compose.material.icons.filled.Paid
 import androidx.compose.material.icons.filled.QueryStats
@@ -90,6 +91,7 @@ import androidx.compose.material.icons.filled.SpaceBar
 import androidx.compose.material.icons.filled.SubdirectoryArrowRight
 import androidx.compose.material.icons.filled.SwapHoriz
 import androidx.compose.material.icons.filled.SwapVert
+import androidx.compose.material.icons.filled.Tag
 import androidx.compose.material.icons.filled.TextFields
 import androidx.compose.material.icons.filled.TextIncrease
 import androidx.compose.material.icons.filled.Translate
@@ -770,6 +772,23 @@ private val PANEL_SECTIONS: List<DrsTextToolsPanelSection> = listOf(
                 R.string.drs__text_tools__desc_morse_decode,
                 Icons.Default.Hearing,
             ),
+            // the hex byte-dump pair — the fourth machine alphabet:
+            // UTF-8 bytes speak the classic two-digit listing out,
+            // and the strict decoder reads the solid or spaced dump
+            // back — refusing what it does not understand, so honest
+            // typing is never destroyed.
+            toolItem(
+                DrsTextTool.HEX_ENCODE,
+                R.string.drs__text_tools__tool_hex_encode,
+                R.string.drs__text_tools__desc_hex_encode,
+                Icons.Default.Memory,
+            ),
+            toolItem(
+                DrsTextTool.HEX_DECODE,
+                R.string.drs__text_tools__tool_hex_decode,
+                R.string.drs__text_tools__desc_hex_decode,
+                Icons.Default.Tag,
+            ),
         ),
     ),
     DrsTextToolsPanelSection(
@@ -928,6 +947,9 @@ fun textToolTitleRes(tool: DrsTextTool): Int = when (tool) {
     // the Morse telegraph pair.
     DrsTextTool.MORSE_ENCODE -> R.string.drs__text_tools__tool_morse_encode
     DrsTextTool.MORSE_DECODE -> R.string.drs__text_tools__tool_morse_decode
+    // the hex byte-dump pair.
+    DrsTextTool.HEX_ENCODE -> R.string.drs__text_tools__tool_hex_encode
+    DrsTextTool.HEX_DECODE -> R.string.drs__text_tools__tool_hex_decode
     // the compute pair — the calculator and the quantity converter.
     DrsTextTool.CALCULATE -> R.string.drs__text_tools__tool_calculate
     DrsTextTool.CONVERT_UNITS -> R.string.drs__text_tools__tool_convert_units
@@ -1032,6 +1054,9 @@ fun textToolDescRes(tool: DrsTextTool): Int = when (tool) {
     // the Morse telegraph pair.
     DrsTextTool.MORSE_ENCODE -> R.string.drs__text_tools__desc_morse_encode
     DrsTextTool.MORSE_DECODE -> R.string.drs__text_tools__desc_morse_decode
+    // the hex byte-dump pair.
+    DrsTextTool.HEX_ENCODE -> R.string.drs__text_tools__desc_hex_encode
+    DrsTextTool.HEX_DECODE -> R.string.drs__text_tools__desc_hex_decode
     // the compute pair — the calculator and the quantity converter.
     DrsTextTool.CALCULATE -> R.string.drs__text_tools__desc_calculate
     DrsTextTool.CONVERT_UNITS -> R.string.drs__text_tools__desc_convert_units

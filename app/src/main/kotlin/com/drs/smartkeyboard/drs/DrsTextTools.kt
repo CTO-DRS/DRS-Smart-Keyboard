@@ -524,11 +524,35 @@ enum class DrsTextTool(
     // prose, a bare number, an unknown unit, a cross-category target —
     // returns byte-identical, never an invented conversion. See
     // [convertUnits].
-    CONVERT_UNITS(-680);
+    CONVERT_UNITS(-680),
+
+    // the hex encoder — the fourth machine alphabet (after the URL
+    // pair, Base64 and Morse): the text's UTF-8 bytes speak the
+    // classic byte dump — lowercase two-digit pairs joined with one
+    // space, one line. Total and deterministic: every non-empty text
+    // encodes, and the HEX_DECODE mirror restores the exact bytes
+    // (see [hexEncode]).
+    HEX_ENCODE(-681),
+
+    // the hex decoder — the honest mirror of [HEX_ENCODE]:
+    // whitespace (the NBSP family included) folds away, then exactly
+    // one of TWO closed shapes decodes: the SOLID dump (one token,
+    // optional 0x/0X prefix, an even-length run of hex digits) or the
+    // TOKEN list (every token EXACTLY two hex digits, each optionally
+    // 0x-prefixed), in any letter case. The decoded bytes must
+    // themselves decode as valid UTF-8 (REPORT, never a replacement
+    // char) — an odd length, a non-hex character, mixed token lengths,
+    // a colon/percent separator, an eastern-digit dump or binary bytes
+    // all return the input byte-identically. A bare digit run is a
+    // NUMBER first and a hex dump second — the advisor stays silent on
+    // it (the one closed ambiguity class), while the tool itself
+    // remains total over its shape. Decoding must never destroy
+    // typing — never a guess. See [hexDecode].
+    HEX_DECODE(-682);
 
     companion object {
         /** Inclusive range covering every tool code, for fast dispatch. */
-        val CODE_RANGE = -680..-601
+        val CODE_RANGE = -682..-601
 
         fun fromCode(code: Int): DrsTextTool? = entries.firstOrNull { it.code == code }
     }
@@ -891,6 +915,10 @@ object DrsTextTools {
                 // the quantity converter — the whole field IS the
                 // quantity (see [convertUnits]).
                 DrsTextTool.CONVERT_UNITS -> convertUnits(text)
+                // the byte-dump pair — the fourth machine alphabet
+                // (see [hexEncode] / [hexDecode]).
+                DrsTextTool.HEX_ENCODE -> hexEncode(text)
+                DrsTextTool.HEX_DECODE -> hexDecode(text)
                 // one space between digits and letters in BOTH
                 // directions (12abc -> 12 abc، ٣س -> ٣ س) — the mixed-script
                 // cleanup pasted prices and codes need. The lookarounds never
@@ -2391,5 +2419,108 @@ object DrsTextTools {
             lines += "$out $tok"
         }
         return lines.joinToString("\n")
+    }
+
+    // -----------------------------------------------------------
+    // HEX_ENCODE / HEX_DECODE — the byte-dump pair
+    // -----------------------------------------------------------
+
+    /** The canonical lowercase hex alphabet of the encode side. */
+    private const val HEX_ALPHABET = "0123456789abcdef"
+
+    /** Whitespace that folds away in the decode shape: spaces, tabs,
+     *  the CR/LF family and the NBSP family. */
+    private val HEX_WS = Regex("[ \\t\\r\\n\\u00A0\\u2007\\u202F]+")
+
+    /** The hex value of one digit — negative when [ch] is outside the
+     *  alphabet (both cases). Eastern digits are OUT by design: the
+     *  byte dump is a machine notation, the catalog stays closed. */
+    private fun hexValue(ch: Char): Int = when (ch) {
+        in '0'..'9' -> ch.code - '0'.code
+        in 'a'..'f' -> ch.code - 'a'.code + 10
+        in 'A'..'F' -> ch.code - 'A'.code + 10
+        else -> -1
+    }
+
+    /**
+     * The encoder: the text's UTF-8 bytes speak the classic byte dump —
+     * lowercase two-digit pairs joined with ONE space, one line (the
+     * xx.d-style listing the HEX_DECODE mirror reads back byte-exact).
+     * Total and deterministic: every non-empty text encodes; the
+     * per-byte mask keeps Java's signed byte off the output.
+     */
+    private fun hexEncode(text: String): String {
+        val bytes = text.toByteArray(Charsets.UTF_8)
+        val sb = StringBuilder(bytes.size * 3)
+        for ((i, b) in bytes.withIndex()) {
+            if (i > 0) sb.append(' ')
+            val v = b.toInt() and 0xFF
+            sb.append(HEX_ALPHABET[v ushr 4]).append(HEX_ALPHABET[v and 0x0F])
+        }
+        return sb.toString()
+    }
+
+    /**
+     * The decoder: whitespace (the NBSP family included) folds to one
+     * plain space and edges trim, then exactly one of TWO closed shapes
+     * speaks: the SOLID dump (one token — an optional 0x/0X prefix over
+     * an even-length run of hex digits) or the TOKEN list (every token
+     * EXACTLY two hex digits, each optionally 0x-prefixed). The bytes
+     * must decode as valid UTF-8 (REPORT, never a replacement char) —
+     * an odd length, a non-hex character, mixed token lengths, a
+     * colon/percent separator, an eastern-digit dump or binary bytes all
+     * return the input byte-identically. Decode must never destroy
+     * typing — never a guess.
+     */
+    private fun hexDecode(text: String): String {
+        val s = HEX_WS.replace(text, " ").trim(' ')
+        if (s.isEmpty()) return text
+        val tokens = s.split(' ')
+        val digits = StringBuilder()
+        if (tokens.size == 1) {
+            // Shape A — the SOLID dump.
+            val body = hexStripPrefix(tokens[0]) ?: return text
+            if (body.isEmpty() || body.length % 2 != 0) return text
+            for (c in body) {
+                if (hexValue(c) < 0) return text
+                digits.append(c)
+            }
+        } else {
+            // Shape B — the TOKEN list: every token exactly two digits.
+            for (token in tokens) {
+                val body = hexStripPrefix(token) ?: return text
+                if (body.length != 2) return text
+                for (c in body) {
+                    if (hexValue(c) < 0) return text
+                    digits.append(c)
+                }
+            }
+        }
+        val bytes = ByteArray(digits.length / 2)
+        for (i in bytes.indices) {
+            bytes[i] = (((hexValue(digits[i * 2]) shl 4) or hexValue(digits[i * 2 + 1]))).toByte()
+        }
+        return try {
+            Charsets.UTF_8.newDecoder()
+                .onMalformedInput(CodingErrorAction.REPORT)
+                .onUnmappableCharacter(CodingErrorAction.REPORT)
+                .decode(ByteBuffer.wrap(bytes))
+                .toString()
+        } catch (_: Throwable) {
+            text
+        }
+    }
+
+    /** The token body after its optional 0x/0X prefix — null when the
+     *  token carries no digits at all behind the prefix («0x» alone). */
+    private fun hexStripPrefix(token: String): String? {
+        val body = if (token.length > 2 &&
+            (token.startsWith("0x") || token.startsWith("0X"))
+        ) {
+            token.substring(2)
+        } else {
+            token
+        }
+        return if (body.isEmpty()) null else body
     }
 }

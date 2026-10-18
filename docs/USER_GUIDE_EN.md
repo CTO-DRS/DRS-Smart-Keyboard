@@ -140,6 +140,21 @@ returns 3000 جم). Anything that is not one whole quantity («عمره 25
 quantity, the smart tiles suggest the right tool — a guaranteed-result
 recommendation.
 
+**Hex encode & decode:** want to see your text the way the machine
+sees it, or pass exact bytes through a strict channel? Hex encode
+speaks the text's UTF-8 bytes as the classic readable dump: lowercase
+two-digit pairs with one space between bytes — «م» becomes «d9 85»,
+and emoji and control characters all travel. When a hex dump arrives
+in any known shape — spaced pairs (`48 65 6c`), a solid run
+(`48656c`) or 0x-prefixed tokens, in any letter case — Hex decode
+speaks it back as text, and the bytes must be valid UTF-8: an odd
+length, a foreign character, a colon separator, Eastern digits or
+binary bytes all return untouched byte-for-byte — the decoder never
+guesses and never destroys your typing. When the cursor stands before
+a clean dump, the smart tiles suggest Hex decode — only when the
+recommendation is guaranteed to fire; a bare number («1250») stays a
+number and is never suggested.
+
 **Deterministic text vocalization:** in the text tools panel,
 «Vocalize text» adds canonical harakat to every word the local 3000-word
 lexicon knows — unknown words stay untouched, never guessed. Works on the

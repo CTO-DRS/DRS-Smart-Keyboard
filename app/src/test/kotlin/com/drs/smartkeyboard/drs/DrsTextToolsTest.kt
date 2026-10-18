@@ -418,6 +418,18 @@ class DrsTextToolsTest : FunSpec({
             // conversion.
             DrsTextTool.CONVERT_UNITS -> result shouldBe input
 
+            // the encoder is TOTAL — the hostile text speaks its
+            // exact UTF-8 hex dump — so the pinned invariant is the
+            // mirror itself: the decoder restores the exact bytes.
+            DrsTextTool.HEX_ENCODE ->
+                DrsTextTools.apply(DrsTextTool.HEX_DECODE, result, en) shouldBe input
+
+            // the hostile tokens carry emoji, $, { }, ٍَّ and %s —
+            // no token is two hex digits and no solid even run exists —
+            // the decoder refuses it byte-identically, never a
+            // replacement char.
+            DrsTextTool.HEX_DECODE -> result shouldBe input
+
             // the census is an INFO tool — apply() is the read-only
             // discipline itself: the text returns byte-identical and
             // callers read [DrsTextTools.inspectText] instead.

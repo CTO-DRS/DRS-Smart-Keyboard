@@ -244,6 +244,17 @@ object DrsTileContextAdvisor {
         if (t.length <= 64 && DrsTextTools.apply(DrsTextTool.CONVERT_UNITS, t) != t) {
             picks += DrsTextTool.CONVERT_UNITS
         }
+        // 1.11) كتلة Hex سليمة تفكّ فعلًا — عقد الإطلاق نفسه مع حرسين
+        //       مغلقين (نمط مورس): حرس المسار الساخن (طول 256) وحرس
+        //       الفئة الملتبسة المغلقة الوحيدة — الرقم المجرد الصامت
+        //       («1250»، «4869») رقمٌ أولًا وسرد بايتات ثانيًا، فيصمت
+        //       المستشار عنه والأداة نفسها تبقى شاملة على شكلها: ما لا
+        //       يُفك لا يُرشَّح، وتوصية بنتيجة مضمونة لا إشارة عامة.
+        val isBareDigitRun = t.matches(Regex("\\d+"))
+        if (t.length <= 256 && !isBareDigitRun &&
+            DrsTextTools.apply(DrsTextTool.HEX_DECODE, t) != t) {
+            picks += DrsTextTool.HEX_DECODE
+        }
         // 2) العلامات الصفرية والتطويل نفاية لصق لا تصلح فقرة — انزعها.
         if (hasZeroWidth) picks += DrsTextTool.REMOVE_ZERO_WIDTH
         if (hasTatweel) picks += DrsTextTool.REMOVE_TATWEEL
