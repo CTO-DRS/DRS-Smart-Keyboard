@@ -81,6 +81,20 @@ text's deterministic profile: letters by script (Arabic/Latin), digits,
 words, sentences, lines, hidden marks and emoji, so you know what the
 text carries before picking the cleanup tool worth firing.
 
+**Extract links:** a WhatsApp message or email full of scattered URLs?
+The «Extract links» tool in the text tools panel lands every link and
+email on its own line, in order — http/https/ftp URLs, www. addresses
+not buried inside a larger word, and strict ASCII email — stripping
+trailing sentence punctuation and a lone closing bracket, while a
+balanced wiki-style bracket stays inside its link; a text carrying no
+links returns byte-identical.
+
+**Remove letter stretch:** fast typing arrives as «هلااااا» and
+«جمييييل»? The «Remove letter stretch» tool calms it: any run of three
+or more identical Arabic letters collapses to one — «هلا», «جميل» —
+while legitimate doubles stay (الله، عدّ) and Latin letters and digits
+never touch (www survives); nothing stretched returns byte-identical.
+
 **Deterministic text vocalization:** in the text tools panel,
 «Vocalize text» adds canonical harakat to every word the local 3000-word
 lexicon knows — unknown words stay untouched, never guessed. Works on the

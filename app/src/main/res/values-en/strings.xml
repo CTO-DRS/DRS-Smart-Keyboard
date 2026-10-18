@@ -1905,6 +1905,10 @@
     <string name="drs__text_tools__tool_text_inspect">Text inspector</string>
     <string name="drs__text_tools__desc_text_inspect">Read-only, never edits: one deterministic full profile of the text — letters by script (Arabic/Latin), digits, words, sentences, lines, invisible marks (directional and zero-width joiners) and emoji — in one message telling you what the text carries before you pick the cleanup tool worth firing</string>
     <string name="drs__text_tools__inspect_result">Chars: {chars} (Arabic {arabic} • Latin {latin}) • Words: {words} • Sentences: {sentences} • Lines: {lines} • Digits: {digits} • Hidden marks: {invisible} • Emoji: {emoji}</string>
+    <string name="drs__text_tools__tool_extract_links">Extract links</string>
+    <string name="drs__text_tools__desc_extract_links">Harvests every link and email scattered through your text, one per line in order of appearance: http/https/ftp URLs, www. addresses not buried inside a larger word or domain, and strict ASCII email (user@domain.tld) — trailing sentence punctuation and a lone closing bracket are stripped, while a balanced wiki-style bracket stays inside its link; a text carrying no links returns byte-identical</string>
+    <string name="drs__text_tools__tool_remove_letter_stretch">Remove letter stretch</string>
+    <string name="drs__text_tools__desc_remove_letter_stretch">Calms stretched typing: «هلااااا» becomes «هلا» — any run of three or more identical Arabic letters collapses to one letter, legitimate doubles stay (الله، عدّ), Latin letters, digits and punctuation never touch (www survives), a diacritic after a stretched run follows the collapsed letter, and nothing stretched returns byte-identical</string>
     <string name="quick_action__ime_ui_mode_text_tools">Text tools</string>
     <string name="quick_action__ime_ui_mode_text_tools__tooltip">Open the advanced text tools panel</string>
     <string name="drs__shortcuts__duplicate_error">This abbreviation is already in use - pick a different one</string>

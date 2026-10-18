@@ -374,6 +374,18 @@ class DrsTextToolsTest : FunSpec({
             // the HTML-paste cleaner is a byte-identical passthrough.
             DrsTextTool.HTML_TO_TEXT -> result shouldBe input
 
+            // the hostile input carries NO link shape (no scheme
+            // URL, no www. address, no strict email) — the harvester
+            // finds nothing and returns the text byte-identically,
+            // never an empty or invented row.
+            DrsTextTool.EXTRACT_LINKS -> result shouldBe input
+
+            // the hostile input carries NO run of three-plus
+            // identical Arabic letters (its Arabic run is ٍَّ marks
+            // and single letters) — the stretch cleaner is a
+            // byte-identical passthrough.
+            DrsTextTool.REMOVE_LETTER_STRETCH -> result shouldBe input
+
             // the census is an INFO tool — apply() is the read-only
             // discipline itself: the text returns byte-identical and
             // callers read [DrsTextTools.inspectText] instead.

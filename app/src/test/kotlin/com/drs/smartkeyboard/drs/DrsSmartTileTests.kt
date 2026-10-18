@@ -152,6 +152,28 @@ class DrsV2200Tests : FunSpec({
         plain shouldNotContain DrsTextTool.CLEAN_MARKDOWN
     }
 
+    test("Advisor names the harvester and stretch cleaner for their own shapes") {
+        // رابط بمخطط أو www أو بريد صارم يسمّي حاصد الروابط، وتمدّد
+        // عربي (ثلاث حروف متطابقة فأكثر) يسمّي مهدّئ الكتابة —
+        // شكلا الإطلاق المغلقان لا انطباع.
+        val links = DrsTileContextAdvisor.advise("شوف https://example.com/page وقولي رأيك")
+        links shouldContain DrsTextTool.EXTRACT_LINKS
+        DrsTileContextAdvisor.advise("راسلني على me@example.com") shouldContain
+            DrsTextTool.EXTRACT_LINKS
+        DrsTileContextAdvisor.advise("ادخل www.example.org اليوم") shouldContain
+            DrsTextTool.EXTRACT_LINKS
+        DrsTileContextAdvisor.advise("هلااااا والله") shouldContain
+            DrsTextTool.REMOVE_LETTER_STRETCH
+        // نص صافٍ بلا روابط ولا تمدّد يبقى بلا توصية — لا أسباب افتعالية.
+        val calm = DrsTileContextAdvisor.advise("نص عربي صافٍ والله أكبر")
+        calm shouldNotContain DrsTextTool.EXTRACT_LINKS
+        calm shouldNotContain DrsTextTool.REMOVE_LETTER_STRETCH
+        // https%3A (ترميز بلا مخطط حقيقي) لا يسمّي الحاصد — السبب
+        // محكوم بعقد الإطلاق نفسه لا بشبهه.
+        DrsTileContextAdvisor.advise("https%3A نــَص\u200F  مزدوج") shouldNotContain
+            DrsTextTool.EXTRACT_LINKS
+    }
+
     // ------------------------------------------------------------
     // 4) المفضلة المحدودة — ترتيب تثبيت ورفض صادق
     // ------------------------------------------------------------
@@ -186,7 +208,7 @@ class DrsV2200Tests : FunSpec({
     // 6) الأختام بعد إضافات الدفعة C
     // ------------------------------------------------------------
     test("seals — the catalogue is 67 tools over -673") {
-        DrsTextTool.entries.size shouldBe 72
+        DrsTextTool.entries.size shouldBe 74
         DrsTextTool.CODE_RANGE.first shouldBe -675
         DrsTextTool.CODE_RANGE.last shouldBe -601
         // round-trip من الكود إلى الأداة ومعهRegistration للأربعة الجدد.

@@ -411,7 +411,29 @@ enum class DrsTextTool(
     // invisible marks and emoji) surfaced as a toast, never a transform.
     // The same read-only discipline as COUNT: apply() returns the text
     // byte-identical; callers use [inspectText].
-    TEXT_INSPECT(-648, isInfoOnly = true);
+    TEXT_INSPECT(-648, isInfoOnly = true),
+
+    // the link harvester — a message or a page full of scattered
+    // URLs and emails speaks them plainly: every http/https/ftp
+    // URL, every www. address that is not buried inside a larger
+    // word or domain, and every strict ASCII email lands one per
+    // line, in order of appearance, every one a verbatim substring
+    // (only trailing sentence punctuation and an UNbalanced closing
+    // bracket leave; the balanced wiki-style (…) belongs to the
+    // link). No link, no list — byte-identical, never an invented
+    // row. See [extractLinks].
+    EXTRACT_LINKS(-649),
+
+    // the Arabic stretch cleaner — «هلااااا» speaks like «هلا»:
+    // a run of THREE or more identical Arabic letters collapses to
+    // one letter (three in a row never occurs in standard
+    // orthography), while legitimate doubles stay (الله، عدّ) and
+    // Latin runs never touch (www survives — the tool's zone is
+    // the Arabic letter block only). A diacritic after a stretched
+    // run follows the collapsed letter, and nothing stretched
+    // returns byte-identical — never a rewrite of honest text.
+    // See [unstretchArabicLetters].
+    REMOVE_LETTER_STRETCH(-650);
 
     companion object {
         /** Inclusive range covering every tool code, for fast dispatch. */
@@ -781,6 +803,14 @@ object DrsTextTools {
                 // the HTML-paste cleaner — raw markup off, prose
                 // intact (see [htmlToText]).
                 DrsTextTool.HTML_TO_TEXT -> htmlToText(text)
+                // the link harvester — links out, one per line,
+                // order kept; nothing to harvest, byte-identical (see
+                // [extractLinks]).
+                DrsTextTool.EXTRACT_LINKS -> extractLinks(text)
+                // the stretch cleaner — three-plus identical Arabic
+                // letters collapse to one, legitimate doubles stay
+                // (see [unstretchArabicLetters]).
+                DrsTextTool.REMOVE_LETTER_STRETCH -> unstretchArabicLetters(text)
                 // COUNT and TEXT_INSPECT never transform; callers use
                 // [countInfo] / [inspectText] instead.
                 DrsTextTool.COUNT -> text
@@ -1311,6 +1341,134 @@ object DrsTextTools {
                 }
             }
         }
+    }
+
+    // -----------------------------------------------------------
+    // EXTRACT_LINKS — the link harvester
+    // -----------------------------------------------------------
+
+    /**
+     * The closed link shapes in ONE scan, alternatives tried at each
+     * position left-to-right (first match consumes its span, spans
+     * never overlap):
+     *  - a SCHEME URL: http/https/ftp (the only schemes the closed
+     *    catalog speaks) then a run of non-whitespace, non-angle
+     *    characters — the \b refuses «xhttps://», the charset refuses
+     *    nothing else;
+     *  - a STRICT ASCII email: local [A-Za-z0-9._%+-] at domain
+     *    [A-Za-z0-9.-] with a ≥2-letter TLD (no bare a@b, no IDN, no
+     *    IP domains — refused, never guessed);
+     *  - a www. address whose preceding character is NOT a letter,
+     *    digit, dot, dash or @ — never inside a larger word or domain
+     *    (a@www.x matches as an EMAIL first; mail.www.example.com
+     *    matches nowhere).
+     */
+    private val LINK_SHAPES = Regex(
+        "(?i)\\b(?:(?:https?|ftp)://[^\\s<>]+)" +
+            "|[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}" +
+            "|(?<![A-Za-z0-9._@-])www\\.[^\\s<>]+",
+    )
+
+    // Trailing sentence punctuation a link may arrive wearing —
+    // the closed set (the Arabic ؟ ، ؛ included). Brackets are
+    // deliberately NOT here: a balanced wiki-style (…) belongs to
+    // the URL and only the UNbalanced closing ones leave.
+    private val LINK_TRAILING_PUNCT = charArrayOf(
+        '.', ',', ';', ':', '!', '?', '؟', '،', '؛', '"', '\'', '»', '«', '…',
+    )
+
+    /** One link match trimmed to its honest span: trailing sentence
+     *  punctuation leaves (the closed set), then closing brackets
+     *  leave ONLY while the link's bracket depth is net-negative
+     *  (the balanced wiki-style (…) survives), then one final
+     *  punctuation pass for the dot a bracket was hiding. */
+    private fun trimLinkEdge(link: String): String {
+        var out = link.trimEnd(*LINK_TRAILING_PUNCT)
+        while (out.isNotEmpty()) {
+            val last = out.last()
+            val leaves = when (last) {
+                ')' -> out.count { it == '(' } < out.count { it == ')' }
+                ']' -> out.count { it == '[' } < out.count { it == ']' }
+                '}' -> out.count { it == '{' } < out.count { it == '}' }
+                else -> false
+            }
+            if (!leaves) break
+            out = out.dropLast(1)
+        }
+        return out.trimEnd(*LINK_TRAILING_PUNCT)
+    }
+
+    /**
+     * The link harvester: every scheme URL, www. address and strict
+     * ASCII email in the text lands one per line, in order of
+     * appearance, each a verbatim substring (case and bytes kept) —
+     * duplicates are the text's own business, never silently deduped.
+     * A text with no link shape returns byte-identical, never an
+     * empty or invented row.
+     */
+    private fun extractLinks(text: String): String {
+        val found = ArrayList<String>()
+        for (match in LINK_SHAPES.findAll(text)) {
+            val link = trimLinkEdge(match.value)
+            if (link.isNotEmpty()) found += link
+        }
+        return if (found.isEmpty()) text else found.joinToString("\n")
+    }
+
+    // -----------------------------------------------------------
+    // REMOVE_LETTER_STRETCH — the Arabic stretch cleaner
+    // -----------------------------------------------------------
+
+    /**
+     * The tool's closed zone: a letter of the Arabic block
+     * (U+0600..U+06FF) — [Character.isLetter] already refuses the
+     * digits, the harakat and the punctuation there, and the three
+     * modifier-letter stragglers are refused explicitly (the
+     * tatweel U+0640, the superscript alef U+0670, the Koranic
+     * small letters U+06E5..U+06E6). Latin letters are OUT of the
+     * zone on purpose: «www» is three letters in a row and stays.
+     */
+    private fun isArabicBlockLetter(ch: Char): Boolean {
+        if (ch.code !in 0x0600..0x06FF) return false
+        if (!Character.isLetter(ch)) return false
+        if (ch.code == 0x0640 || ch.code == 0x0670) return false
+        if (ch.code in 0x06D6..0x06ED) return false
+        return true
+    }
+
+    /**
+     * The stretch cleaner: a run of THREE or more identical Arabic
+     * letters collapses to ONE (three in a row never occurs in
+     * standard orthography); a run of two is legitimate doubling —
+     * الله، عدّ — and stays verbatim. A diacritic after a stretched
+     * run follows the collapsed letter (the run breaks at any
+     * non-letter). Latin, digits, punctuation and every non-Arabic
+     * character are out of the zone, and a text with no stretched
+     * run returns byte-identical.
+     */
+    private fun unstretchArabicLetters(text: String): String {
+        if (text.length < 3) return text
+        val out = StringBuilder(text.length)
+        var i = 0
+        while (i < text.length) {
+            val ch = text[i]
+            if (isArabicBlockLetter(ch)) {
+                var runEnd = i + 1
+                while (runEnd < text.length && text[runEnd] == ch) runEnd++
+                val runLen = runEnd - i
+                if (runLen >= 3) {
+                    out.append(ch)
+                } else {
+                    repeat(runLen) { out.append(ch) }
+                }
+                i = runEnd
+            } else {
+                out.append(ch)
+                i++
+            }
+        }
+        val result = out.toString()
+        return if (result == text) text else result
     }
 
     // -----------------------------------------------------------

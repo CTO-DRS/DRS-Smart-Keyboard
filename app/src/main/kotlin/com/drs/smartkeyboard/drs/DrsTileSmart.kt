@@ -157,6 +157,18 @@ object DrsTileContextAdvisor {
     private val MARKDOWN_PASTE_SHAPE =
         Regex("(?m)^[ \\t]{0,3}(#{1,6}\\s|>\\s|[-*+]\\s|•\\s)|\\*\\*|~~|```|\\]\\(https?://")
 
+    // Scattered-link shapes: a scheme URL, a www. address not buried
+    // in a larger word, or a strict ASCII email names the link
+    // harvester; a run of THREE-plus identical Arabic letters names
+    // the stretch cleaner — both closed shapes, both tools will
+    // actually fire on them, never a vibes-based suggestion.
+    private val LINK_SHAPE = Regex(
+        "(?i)\\b(?:(?:https?|ftp)://)[^\\s<>]+" +
+            "|[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}" +
+            "|(?<![A-Za-z0-9._@-])www\\.[^\\s<>]+",
+    )
+    private val STRETCH_SHAPE = Regex("([\u0621-\u064A])\\1{2,}")
+
     /**
      * The ranked advisory picks for [beforeCursor] — the bounded text
      * window before the caret. Order = reason specificity (a decoder
@@ -189,6 +201,11 @@ object DrsTileContextAdvisor {
         //      المدفونة تنطق أخيرًا بأسبابها المغلقة.
         if (HTML_PASTE_SHAPE.containsMatchIn(t)) picks += DrsTextTool.HTML_TO_TEXT
         if (MARKDOWN_PASTE_SHAPE.containsMatchIn(t)) picks += DrsTextTool.CLEAN_MARKDOWN
+        // 1.6) روابط متناثرة (مخطط أو www أو بريد صارم) تسمّي حاصد
+        //      الروابط، وتمدّد عربي (ثلاث حروف متطابقة فأكثر) يسمّي
+        //      مهدّئ الكتابة — شكلان مغلقان لا انطباع.
+        if (LINK_SHAPE.containsMatchIn(t)) picks += DrsTextTool.EXTRACT_LINKS
+        if (STRETCH_SHAPE.containsMatchIn(t)) picks += DrsTextTool.REMOVE_LETTER_STRETCH
         // 2) العلامات الصفرية والتطويل نفاية لصق لا تصلح فقرة — انزعها.
         if (hasZeroWidth) picks += DrsTextTool.REMOVE_ZERO_WIDTH
         if (hasTatweel) picks += DrsTextTool.REMOVE_TATWEEL

@@ -46,6 +46,7 @@ import androidx.compose.material.icons.filled.EmojiEvents
 import androidx.compose.material.icons.filled.Functions
 import androidx.compose.material.icons.filled.Percent
 import androidx.compose.material.icons.filled.ClearAll
+import androidx.compose.material.icons.filled.AddLink
 import androidx.compose.material.icons.filled.Code
 import androidx.compose.material.icons.filled.Compress
 import androidx.compose.material.icons.filled.ContentCopy
@@ -602,6 +603,15 @@ private val PANEL_SECTIONS: List<DrsTextToolsPanelSection> = listOf(
                 R.string.drs__text_tools__desc_normalize_arabic_forms,
                 Icons.Default.TextFields,
             ),
+            // the Arabic stretch cleaner — «هلااااا» speaks like
+            // «هلا»: three-plus identical Arabic letters collapse to
+            // one, legitimate doubles (الله، عدّ) stay and www survives.
+            toolItem(
+                DrsTextTool.REMOVE_LETTER_STRETCH,
+                R.string.drs__text_tools__tool_remove_letter_stretch,
+                R.string.drs__text_tools__desc_remove_letter_stretch,
+                Icons.Default.Compress,
+            ),
             // the web-paste cleaner — copy from the web arrives
             // wearing markdown; the tool keeps the meaning and drops
             // the costume (headers, bullets, emphasis, links to text).
@@ -620,6 +630,16 @@ private val PANEL_SECTIONS: List<DrsTextToolsPanelSection> = listOf(
                 R.string.drs__text_tools__tool_html_to_text,
                 R.string.drs__text_tools__desc_html_to_text,
                 Icons.Default.Html,
+            ),
+            // the link harvester — scattered URLs and emails
+            // land one per line, order kept; a balanced wiki-style
+            // bracket stays inside its link, an unbalanced closer
+            // and sentence punctuation leave.
+            toolItem(
+                DrsTextTool.EXTRACT_LINKS,
+                R.string.drs__text_tools__tool_extract_links,
+                R.string.drs__text_tools__desc_extract_links,
+                Icons.Default.AddLink,
             ),
             // Latin sentence punctuation → Arabic marks.
             toolItem(
@@ -900,6 +920,10 @@ fun textToolTitleRes(tool: DrsTextTool): Int = when (tool) {
     DrsTextTool.CLEAN_MARKDOWN -> R.string.drs__text_tools__tool_clean_markdown
     // the HTML-paste cleaner.
     DrsTextTool.HTML_TO_TEXT -> R.string.drs__text_tools__tool_html_to_text
+    // the link harvester.
+    DrsTextTool.EXTRACT_LINKS -> R.string.drs__text_tools__tool_extract_links
+    // the stretch cleaner.
+    DrsTextTool.REMOVE_LETTER_STRETCH -> R.string.drs__text_tools__tool_remove_letter_stretch
     // the text census.
     DrsTextTool.TEXT_INSPECT -> R.string.drs__text_tools__tool_text_inspect
     DrsTextTool.CLEAN_TEXT -> R.string.drs__text_tools__tool_clean_text
@@ -991,6 +1015,10 @@ fun textToolDescRes(tool: DrsTextTool): Int = when (tool) {
     DrsTextTool.CLEAN_MARKDOWN -> R.string.drs__text_tools__desc_clean_markdown
     // the HTML-paste cleaner.
     DrsTextTool.HTML_TO_TEXT -> R.string.drs__text_tools__desc_html_to_text
+    // the link harvester.
+    DrsTextTool.EXTRACT_LINKS -> R.string.drs__text_tools__desc_extract_links
+    // the stretch cleaner.
+    DrsTextTool.REMOVE_LETTER_STRETCH -> R.string.drs__text_tools__desc_remove_letter_stretch
     // the text census.
     DrsTextTool.TEXT_INSPECT -> R.string.drs__text_tools__desc_text_inspect
     DrsTextTool.CLEAN_TEXT -> R.string.drs__text_tools__desc_clean_text

@@ -206,7 +206,7 @@ class DrsPublicV180Tests : FunSpec({
         // 54 tools through + the date-in-words tool + the
         // clock-time-in-words tool + the fraction,
         // weekday and ordinal tools.
-        DrsTextTool.entries.size shouldBe 72
+        DrsTextTool.entries.size shouldBe 74
         (tool.isInfoOnly) shouldBe false
         (tool.isEditorOp) shouldBe false
         (tool.isInsertMark) shouldBe false

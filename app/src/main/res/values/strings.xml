@@ -1823,6 +1823,10 @@
     <string name="drs__text_tools__tool_text_inspect">فاحص النص</string>
     <string name="drs__text_tools__desc_text_inspect">قراءة فقط لا تعديل: ملف تعريف حتمي كامل للنص — الحروف بالخط (عربية/لاتينية) والأرقام والكلمات والجمل والأسطر والعلامات الخفية (مقاطع الاتجاه والوصل الصفرية) والإيموجي — في رسالة واحدة تقول لك ما يحمله نصك قبل أن تقرر أي أداة تنظيف تُطلق</string>
     <string name="drs__text_tools__inspect_result">الحروف: {chars} (عربية {arabic} • لاتينية {latin}) • الكلمات: {words} • الجمل: {sentences} • الأسطر: {lines} • الأرقام: {digits} • علامات خفية: {invisible} • إيموجي: {emoji}</string>
+    <string name="drs__text_tools__tool_extract_links">استخراج الروابط</string>
+    <string name="drs__text_tools__desc_extract_links">يجمع كل الروابط والعناوين البريدية المتناثرة في نصك ويصفّها سطرًا لكل رابط بالترتيب: روابط http وhttps وftp وعناوين www غير المدفونة داخل كلمة أو نطاق أوسع والبريد الصارم (مستخدم@نطاق.tld) — علامات الترقيم اللاصقة بالنهاية تُنزع والقوس الإغلاق اليتيم يُنزع، أما القوس المتوازن على نمط الويكي فيبقى ضمن رابطه، وما في النص روابط يعود بايتًا ببايت</string>
+    <string name="drs__text_tools__tool_remove_letter_stretch">إزالة تمدد الحروف</string>
+    <string name="drs__text_tools__desc_remove_letter_stretch">يهدّئ الكتابة الممتدة: «هلااااا» تصير «هلا» — أي تتابع من ثلاثة حروف عربية متطابقة فأكثر ينكفي إلى حرف واحد، والتضعيف الشرعي باقٍ (الله، عدّ)، والحروف اللاتينية والأرقام والترقيم لا تُمَس (www سليمة)، والحركة بعد التمدد تلحق الحرف المنكفي، وما فيه تمدد يعود بايتًا ببايت</string>
     <string name="quick_action__ime_ui_mode_text_tools">أدوات النصوص</string>
     <string name="quick_action__ime_ui_mode_text_tools__tooltip">فتح لوحة أدوات النصوص المتقدمة</string>
     <string name="drs__shortcuts__duplicate_error">هذا الاختصار مستخدم بالفعل — اختر اختصارًا آخر</string>
