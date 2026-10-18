@@ -121,7 +121,7 @@ class DrsPublicV2000Tests : FunSpec({
         DrsTextTool.CODE_RANGE.first shouldBe -675
         (tool.code in DrsTextTool.CODE_RANGE) shouldBe true
         // 59 tools through + the decimal and mirror tools.
-        DrsTextTool.entries.size shouldBe 70
+        DrsTextTool.entries.size shouldBe 72
         (tool.isInfoOnly) shouldBe false
         (tool.isEditorOp) shouldBe false
         (tool.isInsertMark) shouldBe false
@@ -241,7 +241,7 @@ class DrsPublicV2000Tests : FunSpec({
         DrsTextTool.CODE_RANGE.first shouldBe -675
         (tool.code in DrsTextTool.CODE_RANGE) shouldBe true
         // 60 tools after the decimal tool + the mirror tool.
-        DrsTextTool.entries.size shouldBe 70
+        DrsTextTool.entries.size shouldBe 72
         (tool.isInfoOnly) shouldBe false
         (tool.isEditorOp) shouldBe false
         (tool.isInsertMark) shouldBe false

@@ -369,6 +369,16 @@ class DrsTextToolsTest : FunSpec({
             // cleaner is a byte-identical passthrough.
             DrsTextTool.CLEAN_MARKDOWN -> result shouldBe input
 
+            // the hostile input carries NO tag, entity or markup
+            // shape (no '<', no '&') — every closed rule refuses it, so
+            // the HTML-paste cleaner is a byte-identical passthrough.
+            DrsTextTool.HTML_TO_TEXT -> result shouldBe input
+
+            // the census is an INFO tool — apply() is the read-only
+            // discipline itself: the text returns byte-identical and
+            // callers read [DrsTextTools.inspectText] instead.
+            DrsTextTool.TEXT_INSPECT -> result shouldBe input
+
             else -> error("DRS p9 (Q3): tool ${tool.name} has no pinned hostile-input invariant")
         }
     }
@@ -517,5 +527,114 @@ class DrsTextToolsTest : FunSpec({
         val pasted = "# عنوان\n\n- **نقطة** مهمة\n\n[رابط](https://x.y)"
         val once = DrsTextTools.apply(DrsTextTool.CLEAN_MARKDOWN, pasted, en)
         DrsTextTools.apply(DrsTextTool.CLEAN_MARKDOWN, once, en) shouldBe once
+    }
+
+    // -----------------------------------------------------------
+    // HTML_TO_TEXT
+    // -----------------------------------------------------------
+
+    test("html to text strips tags and turns structure into newlines") {
+        DrsTextTools.apply(DrsTextTool.HTML_TO_TEXT, "<p>نص أول</p><p>نص ثانٍ</p>", en) shouldBe
+            "نص أول\nنص ثانٍ\n"
+        // <br> variants become real newlines.
+        DrsTextTools.apply(DrsTextTool.HTML_TO_TEXT, "سطر<br>ثانٍ<br/>ثالث", en) shouldBe
+            "سطر\nثانٍ\nثالث"
+        // list items keep their bullet; ul/ol wrappers close into
+        // newlines too (every block closer is one newline — one rule).
+        DrsTextTools.apply(DrsTextTool.HTML_TO_TEXT, "<ul><li>أول</li><li>ثانٍ</li></ul>", en) shouldBe
+            "- أول\n- ثانٍ\n\n"
+        // headings close into newlines too.
+        DrsTextTools.apply(DrsTextTool.HTML_TO_TEXT, "<h2>عنوان</h2>متن", en) shouldBe
+            "عنوان\nمتن"
+    }
+
+    test("html to text drops script and style blocks with their content") {
+        DrsTextTools.apply(
+            DrsTextTool.HTML_TO_TEXT,
+            "<style>p{color:red}</style>مرحبا<script>alert(\"x\")</script> بالعالم",
+            en,
+        ) shouldBe "مرحبا بالعالم"
+    }
+
+    test("html to text strips comments and declarations") {
+        DrsTextTools.apply(DrsTextTool.HTML_TO_TEXT, "<!-- ملاحظة -->نص<!DOCTYPE html>", en) shouldBe
+            "نص"
+    }
+
+    test("html to text decodes the closed entity whitelist in one pass") {
+        DrsTextTools.apply(
+            DrsTextTool.HTML_TO_TEXT,
+            "&amp;&lt;&gt;&quot;&nbsp;&mdash;&#x41;&#160;&#128512;&copy;",
+            en,
+        ) shouldBe "&<>\" —A\u00A0\uD83D\uDE00©"
+        // one pass, never a double decode: &amp;lt; lands as &lt;.
+        DrsTextTools.apply(DrsTextTool.HTML_TO_TEXT, "&amp;lt; &amp;amp;", en) shouldBe
+            "&lt; &amp;"
+        // the soft hyphen is invisible junk — it decodes to NOTHING.
+        DrsTextTools.apply(DrsTextTool.HTML_TO_TEXT, "&mdash;&shy;&ndash;", en) shouldBe
+            "—–"
+    }
+
+    test("html to text leaves unknown and invalid entities verbatim") {
+        val invalid = "&unknown; &#DDDDDDDD; &#xZZ; &#0; &#xD800;"
+        DrsTextTools.apply(DrsTextTool.HTML_TO_TEXT, invalid, en) shouldBe invalid
+    }
+
+    test("html to text never touches a lone angle bracket or prose") {
+        val prose = "a < b و c > d و 5<6 و <>"
+        DrsTextTools.apply(DrsTextTool.HTML_TO_TEXT, prose, en) shouldBe prose
+    }
+
+    test("html to text handles a real paste end to end and is idempotent") {
+        val pasted =
+            "<div class=\"msg\"><h2>عرض جديد</h2><p>خصم <b>30%</b> &amp; شحن مجاني<br>لكل الطلبات</p><script>track(\"view\")</script></div>"
+        val once = DrsTextTools.apply(DrsTextTool.HTML_TO_TEXT, pasted, en)
+        once shouldBe "عرض جديد\nخصم 30% & شحن مجاني\nلكل الطلبات\n\n"
+        DrsTextTools.apply(DrsTextTool.HTML_TO_TEXT, once, en) shouldBe once
+    }
+
+    test("html to text composes with clean markdown on the bullets it writes") {
+        val html = "<li>بند</li>"
+        val htmlCleaned = DrsTextTools.apply(DrsTextTool.HTML_TO_TEXT, html, en)
+        htmlCleaned shouldBe "- بند\n"
+        DrsTextTools.apply(DrsTextTool.CLEAN_MARKDOWN, htmlCleaned, en) shouldBe "بند\n"
+    }
+
+    // -----------------------------------------------------------
+    // TEXT_INSPECT (the census)
+    // -----------------------------------------------------------
+
+    test("text census pins an exact mixed-script profile") {
+        val census = DrsTextTools.inspectText("مرحبا World 12!\nسطر ثانٍ\u200F")
+        census.chars shouldBe 25
+        census.arabicLetters shouldBe 11
+        census.latinLetters shouldBe 5
+        census.otherLetters shouldBe 0
+        census.digits shouldBe 2
+        census.words shouldBe 5
+        census.sentences shouldBe 2
+        census.lines shouldBe 2
+        census.spaces shouldBe 4
+        census.punctuation shouldBe 1
+        census.invisible shouldBe 1
+        census.emoji shouldBe 0
+    }
+
+    test("text census counts emoji and reads an empty text as zeros") {
+        val census = DrsTextTools.inspectText("أهلاً \uD83D\uDE00")
+        census.chars shouldBe 8
+        census.arabicLetters shouldBe 4
+        census.emoji shouldBe 1
+        census.words shouldBe 2
+        census.sentences shouldBe 1
+        val empty = DrsTextTools.inspectText("")
+        empty shouldBe DrsTextTools.TextCensus(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    }
+
+    test("text census sentences count the closed enders only") {
+        // no enders → one fragment; consecutive enders collapse.
+        DrsTextTools.inspectText("سطر بلا نهاية").sentences shouldBe 1
+        DrsTextTools.inspectText("أول. ثانٍ! ثالث؟").sentences shouldBe 3
+        DrsTextTools.inspectText("...؟!").sentences shouldBe 0
     }
 })

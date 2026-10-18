@@ -387,7 +387,31 @@ enum class DrsTextTool(
     // indistinguishable from them, so they are refused byte-identically,
     // never a guess. A text carrying none of the shapes returns
     // byte-identical. See [cleanWebPaste].
-    CLEAN_MARKDOWN(-646);
+    CLEAN_MARKDOWN(-646),
+
+    // the HTML-paste cleaner — the raw-markup sibling of
+    // CLEAN_MARKDOWN: email/WhatsApp-web/CMS copies arrive as literal
+    // HTML, and the tool keeps the PROSE and drops the markup:
+    // <!-- comments --> and <!declarations> vanish, <script>/<style>
+    // blocks vanish WITH their content (code is not prose), <br> becomes
+    // a real newline, block-level closers (</p> </div> </li> </h1..6>…)
+    // become newlines and <li> keeps its «- » bullet — while every other
+    // WELL-FORMED tag (<tag …> or </tag>) strips to nothing. A lone '<'
+    // that opens no tag (a < b) is NOT the shape and survives
+    // byte-identically, and the CLOSED entity whitelist decodes in ONE
+    // pass (&amp;lt; lands as &lt; — never a double decode); numeric
+    // &#N; / &#xN; outside the valid code-point zone stay verbatim,
+    // never invented. A text carrying none of the shapes returns
+    // byte-identical. See [htmlToText].
+    HTML_TO_TEXT(-647),
+
+    // the text census — the info counterpart of COUNT: one
+    // deterministic read-only profile of the whole field (letters by
+    // script, digits, words, sentences, lines, punctuation/symbols,
+    // invisible marks and emoji) surfaced as a toast, never a transform.
+    // The same read-only discipline as COUNT: apply() returns the text
+    // byte-identical; callers use [inspectText].
+    TEXT_INSPECT(-648, isInfoOnly = true);
 
     companion object {
         /** Inclusive range covering every tool code, for fast dispatch. */
@@ -754,8 +778,13 @@ object DrsTextTools {
                 // the web-paste cleaner — markdown costume off,
                 // meaning intact (see [cleanWebPaste]).
                 DrsTextTool.CLEAN_MARKDOWN -> cleanWebPaste(text)
-                // COUNT never transforms; callers use [countInfo] instead.
+                // the HTML-paste cleaner — raw markup off, prose
+                // intact (see [htmlToText]).
+                DrsTextTool.HTML_TO_TEXT -> htmlToText(text)
+                // COUNT and TEXT_INSPECT never transform; callers use
+                // [countInfo] / [inspectText] instead.
                 DrsTextTool.COUNT -> text
+                DrsTextTool.TEXT_INSPECT -> text
                 // Editor ops need the live cursor; handled by EditorInstance.
                 // The mark insertions commit at the cursor the same way —
                 // nothing to transform here.
@@ -1182,6 +1211,232 @@ object DrsTextTools {
         out = MD_ITALIC_STAR.replace(out) { m -> m.groupValues[1] }
         out = MD_ITALIC_UND.replace(out) { m -> m.groupValues[1] }
         return out
+    }
+
+    // -----------------------------------------------------------
+    // HTML_TO_TEXT — the raw-markup paste cleaner
+    // -----------------------------------------------------------
+
+    // Markup that is never prose: comments, <!declarations> and the
+    // <script>/<style> blocks — the latter vanish WITH their content
+    // (code pasted from a page's source is not the page's text).
+    private val HTML_COMMENT = Regex("(?s)<!--.*?-->")
+    private val HTML_DECL = Regex("<![^>]*>")
+    private val HTML_SCRIPT = Regex("(?is)<script\\b.*?</script\\s*>")
+    private val HTML_STYLE = Regex("(?is)<style\\b.*?</style\\s*>")
+
+    // Structure carriers: <br> becomes a real newline, block-level
+    // closers become newlines (one closed tag list), and <li> keeps its
+    // «- » bullet so a pasted list still reads as a list — the exact
+    // shape CLEAN_MARKDOWN strips, so the two cleaners compose.
+    private val HTML_BR = Regex("(?i)<br\\s*/?>")
+    private val HTML_BLOCK_END = Regex(
+        "(?i)</(?:p|div|li|h[1-6]|tr|blockquote|pre|ul|ol|table|section|article|header|footer)>",
+    )
+    private val HTML_LI = Regex("(?i)<li(?:\\s[^<>]*)?>")
+
+    // Every other WELL-FORMED tag: <tag …> or </tag> (attributes may not
+    // carry '<' or '>'; a quoted '>' inside an attribute is OUT of the
+    // closed catalog — the paste is left as-is there, never guessed).
+    private val HTML_TAG = Regex("</?[A-Za-z][A-Za-z0-9:-]*(?:\\s[^<>]*)?/?>")
+
+    // The closed entity whitelist + the numeric forms. One pass, no
+    // double decode: &amp;lt; lands as &lt;, never as '<'.
+    private val HTML_ENTITY =
+        Regex("&(?:#x([0-9A-Fa-f]+)|#([0-9]+)|amp|lt|gt|quot|apos|nbsp|shy|mdash|ndash|hellip|laquo|raquo|copy|reg|trade);")
+
+    /**
+     * The raw-markup paste cleaner: HTML arrives, prose leaves. Comments
+     * and declarations vanish, script/style blocks vanish WITH their
+     * content, <br> becomes a newline, block-level closers become
+     * newlines, <li> keeps its «- » bullet and every other well-formed
+     * tag strips to nothing. The closed entity whitelist decodes in ONE
+     * pass; a numeric reference outside the valid code-point zone (NUL,
+     * surrogates, past 0x10FFFF) stays verbatim — never invented. A lone
+     * '<' that opens no tag (a < b) and a text carrying none of the
+     * closed shapes return byte-identical.
+     */
+    private fun htmlToText(text: String): String {
+        var out = HTML_COMMENT.replace(text, "")
+        out = HTML_DECL.replace(out, "")
+        out = HTML_SCRIPT.replace(out, "")
+        out = HTML_STYLE.replace(out, "")
+        out = HTML_BR.replace(out, "\n")
+        out = HTML_BLOCK_END.replace(out, "\n")
+        out = HTML_LI.replace(out, "- ")
+        out = HTML_TAG.replace(out, "")
+        out = decodeHtmlEntities(out)
+        return if (out == text) text else out
+    }
+
+    /** One-pass entity decode: a whitelisted name or a valid numeric
+     *  code point (supplementary planes included via surrogate pairs),
+     *  anything else verbatim — null means «leave the match as-is». */
+    private fun decodeHtmlEntities(text: String): String {
+        if ('&' !in text) return text
+        return HTML_ENTITY.replace(text) { m ->
+            val hex = m.groupValues[1]
+            val dec = m.groupValues[2]
+            val codepoint = when {
+                hex.isNotEmpty() -> hex.toIntOrNull(16)
+                dec.isNotEmpty() -> dec.toIntOrNull()
+                else -> null
+            }
+            if (codepoint != null) {
+                if (codepoint in 1..0x10FFFF &&
+                    (codepoint < 0xD800 || codepoint > 0xDFFF)
+                ) {
+                    String(java.lang.Character.toChars(codepoint))
+                } else {
+                    m.value
+                }
+            } else {
+                when (m.value) {
+                    "&amp;" -> "&"
+                    "&lt;" -> "<"
+                    "&gt;" -> ">"
+                    "&quot;" -> "\""
+                    "&apos;" -> "'"
+                    "&nbsp;" -> " "
+                    "&shy;" -> ""
+                    "&mdash;" -> "—"
+                    "&ndash;" -> "–"
+                    "&hellip;" -> "…"
+                    "&laquo;" -> "«"
+                    "&raquo;" -> "»"
+                    "&copy;" -> "©"
+                    "&reg;" -> "®"
+                    "&trade;" -> "™"
+                    else -> m.value
+                }
+            }
+        }
+    }
+
+    // -----------------------------------------------------------
+    // TEXT_INSPECT — the text census (the info counterpart)
+    // -----------------------------------------------------------
+
+    /** The invisible formatting marks (the same class REMOVE_ZERO_WIDTH
+     *  strips): zero-width joiners/spaces, directionals, isolates, BOM. */
+    private val INVISIBLE_CHARS =
+        Regex("[\u200B-\u200F\u202A-\u202E\u2066-\u2069\uFEFF]")
+
+    /** The closed sentence enders across scripts: Latin . ! ? the
+     *  ellipsis and the Arabic question mark. */
+    private val SENTENCE_ENDERS = charArrayOf('.', '!', '?', '…', '\u061F')
+
+    /** The emoji code-point zones of the census: pictographs (both
+     *  planes EMOJI_CHARS strips) plus the variation selector and the
+     *  ZWJ joiner. Counted at CODE-POINT level — codePoints() decodes
+     *  a surrogate pair whole, so one emoji counts ONE, never two
+     *  halves (the char-level EMOJI_CHARS regex is for removal, not
+     *  for counting). */
+    private fun isEmojiCodePoint(cp: Int): Boolean = when (cp) {
+        in 0x1F000..0x1FAFF -> true
+        in 0x2600..0x27BF -> true
+        0xFE0F, 0x200D -> true
+        else -> false
+    }
+
+    /** One closed census row-bundle — every field a counted class of
+     *  the same single scan, deterministic on every input. */
+    data class TextCensus(
+        val chars: Int,
+        val arabicLetters: Int,
+        val latinLetters: Int,
+        val otherLetters: Int,
+        val digits: Int,
+        val words: Int,
+        val sentences: Int,
+        val lines: Int,
+        val spaces: Int,
+        val punctuation: Int,
+        val invisible: Int,
+        val emoji: Int,
+    )
+
+    /** True for punctuation and symbol categories (Arabic ،؛؟ included,
+     *  currency and math symbols alike) — the census's sixth class.
+     *  getType() returns Int while the category constants are bytes —
+     *  the census compares in the constants' own type. */
+    private fun isPunctOrSymbol(ch: Char): Boolean {
+        return when (Character.getType(ch).toByte()) {
+            Character.DASH_PUNCTUATION,
+            Character.START_PUNCTUATION,
+            Character.END_PUNCTUATION,
+            Character.CONNECTOR_PUNCTUATION,
+            Character.INITIAL_QUOTE_PUNCTUATION,
+            Character.FINAL_QUOTE_PUNCTUATION,
+            Character.OTHER_PUNCTUATION,
+            Character.MATH_SYMBOL,
+            Character.CURRENCY_SYMBOL,
+            Character.MODIFIER_SYMBOL,
+            Character.OTHER_SYMBOL,
+            -> true
+            else -> false
+        }
+    }
+
+    /**
+     * The read-only census behind [DrsTextTool.TEXT_INSPECT]: one scan
+     * classifies every character (letters by script — Arabic/Latin/other,
+     * the closed three-system digit set, whitespace, punctuation/symbols,
+     * invisible marks, emoji) and counts the structural units (words,
+     * sentences over the closed ender set, lines) exactly like
+     * [countInfo] counts. Pure and never-throwing; the empty text
+     * reports a zeroed census.
+     */
+    fun inspectText(text: String): TextCensus {
+        var arabic = 0
+        var latin = 0
+        var other = 0
+        var digits = 0
+        var spaces = 0
+        var punctuation = 0
+        for (ch in text) {
+            when {
+                ch in '0'..'9' ||
+                    ch in '\u0660'..'\u0669' ||
+                    ch in '\u06F0'..'\u06F9' -> digits++
+                ch.isLetter() -> when {
+                    ch.code in 0x621..0x64A || ch.code in 0x671..0x6D3 -> arabic++
+                    ch.code in 0x41..0x5A || ch.code in 0x61..0x7A -> latin++
+                    else -> other++
+                }
+                ch.isWhitespace() -> spaces++
+                isPunctOrSymbol(ch) -> punctuation++
+            }
+        }
+        var sentences = 0
+        var pending = false
+        for (ch in text) {
+            when {
+                SENTENCE_ENDERS.contains(ch) -> {
+                    if (pending) {
+                        sentences++
+                        pending = false
+                    }
+                }
+                ch.isWhitespace() -> Unit // whitespace neither ends nor starts
+                else -> pending = true
+            }
+        }
+        if (pending) sentences++
+        return TextCensus(
+            chars = text.length,
+            arabicLetters = arabic,
+            latinLetters = latin,
+            otherLetters = other,
+            digits = digits,
+            words = text.split(Regex("\\s+")).count { it.isNotEmpty() },
+            sentences = sentences,
+            lines = if (text.isEmpty()) 0 else text.lines().size,
+            spaces = spaces,
+            punctuation = punctuation,
+            invisible = INVISIBLE_CHARS.findAll(text).sumOf { it.value.length },
+            emoji = text.codePoints().toArray().count { cp -> isEmojiCodePoint(cp) },
+        )
     }
 
     /** Word boundaries of the snake/camel pair: spaces, underscores, dashes. */

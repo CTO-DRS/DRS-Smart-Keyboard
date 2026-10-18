@@ -138,7 +138,7 @@ class DrsPublicV1100Tests : FunSpec({
         (tool.code in DrsTextTool.CODE_RANGE) shouldBe true
         // 56 tools through + the fraction, weekday and
         // ordinal tools.
-        DrsTextTool.entries.size shouldBe 70
+        DrsTextTool.entries.size shouldBe 72
         (tool.isInfoOnly) shouldBe false
         (tool.isEditorOp) shouldBe false
         (tool.isInsertMark) shouldBe false
@@ -206,7 +206,7 @@ class DrsPublicV1100Tests : FunSpec({
         DrsTextTool.CODE_RANGE.first shouldBe -675
         (tool.code in DrsTextTool.CODE_RANGE) shouldBe true
         // 57 tools after the fraction tool + the weekday tool.
-        DrsTextTool.entries.size shouldBe 70
+        DrsTextTool.entries.size shouldBe 72
         (tool.isInfoOnly) shouldBe false
         (tool.isEditorOp) shouldBe false
         (tool.isInsertMark) shouldBe false
@@ -293,7 +293,7 @@ class DrsPublicV1100Tests : FunSpec({
         DrsTextTool.CODE_RANGE.first shouldBe -675
         (tool.code in DrsTextTool.CODE_RANGE) shouldBe true
         // 58 tools after the weekday tool + the ordinal-words tool.
-        DrsTextTool.entries.size shouldBe 70
+        DrsTextTool.entries.size shouldBe 72
         (tool.isInfoOnly) shouldBe false
         (tool.isEditorOp) shouldBe false
         (tool.isInsertMark) shouldBe false

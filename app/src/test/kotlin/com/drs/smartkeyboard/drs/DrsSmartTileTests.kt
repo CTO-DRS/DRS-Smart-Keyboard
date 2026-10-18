@@ -139,6 +139,19 @@ class DrsV2200Tests : FunSpec({
         picks[3] shouldBe DrsTextTool.REMOVE_DIACRITICS
     }
 
+    test("Advisor names the paste cleaners for their own costume shapes") {
+        // وسم أو كيان HTML يسمّي فاكّ HTML، وزخرفة ماركداون تسمّي
+        // منظّف الويب — السببان المدفونان ينطقان بأسبابهما المغلقة.
+        val html = DrsTileContextAdvisor.advise("<p>نص ملصوق</p> &amp; أكثر")
+        html shouldContain DrsTextTool.HTML_TO_TEXT
+        val md = DrsTileContextAdvisor.advise("**غامق** ورابط [نص](https://x.y)")
+        md shouldContain DrsTextTool.CLEAN_MARKDOWN
+        // نص عربي عادي يبقى بلا توصية تنظيف ويب — لا أسباب افتعالية.
+        val plain = DrsTileContextAdvisor.advise("نص عربي صافٍ بلا لصق ويب")
+        plain shouldNotContain DrsTextTool.HTML_TO_TEXT
+        plain shouldNotContain DrsTextTool.CLEAN_MARKDOWN
+    }
+
     // ------------------------------------------------------------
     // 4) المفضلة المحدودة — ترتيب تثبيت ورفض صادق
     // ------------------------------------------------------------
@@ -173,7 +186,7 @@ class DrsV2200Tests : FunSpec({
     // 6) الأختام بعد إضافات الدفعة C
     // ------------------------------------------------------------
     test("seals — the catalogue is 67 tools over -673") {
-        DrsTextTool.entries.size shouldBe 70
+        DrsTextTool.entries.size shouldBe 72
         DrsTextTool.CODE_RANGE.first shouldBe -675
         DrsTextTool.CODE_RANGE.last shouldBe -601
         // round-trip من الكود إلى الأداة ومعهRegistration للأربعة الجدد.

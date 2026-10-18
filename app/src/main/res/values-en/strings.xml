@@ -1870,6 +1870,8 @@
     <string name="drs__text_tools__desc_slugify">Turn text into a link-safe path: diacritics, tatweel and invisible marks stripped, hamza carriers folded (أإآٱ→ا، ة→ه), spaces to one dash, everything outside letters/digits dropped — Arabic keeps its letters, never transliterated, and punctuation-only text stays untouched</string>
     <string name="drs__text_tools__tool_clean_markdown">Clean web paste</string>
     <string name="drs__text_tools__desc_clean_markdown">Clean text pasted from the web: leading # headers, &gt; quotes, (- * + •) bullets and horizontal rules stripped, **bold**, *italic*, ~~strike~~, `code` and triple fences unwrapped, [text](url) back to its text, ![alt](url) to its alt and the &lt;wrapped&gt; link kept as its address — numbered lists and underscores inside words (some_var_name) untouched, and plain text returns byte-identical</string>
+    <string name="drs__text_tools__tool_html_to_text">Clean HTML paste</string>
+    <string name="drs__text_tools__desc_html_to_text">Clean a copy pasted as raw HTML from email or the web: comments and declarations vanish, script and style blocks vanish with their content, br becomes a newline, block closers (p div li headings…) become newlines, list items keep their «- » bullet, every well-formed tag strips to its text and the closed entity whitelist decodes in one pass (&amp;amp; &amp;lt; non-breaking space, dashes, quotes, copyright marks) — a lone &lt; (a &lt; b) is not the shape and stays byte-identical, and plain text without any shape returns as-is</string>
     <string name="drs__text_tools__tool_to_snake_case">snake_case</string>
     <string name="drs__text_tools__desc_to_snake_case">Join words with one underscore, lowercased (my variable becomes my_variable, lower-to-upper camel boundaries split) — Arabic words join with no case invented, and anything that would not change stays untouched</string>
     <string name="drs__text_tools__tool_to_camel_case">camelCase</string>
@@ -1900,6 +1902,9 @@
     <string name="drs__text_tools__no_change">Nothing to change - the text already matches the requested format</string>
     <string name="drs__text_tools__failed">Could not apply the operation in this field - try selecting the text first</string>
     <string name="drs__text_tools__count_result">Characters: {chars} • Words: {words} • Lines: {lines}</string>
+    <string name="drs__text_tools__tool_text_inspect">Text inspector</string>
+    <string name="drs__text_tools__desc_text_inspect">Read-only, never edits: one deterministic full profile of the text — letters by script (Arabic/Latin), digits, words, sentences, lines, invisible marks (directional and zero-width joiners) and emoji — in one message telling you what the text carries before you pick the cleanup tool worth firing</string>
+    <string name="drs__text_tools__inspect_result">Chars: {chars} (Arabic {arabic} • Latin {latin}) • Words: {words} • Sentences: {sentences} • Lines: {lines} • Digits: {digits} • Hidden marks: {invisible} • Emoji: {emoji}</string>
     <string name="quick_action__ime_ui_mode_text_tools">Text tools</string>
     <string name="quick_action__ime_ui_mode_text_tools__tooltip">Open the advanced text tools panel</string>
     <string name="drs__shortcuts__duplicate_error">This abbreviation is already in use - pick a different one</string>

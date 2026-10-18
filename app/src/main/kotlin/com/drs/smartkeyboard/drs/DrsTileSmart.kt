@@ -149,6 +149,14 @@ object DrsTileContextAdvisor {
     private val MULTI_SPACE = Regex("[ \t\u00A0]{2,}")
     private val PERCENT_ESCAPE = Regex("%[0-9A-Fa-f]{2}")
 
+    // Web-paste costume shapes: a well-formed tag or a typed entity
+    // names the HTML cleaner, and a leading #/bullet, a **pair**, a
+    // fence, a strike or a markdown link names the markdown one —
+    // closed shapes only, never a vibes-based suggestion.
+    private val HTML_PASTE_SHAPE = Regex("</?[A-Za-z][^>]*>|&[A-Za-z#][A-Za-z0-9#]*;")
+    private val MARKDOWN_PASTE_SHAPE =
+        Regex("(?m)^[ \\t]{0,3}(#{1,6}\\s|>\\s|[-*+]\\s|•\\s)|\\*\\*|~~|```|\\]\\(https?://")
+
     /**
      * The ranked advisory picks for [beforeCursor] — the bounded text
      * window before the caret. Order = reason specificity (a decoder
@@ -176,6 +184,11 @@ object DrsTileContextAdvisor {
         if (DrsWritingAssistant.improveTail(t) != t) picks += DrsTextTool.IMPROVE_PHRASES
         // 1) عناوين مرمّزة (%XX) تفكّ ترميزها أولًا — السبب الأدق يتصدر.
         if (PERCENT_ESCAPE.containsMatchIn(t)) picks += DrsTextTool.URL_DECODE
+        // 1.5) أزياء الويب: وسم أو كيان يسمّي فاكّ HTML، وترويسة أو
+        //      زخرفة أو رابط ماركداون يسمّي منظّف الويب — الميزة
+        //      المدفونة تنطق أخيرًا بأسبابها المغلقة.
+        if (HTML_PASTE_SHAPE.containsMatchIn(t)) picks += DrsTextTool.HTML_TO_TEXT
+        if (MARKDOWN_PASTE_SHAPE.containsMatchIn(t)) picks += DrsTextTool.CLEAN_MARKDOWN
         // 2) العلامات الصفرية والتطويل نفاية لصق لا تصلح فقرة — انزعها.
         if (hasZeroWidth) picks += DrsTextTool.REMOVE_ZERO_WIDTH
         if (hasTatweel) picks += DrsTextTool.REMOVE_TATWEEL

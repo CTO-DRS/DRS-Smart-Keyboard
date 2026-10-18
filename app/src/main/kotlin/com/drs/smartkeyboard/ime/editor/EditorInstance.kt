@@ -691,13 +691,31 @@ class EditorInstance(context: Context) : AbstractEditorInstance(context) {
         }
         val target = if (hasSelection) full.substring(from, to) else full
         if (tool.isInfoOnly) {
-            val (chars, words, lines) = DrsTextTools.countInfo(target)
-            appContext.showShortToastSync(
-                R.string.drs__text_tools__count_result,
-                "chars" to chars,
-                "words" to words,
-                "lines" to lines,
-            )
+            if (tool == DrsTextTool.TEXT_INSPECT) {
+                // the census toast — the deep read-only profile;
+                // nothing here transforms the text, ever.
+                val census = DrsTextTools.inspectText(target)
+                appContext.showShortToastSync(
+                    R.string.drs__text_tools__inspect_result,
+                    "chars" to census.chars,
+                    "arabic" to census.arabicLetters,
+                    "latin" to census.latinLetters,
+                    "words" to census.words,
+                    "sentences" to census.sentences,
+                    "lines" to census.lines,
+                    "digits" to census.digits,
+                    "invisible" to census.invisible,
+                    "emoji" to census.emoji,
+                )
+            } else {
+                val (chars, words, lines) = DrsTextTools.countInfo(target)
+                appContext.showShortToastSync(
+                    R.string.drs__text_tools__count_result,
+                    "chars" to chars,
+                    "words" to words,
+                    "lines" to lines,
+                )
+            }
             return true
         }
         if (target.isEmpty()) {

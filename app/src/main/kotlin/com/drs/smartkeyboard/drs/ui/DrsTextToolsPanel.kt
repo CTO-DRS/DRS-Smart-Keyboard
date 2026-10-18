@@ -66,12 +66,14 @@ import androidx.compose.material.icons.filled.FormatListNumbered
 import androidx.compose.material.icons.filled.FormatQuote
 import androidx.compose.material.icons.filled.FormatSize
 import androidx.compose.material.icons.filled.HighlightOff
+import androidx.compose.material.icons.filled.Html
 import androidx.compose.material.icons.filled.KeyboardTab
 import androidx.compose.material.icons.filled.LastPage
 import androidx.compose.material.icons.filled.Link
 import androidx.compose.material.icons.filled.LinkOff
 import androidx.compose.material.icons.filled.MergeType
 import androidx.compose.material.icons.filled.Paid
+import androidx.compose.material.icons.filled.QueryStats
 import androidx.compose.material.icons.filled.SentimentNeutral
 import androidx.compose.material.icons.filled.Rule
 import androidx.compose.material.icons.filled.SelectAll
@@ -609,6 +611,16 @@ private val PANEL_SECTIONS: List<DrsTextToolsPanelSection> = listOf(
                 R.string.drs__text_tools__desc_clean_markdown,
                 Icons.Default.FormatClear,
             ),
+            // the HTML-paste cleaner — the raw-markup sibling of
+            // CLEAN_MARKDOWN: tags and entities off, prose on, and the
+            // two cleaners compose (the «- » bullet this tool writes is
+            // the exact shape CLEAN_MARKDOWN strips).
+            toolItem(
+                DrsTextTool.HTML_TO_TEXT,
+                R.string.drs__text_tools__tool_html_to_text,
+                R.string.drs__text_tools__desc_html_to_text,
+                Icons.Default.Html,
+            ),
             // Latin sentence punctuation → Arabic marks.
             toolItem(
                 DrsTextTool.TO_ARABIC_PUNCTUATION,
@@ -784,6 +796,15 @@ private val PANEL_SECTIONS: List<DrsTextToolsPanelSection> = listOf(
                 R.string.drs__text_tools__desc_count,
                 Icons.Default.Calculate,
             ),
+            // the text census — the deep read-only counterpart of
+            // COUNT: one deterministic profile (letters by script,
+            // digits, words, sentences, lines, invisible marks, emoji).
+            toolItem(
+                DrsTextTool.TEXT_INSPECT,
+                R.string.drs__text_tools__tool_text_inspect,
+                R.string.drs__text_tools__desc_text_inspect,
+                Icons.Default.QueryStats,
+            ),
         ),
     ),
 )
@@ -877,6 +898,10 @@ fun textToolTitleRes(tool: DrsTextTool): Int = when (tool) {
     DrsTextTool.NORMALIZE_PUNCTUATION -> R.string.drs__text_tools__tool_normalize_punctuation
     // the web-paste cleaner.
     DrsTextTool.CLEAN_MARKDOWN -> R.string.drs__text_tools__tool_clean_markdown
+    // the HTML-paste cleaner.
+    DrsTextTool.HTML_TO_TEXT -> R.string.drs__text_tools__tool_html_to_text
+    // the text census.
+    DrsTextTool.TEXT_INSPECT -> R.string.drs__text_tools__tool_text_inspect
     DrsTextTool.CLEAN_TEXT -> R.string.drs__text_tools__tool_clean_text
     DrsTextTool.WRAP_QUOTES -> R.string.drs__text_tools__tool_wrap_quotes
     DrsTextTool.WRAP_PARENS -> R.string.drs__text_tools__tool_wrap_parens
@@ -964,6 +989,10 @@ fun textToolDescRes(tool: DrsTextTool): Int = when (tool) {
     DrsTextTool.NORMALIZE_PUNCTUATION -> R.string.drs__text_tools__desc_normalize_punctuation
     // the web-paste cleaner.
     DrsTextTool.CLEAN_MARKDOWN -> R.string.drs__text_tools__desc_clean_markdown
+    // the HTML-paste cleaner.
+    DrsTextTool.HTML_TO_TEXT -> R.string.drs__text_tools__desc_html_to_text
+    // the text census.
+    DrsTextTool.TEXT_INSPECT -> R.string.drs__text_tools__desc_text_inspect
     DrsTextTool.CLEAN_TEXT -> R.string.drs__text_tools__desc_clean_text
     DrsTextTool.WRAP_QUOTES -> R.string.drs__text_tools__desc_wrap_quotes
     DrsTextTool.WRAP_PARENS -> R.string.drs__text_tools__desc_wrap_parens

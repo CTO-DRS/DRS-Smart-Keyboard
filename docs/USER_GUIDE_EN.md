@@ -67,6 +67,20 @@ links return to their text and images to their alt, while numbered lists and
 underscores inside words (some_var_name) are never touched, and plain text
 stays byte-identical — never a guess.
 
+**Clean HTML paste:** a copy from email or a CMS sometimes arrives as
+raw HTML (`<p>`, `<br>`, `&amp;`…) — the «Clean HTML paste» tool in the
+text tools panel keeps the prose and drops the markup: comments and
+script/style blocks vanish, br becomes a newline and block closers
+become lines while list items keep their bullet, every well-formed tag
+strips to its text and the closed entity whitelist decodes in one pass
+— a lone `<` (a < b) is not the shape and stays byte-identical, and
+plain text without any shape returns as-is.
+
+**Text inspector:** read-only, never edits — one message raises your
+text's deterministic profile: letters by script (Arabic/Latin), digits,
+words, sentences, lines, hidden marks and emoji, so you know what the
+text carries before picking the cleanup tool worth firing.
+
 **Deterministic text vocalization:** in the text tools panel,
 «Vocalize text» adds canonical harakat to every word the local 3000-word
 lexicon knows — unknown words stay untouched, never guessed. Works on the

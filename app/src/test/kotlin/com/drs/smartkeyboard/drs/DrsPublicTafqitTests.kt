@@ -170,7 +170,7 @@ class DrsPublicV170Tests : FunSpec({
         (tool.code in DrsTextTool.CODE_RANGE) shouldBe true
         // 53 tools through + the tafqit tool + the date
         // tool + the clock-time tool + the fraction tool.
-        DrsTextTool.entries.size shouldBe 70
+        DrsTextTool.entries.size shouldBe 72
         (tool.isInfoOnly) shouldBe false
         (tool.isEditorOp) shouldBe false
         (tool.isInsertMark) shouldBe false

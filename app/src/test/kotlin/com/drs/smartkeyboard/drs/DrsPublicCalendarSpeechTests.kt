@@ -75,7 +75,7 @@ class DrsPublicV2100Tests : FunSpec({
         DrsTextTool.CODE_RANGE.first shouldBe -675
         (tool.code in DrsTextTool.CODE_RANGE) shouldBe true
         // 61 tools through + the calendar-conversion tool.
-        DrsTextTool.entries.size shouldBe 70
+        DrsTextTool.entries.size shouldBe 72
         (tool.isInfoOnly) shouldBe false
         (tool.isEditorOp) shouldBe false
         (tool.isInsertMark) shouldBe false
@@ -197,7 +197,7 @@ class DrsPublicV2100Tests : FunSpec({
         DrsTextTool.CODE_RANGE.first shouldBe -675
         (tool.code in DrsTextTool.CODE_RANGE) shouldBe true
         // 62 tools after the Gregorian→Hijri tool + the inverse.
-        DrsTextTool.entries.size shouldBe 70
+        DrsTextTool.entries.size shouldBe 72
         (tool.isInfoOnly) shouldBe false
         (tool.isEditorOp) shouldBe false
         (tool.isInsertMark) shouldBe false
