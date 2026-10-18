@@ -363,6 +363,12 @@ class DrsTextToolsTest : FunSpec({
             // normalizer returns it byte-identically.
             DrsTextTool.NORMALIZE_SPACING -> result shouldBe input
 
+            // the hostile input carries NO markdown shape
+            // (no leading #/>/-/•, no emphasis pairs, no links, no
+            // fences) — every closed rule refuses it, so the web-paste
+            // cleaner is a byte-identical passthrough.
+            DrsTextTool.CLEAN_MARKDOWN -> result shouldBe input
+
             else -> error("DRS p9 (Q3): tool ${tool.name} has no pinned hostile-input invariant")
         }
     }
@@ -425,5 +431,91 @@ class DrsTextToolsTest : FunSpec({
         // through unchanged — the tool unifies LETTERS only.
         DrsTextTools.apply(DrsTextTool.NORMALIZE_ARABIC, "Hello 123! مُحَمَّـد", en) shouldBe
             "Hello 123! مُحَمَّـد"
+    }
+
+    // -----------------------------------------------------------
+    // CLEAN_MARKDOWN
+    // -----------------------------------------------------------
+
+    test("clean markdown strips headers, quotes, bullets and rules") {
+        DrsTextTools.apply(DrsTextTool.CLEAN_MARKDOWN, "# عنوان رئيس", en) shouldBe "عنوان رئيس"
+        DrsTextTools.apply(DrsTextTool.CLEAN_MARKDOWN, "### عنوان ثالث", en) shouldBe "عنوان ثالث"
+        DrsTextTools.apply(DrsTextTool.CLEAN_MARKDOWN, "> اقتباس", en) shouldBe "اقتباس"
+        DrsTextTools.apply(DrsTextTool.CLEAN_MARKDOWN, ">> اقتباس متداخل", en) shouldBe "اقتباس متداخل"
+        DrsTextTools.apply(DrsTextTool.CLEAN_MARKDOWN, "- بند أول", en) shouldBe "بند أول"
+        DrsTextTools.apply(DrsTextTool.CLEAN_MARKDOWN, "* بند ثانٍ", en) shouldBe "بند ثانٍ"
+        DrsTextTools.apply(DrsTextTool.CLEAN_MARKDOWN, "+ بند ثالث", en) shouldBe "بند ثالث"
+        DrsTextTools.apply(DrsTextTool.CLEAN_MARKDOWN, "• بند رابع", en) shouldBe "بند رابع"
+        DrsTextTools.apply(DrsTextTool.CLEAN_MARKDOWN, "---\nسطر", en) shouldBe "سطر"
+        DrsTextTools.apply(DrsTextTool.CLEAN_MARKDOWN, "***\nسطر", en) shouldBe "سطر"
+        DrsTextTools.apply(DrsTextTool.CLEAN_MARKDOWN, "- - -\nسطر", en) shouldBe "سطر"
+        // a marker without its required space is NOT the shape — refusal.
+        DrsTextTools.apply(DrsTextTool.CLEAN_MARKDOWN, "#عنوان بلا مسافة", en) shouldBe
+            "#عنوان بلا مسافة"
+    }
+
+    test("clean markdown unwraps emphasis, strike and code") {
+        DrsTextTools.apply(DrsTextTool.CLEAN_MARKDOWN, "**غامق**", en) shouldBe "غامق"
+        DrsTextTools.apply(DrsTextTool.CLEAN_MARKDOWN, "__غامق__", en) shouldBe "غامق"
+        DrsTextTools.apply(DrsTextTool.CLEAN_MARKDOWN, "***غامق مائل***", en) shouldBe "غامق مائل"
+        DrsTextTools.apply(DrsTextTool.CLEAN_MARKDOWN, "*مائل*", en) shouldBe "مائل"
+        DrsTextTools.apply(DrsTextTool.CLEAN_MARKDOWN, "_latin words_", en) shouldBe "latin words"
+        DrsTextTools.apply(DrsTextTool.CLEAN_MARKDOWN, "~~مشطوب~~", en) shouldBe "مشطوب"
+        DrsTextTools.apply(DrsTextTool.CLEAN_MARKDOWN, "`كود`", en) shouldBe "كود"
+        DrsTextTools.apply(
+            DrsTextTool.CLEAN_MARKDOWN,
+            "```kotlin\nval x = 1\n```\n",
+            en,
+        ) shouldBe "val x = 1\n"
+        // Arabic-underscore content is indistinguishable from Arabic
+        // snake-ish text — the honest refusal, never a guess.
+        DrsTextTools.apply(DrsTextTool.CLEAN_MARKDOWN, "_مائل_", en) shouldBe "_مائل_"
+    }
+
+    test("clean markdown snake_case and numbered lists survive") {
+        DrsTextTools.apply(DrsTextTool.CLEAN_MARKDOWN, "some_var_name stays", en) shouldBe
+            "some_var_name stays"
+        DrsTextTools.apply(DrsTextTool.CLEAN_MARKDOWN, "a__b__c", en) shouldBe "a__b__c"
+        DrsTextTools.apply(DrsTextTool.CLEAN_MARKDOWN, "متغير_و_آخر", en) shouldBe "متغير_و_آخر"
+        DrsTextTools.apply(DrsTextTool.CLEAN_MARKDOWN, "1. بند مرقم", en) shouldBe "1. بند مرقم"
+        DrsTextTools.apply(DrsTextTool.CLEAN_MARKDOWN, "10) بند مرقم", en) shouldBe "10) بند مرقم"
+    }
+
+    test("clean markdown resolves links, images and autolinks") {
+        DrsTextTools.apply(
+            DrsTextTool.CLEAN_MARKDOWN,
+            "[النص](https://example.com/page)",
+            en,
+        ) shouldBe "النص"
+        DrsTextTools.apply(
+            DrsTextTool.CLEAN_MARKDOWN,
+            "![وصف الصورة](https://example.com/a.png)",
+            en,
+        ) shouldBe "وصف الصورة"
+        DrsTextTools.apply(
+            DrsTextTool.CLEAN_MARKDOWN,
+            "![](https://example.com/a.png)",
+            en,
+        ) shouldBe ""
+        DrsTextTools.apply(
+            DrsTextTool.CLEAN_MARKDOWN,
+            "<https://example.com/docs>",
+            en,
+        ) shouldBe "https://example.com/docs"
+    }
+
+    test("clean markdown handles a real web paste end to end") {
+        val pasted = "# الميزة الجديدة\n\n- **سرعة**: أسرع بـ50%\n- *استقرار*: صفر أعطال\n\n> جرّبها الآن\n\n[التفاصيل](https://example.com/x)\n\n---"
+        val cleaned = DrsTextTools.apply(DrsTextTool.CLEAN_MARKDOWN, pasted, en)
+        cleaned shouldBe
+            "الميزة الجديدة\n\nسرعة: أسرع بـ50%\nاستقرار: صفر أعطال\n\nجرّبها الآن\n\nالتفاصيل\n\n"
+    }
+
+    test("clean markdown refuses plain text byte-identically and is idempotent") {
+        val plain = "نص عربي صافٍ بلا أي تنسيق، ورقم 1234، وبعض الترقيم!"
+        DrsTextTools.apply(DrsTextTool.CLEAN_MARKDOWN, plain, en) shouldBe plain
+        val pasted = "# عنوان\n\n- **نقطة** مهمة\n\n[رابط](https://x.y)"
+        val once = DrsTextTools.apply(DrsTextTool.CLEAN_MARKDOWN, pasted, en)
+        DrsTextTools.apply(DrsTextTool.CLEAN_MARKDOWN, once, en) shouldBe once
     }
 })

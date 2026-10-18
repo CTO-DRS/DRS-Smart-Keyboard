@@ -1868,6 +1868,8 @@
     <string name="drs__text_tools__desc_sort_lines_natural">Sort lines the way humans read numbers: file2 before file10 and قائمة 2 before قائمة 10, with arbitrary-precision numeric comparison that never overflows and letters through the same device locale — incomparable lines keep their order</string>
     <string name="drs__text_tools__tool_slugify">URL slug</string>
     <string name="drs__text_tools__desc_slugify">Turn text into a link-safe path: diacritics, tatweel and invisible marks stripped, hamza carriers folded (أإآٱ→ا، ة→ه), spaces to one dash, everything outside letters/digits dropped — Arabic keeps its letters, never transliterated, and punctuation-only text stays untouched</string>
+    <string name="drs__text_tools__tool_clean_markdown">Clean web paste</string>
+    <string name="drs__text_tools__desc_clean_markdown">Clean text pasted from the web: leading # headers, &gt; quotes, (- * + •) bullets and horizontal rules stripped, **bold**, *italic*, ~~strike~~, `code` and triple fences unwrapped, [text](url) back to its text, ![alt](url) to its alt and the &lt;wrapped&gt; link kept as its address — numbered lists and underscores inside words (some_var_name) untouched, and plain text returns byte-identical</string>
     <string name="drs__text_tools__tool_to_snake_case">snake_case</string>
     <string name="drs__text_tools__desc_to_snake_case">Join words with one underscore, lowercased (my variable becomes my_variable, lower-to-upper camel boundaries split) — Arabic words join with no case invented, and anything that would not change stays untouched</string>
     <string name="drs__text_tools__tool_to_camel_case">camelCase</string>

@@ -59,6 +59,14 @@ with emoji and lighter colors — switch from the toolbar profile panel.
 Fast selection, case conversion, smart paste from the internal clipboard, and
 a context-aware tools panel (number, URL, email fields).
 
+**Clean web paste:** a copy from ChatGPT, WhatsApp or any website usually
+arrives wearing Markdown (`**bold**`, `# heading`, `- bullet`,
+`[link](url)`) — the «Clean web paste» tool in the text tools panel keeps the
+meaning and drops the costume: bullets, headers, quotes and rules vanish,
+links return to their text and images to their alt, while numbered lists and
+underscores inside words (some_var_name) are never touched, and plain text
+stays byte-identical — never a guess.
+
 **Deterministic text vocalization:** in the text tools panel,
 «Vocalize text» adds canonical harakat to every word the local 3000-word
 lexicon knows — unknown words stay untouched, never guessed. Works on the

@@ -232,6 +232,6 @@ class DrsV180Tests : FunSpec({
         // public +3 the fraction, weekday and ordinal tools;
         // +2 the writing assistant pair (IMPROVE_PHRASES,
         // NORMALIZE_SPACING) reviving the orphaned M1.5 engine.
-        (DrsTextTool.entries.size) shouldBe 69
+        (DrsTextTool.entries.size) shouldBe 70
     }
 })

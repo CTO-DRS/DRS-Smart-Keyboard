@@ -1786,6 +1786,8 @@
     <string name="drs__text_tools__desc_sort_lines_natural">ترتيب الأسطر كما يقرأ البشر الأرقام: file2 قبل file10 وقائمة 2 قبل قائمة 10، بمقارنة رقمية عشوائية الدقة لا تفيض، وحروف بلغة الجهاز نفسها — والأسطر غير القابلة للمقارنة تبقى بترتيبها</string>
     <string name="drs__text_tools__tool_slugify">مسار رابط (slug)</string>
     <string name="drs__text_tools__desc_slugify">تحويل النص إلى مسار رابط آمن: نزع التشكيل والتطويل والعلامات الصفرية، طي الهمزات (أإآٱ→ا، ة→ه)، المسافات إلى شرطة واحدة، وإسقاط كل ما ليس حرفًا أو رقمًا — والعربية تحتفظ بحروفها لا نقل صوتي، والنص الصافي الترقيم يبقى كما هو</string>
+    <string name="drs__text_tools__tool_clean_markdown">تنظيف تنسيق الويب</string>
+    <string name="drs__text_tools__desc_clean_markdown">تنظيف نص منسوخ من الويب: نزع الترويسات # والاقتباسات &gt; والنقاط البادئة (- * + •) والخطوط الفاصلة، وفك الزخارف **غامق** و*مائل* و~~مشطوب~~ و`كود` وكتل ``` الثلاثية، والروابط [نص](رابط) تعود نصًا والصور تعود بوصفها والرابط المحاط &lt;به&gt; يبقى عنوانه — والقوائم المرقمة والشرطات السفلية داخل الكلمات (some_var_name) لا تُمَس، والنص الصافي يبقى بايتًا ببايت كما هو</string>
     <string name="drs__text_tools__tool_to_snake_case">snake_case</string>
     <string name="drs__text_tools__desc_to_snake_case">وصل الكلمات بشرطة سفلية واحدة وأحرف صغيرة (my variable تصير my_variable، وحدود camel الكبيرة تنقسم) — والكلمات العربية تتصل بلا اختراع حالة، وما لا يتغير يبقى كما هو</string>
     <string name="drs__text_tools__tool_to_camel_case">camelCase</string>

@@ -374,7 +374,20 @@ enum class DrsTextTool(
     // idempotent by construction: applying it twice equals applying it
     // once, and a redisplayed result can never grow extra edits. See
     // [DrsWritingAssistant.normalizeSpacing].
-    NORMALIZE_SPACING(-675);
+    NORMALIZE_SPACING(-675),
+
+    // the web-paste cleaner — copy from the web arrives wearing
+    // markdown; the tool keeps the MEANING and drops the costume:
+    // leading # headers, > blockquotes, - * + • bullets and --- rules
+    // vanish, ***bold***/__bold__/*italic*/~~strike~~/`code`/``` fences
+    // unwrap to their bare text, [text](url) speaks its text,
+    // ![alt](url) its alt and <url> its address. Numbered lists are
+    // never touched, and underscores are unwrapped ONLY inside Latin
+    // content — Arabic snake-ish underscores (متغير_و_آخر) are
+    // indistinguishable from them, so they are refused byte-identically,
+    // never a guess. A text carrying none of the shapes returns
+    // byte-identical. See [cleanWebPaste].
+    CLEAN_MARKDOWN(-646);
 
     companion object {
         /** Inclusive range covering every tool code, for fast dispatch. */
@@ -738,6 +751,9 @@ object DrsTextTools {
                             .joinToString("\n") { it.trim(' ', '\t', '\u00A0') },
                     ),
                 ).trim(' ', '\t', '\u00A0')
+                // the web-paste cleaner — markdown costume off,
+                // meaning intact (see [cleanWebPaste]).
+                DrsTextTool.CLEAN_MARKDOWN -> cleanWebPaste(text)
                 // COUNT never transforms; callers use [countInfo] instead.
                 DrsTextTool.COUNT -> text
                 // Editor ops need the live cursor; handled by EditorInstance.
@@ -1092,6 +1108,80 @@ object DrsTextTools {
         s = SLUG_DASH_RUNS.replace(s, "-")
         s = s.trim('-')
         return if (s.isEmpty()) text else s
+    }
+
+    // -----------------------------------------------------------
+    // CLEAN_MARKDOWN — the web-paste cleaner
+    // -----------------------------------------------------------
+
+    // Line-leading shapes (MULTILINE): headers, blockquotes, bullets,
+    // horizontal rules and code fences. Each needs its marker + the
+    // required space (a bare “#عنوان” is NOT the shape — refusal).
+    private val MD_HEADER = Regex("(?m)^[ \\t]{0,3}#{1,6}[ \\t]+")
+    private val MD_BLOCKQUOTE = Regex("(?m)^[ \\t]{0,3}(?:>[ \\t]?)+")
+    private val MD_BULLET = Regex("(?m)^[ \\t]{0,3}[-*+•][ \\t]+")
+    private val MD_RULE =
+        Regex("(?m)^[ \\t]{0,3}([-*_])[ \\t]*(?:\\1[ \\t]*){2,}[ \\t]*$\\n?")
+    private val MD_FENCE = Regex("(?m)^[ \\t]{0,3}`{3,}[^\\n]*\\n?")
+
+    // Inline shapes: images BEFORE links (an image embeds a link shape
+    // inside itself), then autolinks, links, code spans, strike, and the
+    // emphasis family. The underscore-italic form is unwrapped ONLY when
+    // the content is Latin and the neighbors are not word characters —
+    // the lookarounds + Latin-only content guard some_var_name AND
+    // Arabic snake-ish underscores (متغير_و_آخر) alike.
+    private val MD_IMAGE = Regex("!\\[([^\\]\\n]*)\\]\\([^)\\n]+\\)")
+    private val MD_AUTOLINK = Regex("<(https?://[^>\\n]+)>")
+    private val MD_LINK = Regex("\\[([^\\]\\n]+)\\]\\([^)\\n]+\\)")
+    private val MD_CODE = Regex("`([^`\\n]+)`")
+    private val MD_STRIKE = Regex("~~(.+?)~~")
+    // The asterisk emphasis is legit intraword (a**b**c — CommonMark),
+    // so no neighbor guards. The UNDERSCORE emphasis is guarded on both
+    // sides: intraword __bold__ is NOT markdown, and unguarded it would
+    // shred a__b__c and snake_case alike — the guard + the Latin-only
+    // single-underscore rule keep those byte-identical. Triples run
+    // before doubles (else ** eats ***).
+    private val MD_BOLD_STAR3 = Regex("\\*\\*\\*(.+?)\\*\\*\\*")
+    private val MD_BOLD_UND3 =
+        Regex("(?<![A-Za-z0-9_])___(.+?)___(?![A-Za-z0-9_])")
+    private val MD_BOLD_STAR2 = Regex("\\*\\*(.+?)\\*\\*")
+    private val MD_BOLD_UND2 =
+        Regex("(?<![A-Za-z0-9_])__(.+?)__(?![A-Za-z0-9_])")
+    private val MD_ITALIC_STAR = Regex("\\*([^*\\n]+)\\*")
+    private val MD_ITALIC_UND =
+        Regex("(?<![A-Za-z0-9_])_([A-Za-z0-9][^_\\n]*?)_(?![A-Za-z0-9_])")
+
+    /**
+     * The web-paste cleaner: the copy that arrives wearing markdown
+     * keeps its meaning and loses the costume — leading # headers, >
+     * blockquotes, - * + • bullets and --- rules vanish; ***bold***,
+     * __bold__, *italic*, ~~strike~~, `code` and ``` fences unwrap to
+     * their bare text (underscore-italic for Latin content only);
+     * [text](url) speaks its text, ![alt](url) its alt and <url> its
+     * address. Numbered lists, snake_case and Arabic underscores are
+     * never touched; tables and HTML entities are out of the closed
+     * catalog; a text carrying none of the shapes is returned
+     * byte-identical — never a cosmetic rewrite of prose that needs
+     * none.
+     */
+    private fun cleanWebPaste(text: String): String {
+        var out = MD_FENCE.replace(text, "")
+        out = MD_RULE.replace(out, "")
+        out = MD_HEADER.replace(out, "")
+        out = MD_BLOCKQUOTE.replace(out, "")
+        out = MD_BULLET.replace(out, "")
+        out = MD_IMAGE.replace(out) { m -> m.groupValues[1] }
+        out = MD_AUTOLINK.replace(out) { m -> m.groupValues[1] }
+        out = MD_LINK.replace(out) { m -> m.groupValues[1] }
+        out = MD_CODE.replace(out) { m -> m.groupValues[1] }
+        out = MD_STRIKE.replace(out) { m -> m.groupValues[1] }
+        out = MD_BOLD_STAR3.replace(out) { m -> m.groupValues[1] }
+        out = MD_BOLD_UND3.replace(out) { m -> m.groupValues[1] }
+        out = MD_BOLD_STAR2.replace(out) { m -> m.groupValues[1] }
+        out = MD_BOLD_UND2.replace(out) { m -> m.groupValues[1] }
+        out = MD_ITALIC_STAR.replace(out) { m -> m.groupValues[1] }
+        out = MD_ITALIC_UND.replace(out) { m -> m.groupValues[1] }
+        return out
     }
 
     /** Word boundaries of the snake/camel pair: spaces, underscores, dashes. */

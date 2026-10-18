@@ -600,6 +600,15 @@ private val PANEL_SECTIONS: List<DrsTextToolsPanelSection> = listOf(
                 R.string.drs__text_tools__desc_normalize_arabic_forms,
                 Icons.Default.TextFields,
             ),
+            // the web-paste cleaner — copy from the web arrives
+            // wearing markdown; the tool keeps the meaning and drops
+            // the costume (headers, bullets, emphasis, links to text).
+            toolItem(
+                DrsTextTool.CLEAN_MARKDOWN,
+                R.string.drs__text_tools__tool_clean_markdown,
+                R.string.drs__text_tools__desc_clean_markdown,
+                Icons.Default.FormatClear,
+            ),
             // Latin sentence punctuation → Arabic marks.
             toolItem(
                 DrsTextTool.TO_ARABIC_PUNCTUATION,
@@ -866,6 +875,8 @@ fun textToolTitleRes(tool: DrsTextTool): Int = when (tool) {
     DrsTextTool.TO_WESTERN_PUNCTUATION -> R.string.drs__text_tools__tool_to_western_punctuation
     DrsTextTool.NORMALIZE_ARABIC -> R.string.drs__text_tools__tool_normalize_arabic
     DrsTextTool.NORMALIZE_PUNCTUATION -> R.string.drs__text_tools__tool_normalize_punctuation
+    // the web-paste cleaner.
+    DrsTextTool.CLEAN_MARKDOWN -> R.string.drs__text_tools__tool_clean_markdown
     DrsTextTool.CLEAN_TEXT -> R.string.drs__text_tools__tool_clean_text
     DrsTextTool.WRAP_QUOTES -> R.string.drs__text_tools__tool_wrap_quotes
     DrsTextTool.WRAP_PARENS -> R.string.drs__text_tools__tool_wrap_parens
@@ -951,6 +962,8 @@ fun textToolDescRes(tool: DrsTextTool): Int = when (tool) {
     DrsTextTool.TO_WESTERN_PUNCTUATION -> R.string.drs__text_tools__desc_to_western_punctuation
     DrsTextTool.NORMALIZE_ARABIC -> R.string.drs__text_tools__desc_normalize_arabic
     DrsTextTool.NORMALIZE_PUNCTUATION -> R.string.drs__text_tools__desc_normalize_punctuation
+    // the web-paste cleaner.
+    DrsTextTool.CLEAN_MARKDOWN -> R.string.drs__text_tools__desc_clean_markdown
     DrsTextTool.CLEAN_TEXT -> R.string.drs__text_tools__desc_clean_text
     DrsTextTool.WRAP_QUOTES -> R.string.drs__text_tools__desc_wrap_quotes
     DrsTextTool.WRAP_PARENS -> R.string.drs__text_tools__desc_wrap_parens
