@@ -141,7 +141,7 @@ class DrsV21600Tests : FunSpec({
     // ------------------------------------------------------------------
 
     test("العقد: CODE_RANGE امتد إلى -675 والأداتان مرمّحتان بلا تصادم") {
-        DrsTextTool.CODE_RANGE shouldBe -678..-601
+        DrsTextTool.CODE_RANGE shouldBe -680..-601
         DrsTextTool.fromCode(-674) shouldBe DrsTextTool.IMPROVE_PHRASES
         DrsTextTool.fromCode(-675) shouldBe DrsTextTool.NORMALIZE_SPACING
         // لا تصادم: عدد الأكواد المميزة = عدد المدخلات

@@ -566,6 +566,26 @@ private val PANEL_SECTIONS: List<DrsTextToolsPanelSection> = listOf(
                 R.string.drs__text_tools__desc_hijri_to_gregorian,
                 Icons.Default.DateRange,
             ),
+            // the smart calculator — the whole field IS the
+            // expression: «1250×12» answers 15000, with the Eastern
+            // digits and the ×÷− family folded onto the grammar; a
+            // hand-written parser refuses anything it cannot read.
+            toolItem(
+                DrsTextTool.CALCULATE,
+                R.string.drs__text_tools__tool_calculate,
+                R.string.drs__text_tools__desc_calculate,
+                Icons.Default.Calculate,
+            ),
+            // the quantity converter — the whole field IS one
+            // quantity: «5 كم» speaks its conversions ladder across
+            // seven closed categories, «إلى م» names the one target,
+            // and the target answers its canonical Arabic token.
+            toolItem(
+                DrsTextTool.CONVERT_UNITS,
+                R.string.drs__text_tools__tool_convert_units,
+                R.string.drs__text_tools__desc_convert_units,
+                Icons.Default.SwapHoriz,
+            ),
             // tatweel removal + digit conversions.
             toolItem(
                 DrsTextTool.REMOVE_TATWEEL,
@@ -908,6 +928,9 @@ fun textToolTitleRes(tool: DrsTextTool): Int = when (tool) {
     // the Morse telegraph pair.
     DrsTextTool.MORSE_ENCODE -> R.string.drs__text_tools__tool_morse_encode
     DrsTextTool.MORSE_DECODE -> R.string.drs__text_tools__tool_morse_decode
+    // the compute pair — the calculator and the quantity converter.
+    DrsTextTool.CALCULATE -> R.string.drs__text_tools__tool_calculate
+    DrsTextTool.CONVERT_UNITS -> R.string.drs__text_tools__tool_convert_units
     // the mixed-script cleanup pair.
     DrsTextTool.SEPARATE_DIGIT_LETTERS -> R.string.drs__text_tools__tool_separate_digit_letters
     DrsTextTool.REMOVE_PUNCTUATION -> R.string.drs__text_tools__tool_remove_punctuation
@@ -1009,6 +1032,9 @@ fun textToolDescRes(tool: DrsTextTool): Int = when (tool) {
     // the Morse telegraph pair.
     DrsTextTool.MORSE_ENCODE -> R.string.drs__text_tools__desc_morse_encode
     DrsTextTool.MORSE_DECODE -> R.string.drs__text_tools__desc_morse_decode
+    // the compute pair — the calculator and the quantity converter.
+    DrsTextTool.CALCULATE -> R.string.drs__text_tools__desc_calculate
+    DrsTextTool.CONVERT_UNITS -> R.string.drs__text_tools__desc_convert_units
     // the mixed-script cleanup pair.
     DrsTextTool.SEPARATE_DIGIT_LETTERS -> R.string.drs__text_tools__desc_separate_digit_letters
     DrsTextTool.REMOVE_PUNCTUATION -> R.string.drs__text_tools__desc_remove_punctuation

@@ -208,7 +208,7 @@ class DrsPublicV160Tests : FunSpec({
         // 52 tools through (public) + the number-to-words tool
         // + the tafqit tool () + the date tool () + the
         // clock-time tool (), and the fraction, weekday and ordinal tools.
-        DrsTextTool.entries.size shouldBe 78
+        DrsTextTool.entries.size shouldBe 80
         (tool.isInfoOnly) shouldBe false
         (tool.isEditorOp) shouldBe false
         (tool.isInsertMark) shouldBe false

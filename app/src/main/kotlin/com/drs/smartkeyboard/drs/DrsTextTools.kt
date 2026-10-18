@@ -489,11 +489,46 @@ enum class DrsTextTool(
     // or doubled slash), a sign outside the closed map, or any foreign
     // glyph returns the input byte-identically. Decoding must never
     // destroy typing — never a guess. See [morseDecode].
-    MORSE_DECODE(-678);
+    MORSE_DECODE(-678),
+
+    // the arithmetic evaluator — the field IS the expression:
+    // «1250×12» answers 15000, «(50+25)÷3» answers 25, «٥٠ × ٤»
+    // answers 200. A hand-written recursive-descent parser (never an
+    // eval): + − × ÷ ^ over the standard precedence, right-associative
+    // powers, unary minus, parentheses and the percent postfix binding
+    // to its own number (pure math — 15% == 0.15, documented, no
+    // calculator conventions). Eastern digits, the Arabic
+    // decimal/thousands separators and the operator homographs
+    // (×÷−،٪، fullwidth) fold onto the canonical grammar FIRST; a
+    // Latin comma BETWEEN digits is a thousands separator. ANY foreign
+    // character, an unbalanced parenthesis or a dangling operator
+    // refuses the WHOLE text byte-identically — and a division by
+    // zero (Infinity) refuses too. The result prints as an exact
+    // integer when it is one (within 1e-9, inside the 9e15 safe
+    // zone), else 12 SIGNIFICANT digits — never scientific notation,
+    // never a float tail like 0.30000000000000004. A field with no
+    // operator at all is not an attempt: bare numbers stay bare. See
+    // [calculate].
+    CALCULATE(-679),
+
+    // the quantity converter — the field IS the quantity:
+    // «5 كم» speaks its conversions ladder, «38 C» speaks °ف and ك,
+    // and «5 كم إلى م» answers the ONE target — 5000 م. The closed
+    // catalog covers SEVEN categories (length, mass, volume, area,
+    // speed, data, time) over Arabic and English unit names, with the
+    // temperature trio speaking REAL formulas (not factors). The
+    // ladder skips the input unit's own line, and the target answers
+    // its canonical Arabic display token no matter how it was typed
+    // (the morse doctrine: the keyboard speaks Arabic — «3 kg to g»
+    // answers 3000 جم). Anything that is not one whole quantity —
+    // prose, a bare number, an unknown unit, a cross-category target —
+    // returns byte-identical, never an invented conversion. See
+    // [convertUnits].
+    CONVERT_UNITS(-680);
 
     companion object {
         /** Inclusive range covering every tool code, for fast dispatch. */
-        val CODE_RANGE = -678..-601
+        val CODE_RANGE = -680..-601
 
         fun fromCode(code: Int): DrsTextTool? = entries.firstOrNull { it.code == code }
     }
@@ -850,6 +885,12 @@ object DrsTextTools {
                 // (see [morseEncode] / [morseDecode]).
                 DrsTextTool.MORSE_ENCODE -> morseEncode(text)
                 DrsTextTool.MORSE_DECODE -> morseDecode(text)
+                // the arithmetic evaluator — the whole field IS the
+                // expression (see [calculate]).
+                DrsTextTool.CALCULATE -> calculate(text)
+                // the quantity converter — the whole field IS the
+                // quantity (see [convertUnits]).
+                DrsTextTool.CONVERT_UNITS -> convertUnits(text)
                 // one space between digits and letters in BOTH
                 // directions (12abc -> 12 abc، ٣س -> ٣ س) — the mixed-script
                 // cleanup pasted prices and codes need. The lookarounds never
@@ -1936,5 +1977,419 @@ object DrsTextTools {
         }
         val joined = first + rest
         return if (joined == text) text else joined
+    }
+
+    // -----------------------------------------------------------
+    // CALCULATE — the arithmetic expression evaluator
+    // -----------------------------------------------------------
+
+    /**
+     * The symbol homographs the calculator folds onto the canonical
+     * grammar BEFORE parsing: the Arabic decimal/thousands separators,
+     * the multiplication/division/minus family (× ÷ − – — and their
+     * fullwidth siblings), the Arabic and fullwidth percent, the caret
+     * family and the fullwidth parens. Digits fold in [calcNormalize].
+     */
+    private val CALC_FOLDS: Map<Char, String> = mapOf(
+        '\u066B' to ".",  // arabic decimal separator ٫
+        '\u066C' to "",   // arabic thousands separator ٬
+        '\u00D7' to "*",  // ×
+        '\u00F7' to "/",  // ÷
+        '\u2212' to "-", '\u2013' to "-", '\u2014' to "-", '\uFE63' to "-",
+        '\uFF0B' to "+", '\uFF0D' to "-", '\uFF0A' to "*", '\uFF0F' to "/",
+        '\uFF08' to "(", '\uFF09' to ")", '\uFF1E' to ">",
+        '\u066A' to "%", '\uFF05' to "%",
+        '\uFF3E' to "^", '\u2038' to "^",
+    )
+
+    /** The NBSP family folds to a plain space in the parser's eyes. */
+    private val CALC_SOFT_SPACES = charArrayOf('\u00A0', '\u2007', '\u202F')
+
+    /** A longer "expression" is not a typing shape — the guard that
+     *  keeps the advisor's hot path cheap. */
+    private const val CALC_MAX_LEN = 256
+
+    /** The number literal grammar (the parser anchors it itself). */
+    private val CALC_NUMBER = Regex("\\d+(?:\\.\\d+)?|\\.\\d+")
+
+    /** A Latin comma BETWEEN digits is a thousands separator —
+     *  «1,234» speaks 1234. A comma anywhere else is a foreign
+     *  character and refuses the parse. */
+    private val CALC_THOUSANDS_COMMA = Regex("(?<=\\d),(?=\\d)")
+
+    /**
+     * The digit/symbol/separator normalization: Eastern digits (both
+     * families) fold to 0-9, the folds table applies, the NBSP family
+     * becomes a plain space and the between-digits comma vanishes.
+     */
+    private fun calcNormalize(text: String): String {
+        val sb = StringBuilder(text.length)
+        for (ch in text) {
+            when {
+                ch.code in 0x0660..0x0669 -> sb.append(('0' + (ch.code - 0x0660)))
+                ch.code in 0x06F0..0x06F9 -> sb.append(('0' + (ch.code - 0x06F0)))
+                ch in CALC_SOFT_SPACES -> sb.append(' ')
+                else -> sb.append(CALC_FOLDS[ch] ?: ch.toString())
+            }
+        }
+        return sb.toString().replace(CALC_THOUSANDS_COMMA, "")
+    }
+
+    /**
+     * The recursive-descent parser — the exact mirror of the
+     * session's check_calc_units.py: expr → term → unary → power →
+     * primary, `^` right-associative, unary minus, the percent postfix
+     * binding to its own number (pure math: 15% == 0.15), and the
+     * number literal anchored where the parser stands. Any failure
+     * sets [ok] and the caller refuses the text byte-identically.
+     */
+    private class CalcParser(private val s: String) {
+        var index = 0
+        var ok = true
+
+        private fun peek(): Char = if (index < s.length) s[index] else '\u0000'
+
+        private fun skipSpaces() {
+            while (index < s.length && s[index] == ' ') index++
+        }
+
+        /** Parses the WHOLE string as one expression. */
+        fun parse(): Double {
+            val v = expr()
+            skipSpaces()
+            if (!ok || index != s.length) ok = false
+            return v
+        }
+
+        private fun expr(): Double {
+            var v = term()
+            while (ok) {
+                skipSpaces()
+                val c = peek()
+                if (c == '+' || c == '-') {
+                    index++
+                    val rhs = term()
+                    v = if (c == '+') v + rhs else v - rhs
+                } else {
+                    break
+                }
+            }
+            return v
+        }
+
+        private fun term(): Double {
+            var v = unary()
+            while (ok) {
+                skipSpaces()
+                val c = peek()
+                if (c == '*' || c == '/') {
+                    index++
+                    val rhs = unary()
+                    if (!ok) break
+                    v = if (c == '*') v * rhs else v / rhs
+                } else {
+                    break
+                }
+            }
+            return v
+        }
+
+        private fun unary(): Double {
+            skipSpaces()
+            when (peek()) {
+                '-' -> {
+                    index++
+                    return -unary()
+                }
+                '+' -> {
+                    index++
+                    return unary()
+                }
+            }
+            return power()
+        }
+
+        private fun power(): Double {
+            val base = primary()
+            if (!ok) return base
+            skipSpaces()
+            if (peek() == '^') {
+                index++
+                return Math.pow(base, unary())
+            }
+            return base
+        }
+
+        private fun primary(): Double {
+            skipSpaces()
+            if (peek() == '(') {
+                index++
+                val v = expr()
+                skipSpaces()
+                if (peek() != ')') {
+                    ok = false
+                    return 0.0
+                }
+                index++
+                return v
+            }
+            val m = CALC_NUMBER.find(s, index) ?: run {
+                ok = false
+                return 0.0
+            }
+            if (m.range.first != index) {
+                ok = false
+                return 0.0
+            }
+            index = m.range.last + 1
+            var v = m.value.toDouble()
+            if (peek() == '%') {
+                index++
+                v /= 100.0
+            }
+            return v
+        }
+    }
+
+    /**
+     * The result formatter — an exact integer (within 1e-9, inside
+     * the 9.007e15 safe zone) prints bare; anything else keeps 12
+     * SIGNIFICANT digits (HALF_EVEN), trailing zeros stripped, plain
+     * notation only. Null refuses the commit (NaN/Infinity — a
+     * division by zero included).
+     */
+    private fun formatCalcResult(r: Double): String? {
+        if (r.isNaN() || r.isInfinite()) return null
+        if (r == 0.0) return "0"
+        if (Math.abs(r - Math.rint(r)) < 1e-9 && Math.abs(r) < 9.007e15) {
+            return Math.rint(r).toLong().toString()
+        }
+        return java.math.BigDecimal(r.toString(), java.math.MathContext(12))
+            .stripTrailingZeros()
+            .toPlainString()
+    }
+
+    /**
+     * The evaluator behind [DrsTextTool.CALCULATE]: the WHOLE field
+     * must parse as one expression — the firing contract requires at
+     * least one operator/paren/percent in the normalized text (a bare
+     * number is not an attempt), any foreign character, unbalanced
+     * parenthesis, dangling operator or non-finite result refuses the
+     * text byte-identically, and a result equal to the input is the
+     * honest no-op. Pure, never throwing.
+     */
+    private fun calculate(text: String): String {
+        val s = calcNormalize(text)
+        if (s.length > CALC_MAX_LEN) return text
+        if (s.none { it in "+-*/^%()" }) return text
+        val p = CalcParser(s)
+        val v = p.parse()
+        if (!p.ok) return text
+        val out = formatCalcResult(v) ?: return text
+        return if (out == text) text else out
+    }
+
+    // -----------------------------------------------------------
+    // CONVERT_UNITS — the quantity converter
+    // -----------------------------------------------------------
+
+    /** One closed unit group: its category, the exact factor into the
+     *  category's base unit, the ONE Arabic display token the tool
+     *  answers in, and every accepted spelling (Arabic and English). */
+    private class UnitGroup(
+        val category: String,
+        val display: String,
+        val factor: Double,
+        val keys: List<String>,
+    )
+
+    /** The closed catalog — seven categories, every group's display
+     *  token repeated first in its own keys (so the index always owns
+     *  its display). Factors are EXACT definitions, not approximations
+     *  (the mile is 1609.344 m, the gallon 3.785411784 l). */
+    private val UNIT_GROUPS: List<UnitGroup> = listOf(
+        // length (base meter)
+        UnitGroup("length", "م", 1.0, listOf("م", "متر", "مترات", "m", "meter", "meters")),
+        UnitGroup("length", "مم", 0.001, listOf("مم", "مليمتر", "mm", "millimeter")),
+        UnitGroup("length", "سم", 0.01, listOf("سم", "سنتيمتر", "cm", "centimeter")),
+        UnitGroup("length", "كم", 1000.0, listOf("كم", "كيلومتر", "كيلومترات", "km", "kilometer")),
+        UnitGroup("length", "ميل", 1609.344, listOf("ميل", "أميال", "mi", "mile", "miles")),
+        UnitGroup("length", "قدم", 0.3048, listOf("قدم", "أقدام", "ft", "foot", "feet")),
+        UnitGroup("length", "بوصة", 0.0254, listOf("بوصة", "بوصات", "in", "inch", "inches")),
+        UnitGroup("length", "ياردة", 0.9144, listOf("ياردة", "ياردات", "yd", "yard")),
+        // mass (base kilogram)
+        UnitGroup("mass", "كغ", 1.0, listOf(
+            "كغ", "كيلوغرام", "كيلوجرام", "كيلوغرامات", "kg", "kilogram", "kilo",
+        )),
+        UnitGroup("mass", "جم", 0.001, listOf("جم", "غرام", "جرام", "غرامات", "g", "gram", "grams")),
+        UnitGroup("mass", "مج", 0.000001, listOf("مج", "مليغرام", "مليجرام", "mg", "milligram")),
+        UnitGroup("mass", "طن", 1000.0, listOf("طن", "أطنان", "t", "ton", "tonne")),
+        UnitGroup("mass", "رطل", 0.45359237, listOf("رطل", "أرطال", "lb", "lbs", "pound")),
+        UnitGroup("mass", "أوقية", 0.028349523125, listOf("أوقية", "oz", "ounce")),
+        // volume (base liter)
+        UnitGroup("volume", "ل", 1.0, listOf("ل", "لتر", "ليتر", "لترات", "l", "liter", "litre")),
+        UnitGroup("volume", "مل", 0.001, listOf("مل", "مليلتر", "مليليلتر", "ml", "milliliter")),
+        UnitGroup("volume", "م³", 1000.0, listOf("م³", "م3", "متر مكعب", "مكعب", "m3", "m³", "cubic meter")),
+        UnitGroup("volume", "جالون", 3.785411784, listOf("جالون", "جالونات", "gal", "gallon")),
+        UnitGroup("volume", "كوب", 0.24, listOf("كوب", "أكواب", "cup", "cups")),
+        // area (base m²)
+        UnitGroup("area", "م²", 1.0, listOf("م²", "م2", "متر مربع", "متر مربعة", "m2", "m²", "square meter")),
+        UnitGroup("area", "سم²", 0.0001, listOf("سم²", "سم2", "سنتيمتر مربع", "cm2", "cm²")),
+        UnitGroup("area", "كم²", 1000000.0, listOf("كم²", "كم2", "كيلومتر مربع", "km2", "km²")),
+        UnitGroup("area", "هكتار", 10000.0, listOf("هكتار", "هكتارات", "ha", "hectare")),
+        UnitGroup("area", "دونم", 1000.0, listOf("دونم", "دنم", "دونمات", "dunam")),
+        // speed (base m/s)
+        UnitGroup("speed", "م/س", 1.0, listOf("م/س", "م/ث", "متر في الثانية", "m/s", "mps")),
+        UnitGroup("speed", "كم/س", 1000.0 / 3600.0, listOf(
+            "كم/س", "كم/ساعة", "كيلومتر في الساعة", "km/h", "kph", "kmh",
+        )),
+        UnitGroup("speed", "ميل/س", 0.44704, listOf("ميل/س", "ميل في الساعة", "mph")),
+        UnitGroup("speed", "عقدة", 1852.0 / 3600.0, listOf("عقدة", "عقد", "knot", "knots", "kn")),
+        // data (base byte, SI decimal — 1 kb = 1000 bytes, documented)
+        UnitGroup("data", "بايت", 1.0, listOf("بايت", "b", "byte", "bytes")),
+        UnitGroup("data", "كيلوبايت", 1000.0, listOf("كيلوبايت", "kb")),
+        UnitGroup("data", "ميجابايت", 1000000.0, listOf("ميجابايت", "mb")),
+        UnitGroup("data", "جيجابايت", 1000000000.0, listOf("جيجابايت", "gb")),
+        UnitGroup("data", "تيرابايت", 1000000000000.0, listOf("تيرابايت", "tb")),
+        // time (base second; the year is the Julian year 365.25 d)
+        UnitGroup("time", "ث", 1.0, listOf("ث", "ثانية", "ثوان", "ثواني", "s", "sec", "second")),
+        UnitGroup("time", "د", 60.0, listOf("د", "دقيقة", "دقائق", "min", "minute")),
+        UnitGroup("time", "ساعة", 3600.0, listOf("ساعة", "ساعات", "h", "hour", "hr")),
+        UnitGroup("time", "يوم", 86400.0, listOf("يوم", "أيام", "d", "day", "days")),
+        UnitGroup("time", "أسبوع", 604800.0, listOf("أسبوع", "أسابيع", "week", "weeks")),
+        UnitGroup("time", "سنة", 31557600.0, listOf("سنة", "سنوات", "year", "years")),
+    )
+
+    /** The lookup key of one spelling: trimmed, whitespace-collapsed,
+     *  case-folded (ROOT — never a locale surprise). */
+    private fun canonicalUnitKey(k: String): String =
+        k.trim().split(Regex("\\s+")).joinToString(" ").lowercase(Locale.ROOT)
+
+    /** Every spelling resolves to its group (later duplicates of the
+     *  same spelling would overwrite — the catalog is verified unique
+     *  by the structural audit). */
+    private val UNIT_INDEX: Map<String, UnitGroup> = UNIT_GROUPS
+        .flatMap { g -> g.keys.map { canonicalUnitKey(it) to g } }
+        .toMap()
+
+    /** The closed per-category answer ladders — canonical display
+     *  tokens only, the input unit's own line skipped at runtime. */
+    private val UNIT_LADDERS: Map<String, List<String>> = mapOf(
+        "length" to listOf("م", "كم", "سم", "ميل", "قدم"),
+        "mass" to listOf("جم", "كغ", "طن", "رطل"),
+        "volume" to listOf("مل", "ل", "جالون", "كوب"),
+        "area" to listOf("م²", "كم²", "هكتار", "دونم"),
+        "speed" to listOf("م/س", "كم/س", "ميل/س", "عقدة"),
+        "data" to listOf("كيلوبايت", "ميجابايت", "جيجابايت"),
+        "time" to listOf("ث", "د", "ساعة", "يوم"),
+    )
+
+    /** The temperature scales — a separate closed map because they are
+     *  FORMULAS, not factors. «س» alone is NOT celsius (س = second is
+     *  the older abbreviation); the explicit °س / سلسيوس / مئوية
+     *  spellings own the scale. */
+    private val TEMP_SCALE_KEYS: Map<String, Char> = mapOf(
+        "°c" to 'C', "c" to 'C', "سلسيوس" to 'C', "مئوية" to 'C', "°س" to 'C', "س°" to 'C',
+        "°f" to 'F', "f" to 'F', "فهرنهايت" to 'F', "°ف" to 'F', "ف°" to 'F',
+        "k" to 'K', "ك" to 'K', "كلفن" to 'K', "°k" to 'K',
+    )
+
+    /** The canonical Arabic display token of each temperature scale. */
+    private val TEMP_DISPLAY: Map<Char, String> =
+        mapOf('C' to "°م", 'F' to "°ف", 'K' to "ك")
+
+    private fun tempToCelsius(v: Double, from: Char): Double = when (from) {
+        'F' -> (v - 32.0) * 5.0 / 9.0
+        'K' -> v - 273.15
+        else -> v
+    }
+
+    private fun tempFromCelsius(c: Double, to: Char): Double = when (to) {
+        'F' -> c * 9.0 / 5.0 + 32.0
+        'K' -> c + 273.15
+        else -> c
+    }
+
+    /** The digit/separator normalization of the quantity shape — the
+     *  Eastern digit families fold, the Arabic decimal separator
+     *  becomes the dot and the Arabic thousands separator vanishes. */
+    private fun unitsNormalize(text: String): String = buildString(text.length) {
+        for (ch in text) {
+            when {
+                ch.code in 0x0660..0x0669 -> append(('0' + (ch.code - 0x0660)))
+                ch.code in 0x06F0..0x06F9 -> append(('0' + (ch.code - 0x06F0)))
+                ch == '\u066B' -> append('.')
+                ch == '\u066C' -> Unit
+                else -> append(ch)
+            }
+        }
+    }
+
+    /** The whole-text quantity shape: one number, optional spaces, ONE
+     *  unit token (multi-word units join with single spaces). Anchored
+     *  to the whole string — prose never matches. */
+    private val UNIT_QUANTITY = Regex("^(-?\\d+(?:\\.\\d+)?|\\.\\d+)\\s*(.+)\\z")
+
+    /** The explicit-target separator: «إلى»/«to» need surrounding
+     *  spaces, the arrows may glue («5كم→م»). Split ONCE. */
+    private val UNIT_TARGET_SEP = Regex("\\s+(?:إلى|→|->|to)\\s+|\\s*(?:→|->)\\s*")
+
+    /**
+     * The converter behind [DrsTextTool.CONVERT_UNITS]: the WHOLE
+     * field must be one quantity — a number and ONE unit from the
+     * closed catalog (an optional «إلى/to/→» target first split off).
+     * No explicit target answers the category's ladder (the input
+     * unit's own line skipped); an explicit target answers ONE line,
+     * same category only, in its canonical Arabic display token. Any
+     * other shape — prose, a bare number, an unknown unit, a
+     * cross-category target — returns byte-identical, never an
+     * invented conversion. Pure, never throwing.
+     */
+    private fun convertUnits(text: String): String {
+        val s = unitsNormalize(text).replace('\u00A0', ' ').trim()
+        val m = UNIT_QUANTITY.find(s) ?: return text
+        val value = m.groupValues[1].toDouble()
+        var unitRaw = m.groupValues[2].trim()
+        var target: String? = null
+        val parts = UNIT_TARGET_SEP.split(unitRaw, 2)
+        if (parts.size == 2 && parts[0].trim().isNotEmpty() && parts[1].trim().isNotEmpty()) {
+            unitRaw = parts[0].trim()
+            target = parts[1].trim()
+        }
+        val key = canonicalUnitKey(unitRaw)
+        val scale = TEMP_SCALE_KEYS[key]
+        if (scale != null) {
+            if (target != null) {
+                val dst = TEMP_SCALE_KEYS[canonicalUnitKey(target)] ?: return text
+                if (dst == scale) return text
+                val out = formatCalcResult(tempFromCelsius(tempToCelsius(value, scale), dst))
+                    ?: return text
+                return "$out ${TEMP_DISPLAY[dst]}"
+            }
+            val lines = mutableListOf<String>()
+            for (dst in listOf('C', 'F', 'K')) {
+                if (dst == scale) continue
+                val out = formatCalcResult(tempFromCelsius(tempToCelsius(value, scale), dst))
+                    ?: return text
+                lines += "$out ${TEMP_DISPLAY[dst]}"
+            }
+            return lines.joinToString("\n")
+        }
+        val group = UNIT_INDEX[key] ?: return text
+        if (target != null) {
+            val tgt = UNIT_INDEX[canonicalUnitKey(target)] ?: return text
+            if (tgt.category != group.category) return text
+            val out = formatCalcResult(value * group.factor / tgt.factor) ?: return text
+            return "$out ${tgt.display}"
+        }
+        val ladder = UNIT_LADDERS[group.category] ?: return text
+        val lines = mutableListOf<String>()
+        for (tok in ladder) {
+            val tgt = UNIT_INDEX[tok] ?: continue
+            if (tgt.display == group.display) continue
+            val out = formatCalcResult(value * group.factor / tgt.factor) ?: return text
+            lines += "$out $tok"
+        }
+        return lines.joinToString("\n")
     }
 }

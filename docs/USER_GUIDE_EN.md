@@ -121,6 +121,25 @@ An unknown sign or empty word returns the text untouched — the decoder
 never guesses and never destroys. The smart tiles suggest «Morse decode»
 only when the decode is guaranteed to fire.
 
+**Smart calculator & unit converter:** type `1250×12` in any field and
+ask for the smart calculator — it answers 15000. A hand-written parser
+with correct precedence, parentheses, powers (`2^10` = 1024) and a
+percent that binds to its own number (15% = 0.15); Eastern digits
+(٥٠ × ٤ = 200), the Arabic decimal separator and the thousands comma
+(1,234+66 = 1300) all fold onto the grammar first, and the result is
+clean — no float tail (0.1+0.2 = 0.3). Prose, an unbalanced paren and
+a division by zero all return untouched — the calculator never
+guesses. Type `5 كم` and ask for the unit converter — it speaks the
+category ladder: 5000 م, 500000 سم, 3.10685596119 ميل, 16404.1994751
+قدم — seven closed categories (length, mass, volume, area, speed,
+data, time) over Arabic and English names, temperatures by their real
+formulas (38 C = 100.4 °ف and 311.15 ك), and «إلى م»/«to m» names one
+target that answers in its canonical Arabic token («3 kg to g»
+returns 3000 جم). Anything that is not one whole quantity («عمره 25
+سنة») returns untouched. When the whole field IS an expression or a
+quantity, the smart tiles suggest the right tool — a guaranteed-result
+recommendation.
+
 **Deterministic text vocalization:** in the text tools panel,
 «Vocalize text» adds canonical harakat to every word the local 3000-word
 lexicon knows — unknown words stay untouched, never guessed. Works on the

@@ -227,6 +227,23 @@ object DrsTileContextAdvisor {
             DrsTextTools.apply(DrsTextTool.MORSE_DECODE, t) != t) {
             picks += DrsTextTool.MORSE_DECODE
         }
+        // 1.9) الحاسبة الذكية — عقد الإطلاق المضمون (نمط
+        //      IMPROVE_PHRASES): المرشَّح هو ما سيُحل حتمًا. الحقل كله
+        //      تعبير (2+2، ٥٠ × ٤، 15%) فيُحل ويُرشَّح، والنثر («سعر
+        //      2+2 ريال») يرفضه المحلل فلا يُرشَّح. بلا حرس إضافي:
+        //      فحص وجود العامل رخيص داخل المحرك نفسه، وحرس الطول
+        //      (256) يبقي المسار الساخن رخيصًا.
+        if (t.length <= 256 && DrsTextTools.apply(DrsTextTool.CALCULATE, t) != t) {
+            picks += DrsTextTool.CALCULATE
+        }
+        // 1.10) الكمية الواحدة تتحوّل فعلًا — عقد الإطلاق نفسه:
+        //       «5 كم» أو «38 C» أو «5 كم إلى م» يُحل المحوِّل ويُرشَّح،
+        //       والنثر («عمره 25 سنة») لا شكل كمية فيه فيصمت. حرس طول
+        //       واحد (64) يكفي: الكمية كتابة قصيرة، والنص الأطول
+        //       يرفضه الشكل المرسى على الطرفين قبل أي مسح عميق.
+        if (t.length <= 64 && DrsTextTools.apply(DrsTextTool.CONVERT_UNITS, t) != t) {
+            picks += DrsTextTool.CONVERT_UNITS
+        }
         // 2) العلامات الصفرية والتطويل نفاية لصق لا تصلح فقرة — انزعها.
         if (hasZeroWidth) picks += DrsTextTool.REMOVE_ZERO_WIDTH
         if (hasTatweel) picks += DrsTextTool.REMOVE_TATWEEL

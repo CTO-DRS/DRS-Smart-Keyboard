@@ -407,6 +407,17 @@ class DrsTextToolsTest : FunSpec({
             // byte-identically. Decode must never destroy typing.
             DrsTextTool.MORSE_DECODE -> result shouldBe input
 
+            // the hostile field carries % (from %s %d) — the firing
+            // contract lights, but the emoji, braces and letters refuse
+            // the parse: the calculator never guesses a result.
+            DrsTextTool.CALCULATE -> result shouldBe input
+
+            // the hostile field opens with the emoji — no leading
+            // number, no closed unit spelling — the converter refuses
+            // the whole text byte-identically, never an invented
+            // conversion.
+            DrsTextTool.CONVERT_UNITS -> result shouldBe input
+
             // the census is an INFO tool — apply() is the read-only
             // discipline itself: the text returns byte-identical and
             // callers read [DrsTextTools.inspectText] instead.

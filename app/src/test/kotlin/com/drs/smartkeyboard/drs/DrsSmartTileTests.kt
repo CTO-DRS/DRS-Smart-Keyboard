@@ -256,9 +256,9 @@ class DrsV2200Tests : FunSpec({
     // ------------------------------------------------------------
     // 6) الأختام بعد إضافات الدفعة C
     // ------------------------------------------------------------
-    test("seals — the catalogue is 78 tools over -678") {
-        DrsTextTool.entries.size shouldBe 78
-        DrsTextTool.CODE_RANGE.first shouldBe -678
+    test("seals — the catalogue is 80 tools over -680") {
+        DrsTextTool.entries.size shouldBe 80
+        DrsTextTool.CODE_RANGE.first shouldBe -680
         DrsTextTool.CODE_RANGE.last shouldBe -601
         // round-trip من الكود إلى الأداة ومعهRegistration للجدد.
         DrsTextTool.fromCode(-670) shouldBe DrsTextTool.SORT_LINES_NATURAL
@@ -269,6 +269,29 @@ class DrsV2200Tests : FunSpec({
         DrsTextTool.fromCode(-676) shouldBe DrsTextTool.BASE64_DECODE
         DrsTextTool.fromCode(-677) shouldBe DrsTextTool.MORSE_ENCODE
         DrsTextTool.fromCode(-678) shouldBe DrsTextTool.MORSE_DECODE
+        DrsTextTool.fromCode(-679) shouldBe DrsTextTool.CALCULATE
+        DrsTextTool.fromCode(-680) shouldBe DrsTextTool.CONVERT_UNITS
+    }
+
+    // ------------------------------------------------------------
+    // 6.5) الزوج الحسابي — عقدا الإطلاق المضمونان في الذكاء السياقي
+    // ------------------------------------------------------------
+    test("smart advice — the compute pair fires on guaranteed launch") {
+        fun adv(t: String) = DrsTileContextAdvisor.advise(t)
+        // كتلة حسابية سليمة تُرشّح الحاسبة فقط عندما يُحل المحلل فعلًا،
+        // والنثر يرفضه المحلل فلا يُرشّح — توصية بنتيجة مضمونة لا إشارة عامة.
+        (DrsTextTool.CALCULATE in adv("1250×12")).shouldBe(true)
+        (DrsTextTool.CALCULATE in adv("٥٠ × ٤")).shouldBe(true)
+        (DrsTextTool.CALCULATE in adv("15%")).shouldBe(true)
+        (DrsTextTool.CALCULATE in adv("hello world")).shouldBe(false)
+        (DrsTextTool.CALCULATE in adv("سعر 2+2 ريال")).shouldBe(false)
+        (DrsTextTool.CALCULATE in adv("(2+3")).shouldBe(false)
+        // كتلة كمية سليمة تُرشّح المحوّل، والنثر لا شكل كمية فيه فيصمت.
+        (DrsTextTool.CONVERT_UNITS in adv("5 كم")).shouldBe(true)
+        (DrsTextTool.CONVERT_UNITS in adv("38 C")).shouldBe(true)
+        (DrsTextTool.CONVERT_UNITS in adv("5 كم إلى م")).shouldBe(true)
+        (DrsTextTool.CONVERT_UNITS in adv("عمره 25 سنة")).shouldBe(false)
+        (DrsTextTool.CONVERT_UNITS in adv("5 فرسخ")).shouldBe(false)
     }
 
     // ------------------------------------------------------------
