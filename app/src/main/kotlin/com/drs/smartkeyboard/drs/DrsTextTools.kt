@@ -455,11 +455,45 @@ enum class DrsTextTool(
     // malformed length or padding all return the input
     // byte-identically. Decoding must never destroy typing —
     // never a guess, never a replacement char. See [base64Decode].
-    BASE64_DECODE(-676);
+    BASE64_DECODE(-676),
+
+    // the Morse encoder — the telegraph sibling of the URL and
+    // Base64 pairs, and the third machine alphabet: text speaks the
+    // OFFICIAL ITU-R M.1677-1 table — every Arabic letter its historic
+    // sign (29 signs over the 28 letters + the standalone hamza,
+    // injective — the ITU Arabic zone carries NO collision), Latin
+    // letters, digits and the closed punctuation set their
+    // international signs. Letters separate with one space, words
+    // with « / » (the channel's word mark — so a '/' in the input is
+    // refused outright, never ambiguously encoded). Diacritics,
+    // tatweel and zero-width marks strip first; hamza carriers fold
+    // (أإآٱ→ا، ة→ه، ى→ي، ئ→ي، ؤ→و) and Arabic punctuation maps onto
+    // its Latin homograph (؟،،؛ → ? , ;) — the same folding doctrine
+    // as SLUGIFY and NORMALIZE_ARABIC, documented, never a guess.
+    // Anything without a known sign (emoji, other scripts, presentation
+    // forms) refuses the WHOLE text byte-identically — never an
+    // invented sign. See [morseEncode].
+    MORSE_ENCODE(-677),
+
+    // the Morse decoder — the honest mirror of [MORSE_ENCODE]:
+    // accepted glyphs normalize onto the canonical pair (dots {., ·},
+    // dashes {- − ─ — –}) FIRST, then every sign speaks the ARABIC
+    // letter of the decode map — the channel is scriptless and the
+    // keyboard speaks Arabic, so every Latin homograph (SOS → سخس)
+    // returns as its Arabic winner; digits and punctuation return
+    // as-is. The reverse map is injective (56 entries, simulated and
+    // proved) — with one DOCUMENTED ITU quirk: the international slash
+    // sign (−··−) IS the Arabic sad, so it decodes ص and the encoder
+    // refuses '/' outright. The strict shape: letters separated by
+    // single spaces, words by « / » — an empty word (leading, trailing
+    // or doubled slash), a sign outside the closed map, or any foreign
+    // glyph returns the input byte-identically. Decoding must never
+    // destroy typing — never a guess. See [morseDecode].
+    MORSE_DECODE(-678);
 
     companion object {
         /** Inclusive range covering every tool code, for fast dispatch. */
-        val CODE_RANGE = -676..-601
+        val CODE_RANGE = -678..-601
 
         fun fromCode(code: Int): DrsTextTool? = entries.firstOrNull { it.code == code }
     }
@@ -811,6 +845,11 @@ object DrsTextTools {
                 // else returns the input untouched so typing is never
                 // destroyed (see [base64Decode]).
                 DrsTextTool.BASE64_DECODE -> base64Decode(text)
+
+                // the telegraph pair — the third machine alphabet
+                // (see [morseEncode] / [morseDecode]).
+                DrsTextTool.MORSE_ENCODE -> morseEncode(text)
+                DrsTextTool.MORSE_DECODE -> morseDecode(text)
                 // one space between digits and letters in BOTH
                 // directions (12abc -> 12 abc، ٣س -> ٣ س) — the mixed-script
                 // cleanup pasted prices and codes need. The lookarounds never
@@ -1501,6 +1540,176 @@ object DrsTextTools {
         } catch (_: Throwable) {
             text
         }
+    }
+
+    // -----------------------------------------------------------
+    // MORSE_ENCODE / MORSE_DECODE — the telegraph pair
+    // -----------------------------------------------------------
+
+    /**
+     * The OFFICIAL ITU-R M.1677-1 sign table — the encoder's single
+     * source of truth: the 28 Arabic letters + the standalone hamza
+     * (29 signs, injective — the ITU Arabic zone carries NO internal
+     * collision), the 26 Latin letters, the 10 digits and the closed
+     * punctuation set, all their international signs. NO slash entry:
+     * its international sign (−··−) IS the Arabic sad in the ITU
+     * tables themselves, the decoder speaks ص, and the encoder
+     * refuses '/' outright (it is the channel's own word mark).
+     */
+    private val MORSE_SIGNS: Map<Char, String> = mapOf(
+        // Arabic (ITU-R M.1677-1) — the historic telegraph signs.
+        'ا' to "·−", 'ب' to "−···", 'ت' to "−", 'ث' to "−·−·",
+        'ج' to "·−−−", 'ح' to "····", 'خ' to "−−−", 'د' to "−··",
+        'ذ' to "−−··", 'ر' to "·−·", 'ز' to "−−−·", 'س' to "···",
+        'ش' to "−−−−", 'ص' to "−··−", 'ض' to "···−", 'ط' to "··−",
+        'ظ' to "−·−−", 'ع' to "·−·−", 'غ' to "−−·", 'ف' to "··−·",
+        'ق' to "−−·−", 'ك' to "−·−", 'ل' to "·−··", 'م' to "−−",
+        'ن' to "−·", 'ه' to "··−··", 'و' to "·−−", 'ي' to "··",
+        'ء' to "·",
+        // Latin (international) — homographs of the Arabic signs by
+        // design: the channel is scriptless, decode speaks Arabic.
+        'a' to "·−", 'b' to "−···", 'c' to "−·−·", 'd' to "−··",
+        'e' to "·", 'f' to "··−·", 'g' to "−−·", 'h' to "····",
+        'i' to "··", 'j' to "·−−−", 'k' to "−·−", 'l' to "·−··",
+        'm' to "−−", 'n' to "−·", 'o' to "−−−", 'p' to "·−−·",
+        'q' to "−−·−", 'r' to "·−·", 's' to "···", 't' to "−",
+        'u' to "··−", 'v' to "···−", 'w' to "·−−", 'x' to "−··−",
+        'y' to "−·−−", 'z' to "−−··",
+        // Digits — the same five-glyph ladder for every script.
+        '1' to "·−−−−", '2' to "··−−−", '3' to "···−−",
+        '4' to "····−", '5' to "·····", '6' to "−····",
+        '7' to "−−···", '8' to "−−−··", '9' to "−−−−·",
+        '0' to "−−−−−",
+        // Punctuation (international, closed) — no slash, see above.
+        '.' to "·−·−·−", ',' to "−−··−−", '?' to "··−−··",
+        '!' to "−·−·−−", '\'' to "·−−−−·", '"' to "·−··−·",
+        '(' to "−·−−·", ')' to "−·−−·−", '&' to "·−···",
+        ':' to "−−−···", ';' to "−·−·−·", '=' to "−···−",
+        '+' to "·−·−·", '-' to "−····−", '_' to "··−−·−",
+        '$' to "···−··−", '@' to "·−−·−·",
+    )
+
+    /**
+     * The encode-side folds, applied BEFORE the sign lookup: hamza
+     * carriers (أإآٱ→ا، ة→ه، ى→ي، ئ→ي، ؤ→و — the SLUGIFY doctrine),
+     * Arabic punctuation onto its Latin homograph (؟،،؛ → ? , ;) and
+     * the Eastern digit families onto Western digits. U+2212 lands on
+     * the ASCII hyphen. Latin case folds in [morseEncode] itself.
+     */
+    private val MORSE_FOLDS: Map<Char, Char> = mapOf(
+        'أ' to 'ا', 'إ' to 'ا', 'آ' to 'ا', 'ٱ' to 'ا',
+        'ة' to 'ه', 'ى' to 'ي', 'ئ' to 'ي', 'ؤ' to 'و',
+        '؟' to '?', '،' to ',', '؛' to ';', '−' to '-',
+    ) + (0..9).associate { d -> (0x0660 + d).toChar() to ('0' + d) } +
+        (0..9).associate { d -> (0x06F0 + d).toChar() to ('0' + d) }
+
+    /**
+     * The decode map — the sign-to-char mirror carrying the ARABIC
+     * winners only (the Latin homographs are excluded: the channel is
+     * scriptless and the keyboard speaks Arabic). 56 entries, injective
+     * (simulated and proved — check_morse.py); digits and punctuation
+     * return as themselves.
+     */
+    private val MORSE_REVERSE: Map<String, Char> =
+        MORSE_SIGNS.filterKeys { it !in 'a'..'z' }
+            .entries.associate { (ch, sign) -> sign to ch }
+
+    /** Dot glyphs the decoder normalizes onto the canonical '·'. */
+    private val MORSE_DOT_GLYPHS = charArrayOf('.', '·')
+
+    /** Dash glyphs the decoder normalizes onto the canonical '−'. */
+    private val MORSE_DASH_GLYPHS = charArrayOf('-', '−', '─', '—', '–')
+
+    /** Whitespace that folds to one plain space in the decode shape:
+     *  spaces, tabs, the CR/LF family and the NBSP family. */
+    private val MORSE_WS = Regex("[ \\t\\r\\n\\u00A0\\u2007\\u202F]+")
+
+    /** Marks stripped before the sign lookup: the harakat block,
+     *  the Quranic annotations, the superscript alef, the tatweel
+     *  and the zero-width family. */
+    private fun isMorseInvisible(ch: Char): Boolean =
+        ch.code in 0x064B..0x065F || ch.code == 0x0670 ||
+            ch.code in 0x0610..0x061A || ch.code in 0x06D6..0x06ED ||
+            ch.code == 0x0640 || ch.code in 0x200B..0x200F
+
+    /** The word-gap whitespace class of the encode side. */
+    private fun isMorseSpace(ch: Char): Boolean =
+        ch == ' ' || ch == '\t' || ch == '\r' || ch == '\n' ||
+            ch == '\u00A0' || ch == '\u2007' || ch == '\u202F'
+
+    /**
+     * The encoder: every character speaks its ITU sign, letters join
+     * with one space, words with « / ». Folds first (see
+     * [MORSE_FOLDS]), strips invisible marks, folds Latin case — and
+     * REFUSES the whole text byte-identically the moment a character
+     * has no sign ('/', emoji, other scripts, presentation forms) or
+     * nothing codable remains (marks only). Total and deterministic
+     * over the closed alphabet; never an invented sign.
+     */
+    private fun morseEncode(text: String): String {
+        val words = ArrayList<String>()
+        val signs = ArrayList<String>()
+        var sawToken = false
+        fun flushWord() {
+            if (signs.isNotEmpty()) {
+                words += signs.joinToString(" ")
+                signs.clear()
+            }
+        }
+        for (ch0 in text) {
+            when {
+                isMorseSpace(ch0) -> flushWord()
+                isMorseInvisible(ch0) -> Unit
+                ch0 == '/' -> return text
+                else -> {
+                    val folded = MORSE_FOLDS[ch0] ?: ch0
+                    val key = if (folded in 'A'..'Z') folded.lowercaseChar() else folded
+                    val sign = MORSE_SIGNS[key] ?: return text
+                    sawToken = true
+                    signs += sign
+                }
+            }
+        }
+        flushWord()
+        if (!sawToken || words.isEmpty()) return text
+        return words.joinToString(" / ")
+    }
+
+    /**
+     * The decoder: whitespace (the NBSP family included) folds to one
+     * plain space and edges trim; the words split on « / » and the
+     * signs on spaces; every sign's glyphs normalize onto the
+     * canonical pair FIRST, then the closed reverse map speaks —
+     * Arabic letters (documented winners), digits, punctuation. An
+     * empty word (leading/trailing/doubled slash), an empty sign, a
+     * foreign glyph or an unknown sign returns the input
+     * byte-identically. Decode must never destroy typing — never a
+     * guess, never an invented letter.
+     */
+    private fun morseDecode(text: String): String {
+        val s = MORSE_WS.replace(text, " ").trim(' ')
+        if (s.isEmpty()) return text
+        if (s.first() == '/' || s.last() == '/') return text
+        val wordsOut = ArrayList<String>()
+        for (word in s.split('/')) {
+            val w = word.trim(' ')
+            if (w.isEmpty()) return text
+            val sb = StringBuilder(w.length)
+            for (token in w.split(' ')) {
+                if (token.isEmpty()) return text
+                val canonical = buildString(token.length) {
+                    for (c in token) when (c) {
+                        in MORSE_DOT_GLYPHS -> append('·')
+                        in MORSE_DASH_GLYPHS -> append('−')
+                        else -> return text
+                    }
+                }
+                val letter = MORSE_REVERSE[canonical] ?: return text
+                sb.append(letter)
+            }
+            wordsOut += sb.toString()
+        }
+        return wordsOut.joinToString(" ")
     }
 
     // -----------------------------------------------------------

@@ -118,10 +118,10 @@ class DrsPublicV2000Tests : FunSpec({
         val tool = DrsTextTool.DECIMAL_WORDS
         tool.code shouldBe -666
         DrsTextTool.fromCode(-666) shouldBe tool
-        DrsTextTool.CODE_RANGE.first shouldBe -676
+        DrsTextTool.CODE_RANGE.first shouldBe -678
         (tool.code in DrsTextTool.CODE_RANGE) shouldBe true
         // 59 tools through + the decimal and mirror tools.
-        DrsTextTool.entries.size shouldBe 76
+        DrsTextTool.entries.size shouldBe 78
         (tool.isInfoOnly) shouldBe false
         (tool.isEditorOp) shouldBe false
         (tool.isInsertMark) shouldBe false
@@ -238,10 +238,10 @@ class DrsPublicV2000Tests : FunSpec({
         val tool = DrsTextTool.WORDS_TO_NUMBER
         tool.code shouldBe -667
         DrsTextTool.fromCode(-667) shouldBe tool
-        DrsTextTool.CODE_RANGE.first shouldBe -676
+        DrsTextTool.CODE_RANGE.first shouldBe -678
         (tool.code in DrsTextTool.CODE_RANGE) shouldBe true
         // 60 tools after the decimal tool + the mirror tool.
-        DrsTextTool.entries.size shouldBe 76
+        DrsTextTool.entries.size shouldBe 78
         (tool.isInfoOnly) shouldBe false
         (tool.isEditorOp) shouldBe false
         (tool.isInsertMark) shouldBe false

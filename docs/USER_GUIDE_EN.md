@@ -106,6 +106,21 @@ that is not valid Base64 — an honest word, binary bytes — returns
 byte-identical, so your typing is never corrupted. The smart tiles
 suggest «Base64 decode» only when the decode is guaranteed to fire.
 
+**Morse encode/decode:** sending text over a bare channel, solving a
+puzzle, or reading an old telegram? «Morse encode» speaks the OFFICIAL
+ITU table (ITU-R M.1677-1): every Arabic letter takes its historic
+telegraph sign — ا = ·−، ب = −··· — and Latin letters, digits and
+punctuation take the international ones; letters join with a space and
+words with / : «مرحبا» becomes «−− ·−· ···· −··· ·−». Diacritics and
+tatweel strip, hamza carriers fold (سؤال encodes as سوال), and anything
+without a known sign (emoji, a slash) returns untouched — never an
+invented sign. When Morse arrives in any dot/dash glyph family (‎.−‎ or
+‎·−‎ or long dashes) «Morse decode» restores it — and since the channel
+is scriptless, every letter speaks Arabic: ‎··· −−− ···‎ returns «سخس».
+An unknown sign or empty word returns the text untouched — the decoder
+never guesses and never destroys. The smart tiles suggest «Morse decode»
+only when the decode is guaranteed to fire.
+
 **Deterministic text vocalization:** in the text tools panel,
 «Vocalize text» adds canonical harakat to every word the local 3000-word
 lexicon knows — unknown words stay untouched, never guessed. Works on the

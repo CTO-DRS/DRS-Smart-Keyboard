@@ -195,6 +195,34 @@ class DrsV2200Tests : FunSpec({
             "Hello, world!"
     }
 
+    test("Advisor names the Morse decoder only under its firing contract") {
+        // كتلة مورس سليمة تُرشَّح لأن المفكّ سيُطلق حتمًا — عقد
+        // الإطلاق المضمون مع حرسين مغلقين قبل العقد: شرطة واحدة
+        // على الأقل (النقاط وحدها نهاية جملة) ومسافة واحدة على الأقل
+        // (الشرطة الوحيدة واصلة كتابة لا إشارة).
+        DrsTileContextAdvisor.advise("··· −−− ···") shouldContain
+            DrsTextTool.MORSE_DECODE
+        DrsTileContextAdvisor.advise("−− ·−· ···· −··· ·−") shouldContain
+            DrsTextTool.MORSE_DECODE
+        // ما لا يُفك لا يُرشَّح: نص لاتيني، جملة عربية، JWT.
+        DrsTileContextAdvisor.advise("hello world") shouldNotContain
+            DrsTextTool.MORSE_DECODE
+        DrsTileContextAdvisor.advise("مرحبا بالعالم") shouldNotContain
+            DrsTextTool.MORSE_DECODE
+        DrsTileContextAdvisor.advise("eyJhbGciOiJIUzI1NiJ9") shouldNotContain
+            DrsTextTool.MORSE_DECODE
+        // الحرسان: نقاط بلا شرطة، وشرطة وحيدة بلا مسافة — صمت.
+        DrsTileContextAdvisor.advise("...") shouldNotContain
+            DrsTextTool.MORSE_DECODE
+        DrsTileContextAdvisor.advise("−") shouldNotContain
+            DrsTextTool.MORSE_DECODE
+        DrsTileContextAdvisor.advise("———") shouldNotContain
+            DrsTextTool.MORSE_DECODE
+        // والمرشَّح نفسه سيُطلق فعلًا — الدليل داخل الاختبار.
+        DrsTextTools.apply(DrsTextTool.MORSE_DECODE, "··· −−− ···", ar) shouldBe
+            "سخس"
+    }
+
     // ------------------------------------------------------------
     // 4) المفضلة المحدودة — ترتيب تثبيت ورفض صادق
     // ------------------------------------------------------------
@@ -228,9 +256,9 @@ class DrsV2200Tests : FunSpec({
     // ------------------------------------------------------------
     // 6) الأختام بعد إضافات الدفعة C
     // ------------------------------------------------------------
-    test("seals — the catalogue is 76 tools over -676") {
-        DrsTextTool.entries.size shouldBe 76
-        DrsTextTool.CODE_RANGE.first shouldBe -676
+    test("seals — the catalogue is 78 tools over -678") {
+        DrsTextTool.entries.size shouldBe 78
+        DrsTextTool.CODE_RANGE.first shouldBe -678
         DrsTextTool.CODE_RANGE.last shouldBe -601
         // round-trip من الكود إلى الأداة ومعهRegistration للجدد.
         DrsTextTool.fromCode(-670) shouldBe DrsTextTool.SORT_LINES_NATURAL
@@ -239,6 +267,8 @@ class DrsV2200Tests : FunSpec({
         DrsTextTool.fromCode(-673) shouldBe DrsTextTool.TO_CAMEL_CASE
         DrsTextTool.fromCode(-640) shouldBe DrsTextTool.BASE64_ENCODE
         DrsTextTool.fromCode(-676) shouldBe DrsTextTool.BASE64_DECODE
+        DrsTextTool.fromCode(-677) shouldBe DrsTextTool.MORSE_ENCODE
+        DrsTextTool.fromCode(-678) shouldBe DrsTextTool.MORSE_DECODE
     }
 
     // ------------------------------------------------------------

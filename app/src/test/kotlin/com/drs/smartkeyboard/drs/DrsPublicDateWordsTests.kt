@@ -201,12 +201,12 @@ class DrsPublicV180Tests : FunSpec({
         val tool = DrsTextTool.DATE_WORDS
         tool.code shouldBe -661
         DrsTextTool.fromCode(-661) shouldBe tool
-        DrsTextTool.CODE_RANGE.first shouldBe -676
+        DrsTextTool.CODE_RANGE.first shouldBe -678
         (tool.code in DrsTextTool.CODE_RANGE) shouldBe true
         // 54 tools through + the date-in-words tool + the
         // clock-time-in-words tool + the fraction,
         // weekday and ordinal tools.
-        DrsTextTool.entries.size shouldBe 76
+        DrsTextTool.entries.size shouldBe 78
         (tool.isInfoOnly) shouldBe false
         (tool.isEditorOp) shouldBe false
         (tool.isInsertMark) shouldBe false

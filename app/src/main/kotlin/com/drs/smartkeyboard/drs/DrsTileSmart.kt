@@ -214,6 +214,19 @@ object DrsTileContextAdvisor {
         if (DrsTextTools.apply(DrsTextTool.BASE64_DECODE, t) != t) {
             picks += DrsTextTool.BASE64_DECODE
         }
+        // 1.8) كتلة مورس سليمة تفكّ فعلًا — عقد الإطلاق نفسه: المرشَّح
+        //      هو ما سيُطلق حتمًا. حرسان مغلقان يمنعان الضجيج قبل
+        //      العقد: شرطة واحدة على الأقل (النقاط وحدها «...» نهاية
+        //      جملة لا مورس) ومسافة واحدة على الأقل (الشرطة الوحيدة
+        //      «-» واصلة كتابة لا إشارة تلف كلمة إلى حرف) — فلا يُرشَّح
+        //      إلا ما سيُفك حتمًا، وتوصية بنتيجة مضمونة لا إشارة عامة.
+        val hasMorseDash = t.any {
+            it == '-' || it == '−' || it == '─' || it == '—' || it == '–'
+        }
+        if (hasMorseDash && t.contains(' ') &&
+            DrsTextTools.apply(DrsTextTool.MORSE_DECODE, t) != t) {
+            picks += DrsTextTool.MORSE_DECODE
+        }
         // 2) العلامات الصفرية والتطويل نفاية لصق لا تصلح فقرة — انزعها.
         if (hasZeroWidth) picks += DrsTextTool.REMOVE_ZERO_WIDTH
         if (hasTatweel) picks += DrsTextTool.REMOVE_TATWEEL

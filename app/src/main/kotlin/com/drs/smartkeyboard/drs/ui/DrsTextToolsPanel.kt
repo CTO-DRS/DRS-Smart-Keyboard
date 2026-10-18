@@ -77,6 +77,8 @@ import androidx.compose.material.icons.filled.MergeType
 import androidx.compose.material.icons.filled.Output
 import androidx.compose.material.icons.filled.Paid
 import androidx.compose.material.icons.filled.QueryStats
+import androidx.compose.material.icons.filled.Radio
+import androidx.compose.material.icons.filled.Hearing
 import androidx.compose.material.icons.filled.SentimentNeutral
 import androidx.compose.material.icons.filled.Rule
 import androidx.compose.material.icons.filled.SelectAll
@@ -731,6 +733,23 @@ private val PANEL_SECTIONS: List<DrsTextToolsPanelSection> = listOf(
                 R.string.drs__text_tools__desc_base64_decode,
                 Icons.Default.Output,
             ),
+            // the Morse encode/decode pair — the telegraph alphabet
+            // joins the machine alphabets: the OFFICIAL ITU Arabic
+            // signs out, any dot/dash glyph family back in — the
+            // strict decoder refuses what it does not understand,
+            // so honest typing is never destroyed.
+            toolItem(
+                DrsTextTool.MORSE_ENCODE,
+                R.string.drs__text_tools__tool_morse_encode,
+                R.string.drs__text_tools__desc_morse_encode,
+                Icons.Default.Radio,
+            ),
+            toolItem(
+                DrsTextTool.MORSE_DECODE,
+                R.string.drs__text_tools__tool_morse_decode,
+                R.string.drs__text_tools__desc_morse_decode,
+                Icons.Default.Hearing,
+            ),
         ),
     ),
     DrsTextToolsPanelSection(
@@ -886,6 +905,9 @@ fun textToolTitleRes(tool: DrsTextTool): Int = when (tool) {
     // the Base64 payload pair.
     DrsTextTool.BASE64_ENCODE -> R.string.drs__text_tools__tool_base64_encode
     DrsTextTool.BASE64_DECODE -> R.string.drs__text_tools__tool_base64_decode
+    // the Morse telegraph pair.
+    DrsTextTool.MORSE_ENCODE -> R.string.drs__text_tools__tool_morse_encode
+    DrsTextTool.MORSE_DECODE -> R.string.drs__text_tools__tool_morse_decode
     // the mixed-script cleanup pair.
     DrsTextTool.SEPARATE_DIGIT_LETTERS -> R.string.drs__text_tools__tool_separate_digit_letters
     DrsTextTool.REMOVE_PUNCTUATION -> R.string.drs__text_tools__tool_remove_punctuation
@@ -984,6 +1006,9 @@ fun textToolDescRes(tool: DrsTextTool): Int = when (tool) {
     // the Base64 payload pair.
     DrsTextTool.BASE64_ENCODE -> R.string.drs__text_tools__desc_base64_encode
     DrsTextTool.BASE64_DECODE -> R.string.drs__text_tools__desc_base64_decode
+    // the Morse telegraph pair.
+    DrsTextTool.MORSE_ENCODE -> R.string.drs__text_tools__desc_morse_encode
+    DrsTextTool.MORSE_DECODE -> R.string.drs__text_tools__desc_morse_decode
     // the mixed-script cleanup pair.
     DrsTextTool.SEPARATE_DIGIT_LETTERS -> R.string.drs__text_tools__desc_separate_digit_letters
     DrsTextTool.REMOVE_PUNCTUATION -> R.string.drs__text_tools__desc_remove_punctuation

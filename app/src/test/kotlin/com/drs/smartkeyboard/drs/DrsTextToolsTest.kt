@@ -397,6 +397,16 @@ class DrsTextToolsTest : FunSpec({
             // refuses it byte-identically, never a replacement char.
             DrsTextTool.BASE64_DECODE -> result shouldBe input
 
+            // the hostile text carries emoji, $, { } and Arabic marks —
+            // NOT the closed morse alphabet — so the encoder refuses
+            // the whole text byte-identically, never an invented sign.
+            DrsTextTool.MORSE_ENCODE -> result shouldBe input
+
+            // the hostile field carries letters and marks — not the
+            // dot/dash glyph shape — so the decoder refuses it
+            // byte-identically. Decode must never destroy typing.
+            DrsTextTool.MORSE_DECODE -> result shouldBe input
+
             // the census is an INFO tool — apply() is the read-only
             // discipline itself: the text returns byte-identical and
             // callers read [DrsTextTools.inspectText] instead.
