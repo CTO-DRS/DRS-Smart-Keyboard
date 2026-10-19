@@ -1,8 +1,8 @@
 <div align="center">
 
-# DRS Smart Keyboard v1.1.0 — الشفافية والتعلم
+# DRS Smart Keyboard v1.2.0 — أبجديات الآلة والحساب
 
-**Transparency & Learning — Second Release**
+**Machine Alphabets & Calculation — Third Release**
 
 <img src="https://raw.githubusercontent.com/CTO-DRS/drs-sk-work/main/docs/images/hero.png" width="100%"/>
 
@@ -24,41 +24,53 @@
   ومدقق إملائي.
 - **الحافظة الذكية**: محرر نصوص بستة عشر خوارزمية، كاشف أسطر برمجية، أقسام
   تقويمية وشارات فئات، ونافذة تعديل منبثقة فوق التطبيقات.
+- **لوحة الأدوات النصية — 82 أداة**: تحويل الحالة والخطوط، ترتيب الأسطر
+  وترقيمها، تفقيط الأرقام والمبالغ والتواريخ والأوقات والكسور والهجري،
+  تنظيف وتطبيع، وأبجديات الآلة (URL وBase64 ومورس وHex) وحاسبة ومحوّل
+  وحدات — كلها حتمية على الجهاز بعقد «لا تخمين ولا تلف».
 - **الذكاء العربي على الجهاز**: **13 محرك ذكاء اصطناعي محلي بالكامل** للتحليل
   والاقتراح والتصحيح — صفر تبعيات سحابية.
 - **الخصوصية الإثباتية**: privacy canary آلي + بوابة إصدار من 11 فحصًا
   (fail-closed).
 - **مركز الحزم**: امتدادات موقّعة ed25519 مع تحقق قبل فك الضغط (8/8 VALID).
 
-## جديد في 1.1.0 — الشفافية والتعلم (ADR-0009)
+## جديد في 1.2.0 — أبجديات الآلة والحساب
 
-- **مركز الشفافية الحي**: عدّاد بايتات حي لهذا التطبيق وحده + سجل اتصالات
-  يومي بدوران 90 يوماً + شهادة عمر قابلة للمشاركة (تُرسم برمجياً وتُصدَّر
-  PNG) — الإثبات من بيانات جهازك لا من وعود مكتوبة.
-- **«ماذا تعلمت عني»**: قاموسك الشخصي المرئي بالبحث والفرز، وعدّادات تصحيح
-  تبدأ «من الآن» بصدق، وتصدير موقَّع ed25519 واستيراد يقبل الموقَّع فقط.
-- **لوحة الحركات المنبثقة**: ضغط مطول على الحرف العربي ينبثق لوحة الحركات
-  الثماني (U+064B..U+0652) والشدة محطة رئيسة — عبر محرك المنبثقة القائم
-  نفسه، والإفلات على الأصل حرف مجرد والإفلات خارجها إلغاء.
-- **صفر صلاحيات جديدة**: فرق صلاحيات الـManifest منذ 1.0.0 فارغ بالدليل،
-  والاختبارات نمت 1780 → 1844 أخضر.
+- **أربعة أزواج في «أبجديات الآلة»** تنقل النص بين عالمي الكتابة والبايتات
+  بعقد واحد لا يخمّن ولا يتلف: ترميز/فك الروابط (URL)، ترميز/فك Base64
+  (كلمات السر ومفاتيح API تُغلّف بأمان)، ترميز/فك مورس (الجدول الرسمي
+  ITU-R M.1677-1 للعربية واللاتينية — SOS تنطق سخس)، وترميز/فك Hex
+  (سرد بايتات UTF-8 أزواجًا سداسية مقروءة).
+- **الزوج الحسابي الأول**: حاسبة تعبيرات مكتوبة يدويًا (تنازلي متكرر لا
+  eval — أولويات وأقواس ونسبة مئوية وأرقام عربية) تنطق الناتج نقيًا بلا
+  ذيل عشري (0.1+0.2 = 0.3)، ومحوّل وحدات بسبع فئات مغلقة (طول/كتلة/
+  حجم/مساحة/سرعة/بيانات/زمن) و183 مرادفًا عربيًا وإنجليزيًا، بمعادلات
+  حرارية حقيقية لا معاملات.
+- **تنظيف لصق الويب**: منظّف Markdown وHTML يحتفظان بالنثر ويسقطان
+  الزخرفة، فاحص نص قراءة فقط (حروف/أرقام/كلمات/جمل/علامات خفية)،
+  حاصد روابط سطرًا لكل رابط، ومهدّ تمدد الحروف (هلااااا → هلا).
+- **ذكاء البلاطات يكبر بذكاء**: كل زوج فكّ جديد يُقترن بسبب مغلق بعقد
+  الإطلاق المضمون — كتلة سليمة وحدها تُرشَّح، وما لا يُفكّ لا يُرشَّح:
+  توصية بنتيجة مضمونة لا إشارة عامة.
+- **الاختبارات 1844 → 1950 أخضر** وصفر صلاحيات جديدة — فرق صلاحيات
+  الـManifest منذ 1.1.0 فارغ بالدليل.
 
 ## التحديث من الإصدارات السابقة
 
-- ✅ **مستخدمو 1.0.0 يحدّثون موضعياً مباشرة (versionCode 2 > 1)** — ثبّت
-  الحزمة الجديدة فوق القديمة من داخل التطبيق أو من صفحة الإصدارات، دون إلغاء
-  تثبيت ودون فقدان بيانات.
+- ✅ **مستخدمو 1.0.0 و1.1.0 يحدّثون موضعياً مباشرة (versionCode 3 > 2 > 1)** —
+  ثبّت الحزمة الجديدة فوق القديمة من داخل التطبيق أو من صفحة الإصدارات، دون
+  إلغاء تثبيت ودون فقدان بيانات.
 - ⚠️ **مستخدمو v2.x أو أقدم**: التحديث الموضعي لا يزال مستحيلاً تقنياً
-  (أندرويد يرفض تنزيل `versionCode` أقدم) — ألغِ التثبيت أولاً، ثم ثبّت 1.1.0
+  (أندرويد يرفض تنزيل `versionCode` أقدم) — ألغِ التثبيت أولاً، ثم ثبّت 1.2.0
   كتثبيت أول.
 
 ## التثبيت
 
-1. نزّل `DRS-Smart-Keyboard-v1.1.0.apk` من مرفقات هذا الإصدار (أو من موقع
+1. نزّل `DRS-Smart-Keyboard-v1.2.0.apk` من مرفقات هذا الإصدار (أو من موقع
    المشروع).
 2. تحقق من السلامة: قارن بصمة SHA-256 للملف مع ما في مرفق **SHA256SUMS.txt**
    (أو الجدول أسفل هذه الملاحظات).
-3. **مستخدمو 1.0.0**: ثبّت فوق الحالي مباشرة (التحديث الموضعي مضمون) ·
+3. **مستخدمو 1.0.0 و1.1.0**: ثبّت فوق الحالي مباشرة (التحديث الموضعي مضمون) ·
    **مستخدمو v2.x**: ألغِ التثبيت أولاً (التنبيه أعلاه) — ثم ثبّت الحزمة
    الجديدة كتثبيت أول.
 4. فعّل «التثبيت من مصادر غير معروفة» لمتصفحك أو مدير ملفاتك عند الطلب، ثم أكمل
@@ -76,7 +88,7 @@
 
 ## التحقق
 
-- **1,844 اختبار وحدة أخضر** · بوابة تغطية Kover · بوابات أداء · فحص apksigner
+- **1,950 اختبار وحدة أخضر** · بوابة تغطية Kover · بوابات أداء · فحص apksigner
   مستقل.
 - كل مرفقات هذا الإصدار مجدولة بصماتها في ملف **SHA256SUMS.txt** المرفق.
 - جدول البصمات الكامل ملحق أسفل هذه الملاحظات (مولّد آليًا بواسطة CI).
@@ -106,6 +118,11 @@ you type stays on your device: no accounts, no tracking, no mandatory network.
   real autocorrect, and spell checking.
 - **Smart clipboard**: a text editor with sixteen algorithms, code-line
   detection, calendar sections and category badges, and a popup edit window.
+- **Text tools panel — 82 tools**: case and letter transforms, line sorting
+  and numbering, number/amount/date/time/fraction/Hijri words, cleanup and
+  normalization, machine alphabets (URL, Base64, Morse, Hex), a calculator
+  and unit converter — all deterministic on-device under the "never guess,
+  never corrupt" contract.
 - **On-device Arabic intelligence**: **13 fully local AI engines** for
   analysis, suggestion and correction — zero cloud dependencies.
 - **Proven privacy**: automated privacy canary + an 11-check release gate
@@ -113,40 +130,49 @@ you type stays on your device: no accounts, no tracking, no mandatory network.
 - **Package center**: ed25519-signed extensions verified before unpacking
   (8/8 VALID).
 
-## New in 1.1.0 — Transparency & Learning (ADR-0009)
+## New in 1.2.0 — Machine Alphabets & Calculation
 
-- **Live Transparency Hub**: a live byte counter for this app alone + a daily
-  connection log with 90-day rotation + a shareable age certificate (drawn
-  programmatically, exported as PNG) — proof from your device's own data, not
-  written promises.
-- **"What I learned about you"**: your personal visual dictionary with search
-  and sorting, honest correction counters that start "from now", and ed25519
-  signed export with import that accepts signed files only.
-- **Popup Harakat panel**: long-pressing an Arabic letter pops the panel of
-  the eight diacritics (U+064B..U+0652) with the shadda as a primary stop —
-  through the existing popup engine itself; releasing on the origin yields a
-  bare letter, releasing outside cancels.
-- **Zero new permissions**: the Manifest permission diff since 1.0.0 is empty
-  by proof, and tests grew 1780 → 1844 green.
+- **Four "machine alphabets" pairs** move text between the writing world and
+  the byte world under one contract — never guess, never corrupt: URL
+  encode/decode, Base64 encode/decode (passwords and API keys travel safely),
+  Morse encode/decode (the official ITU-R M.1677-1 table for Arabic and Latin
+  — SOS speaks سخس), and Hex encode/decode (a readable UTF-8 byte dump in
+  hex pairs).
+- **The first calculation pair**: a hand-written expression parser
+  (recursive-descent, no eval — precedence, parens, percent, Eastern Arabic
+  digits) with clean output and no decimal tail (0.1+0.2 = 0.3), and a unit
+  converter with seven closed categories (length/mass/volume/area/speed/
+  data/time) and 183 unique Arabic/English spellings — real thermal formulas,
+  not ratios.
+- **Web-paste cleanup**: Markdown and HTML cleaners keep the prose and drop
+  the costume, a read-only text inspector (letters/digits/words/sentences/
+  hidden marks), a link harvester (one link per line), and a letter-stretch
+  softer (هلااااا → هلا).
+- **Smarter tiles, honestly**: every new decode pair adds a closed reason
+  under a guaranteed firing contract — a clean block alone gets suggested;
+  what cannot be decoded is never suggested: a recommendation with a
+  guaranteed result, not a generic hint.
+- **Tests grew 1844 → 1950 green** with zero new permissions — the Manifest
+  permission diff since 1.1.0 is empty by proof.
 
 ## Updating from previous releases
 
-- ✅ **1.0.0 users update in place directly (versionCode 2 > 1)** — install
-  the new package over the old one from inside the app or the releases page,
-  with no uninstall and no data loss.
+- ✅ **1.0.0 and 1.1.0 users update in place directly (versionCode 3 > 2 > 1)**
+  — install the new package over the old one from inside the app or the
+  releases page, with no uninstall and no data loss.
 - ⚠️ **v2.x or older users**: in-place update remains technically impossible
-  (Android refuses a lower `versionCode`) — uninstall first, then install 1.1.0
+  (Android refuses a lower `versionCode`) — uninstall first, then install 1.2.0
   as a fresh install.
 
 ## Installation
 
-1. Download `DRS-Smart-Keyboard-v1.1.0.apk` from this release's assets (or
+1. Download `DRS-Smart-Keyboard-v1.2.0.apk` from this release's assets (or
    from the project website).
 2. Verify integrity: compare the file's SHA-256 against the attached
    **SHA256SUMS.txt** (or the table below).
-3. **1.0.0 users**: install directly over the current version (in-place update
-   guaranteed) · **v2.x users**: uninstall first (see note above) — then
-   install the new package as a fresh install.
+3. **1.0.0 and 1.1.0 users**: install directly over the current version
+   (in-place update guaranteed) · **v2.x users**: uninstall first (see note
+   above) — then install the new package as a fresh install.
 4. Enable "Install from unknown sources" for your browser or file manager when
    prompted, finish the install, and enable the keyboard in system settings.
 
@@ -163,7 +189,7 @@ root.
 
 ## Verification
 
-- **1,844 green unit tests** · Kover coverage gate · performance gates ·
+- **1,950 green unit tests** · Kover coverage gate · performance gates ·
   independent apksigner inspection.
 - All release assets are listed with their fingerprints in the attached
   **SHA256SUMS.txt**.
