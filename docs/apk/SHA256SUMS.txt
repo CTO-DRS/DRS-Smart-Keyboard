@@ -1,5 +1,5 @@
-b8b75825559207e06465f0656d9d0e0c2b19f353694b75dec0a1ea58902aa131  DRS-Smart-Keyboard-v1.1.0.aab
-d8bac7981e6a343508b6ca0693f0e4bec11a50cc25cf4eeacb8ea6b527d4f00a  DRS-Smart-Keyboard-v1.1.0.apk
+de425471dd8242e4773dc7f9b793c436bd5095edaba443df086de29390d93a90  DRS-Smart-Keyboard-v1.2.0.aab
+8fbcdfd53dc0e011944fa553e824c2655d1efdbc95991cbe264810cc1127d516  DRS-Smart-Keyboard-v1.2.0.apk
 ac0151eca622866401f0ddbce12ccfa756b56f137b54e79ffede6bc2fcc870da  pkg-amethyst-v1.0.0.flex
 29579f4e4acf356f4ca352fc9f2f02adf4bee44e45d360e21f80487579cb9d13  pkg-arabian-v1.0.0.flex
 0b71d9e95471d26a2d6600f012cefd9115cf6869f3901c95b81881f15d4d1fc1  pkg-aurora-v1.0.0.flex
