@@ -1,6 +1,6 @@
 # User Guide — DRS Smart Keyboard
 
-- **Version:** 2.0.0 (unified)
+- **Guide version:** 2.0.0 (unified) — covers app release **1.2.0 «Machine Alphabets & Calculation»** (versionCode 3, catalog of 82 tools)
 - **Languages:** this is the English guide — Arabic version: [USER_GUIDE_AR.md](USER_GUIDE_AR.md)
 - **Support:** [SUPPORT.md](../SUPPORT.md) — official channels and crash reports.
 
@@ -22,8 +22,12 @@ without you losing anything.
 3. Return to the app → **Switch keyboard** → pick DRS.
 4. Start typing in any field — try gliding between letters for gesture typing.
 
-Upgrading over an older install works in place (same signing certificate since
-the first unified release) — you never need to uninstall first.
+From release 1.2.0 onward, in-place upgrades are guaranteed (same signing
+certificate) — you never need to uninstall first. One exception when moving
+from 1.1.0 or earlier to 1.2.0: this release rotated the signing key (a new
+key under the same certificate identity), so install 1.2.0 as a fresh install
+after exporting your dictionary and signed backups — this will not repeat in
+upcoming releases.
 
 ## 3. A tour of the screens
 
