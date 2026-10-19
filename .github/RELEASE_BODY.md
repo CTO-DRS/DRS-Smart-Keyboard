@@ -55,14 +55,18 @@
 - **الاختبارات 1844 → 1950 أخضر** وصفر صلاحيات جديدة — فرق صلاحيات
   الـManifest منذ 1.1.0 فارغ بالدليل.
 
-## التحديث من الإصدارات السابقة
+## التحديث من الإصدارات السابقة — تنبيه دوران المفتاح
 
-- ✅ **مستخدمو 1.0.0 و1.1.0 يحدّثون موضعياً مباشرة (versionCode 3 > 2 > 1)** —
-  ثبّت الحزمة الجديدة فوق القديمة من داخل التطبيق أو من صفحة الإصدارات، دون
-  إلغاء تثبيت ودون فقدان بيانات.
-- ⚠️ **مستخدمو v2.x أو أقدم**: التحديث الموضعي لا يزال مستحيلاً تقنياً
-  (أندرويد يرفض تنزيل `versionCode` أقدم) — ألغِ التثبيت أولاً، ثم ثبّت 1.2.0
-  كتثبيت أول.
+- ⚠️ **دوران مفتاح التوقيع في 1.2.0**: المفتاح السابق فقد وصوله مع ترحيل
+  المستودع، فأعيد توليد مفتاح جديد **بنفس هوية الشهادة**
+  (CN=DRS Smart Keyboard Release) — البصمة الجديدة:
+  `54:FA:D7:4F:CD:91:0B:BB:65:F2:60:4F:32:82:27:F4:47:F9:AF:7E:6A:B9:41:66:D9:DC:67:56:97:1E:E3:20`.
+- ❗ **لذلك التحديث الموضعي من 1.1.0 غير متاح هذه المرة** (أندرويد يرفض
+  التحديث فوق بصمة مختلفة): ألغِ تثبيت 1.1.0 أولًا ثم ثبّت 1.2.0 كتثبيت
+  أول. قاموسك المستورد ونسخك الاحتياطية الموقّعة ed25519 تعمل في 1.2.0
+  كالعادة — صدّرها من 1.1.0 قبل الإلغاء واستوردها بعده.
+- ✅ **من 1.2.0 فصاعدًا تعود التحديثات الموضعية المضمونة** (نفس المفتاح
+  لكل ما يلي 1.2.0).
 
 ## التثبيت
 
@@ -70,9 +74,10 @@
    المشروع).
 2. تحقق من السلامة: قارن بصمة SHA-256 للملف مع ما في مرفق **SHA256SUMS.txt**
    (أو الجدول أسفل هذه الملاحظات).
-3. **مستخدمو 1.0.0 و1.1.0**: ثبّت فوق الحالي مباشرة (التحديث الموضعي مضمون) ·
-   **مستخدمو v2.x**: ألغِ التثبيت أولاً (التنبيه أعلاه) — ثم ثبّت الحزمة
-   الجديدة كتثبيت أول.
+3. **مستخدمو 1.0.0/1.1.0 — تنبيه دوران المفتاح**: ألغِ التثبيت أولًا
+   (البصمة الجديدة أعلاه) — وصدّر قاموسك ونسخك الاحتياطية من 1.1.0 قبل
+   الإلغاء ثم استوردها بعد التثبيت · **مستخدمو v2.x**: ألغِ التثبيت أولاً
+   ثم ثبّت الحزمة الجديدة كتثبيت أول.
 4. فعّل «التثبيت من مصادر غير معروفة» لمتصفحك أو مدير ملفاتك عند الطلب، ثم أكمل
    التثبيت وفعّل لوحة المفاتيح من إعدادات النظام.
 
@@ -155,14 +160,19 @@ you type stays on your device: no accounts, no tracking, no mandatory network.
 - **Tests grew 1844 → 1950 green** with zero new permissions — the Manifest
   permission diff since 1.1.0 is empty by proof.
 
-## Updating from previous releases
+## Updating from previous releases — key rotation notice
 
-- ✅ **1.0.0 and 1.1.0 users update in place directly (versionCode 3 > 2 > 1)**
-  — install the new package over the old one from inside the app or the
-  releases page, with no uninstall and no data loss.
-- ⚠️ **v2.x or older users**: in-place update remains technically impossible
-  (Android refuses a lower `versionCode`) — uninstall first, then install 1.2.0
-  as a fresh install.
+- ⚠️ **Key rotation in 1.2.0**: the previous signing key's access was lost
+  with the repository migration, so a new key was generated **with the same
+  certificate identity** (CN=DRS Smart Keyboard Release) — new fingerprint:
+  `54:FA:D7:4F:CD:91:0B:BB:65:F2:60:4F:32:82:27:F4:47:F9:AF:7E:6A:B9:41:66:D9:DC:67:56:97:1E:E3:20`.
+- ❗ **In-place update from 1.1.0 is therefore unavailable this time**
+  (Android refuses updates across different signatures): uninstall 1.1.0
+  first, then install 1.2.0 as a fresh install. Your imported dictionary and
+  ed25519-signed backups keep working in 1.2.0 — export them from 1.1.0
+  before uninstalling and import after installing.
+- ✅ **From 1.2.0 onward, guaranteed in-place updates return** (same key for
+  everything after 1.2.0).
 
 ## Installation
 
@@ -170,9 +180,10 @@ you type stays on your device: no accounts, no tracking, no mandatory network.
    from the project website).
 2. Verify integrity: compare the file's SHA-256 against the attached
    **SHA256SUMS.txt** (or the table below).
-3. **1.0.0 and 1.1.0 users**: install directly over the current version
-   (in-place update guaranteed) · **v2.x users**: uninstall first (see note
-   above) — then install the new package as a fresh install.
+3. **1.0.0/1.1.0 users — key rotation notice**: uninstall first (new
+   fingerprint above) — export your dictionary and backups from 1.1.0
+   before uninstalling, and import after installing · **v2.x users**:
+   uninstall first, then install the new package as a fresh install.
 4. Enable "Install from unknown sources" for your browser or file manager when
    prompted, finish the install, and enable the keyboard in system settings.
 
