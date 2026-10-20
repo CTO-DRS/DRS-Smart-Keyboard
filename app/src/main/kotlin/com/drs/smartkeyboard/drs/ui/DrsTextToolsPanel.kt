@@ -83,6 +83,8 @@ import androidx.compose.material.icons.filled.Hearing
 import androidx.compose.material.icons.filled.SentimentNeutral
 import androidx.compose.material.icons.filled.Rule
 import androidx.compose.material.icons.filled.SelectAll
+import androidx.compose.material.icons.filled.Password
+import androidx.compose.material.icons.filled.Security
 import androidx.compose.material.icons.filled.ShortText
 import androidx.compose.material.icons.filled.Spellcheck
 import androidx.compose.material.icons.filled.Sort
@@ -847,6 +849,28 @@ private val PANEL_SECTIONS: List<DrsTextToolsPanelSection> = listOf(
             ),
         ),
     ),
+    // the security pair — passwords that never leave the device:
+    // the meter reads only (a census toast) and the generator
+    // inserts at the cursor — and the advisor never suggests the
+    // generator (a conscious tap, not a guess). Password fields
+    // refuse the whole surface upstream (the editor gate).
+    DrsTextToolsPanelSection(
+        titleRes = R.string.drs__text_tools__section_security,
+        items = listOf(
+            toolItem(
+                DrsTextTool.PASSWORD_STRENGTH,
+                R.string.drs__text_tools__tool_password_strength,
+                R.string.drs__text_tools__desc_password_strength,
+                Icons.Default.Security,
+            ),
+            toolItem(
+                DrsTextTool.GENERATE_PASSWORD,
+                R.string.drs__text_tools__tool_generate_password,
+                R.string.drs__text_tools__desc_generate_password,
+                Icons.Default.Password,
+            ),
+        ),
+    ),
     DrsTextToolsPanelSection(
         titleRes = R.string.drs__text_tools__section_quick,
         items = listOf(
@@ -950,6 +974,8 @@ fun textToolTitleRes(tool: DrsTextTool): Int = when (tool) {
     // the hex byte-dump pair.
     DrsTextTool.HEX_ENCODE -> R.string.drs__text_tools__tool_hex_encode
     DrsTextTool.HEX_DECODE -> R.string.drs__text_tools__tool_hex_decode
+    DrsTextTool.PASSWORD_STRENGTH -> R.string.drs__text_tools__tool_password_strength
+    DrsTextTool.GENERATE_PASSWORD -> R.string.drs__text_tools__tool_generate_password
     // the compute pair — the calculator and the quantity converter.
     DrsTextTool.CALCULATE -> R.string.drs__text_tools__tool_calculate
     DrsTextTool.CONVERT_UNITS -> R.string.drs__text_tools__tool_convert_units
@@ -1057,6 +1083,8 @@ fun textToolDescRes(tool: DrsTextTool): Int = when (tool) {
     // the hex byte-dump pair.
     DrsTextTool.HEX_ENCODE -> R.string.drs__text_tools__desc_hex_encode
     DrsTextTool.HEX_DECODE -> R.string.drs__text_tools__desc_hex_decode
+    DrsTextTool.PASSWORD_STRENGTH -> R.string.drs__text_tools__desc_password_strength
+    DrsTextTool.GENERATE_PASSWORD -> R.string.drs__text_tools__desc_generate_password
     // the compute pair — the calculator and the quantity converter.
     DrsTextTool.CALCULATE -> R.string.drs__text_tools__desc_calculate
     DrsTextTool.CONVERT_UNITS -> R.string.drs__text_tools__desc_convert_units

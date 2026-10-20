@@ -690,6 +690,42 @@ class EditorInstance(context: Context) : AbstractEditorInstance(context) {
             return performEditorLineOp(ic, tool, full, from, to)
         }
         val target = if (hasSelection) full.substring(from, to) else full
+        if (tool == DrsTextTool.PASSWORD_STRENGTH) {
+            // the meter reads only — the census is a toast, the field
+            // is never touched; a non-subject shows the honest refusal
+            // (no invented measurement).
+            val report = DrsTextTools.passwordStrength(target)
+            if (report == null) {
+                appContext.showShortToastSync(R.string.drs__text_tools__strength_refused)
+                return false
+            }
+            appContext.showShortToastSync(
+                R.string.drs__text_tools__strength_result,
+                "verdict" to report.verdict,
+                "length" to target.length,
+                "entropy" to report.entropyBits,
+                "classes" to report.classes,
+                "notes" to report.notes,
+            )
+            return true
+        }
+        if (tool == DrsTextTool.GENERATE_PASSWORD) {
+            // the generator commits AT THE CURSOR — only an active
+            // selection is consumed, the rest of the field is never
+            // touched (the insertion-mark contract with a payload).
+            val password = DrsTextTools.generatePassword()
+            val ok = ic.commitText(password, 1)
+            if (!ok) {
+                appContext.showShortToastSync(R.string.drs__text_tools__failed)
+            } else {
+                onRawTextToolCommit()
+                appContext.showShortToastSync(
+                    R.string.drs__text_tools__password_generated,
+                    "password" to password,
+                )
+            }
+            return ok
+        }
         if (tool.isInfoOnly) {
             if (tool == DrsTextTool.TEXT_INSPECT) {
                 // the census toast — the deep read-only profile;

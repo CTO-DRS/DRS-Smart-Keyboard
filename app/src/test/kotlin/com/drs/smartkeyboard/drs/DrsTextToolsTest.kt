@@ -435,6 +435,14 @@ class DrsTextToolsTest : FunSpec({
             // callers read [DrsTextTools.inspectText] instead.
             DrsTextTool.TEXT_INSPECT -> result shouldBe input
 
+            // the security pair — both are editor-level info surfaces:
+            // apply() never transforms (the meter reports through a
+            // toast and the generator commits at the cursor inside
+            // EditorInstance), so the text returns byte-identical —
+            // no invented measurement, no destroyed typing.
+            DrsTextTool.PASSWORD_STRENGTH -> result shouldBe input
+            DrsTextTool.GENERATE_PASSWORD -> result shouldBe input
+
             else -> error("DRS p9 (Q3): tool ${tool.name} has no pinned hostile-input invariant")
         }
     }

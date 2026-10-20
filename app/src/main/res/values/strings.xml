@@ -2331,6 +2331,14 @@
     <string name="drs__text_tools__desc_hex_encode">يرمّز النص إلى بايتاته السداسية العشرية (UTF-8) بالسرد الكلاسيكي المقروء: أزواج سداسية صغيرة بمسافة بين كل بايت في سطر واحد — العربية والإيموجي وأسطر التحكم كلها تعبر، والترميز شامل وحتمي و«فك ترميز Hex» يعيد النص بايتًا ببايت</string>
     <string name="drs__text_tools__tool_hex_decode">فك ترميز Hex</string>
     <string name="drs__text_tools__desc_hex_decode">يفك أي سرد سداسي عشري إلى نصه: الأزواج بمسافات (48 65 6c) أو ملتصقة (48656c) أو ببادئة 0x لكل زوج، بأي حالة أحرف وبعائلة المسافات كلها — والبايتات يجب أن تكون UTF-8 سليمًا، وطول فردي أو حرف غريب أو فاصل نقطتان أو ٪ أو أرقام شرقية أو بايتات ثنائية يعيد النص كما هو — الفك لا يخمّن ولا يتلف الكتابة</string>
+    <string name="drs__text_tools__section_security">الأمان والخصوصية</string>
+    <string name="drs__text_tools__tool_password_strength">قيس قوة كلمة المرور</string>
+    <string name="drs__text_tools__desc_password_strength">قراءة فقط لا تعدديل: إحصاء رياضي محلي لكلمة المرور الملصوقة — الإنتروبيا = الطول × log2(حجم محارف الأصناف الحاضرة) بكتالوج مغلقة (26 صغيرة، 26 كبيرة، 10 أرقام، 28 عربية، 32 رمزًا) وحكم بخمس درجات وأنماط ضعيفة مغلقة (تكرار، تسلسل لوحة، تواريخ، كلمات شائعة تُخفّض الحكم إلى «ضعيف» مهما كانت الإنتروبيا)، والموضوع المغلق: بلا مسافات ومن 6 إلى 128 محرفًا وبلا مخطط رابط أو شكل بريد، والرقم المجرد يبقى رقمًا للمستشار بينما الأداة نفسها شاملة على شكلها (رموز PIN تُقاس بضغطة واعية) — ولا شيء يغادر الجهاز أبدًا</string>
+    <string name="drs__text_tools__tool_generate_password">مولّد كلمة مرور</string>
+    <string name="drs__text_tools__desc_generate_password">يولّد كلمة قوية من 16 محرفًا ويُدرجها عند المؤشر دون مساس ببقية الحقل — SecureRandom على أبجدية مغلقة من 68 محرفًا بلا متشابهات (l1IO0o) بصنف مضمون من كل فئة بالبناء وإنتروبيا 97 بت تقريبًا — ولا يُرشّح آليًا عمدًا: جيل بضغطة واعية لا تخمينًا، وحقول كلمات المرور ترفض السطح كله</string>
+    <string name="drs__text_tools__strength_result">القوة: {verdict} • الطول: {length} • الإنتروبيا: {entropy} بت • الأصناف: {classes} • {notes}</string>
+    <string name="drs__text_tools__strength_refused">هذا ليس شكل كلمة مرور (بلا مسافات، من 6 إلى 128 محرفًا، بلا رابط أو بريد) — لا قياسًا مُختلَقًا</string>
+    <string name="drs__text_tools__password_generated">كلمة قوية (97 بت تقريبًا) أُدرجت عند المؤشر: {password}</string>
     <string name="pref__glide__trail_width__label">عرض أثر التمرير</string>
     <string name="drs__unified__basics_trail_summary">يضبط سماكة شريط الأثر الذي يظهر أثناء الكتابة بالتمرير وبعده</string>
     <string name="pref__emoji__size__label">حجم الإيموجي</string>

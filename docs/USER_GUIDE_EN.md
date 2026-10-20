@@ -1,6 +1,6 @@
 # User Guide — DRS Smart Keyboard
 
-- **Guide version:** 2.0.0 (unified) — covers app release **1.2.0 «Machine Alphabets & Calculation»** (versionCode 3, catalog of 82 tools)
+- **Guide version:** 2.0.0 (unified) — covers app release **1.2.0 «Machine Alphabets & Calculation»** (versionCode 3, catalog of 82 tools) plus the new «Digital security» batch (84 tools on main)
 - **Languages:** this is the English guide — Arabic version: [USER_GUIDE_AR.md](USER_GUIDE_AR.md)
 - **Support:** [SUPPORT.md](../SUPPORT.md) — official channels and crash reports.
 
@@ -158,6 +158,20 @@ guesses and never destroys your typing. When the cursor stands before
 a clean dump, the smart tiles suggest Hex decode — only when the
 recommendation is guaranteed to fire; a bare number («1250») stays a
 number and is never suggested.
+
+**Password strength meter & generator (Security & privacy):** pasted a
+password into a normal field and want the truth about it? The «Password
+strength meter» reads only, never transforms: it measures entropy
+mathematically (length × the variety of the classes present), answers
+on a five-band verdict, and flags the closed weak patterns — repeats,
+keyboard walks, year-shaped fragments, and common guessing-list words
+(any list hit reads «weak» no matter the entropy). A bare number stays
+a number and is never suggested; PINs are measured on an explicit tap.
+And the «Password generator» writes a strong password at the cursor
+(16 characters, ≈97 bits, no look-alike l1IO0o, one guaranteed member
+of every class) — deliberately never auto-suggested: generation is a
+conscious tap, not a guess. Both are purely local: nothing leaves your
+device, and password fields themselves refuse the whole surface.
 
 **Deterministic text vocalization:** in the text tools panel,
 «Vocalize text» adds canonical harakat to every word the local 3000-word

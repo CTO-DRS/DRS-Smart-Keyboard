@@ -548,11 +548,38 @@ enum class DrsTextTool(
     // it (the one closed ambiguity class), while the tool itself
     // remains total over its shape. Decoding must never destroy
     // typing — never a guess. See [hexDecode].
-    HEX_DECODE(-682);
+    HEX_DECODE(-682),
+    // the password strength meter — read-only (a toast, never a
+    // transform): the closed subject is a no-whitespace run of 6..128
+    // characters carrying no «://» scheme and no email shape (an @
+    // followed by a dot — a bare @ is a legitimate password symbol).
+    // The report is pure mathematics: entropy = length × log2(charset
+    // of the classes PRESENT) over the closed catalog (26 lower, 26
+    // upper, 10 digits, 28 Arabic letters, 32 symbols), a five-band
+    // verdict (<28 / 28 / 36 / 60 / 128 bits) and closed pattern
+    // catalogs (runs, keyboard walks, dates, common passwords) that
+    // cap common-list hits at «weak». A bare digit run is a NUMBER
+    // first (the closed ambiguity class): the tool itself stays total
+    // over its shape — PINs are analyzed on an explicit tap — while
+    // the advisor stays silent on it. Nothing leaves the device, and
+    // password fields never reach this surface (the editor gate).
+    // See [passwordStrength] / [isPasswordStrengthSubject].
+    PASSWORD_STRENGTH(-683, isInfoOnly = true),
+    // the strong password generator — inserts AT THE CURSOR, never
+    // touching the rest of the field (only an active selection is
+    // consumed — the insertion-mark contract with a strong payload):
+    // 16 characters from a closed 68-character alphabet with the
+    // look-alike pairs removed (l1IO0o), SecureRandom over the four
+    // classes with one guaranteed member of every class by
+    // construction — floor(16·log2(68)) ≈ 97 bits of entropy.
+    // Deliberately NEVER suggested by the advisor: generation is a
+    // conscious tap, not a guess — and password fields refuse the
+    // whole surface anyway (the editor gate). See [generatePassword].
+    GENERATE_PASSWORD(-684);
 
     companion object {
         /** Inclusive range covering every tool code, for fast dispatch. */
-        val CODE_RANGE = -682..-601
+        val CODE_RANGE = -684..-601
 
         fun fromCode(code: Int): DrsTextTool? = entries.firstOrNull { it.code == code }
     }
@@ -919,6 +946,13 @@ object DrsTextTools {
                 // (see [hexEncode] / [hexDecode]).
                 DrsTextTool.HEX_ENCODE -> hexEncode(text)
                 DrsTextTool.HEX_DECODE -> hexDecode(text)
+                // the security pair — passwords that never leave the
+                // device (see [passwordStrength] / [generatePassword]).
+                // Both are editor-level info surfaces: the meter reports
+                // through a toast and the generator commits at the cursor
+                // inside EditorInstance — apply() itself never transforms.
+                DrsTextTool.PASSWORD_STRENGTH -> text
+                DrsTextTool.GENERATE_PASSWORD -> text
                 // one space between digits and letters in BOTH
                 // directions (12abc -> 12 abc، ٣س -> ٣ س) — the mixed-script
                 // cleanup pasted prices and codes need. The lookarounds never
@@ -2522,5 +2556,216 @@ object DrsTextTools {
             token
         }
         return if (body.isEmpty()) null else body
+    }
+
+    // ------------------------------------------------------------------
+    // The security pair — the L1 arm of the smart roadmap
+    // (docs/SMART_FEATURES_ROADMAP.md): local mathematics over closed
+    // catalogs, zero network, zero logging of subject content, and the
+    // password-field editor gate upstream of every entry point.
+
+    /** Closed charset size of the lowercase class (a–z). */
+    private const val PW_LOWER_SIZE = 26
+
+    /** Closed charset size of the uppercase class (A–Z). */
+    private const val PW_UPPER_SIZE = 26
+
+    /** Closed charset size of the digit class (0–9 and ٠–٩). */
+    private const val PW_DIGIT_SIZE = 10
+
+    /** Closed charset size of the Arabic-letters class (ا–ي + hamza forms). */
+    private const val PW_ARABIC_SIZE = 28
+
+    /** Closed charset size of the symbol class (printable ASCII,
+     *  non-alphanumeric, no space). */
+    private const val PW_SYMBOL_SIZE = 32
+
+    /** The closed weak-pattern catalogs: keyboard walks (either
+     *  direction, any 4-character window) and the common-password list
+     *  (substring match over the lowercase text). */
+    private val PW_WALKS = listOf(
+        "abcdefghijklmnopqrstuvwxyz",
+        "qwertyuiop",
+        "asdfghjkl",
+        "zxcvbnm",
+        "0123456789",
+        "0987654321",
+    )
+    private val PW_COMMON = listOf(
+        "password", "123456", "12345678", "qwerty", "abc123", "111111",
+        "123123", "123456789", "12345", "000000", "iloveyou", "admin",
+        "welcome", "monkey", "dragon", "letmein", "football", "baseball",
+        "master", "sunshine", "princess", "654321", "qwerty123", "password1",
+    )
+    private val PW_REPEAT = Regex("(.)\\1{2,}")
+    private val PW_DATE = Regex("(19|20)\\d{2}")
+
+    /** The five verdict bands (<28 / 28 / 36 / 60 / 128 bits) in their
+     *  canonical Arabic display order — the keyboard speaks Arabic
+     *  (the morse-decode doctrine: SOS → سخس). */
+    private val PW_VERDICTS = listOf("ضعيف جدًا", "ضعيف", "متوسط", "قوي", "قوي جدًا")
+
+    /** The honest no-warnings line. */
+    private const val PW_CLEAN_NOTES = "لا أنماط مقلقة"
+
+    /** The read-only census of a password subject — [passwordStrength]'s
+     *  payload. All labels are canonical Arabic regardless of locale. */
+    data class PasswordStrengthReport(
+        val entropyBits: Int,
+        val verdict: String,
+        val classes: String,
+        val notes: String,
+    )
+
+    /** A char is whitespace for the closed subject: Kotlin's
+     *  [Char.isWhitespace] widened by the NBSP family — the same
+     *  whitespace family the hex decoder folds. */
+    private fun isPasswordWhitespace(c: Char): Boolean =
+        c.isWhitespace() || c == '\u00A0' || c == '\u2007' || c == '\u202F'
+
+    private fun isEasternDigit(c: Char): Boolean = c.code in 0x0660..0x0669
+
+    private fun isArabicLetter(c: Char): Boolean = c.code in 0x0621..0x064A
+
+    private fun isPasswordSymbol(c: Char): Boolean =
+        c.code in 0x21..0x7E && !c.isLetterOrDigit()
+
+    private fun passwordClasses(text: String): List<String> {
+        val lower = text.any { it in 'a'..'z' }
+        val upper = text.any { it in 'A'..'Z' }
+        val digit = text.any { it in '0'..'9' || isEasternDigit(it) }
+        val arabic = text.any { isArabicLetter(it) }
+        val symbol = text.any { isPasswordSymbol(it) }
+        val names = ArrayList<String>(5)
+        if (lower) names.add("حروف صغيرة")
+        if (upper) names.add("حروف كبيرة")
+        if (digit) names.add("أرقام")
+        if (arabic) names.add("حروف عربية")
+        if (symbol) names.add("رموز")
+        return names
+    }
+
+    /** How many closed classes the text touches — the advisor's
+     *  two-classes-minimum filter. */
+    fun passwordClassCount(text: String): Int = passwordClasses(text).size
+
+    /**
+     * The closed subject predicate of the meter: a no-whitespace run of
+     * 6..128 characters, carrying no «://» scheme and no EMAIL shape —
+     * an @ followed by a dot. A bare @ is a legitimate password symbol
+     * and stays a subject («Test@2026»), while «user@mail.com» is not.
+     * Bare digit runs ARE subjects (the tool stays total — PINs are
+     * measured on an explicit tap); the advisor filters them out.
+     */
+    fun isPasswordStrengthSubject(text: String): Boolean {
+        if (text.length < 6 || text.length > 128) return false
+        if (text.any { isPasswordWhitespace(it) }) return false
+        if (text.contains("://")) return false
+        val at = text.indexOf('@')
+        if (at >= 0 && text.indexOf('.', at + 1) >= 0) return false
+        return true
+    }
+
+    /**
+     * The strength census: entropy = length × log2(charset of the
+     * classes PRESENT) over the closed catalog, floored; a five-band
+     * verdict; and the closed weak-pattern notes — character runs,
+     * keyboard walks in either direction, year-shaped fragments, and
+     * common-list hits (which cap the verdict at «weak»: a password
+     * that is on a guessing list is weak no matter its entropy).
+     * Returns null byte-identically for non-subjects — no invented
+     * measurement.
+     */
+    fun passwordStrength(text: String): PasswordStrengthReport? {
+        if (!isPasswordStrengthSubject(text)) return null
+        val names = passwordClasses(text)
+        var size = 0
+        var lower = false; var upper = false; var digit = false
+        var arabic = false; var symbol = false
+        for (c in text) {
+            when {
+                c in 'a'..'z' -> lower = true
+                c in 'A'..'Z' -> upper = true
+                c in '0'..'9' || isEasternDigit(c) -> digit = true
+                isArabicLetter(c) -> arabic = true
+                isPasswordSymbol(c) -> symbol = true
+            }
+        }
+        if (lower) size += PW_LOWER_SIZE
+        if (upper) size += PW_UPPER_SIZE
+        if (digit) size += PW_DIGIT_SIZE
+        if (arabic) size += PW_ARABIC_SIZE
+        if (symbol) size += PW_SYMBOL_SIZE
+        val entropy = if (size == 0) {
+            0
+        } else {
+            kotlin.math.floor(text.length * kotlin.math.log2(size.toDouble())).toInt()
+        }
+        var band = when {
+            entropy < 28 -> 0
+            entropy < 36 -> 1
+            entropy < 60 -> 2
+            entropy < 128 -> 3
+            else -> 4
+        }
+        val notes = ArrayList<String>(4)
+        if (PW_REPEAT.containsMatchIn(text)) notes.add("تكرار محارف متتابع")
+        val low = text.lowercase()
+        if (low.length >= 4) {
+            walk@ for (seq in PW_WALKS) {
+                for (i in 0..low.length - 4) {
+                    val frag = low.substring(i, i + 4)
+                    if (seq.contains(frag) || seq.contains(frag.reversed())) {
+                        notes.add("تسلسل لوحة مفاتيح")
+                        break@walk
+                    }
+                }
+            }
+        }
+        if (PW_DATE.containsMatchIn(text)) notes.add("يبدو أنه تاريخ")
+        if (PW_COMMON.any { low.contains(it) }) {
+            notes.add("كلمة شائعة في قوائم التخمين")
+            if (band > 1) band = 1
+        }
+        return PasswordStrengthReport(
+            entropyBits = entropy,
+            verdict = PW_VERDICTS[band],
+            classes = names.joinToString(" + "),
+            notes = if (notes.isEmpty()) PW_CLEAN_NOTES else notes.joinToString(" • "),
+        )
+    }
+
+    /** The closed 68-character generator alphabet — the look-alike
+     *  pairs (l1IO0o) are removed: 24 lowercase, 24 uppercase, 8
+     *  digits, 12 symbols. floor(16·log2(68)) = 97 bits. */
+    private val PW_GEN_LOWER = "abcdefghijkmnpqrstuvwxyz"
+    private val PW_GEN_UPPER = "ABCDEFGHJKLMNPQRSTUVWXYZ"
+    private val PW_GEN_DIGIT = "23456789"
+    private val PW_GEN_SYMBOL = "!@#\$%^&*-_=+"
+    private val PW_GEN_ALPHABET = PW_GEN_LOWER + PW_GEN_UPPER + PW_GEN_DIGIT + PW_GEN_SYMBOL
+
+    /** The generator draws 16 characters with one guaranteed member of
+     *  every class by construction, then Fisher–Yates-shuffles with the
+     *  same SecureRandom — positions unbiased, length and alphabet
+     *  closed. */
+    private val PW_RNG = java.security.SecureRandom()
+    private const val PW_GEN_LENGTH = 16
+
+    fun generatePassword(): String {
+        val chars = CharArray(PW_GEN_LENGTH)
+        chars[0] = PW_GEN_LOWER[PW_RNG.nextInt(PW_GEN_LOWER.length)]
+        chars[1] = PW_GEN_UPPER[PW_RNG.nextInt(PW_GEN_UPPER.length)]
+        chars[2] = PW_GEN_DIGIT[PW_RNG.nextInt(PW_GEN_DIGIT.length)]
+        chars[3] = PW_GEN_SYMBOL[PW_RNG.nextInt(PW_GEN_SYMBOL.length)]
+        for (i in 4 until PW_GEN_LENGTH) {
+            chars[i] = PW_GEN_ALPHABET[PW_RNG.nextInt(PW_GEN_ALPHABET.length)]
+        }
+        for (i in PW_GEN_LENGTH - 1 downTo 1) {
+            val j = PW_RNG.nextInt(i + 1)
+            val tmp = chars[i]
+            chars[i] = chars[j]
+            chars[j] = tmp
+        }
+        return String(chars)
     }
 }

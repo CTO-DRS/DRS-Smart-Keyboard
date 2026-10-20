@@ -255,6 +255,22 @@ object DrsTileContextAdvisor {
             DrsTextTools.apply(DrsTextTool.HEX_DECODE, t) != t) {
             picks += DrsTextTool.HEX_DECODE
         }
+        // 1.12) مقياس قوة كلمة المرور — عقد الإطلاق المضمون: الموضوع
+        //       المغلق وحده يُرشَّح (بلا مسافات وبطول 6..128 وبلا مخطط
+        //       رابط أو شكل بريد) مع حرسين مغلقين قبله على نمط Hex:
+        //       الرقم المجرد الصامت يبقى رقمًا (فئة الالتباس المغلقة —
+        //       والأداة نفسها تبقى شاملة على شكلها: رموز PIN تُقاس
+        //       بضغطة واعية)، ونص من صنف واحد أو مبدوء بـwww يصمت
+        //       (روابط وبريد لهم أدواتهم). وصفتان فأكثر من الكتالوج
+        //       المغلقة شرط الترشيح. والمولّد بلا ترشيح آلي عمدًا:
+        //       جيل بضغطة واعية لا تخمينًا.
+        if (t.length <= 128 &&
+            DrsTextTools.isPasswordStrengthSubject(t) &&
+            !isBareDigitRun &&
+            DrsTextTools.passwordClassCount(t) >= 2 &&
+            !t.lowercase().startsWith("www.")) {
+            picks += DrsTextTool.PASSWORD_STRENGTH
+        }
         // 2) العلامات الصفرية والتطويل نفاية لصق لا تصلح فقرة — انزعها.
         if (hasZeroWidth) picks += DrsTextTool.REMOVE_ZERO_WIDTH
         if (hasTatweel) picks += DrsTextTool.REMOVE_TATWEEL

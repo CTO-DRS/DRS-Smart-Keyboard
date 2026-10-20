@@ -256,9 +256,9 @@ class DrsV2200Tests : FunSpec({
     // ------------------------------------------------------------
     // 6) الأختام بعد إضافات الدفعة C
     // ------------------------------------------------------------
-    test("seals — the catalogue is 82 tools over -682") {
-        DrsTextTool.entries.size shouldBe 82
-        DrsTextTool.CODE_RANGE.first shouldBe -682
+    test("seals — the catalogue is 84 tools over -684") {
+        DrsTextTool.entries.size shouldBe 84
+        DrsTextTool.CODE_RANGE.first shouldBe -684
         DrsTextTool.CODE_RANGE.last shouldBe -601
         // round-trip من الكود إلى الأداة ومعهRegistration للجدد.
         DrsTextTool.fromCode(-670) shouldBe DrsTextTool.SORT_LINES_NATURAL
@@ -273,6 +273,8 @@ class DrsV2200Tests : FunSpec({
         DrsTextTool.fromCode(-680) shouldBe DrsTextTool.CONVERT_UNITS
         DrsTextTool.fromCode(-681) shouldBe DrsTextTool.HEX_ENCODE
         DrsTextTool.fromCode(-682) shouldBe DrsTextTool.HEX_DECODE
+        DrsTextTool.fromCode(-683) shouldBe DrsTextTool.PASSWORD_STRENGTH
+        DrsTextTool.fromCode(-684) shouldBe DrsTextTool.GENERATE_PASSWORD
     }
 
     // ------------------------------------------------------------
@@ -316,6 +318,35 @@ class DrsV2200Tests : FunSpec({
         (DrsTextTool.HEX_DECODE in adv("4869")).shouldBe(false)
         (DrsTextTool.HEX_DECODE in adv("12")).shouldBe(false)
         (DrsTextTool.HEX_DECODE in adv("٤٨")).shouldBe(false)
+    }
+
+    // ------------------------------------------------------------
+    // 6.7) مقياس قوة كلمة المرور — عقد الإطلاق المضمون في الذكاء
+    //      السياقي (الموضوع المغلق + حرسا الفئة الملتبسة وwww)،
+    //      والمولّد بلا ترشيح آلي عمدًا فيصمت عن كل شيء.
+    // ------------------------------------------------------------
+    test("smart advice — the password meter fires on the closed subject") {
+        fun adv(t: String) = DrsTileContextAdvisor.advise(t)
+        // موضوع مغلق بصنفين فأكثر يُرشَّح.
+        (DrsTextTool.PASSWORD_STRENGTH in adv("abc123")).shouldBe(true)
+        (DrsTextTool.PASSWORD_STRENGTH in adv("Test@2026")).shouldBe(true)
+        (DrsTextTool.PASSWORD_STRENGTH in adv("مرحبا12345")).shouldBe(true)
+        (DrsTextTool.PASSWORD_STRENGTH in adv("Aa1!Aa1!Aa1!Aa1!")).shouldBe(true)
+        // الصمت: النثر والمسافات، الرقم المجرد (فئة الالتباس)، صنف واحد،
+        // البريد والروابط (لهم أدواتهم)، والأرقام الشرقية صنف واحد.
+        (DrsTextTool.PASSWORD_STRENGTH in adv("hello world")).shouldBe(false)
+        (DrsTextTool.PASSWORD_STRENGTH in adv("مرحبا")).shouldBe(false)
+        (DrsTextTool.PASSWORD_STRENGTH in adv("1250")).shouldBe(false)
+        (DrsTextTool.PASSWORD_STRENGTH in adv("123456")).shouldBe(false)
+        (DrsTextTool.PASSWORD_STRENGTH in adv("abcdef")).shouldBe(false)
+        (DrsTextTool.PASSWORD_STRENGTH in adv("aaaaaa")).shouldBe(false)
+        (DrsTextTool.PASSWORD_STRENGTH in adv("user@mail.com")).shouldBe(false)
+        (DrsTextTool.PASSWORD_STRENGTH in adv("https://x.com/abc123")).shouldBe(false)
+        (DrsTextTool.PASSWORD_STRENGTH in adv("www.example.com1")).shouldBe(false)
+        (DrsTextTool.PASSWORD_STRENGTH in adv("٠١٢٣٤٥")).shouldBe(false)
+        // والمولّد لا يُرشَّح آليًا أبدًا — جيل بضغطة واعية.
+        (DrsTextTool.GENERATE_PASSWORD in adv("abc123")).shouldBe(false)
+        (DrsTextTool.GENERATE_PASSWORD in adv("")).shouldBe(false)
     }
 
     // ------------------------------------------------------------
