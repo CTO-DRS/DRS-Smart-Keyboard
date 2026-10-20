@@ -23,6 +23,12 @@ import com.drs.smartkeyboard.drs.ai.QwertyCostModel
  *     AND, NEW, stem scans after affix splitting, POOLED and ranked by
  *     quantized cost then frequency (a zero-cost stem match like
  *     والجامعه → وال+جامعة outranks a cost-3 direct match).
+ *     L2 (الدفعة 15): the scan is BUDGET-AWARE (the DP saturates at the
+ *     caller's tier budget, not the global ceiling) and LENGTH-BUCKETED
+ *     (only in-band length buckets are visited — never the whole dict),
+ *     with a VOCAL re-rank when the raw query carries harakat and the
+ *     tier enables vocalization (same-family candidates that spell the
+ *     user's harakat rank first — DrsArabicCorrector.vocalRankAdjust).
  *  4. The legacy delete-1 index as backstop.
  *
  * Affix splitting is bounded and conservative: only the documented Arabic
@@ -85,10 +91,25 @@ object DrsFusedCorrection {
     )
 
     /**
+     * L2 (الدفعة 15): the vocal gate decision — the re-rank arm exists only
+     * when the tier enables vocalization AND the raw query carries harakat.
+     * The LIVE integration point is the display-twin selection (see
+     * DictIndex.displayEntryFor): dictionary candidates are matched on
+     * NORMALIZED keys (harakat stripped), so same-norm display twins are
+     * the only place a vocal shape can discriminate — and on an all-bare
+     * twin set the pick is byte-identical to the canonical rule.
+     */
+    private fun vocalGate(vocalizationEnabled: Boolean, raw: String): Boolean =
+        vocalizationEnabled &&
+            runCatching { DrsArabicCorrector.hasTashkeel(raw) }.getOrDefault(false)
+
+    /**
      * Runs the fused pipeline for [raw] over [index]. [normalize] is the
      * provider's normalization (one tested path); [learningBoost] feeds the
-     * personal-learning frequency bonus (defaults to none for pure tests).
-     * Never throws.
+     * personal-learning frequency bonus (defaults to none for pure tests);
+     * [vocalizationEnabled] is the tier gate (LIGHT passes false — the
+     * vocal re-rank never fires there, the historical default for pure
+     * callers). Never throws.
      */
     internal fun corrections(
         index: DictIndex,
@@ -99,9 +120,11 @@ object DrsFusedCorrection {
         maxCandidateCount: Int,
         normalize: (String) -> String,
         learningBoost: (String) -> Int = { 0 },
+        vocalizationEnabled: Boolean = false,
     ): List<Correction> {
         if (maxCandidateCount <= 0 || raw.isEmpty()) return emptyList()
         val prefix = runCatching { normalize(raw) }.getOrDefault(raw)
+        val vocalActive = vocalGate(vocalizationEnabled, raw)
         val out = LinkedHashMap<String, Correction>()
 
         // 1) Direct hard corrections — the trust ceiling (0.95).
@@ -131,14 +154,14 @@ object DrsFusedCorrection {
             runCatching {
                 DrsQuantizedEngine.search(
                     query = prefix,
-                    words = index.entries.asSequence().map { it.norm to it.freq },
+                    lengthBuckets = index.normFreqByLength,
                     costs = costModel,
                     limit = maxCandidateCount * 3,
                     maxCost = maxCost,
                     lengthBand = lengthBand,
                 )
             }.getOrDefault(emptyList()).forEach { match ->
-                val entry = index.byNorm[match.word] ?: return@forEach
+                val entry = index.displayEntryFor(match.word, raw, vocalActive) ?: return@forEach
                 if (entry.word == raw) return@forEach
                 pool.add(Hit(match.cost, entry.freq, entry.word, entry.norm, learningBoost(entry.word)))
             }
@@ -152,14 +175,14 @@ object DrsFusedCorrection {
                     runCatching {
                         DrsQuantizedEngine.search(
                             query = stem,
-                            words = index.entries.asSequence().map { it.norm to it.freq },
+                            lengthBuckets = index.normFreqByLength,
                             costs = costModel,
                             limit = maxCandidateCount,
                             maxCost = maxCost,
                             lengthBand = lengthBand,
                         )
                     }.getOrDefault(emptyList()).forEach { match ->
-                        val entry = index.byNorm[match.word] ?: return@forEach
+                        val entry = index.displayEntryFor(match.word, raw, vocalActive) ?: return@forEach
                         val composed = p + entry.word
                         if (composed == raw) return@forEach
                         pool.add(Hit(match.cost, entry.freq, composed, match.word, learningBoost(entry.word)))
@@ -168,8 +191,12 @@ object DrsFusedCorrection {
             }
 
             // Rank the pool by cost ascending, frequency (+ personal learning)
-            // descending; dedupe by TEXT first (a hard layer may already hold
-            // the same spelling) then by NORM (direct and stem scans overlap).
+            // descending, then text; dedupe by TEXT first (a hard layer may
+            // already hold the same spelling) then by NORM (direct and stem
+            // scans overlap). The vocal discrimination is NOT here: pool hits
+            // are one-per-norm and same-shape-family texts imply equal norms
+            // (stripTashkeel equality forces normalize equality) — the live
+            // vocal point is the display-twin selection above.
             val sorted = pool.sortedWith(
                 compareBy({ it.cost }, { -(it.freq + it.boost / 4) }, { it.text }),
             )

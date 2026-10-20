@@ -1002,6 +1002,7 @@ class LatinLanguageProvider(context: Context) : SpellingProvider, SuggestionProv
             maxCandidateCount = maxCandidateCount,
             normalize = ::normalize,
             learningBoost = { DrsLearningEngine.boostFor(it) },
+            vocalizationEnabled = caps.vocalizationEnabled,
         ).map { correction ->
             WordSuggestionCandidate(
                 text = displayCase(correction.text, raw, isArabic, subtype.primaryLocale.base),
@@ -1084,11 +1085,73 @@ internal class DictIndex(val entries: List<DictEntry>) {
         map
     }
 
+    /**
+     * DRS L2 (الدفعة 15): norm-LENGTH buckets for the length-banded
+     * quantized scan — prebuilt ONCE so each per-keystroke search visits
+     * only the in-band buckets instead of walking the whole dictionary.
+     * Values are (norm, freq) pairs exactly what DrsQuantizedEngine.search
+     * consumes. Built lazily.
+     */
+    val normFreqByLength: Map<Int, List<Pair<String, Int>>> by lazy {
+        val map = HashMap<Int, MutableList<Pair<String, Int>>>()
+        for (entry in entries) {
+            map.getOrPut(entry.norm.length) { ArrayList() }.add(entry.norm to entry.freq)
+        }
+        map
+    }
+
     private fun canonicalPrefers(a: DictEntry, b: DictEntry): Boolean {
         val aTa = a.word.endsWith('ة')
         val bTa = b.word.endsWith('ة')
         if (aTa != bTa) return aTa
         return a.freq > b.freq
+    }
+
+    /**
+     * DRS L2 (الدفعة 15): ALL entries per norm (not just the canonical
+     * winner) — the display-twin multimap. On the shipped dictionary every
+     * norm is a singleton; twins arise in merged external dictionaries and
+     * future vocalized models. Built lazily.
+     */
+    val byNormAll: Map<String, List<DictEntry>> by lazy {
+        val map = HashMap<String, MutableList<DictEntry>>(entries.size * 2)
+        for (entry in entries) {
+            map.getOrPut(entry.norm) { ArrayList(2) }.add(entry)
+        }
+        map
+    }
+
+    /**
+     * DRS L2 (الدفعة 15): the display entry for one matched [norm].
+     *
+     * Default (and whenever [vocalActive] is false): the canonical winner
+     * ([byNorm]) — the historical behavior, byte-identical.
+     *
+     * When [vocalActive] (the tier gate + a vocalized query): among
+     * same-norm twins, the spelling whose harakat shape best matches the
+     * query's own ([DrsArabicCorrector.vocalRankAdjust] at the reference
+     * base [DrsArabicCorrector.VOCAL_BONUS]) ranks first — with the
+     * canonical rules (ta-marbuta, frequency, spelling) as tiebreakers, so
+     * an all-bare twin set picks EXACTLY what the canonical rule picks
+     * (bare candidates never gain vocal superiority — the closed negative
+     * contract). Pure and deterministic.
+     */
+    fun displayEntryFor(norm: String, rawVocal: String, vocalActive: Boolean): DictEntry? {
+        if (!vocalActive) return byNorm[norm]
+        val twins = byNormAll[norm] ?: return byNorm[norm]
+        if (twins.size == 1) return twins[0]
+        return twins.minWithOrNull(
+            compareBy(
+                {
+                    runCatching {
+                        DrsArabicCorrector.vocalRankAdjust(rawVocal, it.word, DrsArabicCorrector.VOCAL_BONUS)
+                    }.getOrDefault(DrsArabicCorrector.VOCAL_BONUS)
+                },
+                { if (it.word.endsWith('ة')) 0 else 1 },
+                { -it.freq },
+                { it.word },
+            ),
+        )
     }
 
     /**

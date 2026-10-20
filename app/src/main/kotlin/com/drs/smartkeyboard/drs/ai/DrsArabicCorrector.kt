@@ -144,6 +144,69 @@ object DrsArabicCorrector {
 
     fun hasTashkeel(word: String): Boolean = word.any { isHaraka(it) }
 
+    // ------------------------------------------------- vocal rank (L2, batch 15)
+
+    /**
+     * L2 (الدفعة 15): saturation cap of [exactShapeDistance] — harakat
+     * patterns are short; anything 4 shape-ops apart is indistinguishably
+     * wrong and needs no finer measure.
+     */
+    const val VOCAL_SHAPE_CAP = 4
+
+    /**
+     * L2 (الدفعة 15): UNIT-COST Levenshtein on the RAW (vocal) spellings —
+     * the exact-shape distance that decides whether two same-family words
+     * carry the SAME harakat pattern. Plain Int DP, two rolling rows,
+     * saturated at [VOCAL_SHAPE_CAP]. Pure.
+     */
+    fun exactShapeDistance(a: String, b: String): Int {
+        if (a == b) return 0
+        val n = a.length
+        val m = b.length
+        var prev = IntArray(m + 1) { it.coerceAtMost(VOCAL_SHAPE_CAP) }
+        var curr = IntArray(m + 1)
+        for (i in 1..n) {
+            curr[0] = i.coerceAtMost(VOCAL_SHAPE_CAP)
+            for (j in 1..m) {
+                val sub = prev[j - 1] + if (a[i - 1] == b[j - 1]) 0 else 1
+                val del = prev[j] + 1
+                val ins = curr[j - 1] + 1
+                curr[j] = minOf(sub, del, ins, VOCAL_SHAPE_CAP)
+            }
+            val tmp = prev
+            prev = curr
+            curr = tmp
+        }
+        return prev[m]
+    }
+
+    /**
+     * L2 (الدفعة 15): THE VOCAL RANK KERNEL — turns the previously-dead
+     * [VOCAL_BONUS] constant into a live, closed contract. Adjusts a
+     * quantized [baseCost] (computed on the STRIPPED forms by the engine)
+     * with the query's vocal shape, so among same-family candidates the
+     * one spelling the harakat the user actually wrote ranks first:
+     *
+     *  - bare [query] → [baseCost] untouched (bare input never invents
+     *    vocal superiority — the negative contract);
+     *  - bare [candidate] → untouched (a bare dictionary has nothing to
+     *    discriminate — today's data stays byte-identical);
+     *  - different stripped family → untouched (the base cost governs);
+     *  - same family, both vocal → discount by shape agreement: exact
+     *    shape earns the full [VOCAL_BONUS], one shape-op half, two or
+     *    more none (never PENALIZED for carrying harakat); floored at 0.
+     *
+     * Integer arithmetic only — mirrors check_l2_quantized.py exactly.
+     */
+    fun vocalRankAdjust(query: String, candidate: String, baseCost: Int): Int {
+        if (!hasTashkeel(query)) return baseCost
+        if (!hasTashkeel(candidate)) return baseCost
+        if (stripTashkeel(query) != stripTashkeel(candidate)) return baseCost
+        val shape = exactShapeDistance(query, candidate)
+        val discount = (VOCAL_BONUS - shape).coerceAtLeast(0)
+        return (baseCost - discount).coerceAtLeast(0)
+    }
+
     // ----------------------------------------------------- hard corrections
 
     /**
