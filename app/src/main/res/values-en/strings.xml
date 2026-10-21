@@ -1815,6 +1815,9 @@
     <string name="drs__text_tools__section_context">Suggestions for this text</string>
     <string name="drs__text_tools__favorites_hint">Long-press any tile to pin it here — local only, no internet</string>
     <string name="drs__text_tools__recents_hint">Use the tiles and the most-used ones appear here automatically — local counters, never text</string>
+    <!-- L4 arm — field-context intelligence: ranking from the field's attributes alone (EditorInfo.inputType), no content read — password fields stay completely deaf -->
+    <string name="drs__text_tools__chip_field">Field context</string>
+    <string name="drs__text_tools__field_hint">Ranked for this field\'s kind — from its attributes alone, no content read</string>
     <string name="drs__text_tools__favorites_full">Favorites are full — eight tiles at most. Remove one first.</string>
     <string name="pref__panels__text_tools_smart_context__label">Text tools suggestions</string>
     <string name="pref__panels__text_tools_smart_context__summary">A «suggestions for this text» row ranks the tools that fit the text before the cursor — deterministic, local, no guessing</string>

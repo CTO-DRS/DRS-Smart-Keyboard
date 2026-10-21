@@ -127,9 +127,11 @@ import com.drs.smartkeyboard.drs.DrsMotion
 import com.drs.smartkeyboard.drs.DrsPanelGates
 import com.drs.smartkeyboard.drs.DrsStore
 import com.drs.smartkeyboard.drs.DrsSystems
+import com.drs.smartkeyboard.drs.DrsContextualRank
 import com.drs.smartkeyboard.drs.DrsTextTool
 import com.drs.smartkeyboard.drs.DrsTileContextAdvisor
 import com.drs.smartkeyboard.drs.DrsTileFavorites
+import com.drs.smartkeyboard.drs.ai.DrsFieldKind
 import com.drs.smartkeyboard.drs.PanelUsageTracker
 import com.drs.smartkeyboard.drs.rememberDrsMotionEnabled
 import com.drs.smartkeyboard.editorInstance
@@ -192,6 +194,15 @@ private sealed interface TileFilter {
 
     /** One catalogue section only. */
     data class Section(val index: Int) : TileFilter
+
+    /**
+     * ذراع L4 — the field-context ranking: the tools the current
+     * field's KIND deserves (from `EditorInfo.inputType` alone — no
+     * content read). The chip exists only when the closed ranking
+     * has something honest to say; protected and plain fields keep
+     * the panel exactly as it was.
+     */
+    data object FieldContext : TileFilter
 }
 
 /**
@@ -1220,6 +1231,25 @@ fun DrsTextToolsPanel(modifier: Modifier = Modifier) {
     var filter by remember { mutableStateOf<TileFilter>(TileFilter.All) }
     var commitStamp by remember { mutableIntStateOf(0) }
 
+    // ذراع L4 «الذكاء السياقي بين الحقول» — the field's closed kind
+    // from the LIVE EditorInfo (inputType alone — never content, never
+    // the package). One pure classifier feeds both the ranking and the
+    // privacy gate; the ranked chip exists only when the closed
+    // ranking has something honest to say.
+    val activeInfo by editorInstance.activeInfoFlow.collectAsState()
+    val fieldKind = remember(activeInfo.inputAttributes.raw) {
+        DrsFieldKind.from(activeInfo.inputAttributes.raw)
+    }
+    val fieldRanked = remember(fieldKind) { DrsContextualRank.rankedTools(fieldKind) }
+    // the field changed while the field-context view was open — fall
+    // back honestly to All when the new field has no ranking to say
+    // (protected and plain fields keep the panel exactly as it was).
+    LaunchedEffect(fieldRanked) {
+        if (filter is TileFilter.FieldContext && fieldRanked.isEmpty()) {
+            filter = TileFilter.All
+        }
+    }
+
     fun dispatch(code: Int) {
         keyboardManager.inputEventDispatcher.sendDownUp(
             TextKeyData(type = KeyType.FUNCTION, code = code, label = "drs_text_tool"),
@@ -1261,9 +1291,12 @@ fun DrsTextToolsPanel(modifier: Modifier = Modifier) {
     }
 
     // The contextual advisory picks — recomputed after every commit the
-    // same way the harakat board's advisor refreshes.
-    val contextPicks = remember(contextEnabled, commitStamp) {
-        if (contextEnabled) {
+    // same way the harakat board's advisor refreshes. ذراع L4 privacy
+    // gate: password-family fields NEVER feed the content advisor even
+    // when the field exposes its text (visible-password fields do) —
+    // fail-closed by construction via [DrsContextualRank].
+    val contextPicks = remember(contextEnabled, commitStamp, fieldKind) {
+        if (contextEnabled && DrsContextualRank.contentAdviceAllowed(fieldKind)) {
             val before = editorInstance.run { activeContent.getTextBeforeCursor(48) }
             DrsTileContextAdvisor.advise(before)
         } else {
@@ -1371,6 +1404,16 @@ fun DrsTextToolsPanel(modifier: Modifier = Modifier) {
                 accent = accent,
                 onClick = { filter = TileFilter.Recents },
             )
+            // ذراع L4 — the field-context chip: present only when the
+            // closed ranking has an honest list for this field kind.
+            if (fieldRanked.isNotEmpty()) {
+                FilterChip(
+                    label = stringRes(R.string.drs__text_tools__chip_field),
+                    selected = filter is TileFilter.FieldContext,
+                    accent = accent,
+                    onClick = { filter = TileFilter.FieldContext },
+                )
+            }
             PANEL_SECTIONS.forEachIndexed { index, section ->
                 FilterChip(
                     label = stringRes(section.titleRes),
@@ -1514,6 +1557,27 @@ fun DrsTextToolsPanel(modifier: Modifier = Modifier) {
                                 entranceIndex = itemIndex,
                                 entranceKey = current,
                             )
+                        }
+                    }
+                    TileFilter.FieldContext -> {
+                        // ذراع L4 — the field's ranked rows: the same
+                        // rich rows as recents, in the closed ranking
+                        // order. **الترتيب لا الإطلاق** — ordering only
+                        // ever reorders visibility; every tool keeps
+                        // its own honest no-op gate like everywhere else.
+                        HintText(stringRes(R.string.drs__text_tools__field_hint))
+                        fieldRanked.forEachIndexed { rankedIndex, tool ->
+                            ITEMS_BY_CODE[tool.code]?.let { item ->
+                                ToolRow(
+                                    item = item,
+                                    isFavorite = item.code in favoriteSet,
+                                    onApply = ::dispatch,
+                                    onToggleFavorite = ::toggleFavorite,
+                                    actionEnabled = isEnabled(item.code),
+                                    entranceIndex = rankedIndex,
+                                    entranceKey = fieldRanked,
+                                )
+                            }
                         }
                     }
                 }

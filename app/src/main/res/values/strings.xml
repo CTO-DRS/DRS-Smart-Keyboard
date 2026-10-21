@@ -1733,6 +1733,9 @@
     <string name="drs__text_tools__section_context">مقترحات لهذا النص</string>
     <string name="drs__text_tools__favorites_hint">اضغط مطولًا على أي بلاطة لتثبيتها هنا — محليًا فقط، بلا إنترنت</string>
     <string name="drs__text_tools__recents_hint">استعمل البلاطات وسيظهر الأكثر استخدامًا هنا تلقائيًا — عدّادات محلية لا نصوص</string>
+    <!-- ذراع L4 — الذكاء السياقي بين الحقول: الترتيب من صفات الحقل وحده (EditorInfo.inputType) بلا قراءة محتوى — وحقول كلمات المرور تبقى صماء تمامًا -->
+    <string name="drs__text_tools__chip_field">سياق الحقل</string>
+    <string name="drs__text_tools__field_hint">مرتّبة لنوع هذا الحقل — من صفاته وحده بلا قراءة المحتوى</string>
     <string name="drs__text_tools__favorites_full">امتلأت المفضلة — ثماني بلاطات على الأكثر. أزل واحدة أولًا.</string>
     <string name="pref__panels__text_tools_smart_context__label">توصيات لوحة الأدوات</string>
     <string name="pref__panels__text_tools_smart_context__summary">صف «مقترحات لهذا النص» يرشّح الأدوات المناسبة من النص قبل المؤشر — حتمي محلي بلا تخمين</string>
