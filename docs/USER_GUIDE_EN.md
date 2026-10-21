@@ -1,6 +1,6 @@
 # User Guide — DRS Smart Keyboard
 
-- **Guide version:** 2.0.0 (unified) — covers app release **1.4.0 «Proven Privacy»** (versionCode 5, catalog of 84 tools) with the four completed intelligence arms (local security, quantized corrector, deeper next-word prediction, cross-field contextual intelligence)
+- **Guide version:** 2.1.0 (unified) — covers app release **1.4.1 «The Security Face»** (versionCode 6, catalog of 84 tools) with the four completed intelligence arms, **plus the full v1.4.x security wave: absolute mode with a live proof + the internal MASVS audit**
 - **Languages:** this is the English guide — Arabic version: [USER_GUIDE_AR.md](USER_GUIDE_AR.md)
 - **Support:** [SUPPORT.md](../SUPPORT.md) — official channels and crash reports.
 
@@ -223,6 +223,15 @@ engine — no new mechanics.
 
 ## 5. Privacy: what actually happens?
 
+- **The live proof (since 1.4.1):** under «Settings → Privacy & security», the
+  «Live network proof» panel ticks every second while the screen is visible:
+  bytes sent and received since session start, plus a growing «zero-byte
+  streak» (0:00, 0:01, …) that restarts on any movement or on an OS counter
+  reset — honest by construction: a proven zero only when the counters are
+  supported and every delta is truly zero, and an explicit unsupported note
+  if your device cannot prove it. Turn on «Absolute privacy mode» from the
+  same panel to close every network gate (update check/download, package
+  catalog/download, forced on-device voice) and watch the streak grow.
 - **Network:** the app contacts no server by default. Update checks are manual
   (opt-in), and the package catalog uses HTTPS only when you request a package.
 - **Password fields:** learning, voice and context features stop completely on

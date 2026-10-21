@@ -94,3 +94,14 @@ jobs:
         uses: actions/checkout@v4
       - name: Run privacy canary
         run: bash ci/privacy_canary.sh
+
+  masvs-audit:
+    name: MASVS internal audit (v1.4.x security wave)
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Run MASVS audit gate
+        run: bash ci/masvs_audit.sh

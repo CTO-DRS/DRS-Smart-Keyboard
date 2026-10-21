@@ -139,10 +139,18 @@ class DrsNetworkSentinel(
         private var processBaseline: TrafficSnapshot? = null
 
         fun captureBaseline() {
-            processBaseline = readTrafficSnapshot()
+            processBaseline = readSnapshot()
         }
 
         fun baseline(): TrafficSnapshot? = processBaseline
+
+        /**
+         * The real per-UID sampler, exposed for the v1.4.x live-proof
+         * engine (DrsLiveProofEngine.android) — one reader, two
+         * consumers, zero divergence between the attestation and the
+         * live counters.
+         */
+        fun readSnapshot(): TrafficSnapshot = readTrafficSnapshot()
 
         /** Android factory: TrafficStats for our UID + PackageManager inventory. */
         fun android(context: Context): DrsNetworkSentinel = DrsNetworkSentinel(

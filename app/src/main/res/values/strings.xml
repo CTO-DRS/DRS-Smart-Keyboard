@@ -2802,6 +2802,10 @@
     <string name="privacy__attestation__unsupported" comment="Attestation verdict when the ROM lacks per-UID traffic counters">الجهاز لا يدعم عدّادات حركة البيانات لكل تطبيق — الفحص الثابت في CI هو المرجع</string>
     <string name="privacy__attestation__measuring" comment="Attestation placeholder while measuring">جارٍ القياس…</string>
     <string name="privacy__attestation__locked_hint" comment="Attestation suffix while absolute mode is on">الوضع المطلق مفعّل: كل البوابات مغلقة</string>
+    <string name="privacy__live__tx" comment="v1.4.x live proof: transmitted bytes since session start, placeholder is a formatted byte count">الصادر منذ بدء الجلسة: %1$s</string>
+    <string name="privacy__live__rx" comment="v1.4.x live proof: received bytes since session start, placeholder is a formatted byte count">الوارد منذ بدء الجلسة: %1$s</string>
+    <string name="privacy__live__streak" comment="v1.4.x live proof: current zero-byte silence window, placeholder is a formatted duration">صفر بايت لمدة %1$s</string>
+    <string name="privacy__live__reset" comment="v1.4.x live proof: OS counters were reset (reboot/wrap), the silence window restarted honestly">أُعيد ضبط عدّادات النظام — استؤنف العدّ من الصفر</string>
     <string name="privacy__permissions__title" comment="Permission inventory card title">الأذونات المطلوبة</string>
     <string name="privacy__data__title" comment="Data inventory group title">بياناتك على الجهاز</string>
     <string name="privacy__data__learning" comment="Learning store row title">بيانات التعلم الشخصي</string>

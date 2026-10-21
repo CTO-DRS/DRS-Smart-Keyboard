@@ -41,12 +41,14 @@ import com.drs.smartkeyboard.app.Routes
 import com.drs.smartkeyboard.drs.ai.DrsLearningEngine
 import com.drs.smartkeyboard.drs.privacy.DrsE2ECrypto
 import com.drs.smartkeyboard.drs.privacy.DrsE2ECrypto.DrsE2EError
+import com.drs.smartkeyboard.drs.privacy.DrsLiveProofEngine
 import com.drs.smartkeyboard.drs.privacy.DrsNetworkSentinel
 import com.drs.smartkeyboard.drs.privacy.DrsPrivacyDashboard
 import com.drs.smartkeyboard.drs.privacy.DrsPrivacyLock
 import com.drs.smartkeyboard.drs.privacy.DrsSyncBundle
 import com.drs.smartkeyboard.lib.compose.DrsScreen
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.drs.jetpref.datastore.model.collectAsState
@@ -269,6 +271,22 @@ fun PrivacyScreen() = DrsScreen {
         val absoluteMode by prefs.privacy.absoluteMode.collectAsState()
         LaunchedEffect(absoluteMode) { refresh() }
 
+        // v1.4.x security wave — the LIVE proof: a 1 Hz ticker while this
+        // screen is visible (LaunchedEffect cancels it on leave, so the
+        // engine only runs while someone is actually watching). Every
+        // number below comes from the same per-UID TrafficStats reader
+        // the one-shot attestation uses — one sampler, zero divergence.
+        val proofEngine = remember {
+            DrsLiveProofEngine.android(baseline = DrsNetworkSentinel.baseline())
+        }
+        var live by remember { mutableStateOf<DrsLiveProofEngine.LiveProof?>(null) }
+        LaunchedEffect(proofEngine) {
+            while (true) {
+                live = proofEngine.tick(absoluteMode)
+                delay(1_000L)
+            }
+        }
+
         PreferenceGroup(title = stringRes(R.string.privacy__mode__group)) {
             SwitchPreference(
                 pref = prefs.privacy.absoluteMode,
@@ -279,22 +297,19 @@ fun PrivacyScreen() = DrsScreen {
         }
 
         PreferenceGroup(title = stringRes(R.string.privacy__attestation__title)) {
-            val att = summary?.attestation
+            val lp = live
             Preference(
                 icon = Icons.Default.VerifiedUser,
                 title = when {
-                    att == null -> stringRes(R.string.privacy__attestation__measuring)
-                    !att.countersSupported -> stringRes(R.string.privacy__attestation__unsupported)
-                    att.zeroTraffic -> stringRes(R.string.privacy__attestation__ok)
+                    lp == null -> stringRes(R.string.privacy__attestation__measuring)
+                    lp.verdict == DrsLiveProofEngine.Verdict.UNSUPPORTED ->
+                        stringRes(R.string.privacy__attestation__unsupported)
+                    lp.verdict == DrsLiveProofEngine.Verdict.PROVEN_ZERO ->
+                        stringRes(R.string.privacy__attestation__ok)
                     else -> stringRes(R.string.privacy__attestation__moved)
-                        .format(att.rxSinceBaseline, att.txSinceBaseline)
+                        .format(lp.rxSinceBaseline, lp.txSinceBaseline)
                 },
-                summary = stringRes(R.string.privacy__attestation__since_session) +
-                    when {
-                        att == null || !att.countersSupported -> ""
-                        att.absoluteMode -> " · " + stringRes(R.string.privacy__attestation__locked_hint)
-                        else -> ""
-                    },
+                summary = liveSummary(lp),
             )
             Preference(
                 icon = Icons.Default.Visibility,
@@ -305,7 +320,8 @@ fun PrivacyScreen() = DrsScreen {
             Preference(
                 icon = Icons.Default.Security,
                 title = stringRes(R.string.privacy__permissions__title),
-                summary = att?.permissions
+                summary = summary?.attestation
+                    ?.permissions
                     ?.joinToString(" · ") {
                         it.name.substringAfterLast('.') + if (it.granted) " ✓" else " ✗"
                     }
@@ -354,6 +370,37 @@ fun PrivacyScreen() = DrsScreen {
 }
 
 private const val MIN_PASSPHRASE = 8
+
+/**
+ * The live card's summary line — the v1.4.x KPI rendered as numbers:
+ * transmitted/received bytes since session start, the growing
+ * zero-byte streak under a proven silence, the honest reset note, and
+ * the absolute-mode suffix. Every element comes from the engine tick,
+ * nothing is hardcoded.
+ */
+@Composable
+private fun liveSummary(lp: DrsLiveProofEngine.LiveProof?): String {
+    if (lp == null) return stringRes(R.string.privacy__attestation__since_session)
+    return buildList {
+        add(
+            stringRes(R.string.privacy__live__tx)
+                .format(DrsLiveProofEngine.formatBytes(lp.txSinceBaseline)),
+        )
+        add(
+            stringRes(R.string.privacy__live__rx)
+                .format(DrsLiveProofEngine.formatBytes(lp.rxSinceBaseline)),
+        )
+        if (lp.verdict == DrsLiveProofEngine.Verdict.PROVEN_ZERO) {
+            add(
+                stringRes(R.string.privacy__live__streak)
+                    .format(DrsLiveProofEngine.formatDuration(lp.zeroStreakMs)),
+            )
+        }
+        if (lp.counterResetObserved) add(stringRes(R.string.privacy__live__reset))
+        if (lp.absoluteMode) add(stringRes(R.string.privacy__attestation__locked_hint))
+        add(stringRes(R.string.privacy__attestation__since_session))
+    }.joinToString(" · ")
+}
 
 @Composable
 private fun storeTitle(id: String): String = when (id) {
