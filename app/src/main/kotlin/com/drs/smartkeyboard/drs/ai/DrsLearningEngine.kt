@@ -265,6 +265,25 @@ object DrsLearningEngine {
             .map { it.key to it.value.toInt() }
     }
 
+    /**
+     * ذراع L3 — the user's top vocabulary, count descending with the
+     * word itself breaking ties (fully deterministic — the persisted
+     * roundtrip can never flip equal counts). This is the honest
+     * fresh-sentence signal: at a sentence RESET the bigram context of
+     * the finished sentence is noise, and the user's own most-typed
+     * words are what "the next sentence starts with" actually means.
+     * Bounded by [limit]; read-only under the lock.
+     */
+    fun personalTopWords(limit: Int): List<Pair<String, Int>> {
+        if (limit <= 0) return emptyList()
+        return synchronized(lock) {
+            words.entries
+                .sortedWith(compareByDescending<Map.Entry<String, Long>> { it.value }.thenBy { it.key })
+                .take(limit)
+                .map { it.key to it.value.toInt() }
+        }
+    }
+
     /** True when [word] exists in the personal table (known user vocabulary). */
     fun knowsWord(word: String): Boolean {
         val w = word.trim().lowercase()

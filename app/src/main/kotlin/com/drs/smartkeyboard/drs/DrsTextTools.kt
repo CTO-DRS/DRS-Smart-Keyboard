@@ -68,8 +68,13 @@ internal val ZERO_WIDTH_CHARS = Regex("[\\u200B\\u200D\\u200E\\u200F\\uFEFF\\u20
 /** sentence ender followed by horizontal whitespace — the
  *  boundary where SENTENCE_PER_LINE inserts the line break. The lookahead
  *  guarantees the ender is between sentences (not at the text's end), and
- *  existing newlines are left untouched so the tool is idempotent. */
-private val SENTENCE_BOUNDARY = Regex("([.!؟?…])[ \\t\\u00A0]+(?=[^\\s])")
+ *  existing newlines are left untouched so the tool is idempotent.
+ *
+ *  internal — the tiles' context advisor (DrsTileSmart) shares the SAME
+ *  closed shape for its reason 1.13 (مصدر حقيقة واحد — the nomination
+ *  counts the REAL firings of the REAL transform, never a re-spelled
+ *  lookalike that could drift). */
+internal val SENTENCE_BOUNDARY = Regex("([.!؟?…])[ \\t\\u00A0]+(?=[^\\s])")
 
 /** a run of one or more whitespace characters — the word
  *  separator REVERSE_WORDS splits each line on. */

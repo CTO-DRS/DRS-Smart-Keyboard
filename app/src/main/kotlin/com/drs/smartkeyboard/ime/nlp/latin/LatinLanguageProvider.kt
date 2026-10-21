@@ -28,6 +28,7 @@ import com.drs.smartkeyboard.drs.ai.DrsLearningEngine
 import com.drs.smartkeyboard.drs.ai.DrsMorphologyRanker
 import com.drs.smartkeyboard.drs.ai.DrsTrigramChains
 import com.drs.smartkeyboard.drs.ai.DrsNextWordPredictor
+import com.drs.smartkeyboard.drs.ai.DrsSentenceContext
 import com.drs.smartkeyboard.drs.ai.DrsSmartReplies
 import com.drs.smartkeyboard.drs.ai.LatinNormBridge
 import com.drs.smartkeyboard.lib.devtools.flogDebug
@@ -56,7 +57,9 @@ private const val LEARNED_INSERT_FREQ_TYPED = 120
 private const val REVERT_DEMOTE_STEP = 64
 
 /** characters after which the next word starts a new sentence (Latin + Arabic marks). */
-private val SENTENCE_TERMINATORS = charArrayOf('.', '!', '?', '…', '؟', '۔')
+// internal — the L3 sentence analyzer's TERMINALS mirror is pinned
+// against this set by the JVM contract tests (مصدر حقيقة واحد).
+internal val SENTENCE_TERMINATORS = charArrayOf('.', '!', '?', '…', '؟', '۔')
 
 /** DRS Phase 2 (task 13): power-tier probe interval. */
 private const val POWER_CAPS_TTL_MS = 30_000L
@@ -670,6 +673,58 @@ class LatinLanguageProvider(context: Context) : SpellingProvider, SuggestionProv
         val before = content.textBeforeSelection
         if (before.isBlank()) return emptyList()
 
+        // ذراع L3 — the sentence state, from the ONE shared analyzer
+        // (the same signal the tiles' advisory reads — the integration
+        // point of the level). The scan is the SAME word law and the
+        // SAME normalizer the bigram keys use, so no drift is possible.
+        val sentence = DrsSentenceContext.analyze(before, ::normalize, ::isWordInternalChar)
+        val isArabicWindow = before.any { it in ARABIC_SCRIPT_START..ARABIC_SCRIPT_END }
+
+        // ذراع L3 — the FRESH-SENTENCE path. The cross-boundary fix:
+        // «كتبت الرسالة. » must NOT hand «الرسالة» to the bigram tables
+        // as the context of the next sentence — the finished sentence is
+        // noise past its own terminator. The honest signals at a reset
+        // are the user's own top vocabulary (personal, gated) and the
+        // closed opener catalog (static floor, Arabic windows only).
+        if (sentence.freshStart) {
+            val caps = powerCaps()
+            val personalTop = if (caps.learningEnabled) {
+                DrsLearningEngine.personalTopWords(4)
+            } else {
+                emptyList()
+            }
+            val openers = if (isArabicWindow) DrsSentenceContext.openers(DrsSentenceContext.OPENERS_TAKE) else emptyList()
+            if (personalTop.isEmpty() && openers.isEmpty()) return emptyList()
+            var used = 0
+            return buildList {
+                for ((word, count) in personalTop) {
+                    if (used >= maxCandidateCount) break
+                    add(
+                        WordSuggestionCandidate(
+                            text = nextWordDisplayCase(word, before, isArabicWindow),
+                            // the count ceiling (200) maps to 0.8 — rank
+                            // order is the list order, so confidence is
+                            // monotone descending, inside the 0..1 contract.
+                            confidence = (count / 200.0).coerceIn(0.2, 0.8),
+                            sourceProvider = this@LatinLanguageProvider,
+                        ),
+                    )
+                    used++
+                }
+                for (opener in openers) {
+                    if (used >= maxCandidateCount) break
+                    add(
+                        WordSuggestionCandidate(
+                            text = nextWordDisplayCase(opener, before, isArabicWindow),
+                            confidence = 0.25,
+                            sourceProvider = this@LatinLanguageProvider,
+                        ),
+                    )
+                    used++
+                }
+            }
+        }
+
         // DRS M1.3 — the shared last-word scan (word-internal aware, see
         // [lastWordBefore]) now feeds BOTH next-word prediction and the
         // morphology ranker, so the two can no longer disagree about what
@@ -734,7 +789,25 @@ class LatinLanguageProvider(context: Context) : SpellingProvider, SuggestionProv
             staticTrigram = staticTrigram,
             limit = maxCandidateCount,
         )
-        if (predictions.isEmpty()) return emptyList()
+
+        // ذراع L3 — the ordinal chain: when the word before the cursor is
+        // a link of the closed enumeration chain (أولًا…ثامنًا), its
+        // successor is a DETERMINISTIC continuation — the same certainty
+        // class as the curated trigram chains. It leads the strip (the
+        // pinned 0.9 head, suggestion-only — the user's tap is the only
+        // launch), deduplicated against the statistical candidates, and
+        // it survives even when the bigram rows are empty (the curated
+        // layer speaks without them, exactly like the trigram layer).
+        val ordinalHead = sentence.ordinalSuccessor?.let { successor ->
+            WordSuggestionCandidate(
+                text = nextWordDisplayCase(successor, before, isArabic),
+                confidence = 0.9,
+                sourceProvider = this@LatinLanguageProvider,
+            )
+        }
+        if (predictions.isEmpty()) {
+            return ordinalHead?.let { listOf(it) } ?: emptyList()
+        }
 
         // DRS M1.4 — inside an interrogative context (window = 2 tokens:
         // «ماذا تريد أن…» keeps the interrogative in sight behind the
@@ -742,7 +815,7 @@ class LatinLanguageProvider(context: Context) : SpellingProvider, SuggestionProv
         val contextTokens = before.split(Regex("\\s+")).filter { it.isNotBlank() }
         val ordered = DrsContextRanker.rerank(contextTokens, predictions) { it.word }
 
-        return ordered.map { prediction ->
+        val statistical = ordered.map { prediction ->
             WordSuggestionCandidate(
                 text = nextWordDisplayCase(prediction.word, before, isArabic),
                 // DRS p6 (A11): confidence is a 0.0..1.0 contract — the
@@ -750,6 +823,11 @@ class LatinLanguageProvider(context: Context) : SpellingProvider, SuggestionProv
                 confidence = prediction.score.coerceIn(0.0, 1.0),
                 sourceProvider = this,
             )
+        }
+        return if (ordinalHead == null) {
+            statistical
+        } else {
+            listOf(ordinalHead) + statistical.filter { it.text.toString() != ordinalHead.text.toString() }
         }
     }
 

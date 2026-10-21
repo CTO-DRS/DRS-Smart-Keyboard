@@ -271,6 +271,20 @@ object DrsTileContextAdvisor {
             !t.lowercase().startsWith("www.")) {
             picks += DrsTextTool.PASSWORD_STRENGTH
         }
+        // 1.13) الجمل الملتصقة — لصق فقرات انحشرت نهاياتها (ذراع L3 —
+        //       الإشارة الجملية نفسها التي يقرأها المُتوقِّع): تواقيع
+        //       مغلقة (نهاية جملة + فراغ أفقي + نص بعدها) حدّان فأكثر
+        //       يسمّيان «جملة لكل سطر» — عقد الإطلاق المضمون نفسه (نمط
+        //       1.7–1.11): المرشَّح هو ما سيطلق حتمًا (الشكل المشترك هو
+        //       تعبير الأداة ذاتها لا شبيه معاد كتابته)، وحرسان مغلقان
+        //       قبله: حرس المسار الساخن (طول 256) وحرس الالتباس (حدّان
+        //       فأكثر — الاختصارات «ا.د.» والنهايات المفردة تصمت صادقًا
+        //       لا تُقطَّع، والنص المقسوم سلفًا لا تواقيع أفقية له فيصمت).
+        if (t.length <= 256 &&
+            SENTENCE_BOUNDARY.findAll(t).take(2).count() == 2 &&
+            DrsTextTools.apply(DrsTextTool.SENTENCE_PER_LINE, t) != t) {
+            picks += DrsTextTool.SENTENCE_PER_LINE
+        }
         // 2) العلامات الصفرية والتطويل نفاية لصق لا تصلح فقرة — انزعها.
         if (hasZeroWidth) picks += DrsTextTool.REMOVE_ZERO_WIDTH
         if (hasTatweel) picks += DrsTextTool.REMOVE_TATWEEL
