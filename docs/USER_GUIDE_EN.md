@@ -1,6 +1,6 @@
 # User Guide — DRS Smart Keyboard
 
-- **Guide version:** 2.0.0 (unified) — covers app release **1.3.0 «On-Device Intelligence»** (versionCode 4, catalog of 84 tools) with the three completed intelligence arms (local security, quantized corrector, deeper next-word prediction)
+- **Guide version:** 2.0.0 (unified) — covers app release **1.4.0 «Proven Privacy»** (versionCode 5, catalog of 84 tools) with the four completed intelligence arms (local security, quantized corrector, deeper next-word prediction, cross-field contextual intelligence)
 - **Languages:** this is the English guide — Arabic version: [USER_GUIDE_AR.md](USER_GUIDE_AR.md)
 - **Support:** [SUPPORT.md](../SUPPORT.md) — official channels and crash reports.
 
@@ -23,8 +23,8 @@ without you losing anything.
 4. Start typing in any field — try gliding between letters for gesture typing.
 
 From release 1.2.0 onward, in-place upgrades are guaranteed (same signing
-certificate) — you never need to uninstall first, and moving from 1.2.0 to
-1.3.0 is a direct in-place install. The sole historical exception: moving
+certificate) — you never need to uninstall first, and moving from 1.3.0 to
+1.4.0 is a direct in-place install. The sole historical exception: moving
 from 1.1.0 or earlier (the signing key rotated in 1.2.0) — export your
 dictionary and signed backups, uninstall, then install the new release as a
 fresh install and import what you exported — this will not repeat in
@@ -62,7 +62,11 @@ with emoji and lighter colors — switch from the toolbar profile panel.
 
 ### Text tools & smart panels
 Fast selection, case conversion, smart paste from the internal clipboard, and
-a context-aware tools panel (number, URL, email fields).
+a context-aware tools panel (number, URL, email fields). Since 1.4.0 the
+panel also understands the field's own type from its input attributes alone
+(prose, email, URL, number, date, phone, search) and ranks the most fitting
+tools first — a small «Field context» chip tells you when it did — while
+password fields stay completely deaf: no ranking and no content advice there.
 
 **Clean web paste:** a copy from ChatGPT, WhatsApp or any website usually
 arrives wearing Markdown (`**bold**`, `# heading`, `- bullet`,
@@ -222,7 +226,11 @@ engine — no new mechanics.
 - **Network:** the app contacts no server by default. Update checks are manual
   (opt-in), and the package catalog uses HTTPS only when you request a package.
 - **Password fields:** learning, voice and context features stop completely on
-  password fields — enforced in code, not promised in prose.
+  password fields — enforced in code, not promised in prose. Since 1.4.0 this
+  is proven from both sides: the field-type classifier works from the field's
+  attributes alone without ever reading its content, and the privacy gate
+  keeps content advice fed by nothing from password fields even when their
+  text is visible (fail-closed by construction).
 - **Statistics & logs:** abstract numbers, never typed text. The crash log
   stores the exception class name and a stripped stack fingerprint — no
   message, no content, no field names.

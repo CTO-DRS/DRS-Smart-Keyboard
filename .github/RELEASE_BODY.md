@@ -1,8 +1,8 @@
 <div align="center">
 
-# DRS Smart Keyboard v1.3.0 — الذكاء على الجهاز
+# DRS Smart Keyboard v1.4.0 — الخصوصية المثبتة
 
-**On-Device Intelligence — Fourth Release**
+**Proven Privacy — Fifth Release**
 
 <img src="https://raw.githubusercontent.com/CTO-DRS/drs-sk-work/main/docs/images/hero.png" width="100%"/>
 
@@ -30,72 +30,75 @@
   وحدات، وزوج الأمان (قيس قوة كلمة المرور ومولّدها) — كلها حتمية على
   الجهاز بعقد «لا تخمين ولا تلف».
 - **الذكاء العربي على الجهاز**: **13 محرك ذكاء اصطناعي محلي بالكامل** —
-  والآن بسلم ذكاء معلن (L0→L5): تصحيح مكمّم بمعيار المستوى، توقع يقرأ
-  الجملة، وأمان محلي — صفر تبعيات سحابية وصفر تنزيل نموذج.
+  بسلم ذكاء معلن (L0→L5) أُكملت أذرعه الأربعة الأولى: تصحيح مكمّم بمعيار
+  المستوى، توقع يقرأ الجملة، أمان محلي، **وذكاء سياقي بين الحقول يرتب
+  الأدوات حسب نوع الحقل دون قراءة محتواه أبدًا** — صفر تبعيات سحابية
+  وصفر تنزيل نموذج.
 - **الخصوصية الإثباتية**: privacy canary آلي + بوابة إصدار من 11 فحصًا
-  (fail-closed).
+  (fail-closed) — وفي هذا الإصدار صارت الخصوصية مثبتة بالبناء لا بالاتفاق.
 - **مركز الحزم**: امتدادات موقّعة ed25519 مع تحقق قبل فك الضغط (8/8 VALID).
 
-## جديد في 1.3.0 — الذكاء على الجهاز
+## جديد في 1.4.0 — الخصوصية المثبتة
 
-أول قطع رسمي لمرحلة الذكاء من [خارطة الطريق](https://github.com/CTO-DRS/drs-sk-work/blob/main/docs/ROADMAP.md)
-— ثلاثة أذرع مكتملة من سلّم الذكاء، كلها محلية خالصة بلا أي تنزيل سحابي:
+قطع مبكر بقرار المالك لذراع L4 الرابعة من سلّم الذكاء
+([SMART_FEATURES_ROADMAP](https://github.com/CTO-DRS/drs-sk-work/blob/main/docs/SMART_FEATURES_ROADMAP.md))
+المكتملة تقنيًا في الدفعة 17 — وثيمة الإصدار من عندها: خصوصية لا تُوعَد بل
+تُثبت بالبناء. كلها محلية خالصة بلا أي تنزيل سحابي:
 
-- **ذراع L1 — الأمان المحلي (أداتان جديدتان، الكتالوج 82 → 84)**:
-  «قيس قوة كلمة المرور» يقيس بالإنتروبيا الرياضية الخالصة (الطول ×
-  log2 لأصناف المحارف الحاضرة) ويحكم بخمس درجات — وأنماط ضعيفة مغلقة
-  (تكرار، تسلسل لوحة مفاتيح، شكل سنة، كلمات شائعة) **تخفض الحكم إلى
-  ضعيف مهما كانت الأرقام** («مرحبا12345» يقيس 52 بت ويقرأ ضعيفًا).
-  و«مولّد كلمة المرور» يدرج 16 محرفًا من أبجدية 68 بلا متشابهات (l1IO0o)
-  بـSecureRandom وصنف مضمون من كل فئة — نحو 97 بت — **وبلا ترشيح آلي
-  عمدًا**: جيل بضغطة واعية لا تخمينًا. حقول كلمات المرور ترفض السطح
-  كله: لا شيء يغادر الجهاز.
-- **ذراع L2 — محرك التصحيح المكمّم عند معيار المستوى**: الميزانية
-  المكمَّمة الواعية (distance يحسب min(الحقيقي، الميزانية) بإشباع عند
-  ميزانية المستدعي — نظرية min-plus مثبتة بالمحاكاة على 8,225 فحصًا)،
-  والمسح المُدلَّل بالطول الحتمي كليًا (دلو أطوال مُسبق البناء + روابط
-  كسر تعادل ثلاثية)، وميزان التشكيل الحي (خصم كامل للشكل المطابق ونصف
-  لعائق واحد — بعائلة الكلمة نفسها فقط). **معيار خروج الإصدار مثبت**:
-  اختبار A/B على مرجعية أخطاء كتابة حقيقية — المكمّم المندمج **18/18
-  (100%)** مقابل 8/18 (44%) لخط delete-1 القديم. الميزانيات مثبتة
-  بنيويًا: نموذج التصحيح **0.81MB** (< 15MB) ومسح كامل المعجم **94–166ms**
-  دون سقف انحدار 500ms.
-- **ذراع L3 — توقع الكلمة التالية الأعمق**: التوقع يقرأ الجملة لا الكلمة
-  فقط. **حد الجملة الحارس** (`. ! ؟ ? … ۔` كتالوج مغلق) يمنع عبور نهاية
-  الجملة إلى سياق الجملة التالية، **ومسار البداية الجديدة** يقترح من أعلى
-  مفردات المستخدم وكتالوج افتتاحيات مغلق (14 بداية عربية) بثقة حتمية،
-  **وسلسلة الترقيم** أولًا→ثانيًا→…→ثامنًا تُحقن تتمتها رأس الشريط بثقة
-  0.9 (اقتراح فقط — نقرة المستخدم وحدها الإطلاق)، وحد الجملة يسكتها —
-  جملة انتهت بعدّ لا تستمر تخمينًا.
-- **ذكاء البلاطات يكبر بذكاء**: سببان مغلقان جديدان بعقد الإطلاق
-  المضمون — 1.12 «الأمان الرقمي» (موضوع بصنفين فأكثر يُرشَّح لقيس قوة
-  كلمة المرور) و1.13 «الجمل الملتصقة» (حد جملة واضح وحده يُرشَّح لجملة
-  لكل سطر) — مع حرسَي المسار الساخن والالتباس، والإشارة الجُملية لا
-  تسمّي أداة أبدًا: إشارة واحدة مستخدمان لا انجراف.
-- **الاختبارات 1950 → 1995 أخضر** وصفر صلاحيات جديدة — فرق صلاحيات
-  الـManifest منذ 1.2.0 فارغ بالدليل.
+- **المصنِّف النقي `DrsFieldKind` — نوع الحقل من خصائصه وحدها**: كتالوج
+  عشرة أنواع مغلق (عام/نثر/بريد/روابط/رقم/تاريخ/هاتف/بحث/محمي/خام) يُصنَّف
+  من `EditorInfo.inputType` وحده **بلا قراءة محتوى الحقل أبدًا**. عائلة
+  كلمات المرور (النصي والمرئي وويب ورقم PIN) تسبق كل علم بما فيه تعدد
+  الأسطر، والصنف المجهول أصمّ صادقًا لا مخمَّنًا، والحتمية كاملة: نفس
+  المدخل نفس النوع دائمًا.
+- **كتالوج الترتيب المغلق `DrsContextualRank` — «الترتيب لا الإطلاق»**:
+  سبعة أنواع مرتبة بقوائم واقعية موثقة — البريد يفضح اللصق الصامت أولًا،
+  والروابط تُقدَّم بزوج URL الأصلي، والهاتف بأرقام قابلة للاتصال بلا
+  عائلات رمزية، والرقم بتوحيد آلي وقراءة وتفقيط، والتاريخ برباعي التواريخ
+  المغلق، والنثر بمساعد الكتابة أولًا، والبحث بإزالة ضجيج المطابقة —
+  وثلاثة أصمّة بحكم التصميم (محمي/خام/عام: الصمت هو الصدق). بلا عملية
+  محرر ولا علامة إدراج ولا أداة معلومات في أي قائمة — مثبت بنيويًا —
+  وسقف 6 اقتراحات بلمحة واحدة.
+- **بوابة الخصوصية الحية `contentAdviceAllowed`**: حقول كلمات المرور لا
+  تغذي مستشار المحتوى أبدًا **حتى لو كشفت نصها** (الحقول المرئية تفعل) —
+  fail-closed بالبناء لا بالاتفاق.
+- **دمج اللوحة بعقودها دون كسرها**: رقاقة «سياق الحقل» تظهر فقط حين
+  للترتيب ما يقوله صادقًا، وصفوف غنية بنمط «الأكثر استخدامًا» مع بوابة
+  isEnabled نفسها، والتراجع الصادق لـ«الكل» عند تغيّر الحقل، والميزة غائبة
+  بلا ضجيج — والمستشاران من مصدرين مستقلين لا انجراف (المُرتب من صفة
+  الحقل والمستشار من المحتوى).
+- **المحاكاة قبل البناء** (عقيدة الدفعة المثبتة): `check_l4_fields.py` —
+  **296 فحصًا أخضر** على 33 عينة inputType واقعية منها 11 محمية، ثم **18
+  اختبار عقد** في DrsL4FieldContextTests.
+- **الاختبارات 1995 → 2013 أخضر** وصفر صلاحيات جديدة وصفر أدوات جديدة —
+  وصفر سلاسل خارج لوحة الأدوات.
+- **وأين النطاق الأمني المخطط لـ«الخصوصية المثبتة»؟** إثبات حظر الشبكة
+  الدائم (عدّادات TrafficStats الحية) واختبارات عقد الأذونات الموسعة
+  وجولة MASVS الداخلية وتقرير الشفافية العدد الثاني تنقل صدقًا إلى موجة
+  **v1.4.x** التالية (خارطة الطريق محدثة بذلك) — أما هذا الإصدار فيثبت
+  الخصوصية من جهة الذكاء: تصنيف بلا محتوى، وحماية أصمّ بالبناء.
 
 ## التحديث من الإصدارات السابقة
 
-- ✅ **من 1.2.0 إلى 1.3.0: تحديث موضعي مضمون** (نفس مفتاح التوقيع) —
+- ✅ **من 1.3.0 إلى 1.4.0: تحديث موضعي مضمون** (نفس مفتاح التوقيع) —
   ثبّت فوق الإصدار الحالي مباشرة، وقاموسك ونسخك الاحتياطية كما هي.
+- ✅ **من 1.2.0 فصاعدًا كل التحديثات الموضعية مضمونة** (نفس المفتاح
+  لكل ما يلي 1.2.0).
 - ⚠️ **مستخدمو 1.0.0/1.1.0 — تنبيه دوران المفتاح (جرى في 1.2.0)**:
   المفتاح السابق فقد وصوله مع ترحيل المستودع، فأعيد توليد مفتاح جديد
   **بنفس هوية الشهادة** (CN=DRS Smart Keyboard Release) — البصمة:
   `54:FA:D7:4F:CD:91:0B:BB:65:F2:60:4F:32:82:27:F4:47:F9:AF:7E:6A:B9:41:66:D9:DC:67:56:97:1E:E3:20`.
   التحديث الموضعي من 1.1.0 وما قبله غير متاح (أندرويد يرفض التحديث فوق
   بصمة مختلفة): صدّر قاموسك ونسخك الاحتياطية الموقّعة من الإصدار القديم،
-  ألغِ تثبيته، ثم ثبّت 1.3.0 كتثبيت أول واستورد ما صدّرته.
-- ✅ **من 1.2.0 فصاعدًا كل التحديثات الموضعية مضمونة** (نفس المفتاح
-  لكل ما يلي 1.2.0).
+  ألغِ تثبيته، ثم ثبّت 1.4.0 كتثبيت أول واستورد ما صدّرته.
 
 ## التثبيت
 
-1. نزّل `DRS-Smart-Keyboard-v1.3.0.apk` من مرفقات هذا الإصدار (أو من موقع
+1. نزّل `DRS-Smart-Keyboard-v1.4.0.apk` من مرفقات هذا الإصدار (أو من موقع
    المشروع).
 2. تحقق من السلامة: قارن بصمة SHA-256 للملف مع ما في مرفق **SHA256SUMS.txt**
    (أو الجدول أسفل هذه الملاحظات).
-3. **مستخدمو 1.2.0**: ثبّت فوق الإصدار مباشرة (تحديث موضعي مضمون) ·
+3. **مستخدمو 1.2.0 وما بعده**: ثبّت فوق الإصدار مباشرة (تحديث موضعي مضمون) ·
    **مستخدمو 1.0.0/1.1.0**: ألغِ التثبيت أولًا (البصمة أعلاه) وصدّر
    قاموسك ونسخك الاحتياطية قبل الإلغاء ثم استوردها بعد التثبيت ·
    **مستخدمو v2.x (فلوريس بورد المشتق)**: ألغِ التثبيت أولًا ثم ثبّت
@@ -115,7 +118,7 @@
 
 ## التحقق
 
-- **1,995 اختبار وحدة أخضر** · بوابة تغطية Kover · بوابات أداء · فحص apksigner
+- **2,013 اختبار وحدة أخضر** · بوابة تغطية Kover · بوابات أداء · فحص apksigner
   مستقل.
 - كل مرفقات هذا الإصدار مجدولة بصماتها في ملف **SHA256SUMS.txt** المرفق.
 - جدول البصمات الكامل ملحق أسفل هذه الملاحظات (مولّد آليًا بواسطة CI).
@@ -151,67 +154,73 @@ you type stays on your device: no accounts, no tracking, no mandatory network.
   and unit converter, and the security pair (password strength meter and
   generator) — all deterministic on-device under the "never guess,
   never corrupt" contract.
-- **On-device Arabic intelligence**: **13 fully local AI engines** — now
-  with a declared intelligence ladder (L0→L5): a standard-grade quantized
-  corrector, sentence-aware prediction, and local security — zero cloud
-  dependencies and zero model downloads.
+- **On-device Arabic intelligence**: **13 fully local AI engines** — with a
+  declared intelligence ladder (L0→L5) whose first four arms are complete: a
+  standard-grade quantized corrector, sentence-aware prediction, local
+  security, and **cross-field contextual intelligence that ranks tools by
+  field type without ever reading content** — zero cloud dependencies and
+  zero model downloads.
 - **Proven privacy**: automated privacy canary + an 11-check release gate
-  (fail-closed).
+  (fail-closed) — and in this release privacy is proven by construction,
+  not promised in prose.
 - **Package center**: ed25519-signed extensions verified before unpacking
   (8/8 VALID).
 
-## New in 1.3.0 — On-Device Intelligence
+## New in 1.4.0 — Proven Privacy
 
-The first official cut of the roadmap's intelligence phase — three completed
-arms of the intelligence ladder, all purely local with no cloud download:
+An owner-decided early cut of arm L4 — the fourth rung of the intelligence
+ladder ([SMART_FEATURES_ROADMAP](https://github.com/CTO-DRS/drs-sk-work/blob/main/docs/SMART_FEATURES_ROADMAP.md)),
+technically complete in batch 17 — and the release takes its name from it:
+privacy that is proven by construction, not promised. All purely local, no
+cloud download:
 
-- **Arm L1 — Local security (two new tools, catalog 82 → 84)**: the
-  «Password strength meter» measures with pure mathematical entropy
-  (length × log2 of present character classes) and judges on five grades —
-  closed weak patterns (repeats, keyboard runs, year shapes, common words)
-  **downgrade the verdict to weak regardless of the numbers** («مرحبا12345»
-  measures 52 bits yet reads weak). The «Password generator» inserts 16
-  characters from a 68-symbol alphabet without look-alikes (l1IO0o) using
-  SecureRandom with a guaranteed class per category — about 97 bits —
-  **deliberately with no automatic filtering**: a conscious tap generates,
-  no guessing. Password fields reject the whole surface: nothing leaves
-  the device.
-- **Arm L2 — The quantized corrector at standard grade**: the
-  budget-aware quantized distance (computes min(true, budget) with
-  saturation at the caller's budget — a min-plus theorem proven by
-  simulation over 8,225 checks), the fully deterministic length-bucketed
-  scan (prebuilt length buckets + three-way tie-breaking), and the living
-  vocalization scale (full discount for an exact shape match, half for one
-  obstacle — same word family only). **The release exit gate is proven**:
-  an A/B test on a real-typo benchmark — the integrated quantizer scores
-  **18/18 (100%)** versus 8/18 (44%) for the old delete-1 baseline. The
-  declared budgets are structural: correction model **0.81MB** (< 15MB)
-  and a full-dictionary scan of **94–166ms** under the 500ms regression
-  ceiling.
-- **Arm L3 — Deeper next-word prediction**: prediction now reads the
-  sentence, not just the word. The **sentence-boundary guard** (a closed
-  catalog `. ! ؟ ? … ۔`) keeps end-of-sentence noise from crossing into
-  the next sentence's context; a **new-sentence start path** suggests from
-  the user's top words and a closed openings catalog (14 Arabic sentence
-  starters) with deterministic confidence; the **numbering chain**
-  أولًا→ثانيًا→…→ثامنًا injects its deterministic continuation at the top
-  of the strip (confidence 0.9 — a suggestion only; the user's tap is the
-  only trigger), and the sentence boundary silences it — a sentence that
-  ended with a count does not keep guessing.
-- **Smarter tiles, honestly**: two new closed reasons under the guaranteed
-  firing contract — 1.12 «Digital security» (a subject with two or more
-  classes suggests the strength meter) and 1.13 «Glued sentences» (a clear
-  sentence boundary alone suggests one sentence per line) — with hot-path
-  and ambiguity guards, and the sentence signal never names a tool: one
-  signal, two uses, no drift.
-- **Tests grew 1950 → 1995 green** with zero new permissions — the Manifest
-  permission diff since 1.2.0 is empty by proof.
+- **The pure classifier `DrsFieldKind` — field type from attributes alone**:
+  a closed catalog of ten kinds (general/prose/email/URL/number/date/phone/
+  search/protected/raw) classified from `EditorInfo.inputType` alone,
+  **never reading the field's content**. The password family (text, visible,
+  web, numeric PIN) precedes every flag including multi-line, the unknown
+  kind is honestly deaf rather than hidden, and it is fully deterministic:
+  same input, same kind, always.
+- **The closed ranking catalog `DrsContextualRank` — "ranking, not
+  firing"**: seven ranked kinds with documented real-world lists — email
+  exposes silent paste first, links lead with the original URL pair, phone
+  offers dialable numbers without symbol families, numbers get
+  normalization/reading/words, dates use the closed four-tool set, prose
+  puts the writing assistant first, search strips match noise — and three
+  kinds are deaf by design (protected/raw/general: silence is honesty). No
+  editor operation, no cursor mark, no info tool in any list — proven
+  structurally — and a cap of 6 suggestions at one glance.
+- **The living privacy gate `contentAdviceAllowed`**: password fields never
+  feed the content advisor **even when their text is visible** (visible
+  fields do) — fail-closed by construction, not by agreement.
+- **Panel integration without breaking its contracts**: the «Field context»
+  chip appears only when the ranking honestly has something to say; rich
+  rows reuse the "most used" pattern under the same isEnabled gate; the
+  honest fallback to «All» when the field changes; the feature is absent
+  without noise — and the two advisors come from two independent sources
+  with no drift (the ranker from field attributes, the advisor from
+  content).
+- **Simulation before the build** (the proven batch doctrine):
+  `check_l4_fields.py` — **296 green checks** over 33 real-world inputType
+  samples (11 protected), then **18 contract tests** in
+  DrsL4FieldContextTests.
+- **Tests grew 1995 → 2013 green** with zero new permissions, zero new
+  tools — and zero new strings outside the tools panel.
+- **And where is the planned security scope of "Proven Privacy"?** The
+  permanent network-block proof (live TrafficStats counters), extended
+  permission-contract tests, the full internal MASVS pass and Transparency
+  Report #2 move honestly to the next **v1.4.x** wave (the roadmap is
+  updated accordingly). This release proves privacy on the intelligence
+  side: classification without content, and protection that is deaf by
+  construction.
 
 ## Updating from previous releases
 
-- ✅ **1.2.0 → 1.3.0: guaranteed in-place update** (same signing key) —
+- ✅ **1.3.0 → 1.4.0: guaranteed in-place update** (same signing key) —
   install directly over the current version; your dictionary and signed
   backups stay as they are.
+- ✅ **From 1.2.0 onward, all in-place updates are guaranteed** (same key
+  for everything after 1.2.0).
 - ⚠️ **1.0.0/1.1.0 users — key rotation notice (happened in 1.2.0)**:
   the previous signing key's access was lost with the repository migration,
   so a new key was generated **with the same certificate identity**
@@ -220,17 +229,15 @@ arms of the intelligence ladder, all purely local with no cloud download:
   In-place update from 1.1.0 and earlier is unavailable (Android refuses
   updates across different signatures): export your dictionary and
   ed25519-signed backups from the old release, uninstall it, then install
-  1.3.0 as a fresh install and import what you exported.
-- ✅ **From 1.2.0 onward, all in-place updates are guaranteed** (same key
-  for everything after 1.2.0).
+  1.4.0 as a fresh install and import what you exported.
 
 ## Installation
 
-1. Download `DRS-Smart-Keyboard-v1.3.0.apk` from this release's assets (or
+1. Download `DRS-Smart-Keyboard-v1.4.0.apk` from this release's assets (or
    from the project website).
 2. Verify integrity: compare the file's SHA-256 against the attached
    **SHA256SUMS.txt** (or the table below).
-3. **1.2.0 users**: install directly over the current version (guaranteed
+3. **1.2.0+ users**: install directly over the current version (guaranteed
    in-place update) · **1.0.0/1.1.0 users**: uninstall first (fingerprint
    above) — export your dictionary and backups before uninstalling, and
    import after installing · **v2.x users (the derived FlorisBoard)**:
@@ -251,7 +258,7 @@ root.
 
 ## Verification
 
-- **1,995 unit tests green** · Kover coverage gate · performance budgets ·
+- **2,013 unit tests green** · Kover coverage gate · performance budgets ·
   an independent apksigner check.
 - All release assets are scheduled by fingerprint in the attached
   **SHA256SUMS.txt**.
