@@ -1,11 +1,11 @@
 {
-  "version": "1.4.0",
-  "versionCode": 5,
-  "tag": "v1.4.0",
-  "apkVersioned": "DRS-Smart-Keyboard-v1.4.0.apk",
+  "version": "1.4.1",
+  "versionCode": 6,
+  "tag": "v1.4.1",
+  "apkVersioned": "DRS-Smart-Keyboard-v1.4.1.apk",
   "apkLatest": "DRS-Smart-Keyboard-latest.apk",
-  "sha256": "b00b9d51d88d7b36a11dcaf0a9a11c66a8d5b9271fbf9c78103c2abc1e8e33e9",
-  "sizeBytes": 12126911,
+  "sha256": "f3d93f1f09a3158b47de99dc7ec4157dbe638684cd423dd707e25a7f9e157900",
+  "sizeBytes": 12129119,
   "publishedAt": "2026-10-21",
   "source": "GitHub Releases (verified SHA-256)"
 }
