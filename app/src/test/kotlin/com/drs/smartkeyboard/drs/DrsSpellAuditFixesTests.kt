@@ -140,11 +140,13 @@ class DrsV1190Tests : FunSpec({
         // (الإصدار العام) appended the smart numbers panel
         // after the pair, the smart clipboard panel, and
         // the saved-texts panel after those.
-        DrsUnifiedTools.ALL.last().id shouldBe "my_texts_panel"
-        DrsUnifiedTools.ALL[DrsUnifiedTools.ALL.size - 2].id shouldBe "smart_clipboard_panel"
-        DrsUnifiedTools.ALL[DrsUnifiedTools.ALL.size - 3].id shouldBe "smart_number_panel"
-        DrsUnifiedTools.ALL[DrsUnifiedTools.ALL.size - 4].id shouldBe "merge_keyboard"
-        DrsUnifiedTools.ALL[DrsUnifiedTools.ALL.size - 5].id shouldBe "split_keyboard"
+        // the emoji kitchen panel joins after the saved-texts tail.
+        DrsUnifiedTools.ALL.last().id shouldBe "emoji_kitchen_panel"
+        DrsUnifiedTools.ALL[DrsUnifiedTools.ALL.size - 2].id shouldBe "my_texts_panel"
+        DrsUnifiedTools.ALL[DrsUnifiedTools.ALL.size - 3].id shouldBe "smart_clipboard_panel"
+        DrsUnifiedTools.ALL[DrsUnifiedTools.ALL.size - 4].id shouldBe "smart_number_panel"
+        DrsUnifiedTools.ALL[DrsUnifiedTools.ALL.size - 5].id shouldBe "merge_keyboard"
+        DrsUnifiedTools.ALL[DrsUnifiedTools.ALL.size - 6].id shouldBe "split_keyboard"
     }
 
     // -------------------------------------------------------------

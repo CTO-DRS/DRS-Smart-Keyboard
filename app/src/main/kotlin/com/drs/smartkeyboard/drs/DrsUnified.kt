@@ -773,6 +773,22 @@ object DrsUnifiedTools {
         group = DrsToolGroup.TOOLS,
     )
 
+    /**
+     * opens the emoji kitchen panel (مطبخ الإيموجي) through the REAL
+     * engine action (KeyCode.IME_UI_MODE_EMOJI_KITCHEN) — the seventh
+     * smart panel: an original local emoji-combination engine (13 closed
+     * recipes, deterministic plans, honest silence) plus a licensed
+     * original-art sticker library, all on device with zero network.
+     */
+    val EMOJI_KITCHEN_PANEL = DrsUnifiedTool(
+        id = "emoji_kitchen_panel",
+        code = KeyCode.IME_UI_MODE_EMOJI_KITCHEN,
+        type = KeyType.SYSTEM_GUI,
+        scope = DrsSettingScope.BASIC,
+        defaultView = DrsToolView.BOTH,
+        group = DrsToolGroup.TOOLS,
+    )
+
     /** The full basic/shared catalogue in default display order. */
     val ALL: List<DrsUnifiedTool> = listOf(
         EMOJI, CLIPBOARD, TEXT_TOOLS, NUMBERS, SYMBOLS, LANGUAGE,
@@ -815,6 +831,10 @@ object DrsUnifiedTools {
         // لوحة نصوصي المحفوظة joins the tail with the same
         // append contract — every persisted arrangement stays intact.
         MY_TEXTS_PANEL,
+
+        // مطبخ الإيموجي joins the tail with the same
+        // append contract — every persisted arrangement stays intact.
+        EMOJI_KITCHEN_PANEL,
     )
 
     private val BY_ID = ALL.associateBy { it.id }

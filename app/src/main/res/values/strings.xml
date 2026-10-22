@@ -2977,4 +2977,32 @@
     <string name="drs__unified__stats_symbols_panel">إدراجات لوحة الرموز</string>
     <string name="drs__unified__stats_letters">إدراجات لوحة الحروف</string>
     <string name="drs__unified__stats_numbers_panel">إدراجات لوحة الأرقام</string>
+    <!-- مطبخ الإيموجي — اللوحة السابعة (الدفعة 19) -->
+    <string name="panel__switcher_kitchen">المطبخ</string>
+    <string name="panel__kitchen__title">مطبخ الإيموجي</string>
+    <string name="panel__kitchen__tab_compose">تركيبات</string>
+    <string name="panel__kitchen__tab_stickers">الملصقات</string>
+    <string name="panel__kitchen__search_hint">ابحث بالكلمات أو الإيموجي…</string>
+    <string name="panel__kitchen__send">إرسال</string>
+    <string name="panel__kitchen__copy">نسخ</string>
+    <string name="panel__kitchen__favorite">مفضلة</string>
+    <string name="panel__kitchen__unfavorite">إزالة من المفضلة</string>
+    <string name="panel__kitchen__favorites">المفضلة</string>
+    <string name="panel__kitchen__history">السجل</string>
+    <string name="panel__kitchen__sent_image">أُرسلت كصورة إلى الحقل</string>
+    <string name="panel__kitchen__sent_text">الحقل لا يقبل الصور — أُرسلت نصًّا</string>
+    <string name="panel__kitchen__copied">نُسخت إلى الحافظة</string>
+    <string name="panel__kitchen__send_failed">تعذّر التنفيذ — حاول مجددًا</string>
+    <string name="panel__kitchen__no_recipe">لا وصفة لهذا الزوج — الصمت الصادق</string>
+    <string name="panel__kitchen__no_results">لا نتائج</string>
+    <string name="panel__kitchen__all">الكل</string>
+    <string name="panel__kitchen__incognito_note">التخفي: لا سجل</string>
+    <string name="panel__kitchen__cat_smileys">وجوه</string>
+    <string name="panel__kitchen__cat_hearts">قلوب</string>
+    <string name="panel__kitchen__cat_animals">كائنات</string>
+    <string name="panel__kitchen__cat_food">أطعمة</string>
+    <string name="panel__kitchen__cat_objects">أشياء</string>
+    <string name="panel__kitchen__cat_celebration">احتفالات</string>
+    <string name="drs__unified__tool_emoji_kitchen_panel">مطبخ الإيموجي</string>
+    <string name="drs__unified__tool_emoji_kitchen_panel_desc">تركيب إيموجي أصلي على الجهاز مع مكتبة ملصقات مرخّصة — 13 وصفة مغلقة، بحث ومفضلة وسجل، وإرسال متوافق — بلا شبكة</string>
 </resources>

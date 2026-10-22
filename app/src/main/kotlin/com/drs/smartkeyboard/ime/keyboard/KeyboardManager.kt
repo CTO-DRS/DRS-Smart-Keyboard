@@ -1441,6 +1441,13 @@ class KeyboardManager(context: Context) : InputKeyEventReceiver {
                 activeState.imeUiMode = ImeUiMode.MY_TEXTS
                 DrsRuntimeState.closeStripSlotEditor()
             }
+            // the seventh smart panel (مطبخ الإيموجي)
+            // opens through the same path as every other UI mode.
+            KeyCode.IME_UI_MODE_EMOJI_KITCHEN -> {
+                exitMediaSearch()
+                activeState.imeUiMode = ImeUiMode.EMOJI_KITCHEN
+                DrsRuntimeState.closeStripSlotEditor()
+            }
             in DrsTextTool.CODE_RANGE -> {
                 DrsTextTool.fromCode(data.code)?.let { editorInstance.performTextTool(it) }
             }

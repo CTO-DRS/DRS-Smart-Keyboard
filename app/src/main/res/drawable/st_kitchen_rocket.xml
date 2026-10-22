@@ -1,0 +1,12 @@
+<!-- DRS Kitchen Originals — أصليات المشروع (Apache-2.0، docs/EMOJI_KITCHEN.md §4) — صاروخ -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp" android:height="48dp"
+    android:viewportWidth="108" android:viewportHeight="108">
+    <path android:pathData="M24,4L84,4A20,20 0 0 1 104,24L104,84A20,20 0 0 1 84,104L24,104A20,20 0 0 1 4,84L4,24A20,20 0 0 1 24,4Z" android:fillColor="#EDE7F6"/>
+    <path android:pathData="M54,12c14,10 20,26 20,42l-20,14l-20,-14c0,-16 6,-32 20,-42Z" android:fillColor="#3B82F6"/>
+    <path android:pathData="M34,54l-12,18l14,-4Z" android:fillColor="#EF4444"/>
+    <path android:pathData="M74,54l12,18l-14,-4Z" android:fillColor="#EF4444"/>
+    <path android:pathData="M54,68l-7,16h14Z" android:fillColor="#FBBF24"/>
+    <path android:pathData="M54,38a8,8 0 1 0 0.01,0Z" android:fillColor="#FFFFFF"/>
+    <path android:pathData="M54,42a4,4 0 1 0 0.01,0Z" android:fillColor="#3B82F6"/>
+</vector>

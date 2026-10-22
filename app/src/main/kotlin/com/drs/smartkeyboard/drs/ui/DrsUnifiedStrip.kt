@@ -24,6 +24,7 @@ import androidx.compose.material.icons.automirrored.filled.Undo
 import androidx.compose.material.icons.automirrored.filled.Notes
 import androidx.compose.material.icons.automirrored.outlined.Backspace
 import androidx.compose.material.icons.filled.Apps
+import androidx.compose.material.icons.filled.Kitchen
 import androidx.compose.material.icons.filled.Abc
 import androidx.compose.material.icons.filled.Build
 import androidx.compose.material.icons.filled.Close
@@ -151,6 +152,7 @@ import org.drs.lib.snygg.ui.SnyggRow
  */
 internal fun iconForTool(id: String) = when (id) {
     "emoji" -> Icons.Default.EmojiEmotions
+    "emoji_kitchen_panel" -> Icons.Default.Kitchen
     "clipboard" -> Icons.Default.ContentPaste
     "paste" -> Icons.Default.ContentPasteGo
     "numbers" -> Icons.Default.Numbers

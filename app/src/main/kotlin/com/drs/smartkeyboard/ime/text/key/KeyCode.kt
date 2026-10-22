@@ -142,6 +142,11 @@ object KeyCode {
     // the unified tool catalogue with the same tail-append contract.
     const val IME_UI_MODE_MY_TEXTS =        -234
 
+    // the seventh smart panel (مطبخ الإيموجي) — a real
+    // ImeUiMode handled in KeyboardManager + hosted in ImeWindow, joined
+    // the unified tool catalogue with the same tail-append contract.
+    const val IME_UI_MODE_EMOJI_KITCHEN =   -235
+
     const val TOGGLE_SMARTBAR_VISIBILITY =  -241
     const val TOGGLE_ACTIONS_OVERFLOW =     -242
     const val TOGGLE_ACTIONS_EDITOR =       -243

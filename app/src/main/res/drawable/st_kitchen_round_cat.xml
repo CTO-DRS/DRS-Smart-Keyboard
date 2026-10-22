@@ -1,0 +1,14 @@
+<!-- DRS Kitchen Originals — أصليات المشروع (Apache-2.0، docs/EMOJI_KITCHEN.md §4) — قطة مستديرة -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp" android:height="48dp"
+    android:viewportWidth="108" android:viewportHeight="108">
+    <path android:pathData="M24,4L84,4A20,20 0 0 1 104,24L104,84A20,20 0 0 1 84,104L24,104A20,20 0 0 1 4,84L4,24A20,20 0 0 1 24,4Z" android:fillColor="#FFF9C4"/>
+    <path android:pathData="M28,30L44,42a34,34 0 0 1 20,0L80,30L82,52a34,34 0 1 1 -54,0Z" android:fillColor="#F59E0B"/>
+    <path android:pathData="M42,52a3.4,4 0 1 0 0.01,0Z" android:fillColor="#5D4037"/>
+    <path android:pathData="M66,52a3.4,4 0 1 0 0.01,0Z" android:fillColor="#5D4037"/>
+    <path android:pathData="M50,64a5,6 0 0 0 8,0" android:strokeColor="#5D4037" android:strokeWidth="3" android:strokeLineCap="round"/>
+    <path android:pathData="M18.00,58.00L32.00,60.00" android:fillColor="#5D4037" android:strokeWidth="2.5" android:strokeLineCap="round"/>
+    <path android:pathData="M18.00,68.00L32.00,66.00" android:fillColor="#5D4037" android:strokeWidth="2.5" android:strokeLineCap="round"/>
+    <path android:pathData="M90.00,58.00L76.00,60.00" android:fillColor="#5D4037" android:strokeWidth="2.5" android:strokeLineCap="round"/>
+    <path android:pathData="M90.00,68.00L76.00,66.00" android:fillColor="#5D4037" android:strokeWidth="2.5" android:strokeLineCap="round"/>
+</vector>

@@ -19,6 +19,8 @@ import com.drs.smartkeyboard.R
 import com.drs.smartkeyboard.app.DrsPreferenceStore
 import com.drs.smartkeyboard.drs.DrsRuntimeState
 import com.drs.smartkeyboard.drs.HarakatSmartInsert
+import android.net.Uri
+import com.drs.smartkeyboard.drs.DrsKitchenSendPlanner
 import com.drs.smartkeyboard.drs.DrsTextTool
 import com.drs.smartkeyboard.drs.DrsTextTools
 import com.drs.smartkeyboard.appContext
@@ -382,6 +384,37 @@ class EditorInstance(context: Context) : AbstractEditorInstance(context) {
             }
         }
     }
+
+    /**
+     * مطبخ الإيموجي: commits a rendered composition/sticker PNG through
+     * the DOCUMENTED commitContent API — the exact mechanics of
+     * [commitClipboardItem]'s image branch, minus any clipboard-history
+     * side effects (the panel stays open; composing is a flow, not a
+     * paste). Returns false when the editor declines content (the panel
+     * then falls back to the honest text pair, announced as such).
+     *
+     * @param uri a FileProvider content URI of a rendered PNG
+     * @param description a human-readable ClipDescription label
+     * @return True when the content was committed to the editor.
+     */
+    fun commitImageContent(uri: Uri, description: String): Boolean {
+        val inputContentInfo = InputContentInfoCompat(
+            uri,
+            ClipDescription(description, arrayOf(DrsKitchenSendPlanner.IMAGE_MIME)),
+            null,
+        )
+        val ic = currentInputConnection() ?: return false
+        ic.finishComposingText()
+        val flags = InputConnectionCompat.INPUT_CONTENT_GRANT_READ_URI_PERMISSION
+        return InputConnectionCompat.commitContent(ic, activeInfo.base, inputContentInfo, flags, null)
+    }
+
+    /**
+     * The MIME types the ACTIVE editor accepts for commitContent — the
+     * pure send planner's input. Null when the editor declares nothing.
+     */
+    val activeContentMimeTypes: List<String>?
+        get() = activeInfo.base.contentMimeTypes?.toList()
 
     /**
      * Executes a backward delete on this editor's text. If a text selection is active, all

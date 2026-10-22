@@ -1,0 +1,170 @@
+{
+  "schemaVersion": 1,
+  "pack": {
+    "id": "drs-kitchen-originals",
+    "nameAr": "أصليات مطبخ درز — المجموعة الأولى",
+    "nameEn": "DRS Kitchen Originals — Set One",
+    "version": "1.0.0",
+    "author": "DRS Smart Keyboard Project",
+    "license": "Apache-2.0",
+    "licenseNote": "أصول أصلية من تأليف المشروع — original artwork authored for this project"
+  },
+  "stickers": [
+    {
+      "id": "st_kitchen_star_face",
+      "drawable": "st_kitchen_star_face",
+      "category": "SMILEYS",
+      "keywords": {
+        "ar": [
+          "نجمة مبتسمة"
+        ],
+        "en": [
+          "star smile"
+        ]
+      }
+    },
+    {
+      "id": "st_kitchen_cool_face",
+      "drawable": "st_kitchen_cool_face",
+      "category": "SMILEYS",
+      "keywords": {
+        "ar": [
+          "وجه مرتاح"
+        ],
+        "en": [
+          "cool face"
+        ]
+      }
+    },
+    {
+      "id": "st_kitchen_paper_heart",
+      "drawable": "st_kitchen_paper_heart",
+      "category": "HEARTS",
+      "keywords": {
+        "ar": [
+          "قلب ورقي"
+        ],
+        "en": [
+          "paper heart"
+        ]
+      }
+    },
+    {
+      "id": "st_kitchen_spark_heart",
+      "drawable": "st_kitchen_spark_heart",
+      "category": "HEARTS",
+      "keywords": {
+        "ar": [
+          "قلب متوهج"
+        ],
+        "en": [
+          "glow heart"
+        ]
+      }
+    },
+    {
+      "id": "st_kitchen_round_cat",
+      "drawable": "st_kitchen_round_cat",
+      "category": "ANIMALS",
+      "keywords": {
+        "ar": [
+          "قطة مستديرة"
+        ],
+        "en": [
+          "round cat"
+        ]
+      }
+    },
+    {
+      "id": "st_kitchen_sleepy_panda",
+      "drawable": "st_kitchen_sleepy_panda",
+      "category": "ANIMALS",
+      "keywords": {
+        "ar": [
+          "باندا نائمة"
+        ],
+        "en": [
+          "sleepy panda"
+        ]
+      }
+    },
+    {
+      "id": "st_kitchen_coffee_cup",
+      "drawable": "st_kitchen_coffee_cup",
+      "category": "FOOD",
+      "keywords": {
+        "ar": [
+          "فنجان قهوة"
+        ],
+        "en": [
+          "coffee cup"
+        ]
+      }
+    },
+    {
+      "id": "st_kitchen_watermelon_slice",
+      "drawable": "st_kitchen_watermelon_slice",
+      "category": "FOOD",
+      "keywords": {
+        "ar": [
+          "شريحة بطيخ"
+        ],
+        "en": [
+          "watermelon"
+        ]
+      }
+    },
+    {
+      "id": "st_kitchen_rocket",
+      "drawable": "st_kitchen_rocket",
+      "category": "OBJECTS",
+      "keywords": {
+        "ar": [
+          "صاروخ"
+        ],
+        "en": [
+          "rocket"
+        ]
+      }
+    },
+    {
+      "id": "st_kitchen_gift_box",
+      "drawable": "st_kitchen_gift_box",
+      "category": "OBJECTS",
+      "keywords": {
+        "ar": [
+          "صندوق هدية"
+        ],
+        "en": [
+          "gift box"
+        ]
+      }
+    },
+    {
+      "id": "st_kitchen_party_cone",
+      "drawable": "st_kitchen_party_cone",
+      "category": "CELEBRATION",
+      "keywords": {
+        "ar": [
+          "قمع احتفال"
+        ],
+        "en": [
+          "party cone"
+        ]
+      }
+    },
+    {
+      "id": "st_kitchen_confetti_star",
+      "drawable": "st_kitchen_confetti_star",
+      "category": "CELEBRATION",
+      "keywords": {
+        "ar": [
+          "نجمة احتفال"
+        ],
+        "en": [
+          "confetti star"
+        ]
+      }
+    }
+  ]
+}

@@ -68,6 +68,18 @@ panel also understands the field's own type from its input attributes alone
 tools first — a small «Field context» chip tells you when it did — while
 password fields stay completely deaf: no ranking and no content advice there.
 
+**Emoji Kitchen (the seventh panel):** a fully on-device ORIGINAL emoji
+composition experience — from the «Kitchen» chip pick a base emoji and the
+local engine offers its real, rendered combinations (13 closed recipes set
+the positions and scales with no randomness and no network); an uncovered
+pair stays honestly silent rather than showing a fake image. The
+«Stickers» tab is a licensed original library (Apache-2.0, authored by the
+project) with six closed categories, Arabic and English search, favorites
+and history. Sending rides the DOCUMENTED platform API: an image where the
+field accepts one, the honest text pair where it does not, the clipboard
+for stickers — every outcome announced by an explicit toast. In incognito
+mode no history is recorded at all.
+
 **Clean web paste:** a copy from ChatGPT, WhatsApp or any website usually
 arrives wearing Markdown (`**bold**`, `# heading`, `- bullet`,
 `[link](url)`) — the «Clean web paste» tool in the text tools panel keeps the

@@ -35,6 +35,7 @@ import com.drs.smartkeyboard.ime.keyboard.SplitMode
 import com.drs.smartkeyboard.ime.landscapeinput.LandscapeInputUiMode
 import com.drs.smartkeyboard.app.settings.DrsSearchHistory
 // EmojiHairStyle import removed with the dead emoji__preferred_hair_style pref.
+import com.drs.smartkeyboard.drs.DrsKitchenMemory
 import com.drs.smartkeyboard.ime.media.emoji.EmojiHistory
 import com.drs.smartkeyboard.ime.media.emoji.EmojiSkinTone
 import com.drs.smartkeyboard.ime.media.emoji.EmojiSuggestionType
@@ -447,6 +448,26 @@ abstract class DrsPreferenceModel : PreferenceModel() {
         val suggestionCandidateMaxCount = int(
             key = "emoji__suggestion_candidate_max_count",
             default = 5,
+        )
+    }
+
+    // مطبخ الإيموجي (the DRS Emoji Kitchen) — the seventh smart panel's
+    // memory: explicit favorites (user intent, allowed anywhere) and the
+    // recent-uses history (capped at 24, never recorded in incognito).
+    // Same custom-pref pattern as the emoji history (EmojiHistory.Serializer).
+    val emojiKitchen = EmojiKitchen()
+    inner class EmojiKitchen {
+        val memoryData = custom(
+            key = "emoji_kitchen__memory_data",
+            default = DrsKitchenMemory.Empty,
+            serializer = DrsKitchenMemory.Serializer,
+        )
+
+        // whether the send path may use commitContent images where the
+        // editor supports them (else the honest text pair is always used).
+        val imagesEnabled = boolean(
+            key = "emoji_kitchen__images_enabled",
+            default = true,
         )
     }
 

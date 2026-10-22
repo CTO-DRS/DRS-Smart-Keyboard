@@ -71,7 +71,7 @@ class DrsV170Tests : FunSpec({
         // the smart numbers panel after that, the release
         // the smart clipboard panel after that and the 
         // release the saved-texts panel after those.
-        DrsUnifiedTools.ALL.dropLast(10).last().id shouldBe "clipboard_pin"
+        DrsUnifiedTools.ALL.dropLast(11).last().id shouldBe "clipboard_pin"
         DrsUnifiedTools.ALL.first().id shouldBe "emoji"
     }
 

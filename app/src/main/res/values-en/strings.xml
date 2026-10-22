@@ -3058,4 +3058,32 @@
     <string name="panel__numbers__ctx_math">Math</string>
     <string name="panel__numbers__ctx_money">Amount</string>
     <string name="panel__numbers__ctx_otp">Code</string>
+    <!-- Emoji Kitchen — the seventh smart panel (batch 19) -->
+    <string name="panel__switcher_kitchen">Kitchen</string>
+    <string name="panel__kitchen__title">Emoji Kitchen</string>
+    <string name="panel__kitchen__tab_compose">Compose</string>
+    <string name="panel__kitchen__tab_stickers">Stickers</string>
+    <string name="panel__kitchen__search_hint">Search words or emoji…</string>
+    <string name="panel__kitchen__send">Send</string>
+    <string name="panel__kitchen__copy">Copy</string>
+    <string name="panel__kitchen__favorite">Favorite</string>
+    <string name="panel__kitchen__unfavorite">Unfavorite</string>
+    <string name="panel__kitchen__favorites">Favorites</string>
+    <string name="panel__kitchen__history">Recent</string>
+    <string name="panel__kitchen__sent_image">Sent as an image to the field</string>
+    <string name="panel__kitchen__sent_text">The field does not accept images — sent as text</string>
+    <string name="panel__kitchen__copied">Copied to the clipboard</string>
+    <string name="panel__kitchen__send_failed">Could not complete — try again</string>
+    <string name="panel__kitchen__no_recipe">No recipe for this pair — honest silence</string>
+    <string name="panel__kitchen__no_results">No results</string>
+    <string name="panel__kitchen__all">All</string>
+    <string name="panel__kitchen__incognito_note">Incognito: no history</string>
+    <string name="panel__kitchen__cat_smileys">Faces</string>
+    <string name="panel__kitchen__cat_hearts">Hearts</string>
+    <string name="panel__kitchen__cat_animals">Animals</string>
+    <string name="panel__kitchen__cat_food">Food</string>
+    <string name="panel__kitchen__cat_objects">Objects</string>
+    <string name="panel__kitchen__cat_celebration">Celebration</string>
+    <string name="drs__unified__tool_emoji_kitchen_panel">Emoji Kitchen</string>
+    <string name="drs__unified__tool_emoji_kitchen_panel_desc">On-device original emoji compositions plus a licensed sticker library — 13 closed recipes, search, favorites and history, compatible sending — no network</string>
 </resources>

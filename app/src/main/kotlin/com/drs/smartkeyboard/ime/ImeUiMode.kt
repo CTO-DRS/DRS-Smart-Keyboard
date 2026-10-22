@@ -28,7 +28,11 @@ enum class ImeUiMode(val value: Int) {
     SMART_CLIPBOARD(8),
 
     /** the saved-texts panel (لوحة نصوصي المحفوظة) — the sixth smart panel. */
-    MY_TEXTS(9);
+    MY_TEXTS(9),
+
+    /** the emoji kitchen panel (مطبخ الإيموجي) — the seventh smart panel:
+     * an original local emoji-combination engine + a licensed sticker library. */
+    EMOJI_KITCHEN(10);
 
     companion object {
         fun fromInt(int: Int) = entries.firstOrNull { it.value == int } ?: TEXT

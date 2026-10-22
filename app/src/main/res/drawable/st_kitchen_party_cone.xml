@@ -1,0 +1,13 @@
+<!-- DRS Kitchen Originals — أصليات المشروع (Apache-2.0، docs/EMOJI_KITCHEN.md §4) — قمع احتفال -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp" android:height="48dp"
+    android:viewportWidth="108" android:viewportHeight="108">
+    <path android:pathData="M24,4L84,4A20,20 0 0 1 104,24L104,84A20,20 0 0 1 84,104L24,104A20,20 0 0 1 4,84L4,24A20,20 0 0 1 24,4Z" android:fillColor="#FCE4EC"/>
+    <path android:pathData="M54,18L78,82a4,4 0 0 1 -5,5L35,82a4,4 0 0 1 -5,-5Z" android:fillColor="#8B5CF6"/>
+    <path android:pathData="M54,18L62,40a18,18 0 0 1 -16,0Z" android:fillColor="#FFFFFF"/>
+    <path android:pathData="M24,30l3,6 6,3 -6,3 -3,6 -3,-6 -6,-3 6,-3Z" android:fillColor="#FBBF24"/>
+    <path android:pathData="M84,28a3,3 0 1 0 0.01,0Z" android:fillColor="#3B82F6"/>
+    <path android:pathData="M88,48a3,3 0 1 0 0.01,0Z" android:fillColor="#EF4444"/>
+    <path android:pathData="M20,58a3,3 0 1 0 0.01,0Z" android:fillColor="#10B981"/>
+    <path android:pathData="M86,70a3,3 0 1 0 0.01,0Z" android:fillColor="#EC4899"/>
+</vector>

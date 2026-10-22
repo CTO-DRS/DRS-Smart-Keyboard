@@ -55,6 +55,7 @@ import com.drs.smartkeyboard.drs.ui.DrsArabicLettersPanel
 import com.drs.smartkeyboard.drs.ui.DrsSmartNumberPanel
 import com.drs.smartkeyboard.drs.ui.DrsSmartClipboardPanel
 import com.drs.smartkeyboard.drs.ui.DrsMyTextsPanel
+import com.drs.smartkeyboard.drs.ui.DrsEmojiKitchenPanel
 import com.drs.smartkeyboard.ime.input.LocalInputFeedbackController
 import com.drs.smartkeyboard.ime.keyboard.ProvideKeyboardRowBaseHeight
 import com.drs.smartkeyboard.ime.media.MediaInputLayout
@@ -244,6 +245,9 @@ private fun ImeInnerWindow() {
                 ImeUiMode.SMART_CLIPBOARD -> ProvideActualLayoutDirection { DrsSmartClipboardPanel() }
                 // the sixth smart panel (لوحة نصوصي المحفوظة).
                 ImeUiMode.MY_TEXTS -> ProvideActualLayoutDirection { DrsMyTextsPanel() }
+                // the seventh smart panel (مطبخ الإيموجي) — original
+                // local emoji compositions + the licensed sticker library.
+                ImeUiMode.EMOJI_KITCHEN -> ProvideActualLayoutDirection { DrsEmojiKitchenPanel() }
             }
             ImeSystemUiFloating()
         }

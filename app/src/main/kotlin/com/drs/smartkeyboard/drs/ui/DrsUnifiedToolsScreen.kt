@@ -436,6 +436,8 @@ fun toolTitle(id: String): String = when (id) {
     "smart_clipboard_panel" -> stringRes(R.string.drs__unified__tool_smart_clipboard_panel)
     // لوحة نصوصي المحفوظة
     "my_texts_panel" -> stringRes(R.string.drs__unified__tool_my_texts_panel)
+    // مطبخ الإيموجي — اللوحة السابعة
+    "emoji_kitchen_panel" -> stringRes(R.string.drs__unified__tool_emoji_kitchen_panel)
     else -> id
 }
 
@@ -497,5 +499,7 @@ fun toolDesc(id: String): String = when (id) {
     "smart_clipboard_panel" -> stringRes(R.string.drs__unified__tool_smart_clipboard_panel_desc)
     // لوحة نصوصي المحفوظة
     "my_texts_panel" -> stringRes(R.string.drs__unified__tool_my_texts_panel_desc)
+    // مطبخ الإيموجي — اللوحة السابعة
+    "emoji_kitchen_panel" -> stringRes(R.string.drs__unified__tool_emoji_kitchen_panel_desc)
     else -> ""
 }

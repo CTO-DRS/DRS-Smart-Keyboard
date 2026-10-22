@@ -1,0 +1,12 @@
+<!-- DRS Kitchen Originals — أصليات المشروع (Apache-2.0، docs/EMOJI_KITCHEN.md §4) — شريحة بطيخ -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp" android:height="48dp"
+    android:viewportWidth="108" android:viewportHeight="108">
+    <path android:pathData="M24,4L84,4A20,20 0 0 1 104,24L104,84A20,20 0 0 1 84,104L24,104A20,20 0 0 1 4,84L4,24A20,20 0 0 1 24,4Z" android:fillColor="#E8F5E9"/>
+    <path android:pathData="M16,66a42,42 0 0 1 76,0Z" android:fillColor="#10B981"/>
+    <path android:pathData="M22,66a36,36 0 0 1 64,0Z" android:fillColor="#EF4444"/>
+    <path android:pathData="M40,56a2.6,3.6 0 1 0 0.01,0Z" android:fillColor="#5D4037"/>
+    <path android:pathData="M54,50a2.6,3.6 0 1 0 0.01,0Z" android:fillColor="#5D4037"/>
+    <path android:pathData="M68,56a2.6,3.6 0 1 0 0.01,0Z" android:fillColor="#5D4037"/>
+    <path android:pathData="M22,66h64a4,4 0 0 1 -4,6h-56a4,4 0 0 1 -4,-6Z" android:fillColor="#10B981"/>
+</vector>

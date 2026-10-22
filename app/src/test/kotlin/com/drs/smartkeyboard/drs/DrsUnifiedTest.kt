@@ -283,14 +283,15 @@ class DrsUnifiedTest : FunSpec({
         // and the tail (5); appended one, two more,
         // three (the smart panels), two (split/merge),
         // the release one (the smart numbers panel), the
-        // release one (the smart clipboard panel) and the
-        // release one (the saved-texts panel)
-        // — combined tail after them is now 19 — same relative order.
-        DrsUnifiedTools.ALL.dropLast(19).takeLast(2).map { it.id } shouldBe
+        // release one (the smart clipboard panel), the
+        // release one (the saved-texts panel) and the
+        // seventh (the emoji kitchen panel)
+        // — combined tail after them is now 20 — same relative order.
+        DrsUnifiedTools.ALL.dropLast(20).takeLast(2).map { it.id } shouldBe
             listOf("floating_mode", "smartbar_toggle")
         // The head and the previous tails are untouched.
         DrsUnifiedTools.ALL.first().id shouldBe "emoji"
-        DrsUnifiedTools.ALL[DrsUnifiedTools.ALL.size - 22].id shouldBe "voice_input"
+        DrsUnifiedTools.ALL[DrsUnifiedTools.ALL.size - 23].id shouldBe "voice_input"
     }
 
     test("tools exist and dispatch real engine codes") {
@@ -307,9 +308,9 @@ class DrsUnifiedTest : FunSpec({
         // tail of five, the tool, the two tools,
         // the three smart panels, the two tools, the
         // smart numbers panel, the smart clipboard
-        // panel and the saved-texts panel — same relative
-        // order, longer catalogue.
-        DrsUnifiedTools.ALL.dropLast(16).takeLast(3).map { it.id } shouldBe
+        // panel, the saved-texts panel and the emoji
+        // kitchen panel — same relative order, longer catalogue.
+        DrsUnifiedTools.ALL.dropLast(17).takeLast(3).map { it.id } shouldBe
             listOf("clipboard_history_clear", "next_language", "resize_mode")
         DrsUnifiedTools.ALL.first().id shouldBe "emoji"
     }

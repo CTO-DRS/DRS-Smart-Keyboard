@@ -279,12 +279,14 @@ class DrsV1150Tests : FunSpec({
         ImeUiMode.fromInt(6) shouldBe ImeUiMode.ARABIC_LETTERS
         // mode 7 joined as the smart numbers panel, and
         // mode 8 joined as the smart clipboard panel, and
-        // mode 9 joined as the saved-texts panel — the
-        // defensive fallback moved to 10.
+        // mode 9 joined as the saved-texts panel, and
+        // mode 10 joined as the emoji kitchen panel — the
+        // defensive fallback moved to 11.
         ImeUiMode.fromInt(7) shouldBe ImeUiMode.SMART_NUMBER
         ImeUiMode.fromInt(8) shouldBe ImeUiMode.SMART_CLIPBOARD
         ImeUiMode.fromInt(9) shouldBe ImeUiMode.MY_TEXTS
-        ImeUiMode.fromInt(10) shouldBe ImeUiMode.TEXT // defensive fallback
+        ImeUiMode.fromInt(10) shouldBe ImeUiMode.EMOJI_KITCHEN
+        ImeUiMode.fromInt(11) shouldBe ImeUiMode.TEXT // defensive fallback
         ImeUiMode.fromInt(99) shouldBe ImeUiMode.TEXT
     }
 })

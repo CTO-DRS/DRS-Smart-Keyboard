@@ -117,9 +117,9 @@ class DrsV160Tests : FunSpec({
         // the split/merge pair, the release the
         // smart numbers panel and the release the smart
         // clipboard panel, so the
-        // block is now dropLast(11). The contract itself (stable
+        // block is now dropLast(12). The contract itself (stable
         // positions, first tool pinned) is unchanged.
-        DrsUnifiedTools.ALL.dropLast(11).takeLast(5).map { it.id } shouldBe
+        DrsUnifiedTools.ALL.dropLast(12).takeLast(5).map { it.id } shouldBe
             listOf(
                 "clipboard_full_clear", "prev_language", "one_handed_left",
                 "one_handed_right", "next_keyboard_app",
@@ -130,9 +130,10 @@ class DrsV160Tests : FunSpec({
         // the split/merge pair after those and the
         // release the smart numbers panel after that, the
         // release the smart clipboard panel after that and
-        // the release the saved-texts panel after that, so
-        // the combined tail after the block is now 16.
-        DrsUnifiedTools.ALL.dropLast(16).takeLast(3).map { it.id } shouldBe
+        // the release the saved-texts panel after that, and
+        // the release the emoji kitchen panel after that, so
+        // the combined tail after the block is now 17.
+        DrsUnifiedTools.ALL.dropLast(17).takeLast(3).map { it.id } shouldBe
             listOf("clipboard_history_clear", "next_language", "resize_mode")
     }
 

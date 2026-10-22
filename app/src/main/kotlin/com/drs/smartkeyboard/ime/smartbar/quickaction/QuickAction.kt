@@ -95,6 +95,7 @@ val SmartToolCodes = setOf(
     KeyCode.IME_UI_MODE_MEDIA,
     KeyCode.IME_UI_MODE_CLIPBOARD,
     KeyCode.IME_UI_MODE_TEXT_TOOLS,
+    KeyCode.IME_UI_MODE_EMOJI_KITCHEN,
     // every technical text tool counts as a tool press.
     KeyCode.TEXT_TOOL_UPPERCASE,
     KeyCode.TEXT_TOOL_LOWERCASE,

@@ -158,14 +158,15 @@ class DrsV180Tests : FunSpec({
         // release the smart numbers panel after those, and
         // the smart clipboard panel after those, and
         // the saved-texts panel after those.
-        DrsUnifiedTools.ALL.size shouldBe 52
-        DrsUnifiedTools.ALL.last().id shouldBe "my_texts_panel"
-        DrsUnifiedTools.ALL[DrsUnifiedTools.ALL.size - 2].id shouldBe "smart_clipboard_panel"
-        DrsUnifiedTools.ALL[DrsUnifiedTools.ALL.size - 3].id shouldBe "smart_number_panel"
-        DrsUnifiedTools.ALL[DrsUnifiedTools.ALL.size - 4].id shouldBe "merge_keyboard"
-        DrsUnifiedTools.ALL[DrsUnifiedTools.ALL.size - 5].id shouldBe "split_keyboard"
-        DrsUnifiedTools.ALL[DrsUnifiedTools.ALL.size - 10].id shouldBe "quick_actions"
-        DrsUnifiedTools.ALL[DrsUnifiedTools.ALL.size - 9].id shouldBe "actions_editor"
+        DrsUnifiedTools.ALL.size shouldBe 53
+        DrsUnifiedTools.ALL.last().id shouldBe "emoji_kitchen_panel"
+        DrsUnifiedTools.ALL[DrsUnifiedTools.ALL.size - 2].id shouldBe "my_texts_panel"
+        DrsUnifiedTools.ALL[DrsUnifiedTools.ALL.size - 3].id shouldBe "smart_clipboard_panel"
+        DrsUnifiedTools.ALL[DrsUnifiedTools.ALL.size - 4].id shouldBe "smart_number_panel"
+        DrsUnifiedTools.ALL[DrsUnifiedTools.ALL.size - 5].id shouldBe "merge_keyboard"
+        DrsUnifiedTools.ALL[DrsUnifiedTools.ALL.size - 6].id shouldBe "split_keyboard"
+        DrsUnifiedTools.ALL[DrsUnifiedTools.ALL.size - 11].id shouldBe "quick_actions"
+        DrsUnifiedTools.ALL[DrsUnifiedTools.ALL.size - 10].id shouldBe "actions_editor"
         val ids = DrsUnifiedTools.ALL.map { it.id }
         ids.size shouldBe ids.toSet().size
     }

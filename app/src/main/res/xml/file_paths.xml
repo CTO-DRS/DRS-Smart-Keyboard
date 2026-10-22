@@ -12,4 +12,10 @@
     <cache-path
         name="transparency"
         path="transparency/"/>
+    <!-- «مطبخ الإيموجي» (الدفعة 19): تركيبات وملصقات تُرسم برمجياً في هذا
+         الدليل وتُشارك عبر FileProvider القائم — مورد وليس صلاحية، مثل
+         مسار الشفافية قبله. -->
+    <cache-path
+        name="emoji_kitchen"
+        path="emoji-kitchen/"/>
 </paths>

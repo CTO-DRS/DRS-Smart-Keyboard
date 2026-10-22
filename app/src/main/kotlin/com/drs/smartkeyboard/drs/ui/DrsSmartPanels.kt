@@ -201,6 +201,7 @@ internal fun PanelSwitcherChips(current: ImeUiMode, keyboardManager: com.drs.sma
         ImeUiMode.ARABIC_LETTERS to R.string.panel__switcher_letters,
         ImeUiMode.SMART_NUMBER to R.string.panel__switcher_numbers,
         ImeUiMode.SMART_CLIPBOARD to R.string.panel__switcher_clipboard,
+        ImeUiMode.EMOJI_KITCHEN to R.string.panel__switcher_kitchen,
     )
     val options = remember(current, smartOrder) {
         if (!smartOrder) {
