@@ -209,8 +209,23 @@ object ZipUtils {
                     continue
                 }
                 if (flexEntry.isDirectory) {
-                    flexEntryFile.mkdir()
+                    // mkdirs (not mkdir): nested dir entries may arrive without
+                    // their ancestors («a/b/» with no «a/» entry).
+                    flexEntryFile.mkdirs()
                 } else {
+                    // «الأرشيف بلا مدخلات مجلدات» — archives built by
+                    // non-Java tooling (Python's zipfile, `zip -j`, most CLI
+                    // packagers) contain FILE entries only, with no explicit
+                    // directory entries at all. The old code relied on a
+                    // preceding «stylesheets/» entry existing before
+                    // «stylesheets/x.json» could be written — the app's own
+                    // exports always had one, so the gap stayed invisible
+                    // until the OFFICIAL .flex packages (built by Python) hit
+                    // FileNotFoundException on every on-device install/import
+                    // while every byte, checksum and signature was intact.
+                    // Create the parent chain honestly; the traversal guard
+                    // above already proved the entry resolves INSIDE dstDir.
+                    flexEntryFile.parentFile?.mkdirs()
                     totalExtractedBytes += flexFile.copy(
                         srcEntry = flexEntry,
                         dstFile = flexEntryFile,

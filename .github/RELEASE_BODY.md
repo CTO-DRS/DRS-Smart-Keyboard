@@ -1,8 +1,8 @@
 <div align="center">
 
-# DRS Smart Keyboard v1.4.1 — الوجه الأمني
+# DRS Smart Keyboard v1.4.2 — مطبخ الإيموجي والحزم المستلمة
 
-**The Security Face — Sixth Release**
+**Emoji Kitchen & Received Packages — Seventh Release**
 
 <img src="https://raw.githubusercontent.com/CTO-DRS/drs-sk-work/main/docs/images/hero.png" width="100%"/>
 
@@ -30,54 +30,64 @@
   وحدات، وزوج الأمان (قيس قوة كلمة المرور ومولّدها) — كلها حتمية على
   الجهاز بعقد «لا تخمين ولا تلف».
 - **الذكاء العربي على الجهاز**: **13 محرك ذكاء اصطناعي محلي بالكامل** —
-  بسلم ذكاء معلن (L0→L5) أُكملت أذرعه الأربعة الأولى: تصحيح مكمّم بمعيار
-  المستوى، توقع يقرأ الجملة، أمان محلي، **وذكاء سياقي بين الحقول يرتب
-  الأدوات حسب نوع الحقل دون قراءة محتواه أبدًا** — صفر تبعيات سحابية
-  وصفر تنزيل نموذج.
+  بسلم ذكاء معلن (L0→L5) أُكملت أذرعه الأربعة الأولى — صفر تبعيات
+  سحابية وصفر تنزيل نموذج.
+- **اللوحة السابعة — مطبخ الإيموجي (DRS Emoji Kitchen)**: تركيب إيموجي
+  أصلية 100% على الجهاز (لا أصول Google ولا واجهات خاصة ولا شبكة) بمحرك
+  وصفات مغلق، ومكتبة ملصقات أصلية مرخّصة Apache-2.0، وإرسال متوافق
+  بالواجهة العامة commitContent — والإرسال على جهازك الحقيقي هو الاختبار
+  الذي بيدك أنت.
 - **الخصوصية الإثباتية**: privacy canary آلي + بوابة MASVS الداخلية
-  الجديدة (34 فحصًا) + بوابة إصدار من 11 فحصًا (fail-closed) — **والآن
-  الإثبات حي: عدّادات شبكة يقطرها التطبيق أمام المستخدم كل ثانية**.
-- **مركز الحزم**: امتدادات موقّعة ed25519 مع تحقق قبل فك الضغط (8/8 VALID).
+  (34 فحصًا) + بوابة إصدار من 11 فحصًا (fail-closed) — والإثبات حي:
+  عدّادات شبكة يقطرها التطبيق أمام المستخدم كل ثانية.
+- **مركز الحزم**: امتدادات موقّعة ed25519 مع تحقق قبل فك الضغط — **وفي
+  هذا الإصدار صارت الثمانية الرسمية تُثبَّت وتُستورد فعليًا** (عقد اختبار
+  على الحزم الحقيقية نفسها: 9/9 أخضر).
 
-## جديد في 1.4.1 — الوجه الأمني (موجة v1.4.x كاملة)
+## جديد في 1.4.2 — ثلاث دفعات
 
-تنفيذ موجة v1.4.x الأمنية كاملةً — النطاق الأمني الذي نُقل صدقًا من
-«الخصوصية المثبتة» عند قطعها المبكر لذراع L4. أربعة مقطوعات:
+### 1) مطبخ الإيموجي — اللوحة السابعة الذكية (دفعة 19)
 
-- **الوضع المطلق بإثبات حيّ — `DrsLiveProofEngine` + لوحة 1 Hz**: لوحة
-  الخصوصية لم تعد تقيس مرة واحدة عند الفتح؛ عدّاد يقطر **كل ثانية أثناء
-  مشاهدة الشاشة** يعرض الصادر والوارد منذ بدء الجلسة، و«شريط صفر بايت»
-  يكبر مع الصمت (0:00 → 12:34 → …). الصدق بنيويًا: الحكم ثلاثي — صفر
-  مُثبت فقط عند دلتا صفرية على عدّادات مدعومة، أرقام صادقة عند أي
-  حركة، وإعلان صريح عندما لا يدعم الروم العدّادات؛ وشريط الصمت ينقطع
-  مع أي حركة **أو** مع إعادة ضبط عدّادات النظام — لا صمت متظاهر.
-  القارئ واحد للإثباتين (اللحظي والحي) — لا انفراج ممكن.
-- **اختبارات عقد الأذونات الموسعة — `DrsSecurityWaveTests` (28 اختبارًا)**:
-  العقد اتسع من فحص الأذونات الخمسة إلى **السطح الكامل للمانيفست**:
-  قائمة المصدَّرات المغلقة (خمسة مكوّنات بالضبط: خدمة IME ومدقق الإملائي
-  بأذون ربط المنصة، نشاطا الإعداد/الاستيراد، والنسخ للحافظة)، إلزامية
-  التصريح exported لكل ما له intent-filter، كل المزودات غير مصدَّرة،
-  رباعي النسخ/الاستخراج/الشبكة في وسم application، حظر `<profileable>`
-  (لا تنميط قشري للعملية الإنتاجية)، نطاق queries المغلق، والمنع الصريح
-  لثمانية أذونات متكررة تاريخيًا + QUERY_ALL_PACKAGES — إضافة إلى مصفوفة
-  القفل المطلق كاملة (الأسطح الأربعة × الحالتان + فشل مغلق + إجبار
-  المُعرِّف على دون اتصال).
-- **جولة MASVS الداخلية الأولى — `docs/MASVS_AUDIT.md` + بوابة CI**:
-  معيار OWASP MASVS v2.0 بجميع مجموعاته الثمانية (التخزين، التشفير،
-  المصادقة، الشبكة، المنصة، الكود، المرونة، الخصوصية) — النتيجة: **15
-  بنودًا مطابقة، 5 غير منطبقة مُبرَّرة، 1 جزئي موثق، لا فاشل**. الجزء
-  الآلي منها بوابة بناء جديدة `ci/masvs_audit.sh` (34 فحصًا) تعمل في
-  CI كوظيفة «MASVS internal audit» بجانب privacy canary — أي انحراف
-  مستقبلي يُسقط البناء قبل أن يصل للمستخدم.
-- **تقرير الشفافية العدد الثاني**: أرقام الفترة v1.0.0 → v1.4.x بلا
-  تعديل رجعي على العدد الأول: طلبات خارجية صفر، الأذون الخمسة بلا
-  تغيير، إثبات حي جديد، وحدود صراحة معلنة.
-- **الاختبارات 2013 → 2,041 أخضر** وصفر صلاحيات جديدة وصفر أدوات جديدة
-  — و4 سلاسل خصوصية جديدة (عربية وإنجليزية) في لوحة الخصوصية حصرًا.
+- **المحرك الخالص `DrsEmojiKitchen`**: 8 فئات مغلقة و48 مشاركًا (بكلمات
+  عربية وإنجليزية) و13 وصفة تخطيط على 11 موضع مرساة بمقاييس محصورة واهتزاز
+  زاوي حتمي — نفس الزوج نفس الخطة بايت-بايت، والزوج بلا وصفة يظهر صمتًا
+  صادقًا بلا صورة وهمية أبدًا، والبحث العربي مُطبَّع (تشكيل/همزات/تاء
+  مربوطة).
+- **مكتبة الملصقات**: حزمة «أصليات مطبخ درز» v1.0.0 — 12 ملصقًا متجهيًا من
+  تأليف المشروع حصرًا برخصة Apache-2.0 الموثقة في الفهرس نفسه، بستة
+  تصنيفات وبحث ومفضلة وسجل (سقف 24).
+- **الإرسال المتوافق**: الواجهة العامة الموثقة commitContent (API 25+)
+  عبر FileProvider القائم — صورة حيث يقبل الحقل image/png، ثم نص الزوج
+  الحقيقي حيث لا يقبلها، ثم الحافظة النظامية للملصقات؛ كل نتيجة توست
+  صريح. بلا صلاحيات جديدة إطلاقًا (الخمسة كما هي).
+- **اللوحة المدمجة**: تبويبان (تركيبات/ملصقات) ومعاينة حية هي نفسها
+  PNG المُرسل، بتشريح اللوحات الذكية حرفيًا — ولا يُدوَّن أي شيء في
+  وضع التخفي.
+
+### 2) الحزم المستلمة أخيرًا — إصلاح جذر (دفعة 20)
+
+- **البلاغ**: حزمة Sunset تفشل من مركز الحزم بـ«فشل التحقق»، وAmethyst
+  تفشل من الاستيراد اليدوي بـ«أرشيف تالف» — رغم أن الأصول الثمانية
+  سليمة بإثبات مستقل (sha256 مطابق وتوقيع ed25519 صالح في الثمانية).
+- **السبب الجذري**: أرشيفات `.flex` الرسمية بُنيت ببايثون فتكتب **مدخلات
+  ملفات بلا مدخلات مجلدات**، بينما كان فكُّ الضغط في التطبيق يشترط مدخل
+  مجلد صريحًا قبل كتابة أي ملف متداخل — فأول حزمة خارجية-البناء (حزمنا
+  الرسمية ذاتها!) تكشف الخلل الكامن.
+- **الحل**: القارئ ينشئ سلسلة المجلدات الأب بنفسه بعد بوابة رحلة المسار
+  نفسها وبسقوف zip-bomb كما هي — والحزم الثماني بلا تغيير بايت واحد
+  فتبقى بصماتها وتواقيعها صالحة، **وأول عقد اختبار على الحزم الحقيقية
+  (9/9) يمنع تكرار الفصل بين «الأصل الصحيح» و«القارئ العاجز»**.
+
+### 3) حوكمة التوقيع — التخزين البارد (دفعة 18)
+
+- بند نافذة v1.2.x مكتمل: بذرة الناشر ed25519 خارج git تمامًا بنقطة دافئة
+  واحدة ونسختين باردتين بوسيطين جغرافيين بحيازة المالك، بطقوس توليد
+  واستعادة وتدوير وفقد مكتملة (`docs/COLD_STORAGE.md`)، مثبتًا آليًا ببوابة
+  `trust_chain_audit.sh` (8 فحوصات) تعمل في كل دفع.
 
 ## التحديث من الإصدارات السابقة
 
-- ✅ **من 1.4.0 إلى 1.4.1: تحديث موضعي مضمون** (نفس مفتاح التوقيع) —
+- ✅ **من 1.4.1 إلى 1.4.2: تحديث موضعي مضمون** (نفس مفتاح التوقيع) —
   ثبّت فوق الإصدار الحالي مباشرة، وقاموسك ونسخك الاحتياطية كما هي.
 - ✅ **من 1.2.0 فصاعدًا كل التحديثات الموضعية مضمونة** (نفس المفتاح
   لكل ما يلي 1.2.0).
@@ -87,11 +97,11 @@
   `54:FA:D7:4F:CD:91:0B:BB:65:F2:60:4F:32:82:27:F4:47:F9:AF:7E:6A:B9:41:66:D9:DC:67:56:97:1E:E3:20`.
   التحديث الموضعي من 1.1.0 وما قبله غير متاح (أندرويد يرفض التحديث فوق
   بصمة مختلفة): صدّر قاموسك ونسخك الاحتياطية الموقّعة من الإصدار القديم،
-  ألغِ تثبيته، ثم ثبّت 1.4.1 كتثبيت أول واستورد ما صدّرته.
+  ألغِ تثبيته، ثم ثبّت 1.4.2 كتثبيت أول واستورد ما صدّرته.
 
 ## التثبيت
 
-1. نزّل `DRS-Smart-Keyboard-v1.4.1.apk` من مرفقات هذا الإصدار (أو من موقع
+1. نزّل `DRS-Smart-Keyboard-v1.4.2.apk` من مرفقات هذا الإصدار (أو من موقع
    المشروع).
 2. تحقق من السلامة: قارن بصمة SHA-256 للملف مع ما في مرفق **SHA256SUMS.txt**
    (أو الجدول أسفل هذه الملاحظات).
@@ -102,6 +112,9 @@
    الحزمة الجديدة كتثبيت أول.
 4. فعّل «التثبيت من مصادر غير معروفة» لمتصفحك أو مدير ملفاتك عند الطلب، ثم أكمل
    التثبيت وفعّل لوحة المفاتيح من إعدادات النظام.
+5. **جرّب الثيمات الثماني**: مركز الحزم → ثبّت أي سمة (Sunset/Ocean/Forest/
+   Amethyst/Rose/Carbon/Arabian/Aurora) — في هذا الإصدار ينجح التثبيت
+   فعلًا، وجرّب مطبخ الإيموجي من رقاقة المبدّل.
 
 ## بيان الامتثال للمصادر المفتوحة
 
@@ -112,11 +125,13 @@
 - **snygg / kotlin** — The FlorisBoard Contributors
 
 السجل الكامل للإفصاح والجداول: `THIRD_PARTY_NOTICES.md` في جذر المستودع.
+ملصقات مطبخ الإيموجي وأصوله أصلية من تأليف المشروع برخصة Apache-2.0
+(`docs/EMOJI_KITCHEN.md`).
 
 ## التحقق
 
-- **2,041 اختبار وحدة أخضر** · بوابة تغطية Kover · بوابة MASVS الداخلية
-  الجديدة · بوابات أداء · فحص apksigner مستقل.
+- **2,089 اختبار وحدة أخضر** · بوابة تغطية Kover · بوابة MASVS الداخلية
+  · بوابة trust-chain · بوابات أداء · فحص apksigner مستقل.
 - كل مرفقات هذا الإصدار مجدولة بصماتها في ملف **SHA256SUMS.txt** المرفق.
 - جدول البصمات الكامل ملحق أسفل هذه الملاحظات (مولّد آليًا بواسطة CI).
 
@@ -152,63 +167,71 @@ you type stays on your device: no accounts, no tracking, no mandatory network.
   generator) — all deterministic on-device under the "never guess,
   never corrupt" contract.
 - **On-device Arabic intelligence**: **13 fully local AI engines** — with a
-  declared intelligence ladder (L0→L5) whose first four arms are complete: a
-  standard-grade quantized corrector, sentence-aware prediction, local
-  security, and **cross-field contextual intelligence that ranks tools by
-  field type without ever reading content** — zero cloud dependencies and
-  zero model downloads.
-- **Proven privacy**: automated privacy canary + the new internal MASVS
-  gate (34 checks) + an 11-check release gate (fail-closed) — **and the
-  proof is now live: network counters the app ticks in front of you every
-  second**.
-- **Package center**: ed25519-signed extensions verified before unpacking
-  (8/8 VALID).
+  declared intelligence ladder (L0→L5) whose first four arms are complete —
+  zero cloud dependencies and zero model downloads.
+- **The seventh panel — DRS Emoji Kitchen**: a 100% on-device original
+  emoji-combination experience (no Google assets, no private APIs, no
+  network) driven by a closed recipe engine, plus an original Apache-2.0
+  licensed sticker library, and sending through the public commitContent
+  API — the real send test is in your hands.
+- **Proven privacy**: automated privacy canary + the internal MASVS gate
+  (34 checks) + an 11-check release gate (fail-closed) — and the proof is
+  live: network counters the app ticks in front of you every second.
+- **Package center**: ed25519-signed extensions verified before unpacking —
+  **and in this release all eight official packages finally install and
+  import for real** (a contract test on the actual packages: 9/9 green).
 
-## New in 1.4.1 — The Security Face (the full v1.4.x wave)
+## New in 1.4.2 — three batches
 
-The v1.4.x security wave executed in full — the security scope moved
-honestly out of "Proven Privacy" when that release cut arm L4 early.
-Four deliverables:
+### 1) Emoji Kitchen — the seventh smart panel (batch 19)
 
-- **Absolute mode with a live proof — `DrsLiveProofEngine` + a 1 Hz panel**:
-  the privacy dashboard no longer measures once at open; a counter ticks
-  **every second while the screen is visible**, showing bytes sent and
-  received since session start, plus a growing "zero-byte streak"
-  (0:00 → 12:34 → …). Honesty by construction: a three-state verdict —
-  proven zero only with a zero delta on supported counters, honest numbers
-  on any movement, and an explicit unsupported state when the ROM cannot
-  prove anything; the streak also restarts when the OS resets its counters —
-  no faked unbroken silence. One sampler feeds both proofs (snapshot and
-  live) — no divergence is possible.
-- **Expanded permission-contract tests — `DrsSecurityWaveTests` (28 tests)**:
-  the contract widened from the five-permission check to the **full
-  manifest surface**: a closed exported-components allowlist (exactly five:
-  the IME and spell-checker services with their platform binding
-  permissions, the settings/import activities, and the copy-to-clipboard
-  activity), mandatory explicit `exported` for every intent-filter
-  component, all providers unexported, the backup/extraction/network
-  quartet on the application tag, a `<profileable>` ban (no shell
-  profiling of the production process), the closed `queries` scope, and an
-  explicit ban on eight historically recurring permissions + QUERY_ALL_PACKAGES —
-  plus the full absolute-mode gate matrix (all four surfaces × both states +
-  fail-closed provider + on-device-only recognizer coercion).
-- **First full internal MASVS pass — `docs/MASVS_AUDIT.md` + a CI gate**:
-  OWASP MASVS v2.0 across all eight groups (storage, crypto, auth, network,
-  platform, code, resilience, privacy) — **15 controls compliant, 5 not
-  applicable (justified), 1 partial (documented), none failed**. Its
-  machine-checkable slice is a new build gate `ci/masvs_audit.sh`
-  (34 checks) running in CI as the "MASVS internal audit" job beside the
-  privacy canary — any future deviation fails the build.
-- **Transparency Report #2**: real numbers for the v1.0.0 → v1.4.x period
-  with no retroactive edits to issue #1: zero third-party requests, the
-  five permissions unchanged, the new live proof, and stated limitations.
-- **Tests grew 2013 → 2,041 green** with zero new permissions, zero new
-  tools — and 4 new privacy strings (Arabic + English) confined to the
-  privacy panel.
+- **The pure engine `DrsEmojiKitchen`**: 8 closed categories, 48
+  participants (with Arabic and English keywords), 13 layout recipes over
+  11 anchor positions with bounded scales and deterministic angular jitter —
+  the same pair yields the same plan byte-for-byte; a pair without a recipe
+  shows honest silence with no fake image, and Arabic search is normalized
+  (diacritics/hamzas/teh marbuta).
+- **Sticker library**: the "DRS Kitchen Originals" pack v1.0.0 — 12 vector
+  stickers authored exclusively by this project under Apache-2.0 documented
+  in the index itself, with six categories, search, favorites and history
+  (cap 24).
+- **Compatible sending**: the documented public commitContent API (API 25+)
+  through the existing FileProvider — an image where the field accepts
+  image/png, then the real pair as text where it does not, then the system
+  clipboard for stickers; every outcome announces itself with an explicit
+  toast. Zero new permissions (the five stay as they are).
+- **Integrated panel**: two tabs (combinations/stickers) and a live preview
+  identical to the sent PNG, dissecting the smart panels' shared anatomy —
+  and nothing is recorded in incognito mode.
+
+### 2) Received packages at last — a root fix (batch 20)
+
+- **The report**: Sunset failed in the package center with "verification
+  failed", Amethyst failed in manual import with "corrupted archive" — even
+  though all eight assets were independently proven intact (matching
+  sha256 and valid ed25519 signatures on all eight).
+- **Root cause**: the official `.flex` archives were built by Python and
+  contain **file entries only, no directory entries**, while the app's
+  unzip required an explicit directory entry before writing any nested
+  file — so the very first externally-built archive (our own official
+  packages!) exposed the latent defect.
+- **The fix**: the reader now creates the parent directory chain itself,
+  behind the same zip-slip guard and with the zip-bomb caps untouched —
+  the eight packages stay byte-identical so their checksums and signatures
+  remain valid, and a **first-ever contract test on the real packages
+  (9/9)** prevents the "intact asset vs. broken reader" split forever.
+
+### 3) Signing governance — cold storage (batch 18)
+
+- The v1.2.x window item is complete: the ed25519 publisher seed lives
+  entirely outside git with one warm point and two cold copies on two
+  geographically separate media under the owner's custody, with complete
+  generate/restore/rotate/loss rituals (`docs/COLD_STORAGE.md`), proven
+  automatically by the `trust_chain_audit.sh` gate (8 checks) on every push.
 
 ## Updating from previous releases
 
-- ✅ **1.4.0 → 1.4.1: guaranteed in-place update** (same signing key) —
+- ✅ **1.4.1 → 1.4.2: guaranteed in-place update** (same signing key) —
   install directly over the current version; your dictionary and signed
   backups stay as they are.
 - ✅ **From 1.2.0 onward, all in-place updates are guaranteed** (same key
@@ -221,11 +244,11 @@ Four deliverables:
   In-place update from 1.1.0 and earlier is unavailable (Android refuses
   updates across different signatures): export your dictionary and
   ed25519-signed backups from the old release, uninstall it, then install
-  1.4.1 as a fresh install and import what you exported.
+  1.4.2 as a fresh install and import what you exported.
 
 ## Installation
 
-1. Download `DRS-Smart-Keyboard-v1.4.1.apk` from this release's assets (or
+1. Download `DRS-Smart-Keyboard-v1.4.2.apk` from this release's assets (or
    from the project website).
 2. Verify integrity: compare the file's SHA-256 against the attached
    **SHA256SUMS.txt** (or the table below).
@@ -236,6 +259,10 @@ Four deliverables:
    uninstall first, then install the new package as a fresh install.
 4. Enable "Install from unknown sources" for your browser or file manager when
    prompted, finish the install, and enable the keyboard in system settings.
+5. **Try the eight themes**: Package Center → install any theme
+   (Sunset/Ocean/Forest/Amethyst/Rose/Carbon/Arabian/Aurora) — in this
+   release installation genuinely succeeds; then try Emoji Kitchen from the
+   switcher chip.
 
 ## Open-source compliance statement
 
@@ -246,12 +273,14 @@ license with full literal attribution in headers and docs:
 - **snygg / kotlin** — The FlorisBoard Contributors
 
 Full disclosure record and tables: `THIRD_PARTY_NOTICES.md` at the repository
-root.
+root. Emoji Kitchen stickers and assets are original project authorship
+under Apache-2.0 (`docs/EMOJI_KITCHEN.md`).
 
 ## Verification
 
-- **2,041 unit tests green** · Kover coverage gate · the new internal MASVS
-  gate · performance budgets · an independent apksigner check.
+- **2,089 unit tests green** · Kover coverage gate · the internal MASVS
+  gate · the trust-chain gate · performance budgets · an independent
+  apksigner check.
 - All release assets are scheduled by fingerprint in the attached
   **SHA256SUMS.txt**.
 - The full fingerprint table is appended below these notes (generated

@@ -1,6 +1,6 @@
 # User Guide — DRS Smart Keyboard
 
-- **Guide version:** 2.1.0 (unified) — covers app release **1.4.1 «The Security Face»** (versionCode 6, catalog of 84 tools) with the four completed intelligence arms, **plus the full v1.4.x security wave: absolute mode with a live proof + the internal MASVS audit**
+- **Guide version:** 2.1.0 (unified) — covers app release **1.4.2 «Emoji Kitchen & Received Packages»** (versionCode 7, catalog of 84 tools) with the four completed intelligence arms, **plus the full v1.4.x security wave + the seventh panel «Emoji Kitchen» + the root fix for installing all eight official .flex packages**
 - **Languages:** this is the English guide — Arabic version: [USER_GUIDE_AR.md](USER_GUIDE_AR.md)
 - **Support:** [SUPPORT.md](../SUPPORT.md) — official channels and crash reports.
 

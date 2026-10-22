@@ -88,6 +88,47 @@ class ZipUtilsTest : FunSpec({
             File(outDir, "sub/b.json").readText() shouldBe "{\"k\":2}"
             File(outDir, "empty").isDirectory shouldBe true
         }
+
+        test("DRS p10 — archive WITHOUT directory entries extracts fully (official .flex shape)") {
+            // Regression contract: the official packages/*.flex are built by
+            // Python's zipfile, which emits FILE entries only — no
+            // «stylesheets/» directory entry precedes
+            // «stylesheets/amethyst_dark.json». The unzip must create the
+            // parent chain itself instead of throwing FileNotFoundException
+            // (the v1.4.1 on-device "corrupted archive" bug).
+            val root = tempfile()
+            val dst = File(root, "dst")
+            val zip = File(root, "python-built.flex")
+            writeZip(
+                zip,
+                listOf(
+                    "extension.json" to "{}".toByteArray(),
+                    "stylesheets/night.json" to "{\"k\":3}".toByteArray(),
+                ),
+            )
+
+            shouldNotThrowAny { ZipUtils.unzip(zip, dst) }
+
+            File(dst, "extension.json").readText() shouldBe "{}"
+            File(dst, "stylesheets").isDirectory shouldBe true
+            File(dst, "stylesheets/night.json").readText() shouldBe "{\"k\":3}"
+        }
+
+        test("DRS p10 — nested dir entry without ancestors extracts via mkdirs") {
+            val root = tempfile()
+            val dst = File(root, "dst")
+            val zip = File(root, "nested-no-ancestors.zip")
+            writeZip(
+                zip,
+                listOf(
+                    "deep/nested/tree/file.txt" to "deep".toByteArray(),
+                ),
+            )
+
+            shouldNotThrowAny { ZipUtils.unzip(zip, dst) }
+
+            File(dst, "deep/nested/tree/file.txt").readText() shouldBe "deep"
+        }
     }
 
     context("unzip — zip-slip and path bounds") {

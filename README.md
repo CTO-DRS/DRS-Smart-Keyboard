@@ -8,7 +8,7 @@
 
 A DRS-built keyboard for Android — Arabic-first, fully private, deeply customizable.
 
-[![Version](https://img.shields.io/badge/version-1.4.1-0E9488?style=flat-square)](https://github.com/CTO-DRS/drs-sk-work/releases/latest)
+[![Version](https://img.shields.io/badge/version-1.4.2-0E9488?style=flat-square)](https://github.com/CTO-DRS/drs-sk-work/releases/latest)
 [![Launch](https://img.shields.io/badge/%D8%A7%D9%84%D8%A5%D8%B7%D9%84%D8%A7%D9%82-%D8%A7%D9%84%D8%A3%D9%88%D9%84%20%D8%A7%D9%84%D8%B1%D8%B3%D9%85%D9%8A%20v1.0.0-2E7D32?style=flat-square)](https://github.com/CTO-DRS/drs-sk-work/releases)
 [![Android](https://img.shields.io/badge/Android-8.0%2B-3DDC84?style=flat-square&logo=android&logoColor=white)](https://android.com)
 [![Release](https://img.shields.io/github/v/release/CTO-DRS/drs-sk-work?style=flat-square&display_name=release)](https://github.com/CTO-DRS/drs-sk-work/releases/latest)
@@ -138,7 +138,7 @@ A DRS-built keyboard for Android — Arabic-first, fully private, deeply customi
 | المصدر | الرابط |
 |---|---|
 | 🚀 أحدث إصدار (مستقر دائمًا) | **[github.com/CTO-DRS/drs-sk-work/releases/latest](https://github.com/CTO-DRS/drs-sk-work/releases/latest)** |
-| 📱 APK الحالي | `DRS-Smart-Keyboard-v<الإصدار>.apk` في صفحة الإصدار الأخير (حاليًا `v1.4.1` — الوجه الأمني، كتالوج 84 أداة) — والاسم يتبع رقم كل إصدار جديد |
+| 📱 APK الحالي | `DRS-Smart-Keyboard-v<الإصدار>.apk` في صفحة الإصدار الأخير (حاليًا `v1.4.2` — مطبخ الإيموجي والحزم المستلمة، كتالوج 84 أداة + اللوحة السابعة) — والاسم يتبع رقم كل إصدار جديد |
 | 🔄 من داخل التطبيق | مركز تحديثات DRS — تحقق وتنزيل وتثبيت بلا خروج من التطبيق |
 
 > ⚠️ **ثبّت ملف `.apk` فقط**: ملف `.aab` في صفحة الإصدار حزمة نشر لـ Google Play
