@@ -55,6 +55,19 @@
 > قاعدة ذهبية: أي شيء يثبت أن «ما نعلنه في PRIVACY_POLICY.md» غير صحيح
 > يُصنف High فأعلى تلقائيًا.
 
+### حيازة مفتاح النشر (بند نافذة v1.2.x)
+
+مفتاح توقيع حزم flex‏ (`cto-drs-release-1`، ed25519 على RFC 8032) مقسوم
+تصميميًا: **المفتاح العام** مثبّت في كود التطبيق (`DrsPackageTrust.kt`)
+ويلتحق بكل إصدار، و**البذرة الخاصة** تعيش خارج git كليًا ببروتوكول تخزين
+بارد مغلق (`docs/COLD_STORAGE.md`): نقطة دافئة واحدة على جهاز النشر
+(`.local-secrets/` غير متتبَّع) + نسختان باردتان بوسيطين جغرافيين منفصلين
+بحيازة المالك وحده — لا سحابة ولا CI ولا مستودع. الملكية مثبتة آليًا:
+بوابة `ci/trust_chain_audit.sh` تفحص عند كل دفع أن لا بذرة في الشجرة
+ولا في كامل تاريخ git، وأن كل توقيعات الكتالوج صالحة مقابل المفتاح
+المثبّت، وأن أداة التوقيع بلا بذرة سطرية خارج متجهات RFC 8032 الرسمية.
+التدوير والاستعادة وطقوس الفقد مكتوبة كاملة في البروتوكول.
+
 ### مركز الشفافية الحي (حقبة الشفافية والتعلم — ADR-0009)
 
 ثلاث أدوات إفصاح محلية خالصة تُظهر المحركات الموجودة لا تبني محركات جديدة:
@@ -129,6 +142,22 @@ release and the "Security Contributor" badge in the docs.
 
 > Golden rule: anything proving a PRIVACY_POLICY.md claim wrong is
 > automatically High or above.
+
+### Release key custody (v1.2.x window item)
+
+The flex-package signing key (`cto-drs-release-1`, Ed25519 per RFC 8032)
+is split by design: the **public key** is pinned in app code
+(`DrsPackageTrust.kt`) and ships with every release, while the **private
+seed** lives entirely outside git under a closed cold-storage protocol
+(`docs/COLD_STORAGE.md`): one warm point on the signing machine
+(untracked `.local-secrets/`) plus two cold copies on geographically
+separate media, held by the owner alone — no cloud, no CI, no repo.
+Custody is machine-proven: the `ci/trust_chain_audit.sh` gate verifies on
+every push that no seed exists in the tree or anywhere in full git
+history, that every catalog signature verifies against the pinned key,
+and that the signing tool carries no seed literal beyond the official
+RFC 8032 vectors. Rotation, restore and compromise ceremonies are fully
+written in the protocol.
 
 ### Live transparency hub (transparency & learning era — ADR-0009)
 

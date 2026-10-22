@@ -2655,6 +2655,8 @@
     <string name="panel__switcher_harakat">Harakat</string>
     <string name="panel__switcher_symbols">Symbols</string>
     <string name="panel__switcher_letters">Letters</string>
+    <string name="panel__switcher_clipboard">Clipboard</string>
+    <string name="panel__switcher_numbers">Numbers</string>
     <string name="pref__panels__group__label">Smart panels</string>
     <string name="pref__panels__harakat_smart_replace__label">Smart harakat stacking</string>
     <string name="pref__panels__harakat_smart_replace__summary">A new mark replaces the previous one instead of stacking; shadda pairs with marks</string>
@@ -3031,4 +3033,29 @@
     <string name="drs__unified__stats_symbols_panel">Symbols panel insertions</string>
     <string name="drs__unified__stats_letters">Letters panel insertions</string>
     <string name="drs__unified__stats_numbers_panel">Numbers panel insertions</string>
+    <string name="about__licenses__intro" comment="Intro card of the licenses screen">The DRS keyboard builds on open-source libraries whose authors deserve credit. This screen lists the libraries bundled in the app along with their licenses.</string>
+    <string name="drs__unified__tool_smart_clipboard_panel">Smart Clipboard Panel</string>
+    <string name="drs__unified__tool_smart_clipboard_panel_desc">Opens a panel that deterministically classifies what you copy: a URL cleaned of tracking media, a Saudi phone in three forms, an extractable one-time code, an amount in seven currencies, and a numbers core — all purely local computation, no network</string>
+    <string name="drs__unified__tool_smart_number_panel">Smart Numbers Panel</string>
+    <string name="drs__unified__tool_smart_number_panel_desc">Opens a numbers panel that reads the field context and re-orders itself, showing ready formats: phone, Gregorian and Hijri dates, and seven currencies — all purely local computation, no network</string>
+    <string name="panel__clipboard__title">Smart Clipboard Panel</string>
+    <string name="panel__clipboard__empty">Clipboard is empty — copy any text and its ready variants will appear here</string>
+    <string name="panel__clipboard__hidden">In a password field the clipboard is never read — absolute privacy</string>
+    <string name="panel__clipboard__no_variants">No deterministic variants for this content in this category</string>
+    <string name="panel__clipboard__cls_text">Text</string>
+    <string name="panel__clipboard__cls_url">URL</string>
+    <string name="panel__clipboard__cls_email">Email</string>
+    <string name="panel__clipboard__cls_phone">Phone</string>
+    <string name="panel__clipboard__cls_number">Number</string>
+    <string name="panel__clipboard__cls_otp">Code</string>
+    <string name="panel__clipboard__cls_amount">Amount</string>
+    <string name="panel__numbers__title">Smart Numbers Panel</string>
+    <string name="panel__numbers__formats_title">Ready formats</string>
+    <string name="panel__numbers__ctx_general">General</string>
+    <string name="panel__numbers__ctx_phone">Phone</string>
+    <string name="panel__numbers__ctx_date">Date</string>
+    <string name="panel__numbers__ctx_id">Numeric</string>
+    <string name="panel__numbers__ctx_math">Math</string>
+    <string name="panel__numbers__ctx_money">Amount</string>
+    <string name="panel__numbers__ctx_otp">Code</string>
 </resources>

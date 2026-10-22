@@ -105,3 +105,16 @@ jobs:
         uses: actions/checkout@v4
       - name: Run MASVS audit gate
         run: bash ci/masvs_audit.sh
+
+  trust-chain-audit:
+    name: Publisher trust chain (v1.2.x cold storage)
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # full history: the gate proves no seed was EVER committed
+      - name: Run trust-chain audit gate
+        run: bash ci/trust_chain_audit.sh
